@@ -6,7 +6,6 @@ doc/: Doxyfile $(TAG_FILE) FRONTMATTER.md src/*
 
 FRONTMATTER.md: README.md
 	sed -E '/^\[.*\]: *$$/,/^ *$$/d;s/\[|\]//g' < $< > $@
-	# tr -d '[]' < $< > $@
 
 upload-doc:
 	make doc
