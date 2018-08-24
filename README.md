@@ -41,8 +41,8 @@ add_subdirectory(3rdparty/ge211 EXCLUDE_FROM_ALL)
 The `EXCLUDE_FROM_ALL` flag prevents extra CMake targets from GE211
 from appearing in your IDE.
 
-Adding the subdirectory a CMake library target that your program target
-can be linked against using the `target_link_libraries` command:
+Adding the subdirectory creates a CMake library target that your program
+target can be linked against using the `target_link_libraries` command:
 
 ```CMake
 target_link_libraries(my_game ge211)
