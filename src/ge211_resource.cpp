@@ -13,8 +13,7 @@ using namespace detail;
 static const char* search_prefixes[] = {
         "Resources/",
         "../Resources/",
-        ".eecs211/lib/ge211/Resources/",
-        "../.eecs211/lib/ge211/Resources/"
+        GE211_RESOURCES
 };
 
 namespace detail {

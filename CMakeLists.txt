@@ -37,15 +37,20 @@ add_library(ge211
 set_property(TARGET ge211 PROPERTY CXX_STANDARD 14)
 set_property(TARGET ge211 PROPERTY CXX_STANDARD_REQUIRED On)
 
-target_link_libraries(ge211 ${SDL2_LIBRARIES})
-target_link_libraries(ge211 ${SDL2_IMAGE_LIBRARIES})
-target_link_libraries(ge211 ${SDL2_TTF_LIBRARIES})
-target_link_libraries(ge211 utf8-cpp)
+target_compile_definitions(ge211 PRIVATE
+        GE211_RESOURCES="${CMAKE_CURRENT_SOURCE_DIR}/Resources/")
 
 target_include_directories(ge211 PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
 target_include_directories(ge211 PUBLIC ${SDL2_INCLUDE_DIRS})
 target_include_directories(ge211 PRIVATE ${SDL2_IMAGE_INCLUDE_DIRS})
 target_include_directories(ge211 PRIVATE ${SDL2_TTF_INCLUDE_DIRS})
+
+target_link_libraries(ge211 ${SDL2_LIBRARIES})
+target_link_libraries(ge211 ${SDL2_IMAGE_LIBRARIES})
+target_link_libraries(ge211 ${SDL2_TTF_LIBRARIES})
+target_link_libraries(ge211 utf8-cpp)
+
+add_subdirectory(examples/)
 
 # Given a base path to search in, a file extension, and a list of library
 # names, searches for the libraries (using a glob) and saves the resulting
