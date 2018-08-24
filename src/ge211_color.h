@@ -14,7 +14,7 @@ namespace ge211 {
 /// The most common way to construct a color is to pass these
 /// components to the constructor
 /// Color(uint8_t, uint8_t, uint8_t, uint8_t). The components can
-/// also be passed as unit-intervals `double`s to
+/// also be passed as unit-interval `double`s to
 /// Color::from_rgba(double, double, double, double).
 ///
 /// It's also possible to construct a color via alternative color
