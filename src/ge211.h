@@ -1,14 +1,5 @@
 #pragma once
 
-/// \mainpage ge211 — a game engine for EECS 211
-///
-/// ge111 is a relatively simple game engine for beginning C++ programmers.
-///
-/// To use it, you need to derive your game class from
-/// ge211::Abstract_game, so to get started you probably want to go there.
-/// Otherwise, all useful definitions are in the
-/// ge211 namespace.
-
 #include "ge211_base.h"
 #include "ge211_color.h"
 #include "ge211_error.h"

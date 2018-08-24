@@ -1,7 +1,7 @@
 TAG_FILE = cppreference.xml
 TAG_URL = https://en.cppreference.com/w/File:cppreference-doxygen-web.tag.xml
 
-doc/: Doxyfile $(TAG_FILE) src/*
+doc/: Doxyfile $(TAG_FILE) README.md src/*
 	doxygen
 
 upload-doc:
