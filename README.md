@@ -14,6 +14,14 @@ there. Otherwise, all useful definitions are in the [ge211] namespace.
 [ge211]:
     https://tov.github.io/ge211/namespacege211.html
 
+## Requirements
+
+GE211 depends on the SDL library version 2, along with SDL2 plugin
+libraries SDL2_image, SDL2_mixer, and SDL2_ttf. You need to install the
+development versions of these packages, as appropriate for your
+operating system. They are easy to find on Google, but if you are in a
+class, your instructor might have an easier way for you to install them.
+
 ## Setup
 
 If you are using GE211 in a course (such as EECS 211 at Northwestern),
