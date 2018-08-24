@@ -152,7 +152,7 @@ public:
         /// The hue in degrees from 0 to 360. 0° (and 360°) is red,
         /// 120° is green, and 240° is blue.
         double hue;
-        /// The fullness of the color, from 0,0 (grey) to 1.0 (fully
+        /// The fullness of the color, from 0.0 (grey) to 1.0 (fully
         /// saturated).
         double saturation;
         /// The lightness of the color, from 0.0 (black) to 1.0 (white).
