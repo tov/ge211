@@ -3,9 +3,6 @@ project(ge211 CXX)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-set(GE211_RESOURCES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Resources"
-        CACHE PATH "Where ge211 resources are found")
-
 add_subdirectory(3rdparty/utf8-cpp)
 
 find_package(SDL2 REQUIRED)
