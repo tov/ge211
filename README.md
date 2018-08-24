@@ -1,6 +1,6 @@
-# %ge211 — a game engine for EECS 211
+# GE211 — a game engine for EECS 211
 
-%ge211 is a relatively simple game engine for beginning C++ programmers.
+GE211 is a relatively simple game engine for beginning C++ programmers.
 
 ## Use
 
@@ -10,12 +10,12 @@ there. Otherwise, all useful definitions are in the ge211 namespace.
 
 ## Setup
 
-If you are using %ge211 in a course (such as EECS 211 at Northwestern),
+If you are using GE211 in a course (such as EECS 211 at Northwestern),
 your instructor will give you a CMake project that includes files and
-configuration for %ge211. You shouldn't have to do anything to set it
+configuration for GE211. You shouldn't have to do anything to set it
 up. Otherwise, read on.
 
-%ge211 is configured and built using CMake. The easiest way to add this
+GE211 is configured and built using CMake. The easiest way to add this
 whole respository to your project is to add it as a subdirectory, and
 then include it in your `CMakeLists.txt` via the `add_subdirectory`
 command:
@@ -24,7 +24,7 @@ command:
     add_subdirectory(3rdparty/ge211 EXCLUDE_FROM_ALL)
 ```
 
-The `EXCLUDE_FROM_ALL` flag prevents extra CMake targets from %ge211
+The `EXCLUDE_FROM_ALL` flag prevents extra CMake targets from GE211
 from appearing in your IDE.
 
 Adding the subdirectory a CMake library target that your program target
@@ -34,7 +34,7 @@ can be linked against using the `target_link_libraries` command:
     target_link_libraries(my_game ge211)
 ```
 
-A minimal, complete `CMakeLists.txt` for using %ge211 might look
+A minimal, complete `CMakeLists.txt` for using GE211 might look
 something like this:
 
 ```CMake
