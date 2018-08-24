@@ -1,8 +1,12 @@
 TAG_FILE = cppreference.xml
 TAG_URL = https://en.cppreference.com/w/File:cppreference-doxygen-web.tag.xml
 
-doc/: Doxyfile $(TAG_FILE) README.md src/*
+doc/: Doxyfile $(TAG_FILE) FRONTMATTER.md src/*
 	doxygen
+
+FRONTMATTER.md: README.md
+	sed -E '/^\[.*\]: *$$/,/^ *$$/d;s/\[|\]//g' < $< > $@
+	# tr -d '[]' < $< > $@
 
 upload-doc:
 	make doc
