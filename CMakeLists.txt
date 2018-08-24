@@ -7,6 +7,7 @@ add_subdirectory(3rdparty/utf8-cpp)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
+find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 
 if (WIN32)
@@ -40,10 +41,12 @@ target_compile_definitions(ge211 PRIVATE
 target_include_directories(ge211 PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
 target_include_directories(ge211 PUBLIC ${SDL2_INCLUDE_DIRS})
 target_include_directories(ge211 PRIVATE ${SDL2_IMAGE_INCLUDE_DIRS})
+target_include_directories(ge211 PRIVATE ${SDL2_MIXER_INCLUDE_DIRS})
 target_include_directories(ge211 PRIVATE ${SDL2_TTF_INCLUDE_DIRS})
 
 target_link_libraries(ge211 ${SDL2_LIBRARIES})
 target_link_libraries(ge211 ${SDL2_IMAGE_LIBRARIES})
+target_link_libraries(ge211 ${SDL2_MIXER_LIBRARIES})
 target_link_libraries(ge211 ${SDL2_TTF_LIBRARIES})
 target_link_libraries(ge211 utf8-cpp)
 
@@ -71,6 +74,7 @@ function(add_to_ge211_installer target resource_files)
                 RESOURCE "${resource_files}")
         set(app "${CMAKE_BINARY_DIR}/${target}.app")
         set(dirs "${SDL2_IMAGE_INCLUDE_DIR}/../Frameworks"
+                 "${SDL2_MIXER_INCLUDE_DIR}/../Frameworks"
                  "${SDL2_TTF_INCLUDE_DIR}/../Frameworks")
         install(CODE "include(BundleUtilities)
                       fixup_bundle(\"${app}\" \"\" \"${dirs}\")")
