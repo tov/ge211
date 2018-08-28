@@ -19,14 +19,12 @@ public:
     explicit File_resource(const std::string&);
 
     SDL_RWops* get_raw_() const noexcept { return ptr_.get(); }
+    SDL_RWops* forget_() &&;
 
 private:
     static delete_ptr<SDL_RWops> open_rwops_(const std::string&);
 
-    SDL_RWops* forget_() &&;
-
     delete_ptr<SDL_RWops> ptr_;
-
 };
 
 } // end namespace detail
@@ -56,15 +54,15 @@ public:
 
 private:
     friend class sprites::Text_sprite;
+    friend class ge211::Font;
 
     TTF_Font* get_raw_() const noexcept { return ptr_.get(); }
 
     static detail::delete_ptr<TTF_Font>
     load_(const std::string& filename,
-          detail::File_resource& ttf_file,
+          detail::File_resource&& ttf_file,
           int size);
 
-    detail::File_resource file_;
     detail::delete_ptr<TTF_Font> ptr_;
 };
 
