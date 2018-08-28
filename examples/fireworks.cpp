@@ -304,8 +304,8 @@ void Fireworks::on_start()
 {
     auto mixer = get_mixer();
     if (mixer) {
-        mixer->play_music(mixer->load_music("music.dat"));
-        view.explosion_sound = mixer->load_effect("balloon.mp3");
+        mixer->play_music(mixer->load_music("joplin.mid"));
+        view.explosion_sound = mixer->load_effect("pop.mp3");
     }
 }
 

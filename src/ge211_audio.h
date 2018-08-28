@@ -33,10 +33,30 @@ private:
 
 } // end namespace detail
 
-/// Audio utilities, for playing music and sound effects.
+/// Audio facilities, for playing music and sound effects.
+///
+/// All audio facilities are accessed via the Mixer, which is accessed
+/// via the get_mixer() const member function of Abstract_game. If the
+/// Mixer is present (and it may not be), then it can be used to load
+/// audio files as Music_track@s and Effect_track@s. The former is for
+/// playing continuous background music, whereas the latter is for
+/// adding sound effects. See the Mixer documentation for more.
 namespace audio {
 
 /// A music track, which can be attached to the Mixer and played.
+///
+/// The constructor for this class is private, and consequently it cannot be
+/// constructed directly; instead, one should call the
+/// Mixer::load_music(const std::string&) member function of the Mixer, which
+/// returns a std::shared_ptr to a Music_track.
+///
+/// Note that Music_track has no public member functions. However, a
+/// music track can be passed to these Mixer member functions to play it:
+///
+///  - Mixer::play_music(const std::shared_ptr<Music_track>&, Duration)
+///  - Mixer::attach_music(const std::shared_ptr<Music_track>&)
+///
+/// Note also that the mixer can only play one music track at at time.
 class Music_track : private detail::Audio_resource<Mix_Music>
 {
 private:
@@ -52,12 +72,24 @@ private:
 };
 
 /// A sound effect track, which can be attached to a Mixer channel and played.
+///
+/// The constructor for this class is private, and consequently it cannot be
+/// constructed directly; instead, one should call the
+/// Mixer::load_effect(const std::string&) member function of the Mixer, which
+/// returns a std::shared_ptr to a Effect_track.
+///
+/// Note that Effect_track has few public member functions. However, an
+/// effect track can be passed to the Mixer member function
+/// Mixer::play_effect(const std::shared_ptr<Effect_track>&, Duration)
+/// to play it.
 class Effect_track : private detail::Audio_resource<Mix_Chunk>
 {
 public:
-    /// Returns the sound effect's volume as a number from 0 to 1.
+    /// Returns the sound effect's volume as a number from 0.0 to 1.0.
+    /// Initially this will be 1.0, but you can lower it with
+    /// Effect_track::set_volume(double).
     double get_volume() const;
-    /// Sets the sound effects volume as a number from 0 to 1.
+    /// Sets the sound effects volume as a number from 0.0 to 1.0.
     void set_volume(double unit_value);
 
 private:
