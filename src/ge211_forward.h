@@ -8,6 +8,8 @@ struct SDL_RWops;
 struct SDL_Surface;
 struct SDL_Texture;
 struct SDL_Window;
+struct _Mix_Music;
+typedef struct _Mix_Music Mix_Music;
 struct _TTF_Font;
 typedef struct _TTF_Font TTF_Font;
 
@@ -17,6 +19,7 @@ namespace ge211 {
 class Abstract_game;
 class Color;
 class Font;
+class Mixer;
 class Sprite_set;
 class Window;
 

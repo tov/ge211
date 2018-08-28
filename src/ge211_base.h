@@ -6,6 +6,7 @@
 #include "ge211_forward.h"
 #include "ge211_geometry.h"
 #include "ge211_random.h"
+#include "ge211_resource.h"
 #include "ge211_session.h"
 #include "ge211_time.h"
 
@@ -214,6 +215,9 @@ protected:
     /// produce random numbers.
     Random& get_random() const noexcept;
 
+    /// Gets the audio mixer, which can be used to play music.
+    Mixer& get_mixer() noexcept;
+
     /// Gets the time point at which the current frame started. This can be
     /// used to measure intervals between events, though it might be better
     /// to use a time::Timer or time::Pausable_timer.
@@ -256,6 +260,7 @@ private:
 
     mutable Random rng_;
     detail::Session session_;
+    Mixer mixer_;
     detail::Engine* engine_ = nullptr;
 
     bool quit_ = false;

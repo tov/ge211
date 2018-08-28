@@ -91,6 +91,7 @@ class Host_error : public Environment_error
     friend class File_error;
     friend class Font_error;
     friend class Image_error;
+    friend class Mixer_error;
 
     /// Throwers
     friend class ge211::Window;
@@ -128,6 +129,17 @@ class Image_error final : public Host_error
 
     /// Thrower
     friend class sprites::Image_sprite;
+};
+
+/// Indicates an error in the mixer, which could include the inability to
+/// open an audio file or to understand its format.
+class Mixer_error final : public Host_error
+{
+    Mixer_error(const std::string& message);
+    static Mixer_error could_not_load(const std::string& filename);
+
+    /// Thrower
+    friend class ge211::Mixer;
 };
 
 } // end namespace exception

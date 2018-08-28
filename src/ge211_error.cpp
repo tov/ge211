@@ -74,6 +74,15 @@ Image_error Image_error::could_not_load(const std::string& filename)
     return Image_error("Could not load image: " + filename);
 }
 
+Mixer_error::Mixer_error(const std::string& message)
+        : Host_error{message}
+{ }
+
+Mixer_error Mixer_error::could_not_load(const std::string& filename)
+{
+    return Mixer_error("Could not load music: " + filename);
+}
+
 }
 
 namespace detail {

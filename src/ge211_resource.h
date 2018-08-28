@@ -2,6 +2,8 @@
 
 #include "ge211_forward.h"
 #include "ge211_util.h"
+#include "ge211_error.h"
+
 #include <string>
 
 namespace ge211 {
@@ -58,6 +60,31 @@ private:
 
     detail::File_resource file_;
     detail::delete_ptr<TTF_Font> ptr_;
+};
+
+class Mixer
+{
+public:
+    Mixer() noexcept;
+
+    enum class State
+    {
+        unloaded, halted, paused, playing
+    };
+
+    State get_music_state() const;
+
+    void load_music(const std::string& filename);
+    void play_music();
+    void pause_music();
+    void stop_music();
+    void unload_music();
+
+private:
+    static detail::delete_ptr<Mix_Music>
+    load_music_(const std::string&);
+
+    detail::delete_ptr<Mix_Music> music_ptr_;
 };
 
 }

@@ -101,6 +101,8 @@ struct Fireworks : Abstract_game
     void on_key(Key key) override;
     void on_mouse_up(Mouse_button button, Position position) override;
     void on_frame(double dt) override;
+    void on_start() override;
+    void on_quit() override;
 };
 
 int main()
@@ -274,6 +276,19 @@ void Fireworks::on_mouse_up(Mouse_button, Position position)
 {
     if (!is_paused)
         model.add_random(get_random(), position.into<double>());
+}
+
+void Fireworks::on_start()
+{
+    Mixer& mixer = get_mixer();
+    mixer.load_music("DonGiovanni.ogg");
+    mixer.play_music();
+}
+
+void Fireworks::on_quit()
+{
+    Mixer& mixer = get_mixer();
+    mixer.stop_music();
 }
 
 

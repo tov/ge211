@@ -1,5 +1,6 @@
 #include "ge211_session.h"
 #include "ge211_error.h"
+#include "ge211_util.h"
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -16,8 +17,8 @@ Session::Session()
 {
     setlocale(LC_ALL, "en_US.utf8");
 
-    int mix_flags = Mix_Init(0);
-    if (mix_flags == 0) {
+    int mix_flags = MIX_INIT_OGG | MIX_INIT_MP3;
+    if ((Mix_Init(mix_flags) & mix_flags) != mix_flags) {
         warn_sdl() << "Could not initialize audio mixer";
     }
 
@@ -43,6 +44,18 @@ Session::Session()
                       4096) < 0)
     {
         warn_sdl() << "Could not open audio channels";
+    } else {
+        int music_decoders = Mix_GetNumMusicDecoders();
+        info_sdl() << "Number of music decoders is " << music_decoders;
+        for (int i = 0; i < music_decoders; ++i) {
+            info_sdl() << "Encoder " << i << " is " << Mix_GetMusicDecoder(i);
+        }
+
+        int chunk_decoders = Mix_GetNumChunkDecoders();
+        info_sdl() << "Number of chunk decoders is " << chunk_decoders;
+        for (int i = 0; i < chunk_decoders; ++i) {
+            info_sdl() << "Encoder " << i << " is " << Mix_GetChunkDecoder(i);
+        }
     }
 
     SDL_StartTextInput();
