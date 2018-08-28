@@ -84,7 +84,7 @@ public:
         /// Actively playing.
         playing,
         /// In the process of fading out from playing to paused (for music) or
-        // halted and detached (for sound effects).
+        /// to halted and detached (for sound effects).
         fading_out,
         /// Attached but not playing.
         paused,
