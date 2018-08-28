@@ -127,10 +127,10 @@ void Mixer::attach_music(const Music_track& music)
             break;
 
         case State::playing:
-            throw Client_logic_error("Mixer::route_music: still playing");
+            throw Client_logic_error("Mixer::attach_music: still playing");
 
         case State::fading_out:
-            throw Client_logic_error("Mixer::route_music: fading out");
+            throw Client_logic_error("Mixer::attach_music: fading out");
     }
 
     current_music_ = music;
@@ -302,7 +302,7 @@ void Sound_effect_handle::pause()
 {
     switch (ptr_->state) {
         case Mixer::State::empty:
-            throw Client_logic_error("Mixer::pause_effect: empty channel");
+            throw Client_logic_error("Sound_effect_handle::pause: empty");
 
         case Mixer::State::paused:
             // idempotent
@@ -314,7 +314,7 @@ void Sound_effect_handle::pause()
             break;
 
         case Mixer::State::fading_out:
-            throw Client_logic_error("Mixer::pause_effect: fading out");
+            throw Client_logic_error("Sound_effect_handle::pause: fading out");
     }
 }
 
@@ -322,7 +322,7 @@ void Sound_effect_handle::stop(Duration fade_out)
 {
     switch (ptr_->state) {
         case Mixer::State::empty:
-            throw Client_logic_error("Mixer::stop_effect: empty channel");
+            throw Client_logic_error("Sound_effect_handle::stop: empty");
 
         case Mixer::State::paused:
             ptr_->mixer.unregister_effect_(ptr_->channel);
@@ -339,7 +339,7 @@ void Sound_effect_handle::stop(Duration fade_out)
             }
 
         case Mixer::State::fading_out:
-            throw Client_logic_error("Mixer::stop_effect: fading out");
+            throw Client_logic_error("Sound_effect_handle::stop: fading out");
     }
 }
 
