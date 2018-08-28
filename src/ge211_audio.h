@@ -37,41 +37,24 @@ private:
 namespace audio {
 
 /// The state of an audio track.
-enum class Mixer_state
+enum class Channel_state
 {
-    /// Currently not attached to any mixer.
-    detached,
+    /// No track is attached to this channel.
+    empty,
     /// Actively playing.
     playing,
     /// In the process of fading out from playing to paused.
     fading_out,
-    /// Attached, not playing, possibly in the middle.
+    /// Not playing.
     paused,
-    /// Attached, not playing, positioned at beginning.
-    halted,
 };
 
 /// A music track, which can be attached to the Mixer and played.
 class Music_track : private detail::Audio_resource<Mix_Music>
 {
-public:
-    /// Gets the current state of the audio track.
-    Mixer_state get_state() const { return state_; }
-
-    /// Pauses this audio track, with the given fade-out duration.
-    void pause(time::Duration fade_out = 0);
-    /// Unpauses this audio track, with the given fade-in duration.
-    void unpause(time::Duration fade_in = 0);
-    /// Resets this audio track to the beginning, in halted state.
-    void reset();
-
 private:
     // Friends
     friend ge211::audio::Mixer;
-
-    // Member variables
-    Mixer_state state_{Mixer_state::detached};
-    time::Pausable_timer pos_{true};
 
     // Private constructor
     Music_track(const std::string& filename, detail::File_resource&&);
@@ -79,29 +62,12 @@ private:
     // Private static factory
     static Mix_Music* load_(const std::string& filename,
                             detail::File_resource&&);
-
-    // Interface to Mixer
-    void poll_state_();
-
-    // Private helpers
-    void fade_in_(time::Duration dur, time::Duration offset);
-    void fade_out_(time::Duration dur);
 };
 
 /// A sound effect track, which can be attached to a Mixer channel and played.
 class Effect_track : private detail::Audio_resource<Mix_Chunk>
 {
 public:
-    /// Gets the current state of the audio track.
-    Mixer_state get_state() const { return state_; }
-
-    /// Pauses the sound effect if playing.
-    void pause();
-    /// Unpauses the sound effect if paused.
-    void unpause();
-    /// Fades out and halts the effect.
-    void fade_halt(time::Duration duration);
-
     /// Returns the sound effect's volume as a number from 0 to 1.
     double get_volume() const;
     /// Sets the sound effects volume as a number from 0 to 1.
@@ -111,32 +77,43 @@ private:
     // Friends
     friend ge211::audio::Mixer;
 
-    // Member variables
-    Mixer_state state_;
-    int channel_; // The channel we're attached to, if any.
-
     // Private constructor
     Effect_track(const std::string& filename, detail::File_resource&&);
 
     // Private static factory
     static Mix_Chunk* load_(const std::string& filename,
                             detail::File_resource&&);
-
-    // Interface to Mixer
-    void poll_state_();
 };
 
 /// The entity that coordinates playing all audio tracks.
 class Mixer
 {
 public:
+    /// \name Playing music
+    ///@{
+
     /// Loads a new music track, returning a shared pointer to the track.
     std::shared_ptr<Music_track> load_music(const std::string& filename);
 
-    /// Attaches the given music track to this mixer and (by default) starts
-    /// playing the track.
+    /// Attaches the given music track to this mixer and starts it playing.
     void play_music(const std::shared_ptr<Music_track>&,
-                    bool start_halted = false);
+                    time::Duration fade_in = 0.0);
+
+    /// Attaches the given music track to this mixer. Give `nullptr` to detach
+    /// the current track, if any.
+    ///
+    /// **PRECONDITIONS**: It is an error to attach music when other music is
+    /// playing or fading out.
+    void attach_music(const std::shared_ptr<Music_track>&);
+
+    /// Plays the currently attached music from the current saved position,
+    /// fading in if requested.
+    void unpause_music(time::Duration fade_in = 0.0);
+    /// Pauses the currently attached music, fading out if requested.
+    void pause_music(time::Duration fade_out = 0.0);
+    /// Rewinds the music to the beginning. This is only valid when the music
+    // is paused.
+    void rewind_music();
 
     /// Gets the Music_track currently attached to this Mixer, if any.
     const std::shared_ptr<Music_track>& get_music() const
@@ -144,21 +121,48 @@ public:
         return current_music_;
     }
 
+    /// Returns the current state of the attached music, if any.
+    Channel_state get_music_state() const
+    {
+        return music_state_;
+    }
+
+    ///@}
+
+    /// \name Playing sound effects
+    ///@{
+
     /// Loads a new sound effect track, returning a shared pointer to the track.
     std::shared_ptr<Effect_track> load_effect(const std::string& filename);
 
-    /// Returns the number of channels on which effects can be played.
-    int number_of_effect_channels() const;
+    /// Attaches the given effect track to a channel of this mixer, starting
+    /// the effect playing and returning the channel.
+    int play_effect(const std::shared_ptr<Effect_track>&,
+                    time::Duration fade_in = 0.0);
 
-    /// Attaches the given sound effect track to the given mixer effect
-    /// channel, and (by default) starts playing the track.
-    void play_effect(const std::shared_ptr<Effect_track>&,
-                     int channel = -1,
-                     time::Duration fade_in = 0.0,
-                     time::Duration duration = 0.0);
+    /// Attaches the given effect track to a channel of this mixer, returning
+    /// the channel.
+    int attach_effect(const std::shared_ptr<Effect_track>&);
+
+    /// Detaches the effect that is attached to the given channel.
+    void detach_effect(int channel);
+
+    /// Plays the effect on the given channel.
+    void start_effect(int channel, time::Duration fade_in = 0.0);
+    /// Pauses the effect on the given channel.
+    void pause_effect(int channel);
+    /// Unpauses the effect on the given channel.
+    void unpause_effect(int channel);
+    /// Stops the effect from playing.
+    void stop_effect(int channel, time::Duration fade_out = 0.0);
 
     /// Gets the Effect_track currently attached to the given channel.
     const std::shared_ptr<Effect_track>& get_effect(int channel) const;
+
+    /// Gets the Effect_track currently attached to the given channel.
+    Channel_state get_effect_state(int channel) const;
+
+    ///@}
 
     /// The mixer cannot be copied.
     Mixer(const Mixer&) = delete;
@@ -184,12 +188,16 @@ private:
     /// Private constructor -- should not be called.
     Mixer();
 
-    /// Updates the state of the routed music.
+    /// Updates the state of the attached music and sound effects.
     void poll_state_();
 
 private:
     std::shared_ptr<Music_track> current_music_;
+    Channel_state music_state_{Channel_state::empty};
+    time::Pausable_timer music_position_{true};
+
     std::vector<std::shared_ptr<Effect_track>> effect_channels_;
+    std::vector<Channel_state> effect_states_;
 };
 
 } // end namespace audio

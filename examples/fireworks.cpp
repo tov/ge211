@@ -269,18 +269,18 @@ void Fireworks::on_key(Key key)
 
 void Fireworks::on_frame(double dt)
 {
+    auto mixer = get_mixer();
+
     if (is_paused) {
         if (view.music) {
-            if (view.music->get_state() == audio::Mixer_state::playing)
-                view.music->pause(1.0);
+            if (mixer->get_music_state() == audio::Channel_state::playing)
+                mixer->pause_music(0.5);
         }
     } else {
         model.update(dt);
         if (view.music) {
-            if (view.music->get_state() == audio::Mixer_state::halted)
-                view.music->unpause();
-            else if (view.music->get_state() == audio::Mixer_state::paused)
-                view.music->unpause(1.0);
+            if (mixer->get_music_state() == audio::Channel_state::paused)
+                mixer->unpause_music(0.5);
         }
     }
 }
@@ -302,9 +302,11 @@ void Fireworks::on_start()
 
 void Fireworks::on_quit()
 {
+    auto mixer = get_mixer();
     if (view.music) {
         // This seem not to have any effect:
-        view.music->pause(0.5);
+        if (mixer->get_music_state() == audio::Channel_state::playing)
+            mixer->pause_music(1.5);
     }
 }
 
