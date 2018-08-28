@@ -11,6 +11,7 @@
 #include "ge211_session.h"
 #include "ge211_time.h"
 
+#include <memory>
 #include <string>
 
 namespace ge211 {
@@ -217,7 +218,7 @@ protected:
     Random& get_random() const noexcept;
 
     /// Gets the audio mixer, which can be used to play music.
-    audio::Mixer& get_mixer() noexcept;
+    audio::Mixer* get_mixer() const noexcept;
 
     /// Gets the time point at which the current frame started. This can be
     /// used to measure intervals between events, though it might be better
@@ -261,7 +262,7 @@ private:
 
     mutable Random rng_;
     detail::Session session_;
-    audio::Mixer mixer_;
+    std::unique_ptr<audio::Mixer> mixer_ = audio::Mixer::open_mixer();
     detail::Engine* engine_ = nullptr;
 
     bool quit_ = false;

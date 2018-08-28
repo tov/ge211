@@ -51,6 +51,7 @@ void Engine::run()
         while (!game_.quit_) {
             handle_events_(e);
             game_.on_frame(game_.get_prev_frame_length().seconds());
+            if (game_.mixer_) game_.mixer_->update_state_();
             game_.draw(sprites);
 
             renderer_.set_color(game_.background_color);

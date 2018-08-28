@@ -38,34 +38,12 @@ Session::Session()
         exit(1);
     }
 
-    if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,
-                      MIX_DEFAULT_FORMAT,
-                      2,
-                      4096) < 0)
-    {
-        warn_sdl() << "Could not open audio channels";
-    } else {
-        int music_decoders = Mix_GetNumMusicDecoders();
-        info_sdl() << "Number of music decoders is " << music_decoders;
-        for (int i = 0; i < music_decoders; ++i) {
-            info_sdl() << "Encoder " << i << " is " << Mix_GetMusicDecoder(i);
-        }
-
-        int chunk_decoders = Mix_GetNumChunkDecoders();
-        info_sdl() << "Number of chunk decoders is " << chunk_decoders;
-        for (int i = 0; i < chunk_decoders; ++i) {
-            info_sdl() << "Encoder " << i << " is " << Mix_GetChunkDecoder(i);
-        }
-    }
-
     SDL_StartTextInput();
 }
 
 Session::~Session()
 {
     SDL_StopTextInput();
-
-    Mix_CloseAudio();
 
     TTF_Quit();
     IMG_Quit();

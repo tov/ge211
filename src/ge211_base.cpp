@@ -49,9 +49,9 @@ Random& Abstract_game::get_random() const noexcept
     return rng_;
 }
 
-audio::Mixer& Abstract_game::get_mixer() noexcept
+audio::Mixer* Abstract_game::get_mixer() const noexcept
 {
-    return mixer_;
+    return mixer_.get();
 }
 
 void Abstract_game::prepare(const sprites::Sprite& sprite) const

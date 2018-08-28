@@ -46,6 +46,15 @@ public:
         return seconds.count();
     }
 
+    /// Gets this duration, approximately, in milliseconds.
+    long milliseconds() const
+    {
+        auto millis =
+                std::chrono::duration_cast<std::chrono::duration<long, std::milli>>(
+                        duration_);
+        return millis.count();
+    }
+
     /// \name Comparisons
     ///@{
 

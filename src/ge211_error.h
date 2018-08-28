@@ -140,6 +140,7 @@ class Mixer_error final : public Host_error
 
     /// Thrower
     friend class ge211::audio::Mixer;
+    friend class ge211::audio::Music_track;
 };
 
 } // end namespace exception

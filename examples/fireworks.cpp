@@ -82,6 +82,7 @@ struct View
     Text_sprite fps;
     Circle_sprite mortar{mortar_radius, mortar_color};
     vector<Circle_sprite> stars;
+    std::shared_ptr<audio::Music_track> music;
 };
 
 // MAIN STRUCT AND FUNCTION
@@ -268,14 +269,13 @@ void Fireworks::on_key(Key key)
 
 void Fireworks::on_frame(double dt)
 {
-    audio::Mixer& mixer = get_mixer();
-    auto music_state = mixer.get_music_state();
-
     if (is_paused) {
-        mixer.pause_music();
+        if (view.music)
+            view.music->pause();
     } else {
         model.update(dt);
-        mixer.play_music();
+        if (view.music)
+            view.music->play();
     }
 }
 
@@ -287,11 +287,17 @@ void Fireworks::on_mouse_up(Mouse_button, Position position)
 
 void Fireworks::on_start()
 {
-    get_mixer().load_music("DonGiovanni.ogg");
+    auto mixer = get_mixer();
+    if (mixer) {
+        view.music = mixer->load_music("DonGiovanni.ogg");
+        mixer->route_music(view.music);
+    }
 }
 
 void Fireworks::on_quit()
 {
-    get_mixer().stop_music();
+    if (view.music) {
+        view.music->pause(500);
+    }
 }
 

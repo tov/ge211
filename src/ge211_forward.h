@@ -38,7 +38,9 @@ class Texture_sprite;
 
 namespace audio {
 
+class Audio_track;
 class Mixer;
+class Music_track;
 
 } // end namespace audio
 
