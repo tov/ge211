@@ -201,14 +201,14 @@ public:
 
     /// The mixer cannot be copied.
     Mixer(const Mixer&) = delete;
-    /// The mixer cannot be copied.
-    Mixer(const Mixer&&) = delete;
     /// The mixer cannot be moved.
+    Mixer(const Mixer&&) = delete;
+    /// The mixer cannot be copied.
     Mixer& operator=(const Mixer&) = delete;
     /// The mixer cannot be moved.
     Mixer& operator=(const Mixer&&) = delete;
 
-    /// Destructor, cleans up the mixer's resources.
+    /// Destructor, to clean up the mixer's resources.
     ~Mixer();
 
     ///@}
