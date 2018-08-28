@@ -45,8 +45,10 @@ enum class Channel_state
     playing,
     /// In the process of fading out from playing to paused.
     fading_out,
-    /// Not playing.
+    /// Not playing, and not finished.
     paused,
+    /// Not playing, and finished.
+    halted,
 };
 
 /// A music track, which can be attached to the Mixer and played.

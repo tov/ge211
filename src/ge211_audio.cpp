@@ -10,85 +10,6 @@ using namespace detail;
 
 namespace audio {
 
-//void Music_track::unpause(Duration fade_in)
-//{
-//    switch (get_state()) {
-//        case Channel_state::playing:
-//            // idempotent;
-//            break;
-//
-//        case Channel_state::halted:
-//            pos_.reset();
-//            pos_.unpause();
-//            fade_in_(fade_in, 0);
-//            state_ = Channel_state::playing;
-//            break;
-//
-//        case Channel_state::paused: {
-//            Duration point = pos_.elapsed_time();
-//            pos_.unpause();
-//            fade_in_(fade_in, point);
-//            state_ = Channel_state::playing;
-//        }
-//        break;
-//
-//        case Channel_state::fading_out:
-//            throw Client_logic_error("Audio_track::play: fading out");
-//
-//        case Channel_state::detached:
-//            throw Client_logic_error("Audio_track::play: detached");
-//    }
-//}
-//
-//void Music_track::pause(Duration fade_out)
-//{
-//    switch (get_state()) {
-//        case Channel_state::playing:
-//            pos_.pause();
-//            fade_out_(fade_out);
-//            state_ = Channel_state::paused;
-//            break;
-//
-//        case Channel_state::halted:
-//            // allowed (stronger)
-//            break;
-//
-//        case Channel_state::paused:
-//            // idempotent
-//            break;
-//
-//        case Channel_state::fading_out:
-//            throw Client_logic_error("Audio_track::pause: fading out");
-//
-//        case Channel_state::detached:
-//            throw Client_logic_error("Audio_track::pause: detached");
-//    }
-//}
-//
-//void Music_track::reset()
-//{
-//    switch (get_state()) {
-//        case Channel_state::playing:
-//            throw Client_logic_error("Audio_track::reset: still playing");
-//
-//        case Channel_state::halted:
-//            pos_.pause();
-//            pos_.reset();
-//            break;
-//
-//        case Channel_state::paused:
-//            pos_.reset();
-//            break;
-//
-//        case Channel_state::fading_out:
-//            throw Client_logic_error("Audio_track::reset: fading out");
-//
-//        case Channel_state::detached:
-//            pos_.reset();
-//            break;
-//    }
-//}
-
 Mix_Music* Music_track::load_(const std::string& filename,
                               File_resource&& file_resource)
 {
@@ -104,20 +25,6 @@ Music_track::Music_track(const std::string& filename,
                                     &Mix_FreeMusic)
 { }
 
-//void Music_track::fade_in_(time::Duration dur, time::Duration offset)
-//{
-//    Mix_RewindMusic();
-//    Mix_FadeInMusicPos(get_raw_(),
-//                       0,
-//                       int(dur.milliseconds()),
-//                       offset.seconds());
-//}
-//
-//void Music_track::fade_out_(time::Duration dur)
-//{
-//    Mix_FadeOutMusic(int(dur.milliseconds()));
-//}
-
 Mix_Chunk* Effect_track::load_(const std::string& filename,
                                detail::File_resource&& file_resource)
 {
@@ -132,73 +39,6 @@ Effect_track::Effect_track(const std::string& filename,
         : Audio_resource<Mix_Chunk>(load_(filename, std::move(file_resource)),
                                     &Mix_FreeChunk)
 { }
-
-//void Effect_track::pause()
-//{
-//    switch (get_state()) {
-//        case Channel_state::playing:
-//            Mix_Pause(channel_);
-//            state_ = Channel_state::paused;
-//            break;
-//
-//        case Channel_state::halted:
-//            throw Client_logic_error("Effect_track::pause: halted");
-//
-//        case Channel_state::paused:
-//            // idempotent
-//            break;
-//
-//        case Channel_state::fading_out:
-//            throw Client_logic_error("Effect_track::pause: fading out");
-//
-//        case Channel_state::detached:
-//            throw Client_logic_error("Effect_track::pause: detached");
-//    }
-//}
-
-//void Effect_track::unpause()
-//{
-//    switch (get_state()) {
-//        case Channel_state::playing:
-//            // idempotent
-//            break;
-//
-//        case Channel_state::halted:
-//            throw Client_logic_error("Effect_track::unpause: halted");
-//
-//        case Channel_state::paused:
-//            Mix_Resume(channel_);
-//            state_ = Channel_state::playing;
-//            break;
-//
-//        case Channel_state::fading_out:
-//            throw Client_logic_error("Effect_track::unpause: fading out");
-//
-//        case Channel_state::detached:
-//            throw Client_logic_error("Effect_track::unpause: detached");
-//    }
-//}
-//
-//void Effect_track::fade_halt(time::Duration duration)
-//{
-//    switch (get_state()) {
-//        case Channel_state::playing:
-//            Mix_FadeOutChannel(channel_, int(duration.milliseconds()));
-//            state_ = Channel_state::fading_out;
-//            break;
-//
-//        case Channel_state::paused:
-//            Mix_HaltChannel(channel_);
-//            state_ = Channel_state::halted;
-//            break;
-//
-//        case Channel_state::halted:
-//        case Channel_state::fading_out:
-//        case Channel_state::detached:
-//            // Stronger or idempotent
-//            break;
-//    }
-//}
 
 double Effect_track::get_volume() const
 {
@@ -264,6 +104,7 @@ void Mixer::attach_music(const std::shared_ptr<Music_track>& music)
     switch (music_state_) {
         case Channel_state::paused:
         case Channel_state::empty:
+        case Channel_state::halted:
             break;
 
         case Channel_state::playing:
@@ -288,6 +129,7 @@ void Mixer::unpause_music(Duration fade_in)
         case Channel_state::empty:
             throw Client_logic_error("Mixer::unpause_music: no music attached");
 
+        case Channel_state::halted:
         case Channel_state::paused:
             Mix_RewindMusic();
             Mix_FadeInMusicPos(current_music_->get_raw_(),
@@ -313,6 +155,7 @@ void Mixer::pause_music(Duration fade_out)
         case Channel_state::empty:
             throw Client_logic_error("Mixer::pause_music: no music attached");
 
+        case Channel_state::halted:
         case Channel_state::paused:
             // Idempotent
             break;
@@ -335,8 +178,16 @@ void Mixer::pause_music(Duration fade_out)
 
 void Mixer::rewind_music()
 {
-    if (music_state_ != Channel_state::paused) {
-        throw Client_logic_error("Mixer::rewind_music: must be paused");
+    switch (music_state_) {
+        case Channel_state::paused:
+        case Channel_state::halted:
+            break;
+
+        case Channel_state::empty:
+        case Channel_state::playing:
+        case Channel_state::fading_out:
+            throw Client_logic_error(
+                    "Mixer::rewind_music: must be paused or halted");
     }
 
     music_position_.reset();
@@ -349,52 +200,6 @@ std::shared_ptr<Effect_track> Mixer::load_effect(const std::string& filename)
             new Effect_track(filename, std::move(file_resource)));
     return result;
 }
-
-//void Mixer::play_effect(const std::shared_ptr<Effect_track>& effect_track,
-//                        int channel,
-
-//                        time::Duration duration)
-//{
-//    // If a non-negative channel is specified, we may need to detach an effect
-//    // from the given channel.
-//    if (channel >= 0) {
-//        if (channel >= number_of_effect_channels())
-//            throw Client_logic_error("Mixer::play_effect: bad channel");
-//
-//        const auto& old_effect = effect_channels_[channel];
-//        if (old_effect) {
-//            switch (old_effect->get_state()) {
-//                case Channel_state::playing:
-//                case Channel_state::fading_out:
-//                    throw Client_logic_error(
-//                            "Mixer::play_effect: channel already in use");
-//
-//                case Channel_state::paused:
-//                case Channel_state::halted:
-//                case Channel_state::detached:
-//                    old_effect->state_ = Channel_state::detached;
-//                    break;
-//            }
-//        }
-//        effect_channels_[channel] = nullptr;
-//    }
-//
-//    int new_channel = Mix_FadeInChannelTimed(channel,
-//                                             effect_track->get_raw_(),
-//                                             0,
-//                                             int(fade_in.milliseconds()),
-//                                             int(duration.milliseconds()));
-//    if (new_channel < 0) throw Mixer_error::out_of_channels();
-//
-//    if (channel < 0) {
-//        const auto& old_effect = effect_channels_[new_channel];
-//        if (old_effect)
-//            old_effect->state_ = Channel_state::detached;
-//    }
-//
-//    effect_track->state_ = Channel_state::playing;
-//    effect_channels_[new_channel] = effect_track;
-//}
 
 const std::shared_ptr<Effect_track>& Mixer::get_effect(int channel) const
 {
@@ -409,15 +214,32 @@ Channel_state Mixer::get_effect_state(int channel) const
 void Mixer::poll_state_()
 {
     if (current_music_) {
-        if (!Mix_PlayingMusic() && !music_position_.is_paused()) {
-            music_position_.pause();
-            music_state_ = Channel_state::paused;
+        if (!Mix_PlayingMusic()) {
+            switch (music_state_) {
+                case Channel_state::empty:
+                case Channel_state::paused:
+                case Channel_state::halted:
+                    break;
+
+                case Channel_state::playing:
+                    music_position_.pause();
+                    music_position_.reset();
+                    music_state_ = Channel_state::halted;
+                    break;
+
+                case Channel_state::fading_out:
+                    music_position_.pause();
+                    music_state_ = Channel_state::paused;
+                    break;
+            }
         }
     }
 
     for (int channel = 0; channel < effect_channels_.size(); ++channel) {
-        if (!Mix_Playing(channel)) {
-            effect_states_[channel] = Channel_state::paused;
+        if (effect_states_[channel] != Channel_state::empty
+            && !Mix_Playing(channel))
+        {
+            effect_states_[channel] = Channel_state::halted;
         }
     }
 }

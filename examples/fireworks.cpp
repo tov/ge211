@@ -281,6 +281,8 @@ void Fireworks::on_frame(double dt)
         if (view.music) {
             if (mixer->get_music_state() == audio::Channel_state::paused)
                 mixer->unpause_music(0.5);
+            else if (mixer->get_music_state() == audio::Channel_state::halted)
+                mixer->unpause_music();
         }
     }
 }
@@ -309,4 +311,3 @@ void Fireworks::on_quit()
             mixer->pause_music(1.5);
     }
 }
-
