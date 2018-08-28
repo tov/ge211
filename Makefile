@@ -1,5 +1,5 @@
 TAG_FILE = cppreference.xml
-TAG_URL = https://en.cppreference.com/w/File:cppreference-doxygen-web.tag.xml
+TAG_URL = http://upload.cppreference.com/mwiki/images/f/f8/cppreference-doxygen-web.tag.xml
 
 doc/: Doxyfile $(TAG_FILE) FRONTMATTER.md src/*
 	doxygen
