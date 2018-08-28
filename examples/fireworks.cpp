@@ -60,7 +60,7 @@ struct Firework
     int star_color;
     double stage_time;
 
-    void update(double const dt);
+    bool update(double const dt);
     static Firework random(Random&, Projectile::Position);
 };
 
@@ -68,7 +68,7 @@ struct Model
 {
     vector<Firework> fireworks;
 
-    void update(double const dt);
+    bool update(double const dt);
     void add_random(Random&, Projectile::Position);
 };
 
@@ -82,6 +82,7 @@ struct View
     Text_sprite fps;
     Circle_sprite mortar{mortar_radius, mortar_color};
     vector<Circle_sprite> stars;
+    std::shared_ptr<audio::Effect_track> explosion_sound;
 };
 
 // MAIN STRUCT AND FUNCTION
@@ -127,8 +128,10 @@ Projectile::random(Random& rng, Position position,
     return {position, {speed * cos(radians), speed * sin(radians)}};
 }
 
-void Firework::update(double const dt)
+bool Firework::update(double const dt)
 {
+    bool explosion = false;
+
     switch (stage) {
         case Stage::mortar:
             if ((stage_time -= dt) <= 0) {
@@ -138,6 +141,7 @@ void Firework::update(double const dt)
                 }
                 stage_time = burn_seconds;
                 stage = Stage::stars;
+                explosion = true;
             } else {
                 mortar.update(dt);
             }
@@ -156,6 +160,8 @@ void Firework::update(double const dt)
         case Stage::done:
             break;
     }
+
+    return explosion;
 }
 
 Firework Firework::random(Random& rng, Projectile::Position p0)
@@ -180,10 +186,12 @@ Firework Firework::random(Random& rng, Projectile::Position p0)
     return Firework{Stage::mortar, mortar, stars, star_color, fuse_seconds};
 }
 
-void Model::update(double const dt)
+bool Model::update(double const dt)
 {
+    bool explosion = false;
+
     for (Firework& firework : fireworks) {
-        firework.update(dt);
+        explosion |= firework.update(dt);
     }
 
     size_t i = 0;
@@ -195,6 +203,8 @@ void Model::update(double const dt)
             ++i;
         }
     }
+
+    return explosion;
 }
 
 void Model::add_random(Random& rng, Projectile::Position position0)
@@ -272,8 +282,13 @@ void Fireworks::on_frame(double dt)
     if (is_paused) {
         if (mixer) mixer->pause_music();
     } else {
-        model.update(dt);
-        if (mixer) mixer->unpause_music();
+        bool explosion = model.update(dt);
+        if (mixer) {
+            mixer->unpause_music();
+            if (explosion && mixer->available_effect_channels() > 0) {
+                mixer->play_effect(view.explosion_sound);
+            }
+        }
     }
 }
 
@@ -288,6 +303,7 @@ void Fireworks::on_start()
     auto mixer = get_mixer();
     if (mixer) {
         mixer->play_music(mixer->load_music("music.dat"));
+        view.explosion_sound = mixer->load_effect("Don.ogg");
     }
 }
 

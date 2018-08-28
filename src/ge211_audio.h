@@ -137,20 +137,14 @@ public:
     /// Loads a new sound effect track, returning a shared pointer to the track.
     std::shared_ptr<Effect_track> load_effect(const std::string& filename);
 
+    /// How many effect channels are current unattached?
+    int available_effect_channels() const;
+
     /// Attaches the given effect track to a channel of this mixer, starting
     /// the effect playing and returning the channel.
     int play_effect(const std::shared_ptr<Effect_track>&,
                     time::Duration fade_in = 0.0);
 
-    /// Attaches the given effect track to a channel of this mixer, returning
-    /// the channel.
-    int attach_effect(const std::shared_ptr<Effect_track>&);
-
-    /// Detaches the effect that is attached to the given channel.
-    void detach_effect(int channel);
-
-    /// Plays the effect on the given channel.
-    void start_effect(int channel, time::Duration fade_in = 0.0);
     /// Pauses the effect on the given channel.
     void pause_effect(int channel);
     /// Unpauses the effect on the given channel.
@@ -163,6 +157,11 @@ public:
 
     /// Gets the Effect_track currently attached to the given channel.
     Channel_state get_effect_state(int channel) const;
+
+    /// Pauses all currently-playing effects.
+    void pause_all_effects();
+    /// Unpauses all currently-paused effects.
+    void unpause_all_effects();
 
     ///@}
 
@@ -191,15 +190,27 @@ private:
     Mixer();
 
     /// Updates the state of the attached music and sound effects.
-    void poll_state_();
+    void poll_channels_();
+
+    /// Asserts that the given channel value is okay.
+    void check_channel_in_bounds_(int channel) const;
+
+    /// Returns the index of an empty channel, or throws if all are full.
+    int find_empty_channel_() const;
+
+private:
+    void register_effect_(int channel,
+                          const std::shared_ptr<Effect_track>& effect);
+    void unregister_effect_(int channel);
 
 private:
     std::shared_ptr<Music_track> current_music_;
     Channel_state music_state_{Channel_state::empty};
     time::Pausable_timer music_position_{true};
 
-    std::vector<std::shared_ptr<Effect_track>> effect_channels_;
+    std::vector<std::shared_ptr<Effect_track>> effect_tracks_;
     std::vector<Channel_state> effect_states_;
+    int available_effect_channels_;
 };
 
 } // end namespace audio

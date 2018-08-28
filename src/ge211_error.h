@@ -76,6 +76,7 @@ class Ge211_logic_error : public Environment_error
 
     /// Throwers
     friend class detail::Render_sprite;
+    friend class audio::Mixer;
     friend class sprites::Text_sprite;
 };
 
