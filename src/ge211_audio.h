@@ -99,7 +99,7 @@ public:
 
     /// Attaches the given music track to this mixer and starts it playing.
     void play_music(const std::shared_ptr<Music_track>&,
-                    time::Duration fade_in = 0.0);
+                    Duration fade_in = 0.0);
 
     /// Attaches the given music track to this mixer. Give `nullptr` to detach
     /// the current track, if any.
@@ -110,9 +110,9 @@ public:
 
     /// Plays the currently attached music from the current saved position,
     /// fading in if requested.
-    void unpause_music(time::Duration fade_in = 0.0);
+    void unpause_music(Duration fade_in = 0.0);
     /// Pauses the currently attached music, fading out if requested.
-    void pause_music(time::Duration fade_out = 0.0);
+    void pause_music(Duration fade_out = 0.0);
     /// Rewinds the music to the beginning. This is only valid when the music
     // is paused.
     void rewind_music();
@@ -143,14 +143,14 @@ public:
     /// Attaches the given effect track to a channel of this mixer, starting
     /// the effect playing and returning the channel.
     int play_effect(const std::shared_ptr<Effect_track>&,
-                    time::Duration fade_in = 0.0);
+                    Duration fade_in = 0.0);
 
     /// Pauses the effect on the given channel.
     void pause_effect(int channel);
     /// Unpauses the effect on the given channel.
     void unpause_effect(int channel);
     /// Stops the effect from playing.
-    void stop_effect(int channel, time::Duration fade_out = 0.0);
+    void stop_effect(int channel, Duration fade_out = 0.0);
 
     /// Gets the Effect_track currently attached to the given channel.
     const std::shared_ptr<Effect_track>& get_effect(int channel) const;
@@ -207,7 +207,7 @@ private:
 private:
     std::shared_ptr<Music_track> current_music_;
     Channel_state music_state_{Channel_state::empty};
-    time::Pausable_timer music_position_{true};
+    Pausable_timer music_position_{true};
 
     std::vector<std::shared_ptr<Effect_track>> effect_tracks_;
     std::vector<Channel_state> effect_states_;
