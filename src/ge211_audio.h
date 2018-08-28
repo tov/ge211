@@ -33,7 +33,7 @@ namespace audio {
 ///  - Mixer::play_music(const Music_track&, Duration)
 ///  - Mixer::attach_music(const Music_track&)
 ///
-/// Note also that the mixer can only play one music track at at time.
+/// Note also that the mixer can only play one music track at a time.
 class Music_track
 {
 public:
