@@ -17,9 +17,9 @@ public:
 
     SDL_RWops* get_raw_() const noexcept { return ptr_.get(); }
 
+private:
     static delete_ptr<SDL_RWops> open_rwops_(const std::string&);
 
-private:
     delete_ptr<SDL_RWops> ptr_;
 };
 
@@ -75,7 +75,7 @@ public:
     State get_music_state() const;
 
     void load_music(const std::string& filename);
-    void play_music();
+
     void pause_music();
     void stop_music();
     void unload_music();

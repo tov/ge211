@@ -102,6 +102,7 @@ struct Fireworks : Abstract_game
     void on_mouse_up(Mouse_button button, Position position) override;
     void on_frame(double dt) override;
     void on_start() override;
+    void on_quit() override;
 };
 
 int main()
@@ -287,5 +288,10 @@ void Fireworks::on_mouse_up(Mouse_button, Position position)
 void Fireworks::on_start()
 {
     get_mixer().load_music("DonGiovanni.ogg");
+}
+
+void Fireworks::on_quit()
+{
+    get_mixer().stop_music();
 }
 

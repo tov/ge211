@@ -107,7 +107,7 @@ void Mixer::play_music()
 {
     switch (get_music_state()) {
         case State::halted:
-            if (Mix_PlayMusic(music_ptr_.get(), 1) < 0) {
+            if (Mix_FadeInMusicPos(music_ptr_.get(), 1, 500, 0.0) < 0) {
                 throw Mixer_error("Could not play music.");
             }
             break;
@@ -153,7 +153,7 @@ void Mixer::stop_music()
             break;
 
         case State::playing:
-            Mix_HaltMusic();
+            Mix_FadeOutMusic(500);
             break;
 
         case State::paused:
