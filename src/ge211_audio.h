@@ -9,36 +9,12 @@
 
 namespace ge211 {
 
-namespace detail {
-
-template <typename T>
-class Audio_resource
-{
-public:
-    Audio_resource(T* ptr, void (*deleter)(T*))
-            : ptr_{ptr, deleter}
-    { }
-
-    Audio_resource(Audio_resource&) = delete;
-    Audio_resource(Audio_resource&&) = delete;
-    Audio_resource& operator=(Audio_resource&) = delete;
-    Audio_resource& operator=(Audio_resource&&) = delete;
-
-protected:
-    T* get_raw_() const { return ptr_.get(); }
-
-private:
-    delete_ptr<T> ptr_;
-};
-
-} // end namespace detail
-
 /// Audio facilities, for playing music and sound effects.
 ///
 /// All audio facilities are accessed via the Mixer, which is accessed
 /// via the get_mixer() const member function of Abstract_game. If the
 /// Mixer is present (and it may not be), then it can be used to load
-/// audio files as Music_track@s and Effect_track@s. The former is for
+/// audio files as Music_track@s and Sound_effect@s. The former is for
 /// playing continuous background music, whereas the latter is for
 /// adding sound effects. See the Mixer documentation for more.
 namespace audio {
@@ -48,17 +24,27 @@ namespace audio {
 /// The constructor for this class is private, and consequently it cannot be
 /// constructed directly; instead, one should call the
 /// Mixer::load_music(const std::string&) member function of the Mixer, which
-/// returns a std::shared_ptr to a Music_track.
+/// returns a Music_track.
 ///
-/// Note that Music_track has no public member functions. However, a
+/// Note that Music_track has few public member functions. However, a
 /// music track can be passed to these Mixer member functions to play it:
 ///
-///  - Mixer::play_music(const std::shared_ptr<Music_track>&, Duration)
-///  - Mixer::attach_music(const std::shared_ptr<Music_track>&)
+///  - Mixer::play_music(const Music_track&, Duration)
+///  - Mixer::attach_music(const Music_track&)
 ///
 /// Note also that the mixer can only play one music track at at time.
-class Music_track : private detail::Audio_resource<Mix_Music>
+class Music_track
 {
+public:
+    /// Constructs the empty music track.
+    Music_track() { }
+
+    /// Checks for the empty music track.
+    bool empty() const;
+
+    /// Checks for a non-empty music track.
+    operator bool() const;
+
 private:
     // Friends
     friend ge211::audio::Mixer;
@@ -69,6 +55,8 @@ private:
     // Private static factory
     static Mix_Music* load_(const std::string& filename,
                             detail::File_resource&&);
+
+    std::shared_ptr<Mix_Music> raw_;
 };
 
 /// A sound effect track, which can be attached to a Mixer channel and played.
@@ -76,19 +64,29 @@ private:
 /// The constructor for this class is private, and consequently it cannot be
 /// constructed directly; instead, one should call the
 /// Mixer::load_effect(const std::string&) member function of the Mixer, which
-/// returns a std::shared_ptr to a Effect_track.
+/// returns a Sound_effect.
 ///
-/// Note that Effect_track has few public member functions. However, an
+/// Note that Sound_effect has few public member functions. However, an
 /// effect track can be passed to the Mixer member function
-/// Mixer::play_effect(const std::shared_ptr<Effect_track>&, Duration)
+/// Mixer::play_effect(const Sound_effect&, Duration)
 /// to play it.
-class Sound_effect : private detail::Audio_resource<Mix_Chunk>
+class Sound_effect
 {
 public:
+    /// Constructs the empty sound effect track.
+    Sound_effect() { }
+
+    /// Checks for the empty sound effect track.
+    bool empty() const;
+
+    /// Checks for a non-empty sound effect track.
+    operator bool() const;
+
     /// Returns the sound effect's volume as a number from 0.0 to 1.0.
     /// Initially this will be 1.0, but you can lower it with
-    /// Effect_track::set_volume(double).
+    /// Sound_effect::set_volume(double).
     double get_volume() const;
+
     /// Sets the sound effects volume as a number from 0.0 to 1.0.
     void set_volume(double unit_value);
 
@@ -102,6 +100,8 @@ private:
     // Private static factory
     static Mix_Chunk* load_(const std::string& filename,
                             detail::File_resource&&);
+
+    std::shared_ptr<Mix_Chunk> raw_;
 };
 
 /// The entity that coordinates playing all audio tracks.
@@ -125,19 +125,18 @@ public:
     /// \name Playing music
     ///@{
 
-    /// Loads a new music track, returning a shared pointer to the track.
-    std::shared_ptr<Music_track> load_music(const std::string& filename);
+    /// Loads a new music track.
+    Music_track load_music(const std::string& filename);
 
     /// Attaches the given music track to this mixer and starts it playing.
-    void play_music(const std::shared_ptr<Music_track>&,
-                    Duration fade_in = 0.0);
+    void play_music(const Music_track&, Duration fade_in = 0.0);
 
-    /// Attaches the given music track to this mixer. Give `nullptr` to detach
-    /// the current track, if any.
+    /// Attaches the given music track to this mixer. Give empty Music_track to
+    /// detach the current track, if any.
     ///
     /// **PRECONDITIONS**: It is an error to attach music when other music is
     /// playing or fading out.
-    void attach_music(const std::shared_ptr<Music_track>&);
+    void attach_music(const Music_track&);
 
     /// Plays the currently attached music from the current saved position,
     /// fading in if requested.
@@ -149,7 +148,7 @@ public:
     void rewind_music();
 
     /// Gets the Music_track currently attached to this Mixer, if any.
-    const std::shared_ptr<Music_track>& get_music() const
+    const Music_track& get_music() const
     {
         return current_music_;
     }
@@ -165,16 +164,15 @@ public:
     /// \name Playing sound effects
     ///@{
 
-    /// Loads a new sound effect track, returning a shared pointer to the track.
-    std::shared_ptr<Sound_effect> load_effect(const std::string& filename);
+    /// Loads a new sound effect track.
+    Sound_effect load_effect(const std::string& filename);
 
     /// How many effect channels are current unattached?
     int available_effect_channels() const;
 
     /// Attaches the given effect track to a channel of this mixer, starting
     /// the effect playing and returning the channel.
-    int play_effect(const std::shared_ptr<Sound_effect>&,
-                    Duration fade_in = 0.0);
+    int play_effect(const Sound_effect&, Duration fade_in = 0.0);
 
     /// Pauses the effect on the given channel.
     void pause_effect(int channel);
@@ -183,10 +181,10 @@ public:
     /// Stops the effect from playing, and unregisters it when finished.
     void stop_effect(int channel, Duration fade_out = 0.0);
 
-    /// Gets the Effect_track currently attached to the given channel.
-    const std::shared_ptr<Sound_effect>& get_effect(int channel) const;
+    /// Gets the Sound_effect currently attached to the given channel.
+    const Sound_effect& get_effect(int channel) const;
 
-    /// Gets the Effect_track currently attached to the given channel.
+    /// Gets the Sound_effect currently attached to the given channel.
     State get_effect_state(int channel) const;
 
     /// Pauses all currently-playing effects.
@@ -232,8 +230,7 @@ private:
     int find_empty_channel_() const;
 
     /// Registers an effect with a channel.
-    void register_effect_(int channel,
-                          const std::shared_ptr<Sound_effect>& effect);
+    void register_effect_(int channel, const Sound_effect& effect);
     /// Unregisters the effect associated with a channel.
     void unregister_effect_(int channel);
 
@@ -241,11 +238,11 @@ private:
     void check_channel_in_bounds_(int channel) const;
 
 private:
-    std::shared_ptr<Music_track> current_music_;
+    Music_track current_music_;
     State music_state_{State::empty};
     Pausable_timer music_position_{true};
 
-    std::vector<std::shared_ptr<Sound_effect>> effect_tracks_;
+    std::vector<Sound_effect> effect_tracks_;
     std::vector<State> effect_states_;
     int available_effect_channels_;
 };
