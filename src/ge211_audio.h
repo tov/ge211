@@ -22,8 +22,8 @@ namespace audio {
 
 /// A music track, which can be attached to the Mixer and played.
 ///
-/// The constructor for this class is private, and consequently it cannot be
-/// constructed directly; instead, one should call the
+/// The only public constructor is the default constructor, which constructs
+/// an *empty* Music_track. To load an audio file, one should call the
 /// Mixer::load_music(const std::string&) member function of the Mixer, which
 /// returns a Music_track.
 ///
@@ -62,8 +62,8 @@ private:
 
 /// A sound effect track, which can be attached to a Mixer channel and played.
 ///
-/// The constructor for this class is private, and consequently it cannot be
-/// constructed directly; instead, one should call the
+/// The only public constructor is the default constructor, which constructs
+/// an *empty* Sound_effect. To load an audio file, one should call the
 /// Mixer::load_effect(const std::string&) member function of the Mixer, which
 /// returns a Sound_effect.
 ///
