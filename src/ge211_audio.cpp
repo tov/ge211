@@ -28,7 +28,7 @@ Music_track::Music_track(const std::string& filename,
                                     &Mix_FreeMusic)
 { }
 
-Mix_Chunk* Effect_track::load_(const std::string& filename,
+Mix_Chunk* Sound_effect::load_(const std::string& filename,
                                detail::File_resource&& file_resource)
 {
     Mix_Chunk* raw = Mix_LoadWAV_RW(std::move(file_resource).release(), 1);
@@ -37,18 +37,18 @@ Mix_Chunk* Effect_track::load_(const std::string& filename,
     throw Mixer_error::could_not_load(filename);
 }
 
-Effect_track::Effect_track(const std::string& filename,
+Sound_effect::Sound_effect(const std::string& filename,
                            detail::File_resource&& file_resource)
         : Audio_resource<Mix_Chunk>(load_(filename, std::move(file_resource)),
                                     &Mix_FreeChunk)
 { }
 
-double Effect_track::get_volume() const
+double Sound_effect::get_volume() const
 {
     return get_raw_()->volume / double(MIX_MAX_VOLUME);
 }
 
-void Effect_track::set_volume(double unit_value)
+void Sound_effect::set_volume(double unit_value)
 {
     Mix_VolumeChunk(get_raw_(), int(unit_value * MIX_MAX_VOLUME));
 }
@@ -192,15 +192,15 @@ void Mixer::rewind_music()
     }
 }
 
-std::shared_ptr<Effect_track> Mixer::load_effect(const std::string& filename)
+std::shared_ptr<Sound_effect> Mixer::load_effect(const std::string& filename)
 {
     File_resource file_resource{filename};
-    std::shared_ptr<Effect_track> result(
-            new Effect_track(filename, std::move(file_resource)));
+    std::shared_ptr<Sound_effect> result(
+            new Sound_effect(filename, std::move(file_resource)));
     return result;
 }
 
-const std::shared_ptr<Effect_track>& Mixer::get_effect(int channel) const
+const std::shared_ptr<Sound_effect>& Mixer::get_effect(int channel) const
 {
     return effect_tracks_.at(size_t(channel));
 }
@@ -256,7 +256,7 @@ void Mixer::poll_channels_()
     }
 }
 
-int Mixer::play_effect(const std::shared_ptr<Effect_track>& effect,
+int Mixer::play_effect(const std::shared_ptr<Sound_effect>& effect,
                        Duration fade_in)
 {
     int channel = find_empty_channel_();
@@ -370,7 +370,7 @@ int Mixer::available_effect_channels() const
 }
 
 void Mixer::register_effect_(int channel,
-                             const std::shared_ptr<Effect_track>& effect)
+                             const std::shared_ptr<Sound_effect>& effect)
 {
     assert(effect_states_[channel] == State::empty);
     effect_states_[channel] = State::playing;

@@ -143,7 +143,7 @@ class Mixer_error : public Host_error
     /// Thrower
     friend ge211::audio::Mixer;
     friend ge211::audio::Music_track;
-    friend ge211::audio::Effect_track;
+    friend ge211::audio::Sound_effect;
 };
 
 } // end namespace exception

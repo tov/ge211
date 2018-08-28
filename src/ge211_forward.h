@@ -40,7 +40,7 @@ class Texture_sprite;
 namespace audio {
 
 enum class Channel_state;
-class Effect_track;
+class Sound_effect;
 class Mixer;
 class Music_track;
 

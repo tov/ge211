@@ -82,7 +82,7 @@ private:
 /// effect track can be passed to the Mixer member function
 /// Mixer::play_effect(const std::shared_ptr<Effect_track>&, Duration)
 /// to play it.
-class Effect_track : private detail::Audio_resource<Mix_Chunk>
+class Sound_effect : private detail::Audio_resource<Mix_Chunk>
 {
 public:
     /// Returns the sound effect's volume as a number from 0.0 to 1.0.
@@ -97,7 +97,7 @@ private:
     friend ge211::audio::Mixer;
 
     // Private constructor
-    Effect_track(const std::string& filename, detail::File_resource&&);
+    Sound_effect(const std::string& filename, detail::File_resource&&);
 
     // Private static factory
     static Mix_Chunk* load_(const std::string& filename,
@@ -166,14 +166,14 @@ public:
     ///@{
 
     /// Loads a new sound effect track, returning a shared pointer to the track.
-    std::shared_ptr<Effect_track> load_effect(const std::string& filename);
+    std::shared_ptr<Sound_effect> load_effect(const std::string& filename);
 
     /// How many effect channels are current unattached?
     int available_effect_channels() const;
 
     /// Attaches the given effect track to a channel of this mixer, starting
     /// the effect playing and returning the channel.
-    int play_effect(const std::shared_ptr<Effect_track>&,
+    int play_effect(const std::shared_ptr<Sound_effect>&,
                     Duration fade_in = 0.0);
 
     /// Pauses the effect on the given channel.
@@ -184,7 +184,7 @@ public:
     void stop_effect(int channel, Duration fade_out = 0.0);
 
     /// Gets the Effect_track currently attached to the given channel.
-    const std::shared_ptr<Effect_track>& get_effect(int channel) const;
+    const std::shared_ptr<Sound_effect>& get_effect(int channel) const;
 
     /// Gets the Effect_track currently attached to the given channel.
     State get_effect_state(int channel) const;
@@ -228,7 +228,7 @@ private:
 
     /// Registers an effect with a channel.
     void register_effect_(int channel,
-                          const std::shared_ptr<Effect_track>& effect);
+                          const std::shared_ptr<Sound_effect>& effect);
     /// Unregisters the effect associated with a channel.
     void unregister_effect_(int channel);
 
@@ -240,7 +240,7 @@ private:
     State music_state_{State::empty};
     Pausable_timer music_position_{true};
 
-    std::vector<std::shared_ptr<Effect_track>> effect_tracks_;
+    std::vector<std::shared_ptr<Sound_effect>> effect_tracks_;
     std::vector<State> effect_states_;
     int available_effect_channels_;
 };

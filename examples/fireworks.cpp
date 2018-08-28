@@ -82,7 +82,7 @@ struct View
     Text_sprite fps;
     Circle_sprite mortar{mortar_radius, mortar_color};
     vector<Circle_sprite> stars;
-    std::shared_ptr<Effect_track> explosion_sound;
+    std::shared_ptr<Sound_effect> explosion_sound;
 };
 
 // MAIN STRUCT AND FUNCTION
