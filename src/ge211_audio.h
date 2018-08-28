@@ -56,7 +56,7 @@ private:
     static Mix_Music* load_(const std::string& filename,
                             detail::File_resource&&);
 
-    std::shared_ptr<Mix_Music> raw_;
+    std::shared_ptr<Mix_Music> ptr_;
 };
 
 /// A sound effect track, which can be attached to a Mixer channel and played.
@@ -101,7 +101,7 @@ private:
     static Mix_Chunk* load_(const std::string& filename,
                             detail::File_resource&&);
 
-    std::shared_ptr<Mix_Chunk> raw_;
+    std::shared_ptr<Mix_Chunk> ptr_;
 };
 
 /// The entity that coordinates playing all audio tracks.
@@ -172,20 +172,8 @@ public:
 
     /// Attaches the given effect track to a channel of this mixer, starting
     /// the effect playing and returning the channel.
-    int play_effect(const Sound_effect&, Duration fade_in = 0.0);
-
-    /// Pauses the effect on the given channel.
-    void pause_effect(int channel);
-    /// Unpauses the effect on the given channel.
-    void unpause_effect(int channel);
-    /// Stops the effect from playing, and unregisters it when finished.
-    void stop_effect(int channel, Duration fade_out = 0.0);
-
-    /// Gets the Sound_effect currently attached to the given channel.
-    const Sound_effect& get_effect(int channel) const;
-
-    /// Gets the Sound_effect currently attached to the given channel.
-    State get_effect_state(int channel) const;
+    Sound_effect_handle
+    play_effect(const Sound_effect&, Duration fade_in = 0.0);
 
     /// Pauses all currently-playing effects.
     void pause_all_effects();
@@ -214,6 +202,7 @@ public:
 private:
     // Only an Abstract_game is allowed to create a mixer. (And if there is
     // more than one Abstract_game at a time, we are in trouble.)
+    friend audio::Sound_effect_handle;
     friend ge211::Abstract_game;
     friend ge211::detail::Engine;
 
@@ -230,21 +219,65 @@ private:
     int find_empty_channel_() const;
 
     /// Registers an effect with a channel.
-    void register_effect_(int channel, const Sound_effect& effect);
+    Sound_effect_handle
+    register_effect_(int channel, const Sound_effect& effect);
     /// Unregisters the effect associated with a channel.
     void unregister_effect_(int channel);
-
-    /// Asserts that the given channel value is in bounds.
-    void check_channel_in_bounds_(int channel) const;
 
 private:
     Music_track current_music_;
     State music_state_{State::empty};
     Pausable_timer music_position_{true};
 
-    std::vector<Sound_effect> effect_tracks_;
-    std::vector<State> effect_states_;
+    std::vector<Sound_effect_handle> channels_;
     int available_effect_channels_;
+};
+
+/// Used to control a Sound_effect after it is started playing on a Mixer.
+class Sound_effect_handle
+{
+public:
+    /// Constructs the empty sound effect handle, which is not actually
+    /// controlling a Sound_effect.
+    Sound_effect_handle() {}
+
+    /// Checks for the empty sound effect handle.
+    bool empty() const;
+
+    /// Checks for a non-empty sound effect handle.
+    operator bool() const;
+
+    /// Pauses the effect.
+    void pause();
+    /// Unpauses the effect.
+    void unpause();
+    /// Stops the effect from playing, and unregisters it when finished.
+    void stop(Duration fade_out = 0.0);
+
+    /// Gets the Sound_effect being played by this handle.
+    const Sound_effect& get_effect() const;
+
+    /// Gets the state of this effect.
+    Mixer::State get_state() const;
+
+private:
+    friend audio::Mixer;
+
+    struct Impl_
+    {
+        Impl_(Mixer& m, const Sound_effect& e, int c)
+                : mixer(m), effect(e), channel(c),
+                  state(Mixer::State::playing) {}
+
+        Mixer& mixer;
+        Sound_effect effect;
+        int channel;
+        Mixer::State state;
+    };
+
+    Sound_effect_handle(Mixer&, const Sound_effect&, int channel);
+
+    std::shared_ptr<Impl_> ptr_;
 };
 
 } // end namespace audio

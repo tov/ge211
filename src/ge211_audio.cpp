@@ -24,13 +24,13 @@ Mix_Music* Music_track::load_(const std::string& filename,
 
 Music_track::Music_track(const std::string& filename,
                          File_resource&& file_resource)
-        : raw_{load_(filename, std::move(file_resource)),
+        : ptr_{load_(filename, std::move(file_resource)),
                &Mix_FreeMusic}
 { }
 
 bool Music_track::empty() const
 {
-    return raw_ == nullptr;
+    return ptr_ == nullptr;
 }
 
 Music_track::operator bool() const
@@ -49,13 +49,13 @@ Mix_Chunk* Sound_effect::load_(const std::string& filename,
 
 Sound_effect::Sound_effect(const std::string& filename,
                            detail::File_resource&& file_resource)
-        : raw_{load_(filename, std::move(file_resource)),
+        : ptr_{load_(filename, std::move(file_resource)),
                &Mix_FreeChunk}
 { }
 
 bool Sound_effect::empty() const
 {
-    return raw_ == nullptr;
+    return ptr_ == nullptr;
 }
 
 Sound_effect::operator bool() const
@@ -65,12 +65,12 @@ Sound_effect::operator bool() const
 
 double Sound_effect::get_volume() const
 {
-    return raw_->volume / double(MIX_MAX_VOLUME);
+    return ptr_->volume / double(MIX_MAX_VOLUME);
 }
 
 void Sound_effect::set_volume(double unit_value)
 {
-    Mix_VolumeChunk(raw_.get(), int(unit_value * MIX_MAX_VOLUME));
+    Mix_VolumeChunk(ptr_.get(), int(unit_value * MIX_MAX_VOLUME));
 }
 
 std::unique_ptr<Mixer> Mixer::open_mixer()
@@ -86,8 +86,7 @@ std::unique_ptr<Mixer> Mixer::open_mixer()
 }
 
 Mixer::Mixer()
-        : effect_tracks_(MIX_CHANNELS)
-        , effect_states_(MIX_CHANNELS, State::empty)
+        : channels_(MIX_CHANNELS)
         , available_effect_channels_(MIX_CHANNELS)
 {
     int music_decoders = Mix_GetNumMusicDecoders();
@@ -151,7 +150,7 @@ void Mixer::unpause_music(Duration fade_in)
 
         case State::paused:
             Mix_RewindMusic();
-            Mix_FadeInMusicPos(current_music_.raw_.get(),
+            Mix_FadeInMusicPos(current_music_.ptr_.get(),
                                0,
                                int(fade_in.milliseconds()),
                                music_position_.elapsed_time().seconds());
@@ -215,28 +214,28 @@ Sound_effect Mixer::load_effect(const std::string& filename)
     return Sound_effect(filename, std::move(file_resource));
 }
 
-const Sound_effect& Mixer::get_effect(int channel) const
+const Sound_effect& Sound_effect_handle::get_effect() const
 {
-    return effect_tracks_.at(size_t(channel));
+    return ptr_->effect;
 }
 
-Mixer::State Mixer::get_effect_state(int channel) const
+Mixer::State Sound_effect_handle::get_state() const
 {
-    return effect_states_.at(size_t(channel));
+    return ptr_->state;
 }
 
 int Mixer::find_empty_channel_() const
 {
-    auto iter = std::find_if(effect_states_.begin(),
-                             effect_states_.end(),
-                             [](auto state) {
-                                 return state == State::empty;
+    auto iter = std::find_if(channels_.begin(),
+                             channels_.end(),
+                             [](const auto& handle) {
+                                 return handle.empty();
                              });
-    if (iter == effect_states_.end()) {
+    if (iter == channels_.end()) {
         throw Mixer_error::out_of_channels();
     }
 
-    return (int) std::distance(effect_states_.begin(), iter);
+    return (int) std::distance(channels_.begin(), iter);
 }
 
 void Mixer::poll_channels_()
@@ -262,92 +261,84 @@ void Mixer::poll_channels_()
         }
     }
 
-    for (int channel = 0; channel < effect_tracks_.size(); ++channel) {
-        if (effect_states_[channel] != State::empty
-            && !Mix_Playing(channel))
+    for (int channel = 0; channel < channels_.size(); ++channel) {
+        if (channels_[channel] && !Mix_Playing(channel))
         {
             unregister_effect_(channel);
         }
     }
 }
 
-int Mixer::play_effect(const Sound_effect& effect, Duration fade_in)
+Sound_effect_handle
+Mixer::play_effect(const Sound_effect& effect, Duration fade_in)
 {
     int channel = find_empty_channel_();
-    register_effect_(channel, effect);
-
-    Mix_FadeInChannel(channel, effect.raw_.get(), 0,
+    Mix_FadeInChannel(channel, effect.ptr_.get(), 0,
                       int(fade_in.milliseconds()));
-
-    return channel;
+    return register_effect_(channel, effect);
 }
 
-void Mixer::unpause_effect(int channel)
+void Sound_effect_handle::unpause()
 {
-    check_channel_in_bounds_(channel);
+    switch (ptr_->state) {
+        case Mixer::State::empty:
+            throw Client_logic_error("Sound_effect_handle::unpause: empty");
 
-    switch (effect_states_[channel]) {
-        case State::empty:
-            throw Client_logic_error("Mixer::unpause_effect: empty channel");
+        case Mixer::State::paused:
+            ptr_->state = Mixer::State::playing;
+            Mix_Resume(ptr_->channel);
+            break;
 
-        case State::paused:
-            effect_states_[channel] = State::playing;
-            Mix_Resume(channel);
-
-        case State::playing:
+        case Mixer::State::playing:
             // idempotent
             break;
 
-        case State::fading_out:
-            throw Client_logic_error("Mixer::unpause_effect: fading out");
+        case Mixer::State::fading_out:
+            throw Client_logic_error("Sound_effect_handle::unpause: fading out");
     }
 }
 
-void Mixer::pause_effect(int channel)
+void Sound_effect_handle::pause()
 {
-    check_channel_in_bounds_(channel);
-
-    switch (effect_states_[channel]) {
-        case State::empty:
+    switch (ptr_->state) {
+        case Mixer::State::empty:
             throw Client_logic_error("Mixer::pause_effect: empty channel");
 
-        case State::paused:
+        case Mixer::State::paused:
             // idempotent
             break;
 
-        case State::playing:
-            effect_states_[channel] = State::paused;
-            Mix_Pause(channel);
+        case Mixer::State::playing:
+            ptr_->state = Mixer::State::paused;
+            Mix_Pause(ptr_->channel);
             break;
 
-        case State::fading_out:
+        case Mixer::State::fading_out:
             throw Client_logic_error("Mixer::pause_effect: fading out");
     }
 }
 
-void Mixer::stop_effect(int channel, Duration fade_out)
+void Sound_effect_handle::stop(Duration fade_out)
 {
-    check_channel_in_bounds_(channel);
-
-    switch (effect_states_[channel]) {
-        case State::empty:
+    switch (ptr_->state) {
+        case Mixer::State::empty:
             throw Client_logic_error("Mixer::stop_effect: empty channel");
 
-        case State::paused:
-            unregister_effect_(channel);
-            Mix_HaltChannel(channel);
+        case Mixer::State::paused:
+            ptr_->mixer.unregister_effect_(ptr_->channel);
+            Mix_HaltChannel(ptr_->channel);
             break;
 
-        case State::playing:
+        case Mixer::State::playing:
             if (fade_out == 0.0) {
-                unregister_effect_(channel);
-                Mix_HaltChannel(channel);
+                ptr_->mixer.unregister_effect_(ptr_->channel);
+                Mix_HaltChannel(ptr_->channel);
             } else {
-                effect_states_[channel] = State::fading_out;
-                Mix_FadeOutChannel(channel, int(fade_out.milliseconds()));
+                ptr_->state = Mixer::State::fading_out;
+                Mix_FadeOutChannel(ptr_->channel, int(fade_out.milliseconds()));
             }
 
-        case State::fading_out:
+        case Mixer::State::fading_out:
             throw Client_logic_error("Mixer::stop_effect: fading out");
     }
 }
@@ -356,9 +347,9 @@ void Mixer::pause_all_effects()
 {
     Mix_Pause(-1);
 
-    for (auto& state : effect_states_) {
-        if (state == State::playing)
-            state = State::paused;
+    for (const auto& handle : channels_) {
+        if (handle && handle.ptr_->state == State::playing)
+            handle.ptr_->state = State::paused;
     }
 }
 
@@ -366,16 +357,10 @@ void Mixer::unpause_all_effects()
 {
     Mix_Resume(-1);
 
-    for (auto& state : effect_states_) {
-        if (state == State::paused)
-            state = State::playing;
+    for (const auto& handle : channels_) {
+        if (handle && handle.ptr_->state == State::paused)
+            handle.ptr_->state = State::playing;
     }
-}
-
-void Mixer::check_channel_in_bounds_(int channel) const
-{
-    if (channel < 0 || channel >= effect_tracks_.size())
-        throw Client_logic_error("Mixer: channel out of range");
 }
 
 int Mixer::available_effect_channels() const
@@ -383,21 +368,38 @@ int Mixer::available_effect_channels() const
     return available_effect_channels_;
 }
 
-void Mixer::register_effect_(int channel, const Sound_effect& effect)
+Sound_effect_handle
+Mixer::register_effect_(int channel, const Sound_effect& effect)
 {
-    assert(effect_states_[channel] == State::empty);
-    effect_states_[channel] = State::playing;
-    effect_tracks_[channel] = effect;
+    assert(!channels_[channel]);
+    channels_[channel] = Sound_effect_handle(*this, effect, channel);
     --available_effect_channels_;
+    return channels_[channel];
 }
 
 void Mixer::unregister_effect_(int channel)
 {
-    assert(effect_states_[channel] != State::empty);
-    effect_states_[channel] = State::empty;
-    effect_tracks_[channel] = Sound_effect{};
+    assert(channels_[channel]);
+    channels_[channel].ptr_->state = State::empty;
+    channels_[channel] = {};
     ++available_effect_channels_;
 }
+
+bool Sound_effect_handle::empty() const
+{
+    return ptr_ == nullptr;
+}
+
+Sound_effect_handle::operator bool() const
+{
+    return !empty();
+}
+
+Sound_effect_handle::Sound_effect_handle(Mixer& mixer,
+                                         const Sound_effect& effect,
+                                         int channel)
+        : ptr_(std::make_shared<Impl_>(mixer, effect, channel))
+{ }
 
 } // end namespace audio
 
