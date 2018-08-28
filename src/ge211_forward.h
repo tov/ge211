@@ -39,7 +39,7 @@ class Texture_sprite;
 
 namespace audio {
 
-class Audio_track;
+enum class Channel_state;
 class Effect_track;
 class Mixer;
 class Music_track;
@@ -103,6 +103,7 @@ class Pausable_timer;
 
 // Bring everything but detail into the ge211 namespace.
 
+using namespace audio;
 using namespace events;
 using namespace exceptions;
 using namespace geometry;

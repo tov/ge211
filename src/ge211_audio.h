@@ -36,21 +36,6 @@ private:
 /// Audio utilities, for playing music and sound effects.
 namespace audio {
 
-/// The state of an audio track.
-enum class Channel_state
-{
-    /// No track is attached to this channel.
-    empty,
-    /// Actively playing.
-    playing,
-    /// In the process of fading out from playing to paused.
-    fading_out,
-    /// Not playing, and not finished.
-    paused,
-    /// Not playing, and finished.
-    halted,
-};
-
 /// A music track, which can be attached to the Mixer and played.
 class Music_track : private detail::Audio_resource<Mix_Music>
 {
@@ -91,6 +76,20 @@ private:
 class Mixer
 {
 public:
+    /// The state of an audio channel.
+    enum class State
+    {
+        /// No track is attached to the channel.
+        empty,
+        /// Actively playing.
+        playing,
+        /// In the process of fading out from playing to paused (for music) or
+        // halted and detached (for sound effects).
+        fading_out,
+        /// Attached but not playing.
+        paused,
+    };
+
     /// \name Playing music
     ///@{
 
@@ -124,7 +123,7 @@ public:
     }
 
     /// Returns the current state of the attached music, if any.
-    Channel_state get_music_state() const
+    State get_music_state() const
     {
         return music_state_;
     }
@@ -149,14 +148,14 @@ public:
     void pause_effect(int channel);
     /// Unpauses the effect on the given channel.
     void unpause_effect(int channel);
-    /// Stops the effect from playing.
+    /// Stops the effect from playing, and unregisters it when finished.
     void stop_effect(int channel, Duration fade_out = 0.0);
 
     /// Gets the Effect_track currently attached to the given channel.
     const std::shared_ptr<Effect_track>& get_effect(int channel) const;
 
     /// Gets the Effect_track currently attached to the given channel.
-    Channel_state get_effect_state(int channel) const;
+    State get_effect_state(int channel) const;
 
     /// Pauses all currently-playing effects.
     void pause_all_effects();
@@ -206,11 +205,11 @@ private:
 
 private:
     std::shared_ptr<Music_track> current_music_;
-    Channel_state music_state_{Channel_state::empty};
+    State music_state_{State::empty};
     Pausable_timer music_position_{true};
 
     std::vector<std::shared_ptr<Effect_track>> effect_tracks_;
-    std::vector<Channel_state> effect_states_;
+    std::vector<State> effect_states_;
     int available_effect_channels_;
 };
 
