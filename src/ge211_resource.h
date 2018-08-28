@@ -5,10 +5,13 @@
 #include "ge211_error.h"
 
 #include <string>
+#include <vector>
 
 namespace ge211 {
 
 namespace detail {
+
+std::vector<const char*> get_search_prefixes();
 
 class File_resource
 {
@@ -60,31 +63,6 @@ private:
 
     detail::File_resource file_;
     detail::delete_ptr<TTF_Font> ptr_;
-};
-
-class Mixer
-{
-public:
-    Mixer() noexcept;
-
-    enum class State
-    {
-        unloaded, halted, paused, playing
-    };
-
-    State get_music_state() const;
-
-    void load_music(const std::string& filename);
-
-    void pause_music();
-    void stop_music();
-    void unload_music();
-
-private:
-    static detail::delete_ptr<Mix_Music>
-    load_music_(const std::string&);
-
-    detail::delete_ptr<Mix_Music> music_ptr_;
 };
 
 }

@@ -5,6 +5,7 @@
 #include "ge211_error.h"
 #include "ge211_event.h"
 #include "ge211_geometry.h"
+#include "ge211_audio.h"
 #include "ge211_resource.h"
 #include "ge211_random.h"
 #include "ge211_sprites.h"

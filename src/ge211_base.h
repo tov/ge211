@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ge211_audio.h"
 #include "ge211_color.h"
 #include "ge211_error.h"
 #include "ge211_event.h"
@@ -216,7 +217,7 @@ protected:
     Random& get_random() const noexcept;
 
     /// Gets the audio mixer, which can be used to play music.
-    Mixer& get_mixer() noexcept;
+    audio::Mixer& get_mixer() noexcept;
 
     /// Gets the time point at which the current frame started. This can be
     /// used to measure intervals between events, though it might be better
@@ -260,7 +261,7 @@ private:
 
     mutable Random rng_;
     detail::Session session_;
-    Mixer mixer_;
+    audio::Mixer mixer_;
     detail::Engine* engine_ = nullptr;
 
     bool quit_ = false;

@@ -268,7 +268,7 @@ void Fireworks::on_key(Key key)
 
 void Fireworks::on_frame(double dt)
 {
-    Mixer& mixer = get_mixer();
+    audio::Mixer& mixer = get_mixer();
     auto music_state = mixer.get_music_state();
 
     if (is_paused) {

@@ -19,7 +19,6 @@ namespace ge211 {
 class Abstract_game;
 class Color;
 class Font;
-class Mixer;
 class Sprite_set;
 class Window;
 
@@ -36,6 +35,12 @@ class Texture;
 class Texture_sprite;
 
 } // end namespace detail
+
+namespace audio {
+
+class Mixer;
+
+} // end namespace audio
 
 namespace events {
 

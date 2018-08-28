@@ -139,7 +139,7 @@ class Mixer_error final : public Host_error
     static Mixer_error could_not_load(const std::string& filename);
 
     /// Thrower
-    friend class ge211::Mixer;
+    friend class ge211::audio::Mixer;
 };
 
 } // end namespace exception

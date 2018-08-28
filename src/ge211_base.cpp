@@ -49,7 +49,7 @@ Random& Abstract_game::get_random() const noexcept
     return rng_;
 }
 
-Mixer& Abstract_game::get_mixer() noexcept
+audio::Mixer& Abstract_game::get_mixer() noexcept
 {
     return mixer_;
 }

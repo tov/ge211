@@ -26,6 +26,7 @@ add_library(ge211
         src/ge211_event.cpp
         src/ge211_error.cpp
         src/ge211_geometry.cpp
+        src/ge211_audio.cpp
         src/ge211_random.cpp
         src/ge211_render.cpp
         src/ge211_resource.cpp
