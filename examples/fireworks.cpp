@@ -295,7 +295,7 @@ void Fireworks::on_start()
 {
     auto mixer = get_mixer();
     if (mixer) {
-        view.music = mixer->load_music("DonGiovanni.ogg");
+        view.music = mixer->load_music("music.dat");
         mixer->route_music(view.music);
     }
 }
