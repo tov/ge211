@@ -189,19 +189,20 @@ private:
     /// Private constructor -- should not be called.
     Mixer();
 
-    /// Updates the state of the attached music and sound effects.
+    /// Updates the state of the channels.
     void poll_channels_();
-
-    /// Asserts that the given channel value is okay.
-    void check_channel_in_bounds_(int channel) const;
 
     /// Returns the index of an empty channel, or throws if all are full.
     int find_empty_channel_() const;
 
-private:
+    /// Registers an effect with a channel.
     void register_effect_(int channel,
                           const std::shared_ptr<Effect_track>& effect);
+    /// Unregisters the effect associated with a channel.
     void unregister_effect_(int channel);
+
+    /// Asserts that the given channel value is in bounds.
+    void check_channel_in_bounds_(int channel) const;
 
 private:
     std::shared_ptr<Music_track> current_music_;

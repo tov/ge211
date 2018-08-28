@@ -280,7 +280,9 @@ void Fireworks::on_frame(double dt)
     auto mixer = get_mixer();
 
     if (is_paused) {
-        if (mixer) mixer->pause_music();
+        if (mixer) {
+            mixer->pause_music();
+        }
     } else {
         bool explosion = model.update(dt);
         if (mixer) {
@@ -303,7 +305,7 @@ void Fireworks::on_start()
     auto mixer = get_mixer();
     if (mixer) {
         mixer->play_music(mixer->load_music("music.dat"));
-        view.explosion_sound = mixer->load_effect("Don.ogg");
+        view.explosion_sound = mixer->load_effect("balloon.mp3");
     }
 }
 

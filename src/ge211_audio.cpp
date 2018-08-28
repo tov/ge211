@@ -307,11 +307,11 @@ void Mixer::pause_effect(int channel)
             throw Client_logic_error("Mixer::pause_effect: empty channel");
 
         case Channel_state::paused:
-            throw Ge211_logic_error("halted effect channel");
-
-        case Channel_state::halted:
             // idempotent
             break;
+
+        case Channel_state::halted:
+            throw Ge211_logic_error("halted effect channel");
 
         case Channel_state::playing:
             effect_states_[channel] = Channel_state::paused;
