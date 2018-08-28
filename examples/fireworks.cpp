@@ -297,7 +297,8 @@ void Fireworks::on_start()
 void Fireworks::on_quit()
 {
     if (view.music) {
-        view.music->pause(500);
+        // This seem not to have any effect:
+        view.music->pause(1000);
     }
 }
 
