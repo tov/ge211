@@ -12,11 +12,12 @@ namespace ge211 {
 /// Audio facilities, for playing music and sound effects.
 ///
 /// All audio facilities are accessed via the Mixer, which is accessed
-/// via the get_mixer() const member function of Abstract_game. If the
-/// Mixer is present (and it may not be), then it can be used to load
-/// audio files as Music_track@s and Sound_effect@s. The former is for
-/// playing continuous background music, whereas the latter is for
-/// adding sound effects. See the Mixer documentation for more.
+/// via the Abstract_game::get_mixer() const member function of
+/// Abstract_game. If the Mixer is present (and it may not be), then it
+/// can be used to load audio files as Music_track@s and Sound_effect@s.
+/// The former is for playing continuous background music, whereas the
+/// latter is for adding sound effects. See the Mixer documentation for
+/// more.
 namespace audio {
 
 /// A music track, which can be attached to the Mixer and played.
