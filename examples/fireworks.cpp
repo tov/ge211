@@ -82,7 +82,6 @@ struct View
     Text_sprite fps;
     Circle_sprite mortar{mortar_radius, mortar_color};
     vector<Circle_sprite> stars;
-    std::shared_ptr<audio::Music_track> music;
 };
 
 // MAIN STRUCT AND FUNCTION
@@ -103,7 +102,6 @@ struct Fireworks : Abstract_game
     void on_mouse_up(Mouse_button button, Position position) override;
     void on_frame(double dt) override;
     void on_start() override;
-    void on_quit() override;
 };
 
 int main()
@@ -272,18 +270,10 @@ void Fireworks::on_frame(double dt)
     auto mixer = get_mixer();
 
     if (is_paused) {
-        if (view.music) {
-            if (mixer->get_music_state() == audio::Channel_state::playing)
-                mixer->pause_music(0.5);
-        }
+        if (mixer) mixer->pause_music();
     } else {
         model.update(dt);
-        if (view.music) {
-            if (mixer->get_music_state() == audio::Channel_state::paused)
-                mixer->unpause_music(0.5);
-            else if (mixer->get_music_state() == audio::Channel_state::halted)
-                mixer->unpause_music();
-        }
+        if (mixer) mixer->unpause_music();
     }
 }
 
@@ -297,17 +287,7 @@ void Fireworks::on_start()
 {
     auto mixer = get_mixer();
     if (mixer) {
-        view.music = mixer->load_music("music.dat");
-        mixer->play_music(view.music);
+        mixer->play_music(mixer->load_music("music.dat"));
     }
 }
 
-void Fireworks::on_quit()
-{
-    auto mixer = get_mixer();
-    if (view.music) {
-        // This seem not to have any effect:
-        if (mixer->get_music_state() == audio::Channel_state::playing)
-            mixer->pause_music(1.5);
-    }
-}

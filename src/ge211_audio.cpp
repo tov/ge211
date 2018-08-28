@@ -181,6 +181,8 @@ void Mixer::rewind_music()
     switch (music_state_) {
         case Channel_state::paused:
         case Channel_state::halted:
+            music_state_ = Channel_state::halted;
+            music_position_.reset();
             break;
 
         case Channel_state::empty:
@@ -189,8 +191,6 @@ void Mixer::rewind_music()
             throw Client_logic_error(
                     "Mixer::rewind_music: must be paused or halted");
     }
-
-    music_position_.reset();
 }
 
 std::shared_ptr<Effect_track> Mixer::load_effect(const std::string& filename)
