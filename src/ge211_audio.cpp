@@ -95,10 +95,17 @@ Mix_Music* Music_track::load_(const std::string& filename,
     throw Mixer_error::could_not_load(filename);
 }
 
+static void free_Mix_Music(Mix_Music* raw)
+{
+    warn() << "free_Mix_Music(): enter";
+    Mix_FreeMusic(raw);
+    warn() << "free_Mix_Music(): leave";
+}
+
 Music_track::Music_track(const std::string& filename,
                          File_resource&& file_resource)
         : Audio_resource<Mix_Music>(load_(filename, std::move(file_resource)),
-                                    &Mix_FreeMusic)
+                                    &free_Mix_Music)
 { }
 
 void Music_track::fade_in(time::Duration dur, time::Duration offset)
