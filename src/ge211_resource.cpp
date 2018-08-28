@@ -47,7 +47,7 @@ File_resource::File_resource(const std::string& filename)
         : ptr_{open_rwops_(filename)}
 { }
 
-SDL_RWops* File_resource::forget_() &&
+SDL_RWops* File_resource::release() &&
 {
     delete_ptr<SDL_RWops> dummy{nullptr, &no_op_deleter};
     std::swap(dummy, ptr_);
@@ -60,7 +60,7 @@ delete_ptr<TTF_Font> Font::load_(const std::string& filename,
                                  File_resource&& file,
                                  int size)
 {
-    TTF_Font* result = TTF_OpenFontRW(std::move(file).forget_(), 1, size);
+    TTF_Font* result = TTF_OpenFontRW(std::move(file).release(), 1, size);
     if (result) return {result, &TTF_CloseFont};
 
     throw Font_error::could_not_load(filename);

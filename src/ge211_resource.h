@@ -18,8 +18,8 @@ class File_resource
 public:
     explicit File_resource(const std::string&);
 
-    SDL_RWops* get_raw_() const noexcept { return ptr_.get(); }
-    SDL_RWops* forget_() &&;
+    SDL_RWops* get_raw() const noexcept { return ptr_.get(); }
+    SDL_RWops* release() &&;
 
 private:
     static delete_ptr<SDL_RWops> open_rwops_(const std::string&);

@@ -132,15 +132,17 @@ class Image_error final : public Host_error
 };
 
 /// Indicates an error in the mixer, which could include the inability to
-/// open an audio file or to understand its format.
-class Mixer_error final : public Host_error
+/// understand an audio file format.
+class Mixer_error : public Host_error
 {
     Mixer_error(const std::string& message);
     static Mixer_error could_not_load(const std::string& filename);
+    static Mixer_error out_of_channels();
 
     /// Thrower
-    friend class ge211::audio::Mixer;
-    friend class ge211::audio::Music_track;
+    friend ge211::audio::Mixer;
+    friend ge211::audio::Music_track;
+    friend ge211::audio::Effect_track;
 };
 
 } // end namespace exception

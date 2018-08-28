@@ -179,7 +179,7 @@ Texture
 Image_sprite::load_texture_(const std::string& filename)
 {
     File_resource file(filename);
-    SDL_Surface* raw = IMG_Load_RW(file.get_raw_(), 0);
+    SDL_Surface* raw = IMG_Load_RW(file.get_raw(), 0);
     if (raw) return Texture(raw);
 
     throw Image_error::could_not_load(filename);

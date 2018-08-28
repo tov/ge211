@@ -8,6 +8,7 @@ struct SDL_RWops;
 struct SDL_Surface;
 struct SDL_Texture;
 struct SDL_Window;
+struct Mix_Chunk;
 struct _Mix_Music;
 typedef struct _Mix_Music Mix_Music;
 struct _TTF_Font;
@@ -39,6 +40,7 @@ class Texture_sprite;
 namespace audio {
 
 class Audio_track;
+class Effect_track;
 class Mixer;
 class Music_track;
 

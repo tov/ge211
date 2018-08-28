@@ -271,16 +271,16 @@ void Fireworks::on_frame(double dt)
 {
     if (is_paused) {
         if (view.music) {
-            if (view.music->get_state() == audio::Mixer::State::playing)
+            if (view.music->get_state() == audio::Mixer_state::playing)
                 view.music->pause(1.0);
         }
     } else {
         model.update(dt);
         if (view.music) {
-            if (view.music->get_state() == audio::Mixer::State::halted)
-                view.music->play();
-            else if (view.music->get_state() == audio::Mixer::State::paused)
-                view.music->play(1.0);
+            if (view.music->get_state() == audio::Mixer_state::halted)
+                view.music->unpause();
+            else if (view.music->get_state() == audio::Mixer_state::paused)
+                view.music->unpause(1.0);
         }
     }
 }
@@ -296,7 +296,7 @@ void Fireworks::on_start()
     auto mixer = get_mixer();
     if (mixer) {
         view.music = mixer->load_music("music.dat");
-        mixer->route_music(view.music);
+        mixer->play_music(view.music);
     }
 }
 

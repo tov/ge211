@@ -83,6 +83,11 @@ Mixer_error Mixer_error::could_not_load(const std::string& filename)
     return Mixer_error("Could not load music: " + filename);
 }
 
+Mixer_error Mixer_error::out_of_channels()
+{
+    return Mixer_error("Could not play effect: out of channels");
+}
+
 }
 
 namespace detail {
