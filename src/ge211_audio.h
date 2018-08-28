@@ -145,7 +145,7 @@ public:
     /// Pauses the currently attached music, fading out if requested.
     void pause_music(Duration fade_out = 0.0);
     /// Rewinds the music to the beginning. This is only valid when the music
-    // is paused.
+    /// is paused.
     void rewind_music();
 
     /// Gets the Music_track currently attached to this Mixer, if any.
@@ -196,6 +196,9 @@ public:
 
     ///@}
 
+    ///\name Constructors, assignment operators, and destructor
+    ///@{
+
     /// The mixer cannot be copied.
     Mixer(const Mixer&) = delete;
     /// The mixer cannot be copied.
@@ -207,6 +210,8 @@ public:
 
     /// Destructor, cleans up the mixer's resources.
     ~Mixer();
+
+    ///@}
 
 private:
     // Only an Abstract_game is allowed to create a mixer. (And if there is
