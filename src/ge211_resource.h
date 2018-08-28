@@ -23,7 +23,10 @@ public:
 private:
     static delete_ptr<SDL_RWops> open_rwops_(const std::string&);
 
+    SDL_RWops* forget_() &&;
+
     delete_ptr<SDL_RWops> ptr_;
+
 };
 
 } // end namespace detail
