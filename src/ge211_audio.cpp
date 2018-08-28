@@ -123,7 +123,7 @@ void Mixer::attach_music(const Music_track& music)
 {
     switch (music_state_) {
         case State::paused:
-        case State::empty:
+        case State::detached:
             break;
 
         case State::playing:
@@ -138,14 +138,14 @@ void Mixer::attach_music(const Music_track& music)
     if (current_music_) {
         music_state_ = State::paused;
     } else {
-        music_state_ = State::empty;
+        music_state_ = State::detached;
     }
 }
 
 void Mixer::unpause_music(Duration fade_in)
 {
     switch (music_state_) {
-        case State::empty:
+        case State::detached:
             throw Client_logic_error("Mixer::unpause_music: no music attached");
 
         case State::paused:
@@ -170,7 +170,7 @@ void Mixer::unpause_music(Duration fade_in)
 void Mixer::pause_music(Duration fade_out)
 {
     switch (music_state_) {
-        case State::empty:
+        case State::detached:
             throw Client_logic_error("Mixer::pause_music: no music attached");
 
         case State::paused:
@@ -200,7 +200,7 @@ void Mixer::rewind_music()
             music_position_.reset();
             break;
 
-        case State::empty:
+        case State::detached:
         case State::playing:
         case State::fading_out:
             throw Client_logic_error(
@@ -243,7 +243,7 @@ void Mixer::poll_channels_()
     if (current_music_) {
         if (!Mix_PlayingMusic()) {
             switch (music_state_) {
-                case State::empty:
+                case State::detached:
                 case State::paused:
                     break;
 
@@ -281,7 +281,7 @@ Mixer::play_effect(const Sound_effect& effect, Duration fade_in)
 void Sound_effect_handle::unpause()
 {
     switch (ptr_->state) {
-        case Mixer::State::empty:
+        case Mixer::State::detached:
             throw Client_logic_error("Sound_effect_handle::unpause: empty");
 
         case Mixer::State::paused:
@@ -301,7 +301,7 @@ void Sound_effect_handle::unpause()
 void Sound_effect_handle::pause()
 {
     switch (ptr_->state) {
-        case Mixer::State::empty:
+        case Mixer::State::detached:
             throw Client_logic_error("Sound_effect_handle::pause: empty");
 
         case Mixer::State::paused:
@@ -321,7 +321,7 @@ void Sound_effect_handle::pause()
 void Sound_effect_handle::stop(Duration fade_out)
 {
     switch (ptr_->state) {
-        case Mixer::State::empty:
+        case Mixer::State::detached:
             throw Client_logic_error("Sound_effect_handle::stop: empty");
 
         case Mixer::State::paused:
@@ -380,7 +380,7 @@ Mixer::register_effect_(int channel, const Sound_effect& effect)
 void Mixer::unregister_effect_(int channel)
 {
     assert(channels_[channel]);
-    channels_[channel].ptr_->state = State::empty;
+    channels_[channel].ptr_->state = State::detached;
     channels_[channel] = {};
     ++available_effect_channels_;
 }

@@ -111,8 +111,9 @@ public:
     /// The state of an audio channel.
     enum class State
     {
-        /// No track is attached to the channel.
-        empty,
+        /// No track is attached to the channel, or no channel is attached to
+        /// the handle.
+        detached,
         /// Actively playing.
         playing,
         /// In the process of fading out from playing to paused (for music) or
@@ -226,7 +227,7 @@ private:
 
 private:
     Music_track current_music_;
-    State music_state_{State::empty};
+    State music_state_{State::detached};
     Pausable_timer music_position_{true};
 
     std::vector<Sound_effect_handle> channels_;
