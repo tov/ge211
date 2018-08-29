@@ -16,8 +16,8 @@ namespace ge211 {
 /// Abstract_game. If the Mixer is present (and it may not be), then it
 /// can be used to load audio files as Music_track%s and Sound_effect%s.
 /// The former is for playing continuous background music, whereas the
-/// latter is for adding sound effects. See the Mixer documentation for
-/// more.
+/// latter is for adding sound effects. See the Mixer class documentation
+/// for more.
 namespace audio {
 
 /// A music track, which can be attached to the Mixer and played.
@@ -106,18 +106,38 @@ private:
 
 /// The entity that coordinates playing all audio tracks.
 ///
-/// The Mixer is the center of %ge211's audio facilities. It is used to load
+/// The mixer is the center of %ge211's audio facilities. It is used to load
 /// audio files as Music_track%s and Sound_effect%s, and to play and control
 /// them. However, Mixer itself has no public constructor, and you will not
 /// construct your own. Rather, a Mixer is constructed, if possible, when
 /// Abstract_game is initialized, and this mixer can be accessed by your game
 /// via the Abstract_game::get_mixer() const member function. The member
-/// function returns a raw pointer, which will be `nullptr` if the Mixer
+/// function returns a raw pointer, which will be `nullptr` if the mixer
 /// could not be initialized.
 ///
-/// This Mixer has one music channel, and some fixed number (usually 8) of
+/// This mixer has one music channel, and some fixed number (usually 8) of
 /// sound effects channels. This means that it can play one Music_track and
 /// up to (usually) 8 Sound_effect%s simultaneously.
+///
+/// For playing background music, one Music_track can be *attached* to the
+/// mixer at any given time, using Mixer::attach_music(Music_track). Once
+/// a Music_track is attached, it can be played with Mixer::unpause(Duration)
+/// and paused with Mixer::pause(Duration). A Music_track can be both
+/// attached and played with Mixer::play_track(Music_track). The music channel
+/// is always in one of four states, of type audio::Mixer::State, which can be
+/// retrieved by Mixer::get_music_state() const. Note that the validity of
+/// music operations depend on what state the mixer's music channel is in. For
+/// example, it is an error to attach a Music_track to the mixer when music is
+/// already playing or fading out.
+///
+/// For playing sound effects, multiple Sound_effect@s can be attached to the
+/// mixer simultaneously. A Sound_effect is attached and played using the
+/// Mixer::play_effect(Sound_effect, double) member function, which also allows
+/// specifying the volume of the sound effect. If nothing further is done, the
+/// sound effect plays to completion and then detaches, making room to attach
+/// more sound effects; however, Mixer::play_effect(Sound_effect, double)
+/// returns a Sound_effect_handle, which can be used to control the sound
+/// effect while it is playing as well.
 class Mixer
 {
 public:
