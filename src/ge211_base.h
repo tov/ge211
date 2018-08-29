@@ -217,8 +217,11 @@ protected:
     /// produce random numbers.
     Random& get_random() const noexcept;
 
-    /// Gets the audio mixer, which can be used to play music.
-    audio::Mixer* get_mixer() const noexcept;
+    /// Gets the audio mixer, which can be used to play music. If the
+    /// Mixer could not be initialized, this function returns `nullptr`.
+    /// Do not delete the result of this function, as it is borrowed from
+    /// a private Mixer object stored by this class.
+    Mixer* get_mixer() const noexcept;
 
     /// Gets the time point at which the current frame started. This can be
     /// used to measure intervals between events, though it might be better

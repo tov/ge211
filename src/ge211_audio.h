@@ -22,6 +22,9 @@ namespace audio {
 
 /// A music track, which can be attached to the Mixer and played.
 ///
+/// A music track may be *empty* or *non-empty*; only non-empty tracks can
+/// actually be played.
+///
 /// The only public constructor is the default constructor, which constructs
 /// an *empty* Music_track. To load an audio file, one should call the
 /// Mixer::load_music(const std::string&) member function of the Mixer, which
@@ -37,13 +40,17 @@ namespace audio {
 class Music_track
 {
 public:
-    /// Constructs the empty music track.
+    /// Constructs the default, empty music track.
+    ///
+    /// To construct a non-empty Music_track, see
+    /// Mixer::load_music(const std::string&).
     Music_track() { }
 
-    /// Checks for the empty music track.
+    /// Recognizes the empty music track.
     bool empty() const;
 
-    /// Checks for a non-empty music track.
+    /// Recognizes a non-empty music track.
+    /// Equivalent to `!empty()`.
     operator bool() const;
 
 private:
@@ -62,6 +69,9 @@ private:
 
 /// A sound effect track, which can be attached to a Mixer channel and played.
 ///
+/// A sound effect track may be *empty* or *non-empty*; only non-empty sound
+/// effects can actually be played.
+///
 /// The only public constructor is the default constructor, which constructs
 /// an *empty* Sound_effect. To load an audio file, one should call the
 /// Mixer::load_effect(const std::string&) member function of the Mixer, which
@@ -74,13 +84,17 @@ private:
 class Sound_effect
 {
 public:
-    /// Constructs the empty sound effect track.
+    /// Constructs the default, empty sound effect track.
+    ///
+    /// To construct a non-empty Sound_effect, see
+    /// Mixer::load_effect(const std::string&).
     Sound_effect() { }
 
-    /// Checks for the empty sound effect track.
+    /// Recognizes the empty sound effect track.
     bool empty() const;
 
-    /// Checks for a non-empty sound effect track.
+    /// Recognizes a non-empty sound effect track.
+    /// Equivalent to `!empty()`.
     operator bool() const;
 
     /// Returns the sound effect's volume as a number from 0.0 to 1.0.
@@ -106,6 +120,15 @@ private:
 };
 
 /// The entity that coordinates playing all audio tracks.
+///
+/// The Mixer is the center of %ge211's audio facilities. It is used to load
+/// audio files as Music_track%s and Sound_effect%s, and to play and control
+/// them. However, Mixer itself has no public constructor, and you will not
+/// contruct your own. Rather, a Mixer is constructed, if possible, when
+/// Abstract_game is initialized, and this mixer can be accessed by your game
+/// via the Abstract_game::get_mixer() const member function. The member
+/// function returns a raw pointer, which will be `nullptr` if the Mixer
+/// could not be initialized.
 class Mixer
 {
 public:
@@ -236,30 +259,55 @@ private:
 };
 
 /// Used to control a Sound_effect after it is started playing on a Mixer.
+///
+/// This is returned by Mixer::play_effect(const Sound_effect&, Duration).
 class Sound_effect_handle
 {
 public:
-    /// Constructs the empty sound effect handle, which is not actually
-    /// controlling a Sound_effect.
+    /// Constructs the default, empty sound effect handle. The empty handle
+    /// is not associated with a channel, and it is an error to attempt to
+    /// perform operations on it.
+    ///
+    /// To get a non-empty Sound_effect_handle, play a Sound_effect with
+    /// Mixer::play_effect(const Sound_effect&, Duration).
     Sound_effect_handle() {}
 
-    /// Checks for the empty sound effect handle.
+    /// Recognizes the empty sound effect handle.
     bool empty() const;
 
-    /// Checks for a non-empty sound effect handle.
+    /// Recognizes a non-empty sound effect handle.
+    /// Equivalent to `!empty()`.
     operator bool() const;
 
     /// Pauses the effect.
+    ///
+    /// **PRECONDITIONS**:
+    ///  - `!empty()`
+    ///  - `get_state()` is either `playing` or `paused`
     void pause();
+
     /// Unpauses the effect.
+    ///
+    /// **PRECONDITIONS**:
+    ///  - `!empty()`
+    ///  - `get_state()` is either `playing` or `paused`
     void unpause();
-    /// Stops the effect from playing, and unregisters it when finished.
+
+    /// Stops the effect from playing, and detaches it when finished.
+    ///
+    /// **PRECONDITIONS**:
+    ///  - `!empty()`
+    ///  - `get_state()` is either `playing` or `paused`
     void stop(Duration fade_out = 0.0);
 
     /// Gets the Sound_effect being played by this handle.
+    ///
+    /// **PRECONDITION**: `!empty()`
     const Sound_effect& get_effect() const;
 
     /// Gets the state of this effect.
+    ///
+    /// **PRECONDITION**: `!empty()`
     Mixer::State get_state() const;
 
 private:
