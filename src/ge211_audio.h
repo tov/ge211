@@ -33,8 +33,8 @@ namespace audio {
 /// Note that Music_track has few public member functions. However, a
 /// music track can be passed to these Mixer member functions to play it:
 ///
-///  - Mixer::play_music(const Music_track&, Duration)
-///  - Mixer::attach_music(const Music_track&)
+///  - Mixer::play_music(Music_track, Duration)
+///  - Mixer::attach_music(Music_track)
 ///
 /// Note also that the mixer can only play one music track at a time.
 class Music_track
@@ -79,7 +79,7 @@ private:
 ///
 /// Note that Sound_effect has few public member functions. However, an
 /// effect track can be passed to the Mixer member function
-/// Mixer::play_effect(const Sound_effect&, Duration)
+/// Mixer::play_effect(Sound_effect, Duration)
 /// to play it.
 class Sound_effect
 {
@@ -161,7 +161,7 @@ public:
     Music_track load_music(const std::string& filename);
 
     /// Attaches the given music track to this mixer and starts it playing.
-    /// Equivalent to Mixer::attach_music(const Music_track&) followed by
+    /// Equivalent to Mixer::attach_music(Music_track) followed by
     /// Mixer::unpause_music(Duration).
     ///
     /// **PRECONDITIONS**:
@@ -230,7 +230,7 @@ public:
 
     /// How many effect channels are currently unused? If this is positive,
     /// then we can play an additional sound effect with
-    /// Mixer::play_effect(const Sound_effect&, Duration).
+    /// Mixer::play_effect(Sound_effect, Duration).
     int available_effect_channels() const;
 
     /// Attaches the given effect track to a channel of this mixer, starting
@@ -269,20 +269,17 @@ public:
     ///@}
 
 private:
-    // Only an Abstract_game is allowed to create a mixer. (And if there is
-    // more than one Abstract_game at a time, we are in trouble.)
-    friend Sound_effect_handle;
-    friend Abstract_game;
-    friend detail::Engine;
-
     /// Opens the mixer, if possible, returning nullptr for failure.
     static std::unique_ptr<Mixer> open_mixer();
 
-    /// Private constructor -- should not be called.
+    /// Private constructor -- should not be called, except by Abstract_game.
+    // (and if there is more than one Abstract_game at a time, we're in trouble.
     Mixer();
+    friend Abstract_game; // constructs.
 
     /// Updates the state of the channels.
     void poll_channels_();
+    friend detail::Engine; // calls poll_channels_().
 
     /// Returns the index of an empty channel, or throws if all are full.
     int find_empty_channel_() const;
@@ -290,8 +287,10 @@ private:
     /// Registers an effect with a channel.
     Sound_effect_handle
     register_effect_(int channel, Sound_effect effect);
+
     /// Unregisters the effect associated with a channel.
     void unregister_effect_(int channel);
+    friend Sound_effect_handle; // calls unregister_effect_(int).
 
 private:
     Music_track current_music_;
@@ -304,7 +303,7 @@ private:
 
 /// Used to control a Sound_effect after it is started playing on a Mixer.
 ///
-/// This is returned by Mixer::play_effect(const Sound_effect&, Duration).
+/// This is returned by Mixer::play_effect(Sound_effect, Duration).
 class Sound_effect_handle
 {
 public:
@@ -313,7 +312,7 @@ public:
     /// perform operations on it.
     ///
     /// To get a non-empty Sound_effect_handle, play a Sound_effect with
-    /// Mixer::play_effect(const Sound_effect&, Duration).
+    /// Mixer::play_effect(Sound_effect, Duration).
     Sound_effect_handle() {}
 
     /// Recognizes the empty sound effect handle.
