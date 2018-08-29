@@ -165,7 +165,7 @@ public:
     /// Mixer::unpause_music(Duration).
     ///
     /// \preconditions
-    ///  - music state is `paused` or `detached`; throws
+    ///  - `get_music_state()` is `paused` or `detached`; throws
     ///    exceptions::Client_logic_error if violated.
     void play_music(Music_track);
 
@@ -174,7 +174,7 @@ public:
     /// replacement.
     ///
     /// \preconditions
-    ///  - music state is `paused` or `detached`; throws
+    ///  - `get_music_state()` is `paused` or `detached`; throws
     ///    exceptions::Client_logic_error if violated.
     void attach_music(Music_track);
 
@@ -182,21 +182,21 @@ public:
     /// fading in if requested.
     ///
     /// \preconditions
-    ///  - music state is `paused` or `playing`; throws
+    ///  - `get_music_state()` is `paused` or `playing`; throws
     ///    exceptions::Client_logic_error if violated.
     void unpause_music(Duration fade_in = 0.0);
 
     /// Pauses the currently attached music, fading out if requested.
     ///
     /// \preconditions
-    ///  - music state is `paused` or `playing`; throws
+    ///  - `get_music_state()` is `paused` or `playing`; throws
     ///    exceptions::Client_logic_error if violated.
     void pause_music(Duration fade_out = 0.0);
 
     /// Rewinds the music to the beginning.
     ///
     /// \preconditions
-    ///  - music state is `paused`; throws exceptions::Client_logic_error if
+    ///  - `get_music_state()` is `paused`; throws exceptions::Client_logic_error if
     ///    violated.
     void rewind_music();
 
@@ -207,6 +207,23 @@ public:
     }
 
     /// Returns the current state of the attached music, if any.
+    ///
+    /// The state changes in only three ways:
+    ///
+    /// 1. In response to client actions, for example,
+    ///    Mixer::unpause(Duration) changes the state from `paused` to
+    ///    `playing`
+    ///
+    /// 2. When a playing track ends, it changes from `playing` to `paused`.
+    ///
+    /// 3. When a pause-with-fade-out ends, it changes from `fading_out` to
+    ///    `paused`.
+    ///
+    /// Cases 2 and 3 happen only between frames, and not asynchronously
+    /// while computing the next frame. This means that after checking
+    /// the result of `get_music_state()` const, that state continues to
+    /// hold, and can be relied on, at least until the end of the frame,
+    /// unless the client requests that it be changed (case 1).
     State get_music_state() const
     {
         return music_state_;
@@ -324,7 +341,7 @@ public:
     ///
     /// \preconditions
     ///  - `!empty()`, undefined behavior if violated.
-    ///  - state is either `playing` or `paused`, throws
+    ///  - `get_state()` is either `playing` or `paused`, throws
     ///    exceptions::Client_logic_error if violated.
     void pause();
 
@@ -332,7 +349,7 @@ public:
     ///
     /// \preconditions
     ///  - `!empty()`, undefined behavior if violated.
-    ///  - state is either `playing` or `paused`, throws
+    ///  - `get_state()` is either `playing` or `paused`, throws
     ///    exceptions::Client_logic_error if violated.
     void unpause();
 
@@ -340,7 +357,7 @@ public:
     ///
     /// \preconditions
     ///  - `!empty()`, undefined behavior if violated.
-    ///  - state is either `playing` or `paused`, throws
+    ///  - `get_state()` is either `playing` or `paused`, throws
     ///    exceptions::Client_logic_error if violated.
     void stop();
 
@@ -351,6 +368,10 @@ public:
     const Sound_effect& get_effect() const;
 
     /// Gets the state of this effect.
+    ///
+    /// As with the mixer's music state, the state of a side effect channel
+    /// only changes synchronously, either with client requests, or between
+    /// frames, in the case where the sound effect finishes and is detached.
     ///
     /// \preconditions
     ///  - `!empty()`, undefined behavior if violated.
