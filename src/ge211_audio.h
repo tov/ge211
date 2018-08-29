@@ -226,8 +226,8 @@ public:
     /// Loads a new sound effect track from a resource file.
     Sound_effect load_effect(const std::string& filename);
 
-    /// How many effect channels are current unused? If this is positive,
-    /// then we can an play additional sound effect with
+    /// How many effect channels are currently unused? If this is positive,
+    /// then we can play an additional sound effect with
     /// Mixer::play_effect(const Sound_effect&, Duration).
     int available_effect_channels() const;
 
