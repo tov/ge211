@@ -14,7 +14,7 @@ namespace ge211 {
 /// All audio facilities are accessed via the Mixer, which is accessed
 /// via the Abstract_game::get_mixer() const member function of
 /// Abstract_game. If the Mixer is present (and it may not be), then it
-/// can be used to load audio files as Music_track@s and Sound_effect@s.
+/// can be used to load audio files as Music_track%s and Sound_effect%s.
 /// The former is for playing continuous background music, whereas the
 /// latter is for adding sound effects. See the Mixer documentation for
 /// more.
@@ -129,6 +129,10 @@ private:
 /// via the Abstract_game::get_mixer() const member function. The member
 /// function returns a raw pointer, which will be `nullptr` if the Mixer
 /// could not be initialized.
+///
+/// This Mixer has one music channel, and some fixed number (usually 8) of
+/// sound effects channels. This means that it can play one Music_track and
+/// up to (usually) 8 Sound_effect%s simultaneously.
 class Mixer
 {
 public:
@@ -150,26 +154,48 @@ public:
     /// \name Playing music
     ///@{
 
-    /// Loads a new music track.
+    /// Loads a new music track from a resource file.
+    ///
+    /// Throws exceptions::File_error if the file cannot be opened, and
+    /// exceptions::Mixer_error if the file format cannot be understood.
     Music_track load_music(const std::string& filename);
 
     /// Attaches the given music track to this mixer and starts it playing.
+    ///
+    /// **PRECONDITIONS**:
+    ///  - music state is `paused` or `detached`; throws
+    ///    exceptions::Client_logic_error if violated.
     void play_music(const Music_track&, Duration fade_in = 0.0);
 
-    /// Attaches the given music track to this mixer. Give empty Music_track to
-    /// detach the current track, if any.
+    /// Attaches the given music track to this mixer. Give the empty
+    /// Music_track to detach the current track, if any, without attaching a
+    /// replacement.
     ///
-    /// **PRECONDITIONS**: It is an error to attach music when other music is
-    /// playing or fading out.
+    /// **PRECONDITIONS**:
+    ///  - music state is `paused` or `detached`; throws
+    ///    exceptions::Client_logic_error if violated.
     void attach_music(const Music_track&);
 
     /// Plays the currently attached music from the current saved position,
     /// fading in if requested.
+    ///
+    /// **PRECONDITIONS**:
+    ///  - music state is `paused` or `playing`; throws
+    ///    exceptions::Client_logic_error if violated.
     void unpause_music(Duration fade_in = 0.0);
+
     /// Pauses the currently attached music, fading out if requested.
+    ///
+    /// **PRECONDITIONS**:
+    ///  - music state is `paused` or `playing`; throws
+    ///    exceptions::Client_logic_error if violated.
     void pause_music(Duration fade_out = 0.0);
-    /// Rewinds the music to the beginning. This is only valid when the music
-    /// is paused.
+
+    /// Rewinds the music to the beginning.
+    ///
+    /// **PRECONDITIONS**:
+    ///  - music state is `paused`; throws exceptions::Client_logic_error if
+    ///    violated.
     void rewind_music();
 
     /// Gets the Music_track currently attached to this Mixer, if any.
@@ -189,19 +215,27 @@ public:
     /// \name Playing sound effects
     ///@{
 
-    /// Loads a new sound effect track.
+    /// Loads a new sound effect track from a resource file.
     Sound_effect load_effect(const std::string& filename);
 
-    /// How many effect channels are current unattached?
+    /// How many effect channels are current unused? If this is positive,
+    /// then we can an play additional sound effect with
+    /// Mixer::play_effect(const Sound_effect&, Duration).
     int available_effect_channels() const;
 
     /// Attaches the given effect track to a channel of this mixer, starting
     /// the effect playing and returning the channel.
+    ///
+    /// **PRECONDITIONS**:
+    ///  - `available_effect_channels() > 0`, throws exceptions::Mixer_error if
+    ///     violated.
+    ///  - `!effect.empty()`, undefined behavior if violated.
     Sound_effect_handle
-    play_effect(const Sound_effect&, Duration fade_in = 0.0);
+    play_effect(const Sound_effect& effect, Duration fade_in = 0.0);
 
     /// Pauses all currently-playing effects.
     void pause_all_effects();
+
     /// Unpauses all currently-paused effects.
     void unpause_all_effects();
 
@@ -282,32 +316,37 @@ public:
     /// Pauses the effect.
     ///
     /// **PRECONDITIONS**:
-    ///  - `!empty()`
-    ///  - `get_state()` is either `playing` or `paused`
+    ///  - `!empty()`, undefined behavior if violated.
+    ///  - state is either `playing` or `paused`, throws
+    ///    exceptions::Client_logic_error if violated.
     void pause();
 
     /// Unpauses the effect.
     ///
     /// **PRECONDITIONS**:
-    ///  - `!empty()`
-    ///  - `get_state()` is either `playing` or `paused`
+    ///  - `!empty()`, undefined behavior if violated.
+    ///  - state is either `playing` or `paused`, throws
+    ///    exceptions::Client_logic_error if violated.
     void unpause();
 
     /// Stops the effect from playing, and detaches it when finished.
     ///
     /// **PRECONDITIONS**:
-    ///  - `!empty()`
-    ///  - `get_state()` is either `playing` or `paused`
+    ///  - `!empty()`, undefined behavior if violated.
+    ///  - state is either `playing` or `paused`, throws
+    ///    exceptions::Client_logic_error if violated.
     void stop(Duration fade_out = 0.0);
 
     /// Gets the Sound_effect being played by this handle.
     ///
-    /// **PRECONDITION**: `!empty()`
+    /// **PRECONDITIONS**:
+    ///  - `!empty()`, undefined behavior if violated.
     const Sound_effect& get_effect() const;
 
     /// Gets the state of this effect.
     ///
-    /// **PRECONDITION**: `!empty()`
+    /// **PRECONDITIONS**:
+    ///  - `!empty()`, undefined behavior if violated.
     Mixer::State get_state() const;
 
 private:
