@@ -11,8 +11,8 @@ namespace ge211 {
 
 /// Audio facilities, for playing music and sound effects.
 ///
-/// All audio facilities are accessed via the Mixer, which is accessed
-/// via the Abstract_game::get_mixer() const member function of
+/// All audio facilities are accessed via the Mixer, which is in turn
+/// accessed via the Abstract_game::get_mixer() const member function of
 /// Abstract_game. If the Mixer is present (and it may not be), then it
 /// can be used to load audio files as Music_track%s and Sound_effect%s.
 /// The former is for playing continuous background music, whereas the
@@ -21,7 +21,6 @@ namespace ge211 {
 namespace audio {
 
 /// A music track, which can be attached to the Mixer and played.
-///
 /// A music track may be *empty* or *non-empty*; only non-empty tracks can
 /// actually be played.
 ///
@@ -36,6 +35,10 @@ class Music_track
 {
 public:
     /// Loads a new music track from a resource file.
+    ///
+    /// Supported file formats include WAV, MP3, OGG, FLAC, MID, and ABC.
+    /// However, pausing and resuming does not work correctly with all audio
+    /// formats.
     ///
     /// Throws exceptions::File_error if the file cannot be opened, and
     /// exceptions::Mixer_error if the file format cannot be understood.
@@ -74,6 +77,8 @@ class Sound_effect
 {
 public:
     /// Loads a new sound effect track from a resource file.
+    ///
+    /// Supported file formats include WAV, MP3, OGG, FLAC, MID, and ABC.
     ///
     /// Throws exceptions::File_error if the file cannot be opened, and
     /// exceptions::Mixer_error if the file format cannot be understood.
