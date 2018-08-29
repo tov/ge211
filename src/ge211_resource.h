@@ -53,7 +53,7 @@ public:
     Font(const std::string& filename, int size);
 
 private:
-    friend class sprites::Text_sprite;
+    friend Text_sprite;
 
     TTF_Font* get_raw_() const noexcept { return ptr_.get(); }
 

@@ -518,9 +518,9 @@ struct Basic_rectangle
     }
 
 private:
-    friend class sprites::Circle_sprite;
-    friend class detail::Render_sprite;
-    friend class detail::Renderer;
+    friend Circle_sprite;
+    friend detail::Render_sprite;
+    friend detail::Renderer;
 
     /// Converts this rectangle to an internal SDL rectangle.
     operator SDL_Rect() const

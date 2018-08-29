@@ -102,7 +102,8 @@ public:
     bool random_bool(double ptrue = 0.5);
 
 private:
-    friend class Abstract_game;
+    // Creator:
+    friend Abstract_game;
 
     Random();
 

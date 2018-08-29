@@ -136,9 +136,8 @@ public:
     ///@}
 
 private:
-    friend class Time_point;
-
-    friend class detail::Engine;
+    friend Time_point;
+    friend detail::Engine;
 
     Duration(std::chrono::duration<double> duration)
             : Duration{std::chrono::duration_cast<detail::Clock::duration>

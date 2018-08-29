@@ -389,7 +389,7 @@ public:
     Sprite_set& add_sprite(Sprite const&, Position, int z, Transform const&);
 
 private:
-    friend class detail::Engine;
+    friend detail::Engine;
 
     Sprite_set();
     std::vector<detail::Placed_sprite> sprites_;

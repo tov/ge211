@@ -31,7 +31,7 @@ public:
     void present() noexcept;
 
 private:
-    friend class Texture;
+    friend Texture;
 
     SDL_Renderer* get_raw_() const noexcept;
 
@@ -63,7 +63,7 @@ public:
     bool empty() const noexcept;
 
 private:
-    friend class Renderer;
+    friend Renderer;
 
     struct Impl_
     {

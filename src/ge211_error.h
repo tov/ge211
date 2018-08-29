@@ -95,10 +95,10 @@ class Host_error : public Environment_error
     friend Mixer_error;
 
     /// Throwers
+    friend Text_sprite;
     friend Window;
     friend detail::Renderer;
     friend detail::Render_sprite;
-    friend Text_sprite;
     friend detail::Texture;
 };
 
@@ -109,7 +109,7 @@ class File_error final : public Host_error
     static File_error could_not_open(const std::string& filename);
 
     /// Thrower
-    friend class detail::File_resource;
+    friend detail::File_resource;
 };
 
 /// Indicates an error loading a font front an already-open file.
@@ -119,7 +119,7 @@ class Font_error final : public Host_error
     static Font_error could_not_load(const std::string& filename);
 
     /// Thrower
-    friend class ge211::Font;
+    friend Font;
 };
 
 /// Indicates an error loading an image from an already-open file.
@@ -129,7 +129,7 @@ class Image_error final : public Host_error
     static Image_error could_not_load(const std::string& filename);
 
     /// Thrower
-    friend class sprites::Image_sprite;
+    friend Image_sprite;
 };
 
 /// Indicates an error in the mixer, which could include the inability to
@@ -141,9 +141,9 @@ class Mixer_error : public Host_error
     static Mixer_error out_of_channels();
 
     /// Thrower
-    friend ge211::audio::Mixer;
-    friend ge211::audio::Music_track;
-    friend ge211::audio::Sound_effect;
+    friend Mixer;
+    friend Music_track;
+    friend Sound_effect;
 };
 
 } // end namespace exception
