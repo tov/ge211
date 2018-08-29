@@ -66,22 +66,22 @@ public:
     }
 
     /// Solid red.
-    static const Color medium_red() noexcept
+    static Color medium_red() noexcept
     { return from_hsla(0, .5, .5); }
     /// Solid green.
-    static const Color medium_green() noexcept
+    static Color medium_green() noexcept
     { return from_hsla(120, .5, .5); }
     /// Solid blue.
-    static const Color medium_blue() noexcept
+    static Color medium_blue() noexcept
     { return from_hsla(240, .5, .5); }
     /// Solid cyan.
-    static const Color medium_cyan() noexcept
+    static Color medium_cyan() noexcept
     { return from_hsla(180, .5, .5); }
     /// Solid magenta.
-    static const Color medium_magenta() noexcept
+    static Color medium_magenta() noexcept
     { return from_hsla(300, .5, .5); }
     /// Solid yellow.
-    static const Color medium_yellow() noexcept
+    static Color medium_yellow() noexcept
     { return from_hsla(60, .5, .5); }
 
     /// @}
