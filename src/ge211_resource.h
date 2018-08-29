@@ -19,7 +19,7 @@ public:
     explicit File_resource(const std::string&);
 
     SDL_RWops* get_raw() const noexcept { return ptr_.get(); }
-    SDL_RWops* release() &&;
+    SDL_RWops* release() && { return ptr_.release(); }
 
 private:
     static delete_ptr<SDL_RWops> open_rwops_(const std::string&);

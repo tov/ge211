@@ -47,13 +47,6 @@ File_resource::File_resource(const std::string& filename)
         : ptr_{open_rwops_(filename)}
 { }
 
-SDL_RWops* File_resource::release() &&
-{
-    delete_ptr<SDL_RWops> dummy{nullptr, &no_op_deleter};
-    std::swap(dummy, ptr_);
-    return dummy.release();
-}
-
 } // end namespace detail
 
 delete_ptr<TTF_Font> Font::load_(const std::string& filename,
