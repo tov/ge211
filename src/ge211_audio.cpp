@@ -22,7 +22,7 @@ std::shared_ptr<Mix_Music> Music_track::load_(const std::string& filename)
     throw Mixer_error::could_not_load(filename);
 }
 
-Music_track::Music_track(const std::string& filename)
+Music_track::Music_track(const std::string& filename, const Mixer&)
         : ptr_{load_(filename)}
 { }
 
@@ -45,7 +45,7 @@ std::shared_ptr<Mix_Chunk> Sound_effect::load_(const std::string& filename)
     throw Mixer_error::could_not_load(filename);
 }
 
-Sound_effect::Sound_effect(const std::string& filename)
+Sound_effect::Sound_effect(const std::string& filename, const Mixer&)
         : ptr_{load_(filename)}
 { }
 

@@ -82,7 +82,7 @@ struct View
     Text_sprite fps;
     Circle_sprite mortar{mortar_radius, mortar_color};
     vector<Circle_sprite> stars;
-    Sound_effect explosion_sound{"beep.abc"};
+    Sound_effect explosion_sound;
 };
 
 // MAIN STRUCT AND FUNCTION
@@ -304,10 +304,12 @@ void Fireworks::on_start()
     if (mixer) {
         try {
             mixer->set_music_volume(0.25);
-            mixer->play_music(Music_track("music.dat"));
+            mixer->play_music(Music_track("music.dat", *mixer));
         } catch (const Host_error&) {
             // Fail to load music silently.
         }
+
+        view.explosion_sound = Sound_effect("beep.abc", *mixer);
     }
 }
 

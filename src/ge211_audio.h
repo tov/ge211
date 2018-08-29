@@ -39,7 +39,7 @@ public:
     ///
     /// Throws exceptions::File_error if the file cannot be opened, and
     /// exceptions::Mixer_error if the file format cannot be understood.
-    explicit Music_track(const std::string& filename);
+    Music_track(const std::string& filename, const Mixer&);
 
     /// Constructs the default, empty music track.
     Music_track() { }
@@ -77,7 +77,7 @@ public:
     ///
     /// Throws exceptions::File_error if the file cannot be opened, and
     /// exceptions::Mixer_error if the file format cannot be understood.
-    explicit Sound_effect(const std::string& filename);
+    Sound_effect(const std::string& filename, const Mixer&);
 
     /// Constructs the default, empty sound effect track.
     Sound_effect() { }
