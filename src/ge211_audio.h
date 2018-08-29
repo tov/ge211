@@ -55,7 +55,7 @@ public:
 
 private:
     // Friends
-    friend ge211::audio::Mixer;
+    friend Mixer;
 
     // Private constructor
     Music_track(const std::string& filename, detail::File_resource&&);
@@ -107,7 +107,7 @@ public:
 
 private:
     // Friends
-    friend ge211::audio::Mixer;
+    friend Mixer;
 
     // Private constructor
     Sound_effect(const std::string& filename, detail::File_resource&&);
@@ -269,9 +269,9 @@ public:
 private:
     // Only an Abstract_game is allowed to create a mixer. (And if there is
     // more than one Abstract_game at a time, we are in trouble.)
-    friend audio::Sound_effect_handle;
-    friend ge211::Abstract_game;
-    friend ge211::detail::Engine;
+    friend Sound_effect_handle;
+    friend Abstract_game;
+    friend detail::Engine;
 
     /// Opens the mixer, if possible, returning nullptr for failure.
     static std::unique_ptr<Mixer> open_mixer();
@@ -358,7 +358,7 @@ public:
     Mixer::State get_state() const;
 
 private:
-    friend audio::Mixer;
+    friend Mixer;
 
     struct Impl_
     {

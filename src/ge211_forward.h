@@ -64,6 +64,7 @@ class Host_error;
 class File_error;
 class Font_error;
 class Image_error;
+class Mixer_error;
 
 } // end namespace exception
 

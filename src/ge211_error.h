@@ -32,8 +32,8 @@ private:
     explicit Exception_base(const std::string& message);
 
     /// Derived classes
-    friend class Client_logic_error;
-    friend class Environment_error;
+    friend Client_logic_error;
+    friend Environment_error;
 
     std::shared_ptr<const std::string> message_;
 };
@@ -60,11 +60,11 @@ class Environment_error : public Exception_base
     explicit Environment_error(const std::string& message);
 
     /// Throwers
-    friend class ge211::Window;
+    friend Window;
 
     /// Derived classes
-    friend class Ge211_logic_error;
-    friend class Host_error;
+    friend Ge211_logic_error;
+    friend Host_error;
 };
 
 /// Indicates a condition unexpected by %ge211, that appears
@@ -75,9 +75,9 @@ class Ge211_logic_error : public Environment_error
     explicit Ge211_logic_error(const std::string& message);
 
     /// Throwers
-    friend class detail::Render_sprite;
-    friend class audio::Mixer;
-    friend class sprites::Text_sprite;
+    friend detail::Render_sprite;
+    friend Mixer;
+    friend Text_sprite;
 };
 
 /// Indicates an exception from the host environment being
@@ -89,17 +89,17 @@ class Host_error : public Environment_error
     explicit Host_error(const std::string& extra_message = "");
 
     /// Derived classes
-    friend class File_error;
-    friend class Font_error;
-    friend class Image_error;
-    friend class Mixer_error;
+    friend File_error;
+    friend Font_error;
+    friend Image_error;
+    friend Mixer_error;
 
     /// Throwers
-    friend class ge211::Window;
-    friend class detail::Renderer;
-    friend class detail::Render_sprite;
-    friend class ge211::Text_sprite;
-    friend class detail::Texture;
+    friend Window;
+    friend detail::Renderer;
+    friend detail::Render_sprite;
+    friend Text_sprite;
+    friend detail::Texture;
 };
 
 /// Indicates an error opening a file.

@@ -285,8 +285,8 @@ private:
     uint8_t blue_;
     uint8_t alpha_;
 
-    friend class sprites::Text_sprite;
-    friend class detail::Render_sprite;
+    friend Text_sprite;
+    friend detail::Render_sprite;
 
     SDL_Color to_sdl_() const noexcept;
     uint32_t to_sdl_(const SDL_PixelFormat*) const noexcept;
