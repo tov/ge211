@@ -71,7 +71,6 @@ void Sound_effect::set_volume(double unit_value)
 
 std::unique_ptr<Mixer> Mixer::open_mixer()
 {
-
     if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,
                       MIX_DEFAULT_FORMAT,
                       2,
