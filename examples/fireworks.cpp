@@ -281,8 +281,8 @@ void Fireworks::on_frame(double dt)
 
     if (!is_paused) {
         bool explosion = model.update(dt);
-        if (mixer) {
-            if (explosion && mixer->available_effect_channels() > 0) {
+        if (explosion && mixer) {
+            if (mixer->available_effect_channels() > 0) {
                 mixer->play_effect(view.explosion_sound);
             }
         }
