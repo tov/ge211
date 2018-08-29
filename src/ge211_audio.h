@@ -68,7 +68,7 @@ private:
 ///
 /// Note that Sound_effect has few public member functions. However, an
 /// effect track can be passed to the Mixer member function
-/// Mixer::play_effect(Sound_effect, Duration)
+/// Mixer::play_effect(Sound_effect, double)
 /// to play it.
 class Sound_effect
 {
@@ -201,18 +201,19 @@ public:
 
     /// How many effect channels are currently unused? If this is positive,
     /// then we can play an additional sound effect with
-    /// Mixer::play_effect(Sound_effect, Duration).
+    /// Mixer::play_effect(Sound_effect, double).
     int available_effect_channels() const;
 
-    /// Attaches the given effect track to a channel of this mixer, starting
-    /// the effect playing and returning the channel.
+    /// Plays the given effect track on this mixer, at the specified volume.
+    /// The volume must be in the unit interval. Returns a Sound_effect_handle,
+    /// which can be used to control the sound effect while it's playing.
     ///
     /// **PRECONDITIONS**:
     ///  - `available_effect_channels() > 0`, throws exceptions::Mixer_error if
     ///     violated.
     ///  - `!effect.empty()`, undefined behavior if violated.
     Sound_effect_handle
-    play_effect(Sound_effect effect);
+    play_effect(Sound_effect effect, double volume = 1.0);
 
     /// Pauses all currently-playing effects.
     void pause_all_effects();
@@ -274,7 +275,7 @@ private:
 
 /// Used to control a Sound_effect after it is started playing on a Mixer.
 ///
-/// This is returned by Mixer::play_effect(Sound_effect, Duration).
+/// This is returned by Mixer::play_effect(Sound_effect, double).
 class Sound_effect_handle
 {
 public:
@@ -283,7 +284,7 @@ public:
     /// perform operations on it.
     ///
     /// To get a non-empty Sound_effect_handle, play a Sound_effect with
-    /// Mixer::play_effect(Sound_effect, Duration).
+    /// Mixer::play_effect(Sound_effect, double).
     Sound_effect_handle() {}
 
     /// Recognizes the empty sound effect handle.
@@ -309,7 +310,7 @@ public:
     ///    exceptions::Client_logic_error if violated.
     void unpause();
 
-    /// Stops the effect from playing, and detaches it when finished.
+    /// Stops the effect from playing and detaches it.
     ///
     /// **PRECONDITIONS**:
     ///  - `!empty()`, undefined behavior if violated.

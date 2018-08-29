@@ -253,9 +253,10 @@ void Mixer::poll_channels_()
 }
 
 Sound_effect_handle
-Mixer::play_effect(Sound_effect effect)
+Mixer::play_effect(Sound_effect effect, double volume)
 {
     int channel = find_empty_channel_();
+    Mix_Volume(channel, unit_to_volume(volume));
     Mix_PlayChannel(channel, effect.ptr_.get(), 0);
     return register_effect_(channel, std::move(effect));
 }

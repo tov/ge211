@@ -303,7 +303,7 @@ void Fireworks::on_start()
     Mixer* mixer = get_mixer();
     if (mixer) {
         try {
-            mixer->set_music_volume(0.25);
+            mixer->set_music_volume(0.1);
             mixer->play_music(Music_track("music.dat", *mixer));
         } catch (const Host_error&) {
             // Fail to load music silently.
