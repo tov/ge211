@@ -161,6 +161,8 @@ public:
     Music_track load_music(const std::string& filename);
 
     /// Attaches the given music track to this mixer and starts it playing.
+    /// Equivalent to Mixer::attach_music(const Music_track&) followed by
+    /// Mixer::unpause_music(Duration).
     ///
     /// **PRECONDITIONS**:
     ///  - music state is `paused` or `detached`; throws
