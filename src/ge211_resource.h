@@ -54,7 +54,6 @@ public:
 
 private:
     friend class sprites::Text_sprite;
-    friend class ge211::Font;
 
     TTF_Font* get_raw_() const noexcept { return ptr_.get(); }
 
