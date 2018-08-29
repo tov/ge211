@@ -104,7 +104,7 @@ private:
 /// The Mixer is the center of %ge211's audio facilities. It is used to load
 /// audio files as Music_track%s and Sound_effect%s, and to play and control
 /// them. However, Mixer itself has no public constructor, and you will not
-/// contruct your own. Rather, a Mixer is constructed, if possible, when
+/// construct your own. Rather, a Mixer is constructed, if possible, when
 /// Abstract_game is initialized, and this mixer can be accessed by your game
 /// via the Abstract_game::get_mixer() const member function. The member
 /// function returns a raw pointer, which will be `nullptr` if the Mixer
