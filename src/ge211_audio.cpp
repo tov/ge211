@@ -282,7 +282,7 @@ void Sound_effect_handle::unpause()
 {
     switch (ptr_->state) {
         case Mixer::State::detached:
-            throw Client_logic_error("Sound_effect_handle::unpause: empty");
+            throw Client_logic_error("Sound_effect_handle::unpause: detached");
 
         case Mixer::State::paused:
             ptr_->state = Mixer::State::playing;
@@ -302,7 +302,7 @@ void Sound_effect_handle::pause()
 {
     switch (ptr_->state) {
         case Mixer::State::detached:
-            throw Client_logic_error("Sound_effect_handle::pause: empty");
+            throw Client_logic_error("Sound_effect_handle::pause: detached");
 
         case Mixer::State::paused:
             // idempotent
@@ -322,7 +322,7 @@ void Sound_effect_handle::stop(Duration fade_out)
 {
     switch (ptr_->state) {
         case Mixer::State::detached:
-            throw Client_logic_error("Sound_effect_handle::stop: empty");
+            throw Client_logic_error("Sound_effect_handle::stop: detached");
 
         case Mixer::State::paused:
             ptr_->mixer.unregister_effect_(ptr_->channel);
