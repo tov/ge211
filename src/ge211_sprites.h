@@ -12,8 +12,6 @@
 
 namespace ge211 {
 
-/// \defgroup Sprites Sprites and friends
-
 /// Sprites are images that can be rendered to the screen. This namespace
 /// defines a base Sprite class that declares common sprite operations,
 /// and four specific types of sprites with different purposes.
@@ -123,10 +121,6 @@ private:
 
 namespace sprites {
 
-/// \ingroup Sprites
-/// \defgroup GeometricSprites Geometric sprites
-/// @{
-
 /// A Sprite that renders as a solid rectangle.
 class Rectangle_sprite : public detail::Render_sprite
 {
@@ -159,12 +153,6 @@ public:
 private:
     int radius_() const;
 };
-
-/// @}
-
-/// \ingroup Sprites
-/// \defgroup ResourceSprites Resource-based sprites
-/// @{
 
 /// A Sprite that displays a bitmap image.
 class Image_sprite : public detail::Texture_sprite
@@ -224,8 +212,6 @@ private:
 
     detail::Texture texture_;
 };
-
-/// @}
 
 /// Builder-style API for configuring and constructing Text_sprite%s.
 /// The idea is that a Text_sprite::Builder allows configuring a

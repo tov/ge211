@@ -19,7 +19,7 @@ Session::Session()
 
     int mix_flags = MIX_INIT_OGG | MIX_INIT_MP3;
     if ((Mix_Init(mix_flags) & mix_flags) != mix_flags) {
-        warn_sdl() << "Could not initialize audio mixer";
+        info_sdl() << "Could not pre-initialize audio mixer";
     }
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {

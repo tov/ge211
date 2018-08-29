@@ -7,14 +7,8 @@
 
 namespace ge211 {
 
-/// \defgroup Geometry Geometric objects and operations
-/// @{
-
 /// Geometric objects and their operations.
 namespace geometry {
-
-/// \defgroup Dimensions Dimensions and their operations
-/// @{
 
 /// Represents the dimensions of an object, or more generally,
 /// the displacement between two Basic_position%s. Note that
@@ -206,11 +200,6 @@ Basic_dimensions<T>& operator/=(Basic_dimensions<T>& d1, double s2)
     return d1 = d1 / s2;
 }
 
-/// @}
-
-/// \defgroup Positions Positions and their operations
-/// @{
-
 /// A position in the T-valued Cartesian plane. In graphics,
 /// the origin is traditionally in the upper left, so the *x* coordinate
 /// increases to the right and the *y* coordinate increases downward.
@@ -401,11 +390,6 @@ Basic_position<T>& operator-=(Basic_position<T>& p1, Basic_dimensions<T> d2)
     return p1 = p1 - d2;
 }
 
-/// @}
-
-/// \defgroup Rectangles Rectangles and their operations
-/// @{
-
 /// Represents a positioned rectangle.
 template <class T>
 struct Basic_rectangle
@@ -561,11 +545,6 @@ bool operator!=(const Basic_rectangle<T> &r1,
     return !(r1 == r2);
 }
 
-/// @}
-
-/// \defgroup Transforms Transforms and their operations
-/// @{
-
 /// A rendering transform, which can scale, flip, and rotate. A Transform
 /// can be given to
 /// Sprite_set::add_sprite(const Sprite&, Position, int, const Transform&)
@@ -695,10 +674,6 @@ private:
 bool operator==(const Transform&, const Transform&) noexcept;
 /// Disequality for transforms.
 bool operator!=(const Transform&, const Transform&) noexcept;
-
-/// @}
-
-/// @}
 
 } // end namespace geometry.
 
