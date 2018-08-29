@@ -385,6 +385,16 @@ void Mixer::unregister_effect_(int channel)
     ++available_effect_channels_;
 }
 
+double Mixer::get_music_volume() const
+{
+    return Mix_VolumeMusic(-1) / double(MIX_MAX_VOLUME);
+}
+
+void Mixer::set_music_volume(double unit_value)
+{
+    Mix_VolumeMusic(int(unit_value * MIX_MAX_VOLUME));
+}
+
 bool Sound_effect_handle::empty() const
 {
     return ptr_ == nullptr;

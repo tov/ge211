@@ -210,6 +210,14 @@ public:
         return music_state_;
     }
 
+    /// Returns the music volume as a number from 0.0 to 1.0.
+    /// Initially this will be 1.0, but you can lower it with
+    /// Mixer::set_music_volume(double).
+    double get_music_volume() const;
+
+    /// Sets the music volume, on a scale from 0.0 to 1.0.
+    void set_music_volume(double unit_value);
+
     ///@}
 
     /// \name Playing sound effects

@@ -279,14 +279,9 @@ void Fireworks::on_frame(double dt)
 {
     auto mixer = get_mixer();
 
-    if (is_paused) {
-        if (mixer) {
-            mixer->pause_music();
-        }
-    } else {
+    if (!is_paused) {
         bool explosion = model.update(dt);
         if (mixer) {
-            mixer->unpause_music();
             if (explosion && mixer->available_effect_channels() > 0) {
                 mixer->play_effect(view.explosion_sound);
             }
@@ -304,8 +299,15 @@ void Fireworks::on_start()
 {
     auto mixer = get_mixer();
     if (mixer) {
-        mixer->play_music(mixer->load_music("joplin.mid"));
-        view.explosion_sound = mixer->load_effect("pop.mp3");
+        mixer->set_music_volume(0.25);
+
+        try {
+            mixer->play_music(mixer->load_music("music.dat"));
+        } catch (const Host_error&) {
+            // Only load music if it exists.
+        }
+
+        view.explosion_sound = mixer->load_effect("beep.abc");
     }
 }
 
