@@ -102,10 +102,10 @@ Mixer::~Mixer()
     Mix_CloseAudio();
 }
 
-void Mixer::play_music(Music_track music, Duration fade_in)
+void Mixer::play_music(Music_track music)
 {
     attach_music(std::move(music));
-    unpause_music(fade_in);
+    unpause_music();
 }
 
 void Mixer::attach_music(Music_track music)
