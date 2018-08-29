@@ -253,11 +253,10 @@ void Mixer::poll_channels_()
 }
 
 Sound_effect_handle
-Mixer::play_effect(Sound_effect effect, Duration fade_in)
+Mixer::play_effect(Sound_effect effect)
 {
     int channel = find_empty_channel_();
-    Mix_FadeInChannel(channel, effect.ptr_.get(), 0,
-                      int(fade_in.milliseconds()));
+    Mix_PlayChannel(channel, effect.ptr_.get(), 0);
     return register_effect_(channel, std::move(effect));
 }
 
@@ -301,7 +300,7 @@ void Sound_effect_handle::pause()
     }
 }
 
-void Sound_effect_handle::stop(Duration fade_out)
+void Sound_effect_handle::stop()
 {
     switch (ptr_->state) {
         case Mixer::State::detached:
@@ -313,13 +312,9 @@ void Sound_effect_handle::stop(Duration fade_out)
             break;
 
         case Mixer::State::playing:
-            if (fade_out == 0.0) {
-                ptr_->mixer.unregister_effect_(ptr_->channel);
-                Mix_HaltChannel(ptr_->channel);
-            } else {
-                ptr_->state = Mixer::State::fading_out;
-                Mix_FadeOutChannel(ptr_->channel, int(fade_out.milliseconds()));
-            }
+            ptr_->mixer.unregister_effect_(ptr_->channel);
+            Mix_HaltChannel(ptr_->channel);
+            break;
 
         case Mixer::State::fading_out:
             throw Client_logic_error("Sound_effect_handle::stop: fading out");

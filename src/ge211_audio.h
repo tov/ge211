@@ -212,7 +212,7 @@ public:
     ///     violated.
     ///  - `!effect.empty()`, undefined behavior if violated.
     Sound_effect_handle
-    play_effect(Sound_effect effect, Duration fade_in = 0.0);
+    play_effect(Sound_effect effect);
 
     /// Pauses all currently-playing effects.
     void pause_all_effects();
@@ -315,7 +315,7 @@ public:
     ///  - `!empty()`, undefined behavior if violated.
     ///  - state is either `playing` or `paused`, throws
     ///    exceptions::Client_logic_error if violated.
-    void stop(Duration fade_out = 0.0);
+    void stop();
 
     /// Gets the Sound_effect being played by this handle.
     ///
