@@ -277,7 +277,7 @@ void Fireworks::on_key(Key key)
 
 void Fireworks::on_frame(double dt)
 {
-    auto mixer = get_mixer();
+    Mixer* mixer = get_mixer();
 
     if (!is_paused) {
         bool explosion = model.update(dt);
@@ -300,7 +300,7 @@ void Fireworks::on_mouse_up(Mouse_button, Position position)
 
 void Fireworks::on_start()
 {
-    auto mixer = get_mixer();
+    Mixer* mixer = get_mixer();
     if (mixer) {
         try {
             mixer->set_music_volume(0.25);
