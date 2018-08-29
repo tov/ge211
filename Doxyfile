@@ -239,7 +239,7 @@ TAB_SIZE               = 4
 # newlines (in the resulting output). You can put ^^ in the value part of an
 # alias to insert a newline as if a physical newline was in the original file.
 
-ALIASES                =
+ALIASES                = preconditions="\par Preconditions:\n"
 
 # This tag can be used to specify a number of word-keyword mappings (TCL only).
 # A mapping has the form "name=value". For example adding "class=itcl::class"
@@ -704,7 +704,7 @@ FILE_VERSION_FILTER    =
 # DoxygenLayout.xml, doxygen will parse it automatically even if the LAYOUT_FILE
 # tag is left empty.
 
-LAYOUT_FILE            =
+LAYOUT_FILE            = DoxygenLayout.xml
 
 # The CITE_BIB_FILES tag can be used to specify one or more bib files containing
 # the reference definitions. This must be a list of .bib files. The .bib
@@ -1242,7 +1242,7 @@ HTML_DYNAMIC_MENUS     = YES
 # The default value is: NO.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_DYNAMIC_SECTIONS  = NO
+HTML_DYNAMIC_SECTIONS  = YES
 
 # With HTML_INDEX_NUM_ENTRIES one can control the preferred number of entries
 # shown in the various tree structured indices initially; the user can expand
@@ -1451,7 +1451,7 @@ ECLIPSE_DOC_ID         = org.doxygen.Project
 # The default value is: NO.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-DISABLE_INDEX          = NO
+DISABLE_INDEX          = YES
 
 # The GENERATE_TREEVIEW tag is used to specify whether a tree-like index
 # structure should be generated to display hierarchical information. If the tag
@@ -1468,7 +1468,7 @@ DISABLE_INDEX          = NO
 # The default value is: NO.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-GENERATE_TREEVIEW      = NO
+GENERATE_TREEVIEW      = YES
 
 # The ENUM_VALUES_PER_LINE tag can be used to set the number of enum values that
 # doxygen will group on one line in the generated HTML documentation.

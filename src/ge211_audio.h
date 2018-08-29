@@ -138,7 +138,7 @@ public:
     /// Equivalent to Mixer::attach_music(Music_track) followed by
     /// Mixer::unpause_music(Duration).
     ///
-    /// **PRECONDITIONS**:
+    /// \preconditions
     ///  - music state is `paused` or `detached`; throws
     ///    exceptions::Client_logic_error if violated.
     void play_music(Music_track);
@@ -147,7 +147,7 @@ public:
     /// Music_track to detach the current track, if any, without attaching a
     /// replacement.
     ///
-    /// **PRECONDITIONS**:
+    /// \preconditions
     ///  - music state is `paused` or `detached`; throws
     ///    exceptions::Client_logic_error if violated.
     void attach_music(Music_track);
@@ -155,21 +155,21 @@ public:
     /// Plays the currently attached music from the current saved position,
     /// fading in if requested.
     ///
-    /// **PRECONDITIONS**:
+    /// \preconditions
     ///  - music state is `paused` or `playing`; throws
     ///    exceptions::Client_logic_error if violated.
     void unpause_music(Duration fade_in = 0.0);
 
     /// Pauses the currently attached music, fading out if requested.
     ///
-    /// **PRECONDITIONS**:
+    /// \preconditions
     ///  - music state is `paused` or `playing`; throws
     ///    exceptions::Client_logic_error if violated.
     void pause_music(Duration fade_out = 0.0);
 
     /// Rewinds the music to the beginning.
     ///
-    /// **PRECONDITIONS**:
+    /// \preconditions
     ///  - music state is `paused`; throws exceptions::Client_logic_error if
     ///    violated.
     void rewind_music();
@@ -208,7 +208,7 @@ public:
     /// The volume must be in the unit interval. Returns a Sound_effect_handle,
     /// which can be used to control the sound effect while it's playing.
     ///
-    /// **PRECONDITIONS**:
+    /// \preconditions
     ///  - `available_effect_channels() > 0`, throws exceptions::Mixer_error if
     ///     violated.
     ///  - `!effect.empty()`, undefined behavior if violated.
@@ -296,7 +296,7 @@ public:
 
     /// Pauses the effect.
     ///
-    /// **PRECONDITIONS**:
+    /// \preconditions
     ///  - `!empty()`, undefined behavior if violated.
     ///  - state is either `playing` or `paused`, throws
     ///    exceptions::Client_logic_error if violated.
@@ -304,7 +304,7 @@ public:
 
     /// Unpauses the effect.
     ///
-    /// **PRECONDITIONS**:
+    /// \preconditions
     ///  - `!empty()`, undefined behavior if violated.
     ///  - state is either `playing` or `paused`, throws
     ///    exceptions::Client_logic_error if violated.
@@ -312,7 +312,7 @@ public:
 
     /// Stops the effect from playing and detaches it.
     ///
-    /// **PRECONDITIONS**:
+    /// \preconditions
     ///  - `!empty()`, undefined behavior if violated.
     ///  - state is either `playing` or `paused`, throws
     ///    exceptions::Client_logic_error if violated.
@@ -320,13 +320,13 @@ public:
 
     /// Gets the Sound_effect being played by this handle.
     ///
-    /// **PRECONDITIONS**:
+    /// \preconditions
     ///  - `!empty()`, undefined behavior if violated.
     const Sound_effect& get_effect() const;
 
     /// Gets the state of this effect.
     ///
-    /// **PRECONDITIONS**:
+    /// \preconditions
     ///  - `!empty()`, undefined behavior if violated.
     Mixer::State get_state() const;
 
