@@ -321,6 +321,11 @@ bool Text_sprite::empty() const
     return texture_.empty();
 }
 
+Text_sprite::operator bool() const
+{
+    return !empty();
+}
+
 void Multiplexed_sprite::reset()
 {
     since_.reset();
