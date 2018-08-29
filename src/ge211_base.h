@@ -107,7 +107,7 @@ public:
 
     /// The default initial window title. You can change this in a derived class
     /// by overriding the initial_window_title() const member function.
-    static constexpr const char* const default_window_title = "ge211 window";
+    static constexpr const char* default_window_title = "ge211 window";
 
     /// The default window dimensions, in pixels. You can change this in a
     /// derived class by overriding the initial_window_dimensions() const member
