@@ -113,13 +113,13 @@ Music_track Mixer::load_music(const std::string& filename)
     return Music_track(filename, std::move(file_resource));
 }
 
-void Mixer::play_music(const Music_track& music, Duration fade_in)
+void Mixer::play_music(Music_track music, Duration fade_in)
 {
-    attach_music(music);
+    attach_music(std::move(music));
     unpause_music(fade_in);
 }
 
-void Mixer::attach_music(const Music_track& music)
+void Mixer::attach_music(Music_track music)
 {
     switch (music_state_) {
         case State::paused:
@@ -133,7 +133,7 @@ void Mixer::attach_music(const Music_track& music)
             throw Client_logic_error("Mixer::attach_music: fading out");
     }
 
-    current_music_ = music;
+    current_music_ = std::move(music);
 
     if (current_music_) {
         music_state_ = State::paused;

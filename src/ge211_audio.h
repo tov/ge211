@@ -167,7 +167,7 @@ public:
     /// **PRECONDITIONS**:
     ///  - music state is `paused` or `detached`; throws
     ///    exceptions::Client_logic_error if violated.
-    void play_music(const Music_track&, Duration fade_in = 0.0);
+    void play_music(Music_track, Duration fade_in = 0.0);
 
     /// Attaches the given music track to this mixer. Give the empty
     /// Music_track to detach the current track, if any, without attaching a
@@ -176,7 +176,7 @@ public:
     /// **PRECONDITIONS**:
     ///  - music state is `paused` or `detached`; throws
     ///    exceptions::Client_logic_error if violated.
-    void attach_music(const Music_track&);
+    void attach_music(Music_track);
 
     /// Plays the currently attached music from the current saved position,
     /// fading in if requested.
