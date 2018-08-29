@@ -89,14 +89,6 @@ public:
     /// Equivalent to `!empty()`.
     operator bool() const;
 
-    /// Returns the sound effect's volume as a number from 0.0 to 1.0.
-    /// Initially this will be 1.0, but you can lower it with
-    /// Sound_effect::set_volume(double).
-    double get_volume() const;
-
-    /// Sets the sound effects volume as a number from 0.0 to 1.0.
-    void set_volume(double unit_value);
-
 private:
     // Friends
     friend Mixer;
@@ -336,6 +328,14 @@ public:
     /// **PRECONDITIONS**:
     ///  - `!empty()`, undefined behavior if violated.
     Mixer::State get_state() const;
+
+    /// Returns the playing sound effect's volume as a number from 0.0
+    /// to 1.0.
+    double get_volume() const;
+
+    /// Sets the playing sound effect's volume as a number from 0.0 to
+    /// 1.0.
+    void set_volume(double unit_value);
 
 private:
     friend Mixer;

@@ -13,6 +13,16 @@ using namespace detail;
 
 namespace audio {
 
+static inline int unit_to_volume(double unit_volume)
+{
+    return int(unit_volume * MIX_MAX_VOLUME);
+}
+
+static inline double volume_to_unit(int int_volume)
+{
+    return int_volume / double(MIX_MAX_VOLUME);
+}
+
 std::shared_ptr<Mix_Music> Music_track::load_(const std::string& filename)
 {
     File_resource file_resource(filename);
@@ -57,16 +67,6 @@ bool Sound_effect::empty() const
 Sound_effect::operator bool() const
 {
     return !empty();
-}
-
-double Sound_effect::get_volume() const
-{
-    return ptr_->volume / double(MIX_MAX_VOLUME);
-}
-
-void Sound_effect::set_volume(double unit_value)
-{
-    Mix_VolumeChunk(ptr_.get(), int(unit_value * MIX_MAX_VOLUME));
 }
 
 std::unique_ptr<Mixer> Mixer::open_mixer()
@@ -370,12 +370,12 @@ void Mixer::unregister_effect_(int channel)
 
 double Mixer::get_music_volume() const
 {
-    return Mix_VolumeMusic(-1) / double(MIX_MAX_VOLUME);
+    return volume_to_unit(Mix_VolumeMusic(-1));
 }
 
 void Mixer::set_music_volume(double unit_value)
 {
-    Mix_VolumeMusic(int(unit_value * MIX_MAX_VOLUME));
+    Mix_VolumeMusic(unit_to_volume(unit_value));
 }
 
 bool Sound_effect_handle::empty() const
@@ -393,6 +393,21 @@ Sound_effect_handle::Sound_effect_handle(Mixer& mixer,
                                          int channel)
         : ptr_(std::make_shared<Impl_>(mixer, std::move(effect), channel))
 { }
+
+double Sound_effect_handle::get_volume() const
+{
+    if (ptr_->state == Mixer::State::detached)
+        return 0;
+    else
+        return volume_to_unit(Mix_Volume(ptr_->channel, -1));
+}
+
+void Sound_effect_handle::set_volume(double unit_value)
+{
+    if (ptr_->state != Mixer::State::detached)
+        Mix_Volume(ptr_->channel, unit_to_volume(unit_value));
+}
+
 
 } // end namespace audio
 
