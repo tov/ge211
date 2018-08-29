@@ -29,9 +29,9 @@ your instructor will give you a CMake project that includes files and
 configuration for GE211. You shouldn't have to do anything to set it
 up. Otherwise, read on.
 
-GE211 is configured and built using CMake. The easiest way to add this
-whole respository to your project is to add it as a subdirectory, and
-then include it in your `CMakeLists.txt` via the `add_subdirectory`
+GE211 is configured and built using CMake. The easiest way to add the
+library to your project is to add the whole repository as a subdirectory,
+and then include it in your `CMakeLists.txt` via the `add_subdirectory`
 command:
 
 ```CMake
