@@ -45,10 +45,9 @@ public:
     virtual ~Sprite() {}
 
 private:
-    friend class detail::Engine;
-
-    friend struct detail::Placed_sprite;
-    friend class sprites::Multiplexed_sprite;
+    friend detail::Engine;
+    friend detail::Placed_sprite;
+    friend Multiplexed_sprite;
 
     virtual void render(detail::Renderer&,
                         Position,
