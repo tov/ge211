@@ -299,12 +299,11 @@ void Fireworks::on_start()
 {
     auto mixer = get_mixer();
     if (mixer) {
-        mixer->set_music_volume(0.25);
-
         try {
+            mixer->set_music_volume(0.25);
             mixer->play_music(mixer->load_music("music.dat"));
         } catch (const Host_error&) {
-            // Only load music if it exists.
+            // Fail to load music silently.
         }
 
         view.explosion_sound = mixer->load_effect("beep.abc");
