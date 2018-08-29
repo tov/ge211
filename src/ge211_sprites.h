@@ -160,7 +160,7 @@ class Image_sprite : public detail::Texture_sprite
 public:
     /// Constructs an image sprite, given the filename of the
     /// image to display. The image must be saved in the project's
-    /// `resources/` directory. Many image formats are supported,
+    /// `Resources/` directory. Many image formats are supported,
     /// including JPEG, PNG, GIF, BMP, etc.
     explicit Image_sprite(std::string const& filename);
 

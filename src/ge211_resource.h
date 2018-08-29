@@ -31,7 +31,7 @@ private:
 
 /// Represents a font that can be used to render a sprites::Text_sprite.
 /// To create a font, you must specify the TrueType font file (`.ttf`) to
-/// load, and that file must be in the `resources/` directory of your
+/// load, and that file must be in the `Resources/` directory of your
 /// project. You can create multiple Font instances for the same font
 /// file at different sizes.
 ///
