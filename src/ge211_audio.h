@@ -41,7 +41,7 @@ public:
     /// exceptions::Mixer_error if the file format cannot be understood.
     Music_track(const std::string& filename, const Mixer&);
 
-    /// Constructs the default, empty music track.
+    /// Default-constructs the empty music track.
     Music_track() { }
 
     /// Recognizes the empty music track.
@@ -79,7 +79,7 @@ public:
     /// exceptions::Mixer_error if the file format cannot be understood.
     Sound_effect(const std::string& filename, const Mixer&);
 
-    /// Constructs the default, empty sound effect track.
+    /// Default-constructs the empty sound effect track.
     Sound_effect() { }
 
     /// Recognizes the empty sound effect track.
@@ -286,7 +286,7 @@ private:
 class Sound_effect_handle
 {
 public:
-    /// Constructs the default, empty sound effect handle. The empty handle
+    /// Default-constructs the empty sound effect handle. The empty handle
     /// is not associated with a channel, and it is an error to attempt to
     /// perform operations on it.
     ///
