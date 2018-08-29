@@ -287,6 +287,9 @@ void Fireworks::on_frame(double dt)
             }
         }
     }
+
+    if (mixer && mixer->get_music_state() == Mixer::State::paused)
+        mixer->unpause_music();
 }
 
 void Fireworks::on_mouse_up(Mouse_button, Position position)
