@@ -270,12 +270,12 @@ void Mixer::poll_channels_()
 }
 
 Sound_effect_handle
-Mixer::play_effect(const Sound_effect& effect, Duration fade_in)
+Mixer::play_effect(Sound_effect effect, Duration fade_in)
 {
     int channel = find_empty_channel_();
     Mix_FadeInChannel(channel, effect.ptr_.get(), 0,
                       int(fade_in.milliseconds()));
-    return register_effect_(channel, effect);
+    return register_effect_(channel, std::move(effect));
 }
 
 void Sound_effect_handle::unpause()
@@ -369,10 +369,10 @@ int Mixer::available_effect_channels() const
 }
 
 Sound_effect_handle
-Mixer::register_effect_(int channel, const Sound_effect& effect)
+Mixer::register_effect_(int channel, Sound_effect effect)
 {
     assert(!channels_[channel]);
-    channels_[channel] = Sound_effect_handle(*this, effect, channel);
+    channels_[channel] = Sound_effect_handle(*this, std::move(effect), channel);
     --available_effect_channels_;
     return channels_[channel];
 }
@@ -406,9 +406,9 @@ Sound_effect_handle::operator bool() const
 }
 
 Sound_effect_handle::Sound_effect_handle(Mixer& mixer,
-                                         const Sound_effect& effect,
+                                         Sound_effect effect,
                                          int channel)
-        : ptr_(std::make_shared<Impl_>(mixer, effect, channel))
+        : ptr_(std::make_shared<Impl_>(mixer, std::move(effect), channel))
 { }
 
 } // end namespace audio

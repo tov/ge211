@@ -241,7 +241,7 @@ public:
     ///     violated.
     ///  - `!effect.empty()`, undefined behavior if violated.
     Sound_effect_handle
-    play_effect(const Sound_effect& effect, Duration fade_in = 0.0);
+    play_effect(Sound_effect effect, Duration fade_in = 0.0);
 
     /// Pauses all currently-playing effects.
     void pause_all_effects();
@@ -289,7 +289,7 @@ private:
 
     /// Registers an effect with a channel.
     Sound_effect_handle
-    register_effect_(int channel, const Sound_effect& effect);
+    register_effect_(int channel, Sound_effect effect);
     /// Unregisters the effect associated with a channel.
     void unregister_effect_(int channel);
 
@@ -364,9 +364,12 @@ private:
 
     struct Impl_
     {
-        Impl_(Mixer& m, const Sound_effect& e, int c)
-                : mixer(m), effect(e), channel(c),
-                  state(Mixer::State::playing) {}
+        Impl_(Mixer& m, Sound_effect e, int c)
+                : mixer(m)
+                , effect(std::move(e))
+                , channel(c)
+                , state(Mixer::State::playing)
+        { }
 
         Mixer& mixer;
         Sound_effect effect;
@@ -374,7 +377,7 @@ private:
         Mixer::State state;
     };
 
-    Sound_effect_handle(Mixer&, const Sound_effect&, int channel);
+    Sound_effect_handle(Mixer&, Sound_effect, int channel);
 
     std::shared_ptr<Impl_> ptr_;
 };
