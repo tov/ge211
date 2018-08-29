@@ -131,7 +131,7 @@ private:
 /// example, it is an error to attach a Music_track to the mixer when music is
 /// already playing or fading out.
 ///
-/// For playing sound effects, multiple Sound_effect@s can be attached to the
+/// For playing sound effects, multiple Sound_effect%s can be attached to the
 /// mixer simultaneously. A Sound_effect is attached and played using the
 /// Mixer::play_effect(Sound_effect, double) member function, which also allows
 /// specifying the volume of the sound effect. If nothing further is done, the

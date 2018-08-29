@@ -49,8 +49,10 @@ public:
     // An empty texture; don't render this or even ask for its dimensions.
     Texture() noexcept;
 
-    // Takes ownership of the `SDL_Surface*` and will delete it:
-    // **Precondition**: the surface is not zero-sized.
+    // Takes ownership of the `SDL_Surface*` and will delete it.
+    //
+    // \preconditions
+    //  - The surface is not zero-sized.
     explicit Texture(SDL_Surface*);
     explicit Texture(delete_ptr<SDL_Surface>);
 

@@ -1,10 +1,13 @@
-TAG_FILE = cppreference.xml
+TAG_FILE = doxy/cppreference.xml
 TAG_URL = http://upload.cppreference.com/mwiki/images/f/f8/cppreference-doxygen-web.tag.xml
 
-doc/: Doxyfile $(TAG_FILE) FRONTMATTER.md src/*
-	doxygen
+DOXY = doxy/DoxygenLayout.xml doxy/FRONTMATTER.md $(TAGFILE)
+SRCS = $(wildcard src/*)
 
-FRONTMATTER.md: README.md
+doc/: doxy/Doxyfile $(DOXY) $(SRCS)
+	doxygen $<
+
+doxy/FRONTMATTER.md: README.md
 	sed -E '/^\[.*\]: *$$/,/^ *$$/d;s/\[|\]//g' < $< > $@
 
 upload-doc:

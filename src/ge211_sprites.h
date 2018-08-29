@@ -91,7 +91,8 @@ private:
 class Render_sprite : public Texture_sprite
 {
 protected:
-    /// **Precondition:** Both dimensions must be positive.
+    /// \preconditions
+    ///  - Both dimensions must be positive.
     explicit Render_sprite(Dimensions);
 
     /// Fills the whole surface with the given color.
@@ -128,7 +129,8 @@ public:
     /// Constructs a rectangle sprite from required Dimensions
     /// and an optional Color, which defaults to white.
     ///
-    /// **Precondition**: both dimensions must be positive
+    /// \preconditions
+    ///  - both dimensions must be positive
     explicit Rectangle_sprite(Dimensions, Color = Color::white());
 
     /// Changes the color of this rectangle sprite.
@@ -144,7 +146,8 @@ public:
     /// the reference point is the upper-left corner of the bounding
     /// box of the sprite, not the center of the circle.
     ///
-    /// **Precondition**: radius must be positive
+    /// \preconditions
+    ///  - radius must be positive
     explicit Circle_sprite(int radius, Color = Color::white());
 
     /// Changes the color of this circle sprite.
