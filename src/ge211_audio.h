@@ -25,11 +25,6 @@ namespace audio {
 /// A music track may be *empty* or *non-empty*; only non-empty tracks can
 /// actually be played.
 ///
-/// The only public constructor is the default constructor, which constructs
-/// an *empty* Music_track. To load an audio file, one should call the
-/// Mixer::load_music(const std::string&) member function of the Mixer, which
-/// returns a Music_track.
-///
 /// Note that Music_track has few public member functions. However, a
 /// music track can be passed to these Mixer member functions to play it:
 ///
@@ -40,10 +35,13 @@ namespace audio {
 class Music_track
 {
 public:
-    /// Constructs the default, empty music track.
+    /// Loads a new music track from a resource file.
     ///
-    /// To construct a non-empty Music_track, see
-    /// Mixer::load_music(const std::string&).
+    /// Throws exceptions::File_error if the file cannot be opened, and
+    /// exceptions::Mixer_error if the file format cannot be understood.
+    Music_track(const std::string& filename);
+
+    /// Constructs the default, empty music track.
     Music_track() { }
 
     /// Recognizes the empty music track.
@@ -57,12 +55,8 @@ private:
     // Friends
     friend Mixer;
 
-    // Private constructor
-    Music_track(const std::string& filename, detail::File_resource&&);
-
-    // Private static factory
-    static Mix_Music* load_(const std::string& filename,
-                            detail::File_resource&&);
+    // Private helper.
+    static std::shared_ptr<Mix_Music> load_(const std::string& filename);
 
     std::shared_ptr<Mix_Music> ptr_;
 };
@@ -72,11 +66,6 @@ private:
 /// A sound effect track may be *empty* or *non-empty*; only non-empty sound
 /// effects can actually be played.
 ///
-/// The only public constructor is the default constructor, which constructs
-/// an *empty* Sound_effect. To load an audio file, one should call the
-/// Mixer::load_effect(const std::string&) member function of the Mixer, which
-/// returns a Sound_effect.
-///
 /// Note that Sound_effect has few public member functions. However, an
 /// effect track can be passed to the Mixer member function
 /// Mixer::play_effect(Sound_effect, Duration)
@@ -84,10 +73,13 @@ private:
 class Sound_effect
 {
 public:
-    /// Constructs the default, empty sound effect track.
+    /// Loads a new sound effect track from a resource file.
     ///
-    /// To construct a non-empty Sound_effect, see
-    /// Mixer::load_effect(const std::string&).
+    /// Throws exceptions::File_error if the file cannot be opened, and
+    /// exceptions::Mixer_error if the file format cannot be understood.
+    Sound_effect(const std::string& filename);
+
+    /// Constructs the default, empty sound effect track.
     Sound_effect() { }
 
     /// Recognizes the empty sound effect track.
@@ -109,12 +101,8 @@ private:
     // Friends
     friend Mixer;
 
-    // Private constructor
-    Sound_effect(const std::string& filename, detail::File_resource&&);
-
     // Private static factory
-    static Mix_Chunk* load_(const std::string& filename,
-                            detail::File_resource&&);
+    static std::shared_ptr<Mix_Chunk> load_(const std::string& filename);
 
     std::shared_ptr<Mix_Chunk> ptr_;
 };
@@ -153,12 +141,6 @@ public:
 
     /// \name Playing music
     ///@{
-
-    /// Loads a new music track from a resource file.
-    ///
-    /// Throws exceptions::File_error if the file cannot be opened, and
-    /// exceptions::Mixer_error if the file format cannot be understood.
-    Music_track load_music(const std::string& filename);
 
     /// Attaches the given music track to this mixer and starts it playing.
     /// Equivalent to Mixer::attach_music(Music_track) followed by
@@ -224,9 +206,6 @@ public:
 
     /// \name Playing sound effects
     ///@{
-
-    /// Loads a new sound effect track from a resource file.
-    Sound_effect load_effect(const std::string& filename);
 
     /// How many effect channels are currently unused? If this is positive,
     /// then we can play an additional sound effect with

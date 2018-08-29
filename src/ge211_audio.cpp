@@ -13,19 +13,17 @@ using namespace detail;
 
 namespace audio {
 
-Mix_Music* Music_track::load_(const std::string& filename,
-                              File_resource&& file_resource)
+std::shared_ptr<Mix_Music> Music_track::load_(const std::string& filename)
 {
+    File_resource file_resource(filename);
     Mix_Music* raw = Mix_LoadMUS_RW(std::move(file_resource).release(), 1);
-    if (raw) return raw;
+    if (raw) return {raw, &Mix_FreeMusic};
 
     throw Mixer_error::could_not_load(filename);
 }
 
-Music_track::Music_track(const std::string& filename,
-                         File_resource&& file_resource)
-        : ptr_{load_(filename, std::move(file_resource)),
-               &Mix_FreeMusic}
+Music_track::Music_track(const std::string& filename)
+        : ptr_{load_(filename)}
 { }
 
 bool Music_track::empty() const
@@ -38,19 +36,17 @@ Music_track::operator bool() const
     return !empty();
 }
 
-Mix_Chunk* Sound_effect::load_(const std::string& filename,
-                               detail::File_resource&& file_resource)
+std::shared_ptr<Mix_Chunk> Sound_effect::load_(const std::string& filename)
 {
+    File_resource file_resource(filename);
     Mix_Chunk* raw = Mix_LoadWAV_RW(std::move(file_resource).release(), 1);
-    if (raw) return raw;
+    if (raw) return {raw, &Mix_FreeChunk};
 
     throw Mixer_error::could_not_load(filename);
 }
 
-Sound_effect::Sound_effect(const std::string& filename,
-                           detail::File_resource&& file_resource)
-        : ptr_{load_(filename, std::move(file_resource)),
-               &Mix_FreeChunk}
+Sound_effect::Sound_effect(const std::string& filename)
+        : ptr_{load_(filename)}
 { }
 
 bool Sound_effect::empty() const
@@ -105,12 +101,6 @@ Mixer::Mixer()
 Mixer::~Mixer()
 {
     Mix_CloseAudio();
-}
-
-Music_track Mixer::load_music(const std::string& filename)
-{
-    File_resource file_resource{filename};
-    return Music_track(filename, std::move(file_resource));
 }
 
 void Mixer::play_music(Music_track music, Duration fade_in)
@@ -206,12 +196,6 @@ void Mixer::rewind_music()
             throw Client_logic_error(
                     "Mixer::rewind_music: must be paused");
     }
-}
-
-Sound_effect Mixer::load_effect(const std::string& filename)
-{
-    File_resource file_resource{filename};
-    return Sound_effect(filename, std::move(file_resource));
 }
 
 const Sound_effect& Sound_effect_handle::get_effect() const
