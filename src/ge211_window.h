@@ -8,7 +8,7 @@
 
 namespace ge211 {
 
-/// Provides to the game window and its properties.
+/// Provides access to the game window and its properties.
 class Window
 {
 public:
