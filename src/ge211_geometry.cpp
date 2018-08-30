@@ -131,7 +131,7 @@ Transform Transform::inverse() const noexcept
     return result;
 }
 
-bool operator==(const Transform& t1, const Transform t2) noexcept
+bool operator==(const Transform& t1, const Transform& t2) noexcept
 {
     return t1.get_rotation() == t2.get_rotation() &&
             t1.get_flip_h() == t2.get_flip_h() &&
@@ -140,7 +140,7 @@ bool operator==(const Transform& t1, const Transform t2) noexcept
             t1.get_scale_y() == t2.get_scale_y();
 }
 
-bool operator!=(const Transform& t1, const Transform t2) noexcept
+bool operator!=(const Transform& t1, const Transform& t2) noexcept
 {
     return !(t1 == t2);
 }
