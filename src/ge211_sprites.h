@@ -325,7 +325,7 @@ class Multiplexed_sprite : public Sprite
 protected:
     /// Override this to specify what sprite to render, based on the
     /// age of this sprite. This can be used to implement animation.
-    virtual const Sprite& select(Duration age) const = 0;
+    virtual const Sprite& select_(Duration age) const = 0;
 
     /// Resets the age of the sprite to 0.
     void reset();

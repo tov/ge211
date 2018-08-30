@@ -330,7 +330,7 @@ void Multiplexed_sprite::render(detail::Renderer& renderer,
                                 Position position,
                                 Transform const& transform) const
 {
-    const Sprite& selection = select(since_.elapsed_time());
+    const Sprite& selection = select_(since_.elapsed_time());
     selection.render(renderer, position, transform);
 }
 
