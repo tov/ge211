@@ -236,28 +236,28 @@ struct Basic_position
 
     /// Constructs the position that is above this position by the given
     /// amount.
-    Basic_position up_by(int dy) const
+    Basic_position up_by(Coordinate dy) const
     {
         return {x, y - dy};
     }
 
     /// Constructs the position that is below this position by the given
     /// amount.
-    Basic_position down_by(int dy) const
+    Basic_position down_by(Coordinate dy) const
     {
         return {x, y + dy};
     }
 
     /// Constructs the position that is to the left of this position by
     /// the given amount.
-    Basic_position left_by(int dx) const
+    Basic_position left_by(Coordinate dx) const
     {
         return {x - dx, y};
     }
 
     /// Constructs the position that is to the right of this position by
     /// the given amount.
-    Basic_position right_by(int dx) const
+    Basic_position right_by(Coordinate dx) const
     {
         return {x + dx, y};
     }
