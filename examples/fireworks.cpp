@@ -29,6 +29,12 @@ int const mortar_radius = 5;
 Color const mortar_color{255, 255, 127, 80};
 int const star_radius = 2;
 
+int const cursor_radius = 30;
+Color const cursor_color{160, 0, 0};
+Duration const cursor_period{1};
+double const cursor_amplitude{0.2};
+int const cursor_samples{int(20 * cursor_period.seconds())};
+
 // MODEL DATA DEFINITIONS
 
 struct Projectile
@@ -74,12 +80,32 @@ struct Model
 
 // VIEW DATA DEFINITIONS
 
+struct Pulsating_circle_sprite : public Multiplexed_sprite
+{
+public:
+    Pulsating_circle_sprite(int radius, Color color,
+                            Duration period, double amplitude,
+                            int samples);
+
+    Dimensions dimensions() const override;
+
+protected:
+    const Sprite& select_(Duration age) const override;
+
+private:
+    Duration frame_length_;
+    std::vector<Circle_sprite> frames_;
+};
+
 struct View
 {
     View();
 
     Font sans{"sans.ttf", 30};
     Text_sprite fps;
+    Pulsating_circle_sprite cursor{cursor_radius, cursor_color,
+                                   cursor_period, cursor_amplitude,
+                                   cursor_samples};
     Circle_sprite mortar{mortar_radius, mortar_color};
     vector<Circle_sprite> stars;
 };
@@ -98,8 +124,11 @@ struct Fireworks : Abstract_game
 
     // Controller
     bool is_paused = false;
+    Position last_mouse{0, 0};
+
     void on_key(Key key) override;
     void on_mouse_up(Mouse_button button, Position position) override;
+    void on_mouse_move(Position position) override;
     void on_frame(double dt) override;
 };
 
@@ -202,6 +231,31 @@ void Model::add_random(Random& rng, Projectile::Position position0)
 
 // FUNCTION DEFINITIONS FOR VIEW
 
+Pulsating_circle_sprite::Pulsating_circle_sprite(
+        int radius, Color base_color,
+        Duration period, double amplitude,
+        int samples)
+        : frame_length_(period / samples)
+{
+    for (int i = 0; i < samples; ++i) {
+        double theta = 2 * M_PI * i / samples;
+        double adjustment = amplitude * std::sin(theta);
+        Color color = base_color.lighten(adjustment);
+        frames_.emplace_back(radius, color);
+    }
+}
+
+Dimensions Pulsating_circle_sprite::dimensions() const
+{
+    return frames_[0].dimensions();
+}
+
+const Sprite& Pulsating_circle_sprite::select_(Duration age) const
+{
+    double frame_no = age.seconds() / frame_length_.seconds();
+    return frames_[int(frame_no) % frames_.size()];
+}
+
 View::View()
 {
     double hue = 0.0;
@@ -244,6 +298,8 @@ void Fireworks::draw(Sprite_set& sprites)
                 break;
         }
     }
+
+    sprites.add_sprite(view.cursor, last_mouse);
 }
 
 // FUNCTION DEFINITIONS FOR CONTROLLER
@@ -275,3 +331,7 @@ void Fireworks::on_mouse_up(Mouse_button, Position position)
         model.add_random(get_random(), position.into<double>());
 }
 
+void Fireworks::on_mouse_move(Position position)
+{
+    last_mouse = position;
+}
