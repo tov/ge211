@@ -12,7 +12,7 @@ static auto construct_engine()
     auto time = static_cast<random_device::result_type>(
             chrono::high_resolution_clock()
                     .now().time_since_epoch().count());
-    return mt19937_64(rd() | time);
+    return mt19937_64(rd() ^ time);
 }
 
 Random::Random()
