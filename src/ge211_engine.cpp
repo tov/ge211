@@ -65,6 +65,8 @@ void Engine::run()
                     game_.mark_frame_();
                     debug() << "Software vsync slept for "
                             << duration.seconds() << " s";
+                } else {
+                    game_.mark_frame_();
                 }
             } else {
                 game_.mark_frame_();
