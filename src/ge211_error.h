@@ -167,8 +167,9 @@ class Log_message
 public:
     using Level = Log_level;
 
-    Log_message(Level level = Level::debug);
-    Log_message(std::string reason, Level level = Level::debug) noexcept;
+    explicit Log_message(Level level = Level::debug);
+    explicit Log_message(std::string reason,
+                         Level level = Level::debug) noexcept;
 
     template <class T>
     Log_message& operator<<(const T& value)
