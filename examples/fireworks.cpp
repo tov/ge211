@@ -279,7 +279,13 @@ void Fireworks::on_frame(double dt)
 {
     Mixer* mixer = get_mixer();
 
-    if (!is_paused) {
+    if (is_paused) {
+        if (mixer && mixer->get_music_state() == Mixer::State::playing)
+            mixer->pause_music();
+    } else {
+        if (mixer && mixer->get_music_state() == Mixer::State::paused)
+            mixer->resume_music();
+
         bool explosion = model.update(dt);
         if (explosion && mixer) {
             if (mixer->available_effect_channels() > 0) {
@@ -288,8 +294,6 @@ void Fireworks::on_frame(double dt)
         }
     }
 
-    if (mixer && mixer->get_music_state() == Mixer::State::paused)
-        mixer->unpause_music();
 }
 
 void Fireworks::on_mouse_up(Mouse_button, Position position)
