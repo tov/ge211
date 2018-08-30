@@ -336,7 +336,7 @@ public:
     }
 
     /// Unpauses the timer. If the timer is already running, has no effect.
-    void unpause()
+    void resume()
     {
         if (is_paused_) {
             fake_start_time_ = now_() - elapsed_time_;

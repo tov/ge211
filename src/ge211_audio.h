@@ -184,7 +184,7 @@ public:
     /// \preconditions
     ///  - `get_music_state()` is `paused` or `playing`; throws
     ///    exceptions::Client_logic_error if violated.
-    void unpause_music(Duration fade_in = 0.0);
+    void resume_music(Duration fade_in = 0.0);
 
     /// Pauses the currently attached music, fading out if requested.
     ///
@@ -262,7 +262,7 @@ public:
     void pause_all_effects();
 
     /// Unpauses all currently-paused effects.
-    void unpause_all_effects();
+    void resume_all_effects();
 
     ///@}
 
@@ -351,7 +351,7 @@ public:
     ///  - `!empty()`, undefined behavior if violated.
     ///  - `get_state()` is either `playing` or `paused`, throws
     ///    exceptions::Client_logic_error if violated.
-    void unpause();
+    void resume();
 
     /// Stops the effect from playing and detaches it.
     ///

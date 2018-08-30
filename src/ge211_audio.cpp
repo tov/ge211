@@ -105,7 +105,7 @@ Mixer::~Mixer()
 void Mixer::play_music(Music_track music)
 {
     attach_music(std::move(music));
-    unpause_music();
+    resume_music();
 }
 
 void Mixer::attach_music(Music_track music)
@@ -131,11 +131,11 @@ void Mixer::attach_music(Music_track music)
     }
 }
 
-void Mixer::unpause_music(Duration fade_in)
+void Mixer::resume_music(Duration fade_in)
 {
     switch (music_state_) {
         case State::detached:
-            throw Client_logic_error("Mixer::unpause_music: no music attached");
+            throw Client_logic_error("Mixer::resume_music: no music attached");
 
         case State::paused:
             Mix_RewindMusic();
@@ -143,12 +143,12 @@ void Mixer::unpause_music(Duration fade_in)
                                0,
                                int(fade_in.milliseconds()),
                                music_position_.elapsed_time().seconds());
-            music_position_.unpause();
+            music_position_.resume();
             music_state_ = State::playing;
             break;
 
         case State::fading_out:
-            throw Client_logic_error("Mixer::unpause_music: fading out");
+            throw Client_logic_error("Mixer::resume_music: fading out");
 
         case State::playing:
             // idempotent
@@ -261,11 +261,11 @@ Mixer::play_effect(Sound_effect effect, double volume)
     return register_effect_(channel, std::move(effect));
 }
 
-void Sound_effect_handle::unpause()
+void Sound_effect_handle::resume()
 {
     switch (ptr_->state) {
         case Mixer::State::detached:
-            throw Client_logic_error("Sound_effect_handle::unpause: detached");
+            throw Client_logic_error("Sound_effect_handle::resume: detached");
 
         case Mixer::State::paused:
             ptr_->state = Mixer::State::playing;
@@ -277,7 +277,7 @@ void Sound_effect_handle::unpause()
             break;
 
         case Mixer::State::fading_out:
-            throw Client_logic_error("Sound_effect_handle::unpause: fading out");
+            throw Client_logic_error("Sound_effect_handle::resume: fading out");
     }
 }
 
@@ -332,7 +332,7 @@ void Mixer::pause_all_effects()
     }
 }
 
-void Mixer::unpause_all_effects()
+void Mixer::resume_all_effects()
 {
     Mix_Resume(-1);
 
