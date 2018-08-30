@@ -3,6 +3,7 @@
 #include "ge211_color.h"
 #include "ge211_forward.h"
 #include "ge211_geometry.h"
+#include "ge211_time.h"
 #include "ge211_render.h"
 #include "ge211_resource.h"
 
@@ -33,6 +34,12 @@ class Sprite
 {
 public:
     /// Returns the current dimensions of this Sprite.
+    ///
+    /// When deriving from Sprite to implement your own kind of sprite
+    /// (or when deriving from Multiplexed_sprite), you need to make sure
+    /// that this returns the *maximum* dimensions that the sprite could
+    /// render at. For animated sprites, it's usually best if all the
+    /// frames have the same dimensions anyway.
     virtual Dimensions dimensions() const = 0;
 
     virtual ~Sprite() {}
@@ -41,6 +48,7 @@ private:
     friend class detail::Engine;
 
     friend struct detail::Placed_sprite;
+    friend class sprites::Multiplexed_sprite;
 
     virtual void render(detail::Renderer&,
                         Position,
@@ -98,7 +106,6 @@ protected:
     /// Sets one pixel to the given color.
     /// This should only be called from the derived class's constructor.
     void set_pixel(Position, Color);
-
 
 private:
     Texture texture_;
@@ -309,6 +316,25 @@ private:
     Color color_;
     bool antialias_;
     uint32_t word_wrap_;
+};
+
+/// A Sprite that allows switching between other sprites based on the
+/// time at rendering.
+class Multiplexed_sprite : public Sprite
+{
+protected:
+    /// Override this to specify what sprite to render, based on the
+    /// age of this sprite. This can be used to implement animation.
+    virtual const Sprite& select(Duration age) const = 0;
+
+    /// Resets the age of the sprite to 0.
+    void reset();
+
+private:
+    void render(detail::Renderer& renderer, Position position,
+                Transform const& transform) const override;
+
+    Timer since_;
 };
 
 } // end namespace sprites

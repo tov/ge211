@@ -321,6 +321,19 @@ bool Text_sprite::empty() const
     return texture_.empty();
 }
 
+void Multiplexed_sprite::reset()
+{
+    since_.reset();
+}
+
+void Multiplexed_sprite::render(detail::Renderer& renderer,
+                                Position position,
+                                Transform const& transform) const
+{
+    const Sprite& selection = select(since_.elapsed_time());
+    selection.render(renderer, position, transform);
+}
+
 } // end namespace sprites
 
 }

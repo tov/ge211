@@ -73,6 +73,7 @@ class Sprite;
 
 class Circle_sprite;
 class Image_sprite;
+class Multiplexed_sprite;
 class Rectangle_sprite;
 class Text_sprite;
 
