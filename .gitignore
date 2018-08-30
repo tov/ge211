@@ -1,3 +1,3 @@
 doc/
-doxy/cppreference.xml
-doxy/FRONTMATTER.md
+doxygen/cppreference.xml
+doxygen/FRONTMATTER.md

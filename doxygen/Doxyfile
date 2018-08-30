@@ -704,7 +704,7 @@ FILE_VERSION_FILTER    =
 # DoxygenLayout.xml, doxygen will parse it automatically even if the LAYOUT_FILE
 # tag is left empty.
 
-LAYOUT_FILE            = doxy/DoxygenLayout.xml
+LAYOUT_FILE            = doxygen/DoxygenLayout.xml
 
 # The CITE_BIB_FILES tag can be used to specify one or more bib files containing
 # the reference definitions. This must be a list of .bib files. The .bib
@@ -791,7 +791,7 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = doxy/FRONTMATTER.md src/
+INPUT                  = doxygen/FRONTMATTER.md src/
 
 # This tag can be used to specify the code encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -983,7 +983,7 @@ FILTER_SOURCE_PATTERNS =
 # (index.html). This can be useful if you have a project on for instance GitHub
 # and want to reuse the introduction page also for the doxygen output.
 
-USE_MDFILE_AS_MAINPAGE = doxy/FRONTMATTER.md
+USE_MDFILE_AS_MAINPAGE = doxygen/FRONTMATTER.md
 
 #---------------------------------------------------------------------------
 # Configuration options related to source browsing
@@ -2127,7 +2127,7 @@ SKIP_FUNCTION_MACROS   = YES
 # the path). If a tag file is not located in the directory in which doxygen is
 # run, you must also specify the path to the tagfile here.
 
-TAGFILES               = "doxy/cppreference.xml=http://en.cppreference.com/w/"
+TAGFILES               = "doxygen/cppreference.xml=http://en.cppreference.com/w/"
 
 # When a file name is specified after GENERATE_TAGFILE, doxygen will create a
 # tag file that is based on the input files it reads. See section "Linking to
