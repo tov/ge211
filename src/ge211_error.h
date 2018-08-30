@@ -155,7 +155,7 @@ public:
     static Logger& instance() noexcept;
 
 private:
-    Logger() noexcept {}
+    Logger() noexcept = default;
 
     Level level_ = Level::warn;
 };
