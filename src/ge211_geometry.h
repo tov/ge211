@@ -470,7 +470,7 @@ struct Basic_rectangle
     static Basic_rectangle from_center(Position center, Dimensions dims)
         noexcept(has_nothrow_arithmetic<Coordinate>())
     {
-        return from_top_left(center.up_left_by(dims / 2), dims);
+        return from_top_left(center.up_left_by(dims / Coordinate(2)), dims);
     }
 
     /// The dimensions of the rectangle. Equivalent to
@@ -514,7 +514,7 @@ struct Basic_rectangle
         noexcept(has_nothrow_arithmetic<Coordinate>() &&
                  has_nothrow_division<Coordinate, int>())
     {
-        return top_left().down_right_by(dimensions() / 2);
+        return top_left().down_right_by(dimensions() / Coordinate(2));
     }
 
 private:
