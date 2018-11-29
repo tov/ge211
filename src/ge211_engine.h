@@ -11,7 +11,7 @@ namespace detail {
 class Engine
 {
 public:
-    Engine(Abstract_game&);
+    explicit Engine(Abstract_game&);
 
     void run();
     void prepare(const sprites::Sprite&) const;

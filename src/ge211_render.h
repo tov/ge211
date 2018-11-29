@@ -14,7 +14,7 @@ namespace detail {
 class Renderer
 {
 public:
-    Renderer(const Window&);
+    explicit Renderer(const Window&);
 
     bool is_vsync() const noexcept;
 
@@ -51,8 +51,8 @@ public:
 
     // Takes ownership of the `SDL_Surface*` and will delete it:
     // **Precondition**: the surface is not zero-sized.
-    Texture(SDL_Surface*);
-    Texture(delete_ptr<SDL_Surface>);
+    explicit Texture(SDL_Surface*);
+    explicit Texture(delete_ptr<SDL_Surface>);
 
     Dimensions dimensions() const noexcept;
 

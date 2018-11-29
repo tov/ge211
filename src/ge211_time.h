@@ -34,7 +34,7 @@ public:
     Duration() : duration_{} {}
 
     /// Constructs the duration of the given number of seconds.
-    Duration(double seconds)
+    explicit Duration(double seconds)
             : Duration{std::chrono::duration<double>{seconds}} {}
 
     /// Gets this duration in seconds.
@@ -285,7 +285,7 @@ class Pausable_timer
 public:
     /// Constructs a new pausable timer. The timer is started running by
     /// default, but can be started paused by passing `true`.
-    Pausable_timer(bool start_paused = false)
+    explicit Pausable_timer(bool start_paused = false)
     {
         is_paused_ = start_paused;
 

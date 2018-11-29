@@ -93,7 +93,7 @@ class Render_sprite : public Texture_sprite
 {
 protected:
     /// **Precondition:** Both dimensions must be positive.
-    Render_sprite(Dimensions);
+    explicit Render_sprite(Dimensions);
 
     /// Fills the whole surface with the given color.
     /// This should only be called from the derived class's constructor.
@@ -203,7 +203,7 @@ public:
     void reconfigure(Builder const&);
 
 private:
-    Text_sprite(Builder const&);
+    explicit Text_sprite(Builder const&);
 
     void assert_initialized_() const;
 
@@ -234,7 +234,7 @@ public:
     /// @{
     
     /// Constructs a new Text_sprite::Builder with the given Font.
-    Builder(Font const&);
+    explicit Builder(Font const&);
 
     /// Builds the configured Text_sprite.
     Text_sprite build() const;

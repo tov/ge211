@@ -29,7 +29,7 @@ public:
     const char* what() const noexcept override;
 
 private:
-    Exception_base(const std::string& message);
+    explicit Exception_base(const std::string& message);
 
     /// Derived classes
     friend class Client_logic_error;
@@ -47,7 +47,7 @@ class Client_logic_error : public Exception_base
 {
 public:
     /// Constructs the error, given the provided error message.
-    Client_logic_error(const std::string& message);
+    explicit Client_logic_error(const std::string& message);
 };
 
 /// Indicates that an error was encountered by the game engine or
@@ -57,7 +57,7 @@ public:
 /// classes indicate more precisely the nature of the condition.
 class Environment_error : public Exception_base
 {
-    Environment_error(const std::string& message);
+    explicit Environment_error(const std::string& message);
 
     /// Throwers
     friend class ge211::Window;
@@ -72,7 +72,7 @@ class Environment_error : public Exception_base
 /// in %ge211. Please report it if you see one of these.
 class Ge211_logic_error : public Environment_error
 {
-    Ge211_logic_error(const std::string& message);
+    explicit Ge211_logic_error(const std::string& message);
 
     /// Throwers
     friend class detail::Render_sprite;
@@ -85,7 +85,7 @@ class Ge211_logic_error : public Environment_error
 /// by SDL2.
 class Host_error : public Environment_error
 {
-    Host_error(const std::string& extra_message = "");
+    explicit Host_error(const std::string& extra_message = "");
 
     /// Derived classes
     friend class File_error;
@@ -103,7 +103,7 @@ class Host_error : public Environment_error
 /// Indicates an error opening a file.
 class File_error final : public Host_error
 {
-    File_error(const std::string& message);
+    explicit File_error(const std::string& message);
     static File_error could_not_open(const std::string& filename);
 
     /// Thrower
@@ -113,7 +113,7 @@ class File_error final : public Host_error
 /// Indicates an error loading a font front an already-open file.
 class Font_error final : public Host_error
 {
-    Font_error(const std::string& message);
+    explicit Font_error(const std::string& message);
     static Font_error could_not_load(const std::string& filename);
 
     /// Thrower
@@ -123,7 +123,7 @@ class Font_error final : public Host_error
 /// Indicates an error loading an image from an already-open file.
 class Image_error final : public Host_error
 {
-    Image_error(const std::string& message);
+    explicit Image_error(const std::string& message);
     static Image_error could_not_load(const std::string& filename);
 
     /// Thrower

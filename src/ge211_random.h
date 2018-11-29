@@ -44,7 +44,7 @@ template <class T>
 struct Up_to<T, std::enable_if_t<std::is_integral<T>::value>>
         : Between<T>
 {
-    Up_to(T max) : Between<T>{0, max - 1}
+    explicit Up_to(T max) : Between<T>{0, max - 1}
     { }
 };
 
@@ -52,7 +52,7 @@ template <class T>
 struct Up_to<T, std::enable_if_t<std::is_floating_point<T>::value>>
         : Between<T>
 {
-    Up_to(T max) : Between<T>{0, max}
+    explicit Up_to(T max) : Between<T>{0, max}
     { }
 };
 
