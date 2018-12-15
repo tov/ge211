@@ -28,6 +28,10 @@ SDL_Renderer* Renderer::create_renderer_(SDL_Window* window)
 {
     SDL_Renderer* result;
 
+#if SDL_VIDEO_RENDER_METAL
+    SDL_SetHint(SDL_HINT_RENDER_DRIVER, "metal");
+#endif
+
     for (auto flags : renderer_flags_to_try) {
         result = SDL_CreateRenderer(window, -1, flags);
         if (result) {
