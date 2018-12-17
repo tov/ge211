@@ -18,6 +18,7 @@ namespace detail {
 // vsync stops working).
 static const int software_fps = 60;
 static const Duration software_frame_length = Duration(1) / software_fps;
+static const Duration min_frame_length = software_frame_length / 2;
 
 Engine::Engine(Abstract_game& game)
         : game_{game},
@@ -57,17 +58,17 @@ void Engine::run()
             paint_sprites_(sprites);
             renderer_.present();
 
-            if (!is_focused_ || !has_vsync) {
-                auto frame_length = game_.frame_start_.elapsed_time();
-                if (frame_length < software_frame_length) {
-                    auto duration = software_frame_length - frame_length;
-                    duration.sleep_for();
-                    game_.mark_frame_();
-                    debug() << "Software vsync slept for "
-                            << duration.seconds() << " s";
-                } else {
-                    game_.mark_frame_();
-                }
+            Duration allowed_frame_length =
+                    (is_focused_ && has_vsync)?
+                    min_frame_length : software_frame_length;
+
+            auto frame_length = game_.frame_start_.elapsed_time();
+            if (frame_length < allowed_frame_length) {
+                auto duration = allowed_frame_length - frame_length;
+                duration.sleep_for();
+                game_.mark_frame_();
+                debug() << "Software vsync slept for "
+                        << duration.seconds() << " s";
             } else {
                 game_.mark_frame_();
             }
