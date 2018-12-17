@@ -69,7 +69,7 @@ void Abstract_game::mark_frame_() noexcept
 
 void Abstract_game::on_key_down(Key key)
 {
-    if (key.code() == 27) quit();
+    if (key.code() == '\u001B') quit();
 }
 
 } // end namespace ge211
