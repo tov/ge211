@@ -184,14 +184,14 @@ public:
     /// \preconditions
     ///  - `get_music_state()` is `paused` or `playing`; throws
     ///    exceptions::Client_logic_error if violated.
-    void resume_music(Duration fade_in = 0.0);
+    void resume_music(Duration fade_in = Duration(0));
 
     /// Pauses the currently attached music, fading out if requested.
     ///
     /// \preconditions
     ///  - `get_music_state()` is `paused` or `playing`; throws
     ///    exceptions::Client_logic_error if violated.
-    void pause_music(Duration fade_out = 0.0);
+    void pause_music(Duration fade_out = Duration(0));
 
     /// Rewinds the music to the beginning.
     ///

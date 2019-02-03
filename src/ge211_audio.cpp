@@ -170,7 +170,7 @@ void Mixer::pause_music(Duration fade_out)
             throw Client_logic_error("Mixer::pause_music: fading out");
 
         case State::playing:
-            if (fade_out == 0.0) {
+            if (fade_out == Duration(0)) {
                 Mix_HaltMusic();
                 music_position_.pause();
                 music_state_ = State::paused;
