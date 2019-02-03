@@ -122,7 +122,7 @@ private:
 /// For playing background music, one Music_track can be *attached* to the
 /// mixer at any given time, using Mixer::attach_music(Music_track). Once
 /// a Music_track is attached, it can be played with
-/// Mixer::unpause_music(Duration) and paused with
+/// Mixer::resume(Duration) and paused with
 /// Mixer::pause_music(Duration). A Music_track can be both
 /// attached and played with Mixer::play_music(Music_track). The music channel
 /// is always in one of four states, of type audio::Mixer::State, which can be
