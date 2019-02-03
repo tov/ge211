@@ -4,7 +4,7 @@ TAG_URL = http://upload.cppreference.com/mwiki/images/f/f8/cppreference-doxygen-
 DOXY = doxygen/DoxygenLayout.xml doxygen/FRONTMATTER.md $(TAGFILE)
 SRCS = $(wildcard src/*)
 
-doc/: doxygen/Doxyfile $(DOXY) $(SRCS)
+doc: doxygen/Doxyfile $(DOXY) $(SRCS)
 	doxygen $<
 
 doxygen/FRONTMATTER.md: README.md
