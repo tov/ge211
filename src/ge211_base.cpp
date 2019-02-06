@@ -9,9 +9,9 @@ namespace ge211 {
 using namespace detail;
 
 // Storage for constexprs, just in case.
-const Dimensions Abstract_game::default_window_dimensions;
-const char* const Abstract_game::default_window_title;
-const Color Abstract_game::default_background_color;
+const Dimensions Abstract_game::default_window_dimensions{800, 600};
+const char* const Abstract_game::default_window_title = "ge211 window";
+const Color Abstract_game::default_background_color = Color::black();
 
 // How many frames to run before calculating the frame rate.
 static int const frames_per_sample = 60;

@@ -103,16 +103,16 @@ public:
     /// derived class. To change the background color, assign the protected
     /// member variable Abstract_game::background_color from the
     /// draw(Sprite_set&) or on_start() functions.
-    static constexpr Color default_background_color = Color::black();
+    static const Color default_background_color;
 
     /// The default initial window title. You can change this in a derived class
     /// by overriding the initial_window_title() const member function.
-    static constexpr const char* default_window_title = "ge211 window";
+    static const char* const default_window_title;
 
     /// The default window dimensions, in pixels. You can change this in a
     /// derived class by overriding the initial_window_dimensions() const member
     /// function.
-    static constexpr Dimensions default_window_dimensions{800, 600};
+    static const Dimensions default_window_dimensions;
 
 protected:
     /// \name Functions to be overridden by clients
