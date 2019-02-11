@@ -54,13 +54,13 @@ public:
     /// @{
 
     /// Solid white.
-    static constexpr Color white()
+    static constexpr Color white() noexcept
     {
         return {255, 255, 255};
     }
 
     /// Solid black.
-    static constexpr Color black()
+    static constexpr Color black() noexcept
     {
         return {0, 0, 0};
     }
