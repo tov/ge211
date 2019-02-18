@@ -68,7 +68,7 @@ struct Model
 {
     vector<Firework> fireworks;
 
-    void update(double const dt);
+    void update(double dt);
     void add_random(Random&, Projectile::Position);
 };
 
@@ -179,7 +179,7 @@ Firework Firework::random(Random& rng, Projectile::Position p0)
     return Firework{Stage::mortar, mortar, stars, star_color, fuse_seconds};
 }
 
-void Model::update(double const dt)
+void Model::update(double dt)
 {
     for (Firework& firework : fireworks)
         firework.update(dt);
