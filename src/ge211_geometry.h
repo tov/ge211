@@ -503,6 +503,20 @@ struct Basic_rectangle
         return top_left().down_right_by(dimensions() / Coordinate(2));
     }
 
+    class iterator;
+
+    /// Returns an `iterator` to the top left corner of this rectangle.
+    iterator begin() const
+    {
+        return {top_left(), y, y + height};
+    }
+
+    /// Returns an `iterator` one past the end of this rectangle.
+    iterator end() const
+    {
+        return {top_left().right_by(width), y, y + height};
+    }
+
 private:
     friend Circle_sprite;
     friend detail::Render_sprite;
@@ -541,11 +555,101 @@ return r1.x == r2.x &&
 /// Disequality for rectangles.
 template <class T>
 bool operator!=(const Basic_rectangle<T> &r1,
-                const Basic_rectangle<T> r2)
+                const Basic_rectangle<T> &r2)
     noexcept(is_nothrow_comparable<T>())
 {
     return !(r1 == r2);
 }
+
+/// An iterator over the `Basic_position<T>`s of a `Basic_rectangle<T>`.
+///
+/// Iterates in column-major order.
+template <class T>
+class Basic_rectangle<T>::iterator
+        : public std::iterator<
+                std::input_iterator_tag,
+                typename Basic_rectangle<T>::Position const >
+{
+public:
+
+    /// Returns the current `Position` of this iterator.
+    Position operator*() const
+    {
+        return current_;
+    }
+
+    /// Returns a pointer to the current `Position` of this iterator.
+    Position const* operator->() const
+    {
+        return &current_;
+    }
+
+    /// Pre-increments, advancing this iterator to the next `Position`.
+    iterator& operator++()
+    {
+        if (++current_.y >= y_end_) {
+            ++current_.x;
+            current_.y = y_begin_;
+        }
+
+        return *this;
+    }
+
+    /// Pre-decrements, retreating this iterator to the previous `Position`.
+    iterator& operator--()
+    {
+        if (current_.y == y_begin_) {
+            current_.y = y_end_;
+            --current_.x;
+        }
+
+        --current_.y;
+
+        return *this;
+    }
+
+    /// Post-increments, advancing this iterator to the next `Position`.
+    iterator operator++(int)
+    {
+        iterator result(*this);
+        ++*this;
+        return result;
+    }
+
+    /// Post-decrements, retreating this iterator to the previous `Position`.
+    iterator operator--(int)
+    {
+        iterator result(*this);
+        --*this;
+        return result;
+    }
+
+    /// Compares whether two iterators are equal. Considers only the current
+    /// position, not the bounds of the stripe we're iterating through.
+    bool operator==(iterator const& that) const
+    {
+        return **this == *that;
+    }
+
+    /// Iterator inequality.
+    bool operator!=(iterator const& that) const
+    {
+        return !(*this == that);
+    }
+
+private:
+    friend Basic_rectangle<T>;
+
+    iterator(Position current, Coordinate y_begin, Coordinate y_end)
+            : current_(current)
+            , y_begin_(y_begin)
+            , y_end_(y_end)
+    { }
+
+    Position    current_;
+    Coordinate  y_begin_;
+    Coordinate  y_end_;
+};
 
 /// A rendering transform, which can scale, flip, and rotate. A Transform
 /// can be given to
