@@ -133,7 +133,7 @@ Basic_dimensions<T> operator*(double s1, Basic_dimensions<T> d2)
 ///  - `z` cannot be `0` if `T` is an integral type.
 template <class T>
 Basic_dimensions<T> operator/(Basic_dimensions<T> d1, T s2)
-    noexcept(has_nothrow_division<double, T>())
+    noexcept(has_nothrow_division<T>())
 {
     return {d1.width / s2, d1.height / s2};
 }
@@ -501,7 +501,7 @@ struct Basic_rectangle
     /// The position of the center of the rectangle.
     Position center() const
         noexcept(has_nothrow_arithmetic<Coordinate>() &&
-                 has_nothrow_division<Coordinate, int>())
+                 has_nothrow_division<Coordinate>())
     {
         return top_left().down_right_by(dimensions() / Coordinate(2));
     }
