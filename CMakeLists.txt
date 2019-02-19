@@ -16,10 +16,10 @@ if (WIN32)
 endif (WIN32)
 
 add_library(ge211
-        src/ge211.h
-        src/ge211_forward.h
-        src/ge211_time.h
-        src/ge211_util.h
+        include/ge211.h
+        include/ge211_forward.h
+        include/ge211_time.h
+        include/ge211_util.h
         src/ge211_base.cpp
         src/ge211_color.cpp
         src/ge211_engine.cpp
@@ -39,7 +39,7 @@ set_property(TARGET ge211 PROPERTY CXX_STANDARD_REQUIRED On)
 target_compile_definitions(ge211 PRIVATE
         GE211_RESOURCES="${CMAKE_CURRENT_SOURCE_DIR}/Resources/")
 
-target_include_directories(ge211 PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
+target_include_directories(ge211 PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 target_include_directories(ge211 PUBLIC ${SDL2_INCLUDE_DIRS})
 target_include_directories(ge211 PRIVATE ${SDL2_IMAGE_INCLUDE_DIRS})
 target_include_directories(ge211 PRIVATE ${SDL2_MIXER_INCLUDE_DIRS})
