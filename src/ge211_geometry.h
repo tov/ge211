@@ -2,8 +2,11 @@
 
 #include "ge211_forward.h"
 #include "ge211_util.h"
+
 #include <SDL_rect.h>
+
 #include <type_traits>
+#include <utility>
 
 namespace ge211 {
 
@@ -783,4 +786,22 @@ bool operator!=(const Transform&, const Transform&) noexcept;
 
 } // end namespace geometry.
 
-}
+} // end namespace ge211
+
+// specializations in std:
+namespace std
+{
+
+template <class T>
+struct hash<ge211::Basic_position<T>>
+{
+    std::size_t operator()(ge211::Basic_position<T> pos) const noexcept
+    {
+        return hash_t_(pos.x) * 31 ^ hash_t_(pos.y);
+    }
+
+private:
+    std::hash<T> hash_t_;
+};
+
+} // end namespace std
