@@ -9,15 +9,16 @@ namespace ge211 {
 template<class T, class U>
 static T weighted_average(T t, double weight, U u) noexcept
 {
-    double f1 = static_cast<double>(t);
-    double f2 = static_cast<double>(u);
+    auto f1 = static_cast<double>(t);
+    auto f2 = static_cast<double>(u);
     double result = (1 - weight) * f1 + weight * f2;
     return T(result);
 }
 
-template<class T, class Field>
-static T adjust_field(T result, Field T::*field,
-                      double weight, double goal) noexcept
+template<class Whole, class Field, class Goal>
+static Whole adjust_field(Whole result, Field Whole::*field,
+                          double weight, Goal goal)
+noexcept
 {
     result.*field = weighted_average(result.*field, weight, goal);
     return result;
