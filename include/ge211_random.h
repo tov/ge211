@@ -2,6 +2,7 @@
 
 #include "ge211_forward.h"
 #include <cstdint>
+#include <limits>
 #include <random>
 #include <type_traits>
 
@@ -97,20 +98,39 @@ public:
         return detail::Between<T>{min, max}(generator_);
     }
 
+    /// Returns a random `T` from the whole range of `T`.
+    /// Only enabled for integral types `T`.
+    template <
+            class T,
+            class = std::enable_if_t<std::is_integral<T>::value>
+    >
+    T any()
+    {
+        return between(std::numeric_limits<T>::min(),
+                       std::numeric_limits<T>::max());
+    }
+
     /// Returns a random `bool` that is `true` with probability
     /// `ptrue`.
     bool random_bool(double ptrue = 0.5);
+
+    /// Can't copy the random number generator.
+    Random(Random &) = delete;
+
+    /// Can't copy the random number generator.
+    Random& operator=(Random &) = delete;
+
+    /// Can't move the random number generator.
+    Random(Random &&) = delete;
+
+    /// Can't move the random number generator.
+    Random& operator=(Random &&) = delete;
 
 private:
     // Creator:
     friend Abstract_game;
 
     Random();
-
-    Random(Random &) = delete;
-    Random(Random &&) = delete;
-    Random& operator=(Random &) = delete;
-    Random& operator=(Random &&) = delete;
 
     std::mt19937_64 generator_;
 };

@@ -265,6 +265,7 @@ void Fireworks::on_key(Key key)
 
 void Fireworks::on_frame(double dt)
 {
+
     if (!is_paused)
         model.update(dt);
 }
