@@ -99,9 +99,12 @@ public:
     uint8_t alpha() const noexcept { return alpha_; };
 
 
-
     /// \name Transformations
     /// @{
+
+    /// Produces a blend of this color and `that`, with higher
+    /// `weight` (between 0 and 1) increasing the level of `that`.
+    Color blend(double weight, Color that) const noexcept;
 
     /// Returns the inverse of a color.
     Color invert() const noexcept;

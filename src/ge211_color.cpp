@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <cmath>
 #include <tuple>
+#include <ge211_color.h>
+
 
 namespace ge211 {
 
@@ -83,6 +85,16 @@ Color Color::from_hsva(double hue, double saturation, double value,
     double C = value * saturation;
     double m = value - C;
     return from_hcma(hue, C, m, alpha);
+}
+
+Color Color::blend(double weight, Color that) const noexcept
+{
+    return Color{
+            weighted_average(red(), weight, that.red()),
+            weighted_average(green(), weight, that.green()),
+            weighted_average(blue(), weight, that.blue()),
+            weighted_average(alpha(), weight, that.alpha())
+    };
 }
 
 Color Color::invert() const noexcept
