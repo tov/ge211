@@ -98,22 +98,48 @@ void Renderer::copy(const Texture& texture, Position xy)
 }
 
 void Renderer::copy(const Texture& texture,
-                    Position xy,
+                    Position dstposn,
                     const Transform& transform)
 {
     auto raw_texture = texture.get_raw_(*this);
     if (!raw_texture) return;
 
-    SDL_Rect dstrect = Rectangle::from_top_left(xy, texture.dimensions());
-    dstrect.w = int(dstrect.w * transform.get_scale_x());
-    dstrect.h = int(dstrect.h * transform.get_scale_y());
+    Rectangle srcrect_ge =
+            Rectangle::from_top_left({0, 0}, texture.dimensions());
+
+    auto crop = transform.get_crop();
+    srcrect_ge.width -= crop.right;
+    srcrect_ge.height -= crop.bottom;
+
+    if (crop.left < 0) {
+        dstposn.x -= crop.left;
+    } else {
+        srcrect_ge.x += crop.left;
+        srcrect_ge.width -= crop.left;
+    }
+
+    if (crop.top < 0) {
+        dstposn.y -= crop.top;
+    } else {
+        srcrect_ge.y += crop.top;
+        srcrect_ge.height -= crop.top;
+    }
+
+    Rectangle dstrect_ge =
+            Rectangle::from_top_left(dstposn, srcrect_ge.dimensions());
+
+    dstrect_ge.width = int(dstrect_ge.width * transform.get_scale_x());
+    dstrect_ge.height = int(dstrect_ge.height * transform.get_scale_y());
+
+    SDL_Rect srcrect = srcrect_ge;
+    SDL_Rect dstrect = dstrect_ge;
 
     SDL_RendererFlip flip = SDL_FLIP_NONE;
     if (transform.get_flip_h()) flip |= SDL_FLIP_HORIZONTAL;
     if (transform.get_flip_v()) flip |= SDL_FLIP_VERTICAL;
 
     int render_result = SDL_RenderCopyEx(get_raw_(), raw_texture,
-                                         nullptr, &dstrect,
+                                         &srcrect, &dstrect,
                                          transform.get_rotation(),
                                          nullptr,
                                          flip);

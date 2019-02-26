@@ -5,6 +5,7 @@
 
 #include <SDL_rect.h>
 
+#include <cstdint>
 #include <type_traits>
 #include <utility>
 
@@ -654,8 +655,8 @@ private:
     Coordinate  y_end_;
 };
 
-/// A rendering transform, which can scale, flip, and rotate. A Transform
-/// can be given to
+/// A rendering transform, which can crop, scale, flip, and rotate. A
+/// Transform can be given to
 /// Sprite_set::add_sprite(const Sprite&, Position, int, const Transform&)
 /// to specify how a sprites::Sprite should be rendered.
 ///
@@ -668,6 +669,7 @@ private:
 ///   - Transform::scale(double)
 ///   - Transform::scale_x(double)
 ///   - Transform::scale_y(double)
+///   - Transform::crop(Crop)
 ///
 /// It is also possible to modify a transform with the setter functions
 /// such as set_rotation(double) and set_scale(double). This can be used
@@ -683,11 +685,122 @@ private:
 class Transform
 {
 public:
+    /// \name Helper types
+    /// @{
+
+    /// Represents a side of a sprite, or a set thereof.
+    class Side
+    {
+    public:
+        /// No sides.
+        static Side const none;
+        /// The top side.
+        static Side const top;
+        /// The bottom side.
+        static Side const bottom;
+        /// The left side.
+        static Side const left;
+        /// The right side.
+        static Side const right;
+        /// All four sides.
+        static Side const all;
+
+        // Is this not `none`?
+        explicit operator bool() const
+        {
+            return value_ != 0;
+        }
+
+        // Equality for `Side`s.
+        bool operator==(Side that) const
+        {
+            return value_ == that.value_;
+        }
+
+        // Disequality for `Side`s.
+        bool operator!=(Side that) const
+        {
+            return !(*this == that);
+        }
+
+        /// Set union (bitwise or).
+        constexpr Side operator|(Side that) const
+        {
+            return value_ | that.value_;
+        }
+
+        /// Set intersection (bitwise and).
+        constexpr Side operator&(Side that) const
+        {
+            return value_ & that.value_;
+        }
+
+        /// Symmetric difference (bitwise xor).
+        constexpr Side operator^(Side that) const
+        {
+            return value_ ^ that.value_;
+        }
+
+        /// Set union (bitwise or).
+        constexpr Side& operator|=(Side that)
+        {
+            *this = *this | that;
+            return *this;
+        }
+
+        /// Set intersection (bitwise and).
+        constexpr Side& operator&=(Side that)
+        {
+            *this = *this & that;
+            return *this;
+        }
+
+        /// Symmetric difference (bitwise xor).
+        constexpr Side& operator^=(Side that)
+        {
+            *this = *this ^ that;
+            return *this;
+        }
+
+        /// Set complement.
+        Side operator~() const
+        {
+            return all.value_ & ~value_;
+        }
+
+    private:
+        using repr_t = uint8_t;
+
+        constexpr Side(repr_t value) noexcept
+                : value_(value)
+        { }
+
+        repr_t value_;
+    };
+
+    /// Cropping on all four sides.
+    struct Crop
+    {
+        /// Number of pixels to remove from the top.
+        std::int16_t top;
+        /// Number of pixels to remove from the bottom.
+        std::int16_t bottom;
+        /// Number of pixels to remove from the left side.
+        std::int16_t left;
+        /// Number of pixels to remove from the right side.
+        std::int16_t right;
+    };
+
+    /// @}
+
     /// \name Constructor and factory functions
     /// @{
 
     /// Constructs the identity transform, which has no effect.
     Transform() noexcept;
+
+    /// Constructs a transform that crops the sprite as specified.
+    static Transform crop(Crop) noexcept;
 
     /// Constructs a rotating transform, given the rotation in degrees
     /// clockwise.
@@ -713,6 +826,13 @@ public:
     /// \name Setters
     /// @{
 
+    /// Modifies this transform to crop the sprite by the given amounts.
+    /// This overwrites the effect of previous calls to `set_crop`.
+    Transform& set_crop(Crop) noexcept;
+    /// Modifies this transform to crop the sprite on the given side(s)
+    /// by the given amount. This overwrites the effect of previous
+    /// calls to `set_crop` for the given side(s).
+    Transform& set_crop(Side, std::int16_t) noexcept;
     /// Modifies this transform to have the given rotation, in degrees
     /// degrees.
     Transform& set_rotation(double) noexcept;
@@ -738,6 +858,11 @@ public:
     /// \name Getters
     /// @{
 
+    /// Gets the crop amounts.
+    Crop get_crop() const noexcept;
+    /// Gets the crop amount for the given side. (If given the bitwise
+    /// or of multiple sides, returns the sum of their crop amounts.)
+    std::int16_t get_crop(Side) const noexcept;
     /// Returns the rotation that will be applied to the sprite.
     double get_rotation() const noexcept;
     /// Returns whether the sprite will be flipped horizontally.
@@ -772,17 +897,21 @@ public:
     /// @}
 
 private:
+    Crop crop_;
     double rotation_;
-    double scale_x_;
-    double scale_y_;
-    bool flip_h_;
-    bool flip_v_;
+    Basic_dimensions<double> scale_;
+    Basic_position<bool> flip_;
 };
 
 /// Equality for transforms.
 bool operator==(const Transform&, const Transform&) noexcept;
 /// Disequality for transforms.
 bool operator!=(const Transform&, const Transform&) noexcept;
+
+// Equality for `Transform::Crop`.
+bool operator==(Transform::Crop, Transform::Crop);
+// Disequality for `Transform::Crop`.
+bool operator!=(Transform::Crop, Transform::Crop);
 
 } // end namespace geometry.
 
