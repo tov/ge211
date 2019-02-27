@@ -35,6 +35,7 @@ add_library(ge211
         src/ge211_window.cpp)
 set_property(TARGET ge211 PROPERTY CXX_STANDARD 14)
 set_property(TARGET ge211 PROPERTY CXX_STANDARD_REQUIRED On)
+set_property(TARGET ge211 PROPERTY CXX_EXTENSIONS OFF)
 
 target_compile_definitions(ge211 PRIVATE
         GE211_RESOURCES="${CMAKE_CURRENT_SOURCE_DIR}/Resources/")
