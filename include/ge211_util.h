@@ -38,7 +38,7 @@ template<class T>
 constexpr bool is_nothrow_comparable()
 {
     T t{};
-    return noexcept(t == t, t != t);
+    return noexcept(t == t) && noexcept(t != t);
 }
 
 /// Can types `T` and `U` be used for basic arithmetic (addition,
@@ -48,7 +48,7 @@ constexpr bool has_nothrow_arithmetic()
 {
     T t{};
     U u{};
-    return noexcept(t + u, t - u, t * u);
+    return noexcept(t + u) && noexcept(t - u) && noexcept(t * u);
 }
 
 /// Can types `T` and `U` be used for division without risk of an exception?

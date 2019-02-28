@@ -156,7 +156,7 @@ Basic_dimensions<T> operator/(Basic_dimensions<T> d1, double s2)
 template <class T>
 Basic_dimensions<T>& operator+=(Basic_dimensions<T>& d1,
                                 Basic_dimensions<T> d2)
-    noexcept(has_nothrow_arithmetic<T>)
+    noexcept(has_nothrow_arithmetic<T>())
 {
     return d1 = d1 + d2;
 }
