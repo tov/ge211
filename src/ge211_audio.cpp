@@ -244,7 +244,7 @@ void Mixer::poll_channels_()
         }
     }
 
-    for (int channel = 0; channel < channels_.size(); ++channel) {
+    for (int channel = 0; channel < int(channels_.size()); ++channel) {
         if (channels_[channel] && !Mix_Playing(channel))
         {
             unregister_effect_(channel);
