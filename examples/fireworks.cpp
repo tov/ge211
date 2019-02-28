@@ -265,7 +265,6 @@ void Fireworks::on_key(Key key)
 
 void Fireworks::on_frame(double dt)
 {
-
     if (!is_paused)
         model.update(dt);
 }
@@ -275,5 +274,4 @@ void Fireworks::on_mouse_up(Mouse_button, Position position)
     if (!is_paused)
         model.add_random(get_random(), position.into<double>());
 }
-
 
