@@ -37,14 +37,25 @@ set_property(TARGET ge211 PROPERTY CXX_STANDARD 14)
 set_property(TARGET ge211 PROPERTY CXX_STANDARD_REQUIRED On)
 set_property(TARGET ge211 PROPERTY CXX_EXTENSIONS OFF)
 
+if(MSVC)
+    target_compile_options(ge211 PRIVATE /W4)
+else(MSVC)
+    target_compile_options(ge211 PRIVATE -Wall -Wextra -pedantic)
+endif(MSVC)
+
 target_compile_definitions(ge211 PRIVATE
         GE211_RESOURCES="${CMAKE_CURRENT_SOURCE_DIR}/Resources/")
 
-target_include_directories(ge211 PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
-target_include_directories(ge211 PUBLIC ${SDL2_INCLUDE_DIRS})
-target_include_directories(ge211 PRIVATE ${SDL2_IMAGE_INCLUDE_DIRS})
-target_include_directories(ge211 PRIVATE ${SDL2_MIXER_INCLUDE_DIRS})
-target_include_directories(ge211 PRIVATE ${SDL2_TTF_INCLUDE_DIRS})
+target_include_directories(ge211 SYSTEM INTERFACE
+        include
+        ${SDL2_INCLUDE_DIRS})
+
+target_include_directories(ge211 PRIVATE
+        include
+        ${SDL2_INCLUDE_DIRS}
+        ${SDL2_IMAGE_INCLUDE_DIRS}
+        ${SDL2_MIXER_INCLUDE_DIRS}
+        ${SDL2_TTF_INCLUDE_DIRS})
 
 target_link_libraries(ge211 ${SDL2_LIBRARIES})
 target_link_libraries(ge211 ${SDL2_IMAGE_LIBRARIES})
