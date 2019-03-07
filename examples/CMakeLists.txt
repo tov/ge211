@@ -17,4 +17,4 @@ endif(MSVC)
 
 include(GNUInstallDirs)
 install(TARGETS fireworks
-        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+        RUNTIME DESTINATION bin)
