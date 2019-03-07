@@ -1,5 +1,12 @@
 cmake_minimum_required(VERSION 3.3)
-project(ge211 CXX)
+project(ge211
+        VERSION 2019.0.0
+        DESCRIPTION "A student game engine"
+        LANGUAGES CXX)
+
+###
+### DEPENDENCIES
+###
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
@@ -10,10 +17,10 @@ find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 
-if (WIN32)
-    set(MINGW_DIR "${SDL2_IMAGE_INCLUDE_DIR}/../.."
-            CACHE PATH "Where MinGW-w64 is installed")
-endif (WIN32)
+
+###
+### MAIN LIBRARY SETUP
+###
 
 add_library(ge211
         include/ge211.h
@@ -33,9 +40,14 @@ add_library(ge211
         src/ge211_session.cpp
         src/ge211_sprites.cpp
         src/ge211_window.cpp)
-set_property(TARGET ge211 PROPERTY CXX_STANDARD 14)
-set_property(TARGET ge211 PROPERTY CXX_STANDARD_REQUIRED On)
-set_property(TARGET ge211 PROPERTY CXX_EXTENSIONS OFF)
+
+set_target_properties(ge211 PROPERTIES
+        CXX_STANDARD                    14
+        CXX_STANDARD_REQUIRED           On
+        CXX_EXTENSIONS                  Off
+        VERSION                         ${PROJECT_VERSION}
+        PUBLIC_HEADER                   "${HEADER_FILES}"
+        INTERFACE_INCLUDE_DIRECTORIES   "${SDL2_INCLUDE_DIRS}")
 
 if(MSVC)
     target_compile_options(ge211 PRIVATE /W4)
@@ -44,10 +56,12 @@ else(MSVC)
 endif(MSVC)
 
 target_compile_definitions(ge211 PRIVATE
-        GE211_RESOURCES="${CMAKE_CURRENT_SOURCE_DIR}/Resources/")
+        $<BUILD_INTERFACE:GE211_RESOURCES="${CMAKE_CURRENT_SOURCE_DIR}/Resources/">
+        $<INSTALL_INTERFACE:GE211_RESOURCES="share/Resources/">)
 
 target_include_directories(ge211 SYSTEM INTERFACE
-        include
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
         ${SDL2_INCLUDE_DIRS})
 
 target_include_directories(ge211 PRIVATE
@@ -57,13 +71,38 @@ target_include_directories(ge211 PRIVATE
         ${SDL2_MIXER_INCLUDE_DIRS}
         ${SDL2_TTF_INCLUDE_DIRS})
 
-target_link_libraries(ge211 ${SDL2_LIBRARIES})
-target_link_libraries(ge211 ${SDL2_IMAGE_LIBRARIES})
-target_link_libraries(ge211 ${SDL2_MIXER_LIBRARIES})
-target_link_libraries(ge211 ${SDL2_TTF_LIBRARIES})
-target_link_libraries(ge211 utf8-cpp)
+target_link_libraries(ge211
+        ${SDL2_LIBRARIES}
+        ${SDL2_IMAGE_LIBRARIES}
+        ${SDL2_MIXER_LIBRARIES}
+        ${SDL2_TTF_LIBRARIES}
+        utf8-cpp)
 
 add_subdirectory(examples/)
+
+
+###
+### LIBRARY INSTALLATION
+###
+
+include(GNUInstallDirs)
+install(TARGETS ge211 utf8-cpp EXPORT Ge211Config
+        ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(EXPORT Ge211Config DESTINATION ${CMAKE_INSTALL_DATADIR}/cmake)
+export(TARGETS ge211 FILE Ge211Config.cmake)
+
+
+###
+### CLIENT PROGRAM INSTALLER
+###
+
+if (WIN32)
+    set(MINGW_DIR "${SDL2_IMAGE_INCLUDE_DIR}/../.."
+            CACHE PATH "Where MinGW-w64 is installed")
+endif (WIN32)
 
 # Given a base path to search in, a file extension, and a list of library
 # names, searches for the libraries (using a glob) and saves the resulting

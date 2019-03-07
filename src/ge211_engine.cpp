@@ -4,7 +4,7 @@
 #include "ge211_sprites.h"
 
 #include <SDL.h>
-#include "../3rdparty/utf8-cpp/utf8.h"
+#include "utf8.h"
 
 #include <algorithm>
 #include <cstring>

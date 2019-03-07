@@ -1,7 +1,7 @@
 #include "ge211_event.h"
 
 #include <SDL_events.h>
-#include "../3rdparty/utf8-cpp/utf8.h"
+#include "utf8.h"
 
 #include <cctype>
 
