@@ -15,5 +15,6 @@ else(MSVC)
     target_compile_options(fireworks PRIVATE -Wall -Wextra -pedantic)
 endif(MSVC)
 
+include(GNUInstallDirs)
 install(TARGETS fireworks
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
