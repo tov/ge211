@@ -55,10 +55,6 @@ else(MSVC)
     target_compile_options(ge211 PRIVATE -Wall -Wextra -pedantic)
 endif(MSVC)
 
-target_compile_definitions(ge211 PRIVATE
-        $<BUILD_INTERFACE:GE211_RESOURCES="${CMAKE_CURRENT_SOURCE_DIR}/Resources/">
-        $<INSTALL_INTERFACE:GE211_RESOURCES="${CMAKE_INSTALL_DATADIR}/ge211/">)
-
 target_include_directories(ge211 SYSTEM INTERFACE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
@@ -95,6 +91,9 @@ install(DIRECTORY Resources/ DESTINATION ${CMAKE_INSTALL_DATADIR}/ge211)
 install(EXPORT Ge211Config DESTINATION ${CMAKE_INSTALL_DATADIR}/cmake/Ge211)
 export(TARGETS ge211 FILE Ge211Config.cmake)
 
+target_compile_definitions(ge211 PRIVATE
+        $<BUILD_INTERFACE:GE211_RESOURCES="${CMAKE_CURRENT_SOURCE_DIR}/Resources/">
+        $<INSTALL_INTERFACE:GE211_RESOURCES="${CMAKE_INSTALL_DATADIR}/ge211/">)
 
 ###
 ### CLIENT PROGRAM INSTALLER
