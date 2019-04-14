@@ -50,6 +50,7 @@ void Window::set_title(const std::string& title) noexcept
     SDL_SetWindowTitle(get_raw_(), title.c_str());
 }
 
+#if SDL_VERSION_ATLEAST(2, 0, 5)
 bool Window::get_resizeable() const noexcept
 {
     return (get_flags_() & SDL_WINDOW_RESIZABLE) != 0;
@@ -59,6 +60,7 @@ void Window::set_resizeable(bool resizable) noexcept
 {
     SDL_SetWindowResizable(get_raw_(), resizable? SDL_TRUE : SDL_FALSE);
 }
+#endif
 
 Position Window::get_position() const noexcept
 {

@@ -4,6 +4,8 @@
 #include "ge211_geometry.h"
 #include "ge211_util.h"
 
+#include <SDL_version.h>
+
 #include <string>
 
 namespace ge211 {
@@ -38,10 +40,12 @@ public:
     /// Changes the title of this window.
     void set_title(const std::string&) noexcept;
 
+#if SDL_VERSION_ATLEAST(2, 0, 5)
     /// Returns whether the user can resize this window.
     bool get_resizeable() const noexcept;
     /// Changes whether the user can resize this window.
     void set_resizeable(bool) noexcept;
+#endif
 
     /// Returns whether the program is in fullscreen mode.
     bool get_fullscreen() const noexcept;
