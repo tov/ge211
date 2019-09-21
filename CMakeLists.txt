@@ -84,7 +84,7 @@ SET(GE211_RESOURCE_PATH
 target_compile_definitions(ge211 PRIVATE
     -DGE211_RESOURCES="$<JOIN:${GE211_RESOURCE_PATH},$<COMMA>>")
 
-add_subdirectory(examples/)
+add_subdirectory(examples/installed/)
 
 ###
 ### LIBRARY INSTALLATION
