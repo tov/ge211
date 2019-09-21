@@ -3,6 +3,7 @@
 #include <memory>
 #include <string>
 #include <sstream>
+#include <type_traits>
 
 namespace ge211 {
 
@@ -18,10 +19,23 @@ std::string to_string(const T& value)
 namespace detail {
 
 template<class T>
-using delete_ptr = std::unique_ptr<T, void (*)(T*)>;
+using deleter_t = void (*)(T*);
+
+template<class T>
+using delete_ptr = std::unique_ptr<T, deleter_t<T>>;
 
 template<class T>
 void no_op_deleter(T*) {}
+
+#define make_delete_ptr(PTR, DELETER)                           \
+    ([&] () {                                                   \
+        auto ptr = (PTR);                                       \
+        using T = ::std::remove_pointer_t<decltype(ptr)>;       \
+        return ::ge211::detail::delete_ptr<T> {                 \
+            ptr,                                                \
+            [](T* raw) { DELETER(raw); }                        \
+        };                                                      \
+    })()
 
 } // end namespace detail
 

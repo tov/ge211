@@ -25,19 +25,16 @@ std::vector<const char*> get_search_prefixes()
                                end(search_prefixes));
 }
 
-static void close_rwops(SDL_RWops* rwops)
-{
-    SDL_RWclose(rwops);
-}
-
 delete_ptr<SDL_RWops> File_resource::open_rwops_(const std::string& filename)
 {
+    std::string path;
+
     for (auto prefix : search_prefixes) {
-        std::string path;
+        path.clear();
         path += prefix;
         path += filename;
-        SDL_RWops* rwops = SDL_RWFromFile(path.c_str(), "rb");
-        if (rwops) return {rwops, &close_rwops};
+        auto rwops = SDL_RWFromFile(path.c_str(), "rb");
+        if (rwops) return make_delete_ptr(rwops, SDL_RWclose);
     }
 
     throw File_error::could_not_open(filename);
