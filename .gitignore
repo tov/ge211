@@ -1,3 +1,8 @@
+# Build directories:
+build/
+cmake-build-*/
+
+# Documentation:
 doc/
 doxygen/cppreference.xml
 doxygen/FRONTMATTER.md
