@@ -150,8 +150,8 @@ char32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <tr class="memitem:aa1cc89b6c65b5df065af69b46e65d93f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1events_1_1_key.html#aa1cc89b6c65b5df065af69b46e65d93f">is_textual</a> () const noexcept</td></tr>
 <tr class="memdesc:aa1cc89b6c65b5df065af69b46e65d93f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Does the key represent printable text? This is true for some but not all <a class="el" href="classge211_1_1events_1_1_key.html#a1d1cfd8ffb84e947f82999c682b666a7ac13367945d5d4c91047b3b50234aa7ab" title="Indicates a key with an Unicode value, which can be gotten with Key::code() const. ">Type::code</a> keys.  <a href="#aa1cc89b6c65b5df065af69b46e65d93f">More...</a><br /></td></tr>
 <tr class="separator:aa1cc89b6c65b5df065af69b46e65d93f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0fccc6a22afa07f575ade365343a794d"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1events_1_1_key.html#a0fccc6a22afa07f575ade365343a794d">as_text</a> () const</td></tr>
-<tr class="memdesc:a0fccc6a22afa07f575ade365343a794d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a representation of the key's code as a std::string.  <a href="#a0fccc6a22afa07f575ade365343a794d">More...</a><br /></td></tr>
+<tr class="memitem:a0fccc6a22afa07f575ade365343a794d"><td class="memItemLeft" align="right" valign="top"><a class="elRef" doxygen="/Users/tov/school/eecs211/dev/ge211/doxygen/cppreference.xml:http://en.cppreference.com/w/" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1events_1_1_key.html#a0fccc6a22afa07f575ade365343a794d">as_text</a> () const</td></tr>
+<tr class="memdesc:a0fccc6a22afa07f575ade365343a794d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a representation of the key's code as a <a class="elRef" doxygen="/Users/tov/school/eecs211/dev/ge211/doxygen/cppreference.xml:http://en.cppreference.com/w/" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>.  <a href="#a0fccc6a22afa07f575ade365343a794d">More...</a><br /></td></tr>
 <tr class="separator:a0fccc6a22afa07f575ade365343a794d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
@@ -256,7 +256,7 @@ static <a class="el" href="classge211_1_1events_1_1_key.html">Key</a>&#160;</td>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string as_text </td>
+          <td class="memname"><a class="elRef" doxygen="/Users/tov/school/eecs211/dev/ge211/doxygen/cppreference.xml:http://en.cppreference.com/w/" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> as_text </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -264,7 +264,7 @@ static <a class="el" href="classge211_1_1events_1_1_key.html">Key</a>&#160;</td>
       </table>
 </div><div class="memdoc">
 
-<p>Returns a representation of the key's code as a std::string. </p>
+<p>Returns a representation of the key's code as a <a class="elRef" doxygen="/Users/tov/school/eecs211/dev/ge211/doxygen/cppreference.xml:http://en.cppreference.com/w/" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>. </p>
 <p>This could be useful if you want to capture typing text, rather than game control, because concatenating a string to a string is easier than concatenating the <code>char32_t</code> <a class="el" href="classge211_1_1events_1_1_key.html#ab1652c8baf804eed5d74ad37f13e1ba3" title="The Unicode code point of the key, if it has one. ">code() const </a>to a string, when that could be an arbitrary Unicode code point.</p>
 <p>The result of this function is only meaningful when <a class="el" href="classge211_1_1events_1_1_key.html#aa1cc89b6c65b5df065af69b46e65d93f" title="Does the key represent printable text? This is true for some but not all Type::code keys...">is_textual() const </a>returns true. </p>
 
