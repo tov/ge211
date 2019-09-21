@@ -12,11 +12,10 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 add_subdirectory(3rdparty/utf8-cpp)
 
-find_package(SDL2 REQUIRED)
+find_package(SDL2       REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
-find_package(SDL2_ttf REQUIRED)
-
+find_package(SDL2_ttf   REQUIRED)
 
 ###
 ### MAIN LIBRARY SETUP
@@ -41,7 +40,8 @@ add_library(ge211
         src/ge211_sprites.cpp
         src/ge211_window.cpp)
 
-set_target_properties(ge211 PROPERTIES
+set_target_properties(ge211
+    PROPERTIES
         CXX_STANDARD                    14
         CXX_STANDARD_REQUIRED           On
         CXX_EXTENSIONS                  Off
@@ -55,12 +55,14 @@ else(MSVC)
     target_compile_options(ge211 PRIVATE -Wall -Wextra -pedantic)
 endif(MSVC)
 
-target_include_directories(ge211 SYSTEM INTERFACE
+target_include_directories(ge211
+    SYSTEM INTERFACE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
         ${SDL2_INCLUDE_DIRS})
 
-target_include_directories(ge211 PRIVATE
+target_include_directories(ge211
+    PRIVATE
         include
         ${SDL2_INCLUDE_DIRS}
         ${SDL2_IMAGE_INCLUDE_DIRS}
@@ -74,25 +76,32 @@ target_link_libraries(ge211
         ${SDL2_TTF_LIBRARIES}
         utf8-cpp)
 
-add_subdirectory(examples/)
+SET(GE211_RESOURCE_PATH
+    "${CMAKE_CURRENT_SOURCE_DIR}/Resources/"
+    "${CMAKE_INSTALL_FULL_DATADIR}/ge211/")
 
+target_compile_definitions(ge211 PRIVATE
+    -DGE211_RESOURCES="$<JOIN:${GE211_RESOURCE_PATH},$<COMMA>>")
+
+add_subdirectory(examples/)
 
 ###
 ### LIBRARY INSTALLATION
 ###
 
 include(GNUInstallDirs)
+
 install(TARGETS ge211 utf8-cpp EXPORT Ge211Config
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
         LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR})
+
 install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 install(DIRECTORY Resources/ DESTINATION ${CMAKE_INSTALL_DATADIR}/ge211)
-install(EXPORT Ge211Config DESTINATION ${CMAKE_INSTALL_DATADIR}/cmake/Ge211)
-export(TARGETS ge211 FILE Ge211Config.cmake)
 
-target_compile_definitions(ge211 PRIVATE
-        -DGE211_RESOURCES="${CMAKE_CURRENT_SOURCE_DIR}/Resources/","${CMAKE_INSTALL_FULL_DATADIR}/ge211/")
+install(EXPORT Ge211Config
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/cmake/Ge211)
+export(TARGETS ge211 FILE Ge211Config.cmake)
 
 ###
 ### CLIENT PROGRAM INSTALLER
