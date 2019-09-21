@@ -82,7 +82,7 @@ SET(GE211_RESOURCE_PATH
     "${CMAKE_INSTALL_FULL_DATADIR}/ge211/")
 
 target_compile_definitions(ge211 PRIVATE
-    -DGE211_RESOURCES="$<JOIN:${GE211_RESOURCE_PATH},$<COMMA>>")
+    -DGE211_RESOURCES="$<JOIN:${GE211_RESOURCE_PATH},\"$<COMMA>\">")
 
 add_subdirectory(examples/installed/)
 

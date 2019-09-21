@@ -11,9 +11,9 @@ namespace ge211 {
 using namespace detail;
 
 static const char* search_prefixes[] = {
+        GE211_RESOURCES,
         "Resources/",
         "../Resources/",
-        GE211_RESOURCES
 };
 
 namespace detail {
@@ -33,8 +33,11 @@ delete_ptr<SDL_RWops> File_resource::open_rwops_(const std::string& filename)
         path.clear();
         path += prefix;
         path += filename;
+
         auto rwops = SDL_RWFromFile(path.c_str(), "rb");
         if (rwops) return make_delete_ptr(rwops, SDL_RWclose);
+
+        info_sdl() << "File_resource: could not load";
     }
 
     throw File_error::could_not_open(filename);
