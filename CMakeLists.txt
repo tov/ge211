@@ -46,7 +46,6 @@ set_target_properties(ge211
         CXX_STANDARD_REQUIRED           On
         CXX_EXTENSIONS                  Off
         VERSION                         ${PROJECT_VERSION}
-        PUBLIC_HEADER                   "${HEADER_FILES}"
         INTERFACE_INCLUDE_DIRECTORIES   "${SDL2_INCLUDE_DIRS}")
 
 if(MSVC)
@@ -70,7 +69,9 @@ target_include_directories(ge211
         ${SDL2_TTF_INCLUDE_DIRS})
 
 target_link_libraries(ge211
+    PUBLIC
         ${SDL2_LIBRARIES}
+    PRIVATE
         ${SDL2_IMAGE_LIBRARIES}
         ${SDL2_MIXER_LIBRARIES}
         ${SDL2_TTF_LIBRARIES}
