@@ -1,0 +1,44 @@
+language: cpp
+dist: xenial
+
+os:
+  - linux
+
+compiler:
+  - clang
+
+install:
+# Where we install to:
+  - export PREFIX=${TRAVIS_BUILD_DIR}/../deps
+  - mkdir -p ${PREFIX}
+  - |
+    export PATH="${PREFIX}/bin:${PATH}"
+    export LD_LIBRARY_PATH="${PREFIX}/lib:${LD_LIBRARY_PATH}"
+    export DYLD_LIBRARY_PATH="${PREFIX}/lib:${DYLD_LIBRARY_PATH}"
+
+# Upgrade CMake:
+  - |
+    CMAKE_VERSION=3.14.2
+    CMAKE_URL=https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz
+    travis_retry wget --quiet -O- ${CMAKE_URL} | \
+        tar --strip-components=1 -xz -C ${PREFIX} &&
+    cmake --version
+
+# Install SDL2 and friends:
+  - I=scripts/autotools_install.sh
+  - $I https://libsdl.org/release/SDL2-2.0.9.tar.gz
+  - $I https://libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.4.tar.gz
+  - $I https://libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.15.tar.gz
+  - $I https://libsdl.org/projects/SDL_image/release/SDL2_image-2.0.4.tar.gz
+
+cache:
+  directories:
+    - ../deps
+
+before_script:
+  - mkdir build
+  - cmake -S . -B build
+
+script:
+  - cmake --build build -- -j2
+
