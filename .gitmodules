@@ -1,0 +1,3 @@
+[submodule "examples/vendored"]
+	path = examples/vendored
+	url = https://github.com/tov/ge211-vendored-example.git
