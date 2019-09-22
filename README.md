@@ -52,13 +52,20 @@ A minimal, complete `CMakeLists.txt` for using GE211 might look
 something like this:
 
 ```CMake
-cmake_minimum_required(VERSION 3.3)
+cmake_minimum_required(VERSION 3.13)
 project(my_game CXX)
 
 add_subdirectory(3rdparty/ge211 EXCLUDE_FROM_ALL)
 
 add_executable(my_game my_game.cpp)
 target_link_libraries(my_game ge211)
-set_property(TARGET my_game PROPERTY CXX_STANDARD 14)
-set_property(TARGET my_game PROPERTY CXX_STANDARD_REQUIRED On)
+set_target_properties(my_game PROPERTIES
+        CXX_STANDARD            14
+        CXX_STANDARD_REQUIRED   On
+        CXX_EXTENSIONS          OFF)
 ```
+
+To see this in action, see the [`examples/vendored/`] submodule.
+
+[`examples/vendored/`]:
+    https://github.com/tov/ge211-vendored-example
