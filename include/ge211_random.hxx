@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ge211_forward.h"
+#include "ge211_forward.hxx"
 #include <cstdint>
 #include <limits>
 #include <random>

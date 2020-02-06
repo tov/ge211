@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ge211_forward.h"
-#include "ge211_error.h"
+#include "ge211_forward.hxx"
+#include "ge211_error.hxx"
 
 #include <sstream>
 #include <string>

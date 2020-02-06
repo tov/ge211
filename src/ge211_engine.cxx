@@ -1,7 +1,7 @@
-#include "ge211_engine.h"
-#include "ge211_base.h"
-#include "ge211_render.h"
-#include "ge211_sprites.h"
+#include "ge211_engine.hxx"
+#include "ge211_base.hxx"
+#include "ge211_render.hxx"
+#include "ge211_sprites.hxx"
 
 #include <SDL.h>
 #include "utf8.h"

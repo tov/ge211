@@ -1,5 +1,5 @@
-#include "ge211_resource.h"
-#include "ge211_error.h"
+#include "ge211_resource.hxx"
+#include "ge211_error.hxx"
 
 #include <SDL.h>
 #include <SDL_ttf.h>

@@ -22,23 +22,23 @@ find_package(SDL2_ttf   REQUIRED)
 ###
 
 add_library(ge211
-        include/ge211.h
-        include/ge211_forward.h
-        include/ge211_time.h
-        include/ge211_util.h
-        src/ge211_base.cpp
-        src/ge211_color.cpp
-        src/ge211_engine.cpp
-        src/ge211_event.cpp
-        src/ge211_error.cpp
-        src/ge211_geometry.cpp
-        src/ge211_audio.cpp
-        src/ge211_random.cpp
-        src/ge211_render.cpp
-        src/ge211_resource.cpp
-        src/ge211_session.cpp
-        src/ge211_sprites.cpp
-        src/ge211_window.cpp)
+        include/ge211.hxx
+        include/ge211_forward.hxx
+        include/ge211_time.hxx
+        include/ge211_util.hxx
+        src/ge211_base.cxx
+        src/ge211_color.cxx
+        src/ge211_engine.cxx
+        src/ge211_event.cxx
+        src/ge211_error.cxx
+        src/ge211_geometry.cxx
+        src/ge211_audio.cxx
+        src/ge211_random.cxx
+        src/ge211_render.cxx
+        src/ge211_resource.cxx
+        src/ge211_session.cxx
+        src/ge211_sprites.cxx
+        src/ge211_window.cxx)
 
 set_target_properties(ge211
     PROPERTIES

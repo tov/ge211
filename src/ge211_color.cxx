@@ -1,9 +1,8 @@
-#include "ge211_color.h"
+#include "ge211_color.hxx"
 
 #include <algorithm>
 #include <cmath>
 #include <tuple>
-#include <ge211_color.h>
 
 
 namespace ge211 {

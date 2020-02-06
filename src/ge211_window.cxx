@@ -1,5 +1,5 @@
-#include "ge211_window.h"
-#include "ge211_error.h"
+#include "ge211_window.hxx"
+#include "ge211_error.hxx"
 
 #include <SDL.h>
 

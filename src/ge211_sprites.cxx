@@ -1,5 +1,5 @@
-#include "ge211_sprites.h"
-#include "ge211_error.h"
+#include "ge211_sprites.hxx"
+#include "ge211_error.hxx"
 
 #include <SDL.h>
 #include <SDL_image.h>

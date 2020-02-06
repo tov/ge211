@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ge211_forward.h"
-#include "ge211_util.h"
+#include "ge211_forward.hxx"
+#include "ge211_util.hxx"
 
 #include <SDL_rect.h>
 

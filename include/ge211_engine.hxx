@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ge211_forward.h"
-#include "ge211_render.h"
-#include "ge211_window.h"
+#include "ge211_forward.hxx"
+#include "ge211_render.hxx"
+#include "ge211_window.hxx"
 
 namespace ge211 {
 

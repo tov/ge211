@@ -3,7 +3,7 @@ project(ge211_examples CXX)
 
 find_package(Ge211 CONFIG QUIET)
 
-add_executable(fireworks fireworks.cpp)
+add_executable(fireworks fireworks.cxx)
 target_link_libraries(fireworks ge211)
 set_target_properties(fireworks PROPERTIES
         CXX_STANDARD            14

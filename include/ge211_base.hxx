@@ -1,15 +1,15 @@
 #pragma once
 
-#include "ge211_audio.h"
-#include "ge211_color.h"
-#include "ge211_error.h"
-#include "ge211_event.h"
-#include "ge211_forward.h"
-#include "ge211_geometry.h"
-#include "ge211_random.h"
-#include "ge211_resource.h"
-#include "ge211_session.h"
-#include "ge211_time.h"
+#include "ge211_audio.hxx"
+#include "ge211_color.hxx"
+#include "ge211_error.hxx"
+#include "ge211_event.hxx"
+#include "ge211_forward.hxx"
+#include "ge211_geometry.hxx"
+#include "ge211_random.hxx"
+#include "ge211_resource.hxx"
+#include "ge211_session.hxx"
+#include "ge211_time.hxx"
 
 #include <memory>
 #include <string>
@@ -29,7 +29,7 @@ namespace ge211 {
  * renders it on the screen:
  *
  * ```cpp
- * #include <ge211.h>
+ * #include <ge211.hxx>
  *
  * using namespace ge211;
  *
@@ -58,7 +58,7 @@ namespace ge211 {
  * the mouse goes:
  *
  * ```cpp
- * #include <ge211.h>
+ * #include <ge211.hxx>
  *
  * using namespace ge211;
  *

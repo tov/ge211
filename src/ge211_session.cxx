@@ -1,6 +1,6 @@
-#include "ge211_session.h"
-#include "ge211_error.h"
-#include "ge211_util.h"
+#include "ge211_session.hxx"
+#include "ge211_error.hxx"
+#include "ge211_util.hxx"
 
 #include <SDL.h>
 #include <SDL_image.h>
