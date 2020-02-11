@@ -2,7 +2,7 @@ TAG_FILE = doxygen/cppreference.xml
 TAG_URL = http://upload.cppreference.com/mwiki/images/f/f8/cppreference-doxygen-web.tag.xml
 
 DOXY = doxygen/DoxygenLayout.xml doxygen/FRONTMATTER.md $(TAGFILE)
-SRCS = $(wildcard src/*)
+SRCS = $(wildcard include/*) $(wildcard src/*)
 
 doc: doxygen/Doxyfile $(DOXY) $(SRCS)
 	doxygen $<
