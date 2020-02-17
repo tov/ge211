@@ -52,7 +52,7 @@ A minimal, complete `CMakeLists.txt` for using GE211 might look
 something like this:
 
 ```CMake
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.13)
 project(my_game CXX)
 
 add_subdirectory(3rdparty/ge211 EXCLUDE_FROM_ALL)

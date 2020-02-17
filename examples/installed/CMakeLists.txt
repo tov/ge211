@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.13)
 project(ge211_examples CXX)
 
 find_package(Ge211 CONFIG QUIET)
