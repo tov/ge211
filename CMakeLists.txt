@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.10)
 project(ge211
         VERSION 2019.1.0
         DESCRIPTION "A student game engine"
