@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="contents">
 <div class="textblock"><p>GE211 is a relatively simple game engine for beginning C++ programmers.</p>
 <h2>Use</h2>
-<p>To use the framework, you need to derive your game class from ge211::Abstract_game; so to get started you may want to go straight there. Otherwise, all useful definitions are in the ge211 namespace.</p>
+<p>To use the framework, you need to derive your game class from <a class="el" href="classge211_1_1_abstract__game.html" title="This is the abstract base class for deriving games. ">ge211::Abstract_game</a>; so to get started you may want to go straight there. Otherwise, all useful definitions are in the <a class="el" href="namespacege211.html" title="The game engine namespace. ">ge211</a> namespace.</p>
 <h2>Requirements</h2>
 <p>GE211 depends on the SDL library version 2, along with SDL2 plugin libraries SDL2_image, SDL2_mixer, and SDL2_ttf. You need to install the development versions of these packages, as appropriate for your operating system. They are easy to find on Google, but if you are in a class, your instructor might have an easier way for you to install them.</p>
 <h2>Setup</h2>
@@ -110,7 +110,8 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="fragment"><div class="line">add_subdirectory(3rdparty/ge211 EXCLUDE_FROM_ALL)</div></div><!-- fragment --><p>The <code>EXCLUDE_FROM_ALL</code> flag prevents extra CMake targets from GE211 from appearing in your IDE.</p>
 <p>Adding the subdirectory creates a CMake library target that your program target can be linked against using the <code>target_link_libraries</code> command:</p>
 <div class="fragment"><div class="line">target_link_libraries(my_game ge211)</div></div><!-- fragment --><p>A minimal, complete <code>CMakeLists.txt</code> for using GE211 might look something like this:</p>
-<div class="fragment"><div class="line">cmake_minimum_required(VERSION 3.3)</div><div class="line">project(my_game CXX)</div><div class="line"></div><div class="line">add_subdirectory(3rdparty/ge211 EXCLUDE_FROM_ALL)</div><div class="line"></div><div class="line">add_executable(my_game my_game.cpp)</div><div class="line">target_link_libraries(my_game ge211)</div><div class="line">set_property(TARGET my_game PROPERTY CXX_STANDARD 14)</div><div class="line">set_property(TARGET my_game PROPERTY CXX_STANDARD_REQUIRED On)</div></div><!-- fragment --> </div></div><!-- contents -->
+<div class="fragment"><div class="line">cmake_minimum_required(VERSION 3.13)</div><div class="line">project(my_game CXX)</div><div class="line"></div><div class="line">add_subdirectory(3rdparty/ge211 EXCLUDE_FROM_ALL)</div><div class="line"></div><div class="line">add_executable(my_game my_game.cpp)</div><div class="line">target_link_libraries(my_game ge211)</div><div class="line">set_target_properties(my_game PROPERTIES</div><div class="line">        CXX_STANDARD            14</div><div class="line">        CXX_STANDARD_REQUIRED   On</div><div class="line">        CXX_EXTENSIONS          OFF)</div></div><!-- fragment --><p>To see this in action, see the <code>examples/vendored/</code> submodule. </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

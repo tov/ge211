@@ -5,6 +5,7 @@ var classge211_1_1_color =
     [ "Color", "classge211_1_1_color.html#a46c0b69706251198b103a12f57d9cb19", null ],
     [ "Color", "classge211_1_1_color.html#ab042b957e56bff4e83fe694aeab5cfd2", null ],
     [ "alpha", "classge211_1_1_color.html#a40d80ee8e4398848fe3cea6182489c8a", null ],
+    [ "blend", "classge211_1_1_color.html#a7f610b2ecf4a7ea01bdae156ac1dab33", null ],
     [ "blue", "classge211_1_1_color.html#a2486e2536c47686cfb5118fb17441fa1", null ],
     [ "darken", "classge211_1_1_color.html#af8ed96b8c493dc358ded35dccea9b603", null ],
     [ "desaturate", "classge211_1_1_color.html#a9b76bb37aced4f11b8f980b6ff6dbfdd", null ],

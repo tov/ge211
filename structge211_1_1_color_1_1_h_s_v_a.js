@@ -1,5 +1,6 @@
 var structge211_1_1_color_1_1_h_s_v_a =
 [
+    [ "alpha", "structge211_1_1_color_1_1_h_s_v_a.html#af14753e963ac53ba89dea958ebdf6fe1", null ],
     [ "desaturate", "structge211_1_1_color_1_1_h_s_v_a.html#ab86169e4baf7ba0c56f9454a6ce7d8f6", null ],
     [ "devalue", "structge211_1_1_color_1_1_h_s_v_a.html#a2908d8d6bbaf83ae9aab9064f166f83f", null ],
     [ "fade_in", "structge211_1_1_color_1_1_h_s_v_a.html#a1dfea5f87c91ca4815b5d572b3faf902", null ],
@@ -7,7 +8,10 @@ var structge211_1_1_color_1_1_h_s_v_a =
     [ "revalue", "structge211_1_1_color_1_1_h_s_v_a.html#a7b70b4a11ebb50f3afc3b05c3cca2bc5", null ],
     [ "rotate_hue", "structge211_1_1_color_1_1_h_s_v_a.html#a06ee82c20df87c27eba7fe71e27a642b", null ],
     [ "saturate", "structge211_1_1_color_1_1_h_s_v_a.html#a69f3feaddfbd60031d5599889794ed1f", null ],
+    [ "saturation", "structge211_1_1_color_1_1_h_s_v_a.html#a149d5b813c19a130f2eff4a7a046c36b", null ],
     [ "to_rgba", "structge211_1_1_color_1_1_h_s_v_a.html#abce5668827e54ce562b3d1c6964749af", null ],
+    [ "value", "structge211_1_1_color_1_1_h_s_v_a.html#aa02dca2627deaa8b1508f7432bf9c4da", null ],
+    [ "__pad0__", "structge211_1_1_color_1_1_h_s_v_a.html#a60169550ad8b267caa355b8a21da0e2d", null ],
     [ "alpha", "structge211_1_1_color_1_1_h_s_v_a.html#a20f4c4490bc8ecbdd1ffcb79acce6035", null ],
     [ "hue", "structge211_1_1_color_1_1_h_s_v_a.html#acb126945102d160a9fabc753318b9075", null ],
     [ "saturation", "structge211_1_1_color_1_1_h_s_v_a.html#af8cb639b360600b7ca938a3e275b017f", null ],

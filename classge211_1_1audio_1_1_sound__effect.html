@@ -107,11 +107,11 @@ $(document).ready(function(){initNavTree('classge211_1_1audio_1_1_sound__effect.
 <p>A sound effect track may be <em>empty</em> or <em>non-empty</em>; only non-empty sound effects can actually be played.</p>
 <p>Note that <a class="el" href="classge211_1_1audio_1_1_sound__effect.html" title="A sound effect track, which can be attached to a Mixer channel and played. ">Sound_effect</a> has few public member functions. However, an effect track can be passed to the <a class="el" href="classge211_1_1audio_1_1_mixer.html" title="The entity that coordinates playing all audio tracks. ">Mixer</a> member function <a class="el" href="classge211_1_1audio_1_1_mixer.html#a44e4d21a97285323b523a94380561220" title="Plays the given effect track on this mixer, at the specified volume. ">Mixer::play_effect(Sound_effect, double)</a> to play it. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8h_source.html#l00076">76</a> of file <a class="el" href="ge211__audio_8h_source.html">ge211_audio.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00076">76</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae098446ee951bd399f7d5de4acb8cd57"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1audio_1_1_sound__effect.html#ae098446ee951bd399f7d5de4acb8cd57">Sound_effect</a> (const <a class="elRef" doxygen="/Users/tov/school/eecs211/dev/ge211/doxygen/cppreference.xml:http://en.cppreference.com/w/" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> &amp;filename, const <a class="el" href="classge211_1_1audio_1_1_mixer.html">Mixer</a> &amp;)</td></tr>
+<tr class="memitem:ae098446ee951bd399f7d5de4acb8cd57"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1audio_1_1_sound__effect.html#ae098446ee951bd399f7d5de4acb8cd57">Sound_effect</a> (const std::string &amp;filename, const <a class="el" href="classge211_1_1audio_1_1_mixer.html">Mixer</a> &amp;)</td></tr>
 <tr class="memdesc:ae098446ee951bd399f7d5de4acb8cd57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a new sound effect track from a resource file.  <a href="#ae098446ee951bd399f7d5de4acb8cd57">More...</a><br /></td></tr>
 <tr class="separator:ae098446ee951bd399f7d5de4acb8cd57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abcf0e7bf3ea5b4717e382b82f6bb7443"><td class="memItemLeft" align="right" valign="top"><a id="abcf0e7bf3ea5b4717e382b82f6bb7443"></a>
@@ -136,7 +136,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         <tr>
           <td class="memname"><a class="el" href="classge211_1_1audio_1_1_sound__effect.html">Sound_effect</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="elRef" doxygen="/Users/tov/school/eecs211/dev/ge211/doxygen/cppreference.xml:http://en.cppreference.com/w/" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>filename</em>, </td>
         </tr>
         <tr>
@@ -157,7 +157,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>Supported file formats include WAV, MP3, OGG, FLAC, MID, and ABC.</p>
 <p>Throws <a class="el" href="classge211_1_1exceptions_1_1_file__error.html" title="Indicates an error opening a file. ">exceptions::File_error</a> if the file cannot be opened, and <a class="el" href="classge211_1_1exceptions_1_1_mixer__error.html" title="Indicates an error in the mixer, which could include the inability to understand an audio file format...">exceptions::Mixer_error</a> if the file format cannot be understood. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00058">58</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00058">58</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
@@ -180,13 +180,13 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>Recognizes a non-empty sound effect track. </p>
 <p>Equivalent to <code>!empty()</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00067">67</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00067">67</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/<a class="el" href="ge211__audio_8h_source.html">ge211_audio.h</a></li>
-<li>src/<a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a></li>
+<li>include/<a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a></li>
+<li>src/<a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

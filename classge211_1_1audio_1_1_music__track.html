@@ -112,11 +112,11 @@ $(document).ready(function(){initNavTree('classge211_1_1audio_1_1_music__track.h
 </ul>
 <p>Note also that the mixer can only play one music track at a time. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8h_source.html#l00034">34</a> of file <a class="el" href="ge211__audio_8h_source.html">ge211_audio.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00034">34</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aefb0b7f41354fbac158b64aebc5fdfc0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1audio_1_1_music__track.html#aefb0b7f41354fbac158b64aebc5fdfc0">Music_track</a> (const <a class="elRef" doxygen="/Users/tov/school/eecs211/dev/ge211/doxygen/cppreference.xml:http://en.cppreference.com/w/" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> &amp;filename, const <a class="el" href="classge211_1_1audio_1_1_mixer.html">Mixer</a> &amp;)</td></tr>
+<tr class="memitem:aefb0b7f41354fbac158b64aebc5fdfc0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1audio_1_1_music__track.html#aefb0b7f41354fbac158b64aebc5fdfc0">Music_track</a> (const std::string &amp;filename, const <a class="el" href="classge211_1_1audio_1_1_mixer.html">Mixer</a> &amp;)</td></tr>
 <tr class="memdesc:aefb0b7f41354fbac158b64aebc5fdfc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a new music track from a resource file.  <a href="#aefb0b7f41354fbac158b64aebc5fdfc0">More...</a><br /></td></tr>
 <tr class="separator:aefb0b7f41354fbac158b64aebc5fdfc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a812397c93da0a541b6e252291e03cd62"><td class="memItemLeft" align="right" valign="top"><a id="a812397c93da0a541b6e252291e03cd62"></a>
@@ -141,7 +141,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         <tr>
           <td class="memname"><a class="el" href="classge211_1_1audio_1_1_music__track.html">Music_track</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="elRef" doxygen="/Users/tov/school/eecs211/dev/ge211/doxygen/cppreference.xml:http://en.cppreference.com/w/" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>filename</em>, </td>
         </tr>
         <tr>
@@ -162,7 +162,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>Supported file formats include WAV, MP3, OGG, FLAC, MID, and ABC. However, pausing and resuming does not work correctly with all audio formats.</p>
 <p>Throws <a class="el" href="classge211_1_1exceptions_1_1_file__error.html" title="Indicates an error opening a file. ">exceptions::File_error</a> if the file cannot be opened, and <a class="el" href="classge211_1_1exceptions_1_1_mixer__error.html" title="Indicates an error in the mixer, which could include the inability to understand an audio file format...">exceptions::Mixer_error</a> if the file format cannot be understood. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00035">35</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00035">35</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
@@ -185,13 +185,13 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>Recognizes a non-empty music track. </p>
 <p>Equivalent to <code>!empty()</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00044">44</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00044">44</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/<a class="el" href="ge211__audio_8h_source.html">ge211_audio.h</a></li>
-<li>src/<a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a></li>
+<li>include/<a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a></li>
+<li>src/<a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

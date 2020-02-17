@@ -110,7 +110,7 @@ struct ge211::geometry::Basic_position&lt; T &gt;</h3>
 <p>A position in the T-valued Cartesian plane. </p>
 <p>In graphics, the origin is traditionally in the upper left, so the <em>x</em> coordinate increases to the right and the <em>y</em> coordinate increases downward. Note that much of the library uses <a class="el" href="namespacege211_1_1geometry.html#a6820f820ccaf24da3439a5e45b0e983e" title="Type alias for the most common use of Basic_position, which is with a coordinate type of int...">geometry::Position</a>, which is a type alias for Basic_position&lt;int&gt;. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__forward_8h_source.html#l00074">74</a> of file <a class="el" href="ge211__forward_8h_source.html">ge211_forward.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__forward_8hxx_source.html#l00074">74</a> of file <a class="el" href="ge211__forward_8hxx_source.html">ge211_forward.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -188,7 +188,7 @@ Public Attributes</h2></td></tr>
 <p>The coordinate type for the position. </p>
 <p>This is an alias of type parameter <code>T</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00217">217</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00220">220</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -206,7 +206,7 @@ Public Attributes</h2></td></tr>
 
 <p>A dimensions type having the same coordinate type as this position type. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00220">220</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00223">223</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -237,7 +237,7 @@ Public Attributes</h2></td></tr>
 
 <p>Constructs a position from a <a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html" title="Represents the dimensions of an object, or more generally, the displacement between two Basic_positio...">Basic_dimensions</a>, which gives the displacement of the position from the origin. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00236">236</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00239">239</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -268,7 +268,7 @@ Public Attributes</h2></td></tr>
 
 <p>Constructs the position that is below this position by the given amount. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00270">270</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00273">273</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -298,7 +298,7 @@ Public Attributes</h2></td></tr>
 
 <p>Constructs the position that is below and left of this position by the given dimensions. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00310">310</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00313">313</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -328,7 +328,7 @@ Public Attributes</h2></td></tr>
 
 <p>Constructs the position that is below and right of this position by the given dimensions. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00318">318</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00321">321</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -358,7 +358,7 @@ Public Attributes</h2></td></tr>
 <p>Converts a <a class="el" href="structge211_1_1geometry_1_1_basic__position.html" title="A position in the T-valued Cartesian plane. ">Basic_position</a> to another coordinate type. </p>
 <p>For example:</p>
 <div class="fragment"><div class="line">Basic_position&lt;int&gt; p1{3, 4};</div><div class="line">Basic_position&lt;double&gt; p2 = d1.into&lt;<span class="keywordtype">double</span>&gt;();</div></div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00249">249</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00252">252</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -388,7 +388,7 @@ Public Attributes</h2></td></tr>
 
 <p>Constructs the position that is to the left of this position by the given amount. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00278">278</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00281">281</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -418,7 +418,7 @@ Public Attributes</h2></td></tr>
 
 <p>Constructs the position that is to the right of this position by the given amount. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00286">286</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00289">289</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -448,7 +448,7 @@ Public Attributes</h2></td></tr>
 
 <p>Constructs the position that is above this position by the given amount. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00262">262</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00265">265</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -478,7 +478,7 @@ Public Attributes</h2></td></tr>
 
 <p>Constructs the position that is above and left of this position by the given dimensions. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00294">294</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00297">297</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -508,13 +508,13 @@ Public Attributes</h2></td></tr>
 
 <p>Constructs the position that is above and right of this position by the given dimensions. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00302">302</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00305">305</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
-<li>src/<a class="el" href="ge211__forward_8h_source.html">ge211_forward.h</a></li>
-<li>src/<a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a></li>
+<li>include/<a class="el" href="ge211__forward_8hxx_source.html">ge211_forward.hxx</a></li>
+<li>include/<a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

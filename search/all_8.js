@@ -1,15 +1,11 @@
 var searchData=
 [
-  ['hardware_5fconcurrency',['hardware_concurrency',['http://en.cppreference.com/w/cpp/thread/thread/hardware_concurrency.html',1,'std::thread']]],
-  ['has_5ffacet',['has_facet',['http://en.cppreference.com/w/cpp/locale/has_facet.html',1,'std']]],
-  ['has_5fvirtual_5fdestructor',['has_virtual_destructor',['http://en.cppreference.com/w/cpp/types/has_virtual_destructor.html',1,'std']]],
-  ['hash',['hash',['http://en.cppreference.com/w/cpp/utility/hash.html',1,'hash'],['http://en.cppreference.com/w/cpp/locale/collate/hash.html',1,'std::collate_byname::hash()'],['http://en.cppreference.com/w/cpp/utility/hash/hash.html',1,'std::hash::hash()'],['http://en.cppreference.com/w/cpp/locale/collate/hash.html',1,'std::collate::hash()']]],
-  ['hash_5fcode',['hash_code',['http://en.cppreference.com/w/cpp/types/type_info/hash_code.html',1,'std::type_info::hash_code()'],['http://en.cppreference.com/w/cpp/types/type_index/hash_code.html',1,'std::type_index::hash_code()']]],
-  ['hash_5ffunction',['hash_function',['http://en.cppreference.com/w/cpp/container/unordered_map/hash_function.html',1,'std::unordered_map::hash_function()'],['http://en.cppreference.com/w/cpp/container/unordered_multimap/hash_function.html',1,'std::unordered_multimap::hash_function()'],['http://en.cppreference.com/w/cpp/container/unordered_multiset/hash_function.html',1,'std::unordered_multiset::hash_function()'],['http://en.cppreference.com/w/cpp/container/unordered_set/hash_function.html',1,'std::unordered_set::hash_function()']]],
-  ['hecto',['hecto',['http://en.cppreference.com/w/cpp/numeric/ratio/ratio.html',1,'std']]],
-  ['hex',['hex',['http://en.cppreference.com/w/cpp/io/manip/hex.html',1,'std']]],
-  ['hexfloat',['hexfloat',['http://en.cppreference.com/w/cpp/io/manip/fixed.html',1,'std']]],
-  ['high_5fresolution_5fclock',['high_resolution_clock',['http://en.cppreference.com/w/cpp/chrono/high_resolution_clock.html',1,'std::chrono']]],
-  ['hours',['hours',['http://en.cppreference.com/w/cpp/chrono/duration.html',1,'hours'],['http://en.cppreference.com/w/cpp/chrono/duration/duration.html',1,'std::chrono::hours::hours()']]],
-  ['hypot',['hypot',['http://en.cppreference.com/w/cpp/numeric/math/hypot.html',1,'std']]]
+  ['has_5fnothrow_5farithmetic',['has_nothrow_arithmetic',['../namespacege211.html#a22213b867c970df35398df8d9e35e612',1,'ge211']]],
+  ['has_5fnothrow_5fdivision',['has_nothrow_division',['../namespacege211.html#a8cbfe27919e395ffa21438e50e35fb37',1,'ge211']]],
+  ['hash_3c_20ge211_3a_3abasic_5fposition_3c_20t_20_3e_20_3e',['hash&lt; ge211::Basic_position&lt; T &gt; &gt;',['../structstd_1_1hash_3_01ge211_1_1_basic__position_3_01_t_01_4_01_4.html',1,'std']]],
+  ['height',['height',['../structge211_1_1geometry_1_1_basic__dimensions.html#a050576b0776777b293a8aa065f369292',1,'ge211::geometry::Basic_dimensions::height()'],['../structge211_1_1geometry_1_1_basic__rectangle.html#a050576b0776777b293a8aa065f369292',1,'ge211::geometry::Basic_rectangle::height()']]],
+  ['host_5ferror',['Host_error',['../classge211_1_1exceptions_1_1_host__error.html',1,'ge211::exceptions']]],
+  ['hsla',['HSLA',['../structge211_1_1_color_1_1_h_s_l_a.html',1,'ge211::Color']]],
+  ['hsva',['HSVA',['../structge211_1_1_color_1_1_h_s_v_a.html',1,'ge211::Color']]],
+  ['hue',['hue',['../structge211_1_1_color_1_1_h_s_l_a.html#acb126945102d160a9fabc753318b9075',1,'ge211::Color::HSLA::hue()'],['../structge211_1_1_color_1_1_h_s_v_a.html#acb126945102d160a9fabc753318b9075',1,'ge211::Color::HSVA::hue()']]]
 ];

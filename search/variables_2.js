@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['centered',['centered',['../classge211_1_1_window.html#a6827bb057cd77caec505e884e921689a',1,'ge211::Window']]]
+  ['background_5fcolor',['background_color',['../classge211_1_1_abstract__game.html#a3af4612678da78558adccf47e17164bb',1,'ge211::Abstract_game']]]
 ];

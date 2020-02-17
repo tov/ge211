@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('classge211_1_1_window.html','');});
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Provides access to the game window and its properties. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__window_8h_source.html#l00012">12</a> of file <a class="el" href="ge211__window_8h_source.html">ge211_window.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__window_8hxx_source.html#l00014">14</a> of file <a class="el" href="ge211__window_8hxx_source.html">ge211_window.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -128,17 +128,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:afad9f246c18c65d1e261ace7e9b64f94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current title of this window.  <a href="#afad9f246c18c65d1e261ace7e9b64f94">More...</a><br /></td></tr>
 <tr class="separator:afad9f246c18c65d1e261ace7e9b64f94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3da96287f3a4498fbade3e3ee42fdd7a"><td class="memItemLeft" align="right" valign="top"><a id="a3da96287f3a4498fbade3e3ee42fdd7a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_window.html#a3da96287f3a4498fbade3e3ee42fdd7a">set_title</a> (const <a class="elRef" doxygen="/Users/tov/school/eecs211/dev/ge211/doxygen/cppreference.xml:http://en.cppreference.com/w/" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> &amp;) noexcept</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_window.html#a3da96287f3a4498fbade3e3ee42fdd7a">set_title</a> (const std::string &amp;) noexcept</td></tr>
 <tr class="memdesc:a3da96287f3a4498fbade3e3ee42fdd7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the title of this window. <br /></td></tr>
 <tr class="separator:a3da96287f3a4498fbade3e3ee42fdd7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae99bf15da159c9f72f7793808e274abe"><td class="memItemLeft" align="right" valign="top"><a id="ae99bf15da159c9f72f7793808e274abe"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_window.html#ae99bf15da159c9f72f7793808e274abe">get_resizeable</a> () const noexcept</td></tr>
-<tr class="memdesc:ae99bf15da159c9f72f7793808e274abe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the user can resize this window. <br /></td></tr>
-<tr class="separator:ae99bf15da159c9f72f7793808e274abe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17122bb835b848c464c9b5662b5134d6"><td class="memItemLeft" align="right" valign="top"><a id="a17122bb835b848c464c9b5662b5134d6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_window.html#a17122bb835b848c464c9b5662b5134d6">set_resizeable</a> (bool) noexcept</td></tr>
-<tr class="memdesc:a17122bb835b848c464c9b5662b5134d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes whether the user can resize this window. <br /></td></tr>
-<tr class="separator:a17122bb835b848c464c9b5662b5134d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7a580b2d5460cf2e38d4ed44d7e5dfc"><td class="memItemLeft" align="right" valign="top"><a id="ad7a580b2d5460cf2e38d4ed44d7e5dfc"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_window.html#ad7a580b2d5460cf2e38d4ed44d7e5dfc">get_fullscreen</a> () const noexcept</td></tr>
 <tr class="memdesc:ad7a580b2d5460cf2e38d4ed44d7e5dfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the program is in fullscreen mode. <br /></td></tr>
@@ -188,7 +180,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Gets the position of the upper-left corner of the window with respect to the upper-left corner of the screen. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__window_8cpp_source.html#l00063">63</a> of file <a class="el" href="ge211__window_8cpp_source.html">ge211_window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__window_8cxx_source.html#l00065">65</a> of file <a class="el" href="ge211__window_8cxx_source.html">ge211_window.cxx</a>.</p>
 
 </div>
 </div>
@@ -216,9 +208,9 @@ Static Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns the current title of this window. </p>
-<p>The returned pointer should not be freed by the client. It is borrowed from a buffer stored within the window, and should be valid until the next call to <a class="el" href="classge211_1_1_window.html#a3da96287f3a4498fbade3e3ee42fdd7a" title="Changes the title of this window. ">set_title(const std::string&amp;)</a>. Copy it to a <a class="elRef" doxygen="/Users/tov/school/eecs211/dev/ge211/doxygen/cppreference.xml:http://en.cppreference.com/w/" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> if you need to hold it longer. </p>
+<p>The returned pointer should not be freed by the client. It is borrowed from a buffer stored within the window, and should be valid until the next call to <a class="el" href="classge211_1_1_window.html#a3da96287f3a4498fbade3e3ee42fdd7a" title="Changes the title of this window. ">set_title(const std::string&amp;)</a>. Copy it to a std::string if you need to hold it longer. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__window_8cpp_source.html#l00043">43</a> of file <a class="el" href="ge211__window_8cpp_source.html">ge211_window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__window_8cxx_source.html#l00043">43</a> of file <a class="el" href="ge211__window_8cxx_source.html">ge211_window.cxx</a>.</p>
 
 </div>
 </div>
@@ -248,7 +240,7 @@ Static Public Attributes</h2></td></tr>
 <p>Returns the maximum dimensions for a fullscreen window. </p>
 <p>Call this before switching to fullscreen mode, since if you fullscreen a smaller window, the video mode may change. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__window_8cpp_source.html#l00090">90</a> of file <a class="el" href="ge211__window_8cpp_source.html">ge211_window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__window_8cxx_source.html#l00092">92</a> of file <a class="el" href="ge211__window_8cxx_source.html">ge211_window.cxx</a>.</p>
 
 </div>
 </div>
@@ -278,7 +270,7 @@ Static Public Attributes</h2></td></tr>
 <p>Returns the maximum dimensions for a non-fullscreen window. </p>
 <p>This is the size of the screen, minus space reserved for the system (such as the Windows taskbar or Mac menu and dock). </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__window_8cpp_source.html#l00097">97</a> of file <a class="el" href="ge211__window_8cpp_source.html">ge211_window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__window_8cxx_source.html#l00099">99</a> of file <a class="el" href="ge211__window_8cxx_source.html">ge211_window.cxx</a>.</p>
 
 </div>
 </div>
@@ -301,7 +293,7 @@ Static Public Attributes</h2></td></tr>
 <p>Changes the size of the window. </p>
 <p>Throws <a class="el" href="classge211_1_1exceptions_1_1_environment__error.html" title="Indicates that an error was encountered by the game engine or in the client&#39;s environment. ">exceptions::Environment_error</a> if the dimensions are negative or outside the allowable range. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__window_8cpp_source.html#l00035">35</a> of file <a class="el" href="ge211__window_8cpp_source.html">ge211_window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__window_8cxx_source.html#l00035">35</a> of file <a class="el" href="ge211__window_8cxx_source.html">ge211_window.cxx</a>.</p>
 
 </div>
 </div>
@@ -324,7 +316,7 @@ Static Public Attributes</h2></td></tr>
 <p>Sets whether the program should be in fullscreen mode. </p>
 <p>Throws <a class="el" href="classge211_1_1exceptions_1_1_host__error.html" title="Indicates an exception from the host environment being passed along by ge211. ">exceptions::Host_error</a> if change fails. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__window_8cpp_source.html#l00082">82</a> of file <a class="el" href="ge211__window_8cpp_source.html">ge211_window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__window_8cxx_source.html#l00084">84</a> of file <a class="el" href="ge211__window_8cxx_source.html">ge211_window.cxx</a>.</p>
 
 </div>
 </div>
@@ -346,7 +338,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Sets the position of the upper-left corner of the window with respect to the upper-left corner of the screen. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__window_8cpp_source.html#l00070">70</a> of file <a class="el" href="ge211__window_8cpp_source.html">ge211_window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__window_8cxx_source.html#l00072">72</a> of file <a class="el" href="ge211__window_8cxx_source.html">ge211_window.cxx</a>.</p>
 
 </div>
 </div>
@@ -373,13 +365,13 @@ Static Public Attributes</h2></td></tr>
 
 <p>A special value to pass to <a class="el" href="classge211_1_1_window.html#ac6cc63cb8ce7e1891860d88844f41b47" title="Sets the position of the upper-left corner of the window with respect to the upper-left corner of the...">set_position(Position)</a> to center the window on the screen. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__window_8h_source.html#l00029">29</a> of file <a class="el" href="ge211__window_8h_source.html">ge211_window.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__window_8hxx_source.html#l00031">31</a> of file <a class="el" href="ge211__window_8hxx_source.html">ge211_window.hxx</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/<a class="el" href="ge211__window_8h_source.html">ge211_window.h</a></li>
-<li>src/<a class="el" href="ge211__window_8cpp_source.html">ge211_window.cpp</a></li>
+<li>include/<a class="el" href="ge211__window_8hxx_source.html">ge211_window.hxx</a></li>
+<li>src/<a class="el" href="ge211__window_8cxx_source.html">ge211_window.cxx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

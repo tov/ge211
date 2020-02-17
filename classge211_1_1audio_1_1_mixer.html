@@ -109,7 +109,7 @@ $(document).ready(function(){initNavTree('classge211_1_1audio_1_1_mixer.html',''
 <p>For playing background music, one <a class="el" href="classge211_1_1audio_1_1_music__track.html" title="A music track, which can be attached to the Mixer and played. ">Music_track</a> can be <em>attached</em> to the mixer at any given time, using <a class="el" href="classge211_1_1audio_1_1_mixer.html#a5e4ec9c6d45c070e1393e4618f9ef8b2" title="Attaches the given music track to this mixer. ">Mixer::attach_music(Music_track)</a>. Once a <a class="el" href="classge211_1_1audio_1_1_music__track.html" title="A music track, which can be attached to the Mixer and played. ">Music_track</a> is attached, it can be played with Mixer::resume(Duration) and paused with <a class="el" href="classge211_1_1audio_1_1_mixer.html#a719fb22740078909c02b8ceae673dc49" title="Pauses the currently attached music, fading out if requested. ">Mixer::pause_music(Duration)</a>. A <a class="el" href="classge211_1_1audio_1_1_music__track.html" title="A music track, which can be attached to the Mixer and played. ">Music_track</a> can be both attached and played with <a class="el" href="classge211_1_1audio_1_1_mixer.html#a2838a830ec261732a92d6661e8f7896d" title="Attaches the given music track to this mixer and starts it playing. ">Mixer::play_music(Music_track)</a>. The music channel is always in one of four states, of type <a class="el" href="classge211_1_1audio_1_1_mixer.html#a5d74787dedbc4e11c1ab15bf487e61f8" title="The state of an audio channel. ">audio::Mixer::State</a>, which can be retrieved by <a class="el" href="classge211_1_1audio_1_1_mixer.html#a3947f21f830ecb981cb8a3f422ded52a" title="Returns the current state of the attached music, if any. ">Mixer::get_music_state() const</a>. Note that the validity of music operations depends on what state the mixer's music channel is in. For example, it is an error to attach a <a class="el" href="classge211_1_1audio_1_1_music__track.html" title="A music track, which can be attached to the Mixer and played. ">Music_track</a> to the mixer when music is already playing or fading out.</p>
 <p>For playing sound effects, multiple <a class="el" href="classge211_1_1audio_1_1_sound__effect.html" title="A sound effect track, which can be attached to a Mixer channel and played. ">Sound_effect</a>s can be attached to the mixer simultaneously. A <a class="el" href="classge211_1_1audio_1_1_sound__effect.html" title="A sound effect track, which can be attached to a Mixer channel and played. ">Sound_effect</a> is attached and played using the <a class="el" href="classge211_1_1audio_1_1_mixer.html#a44e4d21a97285323b523a94380561220" title="Plays the given effect track on this mixer, at the specified volume. ">Mixer::play_effect(Sound_effect, double)</a> member function, which also allows specifying the volume of the sound effect. If nothing further is done, the sound effect plays to completion and then detaches, making room to attach more sound effects; however, <a class="el" href="classge211_1_1audio_1_1_mixer.html#a44e4d21a97285323b523a94380561220" title="Plays the given effect track on this mixer, at the specified volume. ">Mixer::play_effect(Sound_effect, double)</a> returns a <a class="el" href="classge211_1_1audio_1_1_sound__effect__handle.html" title="Used to control a Sound_effect after it is started playing on a Mixer. ">Sound_effect_handle</a>, which can be used to control the sound effect while it is playing as well. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8h_source.html#l00142">142</a> of file <a class="el" href="ge211__audio_8h_source.html">ge211_audio.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00142">142</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -223,7 +223,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8h_source.html#l00146">146</a> of file <a class="el" href="ge211__audio_8h_source.html">ge211_audio.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00146">146</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
 
 </div>
 </div>
@@ -251,7 +251,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <li><code><a class="el" href="classge211_1_1audio_1_1_mixer.html#a3947f21f830ecb981cb8a3f422ded52a" title="Returns the current state of the attached music, if any. ">get_music_state()</a></code> is <code>paused</code> or <code>detached</code>; throws <a class="el" href="classge211_1_1exceptions_1_1_client__logic__error.html" title="An exception that indicates that a logic error was performed by the client. ">exceptions::Client_logic_error</a> if violated. </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00111">111</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00111">111</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
@@ -272,7 +272,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 <p>How many effect channels are currently unused? If this is positive, then we can play an additional sound effect with <a class="el" href="classge211_1_1audio_1_1_mixer.html#a44e4d21a97285323b523a94380561220" title="Plays the given effect track on this mixer, at the specified volume. ">Mixer::play_effect(Sound_effect, double)</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00345">345</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00345">345</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
@@ -308,7 +308,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </ol>
 <p>Cases 2 and 3 happen only between frames, and not asynchronously while computing the next frame. This means that after checking the result of <code><a class="el" href="classge211_1_1audio_1_1_mixer.html#a3947f21f830ecb981cb8a3f422ded52a" title="Returns the current state of the attached music, if any. ">get_music_state()</a></code> const, that state continues to hold, and can be relied on, at least until the end of the frame, unless the client requests that it be changed (case 1). </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8h_source.html#l00232">232</a> of file <a class="el" href="ge211__audio_8h_source.html">ge211_audio.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00232">232</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
 
 </div>
 </div>
@@ -330,7 +330,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>Returns the music volume as a number from 0.0 to 1.0. </p>
 <p>Initially this will be 1.0, but you can lower it with <a class="el" href="classge211_1_1audio_1_1_mixer.html#a0ae3b978f05c3ba7468f2a0509413b30" title="Sets the music volume, on a scale from 0.0 to 1.0. ">Mixer::set_music_volume(double)</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00367">367</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00367">367</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
@@ -356,7 +356,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <li><code><a class="el" href="classge211_1_1audio_1_1_mixer.html#a3947f21f830ecb981cb8a3f422ded52a" title="Returns the current state of the attached music, if any. ">get_music_state()</a></code> is <code>paused</code> or <code>playing</code>; throws <a class="el" href="classge211_1_1exceptions_1_1_client__logic__error.html" title="An exception that indicates that a logic error was performed by the client. ">exceptions::Client_logic_error</a> if violated. </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00159">159</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00159">159</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
@@ -394,7 +394,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <li><code>!effect.empty()</code>, undefined behavior if violated. </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00256">256</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00256">256</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
@@ -421,7 +421,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <li><code><a class="el" href="classge211_1_1audio_1_1_mixer.html#a3947f21f830ecb981cb8a3f422ded52a" title="Returns the current state of the attached music, if any. ">get_music_state()</a></code> is <code>paused</code> or <code>detached</code>; throws <a class="el" href="classge211_1_1exceptions_1_1_client__logic__error.html" title="An exception that indicates that a logic error was performed by the client. ">exceptions::Client_logic_error</a> if violated. </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00105">105</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00105">105</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
@@ -447,7 +447,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <li><code><a class="el" href="classge211_1_1audio_1_1_mixer.html#a3947f21f830ecb981cb8a3f422ded52a" title="Returns the current state of the attached music, if any. ">get_music_state()</a></code> is <code>paused</code> or <code>playing</code>; throws <a class="el" href="classge211_1_1exceptions_1_1_client__logic__error.html" title="An exception that indicates that a logic error was performed by the client. ">exceptions::Client_logic_error</a> if violated. </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00134">134</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00134">134</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
@@ -472,13 +472,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <li><code><a class="el" href="classge211_1_1audio_1_1_mixer.html#a3947f21f830ecb981cb8a3f422ded52a" title="Returns the current state of the attached music, if any. ">get_music_state()</a></code> is <code>paused</code>; throws <a class="el" href="classge211_1_1exceptions_1_1_client__logic__error.html" title="An exception that indicates that a logic error was performed by the client. ">exceptions::Client_logic_error</a> if violated. </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00185">185</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00185">185</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/<a class="el" href="ge211__audio_8h_source.html">ge211_audio.h</a></li>
-<li>src/<a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a></li>
+<li>include/<a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a></li>
+<li>src/<a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

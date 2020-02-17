@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('classge211_1_1events_1_1_key.html','')
 <p>Here is an example distinguishing several keys by switching on their properties:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> on_key(<a class="code" href="classge211_1_1events_1_1_key.html#af98ffb37bd7143548def867be8a309ca">Key</a> key)<span class="keyword"> override</span></div><div class="line"><span class="keyword"></span>{</div><div class="line">    <span class="keywordflow">switch</span> (key.type()) {</div><div class="line">    <span class="keywordflow">case</span> <a class="code" href="classge211_1_1events_1_1_key.html#a1d1cfd8ffb84e947f82999c682b666a7a46c48bec0d282018b9d167eef7711b2c">Key::Type::up</a>:</div><div class="line">        move_up();</div><div class="line">        <span class="keywordflow">break</span>;</div><div class="line">    <span class="keywordflow">case</span> <a class="code" href="classge211_1_1events_1_1_key.html#a1d1cfd8ffb84e947f82999c682b666a7a74e8333ad11685ff3bdae589c8f6e34d">Key::Type::down</a>:</div><div class="line">        move_down();</div><div class="line">        <span class="keywordflow">break</span>;</div><div class="line">    <span class="keywordflow">case</span> <a class="code" href="classge211_1_1events_1_1_key.html#a1d1cfd8ffb84e947f82999c682b666a7ac13367945d5d4c91047b3b50234aa7ab">Key::Type::code</a>: {</div><div class="line">        <span class="keywordtype">char</span> c = key.code();</div><div class="line">        <span class="keywordflow">switch</span> (c) {</div><div class="line">        <span class="keywordflow">case</span> <span class="charliteral">&#39;\b&#39;</span>:</div><div class="line">            backspace();</div><div class="line">            <span class="keywordflow">break</span>;</div><div class="line">        <span class="keywordflow">case</span> <span class="charliteral">&#39;\r&#39;</span>:</div><div class="line">            enter();</div><div class="line">            <span class="keywordflow">break</span>;</div><div class="line">        <span class="keywordflow">default</span>:</div><div class="line">            add_to_buffer(c);</div><div class="line">        }</div><div class="line">        <span class="keywordflow">break</span>;</div><div class="line">   }</div><div class="line">}</div></div><!-- fragment --><p>Currently this type supports keys that deliver Unicode values using whatever input method is supported by your operating system, as well as the arrow keys and modifier keys shift, control, option/alt, and command/meta. If you need to handle other keys, contact me and I will add them. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__event_8h_source.html#l00119">119</a> of file <a class="el" href="ge211__event_8h_source.html">ge211_event.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__event_8hxx_source.html#l00124">124</a> of file <a class="el" href="ge211__event_8hxx_source.html">ge211_event.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -150,8 +150,8 @@ char32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <tr class="memitem:aa1cc89b6c65b5df065af69b46e65d93f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1events_1_1_key.html#aa1cc89b6c65b5df065af69b46e65d93f">is_textual</a> () const noexcept</td></tr>
 <tr class="memdesc:aa1cc89b6c65b5df065af69b46e65d93f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Does the key represent printable text? This is true for some but not all <a class="el" href="classge211_1_1events_1_1_key.html#a1d1cfd8ffb84e947f82999c682b666a7ac13367945d5d4c91047b3b50234aa7ab" title="Indicates a key with an Unicode value, which can be gotten with Key::code() const. ">Type::code</a> keys.  <a href="#aa1cc89b6c65b5df065af69b46e65d93f">More...</a><br /></td></tr>
 <tr class="separator:aa1cc89b6c65b5df065af69b46e65d93f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0fccc6a22afa07f575ade365343a794d"><td class="memItemLeft" align="right" valign="top"><a class="elRef" doxygen="/Users/tov/school/eecs211/dev/ge211/doxygen/cppreference.xml:http://en.cppreference.com/w/" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1events_1_1_key.html#a0fccc6a22afa07f575ade365343a794d">as_text</a> () const</td></tr>
-<tr class="memdesc:a0fccc6a22afa07f575ade365343a794d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a representation of the key's code as a <a class="elRef" doxygen="/Users/tov/school/eecs211/dev/ge211/doxygen/cppreference.xml:http://en.cppreference.com/w/" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>.  <a href="#a0fccc6a22afa07f575ade365343a794d">More...</a><br /></td></tr>
+<tr class="memitem:a0fccc6a22afa07f575ade365343a794d"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1events_1_1_key.html#a0fccc6a22afa07f575ade365343a794d">as_text</a> () const</td></tr>
+<tr class="memdesc:a0fccc6a22afa07f575ade365343a794d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a representation of the key's code as a std::string.  <a href="#a0fccc6a22afa07f575ade365343a794d">More...</a><br /></td></tr>
 <tr class="separator:a0fccc6a22afa07f575ade365343a794d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
@@ -244,7 +244,7 @@ static <a class="el" href="classge211_1_1events_1_1_key.html">Key</a>&#160;</td>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="ge211__event_8h_source.html#l00172">172</a> of file <a class="el" href="ge211__event_8h_source.html">ge211_event.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__event_8hxx_source.html#l00177">177</a> of file <a class="el" href="ge211__event_8hxx_source.html">ge211_event.hxx</a>.</p>
 
 </div>
 </div>
@@ -256,7 +256,7 @@ static <a class="el" href="classge211_1_1events_1_1_key.html">Key</a>&#160;</td>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="elRef" doxygen="/Users/tov/school/eecs211/dev/ge211/doxygen/cppreference.xml:http://en.cppreference.com/w/" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> as_text </td>
+          <td class="memname">std::string as_text </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -264,11 +264,11 @@ static <a class="el" href="classge211_1_1events_1_1_key.html">Key</a>&#160;</td>
       </table>
 </div><div class="memdoc">
 
-<p>Returns a representation of the key's code as a <a class="elRef" doxygen="/Users/tov/school/eecs211/dev/ge211/doxygen/cppreference.xml:http://en.cppreference.com/w/" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>. </p>
+<p>Returns a representation of the key's code as a std::string. </p>
 <p>This could be useful if you want to capture typing text, rather than game control, because concatenating a string to a string is easier than concatenating the <code>char32_t</code> <a class="el" href="classge211_1_1events_1_1_key.html#ab1652c8baf804eed5d74ad37f13e1ba3" title="The Unicode code point of the key, if it has one. ">code() const </a>to a string, when that could be an arbitrary Unicode code point.</p>
 <p>The result of this function is only meaningful when <a class="el" href="classge211_1_1events_1_1_key.html#aa1cc89b6c65b5df065af69b46e65d93f" title="Does the key represent printable text? This is true for some but not all Type::code keys...">is_textual() const </a>returns true. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__event_8cpp_source.html#l00141">141</a> of file <a class="el" href="ge211__event_8cpp_source.html">ge211_event.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__event_8cxx_source.html#l00141">141</a> of file <a class="el" href="ge211__event_8cxx_source.html">ge211_event.cxx</a>.</p>
 
 </div>
 </div>
@@ -299,7 +299,7 @@ static <a class="el" href="classge211_1_1events_1_1_key.html">Key</a>&#160;</td>
 <p>Constructs a key with the given Unicode code point code. </p>
 <p>Throws <a class="el" href="classge211_1_1exceptions_1_1_client__logic__error.html" title="An exception that indicates that a logic error was performed by the client. ">exceptions::Client_logic_error</a> if <code>c</code> is not a valid Unicode code point. Valid code points are from 0 to 0x10FFFF, <a href="https://en.wikipedia.org/wiki/Universal_Character_Set_characters#Surrogates">except for 0xD800 to 0xDFFF</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__event_8h_source.html#l00133">133</a> of file <a class="el" href="ge211__event_8h_source.html">ge211_event.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__event_8hxx_source.html#l00138">138</a> of file <a class="el" href="ge211__event_8hxx_source.html">ge211_event.hxx</a>.</p>
 
 </div>
 </div>
@@ -329,7 +329,7 @@ static <a class="el" href="classge211_1_1events_1_1_key.html">Key</a>&#160;</td>
 <p>Does the key represent printable text? This is true for some but not all <a class="el" href="classge211_1_1events_1_1_key.html#a1d1cfd8ffb84e947f82999c682b666a7ac13367945d5d4c91047b3b50234aa7ab" title="Indicates a key with an Unicode value, which can be gotten with Key::code() const. ">Type::code</a> keys. </p>
 <p>It's never true for other types of keys. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__event_8cpp_source.html#l00136">136</a> of file <a class="el" href="ge211__event_8cpp_source.html">ge211_event.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__event_8cxx_source.html#l00136">136</a> of file <a class="el" href="ge211__event_8cxx_source.html">ge211_event.cxx</a>.</p>
 
 </div>
 </div>
@@ -359,13 +359,13 @@ static <a class="el" href="classge211_1_1events_1_1_key.html">Key</a>&#160;</td>
 <p>Constructs an invalid or unknown key. </p>
 <p>This returns the same value as the default constructor <a class="el" href="classge211_1_1events_1_1_key.html#af98ffb37bd7143548def867be8a309ca" title="Constructs the empty key, with type Key::Type::other. ">Key()</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__event_8h_source.html#l00167">167</a> of file <a class="el" href="ge211__event_8h_source.html">ge211_event.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__event_8hxx_source.html#l00172">172</a> of file <a class="el" href="ge211__event_8hxx_source.html">ge211_event.hxx</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/<a class="el" href="ge211__event_8h_source.html">ge211_event.h</a></li>
-<li>src/<a class="el" href="ge211__event_8cpp_source.html">ge211_event.cpp</a></li>
+<li>include/<a class="el" href="ge211__event_8hxx_source.html">ge211_event.hxx</a></li>
+<li>src/<a class="el" href="ge211__event_8cxx_source.html">ge211_event.cxx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

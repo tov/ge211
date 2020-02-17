@@ -107,10 +107,19 @@ $(document).ready(function(){initNavTree('structge211_1_1_color_1_1_h_s_v_a.html
 <div class="textblock"><p>Representation for the hue-saturation-value-alpha color model. </p>
 <p>See <a href="https://en.wikipedia.org/wiki/HSL_and_HSV">Wikipedia</a> for details on color models. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8h_source.html#l00216">216</a> of file <a class="el" href="ge211__color_8h_source.html">ge211_color.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8hxx_source.html#l00230">230</a> of file <a class="el" href="ge211__color_8hxx_source.html">ge211_color.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a149d5b813c19a130f2eff4a7a046c36b"><td class="memItemLeft" align="right" valign="top"><a id="a149d5b813c19a130f2eff4a7a046c36b"></a>
+noexcept&#160;</td><td class="memItemRight" valign="bottom"><b>saturation</b> (saturation)</td></tr>
+<tr class="separator:a149d5b813c19a130f2eff4a7a046c36b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa02dca2627deaa8b1508f7432bf9c4da"><td class="memItemLeft" align="right" valign="top"><a id="aa02dca2627deaa8b1508f7432bf9c4da"></a>
+noexcept&#160;</td><td class="memItemRight" valign="bottom"><b>value</b> (value)</td></tr>
+<tr class="separator:aa02dca2627deaa8b1508f7432bf9c4da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af14753e963ac53ba89dea958ebdf6fe1"><td class="memItemLeft" align="right" valign="top"><a id="af14753e963ac53ba89dea958ebdf6fe1"></a>
+noexcept&#160;</td><td class="memItemRight" valign="bottom"><b>alpha</b> (alpha)</td></tr>
+<tr class="separator:af14753e963ac53ba89dea958ebdf6fe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abce5668827e54ce562b3d1c6964749af"><td class="memItemLeft" align="right" valign="top"><a id="abce5668827e54ce562b3d1c6964749af"></a>
 <a class="el" href="classge211_1_1_color.html">Color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structge211_1_1_color_1_1_h_s_v_a.html#abce5668827e54ce562b3d1c6964749af">to_rgba</a> () const noexcept</td></tr>
 <tr class="memdesc:abce5668827e54ce562b3d1c6964749af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts color to the RGBA color model. <br /></td></tr>
@@ -152,6 +161,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a20f4c4490bc8ecbdd1ffcb79acce6035"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structge211_1_1_color_1_1_h_s_v_a.html#a20f4c4490bc8ecbdd1ffcb79acce6035">alpha</a></td></tr>
 <tr class="memdesc:a20f4c4490bc8ecbdd1ffcb79acce6035"><td class="mdescLeft">&#160;</td><td class="mdescRight">The opacity of the color, from 0.0 (fully transparent) to 1.0 (fully opaque).  <a href="#a20f4c4490bc8ecbdd1ffcb79acce6035">More...</a><br /></td></tr>
 <tr class="separator:a20f4c4490bc8ecbdd1ffcb79acce6035"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60169550ad8b267caa355b8a21da0e2d"><td class="memItemLeft" align="right" valign="top">noexcept&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structge211_1_1_color_1_1_h_s_v_a.html#a60169550ad8b267caa355b8a21da0e2d">__pad0__</a>: <a class="el" href="structge211_1_1_color_1_1_h_s_v_a.html#acb126945102d160a9fabc753318b9075">hue</a>(<a class="el" href="structge211_1_1_color_1_1_h_s_v_a.html#acb126945102d160a9fabc753318b9075">hue</a>)</td></tr>
+<tr class="memdesc:a60169550ad8b267caa355b8a21da0e2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a hue-saturation-value-alpha color from its unit interval components.  <a href="#a60169550ad8b267caa355b8a21da0e2d">More...</a><br /></td></tr>
+<tr class="separator:a60169550ad8b267caa355b8a21da0e2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="ab86169e4baf7ba0c56f9454a6ce7d8f6"></a>
@@ -181,7 +193,7 @@ Public Attributes</h2></td></tr>
 <p>Produces a weaker tone by desaturating the color. </p>
 <p>The <code>unit_amount</code> must be between 0 and 1, where 0 leaves the color the same, and 1 produces gray at the same lightness as the original color. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8cpp_source.html#l00243">243</a> of file <a class="el" href="ge211__color_8cpp_source.html">ge211_color.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8cxx_source.html#l00255">255</a> of file <a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a>.</p>
 
 </div>
 </div>
@@ -212,7 +224,7 @@ Public Attributes</h2></td></tr>
 <p>Produces a darker color by decreasing the value. </p>
 <p>The <code>unit_amount</code> must be between 0 and 1, where 0 leaves the color the same, and 1 produces black. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8cpp_source.html#l00253">253</a> of file <a class="el" href="ge211__color_8cpp_source.html">ge211_color.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8cxx_source.html#l00265">265</a> of file <a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a>.</p>
 
 </div>
 </div>
@@ -243,7 +255,7 @@ Public Attributes</h2></td></tr>
 <p>Increases opacity of the color. </p>
 <p>The <code>unit_amount</code> must be between 0 and 1, where 0 leaves the color the same, and 1 produces a fully opaque color. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8cpp_source.html#l00258">258</a> of file <a class="el" href="ge211__color_8cpp_source.html">ge211_color.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8cxx_source.html#l00270">270</a> of file <a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a>.</p>
 
 </div>
 </div>
@@ -274,7 +286,7 @@ Public Attributes</h2></td></tr>
 <p>Decreases opacity of the color. </p>
 <p>The // <code>unit_amount</code> must be between 0 and 1, where 0 leaves the color the same, and 1 produces full transparency. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8cpp_source.html#l00263">263</a> of file <a class="el" href="ge211__color_8cpp_source.html">ge211_color.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8cxx_source.html#l00275">275</a> of file <a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a>.</p>
 
 </div>
 </div>
@@ -305,7 +317,7 @@ Public Attributes</h2></td></tr>
 <p>Produces a brighter color by increasing the value. </p>
 <p>The <code>unit_amount</code> must be between 0 and 1, where 0 leaves the color the same, and 1 produces a fully bright color. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8cpp_source.html#l00248">248</a> of file <a class="el" href="ge211__color_8cpp_source.html">ge211_color.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8cxx_source.html#l00260">260</a> of file <a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a>.</p>
 
 </div>
 </div>
@@ -335,7 +347,7 @@ Public Attributes</h2></td></tr>
 
 <p>Returns a color by rotating the hue, leaving the other properties constant. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8cpp_source.html#l00231">231</a> of file <a class="el" href="ge211__color_8cpp_source.html">ge211_color.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8cxx_source.html#l00243">243</a> of file <a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a>.</p>
 
 </div>
 </div>
@@ -366,11 +378,29 @@ Public Attributes</h2></td></tr>
 <p>Produces a fuller tone by saturating the color. </p>
 <p>The <code>unit_amount</code> must be between 0 and 1, where 0 leaves the color the same, and 1 produces a fully saturated color. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8cpp_source.html#l00238">238</a> of file <a class="el" href="ge211__color_8cpp_source.html">ge211_color.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8cxx_source.html#l00250">250</a> of file <a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a60169550ad8b267caa355b8a21da0e2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60169550ad8b267caa355b8a21da0e2d">&#9670;&nbsp;</a></span>__pad0__</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">noexcept __pad0__</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructs a hue-saturation-value-alpha color from its unit interval components. </p>
+
+<p class="definition">Definition at line <a class="el" href="ge211__color_8hxx_source.html#l00250">250</a> of file <a class="el" href="ge211__color_8hxx_source.html">ge211_color.hxx</a>.</p>
+
+</div>
+</div>
 <a id="a20f4c4490bc8ecbdd1ffcb79acce6035"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a20f4c4490bc8ecbdd1ffcb79acce6035">&#9670;&nbsp;</a></span>alpha</h2>
 
@@ -385,7 +415,7 @@ Public Attributes</h2></td></tr>
 
 <p>The opacity of the color, from 0.0 (fully transparent) to 1.0 (fully opaque). </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8h_source.html#l00228">228</a> of file <a class="el" href="ge211__color_8h_source.html">ge211_color.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8hxx_source.html#l00243">243</a> of file <a class="el" href="ge211__color_8hxx_source.html">ge211_color.hxx</a>.</p>
 
 </div>
 </div>
@@ -404,7 +434,7 @@ Public Attributes</h2></td></tr>
 <p>The hue in degrees from 0 to 360. </p>
 <p>0° (and 360°) is red, 120° is green, and 240° is blue. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8h_source.html#l00219">219</a> of file <a class="el" href="ge211__color_8h_source.html">ge211_color.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8hxx_source.html#l00234">234</a> of file <a class="el" href="ge211__color_8hxx_source.html">ge211_color.hxx</a>.</p>
 
 </div>
 </div>
@@ -422,7 +452,7 @@ Public Attributes</h2></td></tr>
 
 <p>The fullness of the color, from 0,0 (grey) to 1.0 (fully saturated). </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8h_source.html#l00222">222</a> of file <a class="el" href="ge211__color_8h_source.html">ge211_color.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8hxx_source.html#l00237">237</a> of file <a class="el" href="ge211__color_8hxx_source.html">ge211_color.hxx</a>.</p>
 
 </div>
 </div>
@@ -440,13 +470,13 @@ Public Attributes</h2></td></tr>
 
 <p>The brightness of the color, from 0.0 (black) to 1.0 (fully colored). </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8h_source.html#l00225">225</a> of file <a class="el" href="ge211__color_8h_source.html">ge211_color.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8hxx_source.html#l00240">240</a> of file <a class="el" href="ge211__color_8hxx_source.html">ge211_color.hxx</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
-<li>src/<a class="el" href="ge211__color_8h_source.html">ge211_color.h</a></li>
-<li>src/<a class="el" href="ge211__color_8cpp_source.html">ge211_color.cpp</a></li>
+<li>include/<a class="el" href="ge211__color_8hxx_source.html">ge211_color.hxx</a></li>
+<li>src/<a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -115,7 +115,7 @@ $(document).ready(function(){initNavTree('classge211_1_1geometry_1_1_transform.h
 </ul>
 <p>It is also possible to modify a transform with the setter functions such as <a class="el" href="classge211_1_1geometry_1_1_transform.html#aa21d9396229f5cd5ce4ebd0c65407524" title="Modifies this transform to have the given rotation, in degrees degrees. ">set_rotation(double)</a> and <a class="el" href="classge211_1_1geometry_1_1_transform.html#a6c2718c56e69ccac1f3113df64359d6d" title="Modifies this transform to scale the sprite by the given amount in both dimensions. ">set_scale(double)</a>. This can be used to configure a transform that does more than one thing:</p>
 <div class="fragment"><div class="line"><a class="code" href="classge211_1_1geometry_1_1_transform.html#a581c712e9880a1899d51235f66fa3302">Transform</a> my_transform =</div><div class="line">    <a class="code" href="classge211_1_1geometry_1_1_transform.html#a581c712e9880a1899d51235f66fa3302">Transform</a>{}.set_flip_h(<span class="keyword">true</span>)</div><div class="line">               .set_flip_v(<span class="keyword">true</span>)</div><div class="line">               .scale_x(2);</div></div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00578">578</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00685">685</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -230,7 +230,7 @@ static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform<
 <p>Returns the inverse of this transform. </p>
 <p>Composing a transform with its inverse should result in the identity transformation, though because floating point is approximate, <a class="el" href="classge211_1_1geometry_1_1_transform.html#ab7fcbe69b926da77c26f0a31c24c1957" title="Is this transformation the identity transformation that does nothing? Because floating point is appro...">is_identity() const </a>may not actually answer <code>true</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8cpp_source.html#l00123">123</a> of file <a class="el" href="ge211__geometry_8cpp_source.html">ge211_geometry.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8cxx_source.html#l00123">123</a> of file <a class="el" href="ge211__geometry_8cxx_source.html">ge211_geometry.cxx</a>.</p>
 
 </div>
 </div>
@@ -260,7 +260,7 @@ static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform<
 <p>Is this transformation the identity transformation that does nothing? Because floating point is approximate, this may answer <code>false</code> for transforms that are nearly the identity. </p>
 <p>But it should answer <code>true</code> for any transform constructed by the default constructor <a class="el" href="classge211_1_1geometry_1_1_transform.html#a581c712e9880a1899d51235f66fa3302" title="Constructs the identity transform, which has no effect. ">Transform()</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8cpp_source.html#l00107">107</a> of file <a class="el" href="ge211__geometry_8cpp_source.html">ge211_geometry.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8cxx_source.html#l00107">107</a> of file <a class="el" href="ge211__geometry_8cxx_source.html">ge211_geometry.cxx</a>.</p>
 
 </div>
 </div>
@@ -290,7 +290,7 @@ static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform<
 
 <p>Constructs a rotating transform, given the rotation in degrees clockwise. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8cpp_source.html#l00014">14</a> of file <a class="el" href="ge211__geometry_8cpp_source.html">ge211_geometry.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8cxx_source.html#l00014">14</a> of file <a class="el" href="ge211__geometry_8cxx_source.html">ge211_geometry.cxx</a>.</p>
 
 </div>
 </div>
@@ -320,7 +320,7 @@ static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform<
 
 <p>Modifies this transform to have the given rotation, in degrees degrees. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8cpp_source.html#l00044">44</a> of file <a class="el" href="ge211__geometry_8cpp_source.html">ge211_geometry.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8cxx_source.html#l00044">44</a> of file <a class="el" href="ge211__geometry_8cxx_source.html">ge211_geometry.cxx</a>.</p>
 
 </div>
 </div>
@@ -351,7 +351,7 @@ static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform<
 <p>Modifies this transform to scale the sprite by the given amount in both dimensions. </p>
 <p>This overwrites the effect of previous calls to <a class="el" href="classge211_1_1geometry_1_1_transform.html#a0c2553788d3f615bb25359b66e940a1a" title="Modifies this transform to scale the sprite horizontally. ">set_scale_x(double)</a> and <a class="el" href="classge211_1_1geometry_1_1_transform.html#a65a0f776840a2547dca4ece7858912a9" title="Modifies this transform to scale the sprite vertically. ">set_scale_y(double)</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8cpp_source.html#l00063">63</a> of file <a class="el" href="ge211__geometry_8cpp_source.html">ge211_geometry.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8cxx_source.html#l00063">63</a> of file <a class="el" href="ge211__geometry_8cxx_source.html">ge211_geometry.cxx</a>.</p>
 
 </div>
 </div>
@@ -382,7 +382,7 @@ static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform<
 <p>Modifies this transform to scale the sprite horizontally. </p>
 <p>This overwrites the effect of previous calls to <code><a class="el" href="classge211_1_1geometry_1_1_transform.html#a6c2718c56e69ccac1f3113df64359d6d" title="Modifies this transform to scale the sprite by the given amount in both dimensions. ">set_scale(double)</a></code> as well as itself. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8cpp_source.html#l00070">70</a> of file <a class="el" href="ge211__geometry_8cpp_source.html">ge211_geometry.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8cxx_source.html#l00070">70</a> of file <a class="el" href="ge211__geometry_8cxx_source.html">ge211_geometry.cxx</a>.</p>
 
 </div>
 </div>
@@ -413,13 +413,13 @@ static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform<
 <p>Modifies this transform to scale the sprite vertically. </p>
 <p>This overwrites the effect of previous calls to <code><a class="el" href="classge211_1_1geometry_1_1_transform.html#a6c2718c56e69ccac1f3113df64359d6d" title="Modifies this transform to scale the sprite by the given amount in both dimensions. ">set_scale(double)</a></code> as well as itself. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8cpp_source.html#l00076">76</a> of file <a class="el" href="ge211__geometry_8cpp_source.html">ge211_geometry.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8cxx_source.html#l00076">76</a> of file <a class="el" href="ge211__geometry_8cxx_source.html">ge211_geometry.cxx</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/<a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a></li>
-<li>src/<a class="el" href="ge211__geometry_8cpp_source.html">ge211_geometry.cpp</a></li>
+<li>include/<a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a></li>
+<li>src/<a class="el" href="ge211__geometry_8cxx_source.html">ge211_geometry.cxx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

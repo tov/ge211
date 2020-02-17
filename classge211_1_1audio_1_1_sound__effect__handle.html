@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('classge211_1_1audio_1_1_sound__effect_
 <div class="textblock"><p>Used to control a <a class="el" href="classge211_1_1audio_1_1_sound__effect.html" title="A sound effect track, which can be attached to a Mixer channel and played. ">Sound_effect</a> after it is started playing on a <a class="el" href="classge211_1_1audio_1_1_mixer.html" title="The entity that coordinates playing all audio tracks. ">Mixer</a>. </p>
 <p>This is returned by <a class="el" href="classge211_1_1audio_1_1_mixer.html#a44e4d21a97285323b523a94380561220" title="Plays the given effect track on this mixer, at the specified volume. ">Mixer::play_effect(Sound_effect, double)</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8h_source.html#l00328">328</a> of file <a class="el" href="ge211__audio_8h_source.html">ge211_audio.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00328">328</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -171,7 +171,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>The empty handle is not associated with a channel, and it is an error to attempt to perform operations on it.</p>
 <p>To get a non-empty <a class="el" href="classge211_1_1audio_1_1_sound__effect__handle.html" title="Used to control a Sound_effect after it is started playing on a Mixer. ">Sound_effect_handle</a>, play a <a class="el" href="classge211_1_1audio_1_1_sound__effect.html" title="A sound effect track, which can be attached to a Mixer channel and played. ">Sound_effect</a> with <a class="el" href="classge211_1_1audio_1_1_mixer.html#a44e4d21a97285323b523a94380561220" title="Plays the given effect track on this mixer, at the specified volume. ">Mixer::play_effect(Sound_effect, double)</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8h_source.html#l00337">337</a> of file <a class="el" href="ge211__audio_8h_source.html">ge211_audio.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00337">337</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
 
 </div>
 </div>
@@ -197,7 +197,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <li><code>!empty()</code>, undefined behavior if violated. </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00200">200</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00200">200</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
@@ -223,7 +223,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <li><code>!empty()</code>, undefined behavior if violated. </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00205">205</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00205">205</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
@@ -244,7 +244,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 <p>Returns the playing sound effect's volume as a number from 0.0 to 1.0. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00393">393</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00393">393</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
@@ -266,7 +266,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>Recognizes a non-empty sound effect handle. </p>
 <p>Equivalent to <code>!empty()</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00382">382</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00382">382</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
@@ -292,7 +292,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <li><code><a class="el" href="classge211_1_1audio_1_1_sound__effect__handle.html#af7efbd61f7b427bf8f5b6533c19fe509" title="Gets the state of this effect. ">get_state()</a></code> is either <code>playing</code> or <code>paused</code>, throws <a class="el" href="classge211_1_1exceptions_1_1_client__logic__error.html" title="An exception that indicates that a logic error was performed by the client. ">exceptions::Client_logic_error</a> if violated. </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00284">284</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00284">284</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
@@ -318,7 +318,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <li><code><a class="el" href="classge211_1_1audio_1_1_sound__effect__handle.html#af7efbd61f7b427bf8f5b6533c19fe509" title="Gets the state of this effect. ">get_state()</a></code> is either <code>playing</code> or <code>paused</code>, throws <a class="el" href="classge211_1_1exceptions_1_1_client__logic__error.html" title="An exception that indicates that a logic error was performed by the client. ">exceptions::Client_logic_error</a> if violated. </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00264">264</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00264">264</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
@@ -340,7 +340,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 <p>Sets the playing sound effect's volume as a number from 0.0 to 1.0. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00401">401</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00401">401</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
@@ -366,13 +366,13 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <li><code><a class="el" href="classge211_1_1audio_1_1_sound__effect__handle.html#af7efbd61f7b427bf8f5b6533c19fe509" title="Gets the state of this effect. ">get_state()</a></code> is either <code>playing</code> or <code>paused</code>, throws <a class="el" href="classge211_1_1exceptions_1_1_client__logic__error.html" title="An exception that indicates that a logic error was performed by the client. ">exceptions::Client_logic_error</a> if violated. </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8cpp_source.html#l00304">304</a> of file <a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00304">304</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/<a class="el" href="ge211__audio_8h_source.html">ge211_audio.h</a></li>
-<li>src/<a class="el" href="ge211__audio_8cpp_source.html">ge211_audio.cpp</a></li>
+<li>include/<a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a></li>
+<li>src/<a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

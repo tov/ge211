@@ -109,7 +109,7 @@ $(document).ready(function(){initNavTree('classge211_1_1_sprite__set.html','');}
 <dd>
 <a class="el" href="classge211_1_1_sprite__set.html#a567a6cc041710e43a2511234590cc8b9" title="Adds the given sprite as the given geometry::Position and z coordinate, to be rendered with the given...">add_sprite(Sprite const&amp;, Position, int, Transform const&amp;)</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ge211__sprites_8h_source.html#l00379">379</a> of file <a class="el" href="ge211__sprites_8h_source.html">ge211_sprites.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__sprites_8hxx_source.html#l00379">379</a> of file <a class="el" href="ge211__sprites_8hxx_source.html">ge211_sprites.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -157,7 +157,7 @@ Public Member Functions</h2></td></tr>
 <p>Sprites with higher <code>z</code> values will be rendered on top of those with lower <code>z</code> values. Two sprites with the same <code>z</code> value that interfere will be stacked in an arbitrary order, so if you care about the layering of your sprites, provide different <code>z</code> values.</p>
 <p>Note that the <a class="el" href="classge211_1_1_sprite__set.html" title="A collection of positioned sprites ready to be rendered to the screen. ">Sprite_set</a> does not copy the sprite it is given, but just stores a reference to it. Thus, the Sprite must live somewhere else, and continue to live until it is rendered. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__sprites_8cpp_source.html#l00024">24</a> of file <a class="el" href="ge211__sprites_8cpp_source.html">ge211_sprites.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__sprites_8cxx_source.html#l00024">24</a> of file <a class="el" href="ge211__sprites_8cxx_source.html">ge211_sprites.cxx</a>.</p>
 
 </div>
 </div>
@@ -202,13 +202,13 @@ Public Member Functions</h2></td></tr>
 <p>Adds the given sprite as the given <a class="el" href="namespacege211_1_1geometry.html#a6820f820ccaf24da3439a5e45b0e983e" title="Type alias for the most common use of Basic_position, which is with a coordinate type of int...">geometry::Position</a> and z coordinate, to be rendered with the given <a class="el" href="classge211_1_1geometry_1_1_transform.html" title="A rendering transform, which can scale, flip, and rotate. ">geometry::Transform</a>. </p>
 <p>The transform allows scaling, flipping, and rotating the Sprite when rendered. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__sprites_8cpp_source.html#l00017">17</a> of file <a class="el" href="ge211__sprites_8cpp_source.html">ge211_sprites.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__sprites_8cxx_source.html#l00017">17</a> of file <a class="el" href="ge211__sprites_8cxx_source.html">ge211_sprites.cxx</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/<a class="el" href="ge211__sprites_8h_source.html">ge211_sprites.h</a></li>
-<li>src/<a class="el" href="ge211__sprites_8cpp_source.html">ge211_sprites.cpp</a></li>
+<li>include/<a class="el" href="ge211__sprites_8hxx_source.html">ge211_sprites.hxx</a></li>
+<li>src/<a class="el" href="ge211__sprites_8cxx_source.html">ge211_sprites.cxx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

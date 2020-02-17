@@ -106,7 +106,7 @@ $(document).ready(function(){initNavTree('classge211_1_1_random.html','');});
 <div class="textblock"><p>A pseudo-random number generator. </p>
 <p>This class has member functions for generating random numbers. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8h_source.html#l00063">63</a> of file <a class="el" href="ge211__random_8h_source.html">ge211_random.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00064">64</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -118,11 +118,61 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a808fbdef59773f1b4e91ab3c6498d597"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classge211_1_1_random.html#a808fbdef59773f1b4e91ab3c6498d597">between</a> (T min, T max)</td></tr>
 <tr class="memdesc:a808fbdef59773f1b4e91ab3c6498d597"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a random <code>T</code> between <code>min</code> and <code>max</code>.  <a href="#a808fbdef59773f1b4e91ab3c6498d597">More...</a><br /></td></tr>
 <tr class="separator:a808fbdef59773f1b4e91ab3c6498d597"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26402ea3fd575d535a6e23a3679804e7"><td class="memTemplParams" colspan="2">template&lt;class T , class  = std::enable_if_t&lt;std::is_integral&lt;T&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a26402ea3fd575d535a6e23a3679804e7"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classge211_1_1_random.html#a26402ea3fd575d535a6e23a3679804e7">any</a> ()</td></tr>
+<tr class="memdesc:a26402ea3fd575d535a6e23a3679804e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a random <code>T</code> from the whole range of <code>T</code>.  <a href="#a26402ea3fd575d535a6e23a3679804e7">More...</a><br /></td></tr>
+<tr class="separator:a26402ea3fd575d535a6e23a3679804e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24c34022698ab572faa24fb04a699b12"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_random.html#a24c34022698ab572faa24fb04a699b12">random_bool</a> (double ptrue=0.5)</td></tr>
 <tr class="memdesc:a24c34022698ab572faa24fb04a699b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a random <code>bool</code> that is <code>true</code> with probability <code>ptrue</code>.  <a href="#a24c34022698ab572faa24fb04a699b12">More...</a><br /></td></tr>
 <tr class="separator:a24c34022698ab572faa24fb04a699b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a288f955cf834411b32b1ca2780432f27"><td class="memItemLeft" align="right" valign="top"><a id="a288f955cf834411b32b1ca2780432f27"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_random.html#a288f955cf834411b32b1ca2780432f27">Random</a> (<a class="el" href="classge211_1_1_random.html">Random</a> &amp;)=delete</td></tr>
+<tr class="memdesc:a288f955cf834411b32b1ca2780432f27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can't copy the random number generator. <br /></td></tr>
+<tr class="separator:a288f955cf834411b32b1ca2780432f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8008cb16783dee2b8e621cce820bc688"><td class="memItemLeft" align="right" valign="top"><a id="a8008cb16783dee2b8e621cce820bc688"></a>
+<a class="el" href="classge211_1_1_random.html">Random</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_random.html#a8008cb16783dee2b8e621cce820bc688">operator=</a> (<a class="el" href="classge211_1_1_random.html">Random</a> &amp;)=delete</td></tr>
+<tr class="memdesc:a8008cb16783dee2b8e621cce820bc688"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can't copy the random number generator. <br /></td></tr>
+<tr class="separator:a8008cb16783dee2b8e621cce820bc688"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adafc8f8792a34676726ae63ee404cb0c"><td class="memItemLeft" align="right" valign="top"><a id="adafc8f8792a34676726ae63ee404cb0c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_random.html#adafc8f8792a34676726ae63ee404cb0c">Random</a> (<a class="el" href="classge211_1_1_random.html">Random</a> &amp;&amp;)=delete</td></tr>
+<tr class="memdesc:adafc8f8792a34676726ae63ee404cb0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can't move the random number generator. <br /></td></tr>
+<tr class="separator:adafc8f8792a34676726ae63ee404cb0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a133930e008c0a2d429aeff000639fe42"><td class="memItemLeft" align="right" valign="top"><a id="a133930e008c0a2d429aeff000639fe42"></a>
+<a class="el" href="classge211_1_1_random.html">Random</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_random.html#a133930e008c0a2d429aeff000639fe42">operator=</a> (<a class="el" href="classge211_1_1_random.html">Random</a> &amp;&amp;)=delete</td></tr>
+<tr class="memdesc:a133930e008c0a2d429aeff000639fe42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can't move the random number generator. <br /></td></tr>
+<tr class="separator:a133930e008c0a2d429aeff000639fe42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a26402ea3fd575d535a6e23a3679804e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26402ea3fd575d535a6e23a3679804e7">&#9670;&nbsp;</a></span>any()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T any </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a random <code>T</code> from the whole range of <code>T</code>. </p>
+<p>Only enabled for integral types <code>T</code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00107">107</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
+
+</div>
+</div>
 <a id="a808fbdef59773f1b4e91ab3c6498d597"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a808fbdef59773f1b4e91ab3c6498d597">&#9670;&nbsp;</a></span>between()</h2>
 
@@ -161,7 +211,7 @@ Public Member Functions</h2></td></tr>
 <p>The right bound is inclusive for integral types but exclusive for floating point types. The left bound is always inclusive.</p>
 <p>Example:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> roll_the_die(Random&amp; random)</div><div class="line">{</div><div class="line">      <span class="keywordflow">return</span> random.between(1, 6);</div><div class="line">}</div></div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8h_source.html#l00095">95</a> of file <a class="el" href="ge211__random_8h_source.html">ge211_random.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00096">96</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
 
 </div>
 </div>
@@ -183,7 +233,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns a random <code>bool</code> that is <code>true</code> with probability <code>ptrue</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8cpp_source.html#l00022">22</a> of file <a class="el" href="ge211__random_8cpp_source.html">ge211_random.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8cxx_source.html#l00022">22</a> of file <a class="el" href="ge211__random_8cxx_source.html">ge211_random.cxx</a>.</p>
 
 </div>
 </div>
@@ -214,13 +264,13 @@ Public Member Functions</h2></td></tr>
 <p>Returns a random <code>T</code> between 0 (inclusive) and <code>max</code> (exclusive). </p>
 <p>Example:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> roll_the_die(Random&amp; random)</div><div class="line">{</div><div class="line">      <span class="keywordflow">return</span> random.up_to(6) + 1;</div><div class="line">}</div></div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8h_source.html#l00077">77</a> of file <a class="el" href="ge211__random_8h_source.html">ge211_random.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00078">78</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/<a class="el" href="ge211__random_8h_source.html">ge211_random.h</a></li>
-<li>src/<a class="el" href="ge211__random_8cpp_source.html">ge211_random.cpp</a></li>
+<li>include/<a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a></li>
+<li>src/<a class="el" href="ge211__random_8cxx_source.html">ge211_random.cxx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

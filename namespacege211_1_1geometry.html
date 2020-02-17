@@ -135,14 +135,6 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7956b672777af72c057966192209ccc0"><td class="memItemLeft" align="right" valign="top"><a id="a7956b672777af72c057966192209ccc0"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacege211_1_1geometry.html#a7956b672777af72c057966192209ccc0">operator==</a> (const <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;, const <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;) noexcept</td></tr>
-<tr class="memdesc:a7956b672777af72c057966192209ccc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Equality for transforms. <br /></td></tr>
-<tr class="separator:a7956b672777af72c057966192209ccc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aada4f02e0824b0931fabf43a91561601"><td class="memItemLeft" align="right" valign="top"><a id="aada4f02e0824b0931fabf43a91561601"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacege211_1_1geometry.html#aada4f02e0824b0931fabf43a91561601">operator!=</a> (const <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;, const <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;) noexcept</td></tr>
-<tr class="memdesc:aada4f02e0824b0931fabf43a91561601"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disequality for transforms. <br /></td></tr>
-<tr class="separator:aada4f02e0824b0931fabf43a91561601"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3b695af820c44d6353910631a35c3ab"><td class="memTemplParams" colspan="2"><a id="ad3b695af820c44d6353910631a35c3ab"></a>
 template&lt;class T &gt; </td></tr>
 <tr class="memitem:ad3b695af820c44d6353910631a35c3ab"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacege211_1_1geometry.html#ad3b695af820c44d6353910631a35c3ab">operator==</a> (<a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; T &gt; a, <a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; T &gt; b) noexcept(<a class="el" href="namespacege211.html#a9888bc29c1416f88cbcff7438f2d8235">is_nothrow_comparable</a>&lt; T &gt;())</td></tr>
@@ -181,19 +173,19 @@ template&lt;class T &gt; </td></tr>
 <tr class="memitem:a8135d96265cc7bfdac9cd0a4b35266da"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacege211_1_1geometry.html#a8135d96265cc7bfdac9cd0a4b35266da">operator*</a> (double s1, <a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; T &gt; d2) noexcept(<a class="el" href="namespacege211.html#a22213b867c970df35398df8d9e35e612">has_nothrow_arithmetic</a>&lt; double, T &gt;())</td></tr>
 <tr class="memdesc:a8135d96265cc7bfdac9cd0a4b35266da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies a <a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html" title="Represents the dimensions of an object, or more generally, the displacement between two Basic_positio...">Basic_dimensions</a> by a <code>double</code>.  <a href="#a8135d96265cc7bfdac9cd0a4b35266da">More...</a><br /></td></tr>
 <tr class="separator:a8135d96265cc7bfdac9cd0a4b35266da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8bd841d64e5ad64ed07b0aa03151e46"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:af8bd841d64e5ad64ed07b0aa03151e46"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacege211_1_1geometry.html#af8bd841d64e5ad64ed07b0aa03151e46">operator/</a> (<a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; T &gt; d1, T s2) noexcept(<a class="el" href="namespacege211.html#a8cbfe27919e395ffa21438e50e35fb37">has_nothrow_division</a>&lt; double, T &gt;())</td></tr>
-<tr class="memdesc:af8bd841d64e5ad64ed07b0aa03151e46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divides a <a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html" title="Represents the dimensions of an object, or more generally, the displacement between two Basic_positio...">Basic_dimensions</a> by a <code>T</code>.  <a href="#af8bd841d64e5ad64ed07b0aa03151e46">More...</a><br /></td></tr>
-<tr class="separator:af8bd841d64e5ad64ed07b0aa03151e46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae40bf4fd7d93afb39fa48e101200a775"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:ae40bf4fd7d93afb39fa48e101200a775"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacege211_1_1geometry.html#ae40bf4fd7d93afb39fa48e101200a775">operator/</a> (<a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; T &gt; d1, T s2) noexcept(<a class="el" href="namespacege211.html#a8cbfe27919e395ffa21438e50e35fb37">has_nothrow_division</a>&lt; T &gt;())</td></tr>
+<tr class="memdesc:ae40bf4fd7d93afb39fa48e101200a775"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divides a <a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html" title="Represents the dimensions of an object, or more generally, the displacement between two Basic_positio...">Basic_dimensions</a> by a <code>T</code>.  <a href="#ae40bf4fd7d93afb39fa48e101200a775">More...</a><br /></td></tr>
+<tr class="separator:ae40bf4fd7d93afb39fa48e101200a775"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade460538843c2148717e9e1ee1a7fb0a"><td class="memTemplParams" colspan="2">template&lt;class T , class  = std::enable_if_t&lt;!std::is_same&lt;T, double&gt;::value, void&gt;&gt; </td></tr>
 <tr class="memitem:ade460538843c2148717e9e1ee1a7fb0a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacege211_1_1geometry.html#ade460538843c2148717e9e1ee1a7fb0a">operator/</a> (<a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; T &gt; d1, double s2) noexcept(<a class="el" href="namespacege211.html#a22213b867c970df35398df8d9e35e612">has_nothrow_arithmetic</a>&lt; T, double &gt;)</td></tr>
 <tr class="memdesc:ade460538843c2148717e9e1ee1a7fb0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divides a <a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html" title="Represents the dimensions of an object, or more generally, the displacement between two Basic_positio...">Basic_dimensions</a> by an <code>double</code>.  <a href="#ade460538843c2148717e9e1ee1a7fb0a">More...</a><br /></td></tr>
 <tr class="separator:ade460538843c2148717e9e1ee1a7fb0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87b237eeec5e9d36a80cfd07ba3f9d60"><td class="memTemplParams" colspan="2"><a id="a87b237eeec5e9d36a80cfd07ba3f9d60"></a>
+<tr class="memitem:a5ed9c9e0d52461ee4c970b58c8aca407"><td class="memTemplParams" colspan="2"><a id="a5ed9c9e0d52461ee4c970b58c8aca407"></a>
 template&lt;class T &gt; </td></tr>
-<tr class="memitem:a87b237eeec5e9d36a80cfd07ba3f9d60"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; T &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacege211_1_1geometry.html#a87b237eeec5e9d36a80cfd07ba3f9d60">operator+=</a> (<a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; T &gt; &amp;d1, <a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; T &gt; d2) noexcept(<a class="el" href="namespacege211.html#a22213b867c970df35398df8d9e35e612">has_nothrow_arithmetic</a>&lt; T &gt;)</td></tr>
-<tr class="memdesc:a87b237eeec5e9d36a80cfd07ba3f9d60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Succinct <a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html" title="Represents the dimensions of an object, or more generally, the displacement between two Basic_positio...">Basic_dimensions</a> addition. <br /></td></tr>
-<tr class="separator:a87b237eeec5e9d36a80cfd07ba3f9d60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ed9c9e0d52461ee4c970b58c8aca407"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; T &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacege211_1_1geometry.html#a5ed9c9e0d52461ee4c970b58c8aca407">operator+=</a> (<a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; T &gt; &amp;d1, <a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; T &gt; d2) noexcept(<a class="el" href="namespacege211.html#a22213b867c970df35398df8d9e35e612">has_nothrow_arithmetic</a>&lt; T &gt;())</td></tr>
+<tr class="memdesc:a5ed9c9e0d52461ee4c970b58c8aca407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Succinct <a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html" title="Represents the dimensions of an object, or more generally, the displacement between two Basic_positio...">Basic_dimensions</a> addition. <br /></td></tr>
+<tr class="separator:a5ed9c9e0d52461ee4c970b58c8aca407"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3bd94f1d696876c6ad1c2e3b58c507e"><td class="memTemplParams" colspan="2"><a id="ae3bd94f1d696876c6ad1c2e3b58c507e"></a>
 template&lt;class T &gt; </td></tr>
 <tr class="memitem:ae3bd94f1d696876c6ad1c2e3b58c507e"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; T &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacege211_1_1geometry.html#ae3bd94f1d696876c6ad1c2e3b58c507e">operator-=</a> (<a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; T &gt; &amp;d1, <a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; T &gt; d2) noexcept(<a class="el" href="namespacege211.html#a22213b867c970df35398df8d9e35e612">has_nothrow_arithmetic</a>&lt; T &gt;)</td></tr>
@@ -260,11 +252,19 @@ template&lt;class T &gt; </td></tr>
 <tr class="memitem:a9aa5b0ce6ba2ad9695c3073d08fd4d7f"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacege211_1_1geometry.html#a9aa5b0ce6ba2ad9695c3073d08fd4d7f">operator==</a> (const <a class="el" href="structge211_1_1geometry_1_1_basic__rectangle.html">Basic_rectangle</a>&lt; T &gt; &amp;r1, const <a class="el" href="structge211_1_1geometry_1_1_basic__rectangle.html">Basic_rectangle</a>&lt; T &gt; &amp;r2) noexcept(<a class="el" href="namespacege211.html#a9888bc29c1416f88cbcff7438f2d8235">is_nothrow_comparable</a>&lt; T &gt;())</td></tr>
 <tr class="memdesc:a9aa5b0ce6ba2ad9695c3073d08fd4d7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Equality for rectangles.  <a href="#a9aa5b0ce6ba2ad9695c3073d08fd4d7f">More...</a><br /></td></tr>
 <tr class="separator:a9aa5b0ce6ba2ad9695c3073d08fd4d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab847697f4b8e034406e7fba75ff14244"><td class="memTemplParams" colspan="2"><a id="ab847697f4b8e034406e7fba75ff14244"></a>
+<tr class="memitem:a261076d64bb58c17a0c2d2883933581f"><td class="memTemplParams" colspan="2"><a id="a261076d64bb58c17a0c2d2883933581f"></a>
 template&lt;class T &gt; </td></tr>
-<tr class="memitem:ab847697f4b8e034406e7fba75ff14244"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacege211_1_1geometry.html#ab847697f4b8e034406e7fba75ff14244">operator!=</a> (const <a class="el" href="structge211_1_1geometry_1_1_basic__rectangle.html">Basic_rectangle</a>&lt; T &gt; &amp;r1, const <a class="el" href="structge211_1_1geometry_1_1_basic__rectangle.html">Basic_rectangle</a>&lt; T &gt; r2) noexcept(<a class="el" href="namespacege211.html#a9888bc29c1416f88cbcff7438f2d8235">is_nothrow_comparable</a>&lt; T &gt;())</td></tr>
-<tr class="memdesc:ab847697f4b8e034406e7fba75ff14244"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disequality for rectangles. <br /></td></tr>
-<tr class="separator:ab847697f4b8e034406e7fba75ff14244"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a261076d64bb58c17a0c2d2883933581f"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacege211_1_1geometry.html#a261076d64bb58c17a0c2d2883933581f">operator!=</a> (const <a class="el" href="structge211_1_1geometry_1_1_basic__rectangle.html">Basic_rectangle</a>&lt; T &gt; &amp;r1, const <a class="el" href="structge211_1_1geometry_1_1_basic__rectangle.html">Basic_rectangle</a>&lt; T &gt; &amp;r2) noexcept(<a class="el" href="namespacege211.html#a9888bc29c1416f88cbcff7438f2d8235">is_nothrow_comparable</a>&lt; T &gt;())</td></tr>
+<tr class="memdesc:a261076d64bb58c17a0c2d2883933581f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disequality for rectangles. <br /></td></tr>
+<tr class="separator:a261076d64bb58c17a0c2d2883933581f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7956b672777af72c057966192209ccc0"><td class="memItemLeft" align="right" valign="top"><a id="a7956b672777af72c057966192209ccc0"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacege211_1_1geometry.html#a7956b672777af72c057966192209ccc0">operator==</a> (const <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;, const <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;) noexcept</td></tr>
+<tr class="memdesc:a7956b672777af72c057966192209ccc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Equality for transforms. <br /></td></tr>
+<tr class="separator:a7956b672777af72c057966192209ccc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aada4f02e0824b0931fabf43a91561601"><td class="memItemLeft" align="right" valign="top"><a id="aada4f02e0824b0931fabf43a91561601"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacege211_1_1geometry.html#aada4f02e0824b0931fabf43a91561601">operator!=</a> (const <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;, const <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;) noexcept</td></tr>
+<tr class="memdesc:aada4f02e0824b0931fabf43a91561601"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disequality for transforms. <br /></td></tr>
+<tr class="separator:aada4f02e0824b0931fabf43a91561601"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="a6984557cfdc7f69501ef8b04882ecd83"></a>
@@ -281,7 +281,7 @@ template&lt;class T &gt; </td></tr>
 
 <p>Type alias for the most common use of <a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html" title="Represents the dimensions of an object, or more generally, the displacement between two Basic_positio...">Basic_dimensions</a>, which is with a coordinate type of <code>int</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__forward_8h_source.html#l00077">77</a> of file <a class="el" href="ge211__forward_8h_source.html">ge211_forward.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__forward_8hxx_source.html#l00077">77</a> of file <a class="el" href="ge211__forward_8hxx_source.html">ge211_forward.hxx</a>.</p>
 
 </div>
 </div>
@@ -299,7 +299,7 @@ template&lt;class T &gt; </td></tr>
 
 <p>Type alias for the most common use of <a class="el" href="structge211_1_1geometry_1_1_basic__position.html" title="A position in the T-valued Cartesian plane. ">Basic_position</a>, which is with a coordinate type of <code>int</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__forward_8h_source.html#l00078">78</a> of file <a class="el" href="ge211__forward_8h_source.html">ge211_forward.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__forward_8hxx_source.html#l00078">78</a> of file <a class="el" href="ge211__forward_8hxx_source.html">ge211_forward.hxx</a>.</p>
 
 </div>
 </div>
@@ -317,7 +317,7 @@ template&lt;class T &gt; </td></tr>
 
 <p>Type alias for the most common use of <a class="el" href="structge211_1_1geometry_1_1_basic__rectangle.html" title="Represents a positioned rectangle. ">Basic_rectangle</a>, which is with a coordinate type of <code>int</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__forward_8h_source.html#l00079">79</a> of file <a class="el" href="ge211__forward_8h_source.html">ge211_forward.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__forward_8hxx_source.html#l00079">79</a> of file <a class="el" href="ge211__forward_8hxx_source.html">ge211_forward.hxx</a>.</p>
 
 </div>
 </div>
@@ -360,7 +360,7 @@ template&lt;class T &gt; </td></tr>
 <p>This is vector-scalar multiplication. If the result components would be fractional, they are truncated.</p>
 <p>This function is disabled if <code>T</code> is <code>double</code>, as there is another function for that. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00104">104</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00107">107</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -402,7 +402,7 @@ template&lt;class T &gt; </td></tr>
 <p>This is vector-scalar multiplication. If the result components would be fractional, they are truncated.</p>
 <p>This function is disabled if <code>T</code> is <code>double</code>, as there is another function for that. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00119">119</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00122">122</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -443,7 +443,7 @@ template&lt;class T &gt; </td></tr>
 <p>Translates a position by some displacement. </p>
 <p>This is the same as Position::below_right_by(Basic_dimensions) const. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00350">350</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00353">353</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -484,12 +484,12 @@ template&lt;class T &gt; </td></tr>
 <p>Translates a position by the opposite of some displacement. </p>
 <p>This is the same as Position::above_left_by(Basic_dimensions) const. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00367">367</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00370">370</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
-<a id="af8bd841d64e5ad64ed07b0aa03151e46"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8bd841d64e5ad64ed07b0aa03151e46">&#9670;&nbsp;</a></span>operator/() <span class="overload">[1/2]</span></h2>
+<a id="ae40bf4fd7d93afb39fa48e101200a775"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae40bf4fd7d93afb39fa48e101200a775">&#9670;&nbsp;</a></span>operator/() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -529,7 +529,7 @@ template&lt;class T &gt; </td></tr>
 <li><code>z</code> cannot be <code>0</code> if <code>T</code> is an integral type. </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00133">133</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00136">136</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -571,7 +571,7 @@ template&lt;class T &gt; </td></tr>
 <p>This is vector-scalar division. If the result components would be fractional, they are truncated.</p>
 <p>This function is disabled if <code>T</code> is <code>double</code>, as there is another function for that. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00147">147</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00150">150</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -615,7 +615,7 @@ template&lt;class T &gt; </td></tr>
 <li><code>s2 != 0</code> </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00193">193</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00196">196</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -656,7 +656,7 @@ template&lt;class T &gt; </td></tr>
 <p>Equality for rectangles. </p>
 <p>Note that this is naïve, in that it considers empty rectangles with different positions to be different. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8h_source.html#l00533">533</a> of file <a class="el" href="ge211__geometry_8h_source.html">ge211_geometry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00550">550</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>

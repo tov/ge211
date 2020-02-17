@@ -108,7 +108,7 @@ $(document).ready(function(){initNavTree('classge211_1_1_color.html','');});
 <p>The most common way to construct a color is to pass these components to the constructor <a class="el" href="classge211_1_1_color.html#ab042b957e56bff4e83fe694aeab5cfd2" title="Constructs the color with the given components. ">Color(uint8_t, uint8_t, uint8_t, uint8_t)</a>. The components can also be passed as unit-interval <code>double</code>s to <a class="el" href="classge211_1_1_color.html#a18b54b8ac213adcdf2c6659504858de7" title="Constructs a color with the given components. ">Color::from_rgba(double, double, double, double)</a>.</p>
 <p>It's also possible to construct a color via alternative color models <a class="el" href="structge211_1_1_color_1_1_h_s_l_a.html" title="Representation for the hue-saturation-lightness-alpha color model. ">HSLA</a> and <a class="el" href="structge211_1_1_color_1_1_h_s_v_a.html" title="Representation for the hue-saturation-value-alpha color model. ">HSVA</a>, and then convert those to RGBA. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8h_source.html#l00022">22</a> of file <a class="el" href="ge211__color_8h_source.html">ge211_color.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8hxx_source.html#l00022">22</a> of file <a class="el" href="ge211__color_8hxx_source.html">ge211_color.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -139,6 +139,9 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memdesc:a40d80ee8e4398848fe3cea6182489c8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the alpha (opacity) component of a color. <br /></td></tr>
 <tr class="separator:a40d80ee8e4398848fe3cea6182489c8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Transformations</div></td></tr>
+<tr class="memitem:a7f610b2ecf4a7ea01bdae156ac1dab33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classge211_1_1_color.html">Color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_color.html#a7f610b2ecf4a7ea01bdae156ac1dab33">blend</a> (double weight, <a class="el" href="classge211_1_1_color.html">Color</a> that) const noexcept</td></tr>
+<tr class="memdesc:a7f610b2ecf4a7ea01bdae156ac1dab33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Produces a blend of this color and <code>that</code>, with higher <code>weight</code> (between 0 and 1) increasing the level of <code>that</code>.  <a href="#a7f610b2ecf4a7ea01bdae156ac1dab33">More...</a><br /></td></tr>
+<tr class="separator:a7f610b2ecf4a7ea01bdae156ac1dab33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d002d4bbe0a39d82cda2c5530b06a08"><td class="memItemLeft" align="right" valign="top"><a id="a5d002d4bbe0a39d82cda2c5530b06a08"></a>
 <a class="el" href="classge211_1_1_color.html">Color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_color.html#a5d002d4bbe0a39d82cda2c5530b06a08">invert</a> () const noexcept</td></tr>
 <tr class="memdesc:a5d002d4bbe0a39d82cda2c5530b06a08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the inverse of a color. <br /></td></tr>
@@ -168,14 +171,14 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Named colors</div></td></tr>
-<tr class="memitem:ad29bc29f61b7ab6e02d34de25050ad77"><td class="memItemLeft" align="right" valign="top"><a id="ad29bc29f61b7ab6e02d34de25050ad77"></a>
-static constexpr <a class="el" href="classge211_1_1_color.html">Color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_color.html#ad29bc29f61b7ab6e02d34de25050ad77">white</a> ()</td></tr>
-<tr class="memdesc:ad29bc29f61b7ab6e02d34de25050ad77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solid white. <br /></td></tr>
-<tr class="separator:ad29bc29f61b7ab6e02d34de25050ad77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7648d9d985e6e5838e460eb66957dbee"><td class="memItemLeft" align="right" valign="top"><a id="a7648d9d985e6e5838e460eb66957dbee"></a>
-static constexpr <a class="el" href="classge211_1_1_color.html">Color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_color.html#a7648d9d985e6e5838e460eb66957dbee">black</a> ()</td></tr>
-<tr class="memdesc:a7648d9d985e6e5838e460eb66957dbee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solid black. <br /></td></tr>
-<tr class="separator:a7648d9d985e6e5838e460eb66957dbee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56f7ae01f3301d65cc43610cb5f51410"><td class="memItemLeft" align="right" valign="top"><a id="a56f7ae01f3301d65cc43610cb5f51410"></a>
+static constexpr <a class="el" href="classge211_1_1_color.html">Color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_color.html#a56f7ae01f3301d65cc43610cb5f51410">white</a> () noexcept</td></tr>
+<tr class="memdesc:a56f7ae01f3301d65cc43610cb5f51410"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solid white. <br /></td></tr>
+<tr class="separator:a56f7ae01f3301d65cc43610cb5f51410"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6f5e38c50cfa0edef94c5b1b66da989"><td class="memItemLeft" align="right" valign="top"><a id="ab6f5e38c50cfa0edef94c5b1b66da989"></a>
+static constexpr <a class="el" href="classge211_1_1_color.html">Color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_color.html#ab6f5e38c50cfa0edef94c5b1b66da989">black</a> () noexcept</td></tr>
+<tr class="memdesc:ab6f5e38c50cfa0edef94c5b1b66da989"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solid black. <br /></td></tr>
+<tr class="separator:ab6f5e38c50cfa0edef94c5b1b66da989"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a736839b75d5dd9139f95aeb1e8739bce"><td class="memItemLeft" align="right" valign="top"><a id="a736839b75d5dd9139f95aeb1e8739bce"></a>
 static <a class="el" href="classge211_1_1_color.html">Color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_color.html#a736839b75d5dd9139f95aeb1e8739bce">medium_red</a> () noexcept</td></tr>
 <tr class="memdesc:a736839b75d5dd9139f95aeb1e8739bce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solid red. <br /></td></tr>
@@ -281,11 +284,51 @@ Alternative color models</h2></td></tr>
 <p>Constructs the color with the given components. </p>
 <p>Components are integers from 0 to 255, inclusive. If <code>alpha</code> is not provided, it defaults to fully opaque. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8h_source.html#l00037">37</a> of file <a class="el" href="ge211__color_8h_source.html">ge211_color.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8hxx_source.html#l00037">37</a> of file <a class="el" href="ge211__color_8hxx_source.html">ge211_color.hxx</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7f610b2ecf4a7ea01bdae156ac1dab33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f610b2ecf4a7ea01bdae156ac1dab33">&#9670;&nbsp;</a></span>blend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classge211_1_1_color.html">Color</a> blend </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>weight</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classge211_1_1_color.html">Color</a>&#160;</td>
+          <td class="paramname"><em>that</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Produces a blend of this color and <code>that</code>, with higher <code>weight</code> (between 0 and 1) increasing the level of <code>that</code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="ge211__color_8cxx_source.html#l00089">89</a> of file <a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a>.</p>
+
+</div>
+</div>
 <a id="af8ed96b8c493dc358ded35dccea9b603"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af8ed96b8c493dc358ded35dccea9b603">&#9670;&nbsp;</a></span>darken()</h2>
 
@@ -313,7 +356,7 @@ Alternative color models</h2></td></tr>
 <p>Produces a shade by darkening the color. </p>
 <p>The <code>unit_amount</code> must be between 0 and 1, where 0 leaves the color the same, and 1 produces black. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8cpp_source.html#l00102">102</a> of file <a class="el" href="ge211__color_8cpp_source.html">ge211_color.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8cxx_source.html#l00114">114</a> of file <a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a>.</p>
 
 </div>
 </div>
@@ -344,7 +387,7 @@ Alternative color models</h2></td></tr>
 <p>Produces a weaker tone by desaturating the color. </p>
 <p>The <code>unit_amount</code> must be between 0 and 1, where 0 leaves the color the same, and 1 produces gray at the same lightness as the original color. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8cpp_source.html#l00112">112</a> of file <a class="el" href="ge211__color_8cpp_source.html">ge211_color.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8cxx_source.html#l00124">124</a> of file <a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a>.</p>
 
 </div>
 </div>
@@ -375,7 +418,7 @@ Alternative color models</h2></td></tr>
 <p>Increases opacity of the color. </p>
 <p>The <code>unit_amount</code> must be between 0 and 1, where 0 leaves the color the same, and 1 produces a fully opaque color. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8cpp_source.html#l00174">174</a> of file <a class="el" href="ge211__color_8cpp_source.html">ge211_color.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8cxx_source.html#l00186">186</a> of file <a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a>.</p>
 
 </div>
 </div>
@@ -406,7 +449,7 @@ Alternative color models</h2></td></tr>
 <p>Decreases opacity of the color. </p>
 <p>The // <code>unit_amount</code> must be between 0 and 1, where 0 leaves the color the same, and 1 produces full transparency. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8cpp_source.html#l00179">179</a> of file <a class="el" href="ge211__color_8cpp_source.html">ge211_color.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8cxx_source.html#l00191">191</a> of file <a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a>.</p>
 
 </div>
 </div>
@@ -468,7 +511,7 @@ Alternative color models</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the color </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8cpp_source.html#l00071">71</a> of file <a class="el" href="ge211__color_8cpp_source.html">ge211_color.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8cxx_source.html#l00073">73</a> of file <a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a>.</p>
 
 </div>
 </div>
@@ -530,7 +573,7 @@ Alternative color models</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the color </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8cpp_source.html#l00079">79</a> of file <a class="el" href="ge211__color_8cpp_source.html">ge211_color.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8cxx_source.html#l00081">81</a> of file <a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a>.</p>
 
 </div>
 </div>
@@ -583,7 +626,7 @@ Alternative color models</h2></td></tr>
 <p>Constructs a color with the given components. </p>
 <p>Components are doubles from 0.0. to 1.0, inclusive. If <code>alpha</code> is not given, it defaults to 1.0, meaning fully opaque. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8cpp_source.html#l00026">26</a> of file <a class="el" href="ge211__color_8cpp_source.html">ge211_color.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8cxx_source.html#l00028">28</a> of file <a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a>.</p>
 
 </div>
 </div>
@@ -614,7 +657,7 @@ Alternative color models</h2></td></tr>
 <p>Produces a tint by lightening the color. </p>
 <p>The <code>amount</code> must be between 0 and 1, where 0 leaves the color the same, and 1 produces white. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8cpp_source.html#l00097">97</a> of file <a class="el" href="ge211__color_8cpp_source.html">ge211_color.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8cxx_source.html#l00109">109</a> of file <a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a>.</p>
 
 </div>
 </div>
@@ -644,7 +687,7 @@ Alternative color models</h2></td></tr>
 
 <p>Returns a color by rotating the hue, leaving the other properties constant. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8cpp_source.html#l00092">92</a> of file <a class="el" href="ge211__color_8cpp_source.html">ge211_color.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8cxx_source.html#l00104">104</a> of file <a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a>.</p>
 
 </div>
 </div>
@@ -675,13 +718,13 @@ Alternative color models</h2></td></tr>
 <p>Produces a fuller tone by saturating the color. </p>
 <p>The <code>unit_amount</code> must be between 0 and 1, where 0 leaves the color the same, and 1 produces a fully saturated color. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__color_8cpp_source.html#l00107">107</a> of file <a class="el" href="ge211__color_8cpp_source.html">ge211_color.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__color_8cxx_source.html#l00119">119</a> of file <a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/<a class="el" href="ge211__color_8h_source.html">ge211_color.h</a></li>
-<li>src/<a class="el" href="ge211__color_8cpp_source.html">ge211_color.cpp</a></li>
+<li>include/<a class="el" href="ge211__color_8hxx_source.html">ge211_color.hxx</a></li>
+<li>src/<a class="el" href="ge211__color_8cxx_source.html">ge211_color.cxx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

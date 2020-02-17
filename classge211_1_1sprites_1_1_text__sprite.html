@@ -106,7 +106,7 @@ $(document).ready(function(){initNavTree('classge211_1_1sprites_1_1_text__sprite
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A <a class="el" href="classge211_1_1sprites_1_1_sprite.html" title="A sprite is an image that knows how to render itself to the screen at a given location, under a particular transformation. ">Sprite</a> that displays text. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__sprites_8h_source.html#l00182">182</a> of file <a class="el" href="ge211__sprites_8h_source.html">ge211_sprites.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__sprites_8hxx_source.html#l00182">182</a> of file <a class="el" href="ge211__sprites_8hxx_source.html">ge211_sprites.hxx</a>.</p>
 </div><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Text_sprite:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -130,7 +130,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9069441586bceae385e26f6e34925392"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1sprites_1_1_text__sprite.html#a9069441586bceae385e26f6e34925392">Text_sprite</a> ()</td></tr>
 <tr class="memdesc:a9069441586bceae385e26f6e34925392"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an empty text sprite.  <a href="#a9069441586bceae385e26f6e34925392">More...</a><br /></td></tr>
 <tr class="separator:a9069441586bceae385e26f6e34925392"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b718939e023d2e35fed519519a23436"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1sprites_1_1_text__sprite.html#a8b718939e023d2e35fed519519a23436">Text_sprite</a> (<a class="elRef" doxygen="/Users/tov/school/eecs211/dev/ge211/doxygen/cppreference.xml:http://en.cppreference.com/w/" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> const &amp;, <a class="el" href="classge211_1_1_font.html">Font</a> const &amp;)</td></tr>
+<tr class="memitem:a8b718939e023d2e35fed519519a23436"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1sprites_1_1_text__sprite.html#a8b718939e023d2e35fed519519a23436">Text_sprite</a> (std::string const &amp;, <a class="el" href="classge211_1_1_font.html">Font</a> const &amp;)</td></tr>
 <tr class="memdesc:a8b718939e023d2e35fed519519a23436"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a white text sprite with the given text and font.  <a href="#a8b718939e023d2e35fed519519a23436">More...</a><br /></td></tr>
 <tr class="separator:a8b718939e023d2e35fed519519a23436"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a644718bb2fb240de962dc3c9a1fdf0dc"><td class="memItemLeft" align="right" valign="top"><a id="a644718bb2fb240de962dc3c9a1fdf0dc"></a>
@@ -165,7 +165,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>Constructs an empty text sprite. </p>
 <p>This is useful when you don't know the message at the point where the sprite is created, but note that passing an empty text sprite to <a class="el" href="classge211_1_1_sprite__set.html#a2240fce09cf44668dcb2e5605676935a" title="Adds the given sprite at the given x–y geometry::Position and optional z coordinate, which defaults to 0. ">Sprite_set::add_sprite(Sprite const&amp;, Position, int)</a> is an error. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__sprites_8cpp_source.html#l00230">230</a> of file <a class="el" href="ge211__sprites_8cpp_source.html">ge211_sprites.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__sprites_8cxx_source.html#l00230">230</a> of file <a class="el" href="ge211__sprites_8cxx_source.html">ge211_sprites.cxx</a>.</p>
 
 </div>
 </div>
@@ -178,7 +178,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         <tr>
           <td class="memname"><a class="el" href="classge211_1_1sprites_1_1_text__sprite.html">Text_sprite</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="elRef" doxygen="/Users/tov/school/eecs211/dev/ge211/doxygen/cppreference.xml:http://en.cppreference.com/w/" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> const &amp;&#160;</td>
+          <td class="paramtype">std::string const &amp;&#160;</td>
           <td class="paramname"><em>message</em>, </td>
         </tr>
         <tr>
@@ -199,13 +199,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>For more control (color, wrapping, turning off anti-aliasing), use the <a class="el" href="classge211_1_1sprites_1_1_text__sprite_1_1_builder.html" title="Builder-style API for configuring and constructing Text_sprites. ">Builder</a> API instead.</p>
 <p>While it is okay to construct a text sprite with no text, it cannot be rendered into a scene. Use <a class="el" href="classge211_1_1sprites_1_1_text__sprite.html#a644718bb2fb240de962dc3c9a1fdf0dc" title="Is this Text_sprite empty? (If so, you shouldn&#39;t try to use it.) ">empty() const </a>to check if you haven't kept track. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__sprites_8cpp_source.html#l00233">233</a> of file <a class="el" href="ge211__sprites_8cpp_source.html">ge211_sprites.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__sprites_8cxx_source.html#l00233">233</a> of file <a class="el" href="ge211__sprites_8cxx_source.html">ge211_sprites.cxx</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/<a class="el" href="ge211__sprites_8h_source.html">ge211_sprites.h</a></li>
-<li>src/<a class="el" href="ge211__sprites_8cpp_source.html">ge211_sprites.cpp</a></li>
+<li>include/<a class="el" href="ge211__sprites_8hxx_source.html">ge211_sprites.hxx</a></li>
+<li>src/<a class="el" href="ge211__sprites_8cxx_source.html">ge211_sprites.cxx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

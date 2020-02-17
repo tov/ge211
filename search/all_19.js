@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['yield',['yield',['http://en.cppreference.com/w/cpp/thread/yield.html',1,'std::this_thread']]],
-  ['yocto',['yocto',['http://en.cppreference.com/w/cpp/numeric/ratio/ratio.html',1,'std']]],
-  ['yotta',['yotta',['http://en.cppreference.com/w/cpp/numeric/ratio/ratio.html',1,'std']]]
+  ['_7emixer',['~Mixer',['../classge211_1_1audio_1_1_mixer.html#a78eb1637a8d743413c122299c8dec735',1,'ge211::audio::Mixer']]]
 ];
