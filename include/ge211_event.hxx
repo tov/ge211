@@ -17,7 +17,12 @@ namespace events {
 /// which mouse button was depressed or released.
 enum class Mouse_button
 {
-    left, middle, right,
+    /// the primary mouse button
+    left,
+    /// the tertiary mouse button
+    middle,
+    /// the secondary mouse button
+    right,
 };
 
 /// Prints a #Mouse_button on a std::ostream. This function prints a

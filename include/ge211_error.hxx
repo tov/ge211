@@ -152,9 +152,13 @@ namespace detail {
 
 enum class Log_level
 {
+    /// extra debugging information
     debug,
+    /// helpful information
     info,
+    /// non-fatal but concerning conditions
     warn,
+    /// serious errors
     fatal,
 };
 
