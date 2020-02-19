@@ -147,7 +147,7 @@ Basic_dimensions<T> operator/(Basic_dimensions<T> d1, T s2)
 template <class T,
           class = std::enable_if_t<!std::is_same<T, double>::value, void>>
 Basic_dimensions<T> operator/(Basic_dimensions<T> d1, double s2)
-    noexcept(has_nothrow_arithmetic<T, double>)
+    noexcept(has_nothrow_arithmetic<T, double>())
 {
     return d1 * (1 / s2);
 }
@@ -165,7 +165,7 @@ Basic_dimensions<T>& operator+=(Basic_dimensions<T>& d1,
 template <class T>
 Basic_dimensions<T>& operator-=(Basic_dimensions<T>& d1,
                                 Basic_dimensions<T> d2)
-    noexcept(has_nothrow_arithmetic<T>)
+    noexcept(has_nothrow_arithmetic<T>())
 {
     return d1 = d1 - d2;
 }
@@ -173,7 +173,7 @@ Basic_dimensions<T>& operator-=(Basic_dimensions<T>& d1,
 /// Succinct Basic_dimensions-scalar multiplication.
 template <class T>
 Basic_dimensions<T>& operator*=(Basic_dimensions<T>& d1, T s2)
-    noexcept(has_nothrow_arithmetic<T>)
+    noexcept(has_nothrow_arithmetic<T>())
 {
     return d1 = d1 * s2;
 }
@@ -181,7 +181,7 @@ Basic_dimensions<T>& operator*=(Basic_dimensions<T>& d1, T s2)
 /// Succinct Basic_dimensions-scalar multiplication.
 template <class T>
 Basic_dimensions<T>& operator*=(Basic_dimensions<T>& d1, double s2)
-    noexcept(has_nothrow_arithmetic<T, double>)
+    noexcept(has_nothrow_arithmetic<T, double>())
 {
     return d1 = d1 * s2;
 }
@@ -192,7 +192,7 @@ Basic_dimensions<T>& operator*=(Basic_dimensions<T>& d1, double s2)
 ///  - `s2 != 0`
 template <class T>
 Basic_dimensions<T>& operator/=(Basic_dimensions<T>& d1, T s2)
-    noexcept(has_nothrow_division<T>)
+    noexcept(has_nothrow_division<T>())
 {
     return d1 = d1 / s2;
 }
@@ -200,7 +200,7 @@ Basic_dimensions<T>& operator/=(Basic_dimensions<T>& d1, T s2)
 /// Succinct Basic_dimensions-scalar division.
 template <class T>
 Basic_dimensions<T>& operator/=(Basic_dimensions<T>& d1, double s2)
-    noexcept(has_nothrow_division<T, double>)
+    noexcept(has_nothrow_division<T, double>())
 {
     return d1 = d1 / s2;
 }
@@ -417,7 +417,7 @@ struct Basic_rectangle
     /// Converts a Basic_rectangle to another coordinate type.
     template<typename U>
     Basic_rectangle<U> into() const
-        noexcept(is_nothrow_convertible<Coordinate, U>)
+        noexcept(is_nothrow_convertible<Coordinate, U>())
     {
         return {U(x), U(y), U(width), U(height)};
     }
@@ -713,8 +713,7 @@ public:
     /// \name Setters
     /// @{
 
-    /// Modifies this transform to have the given rotation, in degrees
-    /// degrees.
+    /// Modifies this transform to have the given rotation, in degrees.
     Transform& set_rotation(double) noexcept;
     /// Modifies this transform to determine whether to flip horizontally.
     Transform& set_flip_h(bool) noexcept;
