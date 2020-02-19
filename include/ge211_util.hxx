@@ -28,7 +28,7 @@ template<class T>
 void no_op_deleter(T*) {}
 
 #define make_delete_ptr(PTR, DELETER)                           \
-    ([&] () {                                                   \
+    ([&] {                                                      \
         auto ptr = (PTR);                                       \
         using T = ::std::remove_pointer_t<decltype(ptr)>;       \
         return ::ge211::detail::delete_ptr<T> {                 \
