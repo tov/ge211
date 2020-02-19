@@ -11,8 +11,6 @@ namespace ge211 {
 
 namespace detail {
 
-std::vector<const char*> get_search_prefixes();
-
 class File_resource
 {
 public:

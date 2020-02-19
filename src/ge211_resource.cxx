@@ -18,13 +18,6 @@ static const char* search_prefixes[] = {
 
 namespace detail {
 
-std::vector<const char*> get_search_prefixes()
-{
-    using namespace std;
-    return vector<const char*>(begin(search_prefixes),
-                               end(search_prefixes));
-}
-
 delete_ptr<SDL_RWops> File_resource::open_rwops_(const std::string& filename)
 {
     std::string path;
