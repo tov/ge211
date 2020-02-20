@@ -57,6 +57,8 @@ void Engine::run()
             renderer_.set_color(game_.background_color);
             renderer_.clear();
             paint_sprites_(sprites);
+
+            game_.mark_present_();
             renderer_.present();
 
             Duration allowed_frame_length =

@@ -64,12 +64,23 @@ void Abstract_game::prepare(const sprites::Sprite& sprite) const
     }
 }
 
+void Abstract_game::mark_present_() noexcept
+{
+    busy_time_.pause();
+}
+
 void Abstract_game::mark_frame_() noexcept
 {
+    busy_time_.resume();
     prev_frame_length_ = frame_start_.reset();
 
-    if (! (fps_sample_count_ = (fps_sample_count_ + 1) % frames_per_sample))
-        fps_ = frames_per_sample / fps_sample_start_.reset().seconds();
+    if (++sample_counter_ == frames_per_sample) {
+        auto sample_duration = real_time_.reset().seconds();
+        auto busy_duration   = busy_time_.reset().seconds();
+        fps_            = frames_per_sample / sample_duration;
+        load_           = 100 * busy_duration / sample_duration;
+        sample_counter_ = 0;
+    }
 }
 
 void Abstract_game::on_key_down(Key key)

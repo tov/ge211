@@ -240,6 +240,10 @@ protected:
     double get_frame_rate() const noexcept
     { return fps_; }
 
+    /// Returns an approximation of the current machine load due to GE211.
+    double get_load_percent() const noexcept
+    { return load_; }
+
     /// Prepares a sprites::Sprite for rendering, without actually including it
     /// in the scene. The first time a sprites::Sprite is rendered, it ordinarily
     /// has to be converted and transferred to video memory. This function
@@ -261,6 +265,7 @@ protected:
 private:
     friend detail::Engine;
 
+    void mark_present_() noexcept;
     void mark_frame_() noexcept;
 
     mutable Random rng_;
@@ -270,11 +275,15 @@ private:
 
     bool quit_ = false;
 
-    Timer frame_start_;
-    Duration prev_frame_length_;
-    Timer fps_sample_start_;
-    int fps_sample_count_{0};
-    double fps_{0};
+    Timer          frame_start_;
+    Duration       prev_frame_length_;
+
+    double         fps_            {0};
+    double         load_           {100};
+
+    int            sample_counter_ {0};
+    Timer          real_time_;
+    Pausable_timer busy_time_;
 };
 
 }
