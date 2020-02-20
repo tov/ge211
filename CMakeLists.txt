@@ -78,8 +78,10 @@ target_link_libraries(ge211
         utf8-cpp)
 
 SET(GE211_RESOURCE_PATH
-    "${CMAKE_CURRENT_SOURCE_DIR}/Resources/"
-    "${CMAKE_INSTALL_FULL_DATADIR}/ge211/")
+        "${CMAKE_CURRENT_SOURCE_DIR}/Resources/"
+        "${CMAKE_INSTALL_FULL_DATADIR}/ge211/"
+        CACHE STRING
+        "Where to search for GE211 resource files.")
 
 target_compile_definitions(ge211 PRIVATE
     -DGE211_RESOURCES="$<JOIN:${GE211_RESOURCE_PATH},\"$<COMMA>\">")
