@@ -39,7 +39,7 @@ struct Projectile
     Position position;
     Velocity velocity;
 
-    void update(double const dt);
+    void update(double dt);
 
     /// Creates a Projectile with the given Position and a random velocity
     /// within the given speed range and angle range.
@@ -60,7 +60,7 @@ struct Firework
     int star_color;
     double stage_time;
 
-    void update(double const dt);
+    void update(double dt);
     static Firework random(Random&, Projectile::Position);
 };
 
@@ -80,6 +80,7 @@ struct View
 
     Font sans{"sans.ttf", 30};
     Text_sprite fps;
+    Text_sprite load;
     Circle_sprite mortar{mortar_radius, mortar_color};
     vector<Circle_sprite> stars;
 };
@@ -95,6 +96,8 @@ struct Fireworks : Abstract_game
     View view;
     Dimensions initial_window_dimensions() const override;
     void draw(Sprite_set& sprites) override;
+    void draw_fireworks(Sprite_set& sprites) const;
+    void draw_stats(Sprite_set& sprites);
 
     // Controller
     bool is_paused = false;
@@ -110,7 +113,7 @@ int main()
 
 // FUNCTION DEFINITIONS FOR MODEL
 
-void Projectile::update(double const dt)
+void Projectile::update(double dt)
 {
     position += velocity * dt;
     velocity += gravity_acceleration * dt;
@@ -126,7 +129,7 @@ Projectile::random(Random& rng, Position position,
     return {position, {speed * cos(radians), speed * sin(radians)}};
 }
 
-void Firework::update(double const dt)
+void Firework::update(double dt)
 {
     switch (stage) {
         case Stage::mortar:
@@ -220,11 +223,12 @@ Dimensions Fireworks::initial_window_dimensions() const
 
 void Fireworks::draw(Sprite_set& sprites)
 {
-    view.fps.reconfigure(Text_sprite::Builder(view.sans)
-                                 << setprecision(3)
-                                 << get_frame_rate());
-    sprites.add_sprite(view.fps, {10, 10});
+    draw_fireworks(sprites);
+    draw_stats(sprites);
+}
 
+void Fireworks::draw_fireworks(Sprite_set& sprites) const
+{
     for (Firework const& firework : model.fireworks) {
         switch (firework.stage) {
             case Firework::Stage::mortar:
@@ -244,6 +248,26 @@ void Fireworks::draw(Sprite_set& sprites)
                 break;
         }
     }
+}
+
+void Fireworks::draw_stats(Sprite_set& sprites)
+{
+    Dimensions const margin {20, 10};
+
+    view.fps.reconfigure(Text_sprite::Builder(view.sans)
+                                 << setprecision(3)
+                                 << get_frame_rate());
+    view.load.reconfigure(Text_sprite::Builder(view.sans)
+                                  << setprecision(0) << fixed
+                                  << get_load_percent() << '%');
+
+    auto fps_posn  = Position{margin};
+    sprites.add_sprite(view.fps, fps_posn);
+
+    auto load_posn = Position{scene_dimensions.width, 0}
+            .down_left_by(margin)
+            .left_by(view.load.dimensions().width);
+    sprites.add_sprite(view.load, load_posn);
 }
 
 // FUNCTION DEFINITIONS FOR CONTROLLER
