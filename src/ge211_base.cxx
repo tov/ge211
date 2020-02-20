@@ -14,7 +14,7 @@ const char* const Abstract_game::default_window_title = "ge211 window";
 const Color Abstract_game::default_background_color = Color::black();
 
 // How many frames to run before calculating the frame rate.
-static int const frames_per_sample = 60;
+static int const frames_per_sample = 30;
 
 Dimensions Abstract_game::initial_window_dimensions() const
 {
