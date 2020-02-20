@@ -120,63 +120,104 @@ endif (WIN32)
 # list of paths in ${output_var}.
 function(glob_libs output_var base_path ext)
     set(acc "")
+
     foreach(lib ${ARGN})
         file(GLOB next "${base_path}/lib${lib}*${ext}")
         list(APPEND acc "${next}")
     endforeach()
+
     set(${output_var} "${acc}" PARENT_SCOPE)
 endfunction(glob_libs)
 
-# Sets up the given target for installation along with the given
-# resource files.
-function(add_to_ge211_installer target resource_files)
-    if (APPLE)
-        set_target_properties(${target} PROPERTIES
-                MACOSX_BUNDLE TRUE
-                MACOSX_FRAMEWORK_IDENTIFIER org.northwestern.eecs.jesse.eecs211
-                RESOURCE "${resource_files}")
-        set(app "${CMAKE_BINARY_DIR}/${target}.app")
-        set(dirs "${SDL2_IMAGE_INCLUDE_DIR}/../Frameworks"
-                 "${SDL2_MIXER_INCLUDE_DIR}/../Frameworks"
-                 "${SDL2_TTF_INCLUDE_DIR}/../Frameworks")
-        install(CODE "include(BundleUtilities)
-                      fixup_bundle(\"${app}\" \"\" \"${dirs}\")")
-        install(TARGETS ${target} BUNDLE DESTINATION .)
-    elseif (WIN32)
-        set(app "\${CMAKE_INSTALL_PREFIX}/bin/${target}.exe")
-        set(bindir "${MINGW_DIR}/bin")
-        glob_libs(Plugins "${bindir}" .dll jpeg png tiff webp)
-        install(TARGETS ${target} DESTINATION bin)
-        install(FILES ${resource_files} DESTINATION Resources)
-        install(FILES ${Plugins} DESTINATION bin)
-        install(CODE "include(BundleUtilities)
-                      list(APPEND gp_cmd_paths \"${bindir}\")
-                      fixup_bundle(\"${app}\" \"\" \"${bindir}\")")
-    else ()
+define_property(GLOBAL PROPERTY GE211_PACKAGE_NAME
+        BRIEF_DOCS "Name of the GE211 installer"
+        FULL_DOCS  "Name of the GE211 installer")
+
+# Precondition: GLOBAL PROPERTY CPACK_PACKAGE_NAME is set.
+macro(_set_ge211_installer_vars)
+    get_property(CPACK_PACKAGE_NAME GLOBAL PROPERTY GE211_PACKAGE_NAME)
+    if(NOT CPACK_PACKAGE_NAME)
+        message(FATAL_ERROR "ge211_installer_add: oops.")
+    endif()
+
+    set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-dist")
+    set(CPACK_STRIP_FILES       FALSE)
+
+    if(APPLE)
+        set(CPACK_GENERATOR DragNDrop)
+        set(GE211_INSTALLER "${CPACK_PACKAGE_FILE_NAME}.dmg")
+    elseif(WIN32)
+        set(CPACK_GENERATOR ZIP)
+        set(GE211_INSTALLER "${CPACK_PACKAGE_FILE_NAME}.zip")
+    else()
         message(FATAL_ERROR
                 "Creating an installer is not supported on your platform")
-    endif ()
-endfunction(add_to_ge211_installer)
+    endif()
+endmacro(_set_ge211_installer_vars)
+
+# Only the first call does anything.
+function(_initialize_ge211_installer)
+    get_property(already_initialized GLOBAL PROPERTY GE211_PACKAGE_NAME SET)
+    if(already_initialized)
+        return()
+    endif()
+
+    cmake_parse_arguments(pa "" "NAME" "" ${ARGN})
+    if(NOT pa_NAME)
+        set(pa_NAME "${CMAKE_PROJECT_NAME}")
+    endif()
+    set_property(GLOBAL PROPERTY GE211_PACKAGE_NAME "${pa_NAME}")
+
+    _set_ge211_installer_vars()
+
+    add_custom_target("${GE211_INSTALLER}")
+    add_custom_command(TARGET "${GE211_INSTALLER}"
+            COMMAND "${CMAKE_CPACK_COMMAND}"
+            COMMENT "Running CPack, please wait...")
+
+    install(CODE "include(BundleUtilities)")
+
+    if(WIN32)
+        glob_libs(Plugins "${MINGW_DIR}/bin" .dll jpeg png tiff webp)
+        install(FILES ${Plugins} DESTINATION bin)
+    endif()
+endfunction(_initialize_ge211_installer)
 
 # Creates a target for a platform-dependent installer for an executable
 # (given by the name of its target) and some resource files.
-function(setup_ge211_installer target resource_files)
-    add_to_ge211_installer(${target} "${resource_files}")
+function(ge211_installer_name name)
+    _initialize_ge211_installer(NAME "${name}")
+endfunction(ge211_installer_name)
 
-    if (APPLE)
-        set(dist_ext dmg)
-        set(CPACK_GENERATOR "DragNDrop")
-    else()
-        set(dist_ext zip)
-        set(CPACK_GENERATOR "ZIP")
-    endif()
-
-    set(CPACK_PACKAGE_EXECUTABLES "${target};${target}")
-    set(CPACK_PACKAGE_FILE_NAME "${target}-dist")
+# Sets up the given target for installation along with the given
+# resource files.
+function(ge211_installer_add target)
+    _initialize_ge211_installer()
+    _set_ge211_installer_vars()
+    add_dependencies(${GE211_INSTALLER} ${target})
+    set(CPACK_PACKAGE_EXECUTABLES "${target}" "${target}")
     include(CPack)
-    add_custom_target("${target}-dist.${dist_ext}")
-    add_custom_command(TARGET "${target}-dist.${dist_ext}"
-            COMMAND "${CMAKE_CPACK_COMMAND}"
-            COMMENT "Running CPack, please wait..."
-            DEPENDS ${target})
-endfunction(setup_ge211_installer)
+
+    target_sources(${target} PUBLIC ${ARGN})
+
+    if(APPLE)
+        set_target_properties(${target} PROPERTIES
+                MACOSX_BUNDLE                TRUE
+                MACOSX_FRAMEWORK_IDENTIFIER  edu.northwestern.cs.jesse.cs211
+                RESOURCE                     "${ARGN}")
+        set(app    "${CMAKE_BINARY_DIR}/${target}.app")
+        install(CODE    "set(BU_CHMOD_BUNDLE_ITEMS TRUE)
+                         fixup_bundle(\"${app}\" \"\" \"\")")
+        install(TARGETS ${target}
+                BUNDLE DESTINATION .)
+    elseif(WIN32)
+        set(exe    "\${CMAKE_INSTALL_PREFIX}/bin/${target}.exe")
+        set(bindir "${MINGW_DIR}/bin")
+        install(TARGETS ${target}
+                RUNTIME DESTINATION bin
+                RESOURCES DESTINATION Resources)
+        install(CODE    "list(APPEND gp_cmd_paths \"${bindir}\")
+                         fixup_bundle(\"${exe}\" \"\" \"\")")
+                      #? fixup_bundle(\"${exe}\" \"\" \"${bindir}\")")
+    endif()
+endfunction(ge211_installer_add)
