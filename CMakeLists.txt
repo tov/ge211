@@ -89,6 +89,14 @@ target_compile_definitions(ge211 PRIVATE
 add_subdirectory(examples/installed/)
 
 ###
+### DOCUMENTATION
+###
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+    include(Ge211Docs)
+endif()
+
+###
 ### LIBRARY INSTALLATION
 ###
 include(Ge211Installer)
