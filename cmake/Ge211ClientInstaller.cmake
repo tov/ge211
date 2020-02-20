@@ -46,14 +46,20 @@ macro(_set_ge211_installer_vars)
 endmacro(_set_ge211_installer_vars)
 
 
-# Only the first call does anything.
 function(_initialize_ge211_installer)
+    cmake_parse_arguments(pa "" "NAME" "" ${ARGN})
+
     get_property(already_initialized GLOBAL PROPERTY GE211_CLIENT_NAME SET)
     if(already_initialized)
+        get_property(old_name GLOBAL PROPERTY GE211_CLIENT_NAME)
+        if(pa_NAME AND NOT "${pa_NAME}" STREQUAL "${old_name}")
+            message(WARNING "Cannot name installer ‘${pa_NAME}’"
+                    " because there is already an installer named"
+                    " ‘${old_name}’.")
+        endif()
         return()
     endif()
 
-    cmake_parse_arguments(pa "" "NAME" "" ${ARGN})
     if(NOT pa_NAME)
         set(pa_NAME "${CMAKE_PROJECT_NAME}")
     endif()
