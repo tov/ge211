@@ -10,8 +10,8 @@ using namespace std;
 
 // MODEL CONSTANTS
 
-Dimensions const scene_dimensions{1024, 768};
-Basic_dimensions<double> const gravity_acceleration{0, 120}; // px/s^2
+Dims<int> const scene_dimensions{1024, 768};
+Dims<double> const gravity_acceleration{0, 120}; // px/s^2
 int const min_launch_speed{350}; // px/s
 int const max_launch_speed{500}; // px/s
 int const max_launch_angle{30}; // degrees from vertical
@@ -33,8 +33,8 @@ int const star_radius = 2;
 
 struct Projectile
 {
-    using Position = Basic_position<double>;
-    using Velocity = Basic_dimensions<double>;
+    using Position = Posn<double>;
+    using Velocity = Dims<double>;
 
     Position position;
     Velocity velocity;
@@ -98,7 +98,7 @@ struct Fireworks : Abstract_game
 
     // View
     View view;
-    Dimensions initial_window_dimensions() const override;
+    Dims<int> initial_window_dimensions() const override;
     void draw(Sprite_set& sprites) override;
     void draw_fireworks(Sprite_set& sprites) const;
     void draw_stats(Sprite_set& sprites);
@@ -106,7 +106,7 @@ struct Fireworks : Abstract_game
     // Controller
     bool is_paused = false;
     void on_key(Key key) override;
-    void on_mouse_up(Mouse_button button, Position position) override;
+    void on_mouse_up(Mouse_button button, Posn<int> position) override;
     void on_frame(double dt) override;
 };
 
@@ -231,7 +231,7 @@ View::View(Mixer& mixer)
     pop.try_load("pop.ogg", mixer);
 }
 
-Dimensions Fireworks::initial_window_dimensions() const
+Dims<int> Fireworks::initial_window_dimensions() const
 {
     return scene_dimensions;
 }
@@ -267,7 +267,7 @@ void Fireworks::draw_fireworks(Sprite_set& sprites) const
 
 void Fireworks::draw_stats(Sprite_set& sprites)
 {
-    Dimensions const margin {20, 10};
+    Dims<int> const margin {20, 10};
 
     view.fps.reconfigure(Text_sprite::Builder(view.sans)
                                  << setprecision(3)
@@ -276,10 +276,10 @@ void Fireworks::draw_stats(Sprite_set& sprites)
                                   << setprecision(0) << fixed
                                   << get_load_percent() << '%');
 
-    auto fps_posn  = Position{margin};
+    auto fps_posn  = Posn<int>{margin};
     sprites.add_sprite(view.fps, fps_posn);
 
-    auto load_posn = Position{scene_dimensions.width, 0}
+    auto load_posn = Posn<int>{scene_dimensions.width, 0}
             .down_left_by(margin)
             .left_by(view.load.dimensions().width);
     sprites.add_sprite(view.load, load_posn);
@@ -303,8 +303,8 @@ void Fireworks::on_key(Key key)
         is_paused = !is_paused;
     } else if (key == Key::code(' ') && !is_paused) {
         auto dims = get_window().get_dimensions();
-        auto pos0 = Projectile::Position(dims.width / 2., dims.height);
-        model.add_random(get_random(), pos0);
+        auto initial_position = Posn<double>(dims.width / 2, dims.height);
+        model.add_random(get_random(), initial_position);
     }
 }
 
@@ -319,7 +319,7 @@ void Fireworks::on_frame(double dt)
             mixer().play_effect(view.pop);
 }
 
-void Fireworks::on_mouse_up(Mouse_button, Position position)
+void Fireworks::on_mouse_up(Mouse_button, Posn<int> position)
 {
     if (is_paused) return;
 

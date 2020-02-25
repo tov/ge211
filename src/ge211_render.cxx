@@ -103,12 +103,12 @@ void Renderer::present() NOEXCEPT
     SDL_RenderPresent(get_raw_());
 }
 
-void Renderer::copy(const Texture& texture, Position xy)
+void Renderer::copy(const Texture& texture, Posn<int> xy)
 {
     auto raw_texture = texture.get_raw_(*this);
     if (!raw_texture) return;
 
-    SDL_Rect dstrect = Rectangle::from_top_left(xy, texture.dimensions());
+    SDL_Rect dstrect = Rect<int>::from_top_left(xy, texture.dimensions());
 
     int render_result = SDL_RenderCopy(get_raw_(), raw_texture,
                                        nullptr, &dstrect);
@@ -118,13 +118,13 @@ void Renderer::copy(const Texture& texture, Position xy)
 }
 
 void Renderer::copy(const Texture& texture,
-                    Position xy,
+                    Posn<int> xy,
                     const Transform& transform)
 {
     auto raw_texture = texture.get_raw_(*this);
     if (!raw_texture) return;
 
-    SDL_Rect dstrect = Rectangle::from_top_left(xy, texture.dimensions());
+    SDL_Rect dstrect = Rect<int>::from_top_left(xy, texture.dimensions());
     dstrect.w = int(dstrect.w * transform.get_scale_x());
     dstrect.h = int(dstrect.h * transform.get_scale_y());
 
@@ -200,9 +200,9 @@ SDL_Texture* Texture::get_raw_(const Renderer& renderer) const
     throw Host_error{"Could not create texture from surface"};
 }
 
-Dimensions Texture::dimensions() const NOEXCEPT
+Dims<int> Texture::dimensions() const NOEXCEPT
 {
-    Dimensions result{0, 0};
+    Dims<int> result{0, 0};
 
     if (impl_->texture_) {
         SDL_QueryTexture(impl_->texture_.get(), nullptr, nullptr,

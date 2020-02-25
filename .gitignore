@@ -1,10 +1,16 @@
-# CLion
-.idea/*
-!.idea/codeStyles
-!.idea/inspectionProfiles
-!.idea/misc.xml
-
-# Build directories:
+# CMake build directories
 build/
 builds/
+build.*/
 cmake-build-*/
+
+# Documentation output
+doc/
+doxygen/cppreference.xml
+doxygen/FRONTMATTER.md
+
+# CLion preferences
+.idea/*
+
+# MacOS Finder preferences
+.DS_Store

@@ -7,7 +7,7 @@ namespace ge211 {
 
 using namespace detail;
 
-Window::Window(const std::string& title, Dimensions dim)
+Window::Window(const std::string& title, Dims<int> dim)
         : ptr_{SDL_CreateWindow(title.c_str(),
                                 SDL_WINDOWPOS_UNDEFINED,
                                 SDL_WINDOWPOS_UNDEFINED,
@@ -24,14 +24,14 @@ uint32_t Window::get_flags_() const NOEXCEPT
     return SDL_GetWindowFlags(get_raw_());
 }
 
-Dimensions Window::get_dimensions() const NOEXCEPT
+Dims<int> Window::get_dimensions() const NOEXCEPT
 {
-    Dimensions result{0, 0};
+    Dims<int> result{0, 0};
     SDL_GetWindowSize(get_raw_(), &result.width, &result.height);
     return result;
 }
 
-void Window::set_dimensions(Dimensions dims)
+void Window::set_dimensions(Dims<int> dims)
 {
     SDL_SetWindowSize(get_raw_(), dims.width, dims.height);
 
@@ -61,19 +61,19 @@ void Window::set_resizeable(bool resizable) NOEXCEPT
 }
 #endif
 
-Position Window::get_position() const NOEXCEPT
+Posn<int> Window::get_position() const NOEXCEPT
 {
-    Position result{0, 0};
+    Posn<int> result{0, 0};
     SDL_GetWindowPosition(get_raw_(), &result.x, &result.y);
     return result;
 }
 
-void Window::set_position(Position position)
+void Window::set_position(Posn<int> position)
 {
     SDL_SetWindowPosition(get_raw_(), position.x, position.y);
 }
 
-const Position Window::centered{SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED};
+const Posn<int> Window::centered{SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED};
 
 bool Window::get_fullscreen() const NOEXCEPT
 {
@@ -88,14 +88,14 @@ void Window::set_fullscreen(bool fullscreen)
         throw Host_error{"Window::set_fullscreen: failed"};
 }
 
-Dimensions Window::max_fullscreen_dimensions() NOEXCEPT
+Dims<int> Window::max_fullscreen_dimensions() NOEXCEPT
 {
     SDL_Rect rect;
     SDL_GetDisplayBounds(0, &rect);
     return {rect.w, rect.h};
 }
 
-Dimensions Window::max_window_dimensions() const NOEXCEPT
+Dims<int> Window::max_window_dimensions() const NOEXCEPT
 {
     int top, left, bottom, right;
     SDL_GetWindowBordersSize(get_raw_(), &top, &left, &bottom, &right);

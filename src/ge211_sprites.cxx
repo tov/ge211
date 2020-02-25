@@ -14,21 +14,21 @@ using namespace detail;
 Sprite_set::Sprite_set() {}
 
 Sprite_set&
-Sprite_set::add_sprite(const Sprite& sprite, Position xy, int z,
+Sprite_set::add_sprite(const Sprite& sprite, Posn<int> xy, int z,
                        const Transform& t)
 {
     sprites_.emplace_back(sprite, xy, z, t);
     return *this;
 }
 
-Sprite_set& Sprite_set::add_sprite(const Sprite& sprite, Position xy, int z)
+Sprite_set& Sprite_set::add_sprite(const Sprite& sprite, Posn<int> xy, int z)
 {
     return add_sprite(sprite, xy, z, Transform{});
 }
 
 namespace detail {
 
-Placed_sprite::Placed_sprite(const Sprite& sprite, Position xy,
+Placed_sprite::Placed_sprite(const Sprite& sprite, Posn<int> xy,
                              int z, const Transform& transform) NOEXCEPT
         : sprite{&sprite}, xy{xy}, z{z}, transform{transform}
 { }
@@ -43,13 +43,13 @@ bool operator<(const Placed_sprite& s1, const Placed_sprite& s2) NOEXCEPT
     return s1.z > s2.z;
 }
 
-Dimensions Texture_sprite::dimensions() const
+Dims<int> Texture_sprite::dimensions() const
 {
     return get_texture_().dimensions();
 }
 
 void Texture_sprite::render(Renderer& renderer,
-                            Position position,
+                            Posn<int> position,
                             const Transform& transform) const
 {
     if (transform.is_identity())
@@ -63,7 +63,7 @@ void Texture_sprite::prepare(const Renderer& renderer) const
     renderer.prepare(get_texture_());
 }
 
-Uniq_SDL_Surface Render_sprite::create_surface_(Dimensions dimensions)
+Uniq_SDL_Surface Render_sprite::create_surface_(Dims<int> dimensions)
 {
     SDL_Surface* surface =
             SDL_CreateRGBSurfaceWithFormat(0,
@@ -77,7 +77,7 @@ Uniq_SDL_Surface Render_sprite::create_surface_(Dimensions dimensions)
     return Uniq_SDL_Surface(surface);
 }
 
-Render_sprite::Render_sprite(Dimensions dimensions)
+Render_sprite::Render_sprite(Dims<int> dimensions)
         : texture_{create_surface_(dimensions)}
 { }
 
@@ -100,14 +100,14 @@ void Render_sprite::fill_surface(Color color)
     SDL_FillRect(&surface, nullptr, color.to_sdl_(surface.format));
 }
 
-void Render_sprite::fill_rectangle(Rectangle rect, Color color)
+void Render_sprite::fill_rectangle(Rect<int> rect, Color color)
 {
     auto& surface = as_surface();
     SDL_Rect rect_buf = rect;
     SDL_FillRect(&surface, &rect_buf, color.to_sdl_(surface.format));
 }
 
-void Render_sprite::set_pixel(Position xy, Color color)
+void Render_sprite::set_pixel(Posn<int> xy, Color color)
 {
     fill_rectangle({xy.x, xy.y, 1, 1}, color);
 }
@@ -116,7 +116,7 @@ void Render_sprite::set_pixel(Position xy, Color color)
 
 namespace sprites {
 
-static Dimensions check_rectangle_dimensions(Dimensions dims)
+static Dims<int> check_rectangle_dimensions(Dims<int> dims)
 {
     if (dims.width <= 0 || dims.height <= 0) {
         throw Client_logic_error(
@@ -126,7 +126,7 @@ static Dimensions check_rectangle_dimensions(Dimensions dims)
     return dims;
 }
 
-Rectangle_sprite::Rectangle_sprite(Dimensions dims, Color color)
+Rectangle_sprite::Rectangle_sprite(Dims<int> dims, Color color)
         : Render_sprite{check_rectangle_dimensions(dims)}
 {
     fill_surface(color);
@@ -137,7 +137,7 @@ void Rectangle_sprite::recolor(Color color)
     *this = Rectangle_sprite{dimensions(), color};
 }
 
-static Dimensions compute_circle_dimensions(int radius)
+static Dims<int> compute_circle_dimensions(int radius)
 {
     if (radius <= 0) {
         throw Client_logic_error("Circle_sprite: radius must be positive");
@@ -331,7 +331,7 @@ void Multiplexed_sprite::reset()
 }
 
 void Multiplexed_sprite::render(detail::Renderer& renderer,
-                                Position position,
+                                Posn<int> position,
                                 Transform const& transform) const
 {
     const Sprite& selection = select_(since_.elapsed_time());

@@ -113,7 +113,7 @@ public:
     /// The default window dimensions, in pixels. You can change this in a
     /// derived class by overriding the initial_window_dimensions() const member
     /// function.
-    static const Dimensions default_window_dimensions;
+    static const Dims<int> default_window_dimensions;
 
     /// Polymorphic classes should have virtual destructors.
     virtual ~Abstract_game() {}
@@ -164,13 +164,13 @@ protected:
     virtual void on_key_up(Key) { }
 
     /// Called by the game engine each time a mouse button is depressed.
-    virtual void on_mouse_down(Mouse_button, Position) { }
+    virtual void on_mouse_down(Mouse_button, Posn<int>) { }
 
     /// Called by the game engine each time a mouse button is released.
-    virtual void on_mouse_up(Mouse_button, Position) { }
+    virtual void on_mouse_up(Mouse_button, Posn<int>) { }
 
     /// Called by the game engine each time the mouse moves.
-    virtual void on_mouse_move(Position) { }
+    virtual void on_mouse_move(Posn<int>) { }
 
     /// Called by the game engine after initializing the game but before
     /// commencing the event loop. You can do this to perform initialization
@@ -193,7 +193,7 @@ protected:
     /// Override this function to specify the initial dimensions of the
     /// game's window.
     /// This is only called by the engine once at startup.
-    virtual Dimensions initial_window_dimensions() const;
+    virtual Dims<int> initial_window_dimensions() const;
 
     /// Override this function to specify the initial title of the game.
     /// This is only called by the engine once at startup. To change the

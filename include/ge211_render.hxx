@@ -30,8 +30,8 @@ public:
     void set_color(Color);
 
     void clear();
-    void copy(const Texture&, Position);
-    void copy(const Texture&, Position, const Transform&);
+    void copy(const Texture&, Posn<int>);
+    void copy(const Texture&, Posn<int>, const Transform&);
 
     // Prepares a texture for rendering with this given renderer, without
     // actually copying it.
@@ -65,7 +65,7 @@ public:
     explicit Texture(Owned<SDL_Surface> surface);
     explicit Texture(Uniq_SDL_Surface);
 
-    Dimensions dimensions() const NOEXCEPT;
+    Dims<int> dimensions() const NOEXCEPT;
 
     // Returns nullptr if this `Texture` has been rendered, and can no
     // longer be updated as an `SDL_Surface`.

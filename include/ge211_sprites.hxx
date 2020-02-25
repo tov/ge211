@@ -41,7 +41,7 @@ public:
     /// that this returns the *maximum* dimensions that the sprite could
     /// render at. For animated sprites, it's usually best if all the
     /// frames have the same dimensions anyway.
-    virtual Dimensions dimensions() const = 0;
+    virtual Dims<int> dimensions() const = 0;
 
     virtual ~Sprite() {}
 
@@ -51,7 +51,7 @@ private:
     friend Multiplexed_sprite;
 
     virtual void render(detail::Renderer&,
-                        Position,
+                        Posn<int>,
                         Transform const&) const = 0;
 
     virtual void prepare(detail::Renderer const&) const {}
@@ -72,10 +72,10 @@ namespace detail {
 class Texture_sprite : public Sprite
 {
 public:
-    Dimensions dimensions() const override;
+    Dims<int> dimensions() const override;
 
 private:
-    void render(detail::Renderer&, Position, Transform const&) const override;
+    void render(detail::Renderer&, Posn<int>, Transform const&) const override;
     void prepare(detail::Renderer const&) const override;
 
     virtual Texture const& get_texture_() const = 0;
@@ -94,7 +94,7 @@ class Render_sprite : public Texture_sprite
 protected:
     /// \preconditions
     ///  - Both dimensions must be positive.
-    explicit Render_sprite(Dimensions);
+    explicit Render_sprite(Dims<int>);
 
     /// Fills the whole surface with the given color.
     /// This should only be called from the derived class's constructor.
@@ -102,11 +102,11 @@ protected:
 
     /// Fills the given rectangle in the given color.
     /// This should only be called from the derived class's constructor.
-    void fill_rectangle(Rectangle, Color);
+    void fill_rectangle(Rect<int>, Color);
 
     /// Sets one pixel to the given color.
     /// This should only be called from the derived class's constructor.
-    void set_pixel(Position, Color);
+    void set_pixel(Posn<int>, Color);
 
 private:
     Texture texture_;
@@ -116,7 +116,7 @@ private:
     /// it should only be called during the derived class's constructor.
     SDL_Surface& as_surface();
 
-    static Uniq_SDL_Surface create_surface_(Dimensions);
+    static Uniq_SDL_Surface create_surface_(Dims<int>);
 };
 
 } // end namespace detail
@@ -132,7 +132,7 @@ public:
     ///
     /// \preconditions
     ///  - both dimensions must be positive
-    explicit Rectangle_sprite(Dimensions, Color = Color::white());
+    explicit Rectangle_sprite(Dims<int>, Color = Color::white());
 
     /// Changes the color of this rectangle sprite.
     void recolor(Color);
@@ -413,7 +413,7 @@ protected:
     virtual const Sprite& select_(Duration age) const = 0;
 
 private:
-    void render(detail::Renderer& renderer, Position position,
+    void render(detail::Renderer& renderer, Posn<int> position,
                 Transform const& transform) const override;
 
     Timer since_;
@@ -426,11 +426,11 @@ namespace detail {
 struct Placed_sprite
 {
     const Sprite* sprite;
-    Position xy;
+    Posn<int> xy;
     int z;
     Transform transform;
 
-    Placed_sprite(Sprite const&, Position, int, Transform const&) NOEXCEPT;
+    Placed_sprite(Sprite const&, Posn<int>, int, Transform const&) NOEXCEPT;
 
     void render(Renderer&) const;
 };
@@ -462,13 +462,13 @@ public:
     /// Note that the Sprite_set does not copy the sprite it is given, but
     /// just stores a reference to it. Thus, the Sprite must live somewhere
     /// else, and continue to live until it is rendered.
-    Sprite_set& add_sprite(Sprite const&, Position, int z = 0);
+    Sprite_set& add_sprite(Sprite const&, Posn<int>, int z = 0);
 
     /// Adds the given sprite as the given geometry::Position and
     /// z coordinate, to be rendered with the given geometry::Transform. The
     /// transform allows scaling, flipping, and rotating the Sprite when
     /// rendered.
-    Sprite_set& add_sprite(Sprite const&, Position, int z, Transform const&);
+    Sprite_set& add_sprite(Sprite const&, Posn<int>, int z, Transform const&);
 
 private:
     friend class detail::Engine;

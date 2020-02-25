@@ -63,15 +63,27 @@ class Mixer_error;
 
 namespace geometry {
 
-template <class> struct Basic_dimensions;
-template <class> struct Basic_position;
-template <class> struct Basic_rectangle;
 class Origin_type;
 
-using Dimensions = Basic_dimensions<int>;
-using Position = Basic_position<int>;
-using Rectangle = Basic_rectangle<int>;
+template <class T>
+struct Geometry
+{
+    using Coordinate = T;
+    struct Posn;
+    struct Dims;
+    struct Rect;
+};
+
 class Transform;
+
+template <class T>
+using Posn = typename Geometry<T>::Posn;
+
+template <class T>
+using Dims = typename Geometry<T>::Dims;
+
+template <class T>
+using Rect = typename Geometry<T>::Rect;
 
 } // end namespace geometry
 
