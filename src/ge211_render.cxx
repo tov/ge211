@@ -12,17 +12,35 @@ operator|=(SDL_RendererFlip& f1, SDL_RendererFlip f2)
     return f1 = SDL_RendererFlip(f1 | f2);
 }
 
-namespace ge211 {
+namespace ge211
+{
 
-namespace detail {
+namespace detail
+{
 
-static const uint32_t renderer_flags_to_try[] = {
-        SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC,
-        SDL_RENDERER_SOFTWARE | SDL_RENDERER_PRESENTVSYNC,
-        SDL_RENDERER_ACCELERATED,
-        SDL_RENDERER_SOFTWARE,
-        0,
+namespace
+{
+
+struct Renderer_flag
+{
+    uint32_t value;
+    const char* description;
 };
+
+#pragma push_macro("RF")
+#define RF(E) Renderer_flag{(E), #E}
+
+static const Renderer_flag renderer_flags_to_try[] = {
+        RF(SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC),
+        RF(SDL_RENDERER_SOFTWARE | SDL_RENDERER_PRESENTVSYNC),
+        RF(SDL_RENDERER_ACCELERATED),
+        RF(SDL_RENDERER_SOFTWARE),
+        RF(0),
+};
+
+#pragma pop_macro("RF")
+
+} // end anonymous namespace
 
 SDL_Renderer* Renderer::create_renderer_(SDL_Window* window)
 {
@@ -32,19 +50,19 @@ SDL_Renderer* Renderer::create_renderer_(SDL_Window* window)
     SDL_SetHint(SDL_HINT_RENDER_DRIVER, "metal");
 #endif
 
-    for (auto flags : renderer_flags_to_try) {
-        result = SDL_CreateRenderer(window, -1, flags);
+    for (auto flag : renderer_flags_to_try) {
+        result = SDL_CreateRenderer(window, -1, flag.value);
         if (result) {
             SDL_SetRenderDrawBlendMode(result, SDL_BLENDMODE_BLEND);
             return result;
         }
 
         info_sdl()
-                << "Could not initialize preferred renderer ("
-                << flags << "); trying next.";
+                << "Could not initialize renderer ("
+                << flag.description << "); trying next.";
     }
 
-    throw Host_error{"Could not initialize renderer"};
+    throw Host_error{"Could not initialize renderer."};
 }
 
 Renderer::Renderer(const Window& window)
@@ -73,8 +91,8 @@ SDL_Renderer* Renderer::get_raw_() const noexcept
 void Renderer::set_color(Color color)
 {
     if (SDL_SetRenderDrawColor(
-                get_raw_(),
-                color.red(), color.green(), color.blue(), color.alpha()))
+            get_raw_(),
+            color.red(), color.green(), color.blue(), color.alpha()))
         throw Host_error{"Could not set renderer color"};
 }
 
@@ -181,7 +199,7 @@ Dimensions Texture::dimensions() const noexcept
         SDL_QueryTexture(impl_->texture_.get(), nullptr, nullptr,
                          &result.width, &result.height);
     } else if (impl_->surface_) {
-        result.width = impl_->surface_->w;
+        result.width  = impl_->surface_->w;
         result.height = impl_->surface_->h;
     }
 
