@@ -114,6 +114,9 @@ public:
     /// function.
     static const Dimensions default_window_dimensions;
 
+    /// Polymorphic classes should have virtual destructors.
+    virtual ~Abstract_game() {}
+
 protected:
     /// \name Functions to be overridden by clients
     ///@{
