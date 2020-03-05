@@ -215,9 +215,27 @@ protected:
     /// called before the window is created by `run()`.
     Window& get_window() const;
 
-    /// Gets the pseudo-random number generator associated with this game.
-    /// See the documentation for Random to find out how this can be used to
-    /// produce random numbers.
+    /// Gets a reference to the pseudo-random number generator associated
+    /// with this game.
+    ///
+    /// ```
+    /// void My_game::on_frame(double dt)
+    /// {
+    ///     Random& rnd = get_random();
+    ///
+    ///     if (rnd.random_bool(SPAWN_RATE * dt)) {
+    ///         int row   = rnd.between(ROW_MIN, ROW_MAX);
+    ///         int count = rnd.up_to(PER_ROW_LIMIT);
+    ///         while (count--) {
+    ///             int col  = rnd.between(COL_MIN, COL_MAX);
+    ///             add_enemy(row, col);
+    ///         }
+    ///     }
+    /// }
+    /// ```
+    ///
+    /// See the documentation for Random to read more about how this can
+    /// be used to produce random numbers.
     Random& get_random() const noexcept;
 
     /// Gets the audio mixer, which can be used to play music. If the

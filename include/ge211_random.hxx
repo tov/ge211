@@ -59,8 +59,15 @@ struct Up_to<T, std::enable_if_t<std::is_floating_point<T>::value>>
 
 } // end namespace detail
 
-/// A pseudo-random number generator. This class has member functions
-/// for generating random numbers.
+/// A pseudo-random number generator.
+///
+/// This class has member functions for generating random numbers.
+///
+/// Classes derived from Abstract_game can access an instance of
+/// this class via Abstract_game::get_random(), which returns a
+/// reference to a Random object maintained by Abstract_game. There
+/// is no way for clients to construct their own instances of the
+/// Random class.
 class Random
 {
 public:
