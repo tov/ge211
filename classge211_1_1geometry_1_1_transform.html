@@ -113,15 +113,16 @@ $(document).ready(function(){initNavTree('classge211_1_1geometry_1_1_transform.h
 <li><a class="el" href="classge211_1_1geometry_1_1_transform.html#a6b0b704982ac34bfe41738a404df341a" title="Constructs a transform that scales the sprite in the x dimension. ">Transform::scale_x(double)</a></li>
 <li><a class="el" href="classge211_1_1geometry_1_1_transform.html#a9dbe926dc876a1e74eecb6fb13c1c343" title="Constructs a transform that scales the sprite in the y dimension. ">Transform::scale_y(double)</a></li>
 </ul>
-<p>It is also possible to modify a transform with the setter functions such as <a class="el" href="classge211_1_1geometry_1_1_transform.html#aa21d9396229f5cd5ce4ebd0c65407524" title="Modifies this transform to have the given rotation, in degrees degrees. ">set_rotation(double)</a> and <a class="el" href="classge211_1_1geometry_1_1_transform.html#a6c2718c56e69ccac1f3113df64359d6d" title="Modifies this transform to scale the sprite by the given amount in both dimensions. ">set_scale(double)</a>. This can be used to configure a transform that does more than one thing:</p>
+<p>It is also possible to modify a transform with the setter functions such as <a class="el" href="classge211_1_1geometry_1_1_transform.html#aa21d9396229f5cd5ce4ebd0c65407524" title="Modifies this transform to have the given rotation, in degrees. ">set_rotation(double)</a> and <a class="el" href="classge211_1_1geometry_1_1_transform.html#a6c2718c56e69ccac1f3113df64359d6d" title="Modifies this transform to scale the sprite by the given amount in both dimensions. ">set_scale(double)</a>. This can be used to configure a transform that does more than one thing:</p>
 <div class="fragment"><div class="line"><a class="code" href="classge211_1_1geometry_1_1_transform.html#a581c712e9880a1899d51235f66fa3302">Transform</a> my_transform =</div><div class="line">    <a class="code" href="classge211_1_1geometry_1_1_transform.html#a581c712e9880a1899d51235f66fa3302">Transform</a>{}.set_flip_h(<span class="keyword">true</span>)</div><div class="line">               .set_flip_v(<span class="keyword">true</span>)</div><div class="line">               .scale_x(2);</div></div><!-- fragment --> 
 <p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00685">685</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Setters</div></td></tr>
-<tr class="memitem:aa21d9396229f5cd5ce4ebd0c65407524"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#aa21d9396229f5cd5ce4ebd0c65407524">set_rotation</a> (double) noexcept</td></tr>
-<tr class="memdesc:aa21d9396229f5cd5ce4ebd0c65407524"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifies this transform to have the given rotation, in degrees degrees.  <a href="#aa21d9396229f5cd5ce4ebd0c65407524">More...</a><br /></td></tr>
+<tr class="memitem:aa21d9396229f5cd5ce4ebd0c65407524"><td class="memItemLeft" align="right" valign="top"><a id="aa21d9396229f5cd5ce4ebd0c65407524"></a>
+<a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#aa21d9396229f5cd5ce4ebd0c65407524">set_rotation</a> (double) noexcept</td></tr>
+<tr class="memdesc:aa21d9396229f5cd5ce4ebd0c65407524"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifies this transform to have the given rotation, in degrees. <br /></td></tr>
 <tr class="separator:aa21d9396229f5cd5ce4ebd0c65407524"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71640b05e5f7f7be2c8c0938a2cb310e"><td class="memItemLeft" align="right" valign="top"><a id="a71640b05e5f7f7be2c8c0938a2cb310e"></a>
 <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a71640b05e5f7f7be2c8c0938a2cb310e">set_flip_h</a> (bool) noexcept</td></tr>
@@ -291,36 +292,6 @@ static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform<
 <p>Constructs a rotating transform, given the rotation in degrees clockwise. </p>
 
 <p class="definition">Definition at line <a class="el" href="ge211__geometry_8cxx_source.html#l00014">14</a> of file <a class="el" href="ge211__geometry_8cxx_source.html">ge211_geometry.cxx</a>.</p>
-
-</div>
-</div>
-<a id="aa21d9396229f5cd5ce4ebd0c65407524"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa21d9396229f5cd5ce4ebd0c65407524">&#9670;&nbsp;</a></span>set_rotation()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp; set_rotation </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>rotation</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Modifies this transform to have the given rotation, in degrees degrees. </p>
-
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8cxx_source.html#l00044">44</a> of file <a class="el" href="ge211__geometry_8cxx_source.html">ge211_geometry.cxx</a>.</p>
 
 </div>
 </div>

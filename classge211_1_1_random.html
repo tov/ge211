@@ -104,9 +104,10 @@ $(document).ready(function(){initNavTree('classge211_1_1_random.html','');});
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A pseudo-random number generator. </p>
-<p>This class has member functions for generating random numbers. </p>
+<p>This class has member functions for generating random numbers.</p>
+<p>Classes derived from <a class="el" href="classge211_1_1_abstract__game.html" title="This is the abstract base class for deriving games. ">Abstract_game</a> can access an instance of this class via <a class="el" href="classge211_1_1_abstract__game.html#ae427d958ed5a0ae77c6a948650cca7bf" title="Gets a reference to the pseudo-random number generator associated with this game. ...">Abstract_game::get_random()</a>, which returns a reference to a <a class="el" href="classge211_1_1_random.html" title="A pseudo-random number generator. ">Random</a> object maintained by <a class="el" href="classge211_1_1_abstract__game.html" title="This is the abstract base class for deriving games. ">Abstract_game</a>. There is no way for clients to construct their own instances of the <a class="el" href="classge211_1_1_random.html" title="A pseudo-random number generator. ">Random</a> class. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00064">64</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00071">71</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -169,7 +170,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns a random <code>T</code> from the whole range of <code>T</code>. </p>
 <p>Only enabled for integral types <code>T</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00107">107</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00114">114</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
 
 </div>
 </div>
@@ -211,7 +212,7 @@ Public Member Functions</h2></td></tr>
 <p>The right bound is inclusive for integral types but exclusive for floating point types. The left bound is always inclusive.</p>
 <p>Example:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> roll_the_die(Random&amp; random)</div><div class="line">{</div><div class="line">      <span class="keywordflow">return</span> random.between(1, 6);</div><div class="line">}</div></div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00096">96</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00103">103</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
 
 </div>
 </div>
@@ -264,7 +265,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns a random <code>T</code> between 0 (inclusive) and <code>max</code> (exclusive). </p>
 <p>Example:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> roll_the_die(Random&amp; random)</div><div class="line">{</div><div class="line">      <span class="keywordflow">return</span> random.up_to(6) + 1;</div><div class="line">}</div></div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00078">78</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00085">85</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
 
 </div>
 </div>

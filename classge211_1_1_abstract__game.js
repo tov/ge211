@@ -1,8 +1,10 @@
 var classge211_1_1_abstract__game =
 [
+    [ "~Abstract_game", "classge211_1_1_abstract__game.html#ad7bb94cf4db55ceaab014bafc0d7ece9", null ],
     [ "draw", "classge211_1_1_abstract__game.html#a44518135e411e35374f252d1c7d44e3e", null ],
     [ "get_frame_rate", "classge211_1_1_abstract__game.html#a466ce6e917f4e2af12ccd7cd28406248", null ],
     [ "get_frame_start_time", "classge211_1_1_abstract__game.html#a7329861f81db4c45ce52f459e665151d", null ],
+    [ "get_load_percent", "classge211_1_1_abstract__game.html#a7d6579eaf07d4481387f0609a2100438", null ],
     [ "get_mixer", "classge211_1_1_abstract__game.html#a89a187d45909eb2bda4622c16e2287ab", null ],
     [ "get_prev_frame_length", "classge211_1_1_abstract__game.html#ae4657bfa0ca87d757f157ad96842e7c8", null ],
     [ "get_random", "classge211_1_1_abstract__game.html#ae427d958ed5a0ae77c6a948650cca7bf", null ],

@@ -10,5 +10,5 @@ var searchData=
   ['top_5fleft',['top_left',['../structge211_1_1geometry_1_1_basic__rectangle.html#a81b45d5896ffcbaf9b315c2c1592c2e7',1,'ge211::geometry::Basic_rectangle']]],
   ['top_5fright',['top_right',['../structge211_1_1geometry_1_1_basic__rectangle.html#a93abf9b91225142c2320a88c89574f8b',1,'ge211::geometry::Basic_rectangle']]],
   ['transform',['Transform',['../classge211_1_1geometry_1_1_transform.html',1,'Transform'],['../classge211_1_1geometry_1_1_transform.html#a581c712e9880a1899d51235f66fa3302',1,'ge211::geometry::Transform::Transform()']]],
-  ['type',['type',['../classge211_1_1events_1_1_key.html#a7a5e549ca0b63ecd2f5e0057a7166358',1,'ge211::events::Key::type() const noexcept'],['../classge211_1_1events_1_1_key.html#a1d1cfd8ffb84e947f82999c682b666a7',1,'ge211::events::Key::Type()']]]
+  ['type',['Type',['../classge211_1_1events_1_1_key.html#a1d1cfd8ffb84e947f82999c682b666a7',1,'ge211::events::Key::Type()'],['../classge211_1_1events_1_1_key.html#a7a5e549ca0b63ecd2f5e0057a7166358',1,'ge211::events::Key::type() const noexcept']]]
 ];

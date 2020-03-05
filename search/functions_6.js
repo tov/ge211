@@ -7,6 +7,7 @@ var searchData=
   ['get_5fframe_5frate',['get_frame_rate',['../classge211_1_1_abstract__game.html#a466ce6e917f4e2af12ccd7cd28406248',1,'ge211::Abstract_game']]],
   ['get_5fframe_5fstart_5ftime',['get_frame_start_time',['../classge211_1_1_abstract__game.html#a7329861f81db4c45ce52f459e665151d',1,'ge211::Abstract_game']]],
   ['get_5ffullscreen',['get_fullscreen',['../classge211_1_1_window.html#ad7a580b2d5460cf2e38d4ed44d7e5dfc',1,'ge211::Window']]],
+  ['get_5fload_5fpercent',['get_load_percent',['../classge211_1_1_abstract__game.html#a7d6579eaf07d4481387f0609a2100438',1,'ge211::Abstract_game']]],
   ['get_5fmixer',['get_mixer',['../classge211_1_1_abstract__game.html#a89a187d45909eb2bda4622c16e2287ab',1,'ge211::Abstract_game']]],
   ['get_5fmusic',['get_music',['../classge211_1_1audio_1_1_mixer.html#ae7ed2c298311f23fac5314b0e4eebfbc',1,'ge211::audio::Mixer']]],
   ['get_5fmusic_5fstate',['get_music_state',['../classge211_1_1audio_1_1_mixer.html#a3947f21f830ecb981cb8a3f422ded52a',1,'ge211::audio::Mixer']]],
