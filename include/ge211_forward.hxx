@@ -30,7 +30,7 @@ class Engine;
 class File_resource;
 struct Placed_sprite;
 class Renderer;
-class Session;
+struct Session;
 class Render_sprite;
 class Texture;
 class Texture_sprite;

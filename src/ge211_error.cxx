@@ -10,6 +10,13 @@ namespace ge211 {
 
 namespace exceptions {
 
+static const char* take_sdl_error()
+{
+    const char* result = SDL_GetError();
+    SDL_ClearError();
+    return result;
+}
+
 const char* Exception_base::what() const noexcept
 {
     return message_->c_str();
@@ -28,7 +35,7 @@ Client_logic_error::Client_logic_error(const std::string& message)
 { }
 
 static std::string build_sdl_error_message(const std::string& message) {
-    const char* reason = SDL_GetError();
+    const char* reason = take_sdl_error();
 
     std::ostringstream oss;
     if (message.empty())
@@ -132,17 +139,17 @@ Log_message fatal(std::string reason)
 
 Log_message info_sdl()
 {
-    return info(SDL_GetError());
+    return info(take_sdl_error());
 }
 
 Log_message warn_sdl()
 {
-    return warn(SDL_GetError());
+    return warn(take_sdl_error());
 }
 
 Log_message fatal_sdl()
 {
-    return fatal(SDL_GetError());
+    return fatal(take_sdl_error());
 }
 
 Logger& Logger::instance() noexcept

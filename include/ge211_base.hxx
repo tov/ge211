@@ -291,7 +291,7 @@ private:
 
     mutable Random rng_;
     detail::Session session_;
-    std::unique_ptr<audio::Mixer> mixer_ = audio::Mixer::open_mixer();
+    Mixer::Ptr mixer_ = Mixer::open_if_(session_.mix.enabled);
     detail::Engine* engine_ = nullptr;
 
     bool quit_ = false;

@@ -284,13 +284,16 @@ public:
     ///@}
 
 private:
-    /// Opens the mixer, if possible, returning nullptr for failure.
-    static std::unique_ptr<Mixer> open_mixer();
+    using Ptr = std::unique_ptr<Mixer>;
 
-    /// Private constructor -- should not be called, except by Abstract_game.
-    // (and if there is more than one Abstract_game at a time, we're in trouble.
+    /// Opens the mixer, if possible, returning nullptr for failure.
+    /// Only Abstract_game is allowed to do this (and if there’s more
+    /// than one Abstract_game at a time then we’re in trouble.)
+    static Ptr open_if_(bool enable = true);
+    friend Abstract_game; // calls open_if_().
+
+    /// Private constructor -- should only be called by open_if_().
     Mixer();
-    friend Abstract_game; // constructs.
 
     /// Updates the state of the channels.
     void poll_channels_();

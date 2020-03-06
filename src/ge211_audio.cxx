@@ -69,15 +69,9 @@ Sound_effect::operator bool() const
     return !empty();
 }
 
-std::unique_ptr<Mixer> Mixer::open_mixer()
+Mixer::Ptr Mixer::open_if_(bool enable)
 {
-    if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,
-                      MIX_DEFAULT_FORMAT,
-                      2,
-                      4096) >= 0)
-        return std::unique_ptr<Mixer>{new Mixer};
-    else
-        return {};
+    return Ptr{enable? new Mixer : nullptr};
 }
 
 Mixer::Mixer()
@@ -98,9 +92,7 @@ Mixer::Mixer()
 }
 
 Mixer::~Mixer()
-{
-    Mix_CloseAudio();
-}
+{ }
 
 void Mixer::play_music(Music_track music)
 {
