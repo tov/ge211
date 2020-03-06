@@ -13,10 +13,9 @@ Window::Window(const std::string& title, Dimensions dim)
                                 SDL_WINDOWPOS_UNDEFINED,
                                 dim.width,
                                 dim.height,
-                                SDL_WINDOW_SHOWN),
-               &SDL_DestroyWindow}
+                                SDL_WINDOW_SHOWN)}
 {
-    if (ptr_ == nullptr)
+    if (!ptr_)
         throw Host_error{"Could not create window"};
 }
 

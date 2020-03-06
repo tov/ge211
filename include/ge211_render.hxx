@@ -5,11 +5,19 @@
 #include "ge211_geometry.hxx"
 #include "ge211_window.hxx"
 #include "ge211_util.hxx"
+
+#include <SDL_render.h>
+#include <SDL_surface.h>
+
 #include <memory>
 
 namespace ge211 {
 
 namespace detail {
+
+using Uniq_SDL_Renderer = delete_ptr<SDL_Renderer, &SDL_DestroyRenderer>;
+using Uniq_SDL_Surface  = delete_ptr<SDL_Surface, &SDL_FreeSurface>;
+using Uniq_SDL_Texture  = delete_ptr<SDL_Texture, &SDL_DestroyTexture>;
 
 class Renderer
 {
@@ -33,11 +41,11 @@ public:
 private:
     friend Texture;
 
-    SDL_Renderer* get_raw_() const noexcept;
+    Borrowed<SDL_Renderer> get_raw_() const noexcept;
 
-    static SDL_Renderer* create_renderer_(SDL_Window*);
+    static Owned<SDL_Renderer> create_renderer_(Borrowed<SDL_Window>);
 
-    delete_ptr<SDL_Renderer> ptr_;
+    Uniq_SDL_Renderer ptr_;
 };
 
 // A texture is initially created as a (device-independent) `SDL_Surface`,
@@ -49,18 +57,18 @@ public:
     // An empty texture; don't render this or even ask for its dimensions.
     Texture() noexcept;
 
-    // Takes ownership of the `SDL_Surface*` and will delete it.
+    // Takes ownership of the `SDL_Surface` and will delete it.
     //
     // \preconditions
     //  - The surface is not zero-sized.
-    explicit Texture(SDL_Surface*);
-    explicit Texture(delete_ptr<SDL_Surface>);
+    explicit Texture(Owned<SDL_Surface> surface);
+    explicit Texture(Uniq_SDL_Surface);
 
     Dimensions dimensions() const noexcept;
 
     // Returns nullptr if this `Texture` has been rendered, and can no
     // longer be updated as an `SDL_Surface`.
-    SDL_Surface* as_surface() noexcept;
+    Borrowed<SDL_Surface> as_surface() noexcept;
 
     bool empty() const noexcept;
 
@@ -69,21 +77,21 @@ private:
 
     struct Impl_
     {
-        Impl_(SDL_Surface*) noexcept;
-        Impl_(SDL_Texture*) noexcept;
+        Impl_(Owned<SDL_Surface>) noexcept;
+        Impl_(Owned<SDL_Texture>) noexcept;
 
-        Impl_(delete_ptr<SDL_Surface>) noexcept;
-        Impl_(delete_ptr<SDL_Texture>) noexcept;
+        Impl_(Uniq_SDL_Surface) noexcept;
+        Impl_(Uniq_SDL_Texture) noexcept;
 
-        delete_ptr<SDL_Surface> surface_;
-        delete_ptr<SDL_Texture> texture_;
+        Uniq_SDL_Surface surface_;
+        Uniq_SDL_Texture texture_;
         // Invariant:
         //  - Exactly one surface_ and texture_ is non-null.
         //  - Whichever is non-null is non-zero-sized.
         // Note: impl_ below is null for the empty Texture.
     };
 
-    SDL_Texture* get_raw_(const Renderer&) const;
+    Borrowed<SDL_Texture> get_raw_(const Renderer&) const;
 
     std::shared_ptr<Impl_> impl_;
 };

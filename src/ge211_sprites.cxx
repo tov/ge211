@@ -63,7 +63,7 @@ void Texture_sprite::prepare(const Renderer& renderer) const
     renderer.prepare(get_texture_());
 }
 
-delete_ptr<SDL_Surface> Render_sprite::create_surface_(Dimensions dimensions)
+Uniq_SDL_Surface Render_sprite::create_surface_(Dimensions dimensions)
 {
     SDL_Surface* surface =
             SDL_CreateRGBSurfaceWithFormat(0,
@@ -71,11 +71,10 @@ delete_ptr<SDL_Surface> Render_sprite::create_surface_(Dimensions dimensions)
                                            dimensions.height,
                                            32,
                                            SDL_PIXELFORMAT_RGBA32);
-    if (surface) {
-        return {surface, &SDL_FreeSurface};
-    }
+    if (!surface)
+        throw Host_error{"Could not create sprite surface"};
 
-    throw Host_error{"Could not create sprite surface"};
+    return Uniq_SDL_Surface(surface);
 }
 
 Render_sprite::Render_sprite(Dimensions dimensions)
@@ -87,25 +86,25 @@ const Texture& Render_sprite::get_texture_() const
     return texture_;
 }
 
-SDL_Surface* Render_sprite::as_surface()
+SDL_Surface& Render_sprite::as_surface()
 {
     SDL_Surface* result = texture_.as_surface();
-    if (result) return result;
+    if (result) return *result;
 
     throw Ge211_logic_error{"Render_sprite::as_surface: already a texture"};
 }
 
 void Render_sprite::fill_surface(Color color)
 {
-    auto surface = as_surface();
-    SDL_FillRect(surface, nullptr, color.to_sdl_(surface->format));
+    auto& surface = as_surface();
+    SDL_FillRect(&surface, nullptr, color.to_sdl_(surface.format));
 }
 
 void Render_sprite::fill_rectangle(Rectangle rect, Color color)
 {
-    auto surface = as_surface();
+    auto& surface = as_surface();
     SDL_Rect rect_buf = rect;
-    SDL_FillRect(surface, &rect_buf, color.to_sdl_(surface->format));
+    SDL_FillRect(&surface, &rect_buf, color.to_sdl_(surface.format));
 }
 
 void Render_sprite::set_pixel(Position xy, Color color)

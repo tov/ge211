@@ -1,11 +1,22 @@
 #pragma once
 
+#include <cstdlib>
 #include <memory>
 #include <string>
 #include <sstream>
 #include <type_traits>
 
 namespace ge211 {
+
+/// Type alias to indicate that the given pointer owns
+/// its object.
+template<class T>
+using Owned = T*;
+
+/// Type alias to indicate that the given pointer does
+/// not own its object.
+template<class T>
+using Borrowed = T*;
 
 /// Converts any printable type to a `std::string`.
 template<class T>
@@ -19,23 +30,132 @@ std::string to_string(const T& value)
 namespace detail {
 
 template<class T>
-using deleter_t = void (*)(T*);
+T replace(T& target, T src)
+{
+    std::swap(target, src);
+    return src;
+}
 
 template<class T>
-using delete_ptr = std::unique_ptr<T, deleter_t<T>>;
+using deleter_t = void (*)(Owned<T>);
 
 template<class T>
-void no_op_deleter(T*) {}
+void no_op_deleter(Owned<T>) {}
 
-#define make_delete_ptr(PTR, DELETER)                           \
-    ([&] {                                                      \
-        auto ptr = (PTR);                                       \
-        using T = ::std::remove_pointer_t<decltype(ptr)>;       \
-        return ::ge211::detail::delete_ptr<T> {                 \
-            ptr,                                                \
-            [](T* raw) { DELETER(raw); }                        \
-        };                                                      \
-    })()
+template<class T>
+void c_heap_deleter(Owned<T> o)
+{
+    std::free(o);
+}
+
+template<
+        class        T,
+        deleter_t<T> Deleter     = &c_heap_deleter,
+        bool         Delete_null = false
+>
+class delete_ptr
+{
+public:
+    using object_type           = T;
+    using owned_pointer         = Owned<object_type>;
+    using borrowed_pointer      = Borrowed<object_type>;
+    using deleter_function_type = deleter_t<object_type>;
+
+    static constexpr object_type*          null = nullptr;
+    static constexpr deleter_function_type deleter_function = Deleter;
+    static constexpr bool                  delete_null_v = Delete_null;
+
+    delete_ptr() noexcept
+            : ptr_(null) { }
+
+    explicit delete_ptr(owned_pointer ptr) noexcept
+            : ptr_(ptr) { }
+
+    delete_ptr(std::nullptr_t) noexcept
+            : ptr_(null) { }
+
+    delete_ptr(delete_ptr const&) = delete;
+    delete_ptr& operator=(delete_ptr const&) = delete;
+
+    delete_ptr(delete_ptr&& that) noexcept
+            : ptr_(that.release()) { }
+
+    delete_ptr& operator=(delete_ptr&& that) noexcept
+    {
+        delete_it_();
+        ptr_ = that.release();
+        return *this;
+    }
+
+    delete_ptr& operator=(owned_pointer that) noexcept
+    {
+        return *this = delete_ptr(that);
+    }
+
+    ~delete_ptr()
+    {
+        delete_it_();
+    }
+
+    owned_pointer release() noexcept
+    {
+        return replace(ptr_, null);
+    }
+
+    borrowed_pointer get() const noexcept
+    {
+        return ptr_;
+    }
+
+    object_type& operator*() const
+    {
+        return *ptr_;
+    }
+
+    borrowed_pointer operator->() const noexcept
+    {
+        return ptr_;
+    }
+
+    operator bool() const noexcept
+    {
+        return ptr_ != nullptr;
+    }
+
+    explicit operator std::unique_ptr<object_type, deleter_function_type>()
+    && noexcept
+    {
+        return {release(), deleter_function};
+    };
+
+    friend void swap(delete_ptr& a, delete_ptr& b) noexcept
+    {
+        std::swap(a.ptr_, b.ptr_);
+    }
+
+private:
+    void delete_it_() noexcept
+    {
+        if (delete_null_v || ptr_)
+            deleter_function(ptr_);
+    }
+
+    owned_pointer ptr_;
+};
+
+template<class T, deleter_t<T> deleter>
+bool operator==(delete_ptr<T, deleter> const& a,
+                delete_ptr<T, deleter> const& b)
+{
+    return a.get() == b.get();
+}
+
+template<class T, deleter_t<T> deleter>
+bool operator!=(delete_ptr<T, deleter> const& a,
+                delete_ptr<T, deleter> const& b)
+{
+    return !(a == b);
+}
 
 } // end namespace detail
 

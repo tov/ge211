@@ -62,13 +62,15 @@ SDL_Renderer* Renderer::create_renderer_(SDL_Window* window)
                 << flag.description << "); trying next.";
     }
 
-    throw Host_error{"Could not initialize renderer."};
+    return nullptr;
 }
 
 Renderer::Renderer(const Window& window)
-        : ptr_{create_renderer_(window.get_raw_()),
-               &SDL_DestroyRenderer}
-{ }
+        : ptr_{create_renderer_(window.get_raw_())}
+{
+    if (!ptr_)
+        throw Host_error{"Could not initialize renderer."};
+}
 
 bool Renderer::is_vsync() const noexcept
 {
@@ -146,33 +148,30 @@ void Renderer::prepare(const Texture& texture) const
 }
 
 Texture::Impl_::Impl_(SDL_Surface* surface) noexcept
-        : Impl_{{surface, &SDL_FreeSurface}}
+        : surface_(surface)
 { }
 
 Texture::Impl_::Impl_(SDL_Texture* texture) noexcept
-        : Impl_{{texture, &SDL_DestroyTexture}}
+        : texture_(texture)
 { }
 
-Texture::Impl_::Impl_(delete_ptr<SDL_Surface> surface) noexcept
-        : surface_{std::move(surface)},
-          texture_{nullptr, &no_op_deleter}
+Texture::Impl_::Impl_(Uniq_SDL_Surface surface) noexcept
+        : surface_(std::move(surface))
 { }
 
-Texture::Impl_::Impl_(delete_ptr<SDL_Texture> texture) noexcept
-        : surface_{nullptr, &no_op_deleter},
-          texture_{std::move(texture)}
+Texture::Impl_::Impl_(Uniq_SDL_Texture texture) noexcept
+        : texture_(std::move(texture))
 { }
 
 Texture::Texture() noexcept
-        : impl_{nullptr}
 { }
 
-Texture::Texture(SDL_Surface* surface)
-        : impl_{std::make_shared<Impl_>(surface)}
+Texture::Texture(Owned<SDL_Surface> surface)
+        : Texture(Uniq_SDL_Surface(surface))
 { }
 
-Texture::Texture(delete_ptr<SDL_Surface> surface)
-        : impl_{std::make_shared<Impl_>(std::move(surface))}
+Texture::Texture(Uniq_SDL_Surface surface)
+        : impl_(std::make_shared<Impl_>(std::move(surface)))
 { }
 
 SDL_Texture* Texture::get_raw_(const Renderer& renderer) const

@@ -5,6 +5,7 @@
 #include "ge211_util.hxx"
 
 #include <SDL_version.h>
+#include <SDL_video.h>
 
 #include <string>
 
@@ -69,10 +70,10 @@ private:
 
     Window(const std::string&, Dimensions dim);
 
-    SDL_Window* get_raw_() const noexcept { return ptr_.get(); }
+    Borrowed<SDL_Window> get_raw_() const noexcept { return ptr_.get(); }
     uint32_t get_flags_() const noexcept;
 
-    detail::delete_ptr<SDL_Window> ptr_;
+    detail::delete_ptr<SDL_Window, &SDL_DestroyWindow> ptr_;
 };
 
 }

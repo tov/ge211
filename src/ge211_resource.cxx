@@ -2,7 +2,6 @@
 #include "ge211_error.hxx"
 
 #include <SDL.h>
-#include <SDL_ttf.h>
 
 #include <string>
 
@@ -18,7 +17,7 @@ static const char* search_prefixes[] = {
 
 namespace detail {
 
-delete_ptr<SDL_RWops> File_resource::open_rwops_(const std::string& filename)
+static Owned<SDL_RWops> open_rwops_(const std::string& filename)
 {
     std::string path;
 
@@ -28,35 +27,38 @@ delete_ptr<SDL_RWops> File_resource::open_rwops_(const std::string& filename)
         path += filename;
 
         auto rwops = SDL_RWFromFile(path.c_str(), "rb");
-        if (rwops) return make_delete_ptr(rwops, SDL_RWclose);
+        if (rwops) return rwops;
 
         info_sdl() << "File_resource: could not load";
     }
 
-    throw File_error::could_not_open(filename);
+    return nullptr;
 }
 
 File_resource::File_resource(const std::string& filename)
-        : ptr_{open_rwops_(filename)}
-{ }
+        : ptr_(open_rwops_(filename))
+{
+    if (!ptr_)
+        throw File_error::could_not_open(filename);
+}
+
+void File_resource::close_rwops_(Owned<SDL_RWops> ptr)
+{
+    SDL_RWclose(ptr);
+}
 
 } // end namespace detail
 
-delete_ptr<TTF_Font> Font::load_(const std::string& filename,
-                                 File_resource&& file,
-                                 int size)
+static Owned<TTF_Font> open_ttf_(const std::string& filename, int size)
 {
-    TTF_Font* result = TTF_OpenFontRW(std::move(file).release(), 1, size);
-    if (result) return {result, &TTF_CloseFont};
-
-    throw Font_error::could_not_load(filename);
+    return TTF_OpenFontRW(File_resource(filename).release(), 1, size);
 }
 
 Font::Font(const std::string& filename, int size)
-        : ptr_{nullptr, &no_op_deleter}
+        : ptr_(open_ttf_(filename, size))
 {
-    File_resource fr(filename);
-    ptr_ = load_(filename, std::move(fr), size);
+    if (!ptr_)
+        throw Font_error::could_not_load(filename);
 }
 
 }

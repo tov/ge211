@@ -113,9 +113,9 @@ private:
 
     /// This is called by fill_surface/fill_rectangle/set_pixel, so
     /// it should only be called during the derived class's constructor.
-    SDL_Surface* as_surface();
+    SDL_Surface& as_surface();
 
-    static delete_ptr<SDL_Surface> create_surface_(Dimensions);
+    static Uniq_SDL_Surface create_surface_(Dimensions);
 };
 
 } // end namespace detail

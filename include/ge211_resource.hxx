@@ -4,6 +4,9 @@
 #include "ge211_util.hxx"
 #include "ge211_error.hxx"
 
+#include <SDL_rwops.h>
+#include <SDL_ttf.h>
+
 #include <string>
 #include <vector>
 
@@ -16,13 +19,14 @@ class File_resource
 public:
     explicit File_resource(const std::string&);
 
-    SDL_RWops* get_raw() const noexcept { return ptr_.get(); }
-    SDL_RWops* release() && { return ptr_.release(); }
+    Borrowed<SDL_RWops> get_raw() const noexcept { return ptr_.get(); }
+
+    Owned<SDL_RWops> release() && { return ptr_.release(); }
 
 private:
-    static delete_ptr<SDL_RWops> open_rwops_(const std::string&);
+    static void close_rwops_(Owned<SDL_RWops>);
 
-    delete_ptr<SDL_RWops> ptr_;
+    delete_ptr<SDL_RWops, &close_rwops_> ptr_;
 };
 
 } // end namespace detail
@@ -53,14 +57,9 @@ public:
 private:
     friend Text_sprite;
 
-    TTF_Font* get_raw_() const noexcept { return ptr_.get(); }
+    Borrowed<TTF_Font> get_raw_() const noexcept { return ptr_.get(); }
 
-    static detail::delete_ptr<TTF_Font>
-    load_(const std::string& filename,
-          detail::File_resource&& ttf_file,
-          int size);
-
-    detail::delete_ptr<TTF_Font> ptr_;
+    detail::delete_ptr<TTF_Font, &TTF_CloseFont, true> ptr_;
 };
 
 }
