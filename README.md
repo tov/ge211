@@ -1,4 +1,4 @@
-# GE211 — a game engine for EECS 211
+# GE211 — a game engine for CS 211
 
 GE211 is a relatively simple game engine for beginning C++ programmers.
 
@@ -24,7 +24,7 @@ class, your instructor might have an easier way for you to install them.
 
 ## Setup
 
-If you are using GE211 in a course (such as EECS 211 at Northwestern),
+If you are using GE211 in a course (such as CS 211 at Northwestern),
 your instructor will give you a CMake project that includes files and
 configuration for GE211. You shouldn't have to do anything to set it
 up. Otherwise, read on.
