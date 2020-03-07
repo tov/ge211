@@ -76,7 +76,7 @@ struct Model
 
 struct View
 {
-    View(const Mixer*);
+    View(Mixer*);
 
     Font sans{"sans.ttf", 30};
     Text_sprite fps;
@@ -112,9 +112,6 @@ struct Fireworks : Abstract_game
 
 int main()
 {
-    Rectangle_sprite sprite{{20, 30}, {0, 0, 0}};
-    //Font font{"sans.ttf", 20};
-
     Fireworks{}.run();
 }
 
@@ -221,7 +218,7 @@ void Model::add_random(Random& rng, Projectile::Position position0)
 
 // FUNCTION DEFINITIONS FOR VIEW
 
-View::View(const Mixer* mixer)
+View::View(Mixer* mixer)
 {
     double hue = 1.0;
     double dhue = 360.0 / number_of_colors;
@@ -325,4 +322,3 @@ void Fireworks::on_mouse_up(Mouse_button, Position position)
     if (!is_paused)
         model.add_random(get_random(), position.into<double>());
 }
-
