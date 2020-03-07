@@ -160,14 +160,18 @@ void Engine::handle_events_(SDL_Event& e)
 
 void Engine::paint_sprites_(Sprite_set& sprite_set)
 {
-    auto& sprites = sprite_set.sprites_;
-    std::make_heap(sprites.begin(), sprites.end());
+    auto& vec   = sprite_set.sprites_;
+    auto  begin = vec.begin(),
+          end   = vec.end();
 
-    while (!sprites.empty()) {
-        std::pop_heap(sprites.begin(), sprites.end());
-        sprites.back().render(renderer_);
-        sprites.pop_back();
+    std::make_heap(begin, end);
+
+    while (begin != end) {
+        std::pop_heap(begin, end--);
+        end->render(renderer_);
     }
+
+    vec.clear();
 }
 
 Window& Engine::get_window() noexcept
