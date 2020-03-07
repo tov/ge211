@@ -60,7 +60,7 @@ struct Firework
     int star_color;
     double stage_time;
 
-    void update(double dt);
+    bool update(double dt);
     static Firework random(Random&, Projectile::Position);
 };
 
@@ -68,7 +68,7 @@ struct Model
 {
     vector<Firework> fireworks;
 
-    void update(double dt);
+    bool update(double dt);
     void add_random(Random&, Projectile::Position);
 };
 
@@ -76,19 +76,23 @@ struct Model
 
 struct View
 {
-    View();
+    View(const Mixer*);
 
     Font sans{"sans.ttf", 30};
     Text_sprite fps;
     Text_sprite load;
     Circle_sprite mortar{mortar_radius, mortar_color};
     vector<Circle_sprite> stars;
+    Sound_effect pop;
 };
 
 // MAIN STRUCT AND FUNCTION
 
 struct Fireworks : Abstract_game
 {
+    // Constructor
+    Fireworks();
+
     // Model
     Model model;
 
@@ -108,6 +112,9 @@ struct Fireworks : Abstract_game
 
 int main()
 {
+    Rectangle_sprite sprite{{20, 30}, {0, 0, 0}};
+    //Font font{"sans.ttf", 20};
+
     Fireworks{}.run();
 }
 
@@ -129,8 +136,10 @@ Projectile::random(Random& rng, Position position,
     return {position, {speed * cos(radians), speed * sin(radians)}};
 }
 
-void Firework::update(double dt)
+bool Firework::update(double dt)
 {
+    bool explosion = false;
+
     switch (stage) {
         case Stage::mortar:
             if ((stage_time -= dt) <= 0) {
@@ -140,6 +149,7 @@ void Firework::update(double dt)
                 }
                 stage_time = burn_seconds;
                 stage = Stage::stars;
+                explosion = true;
             } else {
                 mortar.update(dt);
             }
@@ -158,6 +168,8 @@ void Firework::update(double dt)
         case Stage::done:
             break;
     }
+
+    return explosion;
 }
 
 Firework Firework::random(Random& rng, Projectile::Position p0)
@@ -182,10 +194,12 @@ Firework Firework::random(Random& rng, Projectile::Position p0)
     return Firework{Stage::mortar, mortar, stars, star_color, fuse_seconds};
 }
 
-void Model::update(double dt)
+bool Model::update(double dt)
 {
+    bool explosion = false;
+
     for (Firework& firework : fireworks)
-        firework.update(dt);
+        explosion |= firework.update(dt);
 
     size_t i = 0;
     while (i < fireworks.size()) {
@@ -196,6 +210,8 @@ void Model::update(double dt)
             ++i;
         }
     }
+
+    return explosion;
 }
 
 void Model::add_random(Random& rng, Projectile::Position position0)
@@ -205,15 +221,17 @@ void Model::add_random(Random& rng, Projectile::Position position0)
 
 // FUNCTION DEFINITIONS FOR VIEW
 
-View::View()
+View::View(const Mixer* mixer)
 {
-    double hue = 0.0;
+    double hue = 1.0;
     double dhue = 360.0 / number_of_colors;
 
     for (int i = 0; i < number_of_colors; ++i) {
         stars.emplace_back(star_radius, Color::from_hsla(hue, .75, .75, .75));
         hue += dhue;
     }
+
+    pop.try_load("pop.ogg", mixer);
 }
 
 Dimensions Fireworks::initial_window_dimensions() const
@@ -270,6 +288,12 @@ void Fireworks::draw_stats(Sprite_set& sprites)
     sprites.add_sprite(view.load, load_posn);
 }
 
+// CONSTRUCTING THE GAME OBJECT
+
+Fireworks::Fireworks()
+        : view(get_mixer())
+{ }
+
 // FUNCTION DEFINITIONS FOR CONTROLLER
 
 void Fireworks::on_key(Key key)
@@ -289,8 +313,11 @@ void Fireworks::on_key(Key key)
 
 void Fireworks::on_frame(double dt)
 {
-    if (!is_paused)
-        model.update(dt);
+    if (is_paused) return;
+
+    bool explosion = model.update(dt);
+    if (explosion && view.pop)
+        get_mixer()->try_play_effect(view.pop);
 }
 
 void Fireworks::on_mouse_up(Mouse_button, Position position)
