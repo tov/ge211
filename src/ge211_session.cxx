@@ -93,6 +93,20 @@ Text_input_session::~Text_input_session()
 Session::Session()
 {
     setlocale(LC_ALL, "en_US.utf8");
+    ++session_count_;
+}
+
+Session::~Session()
+{
+    --session_count_;
+}
+
+std::atomic<int> Session::session_count_{0};
+
+void Session::check_session(const char* action)
+{
+    if (session_count_ <= 0)
+        throw Session_needed_error(action);
 }
 
 } // end namespace detail

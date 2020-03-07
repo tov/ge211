@@ -1,5 +1,7 @@
 #pragma once
 
+#include <atomic>
+
 namespace ge211 {
 
 namespace detail {
@@ -46,15 +48,24 @@ struct Text_input_session : PINNED
     ~Text_input_session();
 };
 
-struct Session
+class Session
 {
+public:
     Session();
+    ~Session();
 
-    Sdl_session        sdl;
-    Mix_session        mix;
-    Img_session        img;
-    Ttf_session        ttf;
-    Text_input_session text_input;
+    bool is_mixer_enabled() const { return mix_.enabled; }
+
+    static void check_session(const char*);
+
+private:
+    Sdl_session        sdl_;
+    Mix_session        mix_;
+    Img_session        img_;
+    Ttf_session        ttf_;
+    Text_input_session text_input_;
+
+    static std::atomic<int> session_count_;
 };
 
 } // end namespace detail

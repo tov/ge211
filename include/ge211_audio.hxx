@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ge211_forward.hxx"
+#include "ge211_error.hxx"
+#include "ge211_session.hxx"
 #include "ge211_time.hxx"
 #include "ge211_util.hxx"
 
@@ -20,6 +22,75 @@ namespace ge211 {
 /// for more.
 namespace audio {
 
+/// Abstract base class for classes that load audio data, Music_track and
+/// Sound_effect.
+class Audio_clip
+{
+public:
+    /// Returns true if this audio clip is empty.
+    bool empty() const { return real_empty(); }
+
+    /// Recognizes a non-empty audio clip.
+    /// Equivalent to `!empty()`.
+    operator bool() const { return !real_empty(); }
+
+    /// Loads audio from a resource file into this audio clip instance.
+    ///
+    /// Throws exceptions::File_error if the file cannot be opened, and
+    /// exceptions::Mixer_error if the file format cannot be understood.
+    void load(const std::string& filename, const Mixer& mixer)
+    {
+        if (!real_try_load(filename, mixer))
+            throw Mixer_error::could_not_load(filename);
+    }
+
+    /// Attempts to load audio from a resource file into this Audio_clip
+    /// instance. Returns `true` if loading succeeds, or `false` if
+    /// the file format cannot be understood.
+    ///
+    /// Throws exceptions::File_error if the file cannot be opened.
+    bool try_load(const std::string& filename, const Mixer& mixer)
+    {
+        return real_try_load(filename, mixer);
+    }
+
+    /// Attempts to load audio from a resource file into this Audio_clip
+    /// instance, but skips loading and returns `false` if `mixer` is null.
+    /// Otherwise, returns whether loading succeeds.
+    ///
+    /// Throws exceptions::File_error if the file cannot be opened.
+    bool try_load(const std::string& filename, const Mixer* mixer)
+    {
+        return mixer && real_try_load(filename, *mixer);
+    }
+
+    /// Unloads any audio data, leaving this Audio_clip empty.
+    void clear()
+    {
+        real_clear();
+    }
+
+    virtual ~Audio_clip() = default;
+
+protected:
+    Audio_clip()
+    {
+        detail::Session::check_session("Audio loading");
+    }
+
+    /// Derived classes must override this to provide an implementation
+    /// for Audio_clip::try_load(const std::string&, const Mixer&).
+    virtual bool real_try_load(const std::string& filename, const Mixer&) = 0;
+
+    /// Derived classes must override this to provide an implementation
+    /// for Audio_clip::clear().
+    virtual void real_clear() = 0;
+
+    /// Derived classes must override this to provide an implementation
+    /// for Audio_clip::empty().
+    virtual bool real_empty() const = 0;
+};
+
 /// A music track, which can be attached to the Mixer and played.
 /// A music track may be *empty* or *non-empty*; only non-empty tracks can
 /// actually be played.
@@ -31,13 +102,17 @@ namespace audio {
 ///  - Mixer::attach_music(Music_track)
 ///
 /// Note also that the mixer can only play one music track at a time.
-class Music_track
+class Music_track : public Audio_clip
 {
 public:
     /// Loads a new music track from a resource file.
     ///
-    /// Supported file formats include WAV, MP3, OGG, FLAC, MID, and ABC.
-    /// However, pausing and resuming does not work correctly with all audio
+    /// Supported file formats may include WAV, MP3, OGG, FLAC, MID,
+    /// and ABC. Which you actually get depends on which options were
+    /// enabled when your copy of the SDL2_mixer library that %ge211 links
+    /// against was compiled.
+    ///
+    /// Pausing and resuming does not work correctly with all audio
     /// formats.
     ///
     /// Throws exceptions::File_error if the file cannot be opened, and
@@ -47,19 +122,14 @@ public:
     /// Default-constructs the empty music track.
     Music_track() { }
 
-    /// Recognizes the empty music track.
-    bool empty() const;
-
-    /// Recognizes a non-empty music track.
-    /// Equivalent to `!empty()`.
-    operator bool() const;
+protected:
+    bool real_try_load(const std::string&, const Mixer&) override;
+    void real_clear() override;
+    bool real_empty() const override;
 
 private:
     // Friends
     friend Mixer;
-
-    // Private helper.
-    static std::shared_ptr<Mix_Music> load_(const std::string& filename);
 
     std::shared_ptr<Mix_Music> ptr_;
 };
@@ -73,12 +143,15 @@ private:
 /// effect track can be passed to the Mixer member function
 /// Mixer::play_effect(Sound_effect, double)
 /// to play it.
-class Sound_effect
+class Sound_effect : public Audio_clip
 {
 public:
     /// Loads a new sound effect track from a resource file.
     ///
-    /// Supported file formats include WAV, MP3, OGG, FLAC, MID, and ABC.
+    /// Supported file formats may include WAV, MP3, OGG, FLAC, MID,
+    /// and ABC. Which you actually get depends on which options were
+    /// enabled when your copy of the SDL2_mixer library that %ge211 links
+    /// against was compiled.
     ///
     /// Throws exceptions::File_error if the file cannot be opened, and
     /// exceptions::Mixer_error if the file format cannot be understood.
@@ -87,19 +160,14 @@ public:
     /// Default-constructs the empty sound effect track.
     Sound_effect() { }
 
-    /// Recognizes the empty sound effect track.
-    bool empty() const;
-
-    /// Recognizes a non-empty sound effect track.
-    /// Equivalent to `!empty()`.
-    operator bool() const;
+protected:
+    bool real_try_load(const std::string&, const Mixer&) override;
+    void real_clear() override;
+    bool real_empty() const override;
 
 private:
     // Friends
     friend Mixer;
-
-    // Private static factory
-    static std::shared_ptr<Mix_Chunk> load_(const std::string& filename);
 
     std::shared_ptr<Mix_Chunk> ptr_;
 };
@@ -258,6 +326,14 @@ public:
     Sound_effect_handle
     play_effect(Sound_effect effect, double volume = 1.0);
 
+    /// Attempts to play the given effect track on this mixer, returning an
+    /// empty Sound_effect_handle if no effect channel is available.
+    ///
+    /// \preconditions
+    ///  - `!effect.empty()`, undefined behavior if violated.
+    Sound_effect_handle
+    try_play_effect(Sound_effect effect, double volume = 1.0);
+
     /// Pauses all currently-playing effects.
     void pause_all_effects();
 
@@ -299,7 +375,8 @@ private:
     void poll_channels_();
     friend detail::Engine; // calls poll_channels_().
 
-    /// Returns the index of an empty channel, or throws if all are full.
+    /// Returns the index of an empty channel. Returns -1 if all
+    /// are full.
     int find_empty_channel_() const;
 
     /// Registers an effect with a channel.

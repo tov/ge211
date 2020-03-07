@@ -50,6 +50,26 @@ public:
     explicit Client_logic_error(const std::string& message);
 };
 
+/// An exception thrown when the client attempts to perform an
+/// action that requires a GE211 session before GE211 starts.
+/// For example, GE211 needs to initialize the font subsystem
+/// before fonts can be loaded, so the `Font` constructor throws
+/// this exception if it’s called too early.
+class Session_needed_error : public Client_logic_error
+{
+public:
+    /// The action that the client attempted that couldn't be
+    /// completed without a GE211 session.
+    const std::string& attempted_action() const { return action_; }
+
+private:
+    friend detail::Session;
+
+    explicit Session_needed_error(const std::string& action);
+
+    std::string action_;
+};
+
 /// Indicates that an error was encountered by the game engine or
 /// in the client's environment.
 /// This could indicate a problem with your video driver,
@@ -142,6 +162,7 @@ class Mixer_error : public Host_error
 
     /// Thrower
     friend Mixer;
+    friend Audio_clip;
     friend Music_track;
     friend Sound_effect;
 };

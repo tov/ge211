@@ -30,7 +30,7 @@ class Engine;
 class File_resource;
 struct Placed_sprite;
 class Renderer;
-struct Session;
+class Session;
 class Render_sprite;
 class Texture;
 class Texture_sprite;
@@ -41,6 +41,7 @@ namespace audio {
 
 enum class Channel_state;
 class Mixer;
+class Audio_clip;
 class Music_track;
 class Sound_effect;
 class Sound_effect_handle;
@@ -58,6 +59,7 @@ namespace exceptions {
 
 class Exception_base;
 class Client_logic_error;
+class Session_needed_error;
 class Environment_error;
 class Ge211_logic_error;
 class Host_error;

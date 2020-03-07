@@ -1,5 +1,6 @@
 #include "ge211_resource.hxx"
 #include "ge211_error.hxx"
+#include "ge211_session.hxx"
 
 #include <SDL.h>
 
@@ -57,6 +58,8 @@ static Owned<TTF_Font> open_ttf_(const std::string& filename, int size)
 Font::Font(const std::string& filename, int size)
         : ptr_(open_ttf_(filename, size))
 {
+    Session::check_session("Font loading");
+
     if (!ptr_)
         throw Font_error::could_not_load(filename);
 }

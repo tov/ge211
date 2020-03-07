@@ -291,7 +291,7 @@ private:
 
     mutable Random rng_;
     detail::Session session_;
-    Mixer::Ptr mixer_ = Mixer::open_if_(session_.mix.enabled);
+    Mixer::Ptr mixer_ = Mixer::open_if_(session_.is_mixer_enabled());
     detail::Engine* engine_ = nullptr;
 
     bool quit_ = false;

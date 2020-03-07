@@ -23,50 +23,57 @@ static inline double volume_to_unit(int int_volume)
     return int_volume / double(MIX_MAX_VOLUME);
 }
 
-std::shared_ptr<Mix_Music> Music_track::load_(const std::string& filename)
+Music_track::Music_track(const std::string& filename, const Mixer& mixer)
 {
-    File_resource file_resource(filename);
-    Mix_Music* raw = Mix_LoadMUS_RW(std::move(file_resource).release(), 1);
-    if (raw) return {raw, &Mix_FreeMusic};
-
-    throw Mixer_error::could_not_load(filename);
+    load(filename, mixer);
 }
 
-Music_track::Music_track(const std::string& filename, const Mixer&)
-        : ptr_{load_(filename)}
-{ }
+bool Music_track::real_try_load(const std::string& filename, const Mixer&)
+{
+    Mix_Music* raw = Mix_LoadMUS_RW(File_resource(filename).release(), 1);
+    if (raw) {
+        ptr_ = {raw, &Mix_FreeMusic};
+        return true;
+    } else {
+        return false;
+    }
+}
 
-bool Music_track::empty() const
+void Music_track::real_clear()
+{
+    ptr_ = nullptr;
+}
+
+bool Music_track::real_empty() const
 {
     return ptr_ == nullptr;
 }
 
-Music_track::operator bool() const
+Sound_effect::Sound_effect(const std::string& filename, const Mixer& mixer)
 {
-    return !empty();
+    load(filename, mixer);
 }
 
-std::shared_ptr<Mix_Chunk> Sound_effect::load_(const std::string& filename)
+bool Sound_effect::real_try_load(const std::string& filename, const Mixer&)
 {
-    File_resource file_resource(filename);
-    Mix_Chunk* raw = Mix_LoadWAV_RW(std::move(file_resource).release(), 1);
-    if (raw) return {raw, &Mix_FreeChunk};
+    Mix_Chunk* raw = Mix_LoadWAV_RW(File_resource(filename).release(), 1);
 
-    throw Mixer_error::could_not_load(filename);
+    if (raw) {
+        ptr_ = {raw, &Mix_FreeChunk};
+        return true;
+    } else {
+        return false;
+    }
 }
 
-Sound_effect::Sound_effect(const std::string& filename, const Mixer&)
-        : ptr_{load_(filename)}
-{ }
+void Sound_effect::real_clear()
+{
+    ptr_ = nullptr;
+}
 
-bool Sound_effect::empty() const
+bool Sound_effect::real_empty() const
 {
     return ptr_ == nullptr;
-}
-
-Sound_effect::operator bool() const
-{
-    return !empty();
 }
 
 Mixer::Ptr Mixer::open_if_(bool enable)
@@ -203,14 +210,12 @@ int Mixer::find_empty_channel_() const
 {
     auto iter = std::find_if(channels_.begin(),
                              channels_.end(),
-                             [](const auto& handle) {
-                                 return handle.empty();
-                             });
-    if (iter == channels_.end()) {
-        throw Mixer_error::out_of_channels();
-    }
+                             [](auto& h) { return h.empty(); });
 
-    return (int) std::distance(channels_.begin(), iter);
+    if (iter == channels_.end())
+        return -1;
+    else
+        return (int) std::distance(channels_.begin(), iter);
 }
 
 void Mixer::poll_channels_()
@@ -247,7 +252,16 @@ void Mixer::poll_channels_()
 Sound_effect_handle
 Mixer::play_effect(Sound_effect effect, double volume)
 {
+    auto handle = try_play_effect(std::move(effect), volume);
+    if (!handle) throw Mixer_error::out_of_channels();
+    return handle;
+}
+
+Sound_effect_handle
+Mixer::try_play_effect(Sound_effect effect, double volume)
+{
     int channel = find_empty_channel_();
+    if (channel < 0) return {};
     Mix_Volume(channel, unit_to_volume(volume));
     Mix_PlayChannel(channel, effect.ptr_.get(), 0);
     return register_effect_(channel, std::move(effect));

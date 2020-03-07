@@ -34,6 +34,23 @@ Client_logic_error::Client_logic_error(const std::string& message)
         : Exception_base(message)
 { }
 
+static std::string build_no_session_message(const std::string& action) {
+    std::ostringstream oss;
+    oss << "\n\nERROR\n=====\n\n"
+        << action << " requires an active GE211 session. GE211 sessions\n"
+        << "are managed RAII-style by the ge211::Abstract_game class, so\n"
+        << "a session will be active whenever you have an instance of a\n"
+        << "class derived from Abstract_game, including within that derived\n"
+        << "game class's constructor and member functions.\n";
+
+    return oss.str();
+}
+
+Session_needed_error::Session_needed_error(const std::string& action)
+        : Client_logic_error(build_no_session_message(action))
+        , action_(action)
+{ }
+
 static std::string build_sdl_error_message(const std::string& message) {
     const char* reason = take_sdl_error();
 
