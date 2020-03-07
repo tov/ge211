@@ -2,7 +2,6 @@
 
 #include "ge211_forward.hxx"
 #include "ge211_error.hxx"
-#include "ge211_session.hxx"
 #include "ge211_time.hxx"
 #include "ge211_util.hxx"
 
@@ -73,10 +72,7 @@ public:
     virtual ~Audio_clip() = default;
 
 protected:
-    Audio_clip()
-    {
-        detail::Session::check_session("Audio loading");
-    }
+    Audio_clip();
 
     /// Derived classes must override this to provide an implementation
     /// for Audio_clip::try_load(const std::string&, const Mixer&).

@@ -1,5 +1,6 @@
 #include "ge211_audio.hxx"
 #include "ge211_resource.hxx"
+#include "ge211_session.hxx"
 
 #include <SDL.h>
 #include <SDL_mixer.h>
@@ -21,6 +22,11 @@ static inline int unit_to_volume(double unit_volume)
 static inline double volume_to_unit(int int_volume)
 {
     return int_volume / double(MIX_MAX_VOLUME);
+}
+
+Audio_clip::Audio_clip()
+{
+    Session::check_session("Audio loading");
 }
 
 Music_track::Music_track(const std::string& filename, const Mixer& mixer)
@@ -409,7 +415,6 @@ void Sound_effect_handle::set_volume(double unit_value)
     if (ptr_->state != Mixer::State::detached)
         Mix_Volume(ptr_->channel, unit_to_volume(unit_value));
 }
-
 
 } // end namespace audio
 
