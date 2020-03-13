@@ -8,6 +8,7 @@ install(TARGETS         ge211
         RUNTIME         DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(DIRECTORY       include/
+                        ${CMAKE_CURRENT_BINARY_DIR}/include/
         DESTINATION     ${CMAKE_INSTALL_INCLUDEDIR}
         FILES_MATCHING  PATTERN "*.hxx")
 

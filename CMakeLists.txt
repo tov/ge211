@@ -4,11 +4,11 @@ project(ge211
         DESCRIPTION "A student game engine"
         LANGUAGES CXX)
 
+list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
+
 ###
 ### DEPENDENCIES
 ###
-
-list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 add_subdirectory(3rdparty/utf8-cpp)
 
@@ -21,24 +21,27 @@ find_package(SDL2_ttf   REQUIRED)
 ### MAIN LIBRARY SETUP
 ###
 
+configure_file(include/ge211_version.hxx.in
+               include/ge211_version.hxx)
 add_subdirectory(src)
 
 ###
 ### DOCUMENTATION
 ###
+
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
     include(Ge211Docs)
 endif()
 
 ###
-### LIBRARY INSTALLATION
+### EXTRAS
 ###
+
+# Library installation
 include(Ge211Installer)
 
-###
-### CLIENT PROGRAM INSTALLER
-###
+# Client program installer
 include(Ge211ClientInstaller)
 
 # Example client program

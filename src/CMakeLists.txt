@@ -31,6 +31,7 @@ include(GNUInstallDirs)
 target_include_directories(ge211
         SYSTEM INTERFACE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/../include>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
         ${SDL2_INCLUDE_DIRS})
 
