@@ -1,9 +1,9 @@
 #include <ge211.hxx>
 
-#include <algorithm>
 #include <cmath>
 #include <iomanip>
 #include <vector>
+#include <utility>
 
 using namespace ge211;
 using namespace std;
@@ -60,7 +60,7 @@ struct Firework
     int star_color;
     double stage_time;
 
-    bool update(double dt);
+    unsigned update(double dt);
     static Firework random(Random&, Projectile::Position);
 };
 
@@ -68,7 +68,7 @@ struct Model
 {
     vector<Firework> fireworks;
 
-    bool update(double dt);
+    unsigned update(double dt);
     void add_random(Random&, Projectile::Position);
 };
 
@@ -133,9 +133,9 @@ Projectile::random(Random& rng, Position position,
     return {position, {speed * cos(radians), speed * sin(radians)}};
 }
 
-bool Firework::update(double dt)
+unsigned Firework::update(double dt)
 {
-    bool explosion = false;
+    unsigned explosions = 0;
 
     switch (stage) {
         case Stage::mortar:
@@ -146,7 +146,7 @@ bool Firework::update(double dt)
                 }
                 stage_time = burn_seconds;
                 stage = Stage::stars;
-                explosion = true;
+                ++explosions;
             } else {
                 mortar.update(dt);
             }
@@ -166,7 +166,7 @@ bool Firework::update(double dt)
             break;
     }
 
-    return explosion;
+    return explosions;
 }
 
 Firework Firework::random(Random& rng, Projectile::Position p0)
@@ -191,12 +191,12 @@ Firework Firework::random(Random& rng, Projectile::Position p0)
     return Firework{Stage::mortar, mortar, stars, star_color, fuse_seconds};
 }
 
-bool Model::update(double dt)
+unsigned Model::update(double dt)
 {
-    bool explosion = false;
+    unsigned explosions = 0;
 
     for (Firework& firework : fireworks)
-        explosion |= firework.update(dt);
+        explosions += firework.update(dt);
 
     size_t i = 0;
     while (i < fireworks.size()) {
@@ -208,7 +208,7 @@ bool Model::update(double dt)
         }
     }
 
-    return explosion;
+    return explosions;
 }
 
 void Model::add_random(Random& rng, Projectile::Position position0)
@@ -312,8 +312,11 @@ void Fireworks::on_frame(double dt)
 {
     if (is_paused) return;
 
-    bool explosion = model.update(dt);
-    if (explosion && view.pop)
+    unsigned explosion_count = model.update(dt);
+
+    if (!view.pop) return;
+
+    while (explosion_count--)
         get_mixer()->try_play_effect(view.pop);
 }
 
