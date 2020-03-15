@@ -6,6 +6,8 @@
 #include <random>
 #include <type_traits>
 
+struct Random_test_access;
+
 namespace ge211 {
 
 namespace detail {
@@ -136,6 +138,9 @@ public:
 private:
     // Creator:
     friend Abstract_game;
+
+    // Random friend:
+    friend Random_test_access;
 
     Random();
 
