@@ -23,6 +23,14 @@ find_package(SDL2_ttf   REQUIRED)
 
 configure_file(include/ge211_version.hxx.in
                include/ge211_version.hxx)
+
+set(GE211_SRCDIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(GE211_BINDIR ${CMAKE_CURRENT_BINARY_DIR})
+
+file(GLOB GE211_HEADERS
+    "${GE211_SRCDIR}/include/*.hxx"
+    "${GE211_BINDIR}/include/*.hxx")
+
 add_subdirectory(src)
 
 ###
@@ -41,9 +49,6 @@ endif()
 # Library installation
 include(Ge211Installer)
 
-# Client program installer
-include(Ge211ClientInstaller)
-
 # Example client program
-add_subdirectory(examples/installed/)
+#add_subdirectory(examples/installed/)
 

@@ -7,7 +7,7 @@ add_executable(fireworks fireworks.cxx)
 set_target_properties(fireworks PROPERTIES
         CXX_STANDARD            14
         CXX_STANDARD_REQUIRED   On
-        CXX_EXTENSIONS          OFF)
+        CXX_EXTENSIONS          Off)
 target_link_libraries(fireworks ge211)
 
 if(MSVC)
@@ -16,6 +16,6 @@ else(MSVC)
     target_compile_options(fireworks PRIVATE -Wall -Wextra -pedantic)
 endif(MSVC)
 
-include(GNUInstallDirs)
-install(TARGETS fireworks
-        RUNTIME DESTINATION bin)
+include(Ge211ClientInstaller)
+add_ge211_installer(fireworks
+    RESOURCE Resources/pop.wav)
