@@ -228,7 +228,7 @@ View::View(Mixer* mixer)
         hue += dhue;
     }
 
-    pop.try_load("pop.ogg", mixer);
+    pop.try_load("pop.wav", mixer);
 }
 
 Dimensions Fireworks::initial_window_dimensions() const
