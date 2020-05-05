@@ -29,6 +29,22 @@ Audio_clip::Audio_clip()
     Session::check_session("Audio loading");
 }
 
+bool Audio_clip::try_load(const std::string& filename, const Mixer& mixer)
+{
+    return mixer.is_enabled() && real_try_load(filename, mixer);
+}
+
+void Audio_clip::load(const std::string& filename, const Mixer& mixer)
+{
+    if (!try_load(filename, mixer))
+        throw Mixer_error::could_not_load(filename);
+}
+
+void Audio_clip::clear()
+{
+    real_clear();
+}
+
 Music_track::Music_track(const std::string& filename, const Mixer& mixer)
 {
     load(filename, mixer);
@@ -82,15 +98,27 @@ bool Sound_effect::real_empty() const
     return ptr_ == nullptr;
 }
 
-Mixer::Ptr Mixer::open_if_(bool enable)
-{
-    return Ptr{enable? new Mixer : nullptr};
-}
-
 Mixer::Mixer()
-        : channels_(MIX_CHANNELS)
+        : enabled_{0 == Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,
+                                      MIX_DEFAULT_FORMAT,
+                                      2,
+                                      4096)}
+        , channels_(MIX_CHANNELS)
         , available_effect_channels_(MIX_CHANNELS)
 {
+    if (!enabled_) {
+        warn_sdl() << "Could not open audio device";
+        return;
+    }
+
+    int mix_want = MIX_INIT_OGG | MIX_INIT_MP3;
+    int mix_have = Mix_Init(mix_want);
+    if (mix_have == 0) {
+        warn_sdl() << "Could not initialize audio mixer";
+    } else if ((mix_have & mix_want) != mix_want) {
+        warn_sdl() << "Could not initialize all audio formats";
+    }
+
     int music_decoders = Mix_GetNumMusicDecoders();
     info_sdl() << "Number of music decoders is " << music_decoders;
     for (int i = 0; i < music_decoders; ++i) {
@@ -105,7 +133,13 @@ Mixer::Mixer()
 }
 
 Mixer::~Mixer()
-{ }
+{
+    if (enabled_) {
+        Mix_Quit();
+        Mix_CloseAudio();
+    }
+}
+
 
 void Mixer::play_music(Music_track music)
 {
@@ -226,6 +260,8 @@ int Mixer::find_empty_channel_() const
 
 void Mixer::poll_channels_()
 {
+    if (!enabled_) return;
+
     if (current_music_) {
         if (!Mix_PlayingMusic()) {
             switch (music_state_) {
@@ -258,18 +294,25 @@ void Mixer::poll_channels_()
 Sound_effect_handle
 Mixer::play_effect(Sound_effect effect, double volume)
 {
+    if (!enabled_) throw Mixer_error::not_enabled();
+
     auto handle = try_play_effect(std::move(effect), volume);
     if (!handle) throw Mixer_error::out_of_channels();
+
     return handle;
 }
 
 Sound_effect_handle
 Mixer::try_play_effect(Sound_effect effect, double volume)
 {
+    if (!enabled_) return {};
+
     int channel = find_empty_channel_();
     if (channel < 0) return {};
+
     Mix_Volume(channel, unit_to_volume(volume));
     Mix_PlayChannel(channel, effect.ptr_.get(), 0);
+
     return register_effect_(channel, std::move(effect));
 }
 

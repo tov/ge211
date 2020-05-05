@@ -112,6 +112,11 @@ Mixer_error Mixer_error::out_of_channels()
     return Mixer_error("Could not play effect: out of channels");
 }
 
+Mixer_error Mixer_error::not_enabled()
+{
+    return Mixer_error("Mixer is not enabled");
+}
+
 }
 
 namespace detail {

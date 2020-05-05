@@ -76,7 +76,7 @@ struct Model
 
 struct View
 {
-    View(Mixer*);
+    View(Mixer&);
 
     Font sans{"sans.ttf", 30};
     Text_sprite fps;
@@ -218,7 +218,7 @@ void Model::add_random(Random& rng, Projectile::Position position0)
 
 // FUNCTION DEFINITIONS FOR VIEW
 
-View::View(Mixer* mixer)
+View::View(Mixer& mixer)
 {
     double hue = 1.0;
     double dhue = 360.0 / number_of_colors;
@@ -288,7 +288,7 @@ void Fireworks::draw_stats(Sprite_set& sprites)
 // CONSTRUCTING THE GAME OBJECT
 
 Fireworks::Fireworks()
-        : view(get_mixer())
+        : view(mixer())
 { }
 
 // FUNCTION DEFINITIONS FOR CONTROLLER
@@ -314,10 +314,9 @@ void Fireworks::on_frame(double dt)
 
     unsigned explosion_count = model.update(dt);
 
-    if (!view.pop) return;
-
-    while (explosion_count--)
-        get_mixer()->try_play_effect(view.pop);
+    if (view.pop)
+        while (explosion_count--)
+            mixer().play_effect(view.pop);
 }
 
 void Fireworks::on_mouse_up(Mouse_button, Position position)

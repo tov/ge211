@@ -49,11 +49,6 @@ Random& Abstract_game::get_random() const noexcept
     return rng_;
 }
 
-audio::Mixer* Abstract_game::get_mixer() const noexcept
-{
-    return mixer_.get();
-}
-
 void Abstract_game::prepare(const sprites::Sprite& sprite) const
 {
     if (engine_)

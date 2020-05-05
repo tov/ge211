@@ -157,6 +157,40 @@ bool operator!=(delete_ptr<T, deleter> const& a,
     return !(a == b);
 }
 
+template<class T>
+class lazy_ptr
+{
+public:
+    using value     = T;
+    using reference = T&;
+    using pointer   = T*;
+
+    lazy_ptr()
+    { }
+
+    reference operator*() const
+    {
+        force_();
+        return *ptr_;
+    }
+
+    pointer operator->() const
+    {
+        return std::addressof(operator*());
+    }
+
+
+private:
+    mutable std::unique_ptr<value> ptr_;
+
+    void force_() const
+    {
+        if (!ptr_) {
+            ptr_.reset(new value);
+        }
+    }
+};
+
 } // end namespace detail
 
 /// Can type `T` be converted to type `U` without risk of an exception?
