@@ -1,5 +1,10 @@
 #pragma once
 
+// Prevent SDL2 from taking over main().
+#ifndef SDL_MAIN_HANDLED
+# define SDL_MAIN_HANDLED
+#endif
+
 // Forward declarations for some useful SDL2 types.
 struct SDL_KeyboardEvent;
 union SDL_Event;
