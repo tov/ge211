@@ -18,7 +18,7 @@ set_target_properties(ge211
         CXX_STANDARD                    14
         CXX_STANDARD_REQUIRED           On
         CXX_EXTENSIONS                  Off
-        VERSION                         ${PROJECT_VERSION})
+        VERSION                         ${CMAKE_PROJECT_VERSION})
 
 if(MSVC)
     target_compile_options(ge211 PRIVATE /W4)
