@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.13)
 project(ge211_examples CXX)
 
-find_package(Ge211 CONFIG)
+if(NOT GE211_VENDORED)
+    find_package(Ge211 CONFIG)
+endif()
 
 add_executable(fireworks fireworks.cxx)
 set_target_properties(fireworks PROPERTIES

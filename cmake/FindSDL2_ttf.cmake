@@ -29,14 +29,17 @@
 
 include(FindPackageHandleStandardArgs)
 
-find_path(SDL2_TTF_INCLUDE_DIR SDL_ttf.h
+find_path(SDL2_TTF_INCLUDE_DIR
+  NAMES SDL_ttf.h
   HINTS
     ENV SDL2TTFDIR
     ENV SDL2DIR
     ${SDL2_DIR}
-  PATH_SUFFIXES SDL2
-                # path suffixes to search inside ENV{SDL2DIR}
-                include/SDL2 include
+  # path suffixes to search inside the above
+  PATH_SUFFIXES
+        SDL2
+        include/SDL2
+        include
 )
 
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)

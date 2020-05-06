@@ -45,5 +45,6 @@ endif()
 include(Ge211Installer)
 
 # Example client program
+set(GE211_VENDORED "../..")
 add_subdirectory(examples/installed/)
 
