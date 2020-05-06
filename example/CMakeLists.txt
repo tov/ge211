@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.13)
 project(ge211_examples CXX)
 
-if(NOT GE211_VENDORED)
-    find_package(Ge211 CONFIG)
+if(NOT GE211_INHERITED)
+    find_package(Ge211 2020.5 REQUIRED)
 endif()
 
 add_executable(fireworks fireworks.cxx)

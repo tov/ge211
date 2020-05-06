@@ -48,6 +48,6 @@ endif()
 include(Ge211Installer)
 
 # Example client program
-set(GE211_VENDORED "../..")
-add_subdirectory(examples/installed/)
+set(GE211_INHERITED 1)
+add_subdirectory(example/)
 
