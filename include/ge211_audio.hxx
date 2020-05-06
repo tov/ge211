@@ -13,8 +13,8 @@ namespace ge211 {
 /// Audio facilities, for playing music and sound effects.
 ///
 /// All audio facilities are accessed via the Mixer, which is in turn
-/// accessed via the Abstract_game::get_mixer() const member function of
-/// Abstract_game. If the Mixer is present (and it may not be), then it
+/// accessed via the Abstract_game::mixer() const member function of
+/// Abstract_game. If the Mixer is enabled (and it may not be), then it
 /// can be used to load audio files as Music_track%s and Sound_effect%s.
 /// The former is for playing continuous background music, whereas the
 /// latter is for adding sound effects. See the Mixer class documentation
@@ -37,37 +37,17 @@ public:
     ///
     /// Throws exceptions::File_error if the file cannot be opened, and
     /// exceptions::Mixer_error if the file format cannot be understood.
-    void load(const std::string& filename, const Mixer& mixer)
-    {
-        if (!real_try_load(filename, mixer))
-            throw Mixer_error::could_not_load(filename);
-    }
+    void load(const std::string&, const Mixer&);
 
     /// Attempts to load audio from a resource file into this Audio_clip
     /// instance. Returns `true` if loading succeeds, or `false` if
     /// the file format cannot be understood.
     ///
     /// Throws exceptions::File_error if the file cannot be opened.
-    bool try_load(const std::string& filename, const Mixer& mixer)
-    {
-        return real_try_load(filename, mixer);
-    }
-
-    /// Attempts to load audio from a resource file into this Audio_clip
-    /// instance, but skips loading and returns `false` if `mixer` is null.
-    /// Otherwise, returns whether loading succeeds.
-    ///
-    /// Throws exceptions::File_error if the file cannot be opened.
-    bool try_load(const std::string& filename, const Mixer* mixer)
-    {
-        return mixer && real_try_load(filename, *mixer);
-    }
+    bool try_load(const std::string&, const Mixer&);
 
     /// Unloads any audio data, leaving this Audio_clip empty.
-    void clear()
-    {
-        real_clear();
-    }
+    void clear();
 
     virtual ~Audio_clip() = default;
 
@@ -175,9 +155,8 @@ private:
 /// them. However, Mixer itself has no public constructor, and you will not
 /// construct your own. Rather, a Mixer is constructed, if possible, when
 /// Abstract_game is initialized, and this mixer can be accessed by your game
-/// via the Abstract_game::get_mixer() const member function. The member
-/// function returns a raw pointer, which will be `nullptr` if the mixer
-/// could not be initialized.
+/// via the Abstract_game::mixer() const member function. The member
+/// function returns an uncopyable reference.
 ///
 /// This mixer has one music channel, and some fixed number (usually 8) of
 /// sound effects channels. This means that it can play one Music_track and
@@ -220,6 +199,11 @@ public:
         /// Attached but not playing.
         paused,
     };
+
+    /// Returns whether the mixer is enabled. If it is then we can
+    /// play audio, but if it isn't, audio operations will fail.
+    bool is_enabled() const
+    { return enabled_; }
 
     /// \name Playing music
     ///@{
@@ -356,15 +340,15 @@ public:
     ///@}
 
 private:
-    using Ptr = std::unique_ptr<Mixer>;
+    using Lazy_ptr = detail::lazy_ptr<Mixer>;
 
-    /// Opens the mixer, if possible, returning nullptr for failure.
-    /// Only Abstract_game is allowed to do this (and if there’s more
-    /// than one Abstract_game at a time then we’re in trouble.)
-    static Ptr open_if_(bool enable = true);
-    friend Abstract_game; // calls open_if_().
+    // This calls default constructor...
+    friend Abstract_game;
+    // ...via this:
+    friend Lazy_ptr;
 
-    /// Private constructor -- should only be called by open_if_().
+    /// Private constructor -- should only be called by
+    /// Abstract_game::mixer() via lazy_ptr<Mixer>.
     Mixer();
 
     /// Updates the state of the channels.
@@ -388,6 +372,7 @@ private:
     State music_state_{State::detached};
     Pausable_timer music_position_{true};
 
+    bool enabled_;
     std::vector<Sound_effect_handle> channels_;
     int available_effect_channels_;
 };

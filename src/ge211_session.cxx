@@ -4,7 +4,6 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
-#include <SDL_mixer.h>
 #include <SDL_ttf.h>
 
 #include <clocale>
@@ -15,6 +14,8 @@ namespace detail {
 
 Sdl_session::Sdl_session()
 {
+    SDL_SetMainReady();
+
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
         fatal_sdl() << "Could not initialize SDL2";
         exit(1);
@@ -24,33 +25,6 @@ Sdl_session::Sdl_session()
 Sdl_session::~Sdl_session()
 {
     SDL_Quit();
-}
-
-Mix_session::Mix_session()
-        : enabled{0 == Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,
-                                     MIX_DEFAULT_FORMAT,
-                                     2,
-                                     4096)}
-{
-    if (enabled) {
-        int mix_want = MIX_INIT_OGG | MIX_INIT_MP3;
-        int mix_have = Mix_Init(mix_want);
-        if (mix_have == 0) {
-            warn_sdl() << "Could not initialize audio mixer";
-        } else if ((mix_have & mix_want) != mix_want) {
-            warn_sdl() << "Could not initialize all audio formats";
-        }
-    } else {
-        warn_sdl() << "Could not open audio device";
-    }
-}
-
-Mix_session::~Mix_session()
-{
-    if (enabled) {
-        Mix_Quit();
-        Mix_CloseAudio();
-    }
 }
 
 Img_session::Img_session()

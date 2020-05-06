@@ -49,11 +49,6 @@ Random& Abstract_game::get_random() const noexcept
     return rng_;
 }
 
-audio::Mixer* Abstract_game::get_mixer() const noexcept
-{
-    return mixer_.get();
-}
-
 void Abstract_game::prepare(const sprites::Sprite& sprite) const
 {
     if (engine_)
@@ -81,6 +76,12 @@ void Abstract_game::mark_frame_() noexcept
         load_           = 100 * busy_duration / sample_duration;
         sample_counter_ = 0;
     }
+}
+
+void Abstract_game::poll_channels_()
+{
+    if (mixer_.is_forced())
+        mixer_->poll_channels_();
 }
 
 void Abstract_game::on_key_down(Key key)

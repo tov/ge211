@@ -159,6 +159,7 @@ class Mixer_error : public Host_error
     Mixer_error(const std::string& message);
     static Mixer_error could_not_load(const std::string& filename);
     static Mixer_error out_of_channels();
+    static Mixer_error not_enabled();
 
     /// Thrower
     friend Mixer;
