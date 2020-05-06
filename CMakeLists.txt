@@ -44,10 +44,9 @@ endif()
 ### EXTRAS
 ###
 
-# Library installation
+# Support library installation
 include(Ge211Installer)
 
 # Example client program
 set(GE211_INHERITED 1)
 add_subdirectory(example/)
-
