@@ -11,7 +11,10 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 ###
 
 # Prefer Homebrew's /usr/local to Valve's /Library/Frameworks:
-set(CMAKE_FIND_FRAMEWORK LAST)
+set(CMAKE_FIND_FRAMEWORK    LAST)
+
+# Don't link in SDL2's main():
+set(SDL2_BUILDING_LIBRARY   1)
 
 add_subdirectory(3rdparty/utf8-cpp)
 
