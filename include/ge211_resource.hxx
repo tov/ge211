@@ -5,7 +5,12 @@
 #include "ge211_error.hxx"
 
 #include <SDL_rwops.h>
-#include <SDL_ttf.h>
+
+// Copied from SDL_ttf.h in order to avoid getting including all of
+// SDL.h from the GE211 headers.
+extern "C" {
+extern DECLSPEC void SDLCALL TTF_CloseFont(TTF_Font*);
+}
 
 #include <string>
 #include <vector>

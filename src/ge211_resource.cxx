@@ -3,6 +3,7 @@
 #include "ge211_session.hxx"
 
 #include <SDL.h>
+#include <SDL_ttf.h>
 
 #include <string>
 
