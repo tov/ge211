@@ -41,9 +41,6 @@ endif()
 # Library installation
 include(Ge211Installer)
 
-# Client program installer
-include(Ge211ClientInstaller)
-
 # Example client program
 add_subdirectory(examples/installed/)
 
