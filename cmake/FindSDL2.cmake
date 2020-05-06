@@ -77,14 +77,16 @@ if(NOT SDL2_DIR)
     set(SDL2_DIR "" CACHE PATH "SDL2 directory")
 endif()
 
-find_path(SDL2_INCLUDE_DIR SDL.h
-        HINTS
-        ENV SDLDIR
-        ${SDL2_DIR}
-        PATH_SUFFIXES SDL2
-        # path suffixes to search inside ENV{SDLDIR}
-        include/SDL2 include
-        )
+find_path(SDL2_INCLUDE_DIR
+  NAMES SDL.h
+  HINTS
+    ENV SDLDIR
+    ${SDL2_DIR}
+  # path suffixes to search inside above.
+  PATH_SUFFIXES
+    SDL2
+    include/SDL2
+    include)
 
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
     set(VC_LIB_PATH_SUFFIX lib/x64)
@@ -95,12 +97,13 @@ endif()
 # SDL-1.1 is the name used by FreeBSD ports...
 # don't confuse it for the version number.
 find_library(SDL2_LIBRARY_TEMP
-        NAMES SDL2
-        HINTS
-        ENV SDLDIR
-        ${SDL2_DIR}
-        PATH_SUFFIXES lib ${VC_LIB_PATH_SUFFIX}
-        )
+  NAMES SDL2
+  HINTS
+    ENV SDLDIR
+    ${SDL2_DIR}
+  PATH_SUFFIXES
+    lib
+    ${VC_LIB_PATH_SUFFIX})
 
 # Hide this cache variable from the user, it's an internal implementation
 # detail. The documented library variable for the user is SDL2_LIBRARY
@@ -114,17 +117,18 @@ if(NOT SDL2_BUILDING_LIBRARY)
         # seem to provide SDLmain for compatibility even though they don't
         # necessarily need it.
         find_library(SDL2MAIN_LIBRARY
-                NAMES SDL2main
-                HINTS
-                ENV SDLDIR
-                ${SDL2_DIR}
-                PATH_SUFFIXES lib ${VC_LIB_PATH_SUFFIX}
-                PATHS
-                /sw
-                /opt/local
-                /opt/csw
-                /opt
-                )
+          NAMES SDL2main
+          HINTS
+            ENV SDLDIR
+            ${SDL2_DIR}
+          PATH_SUFFIXES
+            lib
+            ${VC_LIB_PATH_SUFFIX}
+          PATHS
+            /sw
+            /opt/local
+            /opt/csw
+            /opt)
     endif()
 endif()
 
@@ -197,8 +201,9 @@ endif()
 set(SDL2_LIBRARIES ${SDL2_LIBRARY})
 set(SDL2_INCLUDE_DIRS ${SDL2_INCLUDE_DIR})
 
-FIND_PACKAGE_HANDLE_STANDARD_ARGS(SDL2
-        REQUIRED_VARS SDL2_LIBRARIES SDL2_INCLUDE_DIRS
-        VERSION_VAR SDL2_VERSION_STRING)
+find_package_handle_standard_args(SDL2
+        FOUND_VAR       SDL2_FOUND
+        REQUIRED_VARS   SDL2_LIBRARIES SDL2_INCLUDE_DIRS
+        VERSION_VAR     SDL2_VERSION_STRING)
 
 mark_as_advanced(SDL2_LIBRARY SDL2_INCLUDE_DIR)

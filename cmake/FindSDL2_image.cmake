@@ -30,15 +30,17 @@
 
 include(FindPackageHandleStandardArgs)
 
-find_path(SDL2_IMAGE_INCLUDE_DIR SDL_image.h
+find_path(SDL2_IMAGE_INCLUDE_DIR
+  NAMES SDL_image.h
   HINTS
     ENV SDL2IMAGEDIR
     ENV SDL2DIR
     ${SDL2_DIR}
-  PATH_SUFFIXES SDL2
-                # path suffixes to search inside ENV{SDL2DIR}
-                include/SDL2 include
-)
+  # path suffixes to search inside ENV{SDL2DIR}
+  PATH_SUFFIXES
+    SDL2
+    include/SDL2
+    include)
 
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
   set(VC_LIB_PATH_SUFFIX lib/x64)
@@ -52,8 +54,9 @@ find_library(SDL2_IMAGE_LIBRARY
     ENV SDL2IMAGEDIR
     ENV SDL2DIR
     ${SDL2_DIR}
-  PATH_SUFFIXES lib ${VC_LIB_PATH_SUFFIX}
-)
+  PATH_SUFFIXES
+    lib
+    ${VC_LIB_PATH_SUFFIX})
 
 if(SDL2_IMAGE_INCLUDE_DIR AND EXISTS "${SDL2_IMAGE_INCLUDE_DIR}/SDL_image.h")
   file(STRINGS "${SDL2_IMAGE_INCLUDE_DIR}/SDL_image.h" SDL2_IMAGE_VERSION_MAJOR_LINE REGEX "^#define[ \t]+SDL_IMAGE_MAJOR_VERSION[ \t]+[0-9]+$")
@@ -74,9 +77,10 @@ endif()
 set(SDL2_IMAGE_LIBRARIES ${SDL2_IMAGE_LIBRARY})
 set(SDL2_IMAGE_INCLUDE_DIRS ${SDL2_IMAGE_INCLUDE_DIR})
 
-FIND_PACKAGE_HANDLE_STANDARD_ARGS(SDL2_image
-                                  REQUIRED_VARS SDL2_IMAGE_LIBRARIES SDL2_IMAGE_INCLUDE_DIRS
-                                  VERSION_VAR SDL2_IMAGE_VERSION_STRING)
+find_package_handle_standard_args(SDL2_image
+        FOUND_VAR       SDL2_IMAGE_FOUND
+        REQUIRED_VARS   SDL2_IMAGE_LIBRARIES SDL2_IMAGE_INCLUDE_DIRS
+        VERSION_VAR     SDL2_IMAGE_VERSION_STRING)
 
 mark_as_advanced(SDL2_IMAGE_LIBRARY SDL2_IMAGE_INCLUDE_DIR)
 
