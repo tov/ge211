@@ -42,7 +42,7 @@ endif()
 ###
 
 # Library installation
-include(Ge211Installer)
+# include(Ge211Installer)
 
 # Example client program
 set(GE211_VENDORED "../..")
