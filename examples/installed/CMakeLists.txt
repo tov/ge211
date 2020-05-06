@@ -5,15 +5,17 @@ if(NOT GE211_VENDORED)
     find_package(Ge211 CONFIG)
 endif()
 
-add_executable(fireworks fireworks.cxx)
-set_target_properties(fireworks PROPERTIES
+set(target fireworks_example)
+
+add_executable(${target} fireworks.cxx)
+set_target_properties(${target} PROPERTIES
         CXX_STANDARD            14
         CXX_STANDARD_REQUIRED   On
-        CXX_EXTENSIONS          OFF)
-target_link_libraries(fireworks ge211)
+        CXX_EXTENSIONS          Off)
+target_link_libraries(${target} ge211)
 
 if(MSVC)
-    target_compile_options(fireworks PRIVATE /W4)
+    target_compile_options(${target} PRIVATE /W4)
 else(MSVC)
-    target_compile_options(fireworks PRIVATE -Wall -pedantic-errors)
+    target_compile_options(${target} PRIVATE -Wall -pedantic-errors)
 endif(MSVC)
