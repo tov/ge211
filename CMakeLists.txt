@@ -32,7 +32,7 @@ add_subdirectory(src)
 ### DOCUMENTATION
 ###
 
-find_package(Doxygen)
+find_package(Doxygen QUIET)
 if(DOXYGEN_FOUND)
     include(Ge211Docs)
 endif()
