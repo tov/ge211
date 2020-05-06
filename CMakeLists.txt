@@ -16,7 +16,7 @@ set(CMAKE_FIND_FRAMEWORK    LAST)
 # Don't link in SDL2's main():
 set(SDL2_BUILDING_LIBRARY   1)
 
-add_subdirectory(3rdparty/utf8-cpp)
+add_subdirectory(3rdparty/utf8-cpp EXCLUDE_FROM_ALL)
 
 find_package(SDL2       REQUIRED)
 find_package(SDL2_image REQUIRED)
