@@ -10,6 +10,9 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 ### DEPENDENCIES
 ###
 
+# Prefer Homebrew's /usr/local to Valve's /Library/Frameworks:
+set(CMAKE_FIND_FRAMEWORK LAST)
+
 add_subdirectory(3rdparty/utf8-cpp)
 
 find_package(SDL2       REQUIRED)
