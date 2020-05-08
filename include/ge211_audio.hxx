@@ -353,7 +353,7 @@ private:
 
     /// Updates the state of the channels.
     void poll_channels_();
-    friend detail::Engine; // calls poll_channels_().
+    friend class detail::Engine; // calls poll_channels_().
 
     /// Returns the index of an empty channel. Returns -1 if all
     /// are full.

@@ -522,8 +522,8 @@ struct Basic_rectangle
 
 private:
     friend Circle_sprite;
-    friend detail::Render_sprite;
-    friend detail::Renderer;
+    friend class detail::Render_sprite;
+    friend class detail::Renderer;
 
     /// Converts this rectangle to an internal SDL rectangle.
     operator SDL_Rect() const
@@ -791,9 +791,13 @@ bool operator!=(const Transform&, const Transform&) noexcept;
 namespace std
 {
 
+/// Template specialization to define hashing of Basic_position,
+/// which allows storing them in a `std::unordered_set`, or using
+/// them as keys in a `std::unordered_map`.
 template <class T>
 struct hash<ge211::Basic_position<T>>
 {
+    /// Hashes a Basic_position<T>, provided that T is hashable.
     std::size_t operator()(ge211::Basic_position<T> pos) const noexcept
     {
         return hash_t_(pos.x) * 31 ^ hash_t_(pos.y);

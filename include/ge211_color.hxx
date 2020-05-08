@@ -156,24 +156,22 @@ public:
         /// The hue in degrees from 0 to 360. 0° (and 360°) is red,
         /// 120° is green, and 240° is blue.
         double hue;
+
         /// The fullness of the color, from 0.0 (grey) to 1.0 (fully
         /// saturated).
         double saturation;
+
         /// The lightness of the color, from 0.0 (black) to 1.0 (white).
         double lightness;
+
         /// The opacity of the color, from 0.0 (fully transparent) to
         /// 1.0 (fully opaque).
         double alpha;
 
         /// Constructs a hue-saturation-lightness-alpha color from its
         /// unit interval components.
-        HSLA(double hue, double saturation, double lightness, double alpha = 1.0)
-        noexcept
-                : hue(hue)
-                , saturation(saturation)
-                , lightness(lightness)
-                , alpha(alpha)
-        { }
+        HSLA(double hue, double saturation,
+             double lightness, double alpha = 1.0) noexcept;
 
         /// Converts color to the RGBA color model.
         Color to_rgba() const noexcept;
@@ -232,25 +230,23 @@ public:
         /// The hue in degrees from 0 to 360. 0° (and 360°) is red,
         /// 120° is green, and 240° is blue.
         double hue;
+
         /// The fullness of the color, from 0,0 (grey) to 1.0 (fully
         /// saturated).
         double saturation;
+
         /// The brightness of the color, from 0.0 (black) to 1.0 (fully
         /// colored).
         double value;
+
         /// The opacity of the color, from 0.0 (fully transparent) to
         /// 1.0 (fully opaque).
         double alpha;
 
         /// Constructs a hue-saturation-value-alpha color from its
         /// unit interval components.
-        HSVA(double hue, double saturation, double value, double alpha = 1.0)
-        noexcept
-                : hue(hue)
-                , saturation(saturation)
-                , value(value)
-                , alpha(alpha)
-        { }
+        HSVA(double hue, double saturation,
+             double value, double alpha = 1.0) noexcept;
 
         /// Converts color to the RGBA color model.
         Color to_rgba() const noexcept;
@@ -311,7 +307,7 @@ private:
     uint8_t alpha_;
 
     friend Text_sprite;
-    friend detail::Render_sprite;
+    friend class detail::Render_sprite;
 
     SDL_Color to_sdl_() const noexcept;
     uint32_t to_sdl_(const SDL_PixelFormat*) const noexcept;

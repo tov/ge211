@@ -63,7 +63,7 @@ public:
     const std::string& attempted_action() const { return action_; }
 
 private:
-    friend detail::Session;
+    friend class detail::Session;
 
     explicit Session_needed_error(const std::string& action);
 
@@ -95,7 +95,7 @@ class Ge211_logic_error : public Environment_error
     explicit Ge211_logic_error(const std::string& message);
 
     /// Throwers
-    friend detail::Render_sprite;
+    friend class detail::Render_sprite;
     friend Mixer;
     friend Text_sprite;
 };
@@ -117,9 +117,9 @@ class Host_error : public Environment_error
     /// Throwers
     friend Text_sprite;
     friend Window;
-    friend detail::Renderer;
-    friend detail::Render_sprite;
-    friend detail::Texture;
+    friend class detail::Renderer;
+    friend class detail::Render_sprite;
+    friend class detail::Texture;
 };
 
 /// Indicates an error opening a file.
@@ -129,7 +129,7 @@ class File_error final : public Host_error
     static File_error could_not_open(const std::string& filename);
 
     /// Thrower
-    friend detail::File_resource;
+    friend class detail::File_resource;
 };
 
 /// Indicates an error loading a font front an already-open file.

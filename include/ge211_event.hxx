@@ -230,7 +230,7 @@ private:
               code_{c}
     { }
 
-    friend detail::Engine;
+    friend class detail::Engine;
     explicit Key(SDL_KeyboardEvent const&) noexcept;
 
     Type type_;

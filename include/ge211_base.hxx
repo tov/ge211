@@ -285,7 +285,7 @@ protected:
     Color background_color = default_background_color;
 
 private:
-    friend detail::Engine;
+    friend class detail::Engine;
 
     void mark_present_() noexcept;
     void mark_frame_() noexcept;

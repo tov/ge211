@@ -65,8 +65,8 @@ public:
     static Dimensions max_fullscreen_dimensions() noexcept;
 
 private:
-    friend detail::Engine;
-    friend detail::Renderer;
+    friend class detail::Engine;
+    friend class detail::Renderer;
 
     Window(const std::string&, Dimensions dim);
 

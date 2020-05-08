@@ -10,8 +10,8 @@ namespace ge211 {
 template<class T, class U>
 static T weighted_average(T t, double weight, U u) noexcept
 {
-    auto f1 = static_cast<double>(t);
-    auto f2 = static_cast<double>(u);
+    auto   f1     = static_cast<double>(t);
+    auto   f2     = static_cast<double>(u);
     double result = (1 - weight) * f1 + weight * f2;
     return T(result);
 }
@@ -25,7 +25,8 @@ noexcept
     return result;
 }
 
-Color Color::from_rgba(double red, double green, double blue, double alpha) noexcept
+Color
+Color::from_rgba(double red, double green, double blue, double alpha) noexcept
 {
     return Color{uint8_t(255 * red),
                  uint8_t(255 * green),
@@ -137,9 +138,9 @@ static std::tuple<double, double, double, double> to_HCMm(Color color) noexcept
     double C = M - m;
 
     double H6 =
-            (M == R)? std::fmod((G - B) / C, 6) :
-            (M == G)? (B - R) / C + 2 :
-            (R - G) / C + 4;
+                   (M == R) ? std::fmod((G - B) / C, 6) :
+                   (M == G) ? (B - R) / C + 2 :
+                   (R - G) / C + 4;
 
     double H = 60 * H6;
 
@@ -152,7 +153,7 @@ Color::HSLA Color::to_hsla() const noexcept
     std::tie(H, C, M, m) = to_HCMm(*this);
 
     double L = (M + m) / 2;
-    double S = (L == 1)? 0 : C / (1 - std::fabs(2 * L - 1));
+    double S = (L == 1) ? 0 : C / (1 - std::fabs(2 * L - 1));
 
     return {H, S, L, alpha() / 255.0};
 }
@@ -192,6 +193,16 @@ Color Color::fade_out(double unit_amount) const noexcept
 {
     return adjust_field(*this, &Color::alpha_, unit_amount, 0);
 }
+
+Color::HSLA::HSLA(double hue,
+                  double saturation,
+                  double lightness,
+                  double alpha) noexcept
+        : hue{hue}
+        , saturation{saturation}
+        , lightness{lightness}
+        , alpha{alpha}
+{ }
 
 Color Color::HSLA::to_rgba() const noexcept
 {
@@ -239,6 +250,14 @@ Color Color::HSVA::to_rgba() const noexcept
 {
     return Color::from_hsva(hue, saturation, value, alpha);
 }
+
+Color::HSVA::HSVA(double hue, double saturation,
+                  double value, double alpha) noexcept
+        : hue(hue)
+        , saturation(saturation)
+        , value(value)
+        , alpha(alpha)
+{ }
 
 Color::HSVA Color::HSVA::rotate_hue(double degrees) const noexcept
 {

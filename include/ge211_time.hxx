@@ -58,31 +58,37 @@ public:
     /// \name Comparisons
     ///@{
 
+    /// Does this Duration equal another one?
     bool operator==(Duration other) const
     {
         return duration_ == other.duration_;
     }
 
+    /// Does this Duration NOT equal another one?
     bool operator!=(Duration other) const
     {
         return duration_ != other.duration_;
     }
 
+    /// Less-than for Duration.
     bool operator<(Duration other) const
     {
         return duration_ < other.duration_;
     }
 
+    /// Less-than-or-equal-to for Duration.
     bool operator<=(Duration other) const
     {
         return duration_ <= other.duration_;
     }
 
+    /// Greater-than for Duration.
     bool operator>(Duration other) const
     {
         return duration_ > other.duration_;
     }
 
+    /// Greater-than-or-equal-to for Duration.
     bool operator>=(Duration other) const
     {
         return duration_ >= other.duration_;
@@ -93,41 +99,49 @@ public:
     ///\name Arithmetic
     ///@{
 
+    /// Addition for Duration.
     Duration operator+(Duration other) const
     {
         return {duration_ + other.duration_};
     }
 
+    /// Subtraction for Duration.
     Duration operator-(Duration other) const
     {
         return {duration_ - other.duration_};
     }
 
+    /// Multiplication for Duration.
     Duration operator*(double factor) const
     {
         return {duration_ * factor};
     }
 
+    /// Division for Duration.
     Duration operator/(double factor) const
     {
         return {duration_ / factor};
     }
 
+    /// Addition for Duration.
     Duration& operator+=(Duration other)
     {
         return *this = *this + other;
     }
 
+    /// Subtraction for Duration.
     Duration& operator-=(Duration other)
     {
         return *this = *this - other;
     }
 
+    /// Multiplication for Duration.
     Duration& operator*=(double factor)
     {
         return *this = *this * factor;
     }
 
+    /// Division for Duration.
     Duration& operator/=(double factor)
     {
         return *this = *this / factor;
@@ -137,7 +151,7 @@ public:
 
 private:
     friend Time_point;
-    friend detail::Engine;
+    friend class detail::Engine;
 
     Duration(std::chrono::duration<double> duration)
             : Duration{std::chrono::duration_cast<detail::Clock::duration>
@@ -169,31 +183,37 @@ public:
     /// \name Comparisons
     ///@{
 
+    /// Equality for Time_point.
     bool operator==(Time_point other) const
     {
         return time_point_ == other.time_point_;
     }
 
+    /// Disequality for Time_point.
     bool operator!=(Time_point other) const
     {
         return time_point_ != other.time_point_;
     }
 
+    /// Is this Time_point earlier than that one?
     bool operator<(Time_point other) const
     {
         return time_point_ < other.time_point_;
     }
 
+    /// Is this Time_point earlier than or equal to that one?
     bool operator<=(Time_point other) const
     {
         return time_point_ <= other.time_point_;
     }
 
+    /// Is this Time_point later than that one?
     bool operator>(Time_point other) const
     {
         return time_point_ > other.time_point_;
     }
 
+    /// Is this Time_point later than or equal to that one?
     bool operator>=(Time_point other) const
     {
         return time_point_ >= other.time_point_;
@@ -204,26 +224,31 @@ public:
     ///\name Arithmetic
     ///@{
 
+    /// Finds the Duration between one Time_point and another.
     Duration operator-(Time_point other) const
     {
         return Duration{time_point_ - other.time_point_};
     }
 
+    /// Offsets a Time_point by adding a Duration.
     Time_point operator+(Duration duration) const
     {
         return Time_point{time_point_ + duration.duration_};
     }
 
+    /// Offsets a Time_point subtracting by a Duration.
     Time_point operator-(Duration duration) const
     {
         return Time_point{time_point_ - duration.duration_};
     }
 
+    /// Offsets a Time_point by adding on a Duration.
     Time_point& operator+=(Duration duration)
     {
         return *this = *this + duration;
     }
 
+    /// Offsets a Time_point subtracting off a Duration.
     Time_point& operator-=(Duration duration)
     {
         return *this = *this - duration;

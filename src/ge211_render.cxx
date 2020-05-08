@@ -147,11 +147,11 @@ void Renderer::prepare(const Texture& texture) const
     texture.get_raw_(*this);
 }
 
-Texture::Impl_::Impl_(SDL_Surface* surface) noexcept
+Texture::Impl_::Impl_(Owned<SDL_Surface> surface) noexcept
         : surface_(surface)
 { }
 
-Texture::Impl_::Impl_(SDL_Texture* texture) noexcept
+Texture::Impl_::Impl_(Owned<SDL_Texture> texture) noexcept
         : texture_(texture)
 { }
 

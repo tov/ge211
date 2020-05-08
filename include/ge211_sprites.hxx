@@ -45,8 +45,8 @@ public:
     virtual ~Sprite() {}
 
 private:
-    friend detail::Engine;
-    friend detail::Placed_sprite;
+    friend class detail::Engine;
+    friend struct detail::Placed_sprite;
     friend Multiplexed_sprite;
 
     virtual void render(detail::Renderer&,
@@ -395,7 +395,7 @@ public:
     Sprite_set& add_sprite(Sprite const&, Position, int z, Transform const&);
 
 private:
-    friend detail::Engine;
+    friend class detail::Engine;
 
     Sprite_set();
     std::vector<detail::Placed_sprite> sprites_;
