@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['alpha',['alpha',['../structge211_1_1_color_1_1_h_s_l_a.html#a20f4c4490bc8ecbdd1ffcb79acce6035',1,'ge211::Color::HSLA::alpha()'],['../structge211_1_1_color_1_1_h_s_v_a.html#a20f4c4490bc8ecbdd1ffcb79acce6035',1,'ge211::Color::HSVA::alpha()']]]
+  ['background_5fcolor_535',['background_color',['../classge211_1_1_abstract__game.html#a3af4612678da78558adccf47e17164bb',1,'ge211::Abstract_game']]]
 ];

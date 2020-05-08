@@ -1,0 +1,7 @@
+<map id="Mixer_error" name="Mixer_error">
+<area shape="rect" id="node1" title="Indicates an error in the mixer, which could include the inability to understand an audio file format..." alt="" coords="26,304,113,331"/>
+<area shape="rect" id="node2" href="$classge211_1_1exceptions_1_1_host__error.html" title="Indicates an exception from the host environment being passed along by ge211." alt="" coords="28,229,111,256"/>
+<area shape="rect" id="node3" href="$classge211_1_1exceptions_1_1_environment__error.html" title="Indicates that an error was encountered by the game engine or in the client&#39;s environment." alt="" coords="5,155,133,181"/>
+<area shape="rect" id="node4" href="$classge211_1_1exceptions_1_1_exception__base.html" title="The root of the ge211 exception hierarchy." alt="" coords="12,80,127,107"/>
+<area shape="rect" id="node5" title=" " alt="" coords="30,5,109,32"/>
+</map>

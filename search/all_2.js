@@ -1,17 +1,13 @@
 var searchData=
 [
-  ['background_5fcolor',['background_color',['../classge211_1_1_abstract__game.html#a3af4612678da78558adccf47e17164bb',1,'ge211::Abstract_game']]],
-  ['basic_5fdimensions',['Basic_dimensions',['../structge211_1_1geometry_1_1_basic__dimensions.html',1,'ge211::geometry']]],
-  ['basic_5fposition',['Basic_position',['../structge211_1_1geometry_1_1_basic__position.html',1,'Basic_position&lt; T &gt;'],['../structge211_1_1geometry_1_1_basic__position.html#aeadf07805dc2bf33db65a8a20f70fec2',1,'ge211::geometry::Basic_position::Basic_position(Coordinate x, Coordinate y) noexcept(is_nothrow_convertible&lt; Coordinate &gt;())'],['../structge211_1_1geometry_1_1_basic__position.html#aa60e0a81d39fa4f6dce9ebe37aa47341',1,'ge211::geometry::Basic_position::Basic_position(Dimensions dims) noexcept(is_nothrow_convertible&lt; Coordinate &gt;())']]],
-  ['basic_5fposition_3c_20coordinate_20_3e',['Basic_position&lt; Coordinate &gt;',['../structge211_1_1geometry_1_1_basic__position.html',1,'ge211::geometry']]],
-  ['basic_5frectangle',['Basic_rectangle',['../structge211_1_1geometry_1_1_basic__rectangle.html',1,'ge211::geometry']]],
-  ['begin',['begin',['../structge211_1_1geometry_1_1_basic__rectangle.html#a0c62c15c8ed609e7e5e9518cf5f5c712',1,'ge211::geometry::Basic_rectangle']]],
-  ['between',['between',['../classge211_1_1_random.html#a808fbdef59773f1b4e91ab3c6498d597',1,'ge211::Random']]],
-  ['black',['black',['../classge211_1_1_color.html#ab6f5e38c50cfa0edef94c5b1b66da989',1,'ge211::Color']]],
-  ['blend',['blend',['../classge211_1_1_color.html#a7f610b2ecf4a7ea01bdae156ac1dab33',1,'ge211::Color']]],
-  ['blue',['blue',['../classge211_1_1_color.html#a2486e2536c47686cfb5118fb17441fa1',1,'ge211::Color']]],
-  ['bottom_5fleft',['bottom_left',['../structge211_1_1geometry_1_1_basic__rectangle.html#a90bc10fc3b57de9da40c571a8f17d95d',1,'ge211::geometry::Basic_rectangle']]],
-  ['bottom_5fright',['bottom_right',['../structge211_1_1geometry_1_1_basic__rectangle.html#a66fdbd079fd8594671c057c399493cc6',1,'ge211::geometry::Basic_rectangle']]],
-  ['build',['build',['../classge211_1_1sprites_1_1_text__sprite_1_1_builder.html#a7f15a1776622346acd1f5f39a695931f',1,'ge211::sprites::Text_sprite::Builder']]],
-  ['builder',['Builder',['../classge211_1_1sprites_1_1_text__sprite_1_1_builder.html',1,'Text_sprite::Builder'],['../classge211_1_1sprites_1_1_text__sprite_1_1_builder.html#ace97c910673a7257eb7bcb577345c025',1,'ge211::sprites::Text_sprite::Builder::Builder()']]]
+  ['center_27',['center',['../structge211_1_1geometry_1_1_basic__rectangle.html#af17639ac276e3b09b0455d5a8ab3bcb7',1,'ge211::geometry::Basic_rectangle']]],
+  ['centered_28',['centered',['../classge211_1_1_window.html#a6827bb057cd77caec505e884e921689a',1,'ge211::Window']]],
+  ['circle_5fsprite_29',['Circle_sprite',['../classge211_1_1sprites_1_1_circle__sprite.html',1,'Circle_sprite'],['../classge211_1_1sprites_1_1_circle__sprite.html#a6818b378368d7cacb5b3fcc4b11c3ee0',1,'ge211::sprites::Circle_sprite::Circle_sprite()']]],
+  ['clear_30',['clear',['../classge211_1_1audio_1_1_audio__clip.html#ac8bb3912a3ce86b15842e79d0b421204',1,'ge211::audio::Audio_clip']]],
+  ['client_5flogic_5ferror_31',['Client_logic_error',['../classge211_1_1exceptions_1_1_client__logic__error.html',1,'Client_logic_error'],['../classge211_1_1exceptions_1_1_client__logic__error.html#a51707ab63ae43bf4adb210064c73f23c',1,'ge211::exceptions::Client_logic_error::Client_logic_error()']]],
+  ['code_32',['code',['../classge211_1_1events_1_1_key.html#a432fb7ffcc1364f573dcaa2513ea5b23',1,'ge211::events::Key::code(char32_t c)'],['../classge211_1_1events_1_1_key.html#ab1652c8baf804eed5d74ad37f13e1ba3',1,'ge211::events::Key::code() const noexcept'],['../classge211_1_1events_1_1_key.html#a1d1cfd8ffb84e947f82999c682b666a7ac13367945d5d4c91047b3b50234aa7ab',1,'ge211::events::Key::code()']]],
+  ['color_33',['Color',['../classge211_1_1_color.html',1,'Color'],['../classge211_1_1sprites_1_1_text__sprite_1_1_builder.html#aea287a592d688bcffaea6c6d28e9b0b0',1,'ge211::sprites::Text_sprite::Builder::color(Color)'],['../classge211_1_1sprites_1_1_text__sprite_1_1_builder.html#a70b93be613e775ef0ff807739ed57917',1,'ge211::sprites::Text_sprite::Builder::color() const'],['../classge211_1_1_color.html#a46c0b69706251198b103a12f57d9cb19',1,'ge211::Color::Color() noexcept'],['../classge211_1_1_color.html#ab042b957e56bff4e83fe694aeab5cfd2',1,'ge211::Color::Color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha=255) noexcept']]],
+  ['command_34',['command',['../classge211_1_1events_1_1_key.html#a4b0a1e594c9c76db8120d23941e2d5b0',1,'ge211::events::Key::command() noexcept'],['../classge211_1_1events_1_1_key.html#a1d1cfd8ffb84e947f82999c682b666a7a1dccadfed7bcbb036c56a4afb97e906f',1,'ge211::events::Key::command()']]],
+  ['control_35',['control',['../classge211_1_1events_1_1_key.html#a665ff26825910f5ee05fb0fc789cedeb',1,'ge211::events::Key::control() noexcept'],['../classge211_1_1events_1_1_key.html#a1d1cfd8ffb84e947f82999c682b666a7afc5364bf9dbfa34954526becad136d4b',1,'ge211::events::Key::control()']]],
+  ['coordinate_36',['Coordinate',['../structge211_1_1geometry_1_1_basic__dimensions.html#a9146ca950101ae8cfe36eb93ed5de867',1,'ge211::geometry::Basic_dimensions::Coordinate()'],['../structge211_1_1geometry_1_1_basic__position.html#a9146ca950101ae8cfe36eb93ed5de867',1,'ge211::geometry::Basic_position::Coordinate()'],['../structge211_1_1geometry_1_1_basic__rectangle.html#a9146ca950101ae8cfe36eb93ed5de867',1,'ge211::geometry::Basic_rectangle::Coordinate()']]]
 ];

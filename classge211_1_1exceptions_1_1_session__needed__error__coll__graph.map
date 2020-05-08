@@ -1,0 +1,6 @@
+<map id="Session_needed_error" name="Session_needed_error">
+<area shape="rect" id="node1" title="An exception thrown when the client attempts to perform an action that requires a GE211 session befor..." alt="" coords="5,229,156,256"/>
+<area shape="rect" id="node2" href="$classge211_1_1exceptions_1_1_client__logic__error.html" title="An exception that indicates that a logic error was performed by the client." alt="" coords="19,155,142,181"/>
+<area shape="rect" id="node3" href="$classge211_1_1exceptions_1_1_exception__base.html" title="The root of the ge211 exception hierarchy." alt="" coords="23,80,138,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="41,5,120,32"/>
+</map>

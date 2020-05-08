@@ -9,6 +9,7 @@ var dir_d44c64559bbebec7f509842c48db8b23 =
     [ "ge211_event.hxx", "ge211__event_8hxx_source.html", null ],
     [ "ge211_forward.hxx", "ge211__forward_8hxx_source.html", null ],
     [ "ge211_geometry.hxx", "ge211__geometry_8hxx_source.html", null ],
+    [ "ge211_noexcept.hxx", "ge211__noexcept_8hxx_source.html", null ],
     [ "ge211_random.hxx", "ge211__random_8hxx_source.html", null ],
     [ "ge211_render.hxx", "ge211__render_8hxx_source.html", null ],
     [ "ge211_resource.hxx", "ge211__resource_8hxx_source.html", null ],

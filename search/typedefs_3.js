@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rectangle',['Rectangle',['../namespacege211_1_1geometry.html#a6070d6748531d25ccc6fdc0c0b096e6b',1,'ge211::geometry']]]
+  ['owned_551',['Owned',['../namespacege211.html#a882ee8931c0eb981b196665bb1b9b9ed',1,'ge211']]]
 ];

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['default_5fbackground_5fcolor',['default_background_color',['../classge211_1_1_abstract__game.html#ad243606866464c451f04038c48e0cef5',1,'ge211::Abstract_game']]],
-  ['default_5fwindow_5fdimensions',['default_window_dimensions',['../classge211_1_1_abstract__game.html#a6eb917c724e17e429ea080edac7ab888',1,'ge211::Abstract_game']]],
-  ['default_5fwindow_5ftitle',['default_window_title',['../classge211_1_1_abstract__game.html#aee30a5af5dd889bff01d52c893a0a88f',1,'ge211::Abstract_game']]]
+  ['height_540',['height',['../structge211_1_1geometry_1_1_basic__dimensions.html#a050576b0776777b293a8aa065f369292',1,'ge211::geometry::Basic_dimensions::height()'],['../structge211_1_1geometry_1_1_basic__rectangle.html#a050576b0776777b293a8aa065f369292',1,'ge211::geometry::Basic_rectangle::height()']]],
+  ['hue_541',['hue',['../structge211_1_1_color_1_1_h_s_l_a.html#acb126945102d160a9fabc753318b9075',1,'ge211::Color::HSLA::hue()'],['../structge211_1_1_color_1_1_h_s_v_a.html#acb126945102d160a9fabc753318b9075',1,'ge211::Color::HSVA::hue()']]]
 ];

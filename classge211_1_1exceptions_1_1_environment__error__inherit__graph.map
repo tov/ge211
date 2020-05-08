@@ -1,0 +1,11 @@
+<map id="Environment_error" name="Environment_error">
+<area shape="rect" id="node1" title="Indicates that an error was encountered by the game engine or in the client&#39;s environment." alt="" coords="71,155,199,181"/>
+<area shape="rect" id="node4" href="$classge211_1_1exceptions_1_1_ge211__logic__error.html" title="Indicates a condition unexpected by ge211, that appears to break its invariants." alt="" coords="8,229,135,256"/>
+<area shape="rect" id="node5" href="$classge211_1_1exceptions_1_1_host__error.html" title="Indicates an exception from the host environment being passed along by ge211." alt="" coords="159,229,242,256"/>
+<area shape="rect" id="node2" href="$classge211_1_1exceptions_1_1_exception__base.html" title="The root of the ge211 exception hierarchy." alt="" coords="78,80,193,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="96,5,175,32"/>
+<area shape="rect" id="node6" href="$classge211_1_1exceptions_1_1_file__error.html" title="Indicates an error opening a file." alt="" coords="5,304,81,331"/>
+<area shape="rect" id="node7" href="$classge211_1_1exceptions_1_1_font__error.html" title="Indicates an error loading a font front an already&#45;open file." alt="" coords="105,304,187,331"/>
+<area shape="rect" id="node8" href="$classge211_1_1exceptions_1_1_image__error.html" title="Indicates an error loading an image from an already&#45;open file." alt="" coords="211,304,302,331"/>
+<area shape="rect" id="node9" href="$classge211_1_1exceptions_1_1_mixer__error.html" title="Indicates an error in the mixer, which could include the inability to understand an audio file format..." alt="" coords="327,304,413,331"/>
+</map>

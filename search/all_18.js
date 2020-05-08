@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['y',['y',['../structge211_1_1geometry_1_1_basic__position.html#a6868b0f3e17c825b6d02243d2b1473fe',1,'ge211::geometry::Basic_position::y()'],['../structge211_1_1geometry_1_1_basic__rectangle.html#a6868b0f3e17c825b6d02243d2b1473fe',1,'ge211::geometry::Basic_rectangle::y()']]]
+  ['_7eabstract_5fgame_267',['~Abstract_game',['../classge211_1_1_abstract__game.html#ad7bb94cf4db55ceaab014bafc0d7ece9',1,'ge211::Abstract_game']]],
+  ['_7emixer_268',['~Mixer',['../classge211_1_1audio_1_1_mixer.html#a78eb1637a8d743413c122299c8dec735',1,'ge211::audio::Mixer']]]
 ];

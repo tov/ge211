@@ -1,0 +1,5 @@
+<map id="Pausable_timer" name="Pausable_timer">
+<area shape="rect" id="node1" title="A class for timing intervals while supporting pausing." alt="" coords="45,95,157,121"/>
+<area shape="rect" id="node2" href="$classge211_1_1time_1_1_duration.html" title="A length of time." alt="" coords="5,5,76,32"/>
+<area shape="rect" id="node3" href="$classge211_1_1time_1_1_time__point.html" title="A point in time." alt="" coords="117,5,204,32"/>
+</map>

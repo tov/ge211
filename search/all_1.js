@@ -1,13 +1,18 @@
 var searchData=
 [
-  ['abstract_5fgame',['Abstract_game',['../classge211_1_1_abstract__game.html',1,'ge211']]],
-  ['add_5fmessage',['add_message',['../classge211_1_1sprites_1_1_text__sprite_1_1_builder.html#acb74e65b7b9b3033955228b4b4c45d9e',1,'ge211::sprites::Text_sprite::Builder']]],
-  ['add_5fsprite',['add_sprite',['../classge211_1_1_sprite__set.html#a2240fce09cf44668dcb2e5605676935a',1,'ge211::Sprite_set::add_sprite(Sprite const &amp;, Position, int z=0)'],['../classge211_1_1_sprite__set.html#a567a6cc041710e43a2511234590cc8b9',1,'ge211::Sprite_set::add_sprite(Sprite const &amp;, Position, int z, Transform const &amp;)']]],
-  ['alpha',['alpha',['../structge211_1_1_color_1_1_h_s_l_a.html#a20f4c4490bc8ecbdd1ffcb79acce6035',1,'ge211::Color::HSLA::alpha()'],['../structge211_1_1_color_1_1_h_s_v_a.html#a20f4c4490bc8ecbdd1ffcb79acce6035',1,'ge211::Color::HSVA::alpha()'],['../classge211_1_1_color.html#a40d80ee8e4398848fe3cea6182489c8a',1,'ge211::Color::alpha()']]],
-  ['alt',['alt',['../classge211_1_1events_1_1_key.html#a3537fd58fa24f6653f4f4379fbbbd15b',1,'ge211::events::Key::alt() noexcept'],['../classge211_1_1events_1_1_key.html#a1d1cfd8ffb84e947f82999c682b666a7a34823136d0dd91d0f5d22db740f7679c',1,'ge211::events::Key::alt()']]],
-  ['antialias',['antialias',['../classge211_1_1sprites_1_1_text__sprite_1_1_builder.html#ac2d50f6fd929343e93b3e8639e05bf63',1,'ge211::sprites::Text_sprite::Builder::antialias(bool)'],['../classge211_1_1sprites_1_1_text__sprite_1_1_builder.html#a7e9874f3e0e36293f3e20c175201436c',1,'ge211::sprites::Text_sprite::Builder::antialias() const']]],
-  ['any',['any',['../classge211_1_1_random.html#a26402ea3fd575d535a6e23a3679804e7',1,'ge211::Random']]],
-  ['as_5ftext',['as_text',['../classge211_1_1events_1_1_key.html#a0fccc6a22afa07f575ade365343a794d',1,'ge211::events::Key']]],
-  ['attach_5fmusic',['attach_music',['../classge211_1_1audio_1_1_mixer.html#a5e4ec9c6d45c070e1393e4618f9ef8b2',1,'ge211::audio::Mixer']]],
-  ['available_5feffect_5fchannels',['available_effect_channels',['../classge211_1_1audio_1_1_mixer.html#abe0697d7a8c4384c2a8396e4f11fd7a1',1,'ge211::audio::Mixer']]]
+  ['background_5fcolor_12',['background_color',['../classge211_1_1_abstract__game.html#a3af4612678da78558adccf47e17164bb',1,'ge211::Abstract_game']]],
+  ['basic_5fdimensions_13',['Basic_dimensions',['../structge211_1_1geometry_1_1_basic__dimensions.html',1,'ge211::geometry']]],
+  ['basic_5fposition_14',['Basic_position',['../structge211_1_1geometry_1_1_basic__position.html',1,'Basic_position&lt; T &gt;'],['../structge211_1_1geometry_1_1_basic__position.html#a445d51b50ef2c63e125e3f1720912d1d',1,'ge211::geometry::Basic_position::Basic_position(Coordinate x, Coordinate y)'],['../structge211_1_1geometry_1_1_basic__position.html#a06da1a78ca69c9f993c1430a56b24fdc',1,'ge211::geometry::Basic_position::Basic_position(Dimensions dims)']]],
+  ['basic_5fposition_3c_20coordinate_20_3e_15',['Basic_position&lt; Coordinate &gt;',['../structge211_1_1geometry_1_1_basic__position.html',1,'ge211::geometry']]],
+  ['basic_5frectangle_16',['Basic_rectangle',['../structge211_1_1geometry_1_1_basic__rectangle.html',1,'ge211::geometry']]],
+  ['begin_17',['begin',['../structge211_1_1geometry_1_1_basic__rectangle.html#a0c62c15c8ed609e7e5e9518cf5f5c712',1,'ge211::geometry::Basic_rectangle']]],
+  ['between_18',['between',['../classge211_1_1_random.html#a808fbdef59773f1b4e91ab3c6498d597',1,'ge211::Random']]],
+  ['black_19',['black',['../classge211_1_1_color.html#ab6f5e38c50cfa0edef94c5b1b66da989',1,'ge211::Color']]],
+  ['blend_20',['blend',['../classge211_1_1_color.html#a7f610b2ecf4a7ea01bdae156ac1dab33',1,'ge211::Color']]],
+  ['blue_21',['blue',['../classge211_1_1_color.html#a2486e2536c47686cfb5118fb17441fa1',1,'ge211::Color']]],
+  ['borrowed_22',['Borrowed',['../namespacege211.html#a9a1b22da38f80c3e749c2073e824d35f',1,'ge211']]],
+  ['bottom_5fleft_23',['bottom_left',['../structge211_1_1geometry_1_1_basic__rectangle.html#a4072d34c87a891a7c4c380197b3e4029',1,'ge211::geometry::Basic_rectangle']]],
+  ['bottom_5fright_24',['bottom_right',['../structge211_1_1geometry_1_1_basic__rectangle.html#a796975b0bdb36a276c45c321fce8f2ff',1,'ge211::geometry::Basic_rectangle']]],
+  ['build_25',['build',['../classge211_1_1sprites_1_1_text__sprite_1_1_builder.html#a7f15a1776622346acd1f5f39a695931f',1,'ge211::sprites::Text_sprite::Builder']]],
+  ['builder_26',['Builder',['../classge211_1_1sprites_1_1_text__sprite_1_1_builder.html',1,'Text_sprite::Builder'],['../classge211_1_1sprites_1_1_text__sprite_1_1_builder.html#ace97c910673a7257eb7bcb577345c025',1,'ge211::sprites::Text_sprite::Builder::Builder()']]]
 ];

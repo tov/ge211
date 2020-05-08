@@ -1,0 +1,4 @@
+<map id="Window" name="Window">
+<area shape="rect" id="node1" title="Provides access to the game window and its properties." alt="" coords="40,95,109,121"/>
+<area shape="rect" id="node2" href="$structge211_1_1geometry_1_1_basic__position.html" title="A position in the T&#45;valued Cartesian plane." alt="" coords="5,5,144,32"/>
+</map>

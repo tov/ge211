@@ -8,5 +8,6 @@ var namespacege211_1_1exceptions =
     [ "Ge211_logic_error", "classge211_1_1exceptions_1_1_ge211__logic__error.html", null ],
     [ "Host_error", "classge211_1_1exceptions_1_1_host__error.html", null ],
     [ "Image_error", "classge211_1_1exceptions_1_1_image__error.html", null ],
-    [ "Mixer_error", "classge211_1_1exceptions_1_1_mixer__error.html", null ]
+    [ "Mixer_error", "classge211_1_1exceptions_1_1_mixer__error.html", null ],
+    [ "Session_needed_error", "classge211_1_1exceptions_1_1_session__needed__error.html", "classge211_1_1exceptions_1_1_session__needed__error" ]
 ];

@@ -1,0 +1,6 @@
+<map id="Ge211_logic_error" name="Ge211_logic_error">
+<area shape="rect" id="node1" title="Indicates a condition unexpected by ge211, that appears to break its invariants." alt="" coords="6,229,133,256"/>
+<area shape="rect" id="node2" href="$classge211_1_1exceptions_1_1_environment__error.html" title="Indicates that an error was encountered by the game engine or in the client&#39;s environment." alt="" coords="5,155,133,181"/>
+<area shape="rect" id="node3" href="$classge211_1_1exceptions_1_1_exception__base.html" title="The root of the ge211 exception hierarchy." alt="" coords="12,80,127,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="30,5,109,32"/>
+</map>

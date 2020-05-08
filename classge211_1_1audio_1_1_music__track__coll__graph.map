@@ -1,0 +1,4 @@
+<map id="Music_track" name="Music_track">
+<area shape="rect" id="node1" title="A music track, which can be attached to the Mixer and played." alt="" coords="5,80,99,107"/>
+<area shape="rect" id="node2" href="$classge211_1_1audio_1_1_audio__clip.html" title="Abstract base class for classes that load audio data, Music_track and Sound_effect." alt="" coords="11,5,93,32"/>
+</map>

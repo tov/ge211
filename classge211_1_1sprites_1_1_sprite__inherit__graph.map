@@ -1,0 +1,10 @@
+<map id="Sprite" name="Sprite">
+<area shape="rect" id="node1" title="A sprite is an image that knows how to render itself to the screen at a given location,..." alt="" coords="283,5,339,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="190,80,294,107"/>
+<area shape="rect" id="node8" href="$classge211_1_1sprites_1_1_multiplexed__sprite.html" title="A Sprite that allows switching between other sprites based on the time at rendering." alt="" coords="319,80,445,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="67,155,169,181"/>
+<area shape="rect" id="node6" href="$classge211_1_1sprites_1_1_image__sprite.html" title="A Sprite that displays a bitmap image." alt="" coords="193,155,291,181"/>
+<area shape="rect" id="node7" href="$classge211_1_1sprites_1_1_text__sprite.html" title="A Sprite that displays text." alt="" coords="315,155,401,181"/>
+<area shape="rect" id="node4" href="$classge211_1_1sprites_1_1_circle__sprite.html" title="A Sprite that renders as a solid circle." alt="" coords="5,229,100,256"/>
+<area shape="rect" id="node5" href="$classge211_1_1sprites_1_1_rectangle__sprite.html" title="A Sprite that renders as a solid rectangle." alt="" coords="125,229,245,256"/>
+</map>

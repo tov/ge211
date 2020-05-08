@@ -1,6 +1,10 @@
 var hierarchy =
 [
     [ "Abstract_game", "classge211_1_1_abstract__game.html", null ],
+    [ "Audio_clip", "classge211_1_1audio_1_1_audio__clip.html", [
+      [ "Music_track", "classge211_1_1audio_1_1_music__track.html", null ],
+      [ "Sound_effect", "classge211_1_1audio_1_1_sound__effect.html", null ]
+    ] ],
     [ "Basic_dimensions< T >", "structge211_1_1geometry_1_1_basic__dimensions.html", null ],
     [ "Basic_position< T >", "structge211_1_1geometry_1_1_basic__position.html", null ],
     [ "Basic_position< Coordinate >", "structge211_1_1geometry_1_1_basic__position.html", null ],
@@ -10,7 +14,9 @@ var hierarchy =
     [ "Duration", "classge211_1_1time_1_1_duration.html", null ],
     [ "exception", null, [
       [ "Exception_base", "classge211_1_1exceptions_1_1_exception__base.html", [
-        [ "Client_logic_error", "classge211_1_1exceptions_1_1_client__logic__error.html", null ],
+        [ "Client_logic_error", "classge211_1_1exceptions_1_1_client__logic__error.html", [
+          [ "Session_needed_error", "classge211_1_1exceptions_1_1_session__needed__error.html", null ]
+        ] ],
         [ "Environment_error", "classge211_1_1exceptions_1_1_environment__error.html", [
           [ "Ge211_logic_error", "classge211_1_1exceptions_1_1_ge211__logic__error.html", null ],
           [ "Host_error", "classge211_1_1exceptions_1_1_host__error.html", [
@@ -31,10 +37,8 @@ var hierarchy =
     ] ],
     [ "Key", "classge211_1_1events_1_1_key.html", null ],
     [ "Mixer", "classge211_1_1audio_1_1_mixer.html", null ],
-    [ "Music_track", "classge211_1_1audio_1_1_music__track.html", null ],
     [ "Pausable_timer", "classge211_1_1time_1_1_pausable__timer.html", null ],
     [ "Random", "classge211_1_1_random.html", null ],
-    [ "Sound_effect", "classge211_1_1audio_1_1_sound__effect.html", null ],
     [ "Sound_effect_handle", "classge211_1_1audio_1_1_sound__effect__handle.html", null ],
     [ "Sprite", "classge211_1_1sprites_1_1_sprite.html", [
       [ "Texture_sprite", null, [
