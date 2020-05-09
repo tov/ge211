@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('classge211_1_1_abstract__game.html',''
 <div class="line"> </div>
 <div class="line"><span class="keyword">struct </span>My_game : <a class="code" href="classge211_1_1_abstract__game.html">Abstract_game</a></div>
 <div class="line">{</div>
-<div class="line">    <a class="code" href="classge211_1_1sprites_1_1_rectangle__sprite.html">Rectangle_sprite</a> rect{<a class="code" href="namespacege211_1_1geometry.html#a6984557cfdc7f69501ef8b04882ecd83">Dimensions</a>{300, 200}, <a class="code" href="classge211_1_1_color.html#a736839b75d5dd9139f95aeb1e8739bce">Color::medium_red</a>()};</div>
+<div class="line">    <a class="code" href="classge211_1_1sprites_1_1_rectangle__sprite.html">Rectangle_sprite</a> rect{<a class="code" href="namespacege211_1_1geometry.html#a6984557cfdc7f69501ef8b04882ecd83">Dimensions</a>{300, 200}, <a class="code" href="classge211_1_1_color.html#a445b4991a7ef685a53725933064cb04d">Color::medium_red</a>()};</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordtype">void</span> <a class="code" href="classge211_1_1_abstract__game.html#a44518135e411e35374f252d1c7d44e3e">draw</a>(<a class="code" href="classge211_1_1_sprite__set.html">Sprite_set</a>&amp; sprites)<span class="keyword"> override</span></div>
 <div class="line"><span class="keyword">    </span>{</div>
@@ -143,7 +143,7 @@ $(document).ready(function(){initNavTree('classge211_1_1_abstract__game.html',''
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// The circle sprite to render where the mouse is:</span></div>
-<div class="line">    Circle_sprite cursor{10, <a class="code" href="classge211_1_1_color.html#acc22e27bcdfaef169a3cef864fe23aa6">Color::medium_blue</a>()};</div>
+<div class="line">    Circle_sprite cursor{10, <a class="code" href="classge211_1_1_color.html#aa3eaf7ed370b1ef0ca79e253f547b722">Color::medium_blue</a>()};</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Whenever we need to redraw the screen, add the Circle_sprite</span></div>
 <div class="line">    <span class="comment">// at the mouse position.</span></div>
@@ -158,7 +158,7 @@ $(document).ready(function(){initNavTree('classge211_1_1_abstract__game.html',''
 <div class="line">    My_game2{}.run();</div>
 <div class="line">}</div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00094">94</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00095">95</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
 </div><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for Abstract_game:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -184,7 +184,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:ad243606866464c451f04038c48e0cef5"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="classge211_1_1_color.html">Color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#ad243606866464c451f04038c48e0cef5">default_background_color</a> = <a class="el" href="classge211_1_1_color.html#ab6f5e38c50cfa0edef94c5b1b66da989">Color::black</a>()</td></tr>
+<tr class="memitem:ad243606866464c451f04038c48e0cef5"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="classge211_1_1_color.html">Color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#ad243606866464c451f04038c48e0cef5">default_background_color</a> = <a class="el" href="classge211_1_1_color.html#a7648d9d985e6e5838e460eb66957dbee">Color::black</a>()</td></tr>
 <tr class="memdesc:ad243606866464c451f04038c48e0cef5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default background color of the window, if not changed by the derived class.  <a href="classge211_1_1_abstract__game.html#ad243606866464c451f04038c48e0cef5">More...</a><br /></td></tr>
 <tr class="separator:ad243606866464c451f04038c48e0cef5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee30a5af5dd889bff01d52c893a0a88f"><td class="memItemLeft" align="right" valign="top">static const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#aee30a5af5dd889bff01d52c893a0a88f">default_window_title</a> = &quot;ge211 window&quot;</td></tr>
@@ -237,33 +237,33 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memdesc:a5dd1fce58a747385e3372c62744933d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override this function to specify the initial title of the game.  <a href="classge211_1_1_abstract__game.html#a5dd1fce58a747385e3372c62744933d7">More...</a><br /></td></tr>
 <tr class="separator:a5dd1fce58a747385e3372c62744933d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Functions to be called by clients</div></td></tr>
-<tr class="memitem:ad0eb736262d05c5af0143a5eadae67ca"><td class="memItemLeft" align="right" valign="top"><a id="ad0eb736262d05c5af0143a5eadae67ca"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#ad0eb736262d05c5af0143a5eadae67ca">quit</a> () noexcept</td></tr>
-<tr class="memdesc:ad0eb736262d05c5af0143a5eadae67ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Causes the event loop to quit after the current frame finishes. <br /></td></tr>
-<tr class="separator:ad0eb736262d05c5af0143a5eadae67ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2463a3acef2df4c951ce942a3229e44e"><td class="memItemLeft" align="right" valign="top"><a id="a2463a3acef2df4c951ce942a3229e44e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#a2463a3acef2df4c951ce942a3229e44e">quit</a> ()</td></tr>
+<tr class="memdesc:a2463a3acef2df4c951ce942a3229e44e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Causes the event loop to quit after the current frame finishes. <br /></td></tr>
+<tr class="separator:a2463a3acef2df4c951ce942a3229e44e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a329a95db19556a21771dc45265095cee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classge211_1_1_window.html">Window</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#a329a95db19556a21771dc45265095cee">get_window</a> () const</td></tr>
 <tr class="memdesc:a329a95db19556a21771dc45265095cee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the <a class="el" href="classge211_1_1_window.html" title="Provides access to the game window and its properties.">Window</a> that the game is running in.  <a href="classge211_1_1_abstract__game.html#a329a95db19556a21771dc45265095cee">More...</a><br /></td></tr>
 <tr class="separator:a329a95db19556a21771dc45265095cee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae427d958ed5a0ae77c6a948650cca7bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classge211_1_1_random.html">Random</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#ae427d958ed5a0ae77c6a948650cca7bf">get_random</a> () const noexcept</td></tr>
-<tr class="memdesc:ae427d958ed5a0ae77c6a948650cca7bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a reference to the pseudo-random number generator associated with this game.  <a href="classge211_1_1_abstract__game.html#ae427d958ed5a0ae77c6a948650cca7bf">More...</a><br /></td></tr>
-<tr class="separator:ae427d958ed5a0ae77c6a948650cca7bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51c72d981bc39c04ad570317ec73bdc9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classge211_1_1_random.html">Random</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#a51c72d981bc39c04ad570317ec73bdc9">get_random</a> () const</td></tr>
+<tr class="memdesc:a51c72d981bc39c04ad570317ec73bdc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a reference to the pseudo-random number generator associated with this game.  <a href="classge211_1_1_abstract__game.html#a51c72d981bc39c04ad570317ec73bdc9">More...</a><br /></td></tr>
+<tr class="separator:a51c72d981bc39c04ad570317ec73bdc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2984a24279136313af128c084eeb9da"><td class="memItemLeft" align="right" valign="top"><a id="ac2984a24279136313af128c084eeb9da"></a>
 <a class="el" href="classge211_1_1audio_1_1_mixer.html">Mixer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#ac2984a24279136313af128c084eeb9da">mixer</a> () const</td></tr>
 <tr class="memdesc:ac2984a24279136313af128c084eeb9da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets access to the audio mixer, which can be used to play music and sound effects. <br /></td></tr>
 <tr class="separator:ac2984a24279136313af128c084eeb9da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7329861f81db4c45ce52f459e665151d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classge211_1_1time_1_1_time__point.html">Time_point</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#a7329861f81db4c45ce52f459e665151d">get_frame_start_time</a> () const noexcept</td></tr>
-<tr class="memdesc:a7329861f81db4c45ce52f459e665151d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the time point at which the current frame started.  <a href="classge211_1_1_abstract__game.html#a7329861f81db4c45ce52f459e665151d">More...</a><br /></td></tr>
-<tr class="separator:a7329861f81db4c45ce52f459e665151d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4657bfa0ca87d757f157ad96842e7c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classge211_1_1time_1_1_duration.html">Duration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#ae4657bfa0ca87d757f157ad96842e7c8">get_prev_frame_length</a> () const noexcept</td></tr>
-<tr class="memdesc:ae4657bfa0ca87d757f157ad96842e7c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the duration of the frame right before the frame currently running.  <a href="classge211_1_1_abstract__game.html#ae4657bfa0ca87d757f157ad96842e7c8">More...</a><br /></td></tr>
-<tr class="separator:ae4657bfa0ca87d757f157ad96842e7c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a466ce6e917f4e2af12ccd7cd28406248"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#a466ce6e917f4e2af12ccd7cd28406248">get_frame_rate</a> () const noexcept</td></tr>
-<tr class="memdesc:a466ce6e917f4e2af12ccd7cd28406248"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an approximation of the current frame rate in Hz.  <a href="classge211_1_1_abstract__game.html#a466ce6e917f4e2af12ccd7cd28406248">More...</a><br /></td></tr>
-<tr class="separator:a466ce6e917f4e2af12ccd7cd28406248"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d6579eaf07d4481387f0609a2100438"><td class="memItemLeft" align="right" valign="top"><a id="a7d6579eaf07d4481387f0609a2100438"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#a7d6579eaf07d4481387f0609a2100438">get_load_percent</a> () const noexcept</td></tr>
-<tr class="memdesc:a7d6579eaf07d4481387f0609a2100438"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an approximation of the current machine load due to GE211. <br /></td></tr>
-<tr class="separator:a7d6579eaf07d4481387f0609a2100438"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cfc2a49b28e1be3bdb4d82628b56575"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classge211_1_1time_1_1_time__point.html">Time_point</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#a7cfc2a49b28e1be3bdb4d82628b56575">get_frame_start_time</a> () const</td></tr>
+<tr class="memdesc:a7cfc2a49b28e1be3bdb4d82628b56575"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the time point at which the current frame started.  <a href="classge211_1_1_abstract__game.html#a7cfc2a49b28e1be3bdb4d82628b56575">More...</a><br /></td></tr>
+<tr class="separator:a7cfc2a49b28e1be3bdb4d82628b56575"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a049544ef717b8f4de91c6ea1cad2a0e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classge211_1_1time_1_1_duration.html">Duration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#a049544ef717b8f4de91c6ea1cad2a0e6">get_prev_frame_length</a> () const</td></tr>
+<tr class="memdesc:a049544ef717b8f4de91c6ea1cad2a0e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the duration of the frame right before the frame currently running.  <a href="classge211_1_1_abstract__game.html#a049544ef717b8f4de91c6ea1cad2a0e6">More...</a><br /></td></tr>
+<tr class="separator:a049544ef717b8f4de91c6ea1cad2a0e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88855d3a39213ac10335e23a33928f2e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#a88855d3a39213ac10335e23a33928f2e">get_frame_rate</a> () const</td></tr>
+<tr class="memdesc:a88855d3a39213ac10335e23a33928f2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an approximation of the current frame rate in Hz.  <a href="classge211_1_1_abstract__game.html#a88855d3a39213ac10335e23a33928f2e">More...</a><br /></td></tr>
+<tr class="separator:a88855d3a39213ac10335e23a33928f2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45a74e279f6bbe00fba0490daae44d9b"><td class="memItemLeft" align="right" valign="top"><a id="a45a74e279f6bbe00fba0490daae44d9b"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#a45a74e279f6bbe00fba0490daae44d9b">get_load_percent</a> () const</td></tr>
+<tr class="memdesc:a45a74e279f6bbe00fba0490daae44d9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an approximation of the current machine load due to GE211. <br /></td></tr>
+<tr class="separator:a45a74e279f6bbe00fba0490daae44d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbe37dbca5786ecf29bb5ecdf057ccb0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#adbe37dbca5786ecf29bb5ecdf057ccb0">prepare</a> (const <a class="el" href="classge211_1_1sprites_1_1_sprite.html">sprites::Sprite</a> &amp;) const</td></tr>
 <tr class="memdesc:adbe37dbca5786ecf29bb5ecdf057ccb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepares a <a class="el" href="classge211_1_1sprites_1_1_sprite.html" title="A sprite is an image that knows how to render itself to the screen at a given location,...">sprites::Sprite</a> for rendering, without actually including it in the scene.  <a href="classge211_1_1_abstract__game.html#adbe37dbca5786ecf29bb5ecdf057ccb0">More...</a><br /></td></tr>
 <tr class="separator:adbe37dbca5786ecf29bb5ecdf057ccb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -305,8 +305,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a466ce6e917f4e2af12ccd7cd28406248"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a466ce6e917f4e2af12ccd7cd28406248">&#9670;&nbsp;</a></span>get_frame_rate()</h2>
+<a id="a88855d3a39213ac10335e23a33928f2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88855d3a39213ac10335e23a33928f2e">&#9670;&nbsp;</a></span>get_frame_rate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -323,7 +323,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -331,12 +331,12 @@ Protected Attributes</h2></td></tr>
 <p>Returns an approximation of the current frame rate in Hz. </p>
 <p>Typically we synchronize the frame rate with the video controller, but accessing it might be useful for diagnosing performance problems. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00262">262</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00263">263</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
 
 </div>
 </div>
-<a id="a7329861f81db4c45ce52f459e665151d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7329861f81db4c45ce52f459e665151d">&#9670;&nbsp;</a></span>get_frame_start_time()</h2>
+<a id="a7cfc2a49b28e1be3bdb4d82628b56575"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cfc2a49b28e1be3bdb4d82628b56575">&#9670;&nbsp;</a></span>get_frame_start_time()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -353,7 +353,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -361,12 +361,12 @@ Protected Attributes</h2></td></tr>
 <p>Gets the time point at which the current frame started. </p>
 <p>This can be used to measure intervals between events, though it might be better to use a <a class="el" href="classge211_1_1time_1_1_timer.html" title="A class for timing intervals. The result is a Duration.">time::Timer</a> or <a class="el" href="classge211_1_1time_1_1_pausable__timer.html" title="A class for timing intervals while supporting pausing.">time::Pausable_timer</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00251">251</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00252">252</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
 
 </div>
 </div>
-<a id="ae4657bfa0ca87d757f157ad96842e7c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4657bfa0ca87d757f157ad96842e7c8">&#9670;&nbsp;</a></span>get_prev_frame_length()</h2>
+<a id="a049544ef717b8f4de91c6ea1cad2a0e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a049544ef717b8f4de91c6ea1cad2a0e6">&#9670;&nbsp;</a></span>get_prev_frame_length()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -383,7 +383,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -391,12 +391,12 @@ Protected Attributes</h2></td></tr>
 <p>Returns the duration of the frame right before the frame currently running. </p>
 <p>See <a class="el" href="classge211_1_1time_1_1_duration.html" title="A length of time.">time::Duration</a> for information on how to use the result. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00256">256</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00257">257</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
 
 </div>
 </div>
-<a id="ae427d958ed5a0ae77c6a948650cca7bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae427d958ed5a0ae77c6a948650cca7bf">&#9670;&nbsp;</a></span>get_random()</h2>
+<a id="a51c72d981bc39c04ad570317ec73bdc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51c72d981bc39c04ad570317ec73bdc9">&#9670;&nbsp;</a></span>get_random()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -413,7 +413,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -421,7 +421,7 @@ Protected Attributes</h2></td></tr>
 <p>Gets a reference to the pseudo-random number generator associated with this game. </p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> My_game::on_frame(<span class="keywordtype">double</span> dt)</div>
 <div class="line">{</div>
-<div class="line">    Random&amp; rnd = <a class="code" href="classge211_1_1_abstract__game.html#ae427d958ed5a0ae77c6a948650cca7bf">get_random</a>();</div>
+<div class="line">    Random&amp; rnd = <a class="code" href="classge211_1_1_abstract__game.html#a51c72d981bc39c04ad570317ec73bdc9">get_random</a>();</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span> (rnd.random_bool(SPAWN_RATE * dt)) {</div>
 <div class="line">        <span class="keywordtype">int</span> row   = rnd.between(ROW_MIN, ROW_MAX);</div>
@@ -523,7 +523,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Override this function to specify the initial title of the game. </p>
-<p>This is only called by the engine once at startup. To change the title during the game, use <a class="el" href="classge211_1_1_abstract__game.html#a329a95db19556a21771dc45265095cee" title="Gets the Window that the game is running in.">get_window() const </a>and <a class="el" href="classge211_1_1_window.html#a3da96287f3a4498fbade3e3ee42fdd7a" title="Changes the title of this window.">Window::set_title(const std::string&amp;)</a>. </p>
+<p>This is only called by the engine once at startup. To change the title during the game, use <a class="el" href="classge211_1_1_abstract__game.html#a329a95db19556a21771dc45265095cee" title="Gets the Window that the game is running in.">get_window() const </a>and <a class="el" href="classge211_1_1_window.html#ad45c02327301d5a77826dbcfb48a30c8" title="Changes the title of this window.">Window::set_title(const std::string&amp;)</a>. </p>
 
 <p class="definition">Definition at line <a class="el" href="ge211__base_8cxx_source.html#l00024">24</a> of file <a class="el" href="ge211__base_8cxx_source.html">ge211_base.cxx</a>.</p>
 
@@ -556,7 +556,7 @@ Protected Attributes</h2></td></tr>
 <p>Called by the game engine once per frame. </p>
 <p>The parameter is the duration of the previous frame in seconds. Override this function to react to time passing in order to implement animation. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00139">139</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00140">140</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
 
 </div>
 </div>
@@ -587,7 +587,7 @@ Protected Attributes</h2></td></tr>
 <p>Called by the game engine for each keypress. </p>
 <p>This uses the system's repeating behavior, so the user holding down a key can result in multiple events being delivered. To find out exactly when keys go down and up, override <a class="el" href="classge211_1_1_abstract__game.html#ae85ce1a769627a2932a9aedcc9316fc5" title="Called by the game engine each time a key is depressed.">on_key_down(Key)</a> and <a class="el" href="classge211_1_1_abstract__game.html#aba6660414891120246d8b126a7b667fd" title="Called by the game engine each time a key is released.">on_key_up(Key)</a> instead. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00147">147</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00148">148</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
 
 </div>
 </div>
@@ -650,7 +650,7 @@ Protected Attributes</h2></td></tr>
 <p>Called by the game engine each time a key is released. </p>
 <p>This delivers the same raw key code as <a class="el" href="classge211_1_1_abstract__game.html#ae85ce1a769627a2932a9aedcc9316fc5" title="Called by the game engine each time a key is depressed.">on_key_down(Key)</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00163">163</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00164">164</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
 
 </div>
 </div>
@@ -679,9 +679,9 @@ Protected Attributes</h2></td></tr>
 
 <p>Called by the game engine after exiting the event loop but before the game instance is destroyed. </p>
 <p>Overriding the function cannot be used to show anything to the user, since no more rendering will be performed. It could, however, be used to save a file or shutdown a network connection.</p>
-<p>Note that this function is called only if the game exits normally, by calling <a class="el" href="classge211_1_1_abstract__game.html#ad0eb736262d05c5af0143a5eadae67ca" title="Causes the event loop to quit after the current frame finishes.">quit()</a>, or by the user telling the OS to quit the program. It is not called on exceptions or errors. </p>
+<p>Note that this function is called only if the game exits normally, by calling <a class="el" href="classge211_1_1_abstract__game.html#a2463a3acef2df4c951ce942a3229e44e" title="Causes the event loop to quit after the current frame finishes.">quit()</a>, or by the user telling the OS to quit the program. It is not called on exceptions or errors. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00190">190</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00191">191</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
 
 </div>
 </div>
@@ -711,7 +711,7 @@ Protected Attributes</h2></td></tr>
 <p>Called by the game engine after initializing the game but before commencing the event loop. </p>
 <p>You can do this to perform initialization tasks such as preparing <a class="el" href="classge211_1_1sprites_1_1_sprite.html" title="A sprite is an image that knows how to render itself to the screen at a given location,...">sprites::Sprite</a>s with <a class="el" href="classge211_1_1_abstract__game.html#adbe37dbca5786ecf29bb5ecdf057ccb0" title="Prepares a sprites::Sprite for rendering, without actually including it in the scene.">prepare(const Sprite&amp;) const</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00178">178</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00179">179</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
 
 </div>
 </div>
@@ -792,7 +792,7 @@ Protected Attributes</h2></td></tr>
 <p>Assign this member variable to change the window's background color in subsequent frames. </p>
 <p>The usual place to assign this variable is from your overridden <a class="el" href="classge211_1_1_abstract__game.html#a6122f9c7efc34a6648754d435f0ed8c8" title="Called by the game engine after initializing the game but before commencing the event loop.">on_start()</a> and/or <a class="el" href="classge211_1_1_abstract__game.html#a44518135e411e35374f252d1c7d44e3e" title="You must override this function in the derived class to specify how to draw your scene.">draw(Sprite_set&amp;)</a> functions. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00285">285</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00286">286</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
 
 </div>
 </div>
@@ -806,7 +806,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="classge211_1_1_color.html">Color</a> default_background_color = <a class="el" href="classge211_1_1_color.html#ab6f5e38c50cfa0edef94c5b1b66da989">Color::black</a>()</td>
+          <td class="memname">const <a class="el" href="classge211_1_1_color.html">Color</a> default_background_color = <a class="el" href="classge211_1_1_color.html#a7648d9d985e6e5838e460eb66957dbee">Color::black</a>()</td>
         </tr>
       </table>
   </td>
@@ -819,7 +819,7 @@ Protected Attributes</h2></td></tr>
 <p>The default background color of the window, if not changed by the derived class. </p>
 <p>To change the background color, assign the protected member variable <a class="el" href="classge211_1_1_abstract__game.html#a3af4612678da78558adccf47e17164bb" title="Assign this member variable to change the window&#39;s background color in subsequent frames.">Abstract_game::background_color</a> from the <a class="el" href="classge211_1_1_abstract__game.html#a44518135e411e35374f252d1c7d44e3e" title="You must override this function in the derived class to specify how to draw your scene.">draw(Sprite_set&amp;)</a> or <a class="el" href="classge211_1_1_abstract__game.html#a6122f9c7efc34a6648754d435f0ed8c8" title="Called by the game engine after initializing the game but before commencing the event loop.">on_start()</a> functions. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00106">106</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00107">107</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
 
 </div>
 </div>
@@ -846,7 +846,7 @@ Protected Attributes</h2></td></tr>
 <p>The default window dimensions, in pixels. </p>
 <p>You can change this in a derived class by overriding the <a class="el" href="classge211_1_1_abstract__game.html#a184aaacf68bad060099912dc8d65c7df" title="Override this function to specify the initial dimensions of the game&#39;s window.">initial_window_dimensions() const </a>member function. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00115">115</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00116">116</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
 
 </div>
 </div>
@@ -873,7 +873,7 @@ Protected Attributes</h2></td></tr>
 <p>The default initial window title. </p>
 <p>You can change this in a derived class by overriding the <a class="el" href="classge211_1_1_abstract__game.html#a5dd1fce58a747385e3372c62744933d7" title="Override this function to specify the initial title of the game.">initial_window_title() const </a>member function. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00110">110</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00111">111</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
 
 </div>
 </div>
@@ -883,17 +883,17 @@ Protected Attributes</h2></td></tr>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclassge211_1_1_sprite__set_html"><div class="ttname"><a href="classge211_1_1_sprite__set.html">ge211::Sprite_set</a></div><div class="ttdoc">A collection of positioned sprites ready to be rendered to the screen.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__sprites_8hxx_source.html#l00376">ge211_sprites.hxx:377</a></div></div>
+<div class="ttc" id="aclassge211_1_1_sprite__set_html"><div class="ttname"><a href="classge211_1_1_sprite__set.html">ge211::Sprite_set</a></div><div class="ttdoc">A collection of positioned sprites ready to be rendered to the screen.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__sprites_8hxx_source.html#l00377">ge211_sprites.hxx:378</a></div></div>
 <div class="ttc" id="aclassge211_1_1_abstract__game_html_a44518135e411e35374f252d1c7d44e3e"><div class="ttname"><a href="classge211_1_1_abstract__game.html#a44518135e411e35374f252d1c7d44e3e">ge211::Abstract_game::draw</a></div><div class="ttdeci">virtual void draw(Sprite_set &amp;)=0</div><div class="ttdoc">You must override this function in the derived class to specify how to draw your scene.</div></div>
-<div class="ttc" id="aclassge211_1_1_abstract__game_html_ae427d958ed5a0ae77c6a948650cca7bf"><div class="ttname"><a href="classge211_1_1_abstract__game.html#ae427d958ed5a0ae77c6a948650cca7bf">ge211::Abstract_game::get_random</a></div><div class="ttdeci">Random &amp; get_random() const noexcept</div><div class="ttdoc">Gets a reference to the pseudo-random number generator associated with this game.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__base_8cxx_source.html#l00047">ge211_base.cxx:47</a></div></div>
-<div class="ttc" id="aclassge211_1_1_color_html_a736839b75d5dd9139f95aeb1e8739bce"><div class="ttname"><a href="classge211_1_1_color.html#a736839b75d5dd9139f95aeb1e8739bce">ge211::Color::medium_red</a></div><div class="ttdeci">static Color medium_red() noexcept</div><div class="ttdoc">Solid red.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__color_8hxx_source.html#l00069">ge211_color.hxx:69</a></div></div>
 <div class="ttc" id="anamespacege211_html"><div class="ttname"><a href="namespacege211.html">ge211</a></div><div class="ttdoc">The game engine namespace.</div><div class="ttdef"><b>Definition:</b> <a href="ge211_8hxx_source.html#l00004">ge211.hxx:4</a></div></div>
-<div class="ttc" id="aclassge211_1_1_abstract__game_html_aae80d0ae41edb758760e751670288f7c"><div class="ttname"><a href="classge211_1_1_abstract__game.html#aae80d0ae41edb758760e751670288f7c">ge211::Abstract_game::on_mouse_move</a></div><div class="ttdeci">virtual void on_mouse_move(Position)</div><div class="ttdoc">Called by the game engine each time the mouse moves.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__base_8hxx_source.html#l00172">ge211_base.hxx:172</a></div></div>
-<div class="ttc" id="aclassge211_1_1sprites_1_1_rectangle__sprite_html"><div class="ttname"><a href="classge211_1_1sprites_1_1_rectangle__sprite.html">ge211::sprites::Rectangle_sprite</a></div><div class="ttdoc">A Sprite that renders as a solid rectangle.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__sprites_8hxx_source.html#l00126">ge211_sprites.hxx:127</a></div></div>
+<div class="ttc" id="aclassge211_1_1_color_html_a445b4991a7ef685a53725933064cb04d"><div class="ttname"><a href="classge211_1_1_color.html#a445b4991a7ef685a53725933064cb04d">ge211::Color::medium_red</a></div><div class="ttdeci">static Color medium_red()</div><div class="ttdoc">Solid red.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__color_8hxx_source.html#l00070">ge211_color.hxx:70</a></div></div>
+<div class="ttc" id="aclassge211_1_1_abstract__game_html_aae80d0ae41edb758760e751670288f7c"><div class="ttname"><a href="classge211_1_1_abstract__game.html#aae80d0ae41edb758760e751670288f7c">ge211::Abstract_game::on_mouse_move</a></div><div class="ttdeci">virtual void on_mouse_move(Position)</div><div class="ttdoc">Called by the game engine each time the mouse moves.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__base_8hxx_source.html#l00173">ge211_base.hxx:173</a></div></div>
+<div class="ttc" id="aclassge211_1_1_abstract__game_html_a51c72d981bc39c04ad570317ec73bdc9"><div class="ttname"><a href="classge211_1_1_abstract__game.html#a51c72d981bc39c04ad570317ec73bdc9">ge211::Abstract_game::get_random</a></div><div class="ttdeci">Random &amp; get_random() const</div><div class="ttdoc">Gets a reference to the pseudo-random number generator associated with this game.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__base_8cxx_source.html#l00047">ge211_base.cxx:47</a></div></div>
+<div class="ttc" id="aclassge211_1_1sprites_1_1_rectangle__sprite_html"><div class="ttname"><a href="classge211_1_1sprites_1_1_rectangle__sprite.html">ge211::sprites::Rectangle_sprite</a></div><div class="ttdoc">A Sprite that renders as a solid rectangle.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__sprites_8hxx_source.html#l00127">ge211_sprites.hxx:128</a></div></div>
 <div class="ttc" id="anamespacege211_1_1geometry_html_a6820f820ccaf24da3439a5e45b0e983e"><div class="ttname"><a href="namespacege211_1_1geometry.html#a6820f820ccaf24da3439a5e45b0e983e">ge211::geometry::Position</a></div><div class="ttdeci">Basic_position&lt; int &gt; Position</div><div class="ttdoc">Type alias for the most common use of Basic_position, which is with a coordinate type of int.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__forward_8hxx_source.html#l00085">ge211_forward.hxx:85</a></div></div>
 <div class="ttc" id="anamespacege211_1_1geometry_html_a6984557cfdc7f69501ef8b04882ecd83"><div class="ttname"><a href="namespacege211_1_1geometry.html#a6984557cfdc7f69501ef8b04882ecd83">ge211::geometry::Dimensions</a></div><div class="ttdeci">Basic_dimensions&lt; int &gt; Dimensions</div><div class="ttdoc">Type alias for the most common use of Basic_dimensions, which is with a coordinate type of int.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__forward_8hxx_source.html#l00084">ge211_forward.hxx:84</a></div></div>
-<div class="ttc" id="aclassge211_1_1_color_html_acc22e27bcdfaef169a3cef864fe23aa6"><div class="ttname"><a href="classge211_1_1_color.html#acc22e27bcdfaef169a3cef864fe23aa6">ge211::Color::medium_blue</a></div><div class="ttdeci">static Color medium_blue() noexcept</div><div class="ttdoc">Solid blue.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__color_8hxx_source.html#l00075">ge211_color.hxx:75</a></div></div>
-<div class="ttc" id="aclassge211_1_1_abstract__game_html"><div class="ttname"><a href="classge211_1_1_abstract__game.html">ge211::Abstract_game</a></div><div class="ttdoc">This is the abstract base class for deriving games.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__base_8hxx_source.html#l00094">ge211_base.hxx:95</a></div></div>
+<div class="ttc" id="aclassge211_1_1_color_html_aa3eaf7ed370b1ef0ca79e253f547b722"><div class="ttname"><a href="classge211_1_1_color.html#aa3eaf7ed370b1ef0ca79e253f547b722">ge211::Color::medium_blue</a></div><div class="ttdeci">static Color medium_blue()</div><div class="ttdoc">Solid blue.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__color_8hxx_source.html#l00076">ge211_color.hxx:76</a></div></div>
+<div class="ttc" id="aclassge211_1_1_abstract__game_html"><div class="ttname"><a href="classge211_1_1_abstract__game.html">ge211::Abstract_game</a></div><div class="ttdoc">This is the abstract base class for deriving games.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__base_8hxx_source.html#l00095">ge211_base.hxx:96</a></div></div>
 <div class="ttc" id="aclassge211_1_1_sprite__set_html_a2240fce09cf44668dcb2e5605676935a"><div class="ttname"><a href="classge211_1_1_sprite__set.html#a2240fce09cf44668dcb2e5605676935a">ge211::Sprite_set::add_sprite</a></div><div class="ttdeci">Sprite_set &amp; add_sprite(Sprite const &amp;, Position, int z=0)</div><div class="ttdoc">Adds the given sprite at the given x–y geometry::Position and optional z coordinate,...</div><div class="ttdef"><b>Definition:</b> <a href="ge211__sprites_8cxx_source.html#l00024">ge211_sprites.cxx:24</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

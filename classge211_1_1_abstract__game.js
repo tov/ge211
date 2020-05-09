@@ -2,11 +2,11 @@ var classge211_1_1_abstract__game =
 [
     [ "~Abstract_game", "classge211_1_1_abstract__game.html#ad7bb94cf4db55ceaab014bafc0d7ece9", null ],
     [ "draw", "classge211_1_1_abstract__game.html#a44518135e411e35374f252d1c7d44e3e", null ],
-    [ "get_frame_rate", "classge211_1_1_abstract__game.html#a466ce6e917f4e2af12ccd7cd28406248", null ],
-    [ "get_frame_start_time", "classge211_1_1_abstract__game.html#a7329861f81db4c45ce52f459e665151d", null ],
-    [ "get_load_percent", "classge211_1_1_abstract__game.html#a7d6579eaf07d4481387f0609a2100438", null ],
-    [ "get_prev_frame_length", "classge211_1_1_abstract__game.html#ae4657bfa0ca87d757f157ad96842e7c8", null ],
-    [ "get_random", "classge211_1_1_abstract__game.html#ae427d958ed5a0ae77c6a948650cca7bf", null ],
+    [ "get_frame_rate", "classge211_1_1_abstract__game.html#a88855d3a39213ac10335e23a33928f2e", null ],
+    [ "get_frame_start_time", "classge211_1_1_abstract__game.html#a7cfc2a49b28e1be3bdb4d82628b56575", null ],
+    [ "get_load_percent", "classge211_1_1_abstract__game.html#a45a74e279f6bbe00fba0490daae44d9b", null ],
+    [ "get_prev_frame_length", "classge211_1_1_abstract__game.html#a049544ef717b8f4de91c6ea1cad2a0e6", null ],
+    [ "get_random", "classge211_1_1_abstract__game.html#a51c72d981bc39c04ad570317ec73bdc9", null ],
     [ "get_window", "classge211_1_1_abstract__game.html#a329a95db19556a21771dc45265095cee", null ],
     [ "initial_window_dimensions", "classge211_1_1_abstract__game.html#a184aaacf68bad060099912dc8d65c7df", null ],
     [ "initial_window_title", "classge211_1_1_abstract__game.html#a5dd1fce58a747385e3372c62744933d7", null ],
@@ -21,7 +21,7 @@ var classge211_1_1_abstract__game =
     [ "on_quit", "classge211_1_1_abstract__game.html#a405c726a817771b911ac102ac8388b3d", null ],
     [ "on_start", "classge211_1_1_abstract__game.html#a6122f9c7efc34a6648754d435f0ed8c8", null ],
     [ "prepare", "classge211_1_1_abstract__game.html#adbe37dbca5786ecf29bb5ecdf057ccb0", null ],
-    [ "quit", "classge211_1_1_abstract__game.html#ad0eb736262d05c5af0143a5eadae67ca", null ],
+    [ "quit", "classge211_1_1_abstract__game.html#a2463a3acef2df4c951ce942a3229e44e", null ],
     [ "run", "classge211_1_1_abstract__game.html#a13a43e6d814de94978c515cb084873b1", null ],
     [ "background_color", "classge211_1_1_abstract__game.html#a3af4612678da78558adccf47e17164bb", null ]
 ];

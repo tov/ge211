@@ -103,11 +103,11 @@ $(document).ready(function(){initNavTree('ge211__noexcept_8hxx_source.html','');
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// to produce simpler API documentation.</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifdef NO_NOEXCEPT</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor"># define  NOEXCEPT(...)</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor"># define  NEVEREXCEPT</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor"># define  NOEXCEPT_(...)</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor"># define  NOEXCEPT</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"># define  NOEXCEPT(...)  noexcept(__VA_ARGS__)</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor"># define  NEVEREXCEPT    noexcept</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"># define  NOEXCEPT_(...)  noexcept(__VA_ARGS__)</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor"># define  NOEXCEPT        noexcept</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->

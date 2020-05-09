@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ge211: GE211 — a game engine for CS 211</title>
+<title>ge211: Main Page</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -92,40 +92,26 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </iframe>
 </div>
 
-<div class="PageDoc"><div class="header">
+<div class="header">
   <div class="headertitle">
-<div class="title">GE211 — a game engine for CS 211 </div>  </div>
+<div class="title">ge211 Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_doxygen_FRONTMATTER"></a> GE211 is a relatively simple game engine for beginning C++ programmers.</p>
-<h1><a class="anchor" id="autotoc_md1"></a>
-Use</h1>
-<p>To use the framework, you need to derive your game class from <a class="el" href="classge211_1_1_abstract__game.html" title="This is the abstract base class for deriving games.">ge211::Abstract_game</a>; so to get started you may want to go straight there. Otherwise, all useful definitions are in the <a class="el" href="namespacege211.html" title="The game engine namespace.">ge211</a> namespace.</p>
-<h1><a class="anchor" id="autotoc_md2"></a>
-Requirements</h1>
-<p>GE211 depends on the SDL library version 2, along with SDL2 plugin libraries SDL2_image, SDL2_mixer, and SDL2_ttf. You need to install the development versions of these packages, as appropriate for your operating system. They are easy to find on Google, but if you are in a class, your instructor might have an easier way for you to install them.</p>
-<h1><a class="anchor" id="autotoc_md3"></a>
-Setup</h1>
-<p>If you are using GE211 in a course (such as CS 211 at Northwestern), your instructor will give you a CMake project that includes files and configuration for GE211. You shouldn't have to do anything to set it up. Otherwise, read on.</p>
-<p>GE211 is configured and built using CMake. The easiest way to add the library to your project is to add the whole repository as a subdirectory, and then include it in your <code>CMakeLists.txt</code> via the <code>add_subdirectory</code> command:</p>
-<div class="fragment"><div class="line">add_subdirectory(3rdparty/ge211 EXCLUDE_FROM_ALL)</div>
-</div><!-- fragment --><p>The <code>EXCLUDE_FROM_ALL</code> flag prevents extra CMake targets from GE211 from appearing in your IDE.</p>
-<p>Adding the subdirectory creates a CMake library target that your program target can be linked against using the <code>target_link_libraries</code> command:</p>
-<div class="fragment"><div class="line">target_link_libraries(my_game ge211)</div>
-</div><!-- fragment --><p>A minimal, complete <code>CMakeLists.txt</code> for using GE211 might look something like this:</p>
-<div class="fragment"><div class="line">cmake_minimum_required(VERSION 3.13)</div>
-<div class="line">project(my_game CXX)</div>
-<div class="line"> </div>
-<div class="line">add_subdirectory(3rdparty/ge211 EXCLUDE_FROM_ALL)</div>
-<div class="line"> </div>
-<div class="line">add_executable(my_game my_game.cpp)</div>
-<div class="line">target_link_libraries(my_game ge211)</div>
-<div class="line">set_target_properties(my_game PROPERTIES</div>
-<div class="line">        CXX_STANDARD            14</div>
-<div class="line">        CXX_STANDARD_REQUIRED   On</div>
-<div class="line">        CXX_EXTENSIONS          OFF)</div>
-</div><!-- fragment --><p>To see this in action, see the <code>examples/vendored/</code> submodule. </p>
-</div></div><!-- PageDoc -->
+<ul><li><a href="index.html"><span>Main&#160;Page</span></a>
+</li><li><a href="namespaces.html"><span>Namespaces</span></a>
+<ul><li><a href="namespaces.html"><span>Namespace&#160;List</span></a>
+</li><li><a href="namespacemembers.html"><span>Namespace&#160;Members</span></a>
+</li></ul>
+</li><li><a href="annotated.html"><span>Classes</span></a>
+<ul><li><a href="annotated.html"><span>Class&#160;List</span></a>
+</li><li><a href="classes.html"><span>Class&#160;Index</span></a>
+</li><li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a>
+</li><li><a href="functions.html"><span>Class&#160;Members</span></a>
+</li></ul>
+</li><li><a href="files.html"><span>Files</span></a>
+<ul><li><a href="files.html"><span>File&#160;List</span></a>
+</li></ul>
+</li></ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

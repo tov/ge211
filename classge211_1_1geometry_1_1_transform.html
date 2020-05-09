@@ -104,16 +104,16 @@ $(document).ready(function(){initNavTree('classge211_1_1geometry_1_1_transform.h
 <p>A <a class="el" href="classge211_1_1geometry_1_1_transform.html" title="A rendering transform, which can scale, flip, and rotate.">Transform</a> can be given to <a class="el" href="classge211_1_1_sprite__set.html#a567a6cc041710e43a2511234590cc8b9" title="Adds the given sprite as the given geometry::Position and z coordinate, to be rendered with the given...">Sprite_set::add_sprite(const Sprite&amp;, Position, int, const Transform&amp;)</a> to specify how a <a class="el" href="classge211_1_1sprites_1_1_sprite.html" title="A sprite is an image that knows how to render itself to the screen at a given location,...">sprites::Sprite</a> should be rendered.</p>
 <p>To construct a transform that does just one thing, you can use one of the static factory functions:</p>
 <ul>
-<li><a class="el" href="classge211_1_1geometry_1_1_transform.html#a62d021411b2f4bc4f8f57684177ffaa0" title="Constructs a rotating transform, given the rotation in degrees clockwise.">Transform::rotation(double)</a></li>
-<li><a class="el" href="classge211_1_1geometry_1_1_transform.html#a113eb74ab193dcd75479cf8dff6e3ddc" title="Constructs a transform that flips the sprite horizontally.">Transform::flip_h()</a></li>
-<li><a class="el" href="classge211_1_1geometry_1_1_transform.html#a24968faa71493b8aa2024b71ef279b3b" title="Constructs a transform that flips the sprite vertically.">Transform::flip_v()</a></li>
-<li><a class="el" href="classge211_1_1geometry_1_1_transform.html#ac4d7064c08673cc72fc43ec7a26188d6" title="Constructs a transform that scales the sprite in both dimensions.">Transform::scale(double)</a></li>
-<li><a class="el" href="classge211_1_1geometry_1_1_transform.html#a89dee73ee17a7179540643e0bd7bde24" title="Constructs a transform that scales the sprite in the x dimension.">Transform::scale_x(double)</a></li>
-<li><a class="el" href="classge211_1_1geometry_1_1_transform.html#aa031340a58534dcfd14d7a06dd06e0d6" title="Constructs a transform that scales the sprite in the y dimension.">Transform::scale_y(double)</a></li>
+<li><a class="el" href="classge211_1_1geometry_1_1_transform.html#a1e7de7869f3a1f94156e47e53b085e43" title="Constructs a rotating transform, given the rotation in degrees clockwise.">Transform::rotation(double)</a></li>
+<li><a class="el" href="classge211_1_1geometry_1_1_transform.html#aacdf2e21a469419140b29332b6eea407" title="Constructs a transform that flips the sprite horizontally.">Transform::flip_h()</a></li>
+<li><a class="el" href="classge211_1_1geometry_1_1_transform.html#a66e12da4bd87188e226f9e6ac12a31ec" title="Constructs a transform that flips the sprite vertically.">Transform::flip_v()</a></li>
+<li><a class="el" href="classge211_1_1geometry_1_1_transform.html#ab4e03ae73363117330e691fc9b4e4b7a" title="Constructs a transform that scales the sprite in both dimensions.">Transform::scale(double)</a></li>
+<li><a class="el" href="classge211_1_1geometry_1_1_transform.html#afc75bfba975e7e25c77eedbd74d01185" title="Constructs a transform that scales the sprite in the x dimension.">Transform::scale_x(double)</a></li>
+<li><a class="el" href="classge211_1_1geometry_1_1_transform.html#ab49acda5568ba61b5750b82e7f4dc1a4" title="Constructs a transform that scales the sprite in the y dimension.">Transform::scale_y(double)</a></li>
 </ul>
-<p>It is also possible to modify a transform with the setter functions such as <a class="el" href="classge211_1_1geometry_1_1_transform.html#a88dfbb857df4f2d43300b546d65d3754" title="Modifies this transform to have the given rotation, in degrees.">set_rotation(double)</a> and <a class="el" href="classge211_1_1geometry_1_1_transform.html#aab47da8304b110509d97a4a286fea4c6" title="Modifies this transform to scale the sprite by the given amount in both dimensions.">set_scale(double)</a>. This can be used to configure a transform that does more than one thing:</p>
-<div class="fragment"><div class="line"><a class="code" href="classge211_1_1geometry_1_1_transform.html#a953a033901c2aa2471a00b3b07cf1549">Transform</a> my_transform =</div>
-<div class="line">    <a class="code" href="classge211_1_1geometry_1_1_transform.html#a953a033901c2aa2471a00b3b07cf1549">Transform</a>{}.set_flip_h(<span class="keyword">true</span>)</div>
+<p>It is also possible to modify a transform with the setter functions such as <a class="el" href="classge211_1_1geometry_1_1_transform.html#a4beeff4a6a0371fafe7a4378a602449a" title="Modifies this transform to have the given rotation, in degrees.">set_rotation(double)</a> and <a class="el" href="classge211_1_1geometry_1_1_transform.html#af142bde616145730af6d36fef55095b4" title="Modifies this transform to scale the sprite by the given amount in both dimensions.">set_scale(double)</a>. This can be used to configure a transform that does more than one thing:</p>
+<div class="fragment"><div class="line"><a class="code" href="classge211_1_1geometry_1_1_transform.html#a9de68ec1c9b7809129814a3233ae4655">Transform</a> my_transform =</div>
+<div class="line">    <a class="code" href="classge211_1_1geometry_1_1_transform.html#a9de68ec1c9b7809129814a3233ae4655">Transform</a>{}.set_flip_h(<span class="keyword">true</span>)</div>
 <div class="line">               .set_flip_v(<span class="keyword">true</span>)</div>
 <div class="line">               .scale_x(2);</div>
 </div><!-- fragment --> 
@@ -122,100 +122,97 @@ $(document).ready(function(){initNavTree('classge211_1_1geometry_1_1_transform.h
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Setters</div></td></tr>
-<tr class="memitem:a88dfbb857df4f2d43300b546d65d3754"><td class="memItemLeft" align="right" valign="top"><a id="a88dfbb857df4f2d43300b546d65d3754"></a>
-<a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a88dfbb857df4f2d43300b546d65d3754">set_rotation</a> (double) NEVEREXCEPT</td></tr>
-<tr class="memdesc:a88dfbb857df4f2d43300b546d65d3754"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifies this transform to have the given rotation, in degrees. <br /></td></tr>
-<tr class="separator:a88dfbb857df4f2d43300b546d65d3754"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9adf99e7ab3a4ba44bc920bcba062b4"><td class="memItemLeft" align="right" valign="top"><a id="ac9adf99e7ab3a4ba44bc920bcba062b4"></a>
-<a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#ac9adf99e7ab3a4ba44bc920bcba062b4">set_flip_h</a> (bool) NEVEREXCEPT</td></tr>
-<tr class="memdesc:ac9adf99e7ab3a4ba44bc920bcba062b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifies this transform to determine whether to flip horizontally. <br /></td></tr>
-<tr class="separator:ac9adf99e7ab3a4ba44bc920bcba062b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06be4ce65f30427bd45403a6bcf547e7"><td class="memItemLeft" align="right" valign="top"><a id="a06be4ce65f30427bd45403a6bcf547e7"></a>
-<a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a06be4ce65f30427bd45403a6bcf547e7">set_flip_v</a> (bool) NEVEREXCEPT</td></tr>
-<tr class="memdesc:a06be4ce65f30427bd45403a6bcf547e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifies this transform to determine whether to flip vertically. <br /></td></tr>
-<tr class="separator:a06be4ce65f30427bd45403a6bcf547e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab47da8304b110509d97a4a286fea4c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#aab47da8304b110509d97a4a286fea4c6">set_scale</a> (double) NEVEREXCEPT</td></tr>
-<tr class="memdesc:aab47da8304b110509d97a4a286fea4c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifies this transform to scale the sprite by the given amount in both dimensions.  <a href="classge211_1_1geometry_1_1_transform.html#aab47da8304b110509d97a4a286fea4c6">More...</a><br /></td></tr>
-<tr class="separator:aab47da8304b110509d97a4a286fea4c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f4a854715043bf5e8a12d1411a79f21"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a5f4a854715043bf5e8a12d1411a79f21">set_scale_x</a> (double) NEVEREXCEPT</td></tr>
-<tr class="memdesc:a5f4a854715043bf5e8a12d1411a79f21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifies this transform to scale the sprite horizontally.  <a href="classge211_1_1geometry_1_1_transform.html#a5f4a854715043bf5e8a12d1411a79f21">More...</a><br /></td></tr>
-<tr class="separator:a5f4a854715043bf5e8a12d1411a79f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49aa6853bf6362e4d57f408a6bebc704"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a49aa6853bf6362e4d57f408a6bebc704">set_scale_y</a> (double) NEVEREXCEPT</td></tr>
-<tr class="memdesc:a49aa6853bf6362e4d57f408a6bebc704"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifies this transform to scale the sprite vertically.  <a href="classge211_1_1geometry_1_1_transform.html#a49aa6853bf6362e4d57f408a6bebc704">More...</a><br /></td></tr>
-<tr class="separator:a49aa6853bf6362e4d57f408a6bebc704"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4beeff4a6a0371fafe7a4378a602449a"><td class="memItemLeft" align="right" valign="top"><a id="a4beeff4a6a0371fafe7a4378a602449a"></a>
+<a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a4beeff4a6a0371fafe7a4378a602449a">set_rotation</a> (double)</td></tr>
+<tr class="memdesc:a4beeff4a6a0371fafe7a4378a602449a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifies this transform to have the given rotation, in degrees. <br /></td></tr>
+<tr class="separator:a4beeff4a6a0371fafe7a4378a602449a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab46945cb64c156e21fa0a8eb4ffdd528"><td class="memItemLeft" align="right" valign="top"><a id="ab46945cb64c156e21fa0a8eb4ffdd528"></a>
+<a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#ab46945cb64c156e21fa0a8eb4ffdd528">set_flip_h</a> (bool)</td></tr>
+<tr class="memdesc:ab46945cb64c156e21fa0a8eb4ffdd528"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifies this transform to determine whether to flip horizontally. <br /></td></tr>
+<tr class="separator:ab46945cb64c156e21fa0a8eb4ffdd528"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d62308c5aa8c36067033e7723ae2c26"><td class="memItemLeft" align="right" valign="top"><a id="a1d62308c5aa8c36067033e7723ae2c26"></a>
+<a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a1d62308c5aa8c36067033e7723ae2c26">set_flip_v</a> (bool)</td></tr>
+<tr class="memdesc:a1d62308c5aa8c36067033e7723ae2c26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifies this transform to determine whether to flip vertically. <br /></td></tr>
+<tr class="separator:a1d62308c5aa8c36067033e7723ae2c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af142bde616145730af6d36fef55095b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#af142bde616145730af6d36fef55095b4">set_scale</a> (double)</td></tr>
+<tr class="memdesc:af142bde616145730af6d36fef55095b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifies this transform to scale the sprite by the given amount in both dimensions.  <a href="classge211_1_1geometry_1_1_transform.html#af142bde616145730af6d36fef55095b4">More...</a><br /></td></tr>
+<tr class="separator:af142bde616145730af6d36fef55095b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adee00d937ca861ebe644f3d43f77f014"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#adee00d937ca861ebe644f3d43f77f014">set_scale_x</a> (double)</td></tr>
+<tr class="memdesc:adee00d937ca861ebe644f3d43f77f014"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifies this transform to scale the sprite horizontally.  <a href="classge211_1_1geometry_1_1_transform.html#adee00d937ca861ebe644f3d43f77f014">More...</a><br /></td></tr>
+<tr class="separator:adee00d937ca861ebe644f3d43f77f014"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f4399df2bb7545d73177ad97861147b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a0f4399df2bb7545d73177ad97861147b">set_scale_y</a> (double)</td></tr>
+<tr class="memdesc:a0f4399df2bb7545d73177ad97861147b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifies this transform to scale the sprite vertically.  <a href="classge211_1_1geometry_1_1_transform.html#a0f4399df2bb7545d73177ad97861147b">More...</a><br /></td></tr>
+<tr class="separator:a0f4399df2bb7545d73177ad97861147b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Getters</div></td></tr>
-<tr class="memitem:a9a2a0cb4e88b2d157c7a36e08adc8446"><td class="memItemLeft" align="right" valign="top"><a id="a9a2a0cb4e88b2d157c7a36e08adc8446"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a9a2a0cb4e88b2d157c7a36e08adc8446">get_rotation</a> () const NEVEREXCEPT</td></tr>
-<tr class="memdesc:a9a2a0cb4e88b2d157c7a36e08adc8446"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the rotation that will be applied to the sprite. <br /></td></tr>
-<tr class="separator:a9a2a0cb4e88b2d157c7a36e08adc8446"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad49d43628945f53eacf223f10664da5e"><td class="memItemLeft" align="right" valign="top"><a id="ad49d43628945f53eacf223f10664da5e"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#ad49d43628945f53eacf223f10664da5e">get_flip_h</a> () const NEVEREXCEPT</td></tr>
-<tr class="memdesc:ad49d43628945f53eacf223f10664da5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the sprite will be flipped horizontally. <br /></td></tr>
-<tr class="separator:ad49d43628945f53eacf223f10664da5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad77896ae3177ece4c003ddec310e171e"><td class="memItemLeft" align="right" valign="top"><a id="ad77896ae3177ece4c003ddec310e171e"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#ad77896ae3177ece4c003ddec310e171e">get_flip_v</a> () const NEVEREXCEPT</td></tr>
-<tr class="memdesc:ad77896ae3177ece4c003ddec310e171e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the sprite will be flipped vertically. <br /></td></tr>
-<tr class="separator:ad77896ae3177ece4c003ddec310e171e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8e57bdcbd88f940b5a3dcc45aa26be9"><td class="memItemLeft" align="right" valign="top"><a id="ae8e57bdcbd88f940b5a3dcc45aa26be9"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#ae8e57bdcbd88f940b5a3dcc45aa26be9">get_scale_x</a> () const NEVEREXCEPT</td></tr>
-<tr class="memdesc:ae8e57bdcbd88f940b5a3dcc45aa26be9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns how much the sprite will be scaled horizontally. <br /></td></tr>
-<tr class="separator:ae8e57bdcbd88f940b5a3dcc45aa26be9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68a80d78e495fc7d444c5afec5089aeb"><td class="memItemLeft" align="right" valign="top"><a id="a68a80d78e495fc7d444c5afec5089aeb"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a68a80d78e495fc7d444c5afec5089aeb">get_scale_y</a> () const NEVEREXCEPT</td></tr>
-<tr class="memdesc:a68a80d78e495fc7d444c5afec5089aeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns how much the sprite will be scaled vertically. <br /></td></tr>
-<tr class="separator:a68a80d78e495fc7d444c5afec5089aeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c8c5a18caae7584d202692ba3b15b7f"><td class="memItemLeft" align="right" valign="top"><a id="a2c8c5a18caae7584d202692ba3b15b7f"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a2c8c5a18caae7584d202692ba3b15b7f">get_rotation</a> () const</td></tr>
+<tr class="memdesc:a2c8c5a18caae7584d202692ba3b15b7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the rotation that will be applied to the sprite. <br /></td></tr>
+<tr class="separator:a2c8c5a18caae7584d202692ba3b15b7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a747f4e6b428505218db42c89308006f1"><td class="memItemLeft" align="right" valign="top"><a id="a747f4e6b428505218db42c89308006f1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a747f4e6b428505218db42c89308006f1">get_flip_h</a> () const</td></tr>
+<tr class="memdesc:a747f4e6b428505218db42c89308006f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the sprite will be flipped horizontally. <br /></td></tr>
+<tr class="separator:a747f4e6b428505218db42c89308006f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bf838e4e64ab7ee2e30d22ffeca6e4c"><td class="memItemLeft" align="right" valign="top"><a id="a0bf838e4e64ab7ee2e30d22ffeca6e4c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a0bf838e4e64ab7ee2e30d22ffeca6e4c">get_flip_v</a> () const</td></tr>
+<tr class="memdesc:a0bf838e4e64ab7ee2e30d22ffeca6e4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the sprite will be flipped vertically. <br /></td></tr>
+<tr class="separator:a0bf838e4e64ab7ee2e30d22ffeca6e4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afed5d8b7c7ff250635d9230dfbb0b1f9"><td class="memItemLeft" align="right" valign="top"><a id="afed5d8b7c7ff250635d9230dfbb0b1f9"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#afed5d8b7c7ff250635d9230dfbb0b1f9">get_scale_x</a> () const</td></tr>
+<tr class="memdesc:afed5d8b7c7ff250635d9230dfbb0b1f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns how much the sprite will be scaled horizontally. <br /></td></tr>
+<tr class="separator:afed5d8b7c7ff250635d9230dfbb0b1f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca834334bb6f3bd5501fc6960674447a"><td class="memItemLeft" align="right" valign="top"><a id="aca834334bb6f3bd5501fc6960674447a"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#aca834334bb6f3bd5501fc6960674447a">get_scale_y</a> () const</td></tr>
+<tr class="memdesc:aca834334bb6f3bd5501fc6960674447a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns how much the sprite will be scaled vertically. <br /></td></tr>
+<tr class="separator:aca834334bb6f3bd5501fc6960674447a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Combining transforms</div></td></tr>
-<tr class="memitem:aca45159e0a07e419df043876043773e1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#aca45159e0a07e419df043876043773e1">is_identity</a> () const NEVEREXCEPT</td></tr>
-<tr class="memdesc:aca45159e0a07e419df043876043773e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is this transformation the identity transformation that does nothing? Because floating point is approximate, this may answer <code>false</code> for transforms that are nearly the identity.  <a href="classge211_1_1geometry_1_1_transform.html#aca45159e0a07e419df043876043773e1">More...</a><br /></td></tr>
-<tr class="separator:aca45159e0a07e419df043876043773e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fc6192f3b57f59e717081c38b8d9060"><td class="memItemLeft" align="right" valign="top"><a id="a5fc6192f3b57f59e717081c38b8d9060"></a>
-<a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a5fc6192f3b57f59e717081c38b8d9060">operator*</a> (const <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;) const NEVEREXCEPT</td></tr>
-<tr class="memdesc:a5fc6192f3b57f59e717081c38b8d9060"><td class="mdescLeft">&#160;</td><td class="mdescRight">Composes two transforms to combine both of their effects. <br /></td></tr>
-<tr class="separator:a5fc6192f3b57f59e717081c38b8d9060"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d883cbd2a27c389bf438425e06b7635"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a3d883cbd2a27c389bf438425e06b7635">inverse</a> () const NEVEREXCEPT</td></tr>
-<tr class="memdesc:a3d883cbd2a27c389bf438425e06b7635"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the inverse of this transform.  <a href="classge211_1_1geometry_1_1_transform.html#a3d883cbd2a27c389bf438425e06b7635">More...</a><br /></td></tr>
-<tr class="separator:a3d883cbd2a27c389bf438425e06b7635"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91ad0596c60b63bca9cea696e377a2d6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a91ad0596c60b63bca9cea696e377a2d6">is_identity</a> () const</td></tr>
+<tr class="memdesc:a91ad0596c60b63bca9cea696e377a2d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is this transformation the identity transformation that does nothing? Because floating point is approximate, this may answer <code>false</code> for transforms that are nearly the identity.  <a href="classge211_1_1geometry_1_1_transform.html#a91ad0596c60b63bca9cea696e377a2d6">More...</a><br /></td></tr>
+<tr class="separator:a91ad0596c60b63bca9cea696e377a2d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ca1b188bca4f485acef102d218b1585"><td class="memItemLeft" align="right" valign="top"><a id="a3ca1b188bca4f485acef102d218b1585"></a>
+<a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a3ca1b188bca4f485acef102d218b1585">operator*</a> (const <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;) const</td></tr>
+<tr class="memdesc:a3ca1b188bca4f485acef102d218b1585"><td class="mdescLeft">&#160;</td><td class="mdescRight">Composes two transforms to combine both of their effects. <br /></td></tr>
+<tr class="separator:a3ca1b188bca4f485acef102d218b1585"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29dc42828ecc7d06b9fb34f1717fa730"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a29dc42828ecc7d06b9fb34f1717fa730">inverse</a> () const</td></tr>
+<tr class="memdesc:a29dc42828ecc7d06b9fb34f1717fa730"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the inverse of this transform.  <a href="classge211_1_1geometry_1_1_transform.html#a29dc42828ecc7d06b9fb34f1717fa730">More...</a><br /></td></tr>
+<tr class="separator:a29dc42828ecc7d06b9fb34f1717fa730"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
 Constructor and factory functions</h2></td></tr>
-<tr class="memitem:a953a033901c2aa2471a00b3b07cf1549"><td class="memItemLeft" align="right" valign="top"><a id="a953a033901c2aa2471a00b3b07cf1549"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a953a033901c2aa2471a00b3b07cf1549">Transform</a> () NEVEREXCEPT</td></tr>
-<tr class="memdesc:a953a033901c2aa2471a00b3b07cf1549"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs the identity transform, which has no effect. <br /></td></tr>
-<tr class="separator:a953a033901c2aa2471a00b3b07cf1549"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62d021411b2f4bc4f8f57684177ffaa0"><td class="memItemLeft" align="right" valign="top"><a id="a62d021411b2f4bc4f8f57684177ffaa0"></a>
-static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a62d021411b2f4bc4f8f57684177ffaa0">rotation</a> (double) NEVEREXCEPT</td></tr>
-<tr class="memdesc:a62d021411b2f4bc4f8f57684177ffaa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a rotating transform, given the rotation in degrees clockwise. <br /></td></tr>
-<tr class="separator:a62d021411b2f4bc4f8f57684177ffaa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a113eb74ab193dcd75479cf8dff6e3ddc"><td class="memItemLeft" align="right" valign="top"><a id="a113eb74ab193dcd75479cf8dff6e3ddc"></a>
-static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a113eb74ab193dcd75479cf8dff6e3ddc">flip_h</a> () NEVEREXCEPT</td></tr>
-<tr class="memdesc:a113eb74ab193dcd75479cf8dff6e3ddc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a transform that flips the sprite horizontally. <br /></td></tr>
-<tr class="separator:a113eb74ab193dcd75479cf8dff6e3ddc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24968faa71493b8aa2024b71ef279b3b"><td class="memItemLeft" align="right" valign="top"><a id="a24968faa71493b8aa2024b71ef279b3b"></a>
-static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a24968faa71493b8aa2024b71ef279b3b">flip_v</a> () NEVEREXCEPT</td></tr>
-<tr class="memdesc:a24968faa71493b8aa2024b71ef279b3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a transform that flips the sprite vertically. <br /></td></tr>
-<tr class="separator:a24968faa71493b8aa2024b71ef279b3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac4d7064c08673cc72fc43ec7a26188d6"><td class="memItemLeft" align="right" valign="top"><a id="ac4d7064c08673cc72fc43ec7a26188d6"></a>
-static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#ac4d7064c08673cc72fc43ec7a26188d6">scale</a> (double) NEVEREXCEPT</td></tr>
-<tr class="memdesc:ac4d7064c08673cc72fc43ec7a26188d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a transform that scales the sprite in both dimensions. <br /></td></tr>
-<tr class="separator:ac4d7064c08673cc72fc43ec7a26188d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89dee73ee17a7179540643e0bd7bde24"><td class="memItemLeft" align="right" valign="top"><a id="a89dee73ee17a7179540643e0bd7bde24"></a>
-static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a89dee73ee17a7179540643e0bd7bde24">scale_x</a> (double) NEVEREXCEPT</td></tr>
-<tr class="memdesc:a89dee73ee17a7179540643e0bd7bde24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a transform that scales the sprite in the <em>x</em> dimension. <br /></td></tr>
-<tr class="separator:a89dee73ee17a7179540643e0bd7bde24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa031340a58534dcfd14d7a06dd06e0d6"><td class="memItemLeft" align="right" valign="top"><a id="aa031340a58534dcfd14d7a06dd06e0d6"></a>
-static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#aa031340a58534dcfd14d7a06dd06e0d6">scale_y</a> (double) NEVEREXCEPT</td></tr>
-<tr class="memdesc:aa031340a58534dcfd14d7a06dd06e0d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a transform that scales the sprite in the <em>y</em> dimension. <br /></td></tr>
-<tr class="separator:aa031340a58534dcfd14d7a06dd06e0d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9de68ec1c9b7809129814a3233ae4655"><td class="memItemLeft" align="right" valign="top"><a id="a9de68ec1c9b7809129814a3233ae4655"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a9de68ec1c9b7809129814a3233ae4655">Transform</a> ()</td></tr>
+<tr class="memdesc:a9de68ec1c9b7809129814a3233ae4655"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs the identity transform, which has no effect. <br /></td></tr>
+<tr class="separator:a9de68ec1c9b7809129814a3233ae4655"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e7de7869f3a1f94156e47e53b085e43"><td class="memItemLeft" align="right" valign="top"><a id="a1e7de7869f3a1f94156e47e53b085e43"></a>
+static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a1e7de7869f3a1f94156e47e53b085e43">rotation</a> (double)</td></tr>
+<tr class="memdesc:a1e7de7869f3a1f94156e47e53b085e43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a rotating transform, given the rotation in degrees clockwise. <br /></td></tr>
+<tr class="separator:a1e7de7869f3a1f94156e47e53b085e43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacdf2e21a469419140b29332b6eea407"><td class="memItemLeft" align="right" valign="top"><a id="aacdf2e21a469419140b29332b6eea407"></a>
+static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#aacdf2e21a469419140b29332b6eea407">flip_h</a> ()</td></tr>
+<tr class="memdesc:aacdf2e21a469419140b29332b6eea407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a transform that flips the sprite horizontally. <br /></td></tr>
+<tr class="separator:aacdf2e21a469419140b29332b6eea407"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66e12da4bd87188e226f9e6ac12a31ec"><td class="memItemLeft" align="right" valign="top"><a id="a66e12da4bd87188e226f9e6ac12a31ec"></a>
+static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#a66e12da4bd87188e226f9e6ac12a31ec">flip_v</a> ()</td></tr>
+<tr class="memdesc:a66e12da4bd87188e226f9e6ac12a31ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a transform that flips the sprite vertically. <br /></td></tr>
+<tr class="separator:a66e12da4bd87188e226f9e6ac12a31ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4e03ae73363117330e691fc9b4e4b7a"><td class="memItemLeft" align="right" valign="top"><a id="ab4e03ae73363117330e691fc9b4e4b7a"></a>
+static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#ab4e03ae73363117330e691fc9b4e4b7a">scale</a> (double)</td></tr>
+<tr class="memdesc:ab4e03ae73363117330e691fc9b4e4b7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a transform that scales the sprite in both dimensions. <br /></td></tr>
+<tr class="separator:ab4e03ae73363117330e691fc9b4e4b7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc75bfba975e7e25c77eedbd74d01185"><td class="memItemLeft" align="right" valign="top"><a id="afc75bfba975e7e25c77eedbd74d01185"></a>
+static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#afc75bfba975e7e25c77eedbd74d01185">scale_x</a> (double)</td></tr>
+<tr class="memdesc:afc75bfba975e7e25c77eedbd74d01185"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a transform that scales the sprite in the <em>x</em> dimension. <br /></td></tr>
+<tr class="separator:afc75bfba975e7e25c77eedbd74d01185"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab49acda5568ba61b5750b82e7f4dc1a4"><td class="memItemLeft" align="right" valign="top"><a id="ab49acda5568ba61b5750b82e7f4dc1a4"></a>
+static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html#ab49acda5568ba61b5750b82e7f4dc1a4">scale_y</a> (double)</td></tr>
+<tr class="memdesc:ab49acda5568ba61b5750b82e7f4dc1a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a transform that scales the sprite in the <em>y</em> dimension. <br /></td></tr>
+<tr class="separator:ab49acda5568ba61b5750b82e7f4dc1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3d883cbd2a27c389bf438425e06b7635"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d883cbd2a27c389bf438425e06b7635">&#9670;&nbsp;</a></span>inverse()</h2>
+<a id="a29dc42828ecc7d06b9fb34f1717fa730"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29dc42828ecc7d06b9fb34f1717fa730">&#9670;&nbsp;</a></span>inverse()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> inverse </td>
@@ -224,28 +221,20 @@ static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform<
           <td> const</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Returns the inverse of this transform. </p>
-<p>Composing a transform with its inverse should result in the identity transformation, though because floating point is approximate, <a class="el" href="classge211_1_1geometry_1_1_transform.html#aca45159e0a07e419df043876043773e1" title="Is this transformation the identity transformation that does nothing? Because floating point is appro...">is_identity() const </a>may not actually answer <code>true</code>. </p>
+<p>Composing a transform with its inverse should result in the identity transformation, though because floating point is approximate, <a class="el" href="classge211_1_1geometry_1_1_transform.html#a91ad0596c60b63bca9cea696e377a2d6" title="Is this transformation the identity transformation that does nothing? Because floating point is appro...">is_identity() const </a>may not actually answer <code>true</code>. </p>
 
 <p class="definition">Definition at line <a class="el" href="ge211__geometry_8cxx_source.html#l00123">123</a> of file <a class="el" href="ge211__geometry_8cxx_source.html">ge211_geometry.cxx</a>.</p>
 
 </div>
 </div>
-<a id="aca45159e0a07e419df043876043773e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca45159e0a07e419df043876043773e1">&#9670;&nbsp;</a></span>is_identity()</h2>
+<a id="a91ad0596c60b63bca9cea696e377a2d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91ad0596c60b63bca9cea696e377a2d6">&#9670;&nbsp;</a></span>is_identity()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool is_identity </td>
@@ -254,28 +243,20 @@ static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform<
           <td> const</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Is this transformation the identity transformation that does nothing? Because floating point is approximate, this may answer <code>false</code> for transforms that are nearly the identity. </p>
-<p>But it should answer <code>true</code> for any transform constructed by the default constructor <a class="el" href="classge211_1_1geometry_1_1_transform.html#a953a033901c2aa2471a00b3b07cf1549" title="Constructs the identity transform, which has no effect.">Transform()</a>. </p>
+<p>But it should answer <code>true</code> for any transform constructed by the default constructor <a class="el" href="classge211_1_1geometry_1_1_transform.html#a9de68ec1c9b7809129814a3233ae4655" title="Constructs the identity transform, which has no effect.">Transform()</a>. </p>
 
 <p class="definition">Definition at line <a class="el" href="ge211__geometry_8cxx_source.html#l00107">107</a> of file <a class="el" href="ge211__geometry_8cxx_source.html">ge211_geometry.cxx</a>.</p>
 
 </div>
 </div>
-<a id="aab47da8304b110509d97a4a286fea4c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab47da8304b110509d97a4a286fea4c6">&#9670;&nbsp;</a></span>set_scale()</h2>
+<a id="af142bde616145730af6d36fef55095b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af142bde616145730af6d36fef55095b4">&#9670;&nbsp;</a></span>set_scale()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp; set_scale </td>
@@ -285,28 +266,20 @@ static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform<
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Modifies this transform to scale the sprite by the given amount in both dimensions. </p>
-<p>This overwrites the effect of previous calls to <a class="el" href="classge211_1_1geometry_1_1_transform.html#a5f4a854715043bf5e8a12d1411a79f21" title="Modifies this transform to scale the sprite horizontally.">set_scale_x(double)</a> and <a class="el" href="classge211_1_1geometry_1_1_transform.html#a49aa6853bf6362e4d57f408a6bebc704" title="Modifies this transform to scale the sprite vertically.">set_scale_y(double)</a>. </p>
+<p>This overwrites the effect of previous calls to <a class="el" href="classge211_1_1geometry_1_1_transform.html#adee00d937ca861ebe644f3d43f77f014" title="Modifies this transform to scale the sprite horizontally.">set_scale_x(double)</a> and <a class="el" href="classge211_1_1geometry_1_1_transform.html#a0f4399df2bb7545d73177ad97861147b" title="Modifies this transform to scale the sprite vertically.">set_scale_y(double)</a>. </p>
 
 <p class="definition">Definition at line <a class="el" href="ge211__geometry_8cxx_source.html#l00063">63</a> of file <a class="el" href="ge211__geometry_8cxx_source.html">ge211_geometry.cxx</a>.</p>
 
 </div>
 </div>
-<a id="a5f4a854715043bf5e8a12d1411a79f21"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f4a854715043bf5e8a12d1411a79f21">&#9670;&nbsp;</a></span>set_scale_x()</h2>
+<a id="adee00d937ca861ebe644f3d43f77f014"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adee00d937ca861ebe644f3d43f77f014">&#9670;&nbsp;</a></span>set_scale_x()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp; set_scale_x </td>
@@ -316,28 +289,20 @@ static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform<
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Modifies this transform to scale the sprite horizontally. </p>
-<p>This overwrites the effect of previous calls to <code><a class="el" href="classge211_1_1geometry_1_1_transform.html#aab47da8304b110509d97a4a286fea4c6" title="Modifies this transform to scale the sprite by the given amount in both dimensions.">set_scale(double)</a></code> as well as itself. </p>
+<p>This overwrites the effect of previous calls to <code><a class="el" href="classge211_1_1geometry_1_1_transform.html#af142bde616145730af6d36fef55095b4" title="Modifies this transform to scale the sprite by the given amount in both dimensions.">set_scale(double)</a></code> as well as itself. </p>
 
 <p class="definition">Definition at line <a class="el" href="ge211__geometry_8cxx_source.html#l00070">70</a> of file <a class="el" href="ge211__geometry_8cxx_source.html">ge211_geometry.cxx</a>.</p>
 
 </div>
 </div>
-<a id="a49aa6853bf6362e4d57f408a6bebc704"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a49aa6853bf6362e4d57f408a6bebc704">&#9670;&nbsp;</a></span>set_scale_y()</h2>
+<a id="a0f4399df2bb7545d73177ad97861147b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f4399df2bb7545d73177ad97861147b">&#9670;&nbsp;</a></span>set_scale_y()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp; set_scale_y </td>
@@ -347,15 +312,10 @@ static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform<
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Modifies this transform to scale the sprite vertically. </p>
-<p>This overwrites the effect of previous calls to <code><a class="el" href="classge211_1_1geometry_1_1_transform.html#aab47da8304b110509d97a4a286fea4c6" title="Modifies this transform to scale the sprite by the given amount in both dimensions.">set_scale(double)</a></code> as well as itself. </p>
+<p>This overwrites the effect of previous calls to <code><a class="el" href="classge211_1_1geometry_1_1_transform.html#af142bde616145730af6d36fef55095b4" title="Modifies this transform to scale the sprite by the given amount in both dimensions.">set_scale(double)</a></code> as well as itself. </p>
 
 <p class="definition">Definition at line <a class="el" href="ge211__geometry_8cxx_source.html#l00076">76</a> of file <a class="el" href="ge211__geometry_8cxx_source.html">ge211_geometry.cxx</a>.</p>
 
@@ -367,7 +327,7 @@ static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform<
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclassge211_1_1geometry_1_1_transform_html_a953a033901c2aa2471a00b3b07cf1549"><div class="ttname"><a href="classge211_1_1geometry_1_1_transform.html#a953a033901c2aa2471a00b3b07cf1549">ge211::geometry::Transform::Transform</a></div><div class="ttdeci">Transform() NEVEREXCEPT</div><div class="ttdoc">Constructs the identity transform, which has no effect.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8cxx_source.html#l00009">ge211_geometry.cxx:9</a></div></div>
+<div class="ttc" id="aclassge211_1_1geometry_1_1_transform_html_a9de68ec1c9b7809129814a3233ae4655"><div class="ttname"><a href="classge211_1_1geometry_1_1_transform.html#a9de68ec1c9b7809129814a3233ae4655">ge211::geometry::Transform::Transform</a></div><div class="ttdeci">Transform()</div><div class="ttdoc">Constructs the identity transform, which has no effect.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8cxx_source.html#l00009">ge211_geometry.cxx:9</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
