@@ -5,8 +5,3 @@
 build/
 builds/
 cmake-build-*/
-
-# Documentation:
-doc/
-doxygen/cppreference.xml
-doxygen/FRONTMATTER.md
