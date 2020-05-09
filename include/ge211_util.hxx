@@ -55,18 +55,17 @@ public:
     using borrowed_pointer      = Borrowed<object_type>;
     using deleter_function_type = deleter_t<object_type>;
 
-    static constexpr object_type*          null = nullptr;
     static constexpr deleter_function_type deleter_function = Deleter;
     static constexpr bool                  delete_null_v = Delete_null;
 
     delete_ptr() noexcept
-            : ptr_(null) { }
+            : ptr_(nullptr) { }
 
     explicit delete_ptr(owned_pointer ptr) noexcept
             : ptr_(ptr) { }
 
     delete_ptr(std::nullptr_t) noexcept
-            : ptr_(null) { }
+            : ptr_(nullptr) { }
 
     delete_ptr(delete_ptr const&) = delete;
     delete_ptr& operator=(delete_ptr const&) = delete;
@@ -93,7 +92,7 @@ public:
 
     owned_pointer release() noexcept
     {
-        return std::exchange(ptr_, null);
+        return std::exchange(ptr_, nullptr);
     }
 
     borrowed_pointer get() const noexcept
