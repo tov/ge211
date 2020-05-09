@@ -57,15 +57,15 @@ project(my_game CXX)
 
 add_subdirectory(3rdparty/ge211 EXCLUDE_FROM_ALL)
 
-add_executable(my_game my_game.cpp)
+add_executable(my_game my_game.cxx)
 target_link_libraries(my_game ge211)
 set_target_properties(my_game PROPERTIES
         CXX_STANDARD            14
         CXX_STANDARD_REQUIRED   On
-        CXX_EXTENSIONS          OFF)
+        CXX_EXTENSIONS          Off)
 ```
 
-To see this in action, see the [`examples/vendored/`] submodule.
+To see this in action, see the [`ge211-vendored-example`] repo.
 
-[`examples/vendored/`]:
+[`ge211-vendored-example`]:
     https://github.com/tov/ge211-vendored-example
