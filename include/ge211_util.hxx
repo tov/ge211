@@ -27,14 +27,8 @@ std::string to_string(const T& value)
     return oss.str();
 }
 
+// `detail` is for implementation details
 namespace detail {
-
-template<class T>
-T replace(T& target, T src)
-{
-    std::swap(target, src);
-    return src;
-}
 
 template<class T>
 using deleter_t = void (*)(Owned<T>);
@@ -99,7 +93,7 @@ public:
 
     owned_pointer release() noexcept
     {
-        return replace(ptr_, null);
+        return std::exchange(ptr_, null);
     }
 
     borrowed_pointer get() const noexcept
