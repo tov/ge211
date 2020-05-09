@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ge211_forward.hxx"
+#include "ge211_noexcept.hxx"
 #include "ge211_util.hxx"
 
 #include <SDL_rect.h>
@@ -36,7 +37,7 @@ struct Basic_dimensions
     /// ```
     template <class U>
     Basic_dimensions<U> into() const
-        noexcept(is_nothrow_convertible<Coordinate, U>())
+        NOEXCEPT_(detail::is_nothrow_convertible<Coordinate, U>())
     {
         return {U(width), U(height)};
     }
@@ -49,7 +50,7 @@ using Dimensions = Basic_dimensions<int>;
 /// Equality for Basic_dimensions.
 template <class T>
 bool operator==(Basic_dimensions<T> a, Basic_dimensions<T> b)
-    noexcept(is_nothrow_comparable<T>())
+    NOEXCEPT_(detail::is_nothrow_comparable<T>())
 {
     return a.width == b.width && a.height == b.height;
 }
@@ -57,7 +58,7 @@ bool operator==(Basic_dimensions<T> a, Basic_dimensions<T> b)
 /// Disequality for Basic_dimensions.
 template <class T>
 bool operator!=(Basic_dimensions<T> a, Basic_dimensions<T> b)
-    noexcept(is_nothrow_comparable<T>())
+    NOEXCEPT_(detail::is_nothrow_comparable<T>())
 {
     return !(a == b);
 }
@@ -66,7 +67,7 @@ bool operator!=(Basic_dimensions<T> a, Basic_dimensions<T> b)
 template<class T>
 Basic_dimensions<T> operator+(Basic_dimensions<T> d1,
                               Basic_dimensions<T> d2)
-    noexcept(has_nothrow_arithmetic<T>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
 {
     return {d1.width + d2.width, d1.height + d2.height};
 }
@@ -75,7 +76,7 @@ Basic_dimensions<T> operator+(Basic_dimensions<T> d1,
 template <class T>
 Basic_dimensions<T> operator-(Basic_dimensions<T> d1,
                               Basic_dimensions<T> d2)
-    noexcept(has_nothrow_arithmetic<T>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
 {
     return {d1.width - d2.width, d1.height - d2.height};
 }
@@ -83,7 +84,7 @@ Basic_dimensions<T> operator-(Basic_dimensions<T> d1,
 /// Multiplies a Basic_dimensions by a scalar.
 template <class T>
 Basic_dimensions<T> operator*(Basic_dimensions<T> d1, T s2)
-    noexcept(has_nothrow_arithmetic<T>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
 {
     return {d1.width * s2, d1.height * s2};
 }
@@ -91,7 +92,7 @@ Basic_dimensions<T> operator*(Basic_dimensions<T> d1, T s2)
 /// Multiplies a Basic_dimensions by a scalar.
 template <class T>
 Basic_dimensions<T> operator*(T s1, Basic_dimensions<T> d2)
-    noexcept(has_nothrow_arithmetic<T>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
 {
     return d2 * s1;
 }
@@ -105,7 +106,7 @@ Basic_dimensions<T> operator*(T s1, Basic_dimensions<T> d2)
 template <class T,
           class = std::enable_if_t<!std::is_same<T, double>::value, void>>
 Basic_dimensions<T> operator*(Basic_dimensions<T> d1, double s2)
-    noexcept(has_nothrow_arithmetic<T, double>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T, double>())
 {
     return {static_cast<T>(d1.width * s2),
             static_cast<T>(d1.height * s2)};
@@ -120,7 +121,7 @@ Basic_dimensions<T> operator*(Basic_dimensions<T> d1, double s2)
 template <class T,
           class = std::enable_if_t<!std::is_same<T, double>::value, void>>
 Basic_dimensions<T> operator*(double s1, Basic_dimensions<T> d2)
-    noexcept(has_nothrow_arithmetic<double, T>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<double, T>())
 {
     return d2 * s1;
 }
@@ -133,7 +134,7 @@ Basic_dimensions<T> operator*(double s1, Basic_dimensions<T> d2)
 ///  - `z` cannot be `0` if `T` is an integral type.
 template <class T>
 Basic_dimensions<T> operator/(Basic_dimensions<T> d1, T s2)
-    noexcept(has_nothrow_division<T>())
+    NOEXCEPT_(detail::has_nothrow_division<T>())
 {
     return {d1.width / s2, d1.height / s2};
 }
@@ -147,7 +148,7 @@ Basic_dimensions<T> operator/(Basic_dimensions<T> d1, T s2)
 template <class T,
           class = std::enable_if_t<!std::is_same<T, double>::value, void>>
 Basic_dimensions<T> operator/(Basic_dimensions<T> d1, double s2)
-    noexcept(has_nothrow_arithmetic<T, double>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T, double>())
 {
     return d1 * (1 / s2);
 }
@@ -156,7 +157,7 @@ Basic_dimensions<T> operator/(Basic_dimensions<T> d1, double s2)
 template <class T>
 Basic_dimensions<T>& operator+=(Basic_dimensions<T>& d1,
                                 Basic_dimensions<T> d2)
-    noexcept(has_nothrow_arithmetic<T>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
 {
     return d1 = d1 + d2;
 }
@@ -165,7 +166,7 @@ Basic_dimensions<T>& operator+=(Basic_dimensions<T>& d1,
 template <class T>
 Basic_dimensions<T>& operator-=(Basic_dimensions<T>& d1,
                                 Basic_dimensions<T> d2)
-    noexcept(has_nothrow_arithmetic<T>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
 {
     return d1 = d1 - d2;
 }
@@ -173,7 +174,7 @@ Basic_dimensions<T>& operator-=(Basic_dimensions<T>& d1,
 /// Succinct Basic_dimensions-scalar multiplication.
 template <class T>
 Basic_dimensions<T>& operator*=(Basic_dimensions<T>& d1, T s2)
-    noexcept(has_nothrow_arithmetic<T>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
 {
     return d1 = d1 * s2;
 }
@@ -181,7 +182,7 @@ Basic_dimensions<T>& operator*=(Basic_dimensions<T>& d1, T s2)
 /// Succinct Basic_dimensions-scalar multiplication.
 template <class T>
 Basic_dimensions<T>& operator*=(Basic_dimensions<T>& d1, double s2)
-    noexcept(has_nothrow_arithmetic<T, double>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T, double>())
 {
     return d1 = d1 * s2;
 }
@@ -192,7 +193,7 @@ Basic_dimensions<T>& operator*=(Basic_dimensions<T>& d1, double s2)
 ///  - `s2 != 0`
 template <class T>
 Basic_dimensions<T>& operator/=(Basic_dimensions<T>& d1, T s2)
-    noexcept(has_nothrow_division<T>())
+    NOEXCEPT_(detail::has_nothrow_division<T>())
 {
     return d1 = d1 / s2;
 }
@@ -200,7 +201,7 @@ Basic_dimensions<T>& operator/=(Basic_dimensions<T>& d1, T s2)
 /// Succinct Basic_dimensions-scalar division.
 template <class T>
 Basic_dimensions<T>& operator/=(Basic_dimensions<T>& d1, double s2)
-    noexcept(has_nothrow_division<T, double>())
+    NOEXCEPT_(detail::has_nothrow_division<T, double>())
 {
     return d1 = d1 / s2;
 }
@@ -228,14 +229,14 @@ struct Basic_position
 
     /// Constructs a position from the given *x* and *y* coordinates.
     Basic_position(Coordinate x, Coordinate y)
-        noexcept(is_nothrow_convertible<Coordinate>())
+        NOEXCEPT_(detail::is_nothrow_convertible<Coordinate>())
             : x{x}, y{y}
     { }
 
     /// Constructs a position from a Basic_dimensions, which gives the
     /// displacement of the position from the origin.
     explicit Basic_position(Dimensions dims)
-        noexcept(is_nothrow_convertible<Coordinate>())
+        NOEXCEPT_(detail::is_nothrow_convertible<Coordinate>())
             : Basic_position{dims.width, dims.height}
     { }
 
@@ -248,7 +249,7 @@ struct Basic_position
     /// ```
     template <class U>
     Basic_position<U> into() const
-        noexcept(is_nothrow_convertible<Coordinate, U>())
+        NOEXCEPT_(detail::is_nothrow_convertible<Coordinate, U>())
     {
         return {U(x), U(y)};
     }
@@ -261,7 +262,7 @@ struct Basic_position
     /// Constructs the position that is above this position by the given
     /// amount.
     Basic_position up_by(Coordinate dy) const
-        noexcept(has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {x, y - dy};
     }
@@ -269,7 +270,7 @@ struct Basic_position
     /// Constructs the position that is below this position by the given
     /// amount.
     Basic_position down_by(Coordinate dy) const
-        noexcept(has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {x, y + dy};
     }
@@ -277,7 +278,7 @@ struct Basic_position
     /// Constructs the position that is to the left of this position by
     /// the given amount.
     Basic_position left_by(Coordinate dx) const
-        noexcept(has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {x - dx, y};
     }
@@ -285,7 +286,7 @@ struct Basic_position
     /// Constructs the position that is to the right of this position by
     /// the given amount.
     Basic_position right_by(Coordinate dx) const
-        noexcept(has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {x + dx, y};
     }
@@ -293,7 +294,7 @@ struct Basic_position
     /// Constructs the position that is above and left of this position
     /// by the given dimensions.
     Basic_position up_left_by(Dimensions dims) const
-        noexcept(has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {x - dims.width, y - dims.height};
     }
@@ -301,7 +302,7 @@ struct Basic_position
     /// Constructs the position that is above and right of this position
     /// by the given dimensions.
     Basic_position up_right_by(Dimensions dims) const
-        noexcept(has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {x + dims.width, y - dims.height};
     }
@@ -309,7 +310,7 @@ struct Basic_position
     /// Constructs the position that is below and left of this position
     /// by the given dimensions.
     Basic_position down_left_by(Dimensions dims) const
-        noexcept(has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {x - dims.width, y + dims.height};
     }
@@ -317,7 +318,7 @@ struct Basic_position
     /// Constructs the position that is below and right of this position
     /// by the given dimensions.
     Basic_position down_right_by(Dimensions dims) const
-        noexcept(has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {x + dims.width, y + dims.height};
     }
@@ -332,7 +333,7 @@ using Position = Basic_position<int>;
 /// Equality for positions.
 template <class T>
 bool operator==(Basic_position<T> p1, Basic_position<T> p2)
-    noexcept(is_nothrow_comparable<T>())
+    NOEXCEPT_(detail::is_nothrow_comparable<T>())
 {
     return p1.x == p2.x && p1.y == p2.y;
 }
@@ -340,7 +341,7 @@ bool operator==(Basic_position<T> p1, Basic_position<T> p2)
 /// Disequality for positions.
 template <class T>
 bool operator!=(Basic_position<T> p1, Basic_position<T> p2)
-    noexcept(is_nothrow_comparable<T>())
+    NOEXCEPT_(detail::is_nothrow_comparable<T>())
 {
     return !(p1 == p2);
 }
@@ -349,7 +350,7 @@ bool operator!=(Basic_position<T> p1, Basic_position<T> p2)
 /// Position::below_right_by(Basic_dimensions) const.
 template <class T>
 Basic_position<T> operator+(Basic_position<T> p1, Basic_dimensions<T> d2)
-    noexcept(has_nothrow_arithmetic<T>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
 {
     return p1.down_right_by(d2);
 }
@@ -357,7 +358,7 @@ Basic_position<T> operator+(Basic_position<T> p1, Basic_dimensions<T> d2)
 /// Translates a position by some displacement.
 template <class T>
 Basic_position<T> operator+(Basic_dimensions<T> d1, Basic_position<T> p2)
-    noexcept(has_nothrow_arithmetic<T>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
 {
     return p2.down_right_by(d1);
 }
@@ -366,7 +367,7 @@ Basic_position<T> operator+(Basic_dimensions<T> d1, Basic_position<T> p2)
 /// the same as Position::above_left_by(Basic_dimensions) const.
 template <class T>
 Basic_position<T> operator-(Basic_position<T> p1, Basic_dimensions<T> d2)
-    noexcept(has_nothrow_arithmetic<T>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
 {
     return p1.up_left_by(d2);
 }
@@ -374,7 +375,7 @@ Basic_position<T> operator-(Basic_position<T> p1, Basic_dimensions<T> d2)
 /// Translates a position by the opposite of some displacement.
 template <class T>
 Basic_dimensions<T> operator-(Basic_position<T> p1, Basic_position<T> p2)
-    noexcept(has_nothrow_arithmetic<T>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
 {
     return {p1.x - p2.x, p1.y - p2.y};
 }
@@ -382,7 +383,7 @@ Basic_dimensions<T> operator-(Basic_position<T> p1, Basic_position<T> p2)
 /// Succinct position translation.
 template <class T>
 Basic_position<T>& operator+=(Basic_position<T>& p1, Basic_dimensions<T> d2)
-    noexcept(has_nothrow_arithmetic<T>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
 {
     return p1 = p1 + d2;
 }
@@ -390,7 +391,7 @@ Basic_position<T>& operator+=(Basic_position<T>& p1, Basic_dimensions<T> d2)
 /// Succinct position translation.
 template <class T>
 Basic_position<T>& operator-=(Basic_position<T>& p1, Basic_dimensions<T> d2)
-    noexcept(has_nothrow_arithmetic<T>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
 {
     return p1 = p1 - d2;
 }
@@ -417,7 +418,7 @@ struct Basic_rectangle
     /// Converts a Basic_rectangle to another coordinate type.
     template<typename U>
     Basic_rectangle<U> into() const
-        noexcept(is_nothrow_convertible<Coordinate, U>())
+        NOEXCEPT_(detail::is_nothrow_convertible<Coordinate, U>())
     {
         return {U(x), U(y), U(width), U(height)};
     }
@@ -425,7 +426,7 @@ struct Basic_rectangle
     /// Creates a Basic_rectangle given the position of its top left vertex
     /// and its dimensions.
     static Basic_rectangle from_top_left(Position tl, Dimensions dims)
-        noexcept(has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {tl.x, tl.y, dims.width, dims.height};
     }
@@ -433,7 +434,7 @@ struct Basic_rectangle
     /// Creates a Basic_rectangle given the position of its top right vertex
     /// and its dimensions.
     static Basic_rectangle from_top_right(Position tr, Dimensions dims)
-        noexcept(has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return from_top_left(tr.left_by(dims.width), dims);
     }
@@ -441,7 +442,7 @@ struct Basic_rectangle
     /// Creates a Basic_rectangle given the position of its bottom left vertex
     /// and its dimensions.
     static Basic_rectangle from_bottom_left(Position bl, Dimensions dims)
-        noexcept(has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return from_top_left(bl.up_by(dims.height), dims);
     }
@@ -449,7 +450,7 @@ struct Basic_rectangle
     /// Creates a Basic_rectangle given the position of its bottom right vertex
     /// and its dimensions.
     static Basic_rectangle from_bottom_right(Position br, Dimensions dims)
-        noexcept(has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return from_top_left(br.up_left_by(dims), dims);
     }
@@ -457,7 +458,7 @@ struct Basic_rectangle
     /// Creates a Basic_rectangle given the position of its center
     /// and its dimensions.
     static Basic_rectangle from_center(Position center, Dimensions dims)
-        noexcept(has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return from_top_left(center.up_left_by(dims / Coordinate(2)), dims);
     }
@@ -465,43 +466,43 @@ struct Basic_rectangle
     /// The dimensions of the rectangle. Equivalent to
     /// `Basic_dimensions{rect.width, rect.height}`.
     Dimensions dimensions() const
-        noexcept(is_nothrow_convertible<Coordinate>())
+        NOEXCEPT_(detail::is_nothrow_convertible<Coordinate>())
     {
         return {width, height};
     }
 
     /// The position of the top left vertex.
     Position top_left() const
-        noexcept(has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {x, y};
     }
 
     /// The position of the top right vertex.
     Position top_right() const
-        noexcept(has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return top_left().right_by(width);
     }
 
     /// The position of the bottom left vertex.
     Position bottom_left() const
-        noexcept(has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return top_left().down_by(height);
     }
 
     /// The position of the bottom right vertex.
     Position bottom_right() const
-        noexcept(has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return top_left().down_right_by(dimensions());
     }
 
     /// The position of the center of the rectangle.
     Position center() const
-        noexcept(has_nothrow_arithmetic<Coordinate>() &&
-                 has_nothrow_division<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>() &&
+                  detail::has_nothrow_division<Coordinate>())
     {
         return top_left().down_right_by(dimensions() / Coordinate(2));
     }
@@ -527,7 +528,7 @@ private:
 
     /// Converts this rectangle to an internal SDL rectangle.
     operator SDL_Rect() const
-        noexcept(is_nothrow_convertible<Coordinate, int>())
+        NOEXCEPT_(detail::is_nothrow_convertible<Coordinate, int>())
     {
         SDL_Rect result;
         result.x = static_cast<int>(x);
@@ -547,7 +548,7 @@ using Rectangle = Basic_rectangle<int>;
 template <class T>
 bool operator==(const Basic_rectangle<T>& r1,
                 const Basic_rectangle<T>& r2)
-    noexcept(is_nothrow_comparable<T>())
+    NOEXCEPT_(detail::is_nothrow_comparable<T>())
 {
 return r1.x == r2.x &&
         r1.y == r2.y &&
@@ -559,7 +560,7 @@ return r1.x == r2.x &&
 template <class T>
 bool operator!=(const Basic_rectangle<T> &r1,
                 const Basic_rectangle<T> &r2)
-    noexcept(is_nothrow_comparable<T>())
+    NOEXCEPT_(detail::is_nothrow_comparable<T>())
 {
     return !(r1 == r2);
 }
@@ -687,26 +688,26 @@ public:
     /// @{
 
     /// Constructs the identity transform, which has no effect.
-    Transform() noexcept;
+    Transform() NOEXCEPT;
 
     /// Constructs a rotating transform, given the rotation in degrees
     /// clockwise.
-    static Transform rotation(double) noexcept;
+    static Transform rotation(double) NOEXCEPT;
 
     /// Constructs a transform that flips the sprite horizontally.
-    static Transform flip_h() noexcept;
+    static Transform flip_h() NOEXCEPT;
 
     /// Constructs a transform that flips the sprite vertically.
-    static Transform flip_v() noexcept;
+    static Transform flip_v() NOEXCEPT;
 
     /// Constructs a transform that scales the sprite in both dimensions.
-    static Transform scale(double) noexcept;
+    static Transform scale(double) NOEXCEPT;
 
     /// Constructs a transform that scales the sprite in the *x* dimension.
-    static Transform scale_x(double) noexcept;
+    static Transform scale_x(double) NOEXCEPT;
 
     /// Constructs a transform that scales the sprite in the *y* dimension.
-    static Transform scale_y(double) noexcept;
+    static Transform scale_y(double) NOEXCEPT;
 
     /// @}
 
@@ -714,23 +715,23 @@ public:
     /// @{
 
     /// Modifies this transform to have the given rotation, in degrees.
-    Transform& set_rotation(double) noexcept;
+    Transform& set_rotation(double) NOEXCEPT;
     /// Modifies this transform to determine whether to flip horizontally.
-    Transform& set_flip_h(bool) noexcept;
+    Transform& set_flip_h(bool) NOEXCEPT;
     /// Modifies this transform to determine whether to flip vertically.
-    Transform& set_flip_v(bool) noexcept;
+    Transform& set_flip_v(bool) NOEXCEPT;
     /// Modifies this transform to scale the sprite by the given amount in
     /// both dimensions. This overwrites the effect of previous calls to
     /// set_scale_x(double) and set_scale_y(double).
-    Transform& set_scale(double) noexcept;
+    Transform& set_scale(double) NOEXCEPT;
     /// Modifies this transform to scale the sprite horizontally. This
     /// overwrites the effect of previous calls to `set_scale(double)`
     /// as well as itself.
-    Transform& set_scale_x(double) noexcept;
+    Transform& set_scale_x(double) NOEXCEPT;
     /// Modifies this transform to scale the sprite vertically. This
     /// overwrites the effect of previous calls to `set_scale(double)`
     /// as well as itself.
-    Transform& set_scale_y(double) noexcept;
+    Transform& set_scale_y(double) NOEXCEPT;
 
     /// @}
 
@@ -738,15 +739,15 @@ public:
     /// @{
 
     /// Returns the rotation that will be applied to the sprite.
-    double get_rotation() const noexcept;
+    double get_rotation() const NOEXCEPT;
     /// Returns whether the sprite will be flipped horizontally.
-    bool get_flip_h() const noexcept;
+    bool get_flip_h() const NOEXCEPT;
     /// Returns whether the sprite will be flipped vertically.
-    bool get_flip_v() const noexcept;
+    bool get_flip_v() const NOEXCEPT;
     /// Returns how much the sprite will be scaled horizontally.
-    double get_scale_x() const noexcept;
+    double get_scale_x() const NOEXCEPT;
     /// Returns how much the sprite will be scaled vertically.
-    double get_scale_y() const noexcept;
+    double get_scale_y() const NOEXCEPT;
 
     /// @}
 
@@ -757,16 +758,16 @@ public:
     /// Because floating point is approximate, this may answer `false` for
     /// transforms that are nearly the identity. But it should answer `true`
     /// for any transform constructed by the default constructor Transform().
-    bool is_identity() const noexcept;
+    bool is_identity() const NOEXCEPT;
 
     /// Composes two transforms to combine both of their effects.
-    Transform operator*(const Transform&) const noexcept;
+    Transform operator*(const Transform&) const NOEXCEPT;
 
     /// Returns the inverse of this transform. Composing a transform with its
     /// inverse should result in the identity transformation, though because
     /// floating point is approximate, is_identity() const may not actually
     /// answer `true`.
-    Transform inverse() const noexcept;
+    Transform inverse() const NOEXCEPT;
 
     /// @}
 
@@ -779,9 +780,9 @@ private:
 };
 
 /// Equality for transforms.
-bool operator==(const Transform&, const Transform&) noexcept;
+bool operator==(const Transform&, const Transform&) NOEXCEPT;
 /// Disequality for transforms.
-bool operator!=(const Transform&, const Transform&) noexcept;
+bool operator!=(const Transform&, const Transform&) NOEXCEPT;
 
 } // end namespace geometry.
 
@@ -798,7 +799,7 @@ template <class T>
 struct hash<ge211::Basic_position<T>>
 {
     /// Hashes a Basic_position<T>, provided that T is hashable.
-    std::size_t operator()(ge211::Basic_position<T> pos) const noexcept
+    std::size_t operator()(ge211::Basic_position<T> pos) const NOEXCEPT
     {
         return hash_t_(pos.x) * 31 ^ hash_t_(pos.y);
     }

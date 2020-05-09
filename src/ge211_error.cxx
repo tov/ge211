@@ -17,7 +17,7 @@ static const char* take_sdl_error()
     return result;
 }
 
-const char* Exception_base::what() const noexcept
+const char* Exception_base::what() const NOEXCEPT
 {
     return message_->c_str();
 }
@@ -174,13 +174,13 @@ Log_message fatal_sdl()
     return fatal(take_sdl_error());
 }
 
-Logger& Logger::instance() noexcept
+Logger& Logger::instance() NOEXCEPT
 {
     static Logger instance;
     return instance;
 }
 
-Log_message::Log_message(std::string reason, Log_message::Level level) noexcept
+Log_message::Log_message(std::string reason, Log_message::Level level) NOEXCEPT
         : reason_{std::move(reason)}
         , message_{}
         , active_{level >= Logger::instance().level()}

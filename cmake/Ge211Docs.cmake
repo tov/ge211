@@ -13,6 +13,11 @@ set(DOXYGEN_DISABLE_INDEX          YES)
 set(DOXYGEN_GENERATE_TREEVIEW      YES)
 set(DOXYGEN_TAGFILES
         "doxygen/cppreference.xml=http://en.cppreference.com/w/")
+set(DOXYGEN_ENABLE_PREPROCESSING   YES)
+set(DOXYGEN_PREDEFINED             NO_NOEXCEPT)
+set(DOXYGEN_MACRO_EXPANSION        YES)
+set(DOXYGEN_EXPAND_ONLY_PREDEF     YES)
+set(DOXYGEN_EXPAND_AS_DEFINED      NOEXCEPT NOEXCEPT_)
 
 doxygen_add_docs(ge211_docs
         doxygen/FRONTMATTER.md

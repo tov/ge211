@@ -72,7 +72,7 @@ Renderer::Renderer(const Window& window)
         throw Host_error{"Could not initialize renderer."};
 }
 
-bool Renderer::is_vsync() const noexcept
+bool Renderer::is_vsync() const NOEXCEPT
 {
     SDL_RendererInfo info;
     SDL_GetRendererInfo(get_raw_(), &info);
@@ -85,7 +85,7 @@ void Renderer::clear()
         throw Host_error{"Could not clear window"};
 }
 
-SDL_Renderer* Renderer::get_raw_() const noexcept
+SDL_Renderer* Renderer::get_raw_() const NOEXCEPT
 {
     return ptr_.get();
 }
@@ -98,7 +98,7 @@ void Renderer::set_color(Color color)
         throw Host_error{"Could not set renderer color"};
 }
 
-void Renderer::present() noexcept
+void Renderer::present() NOEXCEPT
 {
     SDL_RenderPresent(get_raw_());
 }
@@ -147,23 +147,23 @@ void Renderer::prepare(const Texture& texture) const
     texture.get_raw_(*this);
 }
 
-Texture::Impl_::Impl_(Owned<SDL_Surface> surface) noexcept
+Texture::Impl_::Impl_(Owned<SDL_Surface> surface) NOEXCEPT
         : surface_(surface)
 { }
 
-Texture::Impl_::Impl_(Owned<SDL_Texture> texture) noexcept
+Texture::Impl_::Impl_(Owned<SDL_Texture> texture) NOEXCEPT
         : texture_(texture)
 { }
 
-Texture::Impl_::Impl_(Uniq_SDL_Surface surface) noexcept
+Texture::Impl_::Impl_(Uniq_SDL_Surface surface) NOEXCEPT
         : surface_(std::move(surface))
 { }
 
-Texture::Impl_::Impl_(Uniq_SDL_Texture texture) noexcept
+Texture::Impl_::Impl_(Uniq_SDL_Texture texture) NOEXCEPT
         : texture_(std::move(texture))
 { }
 
-Texture::Texture() noexcept
+Texture::Texture() NOEXCEPT
 { }
 
 Texture::Texture(Owned<SDL_Surface> surface)
@@ -190,7 +190,7 @@ SDL_Texture* Texture::get_raw_(const Renderer& renderer) const
     throw Host_error{"Could not create texture from surface"};
 }
 
-Dimensions Texture::dimensions() const noexcept
+Dimensions Texture::dimensions() const NOEXCEPT
 {
     Dimensions result{0, 0};
 
@@ -205,12 +205,12 @@ Dimensions Texture::dimensions() const noexcept
     return result;
 }
 
-SDL_Surface* Texture::as_surface() noexcept
+SDL_Surface* Texture::as_surface() NOEXCEPT
 {
     return impl_->surface_.get();
 }
 
-bool Texture::empty() const noexcept
+bool Texture::empty() const NOEXCEPT
 {
     return impl_ == nullptr;
 }

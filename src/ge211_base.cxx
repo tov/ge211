@@ -31,7 +31,7 @@ void Abstract_game::run()
     Engine(*this).run();
 }
 
-void Abstract_game::quit() noexcept
+void Abstract_game::quit() NOEXCEPT
 {
     quit_ = true;
 }
@@ -44,7 +44,7 @@ Window& Abstract_game::get_window() const
                              "until engine is initialized"};
 }
 
-Random& Abstract_game::get_random() const noexcept
+Random& Abstract_game::get_random() const NOEXCEPT
 {
     return rng_;
 }
@@ -59,12 +59,12 @@ void Abstract_game::prepare(const sprites::Sprite& sprite) const
     }
 }
 
-void Abstract_game::mark_present_() noexcept
+void Abstract_game::mark_present_() NOEXCEPT
 {
     busy_time_.pause();
 }
 
-void Abstract_game::mark_frame_() noexcept
+void Abstract_game::mark_frame_() NOEXCEPT
 {
     busy_time_.resume();
     prev_frame_length_ = frame_start_.reset();

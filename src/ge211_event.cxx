@@ -9,7 +9,7 @@ namespace ge211 {
 
 namespace detail {
 
-bool map_button(uint8_t input, Mouse_button& output) noexcept
+bool map_button(uint8_t input, Mouse_button& output) NOEXCEPT
 {
     switch (input) {
         case SDL_BUTTON_LEFT:
@@ -30,7 +30,7 @@ bool map_button(uint8_t input, Mouse_button& output) noexcept
 
 namespace events {
 
-static Key map_key(const SDL_KeyboardEvent& e) noexcept
+static Key map_key(const SDL_KeyboardEvent& e) NOEXCEPT
 {
     if (e.keysym.sym >= 0 && e.keysym.sym < 128) {
         return Key::code(uint32_t(e.keysym.sym));
@@ -64,11 +64,11 @@ static Key map_key(const SDL_KeyboardEvent& e) noexcept
     }
 }
 
-Key::Key(const SDL_KeyboardEvent& e) noexcept
+Key::Key(const SDL_KeyboardEvent& e) NOEXCEPT
         : Key{map_key(e)}
 { }
 
-static const char* mouse_button_name(Mouse_button button) noexcept
+static const char* mouse_button_name(Mouse_button button) NOEXCEPT
 {
     switch (button) {
         case Mouse_button::left:
@@ -87,7 +87,7 @@ std::ostream& operator<<(std::ostream& os, Mouse_button button)
     return os << mouse_button_name(button);
 }
 
-static const char* key_type_name(Key::Type type) noexcept
+static const char* key_type_name(Key::Type type) NOEXCEPT
 {
     switch (type) {
         case Key::Type::code:
@@ -133,7 +133,7 @@ std::ostream& operator<<(std::ostream& os, Key key)
     }
 }
 
-bool Key::is_textual() const noexcept
+bool Key::is_textual() const NOEXCEPT
 {
     return type_ == Type::code && !iswcntrl(code_);
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ge211_forward.hxx"
+#include "ge211_noexcept.hxx"
 #include "ge211_render.hxx"
 #include "ge211_window.hxx"
 
@@ -15,7 +16,7 @@ public:
 
     void run();
     void prepare(const sprites::Sprite&) const;
-    Window& get_window() noexcept;
+    Window& get_window() NOEXCEPT;
 
     ~Engine();
 

@@ -3,6 +3,7 @@
 #include "ge211_color.hxx"
 #include "ge211_forward.hxx"
 #include "ge211_geometry.hxx"
+#include "ge211_noexcept.hxx"
 #include "ge211_time.hxx"
 #include "ge211_render.hxx"
 #include "ge211_resource.hxx"
@@ -354,12 +355,12 @@ struct Placed_sprite
     int z;
     Transform transform;
 
-    Placed_sprite(Sprite const&, Position, int, Transform const&) noexcept;
+    Placed_sprite(Sprite const&, Position, int, Transform const&) NOEXCEPT;
 
     void render(Renderer&) const;
 };
 
-bool operator<(Placed_sprite const&, Placed_sprite const&) noexcept;
+bool operator<(Placed_sprite const&, Placed_sprite const&) NOEXCEPT;
 
 } // end namespace detail
 

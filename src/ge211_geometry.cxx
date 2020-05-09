@@ -6,110 +6,110 @@ namespace ge211 {
 
 namespace geometry {
 
-Transform::Transform() noexcept
+Transform::Transform() NOEXCEPT
         : rotation_{0}, scale_x_{1.0}, scale_y_{1.0},
           flip_h_{false}, flip_v_{false}
 { }
 
-Transform Transform::rotation(double degrees) noexcept
+Transform Transform::rotation(double degrees) NOEXCEPT
 {
     return Transform().set_rotation(degrees);
 }
 
-Transform Transform::flip_h() noexcept
+Transform Transform::flip_h() NOEXCEPT
 {
     return Transform().set_flip_h(true);
 }
 
-Transform Transform::flip_v() noexcept
+Transform Transform::flip_v() NOEXCEPT
 {
     return Transform().set_flip_v(true);
 }
 
-Transform Transform::scale(double factor) noexcept
+Transform Transform::scale(double factor) NOEXCEPT
 {
     return Transform().set_scale(factor);
 }
 
-Transform Transform::scale_x(double factor) noexcept
+Transform Transform::scale_x(double factor) NOEXCEPT
 {
     return Transform().set_scale_x(factor);
 }
 
-Transform Transform::scale_y(double factor) noexcept
+Transform Transform::scale_y(double factor) NOEXCEPT
 {
     return Transform().set_scale_y(factor);
 }
 
-Transform& Transform::set_rotation(double rotation) noexcept
+Transform& Transform::set_rotation(double rotation) NOEXCEPT
 {
     while (rotation < 0) rotation += 360;
     rotation_ = std::fmod(rotation, 360);
     return *this;
 }
 
-Transform& Transform::set_flip_h(bool flip_h) noexcept
+Transform& Transform::set_flip_h(bool flip_h) NOEXCEPT
 {
     flip_h_ = flip_h;
     return *this;
 }
 
-Transform& Transform::set_flip_v(bool flip_v) noexcept
+Transform& Transform::set_flip_v(bool flip_v) NOEXCEPT
 {
     flip_v_ = flip_v;
     return *this;
 }
 
-Transform& Transform::set_scale(double scale) noexcept
+Transform& Transform::set_scale(double scale) NOEXCEPT
 {
     scale_x_ = scale;
     scale_y_ = scale;
     return *this;
 }
 
-Transform& Transform::set_scale_x(double scale_x) noexcept
+Transform& Transform::set_scale_x(double scale_x) NOEXCEPT
 {
     scale_x_ = scale_x;
     return *this;
 }
 
-Transform& Transform::set_scale_y(double scale_y) noexcept
+Transform& Transform::set_scale_y(double scale_y) NOEXCEPT
 {
     scale_y_ = scale_y;
     return *this;
 }
 
-double Transform::get_rotation() const noexcept
+double Transform::get_rotation() const NOEXCEPT
 {
     return rotation_;
 }
 
-bool Transform::get_flip_h() const noexcept
+bool Transform::get_flip_h() const NOEXCEPT
 {
     return flip_h_;
 }
 
-bool Transform::get_flip_v() const noexcept
+bool Transform::get_flip_v() const NOEXCEPT
 {
     return flip_v_;
 }
 
-double Transform::get_scale_x() const noexcept
+double Transform::get_scale_x() const NOEXCEPT
 {
     return scale_x_;
 }
 
-double Transform::get_scale_y() const noexcept
+double Transform::get_scale_y() const NOEXCEPT
 {
     return scale_y_;
 }
 
-bool Transform::is_identity() const noexcept
+bool Transform::is_identity() const NOEXCEPT
 {
     return *this == Transform();
 }
 
-Transform Transform::operator*(const Transform& other) const noexcept
+Transform Transform::operator*(const Transform& other) const NOEXCEPT
 {
     Transform result;
     result.set_rotation(rotation_ + other.rotation_);
@@ -120,7 +120,7 @@ Transform Transform::operator*(const Transform& other) const noexcept
     return result;
 }
 
-Transform Transform::inverse() const noexcept
+Transform Transform::inverse() const NOEXCEPT
 {
     Transform result;
     result.set_rotation(-rotation_);
@@ -131,7 +131,7 @@ Transform Transform::inverse() const noexcept
     return result;
 }
 
-bool operator==(const Transform& t1, const Transform& t2) noexcept
+bool operator==(const Transform& t1, const Transform& t2) NOEXCEPT
 {
     return t1.get_rotation() == t2.get_rotation() &&
             t1.get_flip_h() == t2.get_flip_h() &&
@@ -140,7 +140,7 @@ bool operator==(const Transform& t1, const Transform& t2) noexcept
             t1.get_scale_y() == t2.get_scale_y();
 }
 
-bool operator!=(const Transform& t1, const Transform& t2) noexcept
+bool operator!=(const Transform& t1, const Transform& t2) NOEXCEPT
 {
     return !(t1 == t2);
 }

@@ -2,6 +2,7 @@
 
 #include "ge211_forward.hxx"
 #include "ge211_error.hxx"
+#include "ge211_noexcept.hxx"
 
 #include <sstream>
 #include <string>
@@ -37,7 +38,7 @@ namespace detail {
 // Attempts to convert an SDL mouse button code to a ge211 Mouse_button.
 // Returns true on success, or false if the SDL mouse button code does
 // not correspond to left, middle, or right.
-bool map_button(uint8_t, Mouse_button&) noexcept;
+bool map_button(uint8_t, Mouse_button&) NOEXCEPT;
 
 // Unicode constants.
 static char32_t const lowest_unicode_surrogate = 0xD800;
@@ -128,7 +129,7 @@ public:
     /// @{
 
     /// Constructs the empty key, with type Key::Type::other.
-    Key() noexcept : Key{Type::other} { }
+    Key() NOEXCEPT : Key{Type::other} { }
 
     /// Constructs a key with the given Unicode code point code.
     /// Throws exceptions::Client_logic_error if `c` is not a valid
@@ -144,32 +145,32 @@ public:
     }
 
     /// Constructs the up arrow key.
-    static Key up() noexcept { return Key{Type::up}; };
+    static Key up() NOEXCEPT { return Key{Type::up}; };
 
     /// Constructs the down arrow key.
-    static Key down() noexcept { return Key{Type::down}; };
+    static Key down() NOEXCEPT { return Key{Type::down}; };
 
     /// Constructs the left arrow key.
-    static Key left() noexcept { return Key{Type::left}; };
+    static Key left() NOEXCEPT { return Key{Type::left}; };
 
     /// Constructs the right arrow key.
-    static Key right() noexcept { return Key{Type::right}; };
+    static Key right() NOEXCEPT { return Key{Type::right}; };
 
     /// Constructs the shift key.
-    static Key shift() noexcept { return Key{Type::shift}; };
+    static Key shift() NOEXCEPT { return Key{Type::shift}; };
 
     /// Constructs the control key.
-    static Key control() noexcept { return Key{Type::control}; };
+    static Key control() NOEXCEPT { return Key{Type::control}; };
 
     /// Constructs the alt (or option) key.
-    static Key alt() noexcept { return Key{Type::alt}; };
+    static Key alt() NOEXCEPT { return Key{Type::alt}; };
 
     /// Constructs the command (or meta) key.
-    static Key command() noexcept { return Key{Type::command}; };
+    static Key command() NOEXCEPT { return Key{Type::command}; };
 
     /// Constructs an invalid or unknown key. This returns the same
     /// value as the default constructor Key().
-    static Key other() noexcept { return Key{Type::other}; }
+    static Key other() NOEXCEPT { return Key{Type::other}; }
 
     /// @}
 
@@ -200,14 +201,14 @@ public:
     };
 
     /// The type of the key.
-    Type type() const noexcept { return type_; }
+    Type type() const NOEXCEPT { return type_; }
 
     /// The Unicode code point of the key, if it has one.
-    char32_t code() const noexcept { return code_; }
+    char32_t code() const NOEXCEPT { return code_; }
 
     /// Does the key represent printable text? This is true for some but not
     /// all Type::code keys. It's never true for other types of keys.
-    bool is_textual() const noexcept;
+    bool is_textual() const NOEXCEPT;
 
     /// Returns a representation of the key's code as a std::string. This could
     /// be useful if you want to capture typing text, rather than game control,
@@ -220,31 +221,31 @@ public:
     std::string as_text() const;
 
 private:
-    explicit Key(Type type) noexcept
+    explicit Key(Type type) NOEXCEPT
             : type_{type},
               code_{0}
     { }
 
-    explicit Key(char32_t c) noexcept
+    explicit Key(char32_t c) NOEXCEPT
             : type_{Type::code},
               code_{c}
     { }
 
     friend class detail::Engine;
-    explicit Key(SDL_KeyboardEvent const&) noexcept;
+    explicit Key(SDL_KeyboardEvent const&) NOEXCEPT;
 
     Type type_;
     char32_t code_;
 };
 
 /// Equality for keys.
-inline bool operator==(Key a, Key b) noexcept
+inline bool operator==(Key a, Key b) NOEXCEPT
 {
     return a.type() == b.type() && a.code() == b.code();
 }
 
 /// Disequality for keys.
-inline bool operator!=(Key a, Key b) noexcept
+inline bool operator!=(Key a, Key b) NOEXCEPT
 {
     return !(a == b);
 }

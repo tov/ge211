@@ -174,7 +174,7 @@ void Engine::paint_sprites_(Sprite_set& sprite_set)
     vec.clear();
 }
 
-Window& Engine::get_window() noexcept
+Window& Engine::get_window() NOEXCEPT
 {
     return window_;
 }

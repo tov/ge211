@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ge211_forward.hxx"
+#include "ge211_noexcept.hxx"
 #include "ge211_util.hxx"
 #include "ge211_error.hxx"
 
@@ -24,7 +25,7 @@ class File_resource
 public:
     explicit File_resource(const std::string&);
 
-    Borrowed<SDL_RWops> get_raw() const noexcept { return ptr_.get(); }
+    Borrowed<SDL_RWops> get_raw() const NOEXCEPT { return ptr_.get(); }
 
     Owned<SDL_RWops> release() && { return ptr_.release(); }
 
@@ -62,7 +63,7 @@ public:
 private:
     friend Text_sprite;
 
-    Borrowed<TTF_Font> get_raw_() const noexcept { return ptr_.get(); }
+    Borrowed<TTF_Font> get_raw_() const NOEXCEPT { return ptr_.get(); }
 
     detail::delete_ptr<TTF_Font, &TTF_CloseFont, true> ptr_;
 };

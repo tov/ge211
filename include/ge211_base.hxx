@@ -6,6 +6,7 @@
 #include "ge211_event.hxx"
 #include "ge211_forward.hxx"
 #include "ge211_geometry.hxx"
+#include "ge211_noexcept.hxx"
 #include "ge211_random.hxx"
 #include "ge211_resource.hxx"
 #include "ge211_session.hxx"
@@ -206,7 +207,7 @@ protected:
     ///@{
 
     /// Causes the event loop to quit after the current frame finishes.
-    void quit() noexcept;
+    void quit() NOEXCEPT;
 
     /// Gets the Window that the game is running in. This can be used to query
     /// its size, change its title, etc.
@@ -236,7 +237,7 @@ protected:
     ///
     /// See the documentation for Random to read more about how this can
     /// be used to produce random numbers.
-    Random& get_random() const noexcept;
+    Random& get_random() const NOEXCEPT;
 
     /// Gets access to the audio mixer, which can be used to play
     /// music and sound effects.
@@ -248,22 +249,22 @@ protected:
     /// Gets the time point at which the current frame started. This can be
     /// used to measure intervals between events, though it might be better
     /// to use a time::Timer or time::Pausable_timer.
-    Time_point get_frame_start_time() const noexcept
+    Time_point get_frame_start_time() const NOEXCEPT
     { return frame_start_.start_time(); }
 
     /// Returns the duration of the frame right before the frame currently
     /// running. See time::Duration for information on how to use the result.
-    Duration get_prev_frame_length() const noexcept
+    Duration get_prev_frame_length() const NOEXCEPT
     { return prev_frame_length_; }
 
     /// Returns an approximation of the current frame rate in Hz.
     /// Typically we synchronize the frame rate with the video controller, but
     /// accessing it might be useful for diagnosing performance problems.
-    double get_frame_rate() const noexcept
+    double get_frame_rate() const NOEXCEPT
     { return fps_; }
 
     /// Returns an approximation of the current machine load due to GE211.
-    double get_load_percent() const noexcept
+    double get_load_percent() const NOEXCEPT
     { return load_; }
 
     /// Prepares a sprites::Sprite for rendering, without actually including it
@@ -287,8 +288,8 @@ protected:
 private:
     friend class detail::Engine;
 
-    void mark_present_() noexcept;
-    void mark_frame_() noexcept;
+    void mark_present_() NOEXCEPT;
+    void mark_frame_() NOEXCEPT;
 
     void poll_channels_();
 

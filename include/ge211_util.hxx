@@ -187,8 +187,6 @@ private:
     }
 };
 
-} // end namespace detail
-
 /// Can type `T` be converted to type `U` without risk of an exception?
 template <class T, class U = T>
 constexpr bool is_nothrow_convertible()
@@ -223,6 +221,8 @@ constexpr bool has_nothrow_division()
     U u{};
     return noexcept(t / u);
 }
+
+} // end namespace detail
 
 } // end namespace ge211
 

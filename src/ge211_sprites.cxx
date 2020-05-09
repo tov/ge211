@@ -29,7 +29,7 @@ Sprite_set& Sprite_set::add_sprite(const Sprite& sprite, Position xy, int z)
 namespace detail {
 
 Placed_sprite::Placed_sprite(const Sprite& sprite, Position xy,
-                             int z, const Transform& transform) noexcept
+                             int z, const Transform& transform) NOEXCEPT
         : sprite{&sprite}, xy{xy}, z{z}, transform{transform}
 { }
 
@@ -38,7 +38,7 @@ void Placed_sprite::render(Renderer& dst) const
     sprite->render(dst, xy, transform);
 }
 
-bool operator<(const Placed_sprite& s1, const Placed_sprite& s2) noexcept
+bool operator<(const Placed_sprite& s1, const Placed_sprite& s2) NOEXCEPT
 {
     return s1.z > s2.z;
 }

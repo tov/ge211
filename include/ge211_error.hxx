@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ge211_forward.hxx"
+#include "ge211_noexcept.hxx"
 
 #include <exception>
 #include <memory>
@@ -26,7 +27,7 @@ public:
     /// pointer is guaranteed to be good as long as the exception
     /// exists and hasn't been mutated. If you need it for longer,
     /// copy it to a std::string.
-    const char* what() const noexcept override;
+    const char* what() const NOEXCEPT override;
 
 private:
     explicit Exception_base(const std::string& message);
@@ -191,13 +192,13 @@ class Logger
 public:
     using Level = Log_level;
 
-    Level level() const noexcept { return level_; }
-    void level(Level level) noexcept { level_ = level; }
+    Level level() const NOEXCEPT { return level_; }
+    void level(Level level) NOEXCEPT { level_ = level; }
 
-    static Logger& instance() noexcept;
+    static Logger& instance() NOEXCEPT;
 
 private:
-    Logger() noexcept = default;
+    Logger() NOEXCEPT = default;
 
     Level level_ = Level::warn;
 };
@@ -211,7 +212,7 @@ public:
 
     explicit Log_message(Level level = Level::debug);
     explicit Log_message(std::string reason,
-                         Level level = Level::debug) noexcept;
+                         Level level = Level::debug) NOEXCEPT;
 
     template <class T>
     Log_message& operator<<(const T& value)

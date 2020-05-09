@@ -3,6 +3,7 @@
 #include "ge211_color.hxx"
 #include "ge211_forward.hxx"
 #include "ge211_geometry.hxx"
+#include "ge211_noexcept.hxx"
 #include "ge211_window.hxx"
 #include "ge211_util.hxx"
 
@@ -24,7 +25,7 @@ class Renderer
 public:
     explicit Renderer(const Window&);
 
-    bool is_vsync() const noexcept;
+    bool is_vsync() const NOEXCEPT;
 
     void set_color(Color);
 
@@ -36,12 +37,12 @@ public:
     // actually copying it.
     void prepare(const Texture&) const;
 
-    void present() noexcept;
+    void present() NOEXCEPT;
 
 private:
     friend Texture;
 
-    Borrowed<SDL_Renderer> get_raw_() const noexcept;
+    Borrowed<SDL_Renderer> get_raw_() const NOEXCEPT;
 
     static Owned<SDL_Renderer> create_renderer_(Borrowed<SDL_Window>);
 
@@ -55,7 +56,7 @@ class Texture
 {
 public:
     // An empty texture; don't render this or even ask for its dimensions.
-    Texture() noexcept;
+    Texture() NOEXCEPT;
 
     // Takes ownership of the `SDL_Surface` and will delete it.
     //
@@ -64,24 +65,24 @@ public:
     explicit Texture(Owned<SDL_Surface> surface);
     explicit Texture(Uniq_SDL_Surface);
 
-    Dimensions dimensions() const noexcept;
+    Dimensions dimensions() const NOEXCEPT;
 
     // Returns nullptr if this `Texture` has been rendered, and can no
     // longer be updated as an `SDL_Surface`.
-    Borrowed<SDL_Surface> as_surface() noexcept;
+    Borrowed<SDL_Surface> as_surface() NOEXCEPT;
 
-    bool empty() const noexcept;
+    bool empty() const NOEXCEPT;
 
 private:
     friend Renderer;
 
     struct Impl_
     {
-        Impl_(Owned<SDL_Surface>) noexcept;
-        Impl_(Owned<SDL_Texture>) noexcept;
+        Impl_(Owned<SDL_Surface>) NOEXCEPT;
+        Impl_(Owned<SDL_Texture>) NOEXCEPT;
 
-        Impl_(Uniq_SDL_Surface) noexcept;
-        Impl_(Uniq_SDL_Texture) noexcept;
+        Impl_(Uniq_SDL_Surface) NOEXCEPT;
+        Impl_(Uniq_SDL_Texture) NOEXCEPT;
 
         Uniq_SDL_Surface surface_;
         Uniq_SDL_Texture texture_;
