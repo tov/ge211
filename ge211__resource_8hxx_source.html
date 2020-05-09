@@ -122,7 +122,7 @@ $(document).ready(function(){initNavTree('ge211__resource_8hxx_source.html','');
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">class </span>File_resource</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">explicit</span> File_resource(<span class="keyword">const</span> std::string&amp;);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">explicit</span> File_resource(<span class="keyword">const</span> <a class="codeRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>&amp;);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    Borrowed&lt;SDL_RWops&gt; get_raw() const NOEXCEPT { <span class="keywordflow">return</span> ptr_.get(); }</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
@@ -139,7 +139,7 @@ $(document).ready(function(){initNavTree('ge211__resource_8hxx_source.html','');
 <div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classge211_1_1_font.html">   56</a></span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1_font.html">Font</a></div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="classge211_1_1_font.html#a9bc2331b89c9ddb884c1b4b1548830fd">Font</a>(<span class="keyword">const</span> std::string&amp; filename, <span class="keywordtype">int</span> size);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="classge211_1_1_font.html#a9bc2331b89c9ddb884c1b4b1548830fd">Font</a>(<span class="keyword">const</span> <a class="codeRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>&amp; filename, <span class="keywordtype">int</span> size);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">friend</span> <a class="code" href="classge211_1_1sprites_1_1_text__sprite.html">Text_sprite</a>;</div>
@@ -152,6 +152,7 @@ $(document).ready(function(){initNavTree('ge211__resource_8hxx_source.html','');
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="abasic_string_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a></div></div>
 <div class="ttc" id="aclassge211_1_1_font_html_a9bc2331b89c9ddb884c1b4b1548830fd"><div class="ttname"><a href="classge211_1_1_font.html#a9bc2331b89c9ddb884c1b4b1548830fd">ge211::Font::Font</a></div><div class="ttdeci">Font(const std::string &amp;filename, int size)</div><div class="ttdoc">Loads a font from the specified TrueType font file, at the specified size.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__resource_8cxx_source.html#l00059">ge211_resource.cxx:59</a></div></div>
 <div class="ttc" id="anamespacege211_html"><div class="ttname"><a href="namespacege211.html">ge211</a></div><div class="ttdoc">The game engine namespace.</div><div class="ttdef"><b>Definition:</b> <a href="ge211_8hxx_source.html#l00004">ge211.hxx:4</a></div></div>
 <div class="ttc" id="aclassge211_1_1sprites_1_1_text__sprite_html"><div class="ttname"><a href="classge211_1_1sprites_1_1_text__sprite.html">ge211::sprites::Text_sprite</a></div><div class="ttdoc">A Sprite that displays text.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__sprites_8hxx_source.html#l00180">ge211_sprites.hxx:181</a></div></div>

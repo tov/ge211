@@ -233,7 +233,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:a184aaacf68bad060099912dc8d65c7df"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespacege211_1_1geometry.html#a6984557cfdc7f69501ef8b04882ecd83">Dimensions</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#a184aaacf68bad060099912dc8d65c7df">initial_window_dimensions</a> () const</td></tr>
 <tr class="memdesc:a184aaacf68bad060099912dc8d65c7df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override this function to specify the initial dimensions of the game's window.  <a href="classge211_1_1_abstract__game.html#a184aaacf68bad060099912dc8d65c7df">More...</a><br /></td></tr>
 <tr class="separator:a184aaacf68bad060099912dc8d65c7df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5dd1fce58a747385e3372c62744933d7"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#a5dd1fce58a747385e3372c62744933d7">initial_window_title</a> () const</td></tr>
+<tr class="memitem:a5dd1fce58a747385e3372c62744933d7"><td class="memItemLeft" align="right" valign="top">virtual <a class="elRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_abstract__game.html#a5dd1fce58a747385e3372c62744933d7">initial_window_title</a> () const</td></tr>
 <tr class="memdesc:a5dd1fce58a747385e3372c62744933d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override this function to specify the initial title of the game.  <a href="classge211_1_1_abstract__game.html#a5dd1fce58a747385e3372c62744933d7">More...</a><br /></td></tr>
 <tr class="separator:a5dd1fce58a747385e3372c62744933d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Functions to be called by clients</div></td></tr>
@@ -425,7 +425,7 @@ Protected Attributes</h2></td></tr>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span> (rnd.random_bool(SPAWN_RATE * dt)) {</div>
 <div class="line">        <span class="keywordtype">int</span> row   = rnd.between(ROW_MIN, ROW_MAX);</div>
-<div class="line">        <span class="keywordtype">int</span> count = rnd.up_to(PER_ROW_LIMIT);</div>
+<div class="line">        <span class="keywordtype">int</span> <a class="codeRef" href="http://en.cppreference.com/w/cpp/algorithm/count.html">count</a> = rnd.up_to(PER_ROW_LIMIT);</div>
 <div class="line">        <span class="keywordflow">while</span> (count--) {</div>
 <div class="line">            <span class="keywordtype">int</span> col  = rnd.between(COL_MIN, COL_MAX);</div>
 <div class="line">            add_enemy(row, col);</div>
@@ -509,7 +509,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string initial_window_title </td>
+          <td class="memname"><a class="elRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> initial_window_title </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -892,6 +892,7 @@ Protected Attributes</h2></td></tr>
 <div class="ttc" id="aclassge211_1_1sprites_1_1_rectangle__sprite_html"><div class="ttname"><a href="classge211_1_1sprites_1_1_rectangle__sprite.html">ge211::sprites::Rectangle_sprite</a></div><div class="ttdoc">A Sprite that renders as a solid rectangle.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__sprites_8hxx_source.html#l00127">ge211_sprites.hxx:128</a></div></div>
 <div class="ttc" id="anamespacege211_1_1geometry_html_a6820f820ccaf24da3439a5e45b0e983e"><div class="ttname"><a href="namespacege211_1_1geometry.html#a6820f820ccaf24da3439a5e45b0e983e">ge211::geometry::Position</a></div><div class="ttdeci">Basic_position&lt; int &gt; Position</div><div class="ttdoc">Type alias for the most common use of Basic_position, which is with a coordinate type of int.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__forward_8hxx_source.html#l00085">ge211_forward.hxx:85</a></div></div>
 <div class="ttc" id="anamespacege211_1_1geometry_html_a6984557cfdc7f69501ef8b04882ecd83"><div class="ttname"><a href="namespacege211_1_1geometry.html#a6984557cfdc7f69501ef8b04882ecd83">ge211::geometry::Dimensions</a></div><div class="ttdeci">Basic_dimensions&lt; int &gt; Dimensions</div><div class="ttdoc">Type alias for the most common use of Basic_dimensions, which is with a coordinate type of int.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__forward_8hxx_source.html#l00084">ge211_forward.hxx:84</a></div></div>
+<div class="ttc" id="acount_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/algorithm/count.html">std::count</a></div><div class="ttdeci">T count(T... args)</div></div>
 <div class="ttc" id="aclassge211_1_1_color_html_aa3eaf7ed370b1ef0ca79e253f547b722"><div class="ttname"><a href="classge211_1_1_color.html#aa3eaf7ed370b1ef0ca79e253f547b722">ge211::Color::medium_blue</a></div><div class="ttdeci">static Color medium_blue()</div><div class="ttdoc">Solid blue.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__color_8hxx_source.html#l00076">ge211_color.hxx:76</a></div></div>
 <div class="ttc" id="aclassge211_1_1_abstract__game_html"><div class="ttname"><a href="classge211_1_1_abstract__game.html">ge211::Abstract_game</a></div><div class="ttdoc">This is the abstract base class for deriving games.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__base_8hxx_source.html#l00095">ge211_base.hxx:96</a></div></div>
 <div class="ttc" id="aclassge211_1_1_sprite__set_html_a2240fce09cf44668dcb2e5605676935a"><div class="ttname"><a href="classge211_1_1_sprite__set.html#a2240fce09cf44668dcb2e5605676935a">ge211::Sprite_set::add_sprite</a></div><div class="ttdeci">Sprite_set &amp; add_sprite(Sprite const &amp;, Position, int z=0)</div><div class="ttdoc">Adds the given sprite at the given x–y geometry::Position and optional z coordinate,...</div><div class="ttdef"><b>Definition:</b> <a href="ge211__sprites_8cxx_source.html#l00024">ge211_sprites.cxx:24</a></div></div>

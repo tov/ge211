@@ -193,7 +193,7 @@ $(document).ready(function(){initNavTree('ge211__render_8hxx_source.html',''); i
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    Borrowed&lt;SDL_Texture&gt; get_raw_(<span class="keyword">const</span> Renderer&amp;) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    std::shared_ptr&lt;Impl_&gt; impl_;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <a class="codeRef" href="http://en.cppreference.com/w/cpp/memory/shared_ptr.html">std::shared_ptr&lt;Impl_&gt;</a> impl_;</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;};</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;} <span class="comment">// end namespace detail</span></div>
@@ -201,6 +201,7 @@ $(document).ready(function(){initNavTree('ge211__render_8hxx_source.html',''); i
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="ashared_ptr_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/memory/shared_ptr.html">std::shared_ptr&lt; Impl_ &gt;</a></div></div>
 <div class="ttc" id="anamespacege211_html"><div class="ttname"><a href="namespacege211.html">ge211</a></div><div class="ttdoc">The game engine namespace.</div><div class="ttdef"><b>Definition:</b> <a href="ge211_8hxx_source.html#l00004">ge211.hxx:4</a></div></div>
 <div class="ttc" id="anamespacege211_html_a882ee8931c0eb981b196665bb1b9b9ed"><div class="ttname"><a href="namespacege211.html#a882ee8931c0eb981b196665bb1b9b9ed">ge211::Owned</a></div><div class="ttdeci">T * Owned</div><div class="ttdoc">Type alias to indicate that the given pointer owns its object.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__util_8hxx_source.html#l00014">ge211_util.hxx:14</a></div></div>
 <div class="ttc" id="anamespacege211_html_a9a1b22da38f80c3e749c2073e824d35f"><div class="ttname"><a href="namespacege211.html#a9a1b22da38f80c3e749c2073e824d35f">ge211::Borrowed</a></div><div class="ttdeci">T * Borrowed</div><div class="ttdoc">Type alias to indicate that the given pointer does not own its object.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__util_8hxx_source.html#l00019">ge211_util.hxx:19</a></div></div>
