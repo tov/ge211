@@ -24,8 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "ge211", "index.html", [
-    [ "GE211 — a game engine for CS 211", "index.html", null ],
+  [ "ge211_docs", "index.html", [
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [

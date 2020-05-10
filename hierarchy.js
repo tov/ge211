@@ -12,7 +12,7 @@ var hierarchy =
     [ "Text_sprite::Builder", "classge211_1_1sprites_1_1_text__sprite_1_1_builder.html", null ],
     [ "Color", "classge211_1_1_color.html", null ],
     [ "Duration", "classge211_1_1time_1_1_duration.html", null ],
-    [ "exception", "http://en.cppreference.com/w/cpp/error/exception.html", [
+    [ "exception", null, [
       [ "Exception_base", "classge211_1_1exceptions_1_1_exception__base.html", [
         [ "Client_logic_error", "classge211_1_1exceptions_1_1_client__logic__error.html", [
           [ "Session_needed_error", "classge211_1_1exceptions_1_1_session__needed__error.html", null ]
@@ -32,7 +32,7 @@ var hierarchy =
     [ "hash< ge211::Basic_position< T > >", "structstd_1_1hash_3_01ge211_1_1_basic__position_3_01_t_01_4_01_4.html", null ],
     [ "Color::HSLA", "structge211_1_1_color_1_1_h_s_l_a.html", null ],
     [ "Color::HSVA", "structge211_1_1_color_1_1_h_s_v_a.html", null ],
-    [ "iterator< std::input_iterator_tag, Basic_rectangle< T >::Position const >", "http://en.cppreference.com/w/cpp/iterator/iterator.html", [
+    [ "iterator", null, [
       [ "Basic_rectangle< T >::iterator", "classge211_1_1geometry_1_1_basic__rectangle_1_1iterator.html", null ]
     ] ],
     [ "Key", "classge211_1_1events_1_1_key.html", null ],

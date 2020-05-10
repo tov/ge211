@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ge211: Mixer Class Reference</title>
+<title>ge211_docs: Mixer Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,10 +30,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">ge211
-   &#160;<span id="projectnumber">2020.5.3</span>
+   <div id="projectname">ge211_docs
    </div>
-   <div id="projectbrief">A student game engine</div>
   </td>
    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -252,7 +250,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 <p>Attaches the given music track to this mixer. </p>
 <p>Give the empty <a class="el" href="classge211_1_1audio_1_1_music__track.html" title="A music track, which can be attached to the Mixer and played.">Music_track</a> to detach the current track, if any, without attaching a replacement.</p>
-<h4><a class="anchor" id="autotoc_md5"></a>
+<h4><a class="anchor" id="autotoc_md1"></a>
 Preconditions:</h4>
 <ul>
 <li><code><a class="el" href="classge211_1_1audio_1_1_mixer.html#a3947f21f830ecb981cb8a3f422ded52a" title="Returns the current state of the attached music, if any.">get_music_state()</a></code> is <code>paused</code> or <code>detached</code>; throws <a class="el" href="classge211_1_1exceptions_1_1_client__logic__error.html" title="An exception that indicates that a logic error was performed by the client.">exceptions::Client_logic_error</a> if violated. </li>
@@ -367,7 +365,7 @@ Preconditions:</h4>
 </div><div class="memdoc">
 
 <p>Pauses the currently attached music, fading out if requested. </p>
-<h4><a class="anchor" id="autotoc_md7"></a>
+<h4><a class="anchor" id="autotoc_md3"></a>
 Preconditions:</h4>
 <ul>
 <li><code><a class="el" href="classge211_1_1audio_1_1_mixer.html#a3947f21f830ecb981cb8a3f422ded52a" title="Returns the current state of the attached music, if any.">get_music_state()</a></code> is <code>paused</code> or <code>playing</code>; throws <a class="el" href="classge211_1_1exceptions_1_1_client__logic__error.html" title="An exception that indicates that a logic error was performed by the client.">exceptions::Client_logic_error</a> if violated. </li>
@@ -405,7 +403,7 @@ Preconditions:</h4>
 
 <p>Plays the given effect track on this mixer, at the specified volume. </p>
 <p>The volume must be in the unit interval. Returns a <a class="el" href="classge211_1_1audio_1_1_sound__effect__handle.html" title="Used to control a Sound_effect after it is started playing on a Mixer.">Sound_effect_handle</a>, which can be used to control the sound effect while it's playing.</p>
-<h4><a class="anchor" id="autotoc_md9"></a>
+<h4><a class="anchor" id="autotoc_md5"></a>
 Preconditions:</h4>
 <ul>
 <li><code><a class="el" href="classge211_1_1audio_1_1_mixer.html#abe0697d7a8c4384c2a8396e4f11fd7a1" title="How many effect channels are currently unused? If this is positive, then we can play an additional so...">available_effect_channels()</a> &gt; 0</code>, throws <a class="el" href="classge211_1_1exceptions_1_1_mixer__error.html" title="Indicates an error in the mixer, which could include the inability to understand an audio file format...">exceptions::Mixer_error</a> if violated.</li>
@@ -434,7 +432,7 @@ Preconditions:</h4>
 
 <p>Attaches the given music track to this mixer and starts it playing. </p>
 <p>Equivalent to <a class="el" href="classge211_1_1audio_1_1_mixer.html#a5e4ec9c6d45c070e1393e4618f9ef8b2" title="Attaches the given music track to this mixer.">Mixer::attach_music(Music_track)</a> followed by Mixer::unpause_music(Duration).</p>
-<h4><a class="anchor" id="autotoc_md4"></a>
+<h4><a class="anchor" id="autotoc_md0"></a>
 Preconditions:</h4>
 <ul>
 <li><code><a class="el" href="classge211_1_1audio_1_1_mixer.html#a3947f21f830ecb981cb8a3f422ded52a" title="Returns the current state of the attached music, if any.">get_music_state()</a></code> is <code>paused</code> or <code>detached</code>; throws <a class="el" href="classge211_1_1exceptions_1_1_client__logic__error.html" title="An exception that indicates that a logic error was performed by the client.">exceptions::Client_logic_error</a> if violated. </li>
@@ -461,7 +459,7 @@ Preconditions:</h4>
 </div><div class="memdoc">
 
 <p>Plays the currently attached music from the current saved position, fading in if requested. </p>
-<h4><a class="anchor" id="autotoc_md6"></a>
+<h4><a class="anchor" id="autotoc_md2"></a>
 Preconditions:</h4>
 <ul>
 <li><code><a class="el" href="classge211_1_1audio_1_1_mixer.html#a3947f21f830ecb981cb8a3f422ded52a" title="Returns the current state of the attached music, if any.">get_music_state()</a></code> is <code>paused</code> or <code>playing</code>; throws <a class="el" href="classge211_1_1exceptions_1_1_client__logic__error.html" title="An exception that indicates that a logic error was performed by the client.">exceptions::Client_logic_error</a> if violated. </li>
@@ -487,7 +485,7 @@ Preconditions:</h4>
 </div><div class="memdoc">
 
 <p>Rewinds the music to the beginning. </p>
-<h4><a class="anchor" id="autotoc_md8"></a>
+<h4><a class="anchor" id="autotoc_md4"></a>
 Preconditions:</h4>
 <ul>
 <li><code><a class="el" href="classge211_1_1audio_1_1_mixer.html#a3947f21f830ecb981cb8a3f422ded52a" title="Returns the current state of the attached music, if any.">get_music_state()</a></code> is <code>paused</code>; throws <a class="el" href="classge211_1_1exceptions_1_1_client__logic__error.html" title="An exception that indicates that a logic error was performed by the client.">exceptions::Client_logic_error</a> if violated. </li>
@@ -524,7 +522,7 @@ Preconditions:</h4>
 </div><div class="memdoc">
 
 <p>Attempts to play the given effect track on this mixer, returning an empty <a class="el" href="classge211_1_1audio_1_1_sound__effect__handle.html" title="Used to control a Sound_effect after it is started playing on a Mixer.">Sound_effect_handle</a> if no effect channel is available. </p>
-<h4><a class="anchor" id="autotoc_md10"></a>
+<h4><a class="anchor" id="autotoc_md6"></a>
 Preconditions:</h4>
 <ul>
 <li><code>!effect.empty()</code>, undefined behavior if violated. </li>
@@ -535,8 +533,8 @@ Preconditions:</h4>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>include/<a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a></li>
-<li>src/<a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a></li>
+<li>/Users/tov/school/cs211/dev/ge211/include/<a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a></li>
+<li>/Users/tov/school/cs211/dev/ge211/src/<a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

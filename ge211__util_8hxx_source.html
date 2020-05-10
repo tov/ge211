@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ge211: include/ge211_util.hxx Source File</title>
+<title>ge211_docs: /Users/tov/school/cs211/dev/ge211/include/ge211_util.hxx Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,10 +30,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">ge211
-   &#160;<span id="projectnumber">2020.5.3</span>
+   <div id="projectname">ge211_docs
    </div>
-   <div id="projectbrief">A student game engine</div>
   </td>
    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -114,11 +112,11 @@ $(document).ready(function(){initNavTree('ge211__util_8hxx_source.html',''); ini
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="namespacege211.html#a9a1b22da38f80c3e749c2073e824d35f">   19</a></span>&#160;<span class="keyword">using</span> <a class="code" href="namespacege211.html#a9a1b22da38f80c3e749c2073e824d35f">Borrowed</a> = T*;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="namespacege211.html#ab44c045d1ee9568a4c89f0399512eb28">   23</a></span>&#160;<a class="codeRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> <a class="code" href="namespacege211.html#ab44c045d1ee9568a4c89f0399512eb28">to_string</a>(<span class="keyword">const</span> T&amp; value)</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="namespacege211.html#ab44c045d1ee9568a4c89f0399512eb28">   23</a></span>&#160;std::string <a class="code" href="namespacege211.html#ab44c045d1ee9568a4c89f0399512eb28">to_string</a>(<span class="keyword">const</span> T&amp; value)</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="codeRef" href="http://en.cppreference.com/w/cpp/io/basic_ostringstream.html">std::ostringstream</a> oss;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    std::ostringstream oss;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    oss &lt;&lt; value;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordflow">return</span> oss.<a class="codeRef" href="http://en.cppreference.com/w/cpp/io/basic_ostringstream/str.html">str</a>();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordflow">return</span> oss.str();</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">// `detail` is for implementation details</span></div>
@@ -133,7 +131,7 @@ $(document).ready(function(){initNavTree('ge211__util_8hxx_source.html',''); ini
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keywordtype">void</span> c_heap_deleter(Owned&lt;T&gt; o)</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="codeRef" href="http://en.cppreference.com/w/cpp/memory/c/free.html">std::free</a>(o);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    std::free(o);</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">template</span>&lt;</div>
@@ -158,7 +156,7 @@ $(document).ready(function(){initNavTree('ge211__util_8hxx_source.html',''); ini
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">explicit</span> delete_ptr(owned_pointer ptr) noexcept</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            : ptr_(ptr) { }</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    delete_ptr(<a class="codeRef" href="http://en.cppreference.com/w/cpp/types/nullptr_t.html">std::nullptr_t</a>) noexcept</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    delete_ptr(std::nullptr_t) noexcept</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            : ptr_(<span class="keyword">nullptr</span>) { }</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    delete_ptr(delete_ptr <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
@@ -209,15 +207,15 @@ $(document).ready(function(){initNavTree('ge211__util_8hxx_source.html',''); ini
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordflow">return</span> ptr_ != <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    }</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keyword">explicit</span> <span class="keyword">operator</span> <a class="codeRef" href="http://en.cppreference.com/w/cpp/memory/unique_ptr.html">std::unique_ptr&lt;object_type, deleter_function_type&gt;</a>()</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keyword">explicit</span> <span class="keyword">operator</span> std::unique_ptr&lt;object_type, deleter_function_type&gt;()</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    &amp;&amp; noexcept</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    {</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="keywordflow">return</span> {release(), deleter_function};</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    };</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keyword">friend</span> <span class="keywordtype">void</span> <a class="codeRef" href="http://en.cppreference.com/w/cpp/algorithm/swap.html">swap</a>(delete_ptr&amp; a, delete_ptr&amp; b) noexcept</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keyword">friend</span> <span class="keywordtype">void</span> swap(delete_ptr&amp; a, delete_ptr&amp; b) noexcept</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    {</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <a class="codeRef" href="http://en.cppreference.com/w/cpp/algorithm/swap.html">std::swap</a>(a.ptr_, b.ptr_);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        std::swap(a.ptr_, b.ptr_);</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    }</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="keyword">private</span>:</div>
@@ -238,7 +236,7 @@ $(document).ready(function(){initNavTree('ge211__util_8hxx_source.html',''); ini
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;}</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T, deleter_t&lt;T&gt; deleter&gt;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keywordtype">bool</span> <a class="codeRef" href="http://en.cppreference.com/w/cpp/utility/rel_ops/operator_cmp.html">operator!=</a>(delete_ptr&lt;T, deleter&gt; <span class="keyword">const</span>&amp; a,</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespacege211_1_1events.html#aa66d397f3868285ebc7ebf557d47c19b">operator!=</a>(delete_ptr&lt;T, deleter&gt; <span class="keyword">const</span>&amp; a,</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                delete_ptr&lt;T, deleter&gt; <span class="keyword">const</span>&amp; b)</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;{</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keywordflow">return</span> !(a == b);</div>
@@ -268,16 +266,16 @@ $(document).ready(function(){initNavTree('ge211__util_8hxx_source.html',''); ini
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    pointer operator-&gt;()<span class="keyword"> const</span></div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keywordflow">return</span> <a class="codeRef" href="http://en.cppreference.com/w/cpp/memory/addressof.html">std::addressof</a>(<span class="keyword">operator</span>*());</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keywordflow">return</span> std::addressof(<span class="keyword">operator</span>*());</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    }</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keyword">mutable</span> <a class="codeRef" href="http://en.cppreference.com/w/cpp/memory/unique_ptr.html">std::unique_ptr&lt;value&gt;</a> ptr_;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keyword">mutable</span> std::unique_ptr&lt;value&gt; ptr_;</div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keywordtype">void</span> force_()<span class="keyword"> const</span></div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="keyword">    </span>{</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <span class="keywordflow">if</span> (!ptr_)</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            ptr_.<a class="codeRef" href="http://en.cppreference.com/w/cpp/memory/unique_ptr/reset.html">reset</a>(<span class="keyword">new</span> value);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            ptr_.reset(<span class="keyword">new</span> value);</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    }</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;};</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
@@ -317,22 +315,13 @@ $(document).ready(function(){initNavTree('ge211__util_8hxx_source.html',''); ini
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="abasic_string_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a></div></div>
-<div class="ttc" id="aoperator_cmp_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/utility/rel_ops/operator_cmp.html">std::rel_ops::operator!=</a></div><div class="ttdeci">T operator!=(T... args)</div></div>
-<div class="ttc" id="areset_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/memory/unique_ptr/reset.html">std::unique_ptr::reset</a></div><div class="ttdeci">T reset(T... args)</div></div>
 <div class="ttc" id="anamespacege211_html"><div class="ttname"><a href="namespacege211.html">ge211</a></div><div class="ttdoc">The game engine namespace.</div><div class="ttdef"><b>Definition:</b> <a href="ge211_8hxx_source.html#l00004">ge211.hxx:4</a></div></div>
 <div class="ttc" id="anamespacege211_html_a882ee8931c0eb981b196665bb1b9b9ed"><div class="ttname"><a href="namespacege211.html#a882ee8931c0eb981b196665bb1b9b9ed">ge211::Owned</a></div><div class="ttdeci">T * Owned</div><div class="ttdoc">Type alias to indicate that the given pointer owns its object.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__util_8hxx_source.html#l00014">ge211_util.hxx:14</a></div></div>
-<div class="ttc" id="anullptr_t_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/types/nullptr_t.html">std::nullptr_t</a></div></div>
-<div class="ttc" id="aaddressof_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/memory/addressof.html">std::addressof</a></div><div class="ttdeci">T addressof(T... args)</div></div>
 <div class="ttc" id="anamespacege211_html_ab44c045d1ee9568a4c89f0399512eb28"><div class="ttname"><a href="namespacege211.html#ab44c045d1ee9568a4c89f0399512eb28">ge211::to_string</a></div><div class="ttdeci">std::string to_string(const T &amp;value)</div><div class="ttdoc">Converts any printable type to a std::string.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__util_8hxx_source.html#l00023">ge211_util.hxx:23</a></div></div>
 <div class="ttc" id="anamespacege211_1_1events_html_a2934c86f8a4db7b1b836fb9dbafcf4a2"><div class="ttname"><a href="namespacege211_1_1events.html#a2934c86f8a4db7b1b836fb9dbafcf4a2">ge211::events::operator==</a></div><div class="ttdeci">bool operator==(Key a, Key b)</div><div class="ttdoc">Equality for keys.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__event_8hxx_source.html#l00242">ge211_event.hxx:242</a></div></div>
 <div class="ttc" id="anamespacege211_html_a9a1b22da38f80c3e749c2073e824d35f"><div class="ttname"><a href="namespacege211.html#a9a1b22da38f80c3e749c2073e824d35f">ge211::Borrowed</a></div><div class="ttdeci">T * Borrowed</div><div class="ttdoc">Type alias to indicate that the given pointer does not own its object.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__util_8hxx_source.html#l00019">ge211_util.hxx:19</a></div></div>
-<div class="ttc" id="aswap_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/algorithm/swap.html">std::swap</a></div><div class="ttdeci">T swap(T... args)</div></div>
-<div class="ttc" id="abasic_ostringstream_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/io/basic_ostringstream.html">std::ostringstream</a></div></div>
 <div class="ttc" id="anamespacege211_1_1geometry_html_a9d568871b884178dc1eac7a03036ea34"><div class="ttname"><a href="namespacege211_1_1geometry.html#a9d568871b884178dc1eac7a03036ea34">ge211::geometry::operator*</a></div><div class="ttdeci">Basic_dimensions&lt; T &gt; operator*(Basic_dimensions&lt; T &gt; d1, T s2)</div><div class="ttdoc">Multiplies a Basic_dimensions by a scalar.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8hxx_source.html#l00086">ge211_geometry.hxx:86</a></div></div>
-<div class="ttc" id="afree_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/memory/c/free.html">std::free</a></div><div class="ttdeci">T free(T... args)</div></div>
-<div class="ttc" id="astr_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/io/basic_ostringstream/str.html">std::ostringstream::str</a></div><div class="ttdeci">T str(T... args)</div></div>
-<div class="ttc" id="aunique_ptr_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/memory/unique_ptr.html">std::unique_ptr</a></div></div>
+<div class="ttc" id="anamespacege211_1_1events_html_aa66d397f3868285ebc7ebf557d47c19b"><div class="ttname"><a href="namespacege211_1_1events.html#aa66d397f3868285ebc7ebf557d47c19b">ge211::events::operator!=</a></div><div class="ttdeci">bool operator!=(Key a, Key b)</div><div class="ttdoc">Disequality for keys.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__event_8hxx_source.html#l00248">ge211_event.hxx:248</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

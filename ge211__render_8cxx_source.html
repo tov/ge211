@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ge211: src/ge211_render.cxx Source File</title>
+<title>ge211_docs: /Users/tov/school/cs211/dev/ge211/src/ge211_render.cxx Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,10 +30,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">ge211
-   &#160;<span id="projectnumber">2020.5.3</span>
+   <div id="projectname">ge211_docs
    </div>
-   <div id="projectbrief">A student game engine</div>
   </td>
    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -224,16 +222,16 @@ $(document).ready(function(){initNavTree('ge211__render_8cxx_source.html',''); i
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordflow">if</span> (!raw_texture) <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    SDL_Rect dstrect = <a class="code" href="structge211_1_1geometry_1_1_basic__rectangle.html#a0a9ce8f44d07ab35d28849b7a34eab16">Rectangle::from_top_left</a>(xy, texture.dimensions());</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    dstrect.w = int(dstrect.w * <a class="codeRef" href="http://en.cppreference.com/w/cpp/algorithm/transform.html">transform</a>.get_scale_x());</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    dstrect.h = int(dstrect.h * <a class="codeRef" href="http://en.cppreference.com/w/cpp/algorithm/transform.html">transform</a>.get_scale_y());</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    dstrect.w = int(dstrect.w * transform.get_scale_x());</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    dstrect.h = int(dstrect.h * transform.get_scale_y());</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    SDL_RendererFlip flip = SDL_FLIP_NONE;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordflow">if</span> (<a class="codeRef" href="http://en.cppreference.com/w/cpp/algorithm/transform.html">transform</a>.get_flip_h()) flip |= SDL_FLIP_HORIZONTAL;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keywordflow">if</span> (<a class="codeRef" href="http://en.cppreference.com/w/cpp/algorithm/transform.html">transform</a>.get_flip_v()) flip |= SDL_FLIP_VERTICAL;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordflow">if</span> (transform.get_flip_h()) flip |= SDL_FLIP_HORIZONTAL;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keywordflow">if</span> (transform.get_flip_v()) flip |= SDL_FLIP_VERTICAL;</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordtype">int</span> render_result = SDL_RenderCopyEx(get_raw_(), raw_texture,</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                                         <span class="keyword">nullptr</span>, &amp;dstrect,</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                                         <a class="codeRef" href="http://en.cppreference.com/w/cpp/algorithm/transform.html">transform</a>.get_rotation(),</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                                         transform.get_rotation(),</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                                         <span class="keyword">nullptr</span>,</div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                                         flip);</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keywordflow">if</span> (render_result &lt; 0) {</div>
@@ -270,7 +268,7 @@ $(document).ready(function(){initNavTree('ge211__render_8cxx_source.html',''); i
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;{ }</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;Texture::Texture(Uniq_SDL_Surface surface)</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        : impl_(std::<a class="codeRef" href="http://en.cppreference.com/w/cpp/memory/shared_ptr/make_shared.html">make_shared</a>&lt;Impl_&gt;(std::<a class="codeRef" href="http://en.cppreference.com/w/cpp/utility/move.html">move</a>(surface)))</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        : impl_(std::make_shared&lt;Impl_&gt;(std::move(surface)))</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;{ }</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;SDL_Texture* Texture::get_raw_(<span class="keyword">const</span> Renderer&amp; renderer)<span class="keyword"> const</span></div>
@@ -319,11 +317,8 @@ $(document).ready(function(){initNavTree('ge211__render_8cxx_source.html',''); i
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="amove_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/utility/move.html">std::move</a></div><div class="ttdeci">T move(T... args)</div></div>
-<div class="ttc" id="amake_shared_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/memory/shared_ptr/make_shared.html">std::make_shared</a></div><div class="ttdeci">T make_shared(T... args)</div></div>
 <div class="ttc" id="anamespacege211_html"><div class="ttname"><a href="namespacege211.html">ge211</a></div><div class="ttdoc">The game engine namespace.</div><div class="ttdef"><b>Definition:</b> <a href="ge211_8hxx_source.html#l00004">ge211.hxx:4</a></div></div>
 <div class="ttc" id="astructge211_1_1geometry_1_1_basic__rectangle_html_a0a9ce8f44d07ab35d28849b7a34eab16"><div class="ttname"><a href="structge211_1_1geometry_1_1_basic__rectangle.html#a0a9ce8f44d07ab35d28849b7a34eab16">ge211::geometry::Basic_rectangle::from_top_left</a></div><div class="ttdeci">static Basic_rectangle from_top_left(Position tl, Dimensions dims)</div><div class="ttdoc">Creates a Basic_rectangle given the position of its top left vertex and its dimensions.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8hxx_source.html#l00428">ge211_geometry.hxx:428</a></div></div>
-<div class="ttc" id="atransform_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/algorithm/transform.html">std::transform</a></div><div class="ttdeci">T transform(T... args)</div></div>
 <div class="ttc" id="anamespacege211_1_1geometry_html_a6984557cfdc7f69501ef8b04882ecd83"><div class="ttname"><a href="namespacege211_1_1geometry.html#a6984557cfdc7f69501ef8b04882ecd83">ge211::geometry::Dimensions</a></div><div class="ttdeci">Basic_dimensions&lt; int &gt; Dimensions</div><div class="ttdoc">Type alias for the most common use of Basic_dimensions, which is with a coordinate type of int.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__forward_8hxx_source.html#l00084">ge211_forward.hxx:84</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

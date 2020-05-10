@@ -6,5 +6,5 @@
 <area shape="rect" id="node8" href="$classge211_1_1exceptions_1_1_mixer__error.html" title="Indicates an error in the mixer, which could include the inability to understand an audio file format..." alt="" coords="327,304,413,331"/>
 <area shape="rect" id="node2" href="$classge211_1_1exceptions_1_1_environment__error.html" title="Indicates that an error was encountered by the game engine or in the client&#39;s environment." alt="" coords="137,155,265,181"/>
 <area shape="rect" id="node3" href="$classge211_1_1exceptions_1_1_exception__base.html" title="The root of the ge211 exception hierarchy." alt="" coords="143,80,258,107"/>
-<area shape="rect" id="node4" href="/Users/tov/school/cs211/dev/ge211/doxygen/cppreference.xml$cpp/error/exception.html" title=" " alt="" coords="161,5,240,32"/>
+<area shape="rect" id="node4" title=" " alt="" coords="161,5,240,32"/>
 </map>

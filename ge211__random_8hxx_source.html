@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ge211: include/ge211_random.hxx Source File</title>
+<title>ge211_docs: /Users/tov/school/cs211/dev/ge211/include/ge211_random.hxx Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,10 +30,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">ge211
-   &#160;<span id="projectnumber">2020.5.3</span>
+   <div id="projectname">ge211_docs
    </div>
-   <div id="projectbrief">A student game engine</div>
   </td>
    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -115,7 +113,7 @@ $(document).ready(function(){initNavTree('ge211__random_8hxx_source.html',''); i
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">struct </span>Between</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            <a class="codeRef" href="http://en.cppreference.com/w/cpp/types/is_integral.html">std::is_integral&lt;T&gt;::value</a> || <a class="codeRef" href="http://en.cppreference.com/w/cpp/types/is_floating_point.html">std::is_floating_point&lt;T&gt;::value</a>,</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            std::is_integral&lt;T&gt;::value || std::is_floating_point&lt;T&gt;::value,</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            <span class="stringliteral">&quot;Random::between: only works on built-in numeric types&quot;</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    );</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
@@ -123,30 +121,30 @@ $(document).ready(function(){initNavTree('ge211__random_8hxx_source.html',''); i
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T, <span class="keyword">class</span> Enable = <span class="keywordtype">void</span>&gt;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">struct </span>Up_to {</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <a class="codeRef" href="http://en.cppreference.com/w/cpp/types/is_integral.html">std::is_integral&lt;T&gt;::value</a> || <a class="codeRef" href="http://en.cppreference.com/w/cpp/types/is_floating_point.html">std::is_floating_point&lt;T&gt;::value</a>,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            std::is_integral&lt;T&gt;::value || std::is_floating_point&lt;T&gt;::value,</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="stringliteral">&quot;Random::up_to: only works on built-in numeric types&quot;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    );</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;};</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">struct </span>Between&lt;T, std::enable_if_t&lt;std::is_integral&lt;T&gt;::value&gt;&gt;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        : <a class="codeRef" href="http://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution.html">std::uniform_int_distribution</a>&lt;T&gt;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        : std::uniform_int_distribution&lt;T&gt;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">using</span> <a class="codeRef" href="http://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution.html">std::uniform_int_distribution&lt;T&gt;::uniform_int_distribution</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">using</span> std::uniform_int_distribution&lt;T&gt;::uniform_int_distribution;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">struct </span>Between&lt;T, std::enable_if_t&lt;std::is_floating_point&lt;T&gt;::value&gt;&gt;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        : <a class="codeRef" href="http://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution.html">std::uniform_real_distribution</a>&lt;T&gt;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        : std::uniform_real_distribution&lt;T&gt;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">using</span> <a class="codeRef" href="http://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution.html">std::uniform_real_distribution&lt;T&gt;::uniform_real_distribution</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">using</span> std::uniform_real_distribution&lt;T&gt;::uniform_real_distribution;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;};</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">struct </span>Up_to&lt;T, std::enable_if_t&lt;std::is_integral&lt;T&gt;::value&gt;&gt;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        : Between&lt;T&gt;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">explicit</span> Up_to(T max) : Between&lt;T&gt;{0, <a class="codeRef" href="http://en.cppreference.com/w/cpp/algorithm/max.html">max</a> - 1}</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">explicit</span> Up_to(T max) : Between&lt;T&gt;{0, max - 1}</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    { }</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;};</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
@@ -154,7 +152,7 @@ $(document).ready(function(){initNavTree('ge211__random_8hxx_source.html',''); i
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">struct </span>Up_to&lt;T, std::enable_if_t&lt;std::is_floating_point&lt;T&gt;::value&gt;&gt;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        : Between&lt;T&gt;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">explicit</span> Up_to(T max) : Between&lt;T&gt;{0, <a class="codeRef" href="http://en.cppreference.com/w/cpp/algorithm/max.html">max</a>}</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">explicit</span> Up_to(T max) : Between&lt;T&gt;{0, max}</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    { }</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;};</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
@@ -181,8 +179,8 @@ $(document).ready(function(){initNavTree('ge211__random_8hxx_source.html',''); i
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    &gt;</div>
 <div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="classge211_1_1_random.html#a26402ea3fd575d535a6e23a3679804e7">  116</a></span>&#160;    T <a class="code" href="classge211_1_1_random.html#a26402ea3fd575d535a6e23a3679804e7">any</a>()</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    {</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classge211_1_1_random.html#a808fbdef59773f1b4e91ab3c6498d597">between</a>(<a class="codeRef" href="http://en.cppreference.com/w/cpp/types/numeric_limits.html">std::numeric_limits&lt;T&gt;::min</a>(),</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                       <a class="codeRef" href="http://en.cppreference.com/w/cpp/types/numeric_limits.html">std::numeric_limits&lt;T&gt;::max</a>());</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classge211_1_1_random.html#a808fbdef59773f1b4e91ab3c6498d597">between</a>(std::numeric_limits&lt;T&gt;::min(),</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                       std::numeric_limits&lt;T&gt;::max());</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    }</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classge211_1_1_random.html#a24c34022698ab572faa24fb04a699b12">random_bool</a>(<span class="keywordtype">double</span> ptrue = 0.5);</div>
@@ -204,29 +202,22 @@ $(document).ready(function(){initNavTree('ge211__random_8hxx_source.html',''); i
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <a class="code" href="classge211_1_1_random.html">Random</a>();</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <a class="codeRef" href="http://en.cppreference.com/w/cpp/numeric/random/mersenne_twister_engine.html">std::mt19937_64</a> generator_;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    std::mt19937_64 generator_;</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;};</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="auniform_int_distribution_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution.html">std::uniform_int_distribution</a></div></div>
 <div class="ttc" id="aclassge211_1_1_random_html"><div class="ttname"><a href="classge211_1_1_random.html">ge211::Random</a></div><div class="ttdoc">A pseudo-random number generator.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00073">ge211_random.hxx:74</a></div></div>
 <div class="ttc" id="aclassge211_1_1_random_html_a133930e008c0a2d429aeff000639fe42"><div class="ttname"><a href="classge211_1_1_random.html#a133930e008c0a2d429aeff000639fe42">ge211::Random::operator=</a></div><div class="ttdeci">Random &amp; operator=(Random &amp;&amp;)=delete</div><div class="ttdoc">Can't move the random number generator.</div></div>
 <div class="ttc" id="aclassge211_1_1_random_html_a288f955cf834411b32b1ca2780432f27"><div class="ttname"><a href="classge211_1_1_random.html#a288f955cf834411b32b1ca2780432f27">ge211::Random::Random</a></div><div class="ttdeci">Random(Random &amp;)=delete</div><div class="ttdoc">Can't copy the random number generator.</div></div>
-<div class="ttc" id="auniform_real_distribution_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution.html">std::uniform_real_distribution</a></div></div>
-<div class="ttc" id="amersenne_twister_engine_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/numeric/random/mersenne_twister_engine.html">std::mt19937_64</a></div></div>
 <div class="ttc" id="anamespacege211_html"><div class="ttname"><a href="namespacege211.html">ge211</a></div><div class="ttdoc">The game engine namespace.</div><div class="ttdef"><b>Definition:</b> <a href="ge211_8hxx_source.html#l00004">ge211.hxx:4</a></div></div>
 <div class="ttc" id="aclassge211_1_1_random_html_af6dbfa2117de44f65d3531dddd639413"><div class="ttname"><a href="classge211_1_1_random.html#af6dbfa2117de44f65d3531dddd639413">ge211::Random::up_to</a></div><div class="ttdeci">T up_to(T max)</div><div class="ttdoc">Returns a random T between 0 (inclusive) and max (exclusive).</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00087">ge211_random.hxx:87</a></div></div>
 <div class="ttc" id="aclassge211_1_1_random_html_a24c34022698ab572faa24fb04a699b12"><div class="ttname"><a href="classge211_1_1_random.html#a24c34022698ab572faa24fb04a699b12">ge211::Random::random_bool</a></div><div class="ttdeci">bool random_bool(double ptrue=0.5)</div><div class="ttdoc">Returns a random bool that is true with probability ptrue.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8cxx_source.html#l00022">ge211_random.cxx:22</a></div></div>
 <div class="ttc" id="aclassge211_1_1_random_html_a808fbdef59773f1b4e91ab3c6498d597"><div class="ttname"><a href="classge211_1_1_random.html#a808fbdef59773f1b4e91ab3c6498d597">ge211::Random::between</a></div><div class="ttdeci">T between(T min, T max)</div><div class="ttdoc">Returns a random T between min and max.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00105">ge211_random.hxx:105</a></div></div>
-<div class="ttc" id="ais_integral_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/types/is_integral.html">std::is_integral</a></div></div>
 <div class="ttc" id="aclassge211_1_1_random_html_a26402ea3fd575d535a6e23a3679804e7"><div class="ttname"><a href="classge211_1_1_random.html#a26402ea3fd575d535a6e23a3679804e7">ge211::Random::any</a></div><div class="ttdeci">T any()</div><div class="ttdoc">Returns a random T from the whole range of T.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00116">ge211_random.hxx:116</a></div></div>
-<div class="ttc" id="ais_floating_point_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/types/is_floating_point.html">std::is_floating_point</a></div></div>
 <div class="ttc" id="aclassge211_1_1_random_html_a8008cb16783dee2b8e621cce820bc688"><div class="ttname"><a href="classge211_1_1_random.html#a8008cb16783dee2b8e621cce820bc688">ge211::Random::operator=</a></div><div class="ttdeci">Random &amp; operator=(Random &amp;)=delete</div><div class="ttdoc">Can't copy the random number generator.</div></div>
-<div class="ttc" id="amax_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/algorithm/max.html">std::max</a></div><div class="ttdeci">T max(T... args)</div></div>
 <div class="ttc" id="aclassge211_1_1_abstract__game_html"><div class="ttname"><a href="classge211_1_1_abstract__game.html">ge211::Abstract_game</a></div><div class="ttdoc">This is the abstract base class for deriving games.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__base_8hxx_source.html#l00095">ge211_base.hxx:96</a></div></div>
-<div class="ttc" id="anumeric_limits_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/types/numeric_limits.html">std::numeric_limits</a></div></div>
 <div class="ttc" id="aclassge211_1_1_random_html_adafc8f8792a34676726ae63ee404cb0c"><div class="ttname"><a href="classge211_1_1_random.html#adafc8f8792a34676726ae63ee404cb0c">ge211::Random::Random</a></div><div class="ttdeci">Random(Random &amp;&amp;)=delete</div><div class="ttdoc">Can't move the random number generator.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

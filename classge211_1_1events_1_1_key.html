@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ge211: Key Class Reference</title>
+<title>ge211_docs: Key Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,10 +30,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">ge211
-   &#160;<span id="projectnumber">2020.5.3</span>
+   <div id="projectname">ge211_docs
    </div>
-   <div id="projectbrief">A student game engine</div>
   </td>
    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -181,8 +179,8 @@ char32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <tr class="memitem:a3119dc9181d530cd2df1a9112b8024dd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1events_1_1_key.html#a3119dc9181d530cd2df1a9112b8024dd">is_textual</a> () const</td></tr>
 <tr class="memdesc:a3119dc9181d530cd2df1a9112b8024dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Does the key represent printable text? This is true for some but not all <a class="el" href="classge211_1_1events_1_1_key.html#a1d1cfd8ffb84e947f82999c682b666a7ac13367945d5d4c91047b3b50234aa7ab" title="Indicates a key with an Unicode value, which can be gotten with Key::code() const.">Type::code</a> keys.  <a href="classge211_1_1events_1_1_key.html#a3119dc9181d530cd2df1a9112b8024dd">More...</a><br /></td></tr>
 <tr class="separator:a3119dc9181d530cd2df1a9112b8024dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0fccc6a22afa07f575ade365343a794d"><td class="memItemLeft" align="right" valign="top"><a class="elRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1events_1_1_key.html#a0fccc6a22afa07f575ade365343a794d">as_text</a> () const</td></tr>
-<tr class="memdesc:a0fccc6a22afa07f575ade365343a794d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a representation of the key's code as a <a class="elRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>.  <a href="classge211_1_1events_1_1_key.html#a0fccc6a22afa07f575ade365343a794d">More...</a><br /></td></tr>
+<tr class="memitem:a0fccc6a22afa07f575ade365343a794d"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1events_1_1_key.html#a0fccc6a22afa07f575ade365343a794d">as_text</a> () const</td></tr>
+<tr class="memdesc:a0fccc6a22afa07f575ade365343a794d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a representation of the key's code as a std::string.  <a href="classge211_1_1events_1_1_key.html#a0fccc6a22afa07f575ade365343a794d">More...</a><br /></td></tr>
 <tr class="separator:a0fccc6a22afa07f575ade365343a794d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
@@ -287,7 +285,7 @@ static <a class="el" href="classge211_1_1events_1_1_key.html">Key</a>&#160;</td>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="elRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> as_text </td>
+          <td class="memname">std::string as_text </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -295,7 +293,7 @@ static <a class="el" href="classge211_1_1events_1_1_key.html">Key</a>&#160;</td>
       </table>
 </div><div class="memdoc">
 
-<p>Returns a representation of the key's code as a <a class="elRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>. </p>
+<p>Returns a representation of the key's code as a std::string. </p>
 <p>This could be useful if you want to capture typing text, rather than game control, because concatenating a string to a string is easier than concatenating the <code>char32_t</code> <a class="el" href="classge211_1_1events_1_1_key.html#a5c5a3e3646231bc305d56b93d2a3d2ab" title="The Unicode code point of the key, if it has one.">code() const </a>to a string, when that could be an arbitrary Unicode code point.</p>
 <p>The result of this function is only meaningful when <a class="el" href="classge211_1_1events_1_1_key.html#a3119dc9181d530cd2df1a9112b8024dd" title="Does the key represent printable text? This is true for some but not all Type::code keys.">is_textual() const </a>returns true. </p>
 
@@ -387,8 +385,8 @@ static <a class="el" href="classge211_1_1events_1_1_key.html">Key</a>&#160;</td>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>include/<a class="el" href="ge211__event_8hxx_source.html">ge211_event.hxx</a></li>
-<li>src/<a class="el" href="ge211__event_8cxx_source.html">ge211_event.cxx</a></li>
+<li>/Users/tov/school/cs211/dev/ge211/include/<a class="el" href="ge211__event_8hxx_source.html">ge211_event.hxx</a></li>
+<li>/Users/tov/school/cs211/dev/ge211/src/<a class="el" href="ge211__event_8cxx_source.html">ge211_event.cxx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
