@@ -24,7 +24,8 @@ set(DOXYGEN_MACRO_EXPANSION        YES)
 set(DOXYGEN_EXPAND_ONLY_PREDEF     YES)
 set(DOXYGEN_EXPAND_AS_DEFINED      NOEXCEPT NOEXCEPT_)
 
-execute_process(COMMAND "sed;-E;/^\\[.*\\]: *$$/,/^ *$$/d\; s/[][]//g"
+SET(sed_command sed -E "/^\\[.*\\]: *$$/,/^ *$$/d\;s/[][]//g")
+execute_process(COMMAND ${sed_command}
         INPUT_FILE   ${readme_md}
         OUTPUT_FILE  ${frontmatter_md})
 file(GLOB_RECURSE ge211_srcs
