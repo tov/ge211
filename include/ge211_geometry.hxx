@@ -41,6 +41,15 @@ struct Basic_dimensions
     {
         return {U(width), U(height)};
     }
+
+    /// Alias for `into<U>()` to support casting between coordinate
+    /// types.
+    template <class U>
+    explicit operator Basic_dimensions<U>() const
+    NOEXCEPT_(noexcept(into<U>()))
+    {
+        return into<U>();
+    }
 };
 
 /// Type alias for the most common use of Basic_dimensions, which is with
@@ -254,6 +263,15 @@ struct Basic_position
         return {U(x), U(y)};
     }
 
+    /// Alias for `into<U>()` to support casting between coordinate
+    /// types.
+    template <class U>
+    explicit operator Basic_position<U>() const
+    NOEXCEPT_(noexcept(into<U>()))
+    {
+        return into<U>();
+    }
+
     /// @}
 
     /// \name Shifting member functions
@@ -421,6 +439,15 @@ struct Basic_rectangle
         NOEXCEPT_(detail::is_nothrow_convertible<Coordinate, U>())
     {
         return {U(x), U(y), U(width), U(height)};
+    }
+
+    /// Alias for `into<U>()` to support casting between coordinate
+    /// types.
+    template <class U>
+    explicit operator Basic_rectangle<U>() const
+    NOEXCEPT_(noexcept(into<U>()))
+    {
+        return into<U>();
     }
 
     /// Creates a Basic_rectangle given the position of its top left vertex

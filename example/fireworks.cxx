@@ -248,13 +248,13 @@ void Fireworks::draw_fireworks(Sprite_set& sprites) const
         switch (firework.stage) {
             case Firework::Stage::mortar:
                 sprites.add_sprite(view.mortar,
-                                   firework.mortar.position.into<int>());
+                                   Position(firework.mortar.position));
                 break;
 
             case Firework::Stage::stars:
                 for (Projectile const& star : firework.stars) {
                     sprites.add_sprite(view.stars[firework.star_color],
-                                       star.position.into<int>());
+                                       Position(star.position));
                 }
                 break;
 
@@ -303,8 +303,8 @@ void Fireworks::on_key(Key key)
         is_paused = !is_paused;
     } else if (key == Key::code(' ') && !is_paused) {
         auto dims = get_window().get_dimensions();
-        auto initial_position = Position{dims.width / 2, dims.height};
-        model.add_random(get_random(), initial_position.into<double>());
+        auto pos0 = Projectile::Position(dims.width / 2., dims.height);
+        model.add_random(get_random(), pos0);
     }
 }
 
@@ -321,6 +321,7 @@ void Fireworks::on_frame(double dt)
 
 void Fireworks::on_mouse_up(Mouse_button, Position position)
 {
-    if (!is_paused)
-        model.add_random(get_random(), position.into<double>());
+    if (is_paused) return;
+
+    model.add_random(get_random(), Projectile::Position(position));
 }
