@@ -28,20 +28,6 @@ class Font;
 class Sprite_set;
 class Window;
 
-/// Internal implementation details.
-namespace detail {
-
-class Engine;
-class File_resource;
-struct Placed_sprite;
-class Renderer;
-class Session;
-class Render_sprite;
-class Texture;
-class Texture_sprite;
-
-} // end namespace detail
-
 namespace audio {
 
 enum class Channel_state;
@@ -110,6 +96,20 @@ class Timer;
 class Pausable_timer;
 
 } // end namespace time
+
+/// Internal implementation details.
+namespace detail {
+
+class Engine;
+class File_resource;
+struct Placed_sprite;
+class Renderer;
+class Session;
+class Render_sprite;
+class Texture;
+class Texture_sprite;
+
+} // end namespace detail
 
 // Bring everything but detail into the ge211 namespace.
 

@@ -31,7 +31,7 @@ Audio_clip::Audio_clip()
 
 bool Audio_clip::try_load(const std::string& filename, const Mixer& mixer)
 {
-    return mixer.is_enabled() && real_try_load(filename, mixer);
+    return mixer.is_enabled() && real_try_load_(filename, mixer);
 }
 
 void Audio_clip::load(const std::string& filename, const Mixer& mixer)
@@ -42,7 +42,7 @@ void Audio_clip::load(const std::string& filename, const Mixer& mixer)
 
 void Audio_clip::clear()
 {
-    real_clear();
+    real_clear_();
 }
 
 Music_track::Music_track(const std::string& filename, const Mixer& mixer)
@@ -50,7 +50,7 @@ Music_track::Music_track(const std::string& filename, const Mixer& mixer)
     load(filename, mixer);
 }
 
-bool Music_track::real_try_load(const std::string& filename, const Mixer&)
+bool Music_track::real_try_load_(const std::string& filename, const Mixer&)
 {
     Mix_Music* raw = Mix_LoadMUS_RW(File_resource(filename).release(), 1);
     if (raw) {
@@ -61,12 +61,12 @@ bool Music_track::real_try_load(const std::string& filename, const Mixer&)
     }
 }
 
-void Music_track::real_clear()
+void Music_track::real_clear_()
 {
     ptr_ = nullptr;
 }
 
-bool Music_track::real_empty() const
+bool Music_track::real_empty_() const
 {
     return ptr_ == nullptr;
 }
@@ -76,7 +76,7 @@ Sound_effect::Sound_effect(const std::string& filename, const Mixer& mixer)
     load(filename, mixer);
 }
 
-bool Sound_effect::real_try_load(const std::string& filename, const Mixer&)
+bool Sound_effect::real_try_load_(const std::string& filename, const Mixer&)
 {
     Mix_Chunk* raw = Mix_LoadWAV_RW(File_resource(filename).release(), 1);
 
@@ -88,12 +88,12 @@ bool Sound_effect::real_try_load(const std::string& filename, const Mixer&)
     }
 }
 
-void Sound_effect::real_clear()
+void Sound_effect::real_clear_()
 {
     ptr_ = nullptr;
 }
 
-bool Sound_effect::real_empty() const
+bool Sound_effect::real_empty_() const
 {
     return ptr_ == nullptr;
 }

@@ -25,13 +25,16 @@ namespace audio {
 /// Sound_effect.
 class Audio_clip
 {
+    friend Music_track;  // derived class
+    friend Sound_effect; // derived class
+
 public:
     /// Returns true if this audio clip is empty.
-    bool empty() const { return real_empty(); }
+    bool empty() const { return real_empty_(); }
 
     /// Recognizes a non-empty audio clip.
     /// Equivalent to `!empty()`.
-    explicit operator bool() const { return !real_empty(); }
+    explicit operator bool() const { return !real_empty_(); }
 
     /// Loads audio from a resource file into this audio clip instance.
     ///
@@ -51,20 +54,20 @@ public:
 
     virtual ~Audio_clip() = default;
 
-protected:
+private:
     Audio_clip();
 
     /// Derived classes must override this to provide an implementation
     /// for Audio_clip::try_load(const std::string&, const Mixer&).
-    virtual bool real_try_load(const std::string& filename, const Mixer&) = 0;
+    virtual bool real_try_load_(const std::string& filename, const Mixer&) = 0;
 
     /// Derived classes must override this to provide an implementation
     /// for Audio_clip::clear().
-    virtual void real_clear() = 0;
+    virtual void real_clear_() = 0;
 
     /// Derived classes must override this to provide an implementation
     /// for Audio_clip::empty().
-    virtual bool real_empty() const = 0;
+    virtual bool real_empty_() const = 0;
 };
 
 /// A music track, which can be attached to the Mixer and played.
@@ -80,6 +83,8 @@ protected:
 /// Note also that the mixer can only play one music track at a time.
 class Music_track : public Audio_clip
 {
+    friend Mixer;
+
 public:
     /// Loads a new music track from a resource file.
     ///
@@ -98,14 +103,10 @@ public:
     /// Default-constructs the empty music track.
     Music_track() { }
 
-protected:
-    bool real_try_load(const std::string&, const Mixer&) override;
-    void real_clear() override;
-    bool real_empty() const override;
-
 private:
-    // Friends
-    friend Mixer;
+    bool real_try_load_(const std::string&, const Mixer&) override;
+    void real_clear_() override;
+    bool real_empty_() const override;
 
     std::shared_ptr<Mix_Music> ptr_;
 };
@@ -121,6 +122,8 @@ private:
 /// to play it.
 class Sound_effect : public Audio_clip
 {
+    friend Mixer;
+
 public:
     /// Loads a new sound effect track from a resource file.
     ///
@@ -136,14 +139,10 @@ public:
     /// Default-constructs the empty sound effect track.
     Sound_effect() { }
 
-protected:
-    bool real_try_load(const std::string&, const Mixer&) override;
-    void real_clear() override;
-    bool real_empty() const override;
-
 private:
-    // Friends
-    friend Mixer;
+    bool real_try_load_(const std::string&, const Mixer&) override;
+    void real_clear_() override;
+    bool real_empty_() const override;
 
     std::shared_ptr<Mix_Chunk> ptr_;
 };
@@ -184,6 +183,11 @@ private:
 /// effect while it is playing as well.
 class Mixer
 {
+    // This calls default constructor...
+    friend Abstract_game;
+    // ...via this:
+    friend detail::lazy_ptr<Mixer>;
+
 public:
     /// The state of an audio channel.
     enum class State
@@ -340,13 +344,6 @@ public:
     ///@}
 
 private:
-    using Lazy_ptr = detail::lazy_ptr<Mixer>;
-
-    // This calls default constructor...
-    friend Abstract_game;
-    // ...via this:
-    friend Lazy_ptr;
-
     /// Private constructor -- should only be called by
     /// Abstract_game::mixer() via lazy_ptr<Mixer>.
     Mixer();

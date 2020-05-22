@@ -295,7 +295,7 @@ private:
 
     mutable Random rng_;
     detail::Session session_;
-    Mixer::Lazy_ptr mixer_;
+    detail::lazy_ptr<Mixer> mixer_;
     detail::Engine* engine_ = nullptr;
 
     bool quit_ = false;
