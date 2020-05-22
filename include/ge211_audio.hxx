@@ -77,7 +77,7 @@ private:
 /// Note that Music_track has few public member functions. However, a
 /// music track can be passed to these Mixer member functions to play it:
 ///
-///  - Mixer::play_music(Music_track, Duration)
+///  - Mixer::play_music(Music_track)
 ///  - Mixer::attach_music(Music_track)
 ///
 /// Note also that the mixer can only play one music track at a time.
