@@ -132,11 +132,21 @@ void Renderer::copy(const Texture& texture,
     if (transform.get_flip_h()) flip |= SDL_FLIP_HORIZONTAL;
     if (transform.get_flip_v()) flip |= SDL_FLIP_VERTICAL;
 
-    int render_result = SDL_RenderCopyEx(get_raw_(), raw_texture,
-                                         nullptr, &dstrect,
-                                         transform.get_rotation(),
-                                         nullptr,
-                                         flip);
+    auto rotation = transform.get_rotation();
+
+    int render_result;
+    if (rotation == 0 && flip == SDL_FLIP_NONE) {
+        render_result = SDL_RenderCopy(
+                get_raw_(), raw_texture,
+                nullptr, &dstrect);
+    } else {
+        render_result = SDL_RenderCopyEx(
+                get_raw_(), raw_texture,
+                nullptr, &dstrect,
+                transform.get_rotation(), nullptr,
+                flip);
+    }
+
     if (render_result < 0) {
         warn_sdl() << "Could not render texture";
     }
