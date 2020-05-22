@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2020.5.3</span>
+   &#160;<span id="projectnumber">2020.6.1</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -95,7 +95,6 @@ $(document).ready(function(){initNavTree('classge211_1_1audio_1_1_sound__effect.
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classge211_1_1audio_1_1_sound__effect-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Sound_effect Class Reference</div>  </div>
@@ -106,7 +105,7 @@ $(document).ready(function(){initNavTree('classge211_1_1audio_1_1_sound__effect.
 <p>A sound effect track may be <em>empty</em> or <em>non-empty</em>; only non-empty sound effects can actually be played.</p>
 <p>Note that <a class="el" href="classge211_1_1audio_1_1_sound__effect.html" title="A sound effect track, which can be attached to a Mixer channel and played.">Sound_effect</a> has few public member functions. However, an effect track can be passed to the <a class="el" href="classge211_1_1audio_1_1_mixer.html" title="The entity that coordinates playing all audio tracks.">Mixer</a> member function <a class="el" href="classge211_1_1audio_1_1_mixer.html#a44e4d21a97285323b523a94380561220" title="Plays the given effect track on this mixer, at the specified volume.">Mixer::play_effect(Sound_effect, double)</a> to play it. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00122">122</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00123">123</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
 </div><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Sound_effect:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -157,21 +156,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1audio_1_1_audio__clip.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a> ()</td></tr>
 <tr class="memdesc:ac8bb3912a3ce86b15842e79d0b421204 inherit pub_methods_classge211_1_1audio_1_1_audio__clip"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unloads any audio data, leaving this <a class="el" href="classge211_1_1audio_1_1_audio__clip.html" title="Abstract base class for classes that load audio data, Music_track and Sound_effect.">Audio_clip</a> empty. <br /></td></tr>
 <tr class="separator:ac8bb3912a3ce86b15842e79d0b421204 inherit pub_methods_classge211_1_1audio_1_1_audio__clip"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:aaa355950a9c3367f65ae0a03051a4a03"><td class="memItemLeft" align="right" valign="top"><a id="aaa355950a9c3367f65ae0a03051a4a03"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1audio_1_1_sound__effect.html#aaa355950a9c3367f65ae0a03051a4a03">real_try_load</a> (const std::string &amp;, const <a class="el" href="classge211_1_1audio_1_1_mixer.html">Mixer</a> &amp;) override</td></tr>
-<tr class="memdesc:aaa355950a9c3367f65ae0a03051a4a03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derived classes must override this to provide an implementation for <a class="el" href="classge211_1_1audio_1_1_audio__clip.html#a4a4c7be5635ddf3f2f1749a78e6f4ba8" title="Attempts to load audio from a resource file into this Audio_clip instance.">Audio_clip::try_load(const std::string&amp;, const Mixer&amp;)</a>. <br /></td></tr>
-<tr class="separator:aaa355950a9c3367f65ae0a03051a4a03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97204ad5b3c4691aac7f55901b8294a3"><td class="memItemLeft" align="right" valign="top"><a id="a97204ad5b3c4691aac7f55901b8294a3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1audio_1_1_sound__effect.html#a97204ad5b3c4691aac7f55901b8294a3">real_clear</a> () override</td></tr>
-<tr class="memdesc:a97204ad5b3c4691aac7f55901b8294a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derived classes must override this to provide an implementation for <a class="el" href="classge211_1_1audio_1_1_audio__clip.html#ac8bb3912a3ce86b15842e79d0b421204" title="Unloads any audio data, leaving this Audio_clip empty.">Audio_clip::clear()</a>. <br /></td></tr>
-<tr class="separator:a97204ad5b3c4691aac7f55901b8294a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae25ac001179ab9def101d542a7a19db2"><td class="memItemLeft" align="right" valign="top"><a id="ae25ac001179ab9def101d542a7a19db2"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1audio_1_1_sound__effect.html#ae25ac001179ab9def101d542a7a19db2">real_empty</a> () const override</td></tr>
-<tr class="memdesc:ae25ac001179ab9def101d542a7a19db2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derived classes must override this to provide an implementation for <a class="el" href="classge211_1_1audio_1_1_audio__clip.html#a644718bb2fb240de962dc3c9a1fdf0dc" title="Returns true if this audio clip is empty.">Audio_clip::empty()</a>. <br /></td></tr>
-<tr class="separator:ae25ac001179ab9def101d542a7a19db2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae098446ee951bd399f7d5de4acb8cd57"></a>

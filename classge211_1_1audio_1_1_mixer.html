@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2020.5.3</span>
+   &#160;<span id="projectnumber">2020.6.1</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -108,7 +108,7 @@ $(document).ready(function(){initNavTree('classge211_1_1audio_1_1_mixer.html',''
 <p>For playing background music, one <a class="el" href="classge211_1_1audio_1_1_music__track.html" title="A music track, which can be attached to the Mixer and played.">Music_track</a> can be <em>attached</em> to the mixer at any given time, using <a class="el" href="classge211_1_1audio_1_1_mixer.html#a5e4ec9c6d45c070e1393e4618f9ef8b2" title="Attaches the given music track to this mixer.">Mixer::attach_music(Music_track)</a>. Once a <a class="el" href="classge211_1_1audio_1_1_music__track.html" title="A music track, which can be attached to the Mixer and played.">Music_track</a> is attached, it can be played with Mixer::resume(Duration) and paused with <a class="el" href="classge211_1_1audio_1_1_mixer.html#a719fb22740078909c02b8ceae673dc49" title="Pauses the currently attached music, fading out if requested.">Mixer::pause_music(Duration)</a>. A <a class="el" href="classge211_1_1audio_1_1_music__track.html" title="A music track, which can be attached to the Mixer and played.">Music_track</a> can be both attached and played with <a class="el" href="classge211_1_1audio_1_1_mixer.html#a2838a830ec261732a92d6661e8f7896d" title="Attaches the given music track to this mixer and starts it playing.">Mixer::play_music(Music_track)</a>. The music channel is always in one of four states, of type <a class="el" href="classge211_1_1audio_1_1_mixer.html#a5d74787dedbc4e11c1ab15bf487e61f8" title="The state of an audio channel.">audio::Mixer::State</a>, which can be retrieved by <a class="el" href="classge211_1_1audio_1_1_mixer.html#a3947f21f830ecb981cb8a3f422ded52a" title="Returns the current state of the attached music, if any.">Mixer::get_music_state() const</a>. Note that the validity of music operations depends on what state the mixer's music channel is in. For example, it is an error to attach a <a class="el" href="classge211_1_1audio_1_1_music__track.html" title="A music track, which can be attached to the Mixer and played.">Music_track</a> to the mixer when music is already playing or fading out.</p>
 <p>For playing sound effects, multiple <a class="el" href="classge211_1_1audio_1_1_sound__effect.html" title="A sound effect track, which can be attached to a Mixer channel and played.">Sound_effect</a>s can be attached to the mixer simultaneously. A <a class="el" href="classge211_1_1audio_1_1_sound__effect.html" title="A sound effect track, which can be attached to a Mixer channel and played.">Sound_effect</a> is attached and played using the <a class="el" href="classge211_1_1audio_1_1_mixer.html#a44e4d21a97285323b523a94380561220" title="Plays the given effect track on this mixer, at the specified volume.">Mixer::play_effect(Sound_effect, double)</a> member function, which also allows specifying the volume of the sound effect. If nothing further is done, the sound effect plays to completion and then detaches, making room to attach more sound effects; however, <a class="el" href="classge211_1_1audio_1_1_mixer.html#a44e4d21a97285323b523a94380561220" title="Plays the given effect track on this mixer, at the specified volume.">Mixer::play_effect(Sound_effect, double)</a> returns a <a class="el" href="classge211_1_1audio_1_1_sound__effect__handle.html" title="Used to control a Sound_effect after it is started playing on a Mixer.">Sound_effect_handle</a>, which can be used to control the sound effect while it is playing as well. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00185">185</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00184">184</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -229,7 +229,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00189">189</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00193">193</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
 
 </div>
 </div>
@@ -294,7 +294,7 @@ Preconditions:</h4>
 </ol>
 <p>Cases 2 and 3 happen only between frames, and not asynchronously while computing the next frame. This means that after checking the result of <code><a class="el" href="classge211_1_1audio_1_1_mixer.html#a3947f21f830ecb981cb8a3f422ded52a" title="Returns the current state of the attached music, if any.">get_music_state()</a></code> const, that state continues to hold, and can be relied on, at least until the end of the frame, unless the client requests that it be changed (case 1). </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00275">275</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00279">279</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
 
 </div>
 </div>
@@ -346,7 +346,7 @@ Preconditions:</h4>
 <p>Returns whether the mixer is enabled. </p>
 <p>If it is then we can play audio, but if it isn't, audio operations will fail. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00205">205</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00209">209</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
 
 </div>
 </div>

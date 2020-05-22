@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2020.5.3</span>
+   &#160;<span id="projectnumber">2020.6.1</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -112,12 +112,13 @@ $(document).ready(function(){initNavTree('classge211_1_1geometry_1_1_transform.h
 <li><a class="el" href="classge211_1_1geometry_1_1_transform.html#ab49acda5568ba61b5750b82e7f4dc1a4" title="Constructs a transform that scales the sprite in the y dimension.">Transform::scale_y(double)</a></li>
 </ul>
 <p>It is also possible to modify a transform with the setter functions such as <a class="el" href="classge211_1_1geometry_1_1_transform.html#a4beeff4a6a0371fafe7a4378a602449a" title="Modifies this transform to have the given rotation, in degrees.">set_rotation(double)</a> and <a class="el" href="classge211_1_1geometry_1_1_transform.html#af142bde616145730af6d36fef55095b4" title="Modifies this transform to scale the sprite by the given amount in both dimensions.">set_scale(double)</a>. This can be used to configure a transform that does more than one thing:</p>
-<div class="fragment"><div class="line"><a class="code" href="classge211_1_1geometry_1_1_transform.html#a9de68ec1c9b7809129814a3233ae4655">Transform</a> my_transform =</div>
-<div class="line">    <a class="code" href="classge211_1_1geometry_1_1_transform.html#a9de68ec1c9b7809129814a3233ae4655">Transform</a>{}.set_flip_h(<span class="keyword">true</span>)</div>
-<div class="line">               .set_flip_v(<span class="keyword">true</span>)</div>
-<div class="line">               .scale_x(2);</div>
+<div class="fragment"><div class="line"><a class="code" href="classge211_1_1geometry_1_1_transform.html">ge211::Transform</a> my_transform =</div>
+<div class="line">    <a class="code" href="classge211_1_1geometry_1_1_transform.html">ge211::Transform</a>{}</div>
+<div class="line">        .<a class="code" href="classge211_1_1geometry_1_1_transform.html#ab46945cb64c156e21fa0a8eb4ffdd528">set_flip_h</a>(<span class="keyword">true</span>)</div>
+<div class="line">        .<a class="code" href="classge211_1_1geometry_1_1_transform.html#a1d62308c5aa8c36067033e7723ae2c26">set_flip_v</a>(<span class="keyword">true</span>)</div>
+<div class="line">        .<a class="code" href="classge211_1_1geometry_1_1_transform.html#afc75bfba975e7e25c77eedbd74d01185">scale_x</a>(2);</div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00725">725</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00762">762</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -327,7 +328,10 @@ static <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform<
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclassge211_1_1geometry_1_1_transform_html_a9de68ec1c9b7809129814a3233ae4655"><div class="ttname"><a href="classge211_1_1geometry_1_1_transform.html#a9de68ec1c9b7809129814a3233ae4655">ge211::geometry::Transform::Transform</a></div><div class="ttdeci">Transform()</div><div class="ttdoc">Constructs the identity transform, which has no effect.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8cxx_source.html#l00009">ge211_geometry.cxx:9</a></div></div>
+<div class="ttc" id="aclassge211_1_1geometry_1_1_transform_html_ab46945cb64c156e21fa0a8eb4ffdd528"><div class="ttname"><a href="classge211_1_1geometry_1_1_transform.html#ab46945cb64c156e21fa0a8eb4ffdd528">ge211::geometry::Transform::set_flip_h</a></div><div class="ttdeci">Transform &amp; set_flip_h(bool)</div><div class="ttdoc">Modifies this transform to determine whether to flip horizontally.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8cxx_source.html#l00051">ge211_geometry.cxx:51</a></div></div>
+<div class="ttc" id="aclassge211_1_1geometry_1_1_transform_html_a1d62308c5aa8c36067033e7723ae2c26"><div class="ttname"><a href="classge211_1_1geometry_1_1_transform.html#a1d62308c5aa8c36067033e7723ae2c26">ge211::geometry::Transform::set_flip_v</a></div><div class="ttdeci">Transform &amp; set_flip_v(bool)</div><div class="ttdoc">Modifies this transform to determine whether to flip vertically.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8cxx_source.html#l00057">ge211_geometry.cxx:57</a></div></div>
+<div class="ttc" id="aclassge211_1_1geometry_1_1_transform_html_afc75bfba975e7e25c77eedbd74d01185"><div class="ttname"><a href="classge211_1_1geometry_1_1_transform.html#afc75bfba975e7e25c77eedbd74d01185">ge211::geometry::Transform::scale_x</a></div><div class="ttdeci">static Transform scale_x(double)</div><div class="ttdoc">Constructs a transform that scales the sprite in the x dimension.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8cxx_source.html#l00034">ge211_geometry.cxx:34</a></div></div>
+<div class="ttc" id="aclassge211_1_1geometry_1_1_transform_html"><div class="ttname"><a href="classge211_1_1geometry_1_1_transform.html">ge211::geometry::Transform</a></div><div class="ttdoc">A rendering transform, which can scale, flip, and rotate.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8hxx_source.html#l00762">ge211_geometry.hxx:763</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

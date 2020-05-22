@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2020.5.3</span>
+   &#160;<span id="projectnumber">2020.6.1</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -95,7 +95,6 @@ $(document).ready(function(){initNavTree('classge211_1_1audio_1_1_audio__clip.ht
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classge211_1_1audio_1_1_audio__clip-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Audio_clip Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -137,21 +136,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1audio_1_1_audio__clip.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a> ()</td></tr>
 <tr class="memdesc:ac8bb3912a3ce86b15842e79d0b421204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unloads any audio data, leaving this <a class="el" href="classge211_1_1audio_1_1_audio__clip.html" title="Abstract base class for classes that load audio data, Music_track and Sound_effect.">Audio_clip</a> empty. <br /></td></tr>
 <tr class="separator:ac8bb3912a3ce86b15842e79d0b421204"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a3739605d96e31d3681ef2afef8bf6434"><td class="memItemLeft" align="right" valign="top"><a id="a3739605d96e31d3681ef2afef8bf6434"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1audio_1_1_audio__clip.html#a3739605d96e31d3681ef2afef8bf6434">real_try_load</a> (const std::string &amp;filename, const <a class="el" href="classge211_1_1audio_1_1_mixer.html">Mixer</a> &amp;)=0</td></tr>
-<tr class="memdesc:a3739605d96e31d3681ef2afef8bf6434"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derived classes must override this to provide an implementation for <a class="el" href="classge211_1_1audio_1_1_audio__clip.html#a4a4c7be5635ddf3f2f1749a78e6f4ba8" title="Attempts to load audio from a resource file into this Audio_clip instance.">Audio_clip::try_load(const std::string&amp;, const Mixer&amp;)</a>. <br /></td></tr>
-<tr class="separator:a3739605d96e31d3681ef2afef8bf6434"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3e7fcaceb0c14346516b1f440532e4f"><td class="memItemLeft" align="right" valign="top"><a id="ad3e7fcaceb0c14346516b1f440532e4f"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1audio_1_1_audio__clip.html#ad3e7fcaceb0c14346516b1f440532e4f">real_clear</a> ()=0</td></tr>
-<tr class="memdesc:ad3e7fcaceb0c14346516b1f440532e4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derived classes must override this to provide an implementation for <a class="el" href="classge211_1_1audio_1_1_audio__clip.html#ac8bb3912a3ce86b15842e79d0b421204" title="Unloads any audio data, leaving this Audio_clip empty.">Audio_clip::clear()</a>. <br /></td></tr>
-<tr class="separator:ad3e7fcaceb0c14346516b1f440532e4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2babf6147a4809104449555abeffaca1"><td class="memItemLeft" align="right" valign="top"><a id="a2babf6147a4809104449555abeffaca1"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1audio_1_1_audio__clip.html#a2babf6147a4809104449555abeffaca1">real_empty</a> () const =0</td></tr>
-<tr class="memdesc:a2babf6147a4809104449555abeffaca1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derived classes must override this to provide an implementation for <a class="el" href="classge211_1_1audio_1_1_audio__clip.html#a644718bb2fb240de962dc3c9a1fdf0dc" title="Returns true if this audio clip is empty.">Audio_clip::empty()</a>. <br /></td></tr>
-<tr class="separator:a2babf6147a4809104449555abeffaca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a55b9e568b8f04c723e585d838ffd9e85"></a>
@@ -205,7 +189,7 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -213,7 +197,7 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <p>Recognizes a non-empty audio clip. </p>
 <p>Equivalent to <code>!empty()</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00034">34</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00037">37</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
 
 </div>
 </div>

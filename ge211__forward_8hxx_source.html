@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2020.5.3</span>
+   &#160;<span id="projectnumber">2020.6.1</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -127,87 +127,87 @@ $(document).ready(function(){initNavTree('ge211__forward_8hxx_source.html',''); 
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">class </span>Sprite_set;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">class </span>Window;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">namespace </span>detail {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">class </span>Engine;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">class </span>File_resource;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">struct </span>Placed_sprite;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">class </span>Renderer;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">class </span>Session;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">class </span>Render_sprite;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">class </span>Texture;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">class </span>Texture_sprite;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;} <span class="comment">// end namespace detail</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">namespace </span>audio {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">namespace </span>audio {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">enum class</span> Channel_state;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">class </span>Mixer;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">class </span>Audio_clip;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">class </span>Music_track;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">class </span>Sound_effect;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">class </span>Sound_effect_handle;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;} <span class="comment">// end namespace audio</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">namespace </span>events {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">class </span>Key;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">enum class</span> <a class="code" href="namespacege211_1_1events.html#a7996c6421dbcbb112730003daf99ab94">Mouse_button</a>;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">enum class</span> Channel_state;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">class </span>Mixer;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">class </span>Audio_clip;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">class </span>Music_track;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">class </span>Sound_effect;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">class </span>Sound_effect_handle;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;} <span class="comment">// end namespace audio</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">namespace </span>events {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">class </span>Key;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">enum class</span> <a class="code" href="namespacege211_1_1events.html#a7996c6421dbcbb112730003daf99ab94">Mouse_button</a>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;} <span class="comment">// end namespace events</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">namespace </span>exceptions {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">class </span>Exception_base;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">class </span>Client_logic_error;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">class </span>Session_needed_error;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">class </span>Environment_error;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">class </span>Ge211_logic_error;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">class </span>Host_error;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">class </span>File_error;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">class </span>Font_error;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">class </span>Image_error;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">class </span>Mixer_error;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;} <span class="comment">// end namespace events</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">namespace </span>exceptions {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">class </span>Exception_base;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">class </span>Client_logic_error;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">class </span>Session_needed_error;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">class </span>Environment_error;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">class </span>Ge211_logic_error;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">class </span>Host_error;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">class </span>File_error;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">class </span>Font_error;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">class </span>Image_error;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">class </span>Mixer_error;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;} <span class="comment">// end namespace exception</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="namespacege211_1_1geometry.html">   64</a></span>&#160;<span class="keyword">namespace </span>geometry {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="structge211_1_1geometry_1_1_basic__dimensions.html">   66</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>&gt; <span class="keyword">struct </span><a class="code" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="structge211_1_1geometry_1_1_basic__position.html">   67</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>&gt; <span class="keyword">struct </span><a class="code" href="structge211_1_1geometry_1_1_basic__position.html">Basic_position</a>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="structge211_1_1geometry_1_1_basic__rectangle.html">   68</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>&gt; <span class="keyword">struct </span><a class="code" href="structge211_1_1geometry_1_1_basic__rectangle.html">Basic_rectangle</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1geometry_1_1_origin__type.html">Origin_type</a>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="namespacege211_1_1geometry.html#a6984557cfdc7f69501ef8b04882ecd83">   71</a></span>&#160;<span class="keyword">using</span> <a class="code" href="structge211_1_1geometry_1_1_basic__dimensions.html">Dimensions</a> = <a class="code" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions&lt;int&gt;</a>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="namespacege211_1_1geometry.html#a6820f820ccaf24da3439a5e45b0e983e">   72</a></span>&#160;<span class="keyword">using</span> <a class="code" href="structge211_1_1geometry_1_1_basic__position.html">Position</a> = <a class="code" href="structge211_1_1geometry_1_1_basic__position.html">Basic_position&lt;int&gt;</a>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="namespacege211_1_1geometry.html#a6070d6748531d25ccc6fdc0c0b096e6b">   73</a></span>&#160;<span class="keyword">using</span> <a class="code" href="structge211_1_1geometry_1_1_basic__rectangle.html">Rectangle</a> = <a class="code" href="structge211_1_1geometry_1_1_basic__rectangle.html">Basic_rectangle&lt;int&gt;</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1geometry_1_1_transform.html">Transform</a>;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;} <span class="comment">// end namespace exception</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;} <span class="comment">// end namespace geometry</span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="namespacege211_1_1geometry.html">   78</a></span>&#160;<span class="keyword">namespace </span>geometry {</div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="namespacege211_1_1sprites.html">   78</a></span>&#160;<span class="keyword">namespace </span>sprites {</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="structge211_1_1geometry_1_1_basic__dimensions.html">   80</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>&gt; <span class="keyword">struct </span><a class="code" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>;</div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="structge211_1_1geometry_1_1_basic__position.html">   81</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>&gt; <span class="keyword">struct </span><a class="code" href="structge211_1_1geometry_1_1_basic__position.html">Basic_position</a>;</div>
-<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="structge211_1_1geometry_1_1_basic__rectangle.html">   82</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span>&gt; <span class="keyword">struct </span><a class="code" href="structge211_1_1geometry_1_1_basic__rectangle.html">Basic_rectangle</a>;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1geometry_1_1_origin__type.html">Origin_type</a>;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="namespacege211_1_1geometry.html#a6984557cfdc7f69501ef8b04882ecd83">   85</a></span>&#160;<span class="keyword">using</span> <a class="code" href="structge211_1_1geometry_1_1_basic__dimensions.html">Dimensions</a> = <a class="code" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions&lt;int&gt;</a>;</div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="namespacege211_1_1geometry.html#a6820f820ccaf24da3439a5e45b0e983e">   86</a></span>&#160;<span class="keyword">using</span> <a class="code" href="structge211_1_1geometry_1_1_basic__position.html">Position</a> = <a class="code" href="structge211_1_1geometry_1_1_basic__position.html">Basic_position&lt;int&gt;</a>;</div>
-<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="namespacege211_1_1geometry.html#a6070d6748531d25ccc6fdc0c0b096e6b">   87</a></span>&#160;<span class="keyword">using</span> <a class="code" href="structge211_1_1geometry_1_1_basic__rectangle.html">Rectangle</a> = <a class="code" href="structge211_1_1geometry_1_1_basic__rectangle.html">Basic_rectangle&lt;int&gt;</a>;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1geometry_1_1_transform.html">Transform</a>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1sprites_1_1_sprite.html">Sprite</a>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1sprites_1_1_circle__sprite.html">Circle_sprite</a>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1sprites_1_1_image__sprite.html">Image_sprite</a>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1sprites_1_1_multiplexed__sprite.html">Multiplexed_sprite</a>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1sprites_1_1_rectangle__sprite.html">Rectangle_sprite</a>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1sprites_1_1_text__sprite.html">Text_sprite</a>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;} <span class="comment">// end namespace sprites</span></div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;} <span class="comment">// end namespace geometry</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="namespacege211_1_1time.html">   90</a></span>&#160;<span class="keyword">namespace </span>time {</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="namespacege211_1_1sprites.html">   92</a></span>&#160;<span class="keyword">namespace </span>sprites {</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1sprites_1_1_sprite.html">Sprite</a>;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1sprites_1_1_circle__sprite.html">Circle_sprite</a>;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1sprites_1_1_image__sprite.html">Image_sprite</a>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1sprites_1_1_multiplexed__sprite.html">Multiplexed_sprite</a>;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1sprites_1_1_rectangle__sprite.html">Rectangle_sprite</a>;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1sprites_1_1_text__sprite.html">Text_sprite</a>;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;} <span class="comment">// end namespace sprites</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="namespacege211_1_1time.html">  104</a></span>&#160;<span class="keyword">namespace </span>time {</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1time_1_1_duration.html">Duration</a>;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1time_1_1_time__point.html">Time_point</a>;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1time_1_1_timer.html">Timer</a>;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1time_1_1_pausable__timer.html">Pausable_timer</a>;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1time_1_1_duration.html">Duration</a>;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1time_1_1_time__point.html">Time_point</a>;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1time_1_1_timer.html">Timer</a>;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1time_1_1_pausable__timer.html">Pausable_timer</a>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;} <span class="comment">// end namespace time</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keyword">namespace </span>detail {</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">class </span>Engine;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keyword">class </span>File_resource;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keyword">struct </span>Placed_sprite;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">class </span>Renderer;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">class </span>Session;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">class </span>Render_sprite;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keyword">class </span>Texture;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keyword">class </span>Texture_sprite;</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;} <span class="comment">// end namespace time</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;} <span class="comment">// end namespace detail</span></div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">// Bring everything but detail into the ge211 namespace.</span></div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
@@ -224,8 +224,8 @@ $(document).ready(function(){initNavTree('ge211__forward_8hxx_source.html',''); 
 <div class="ttc" id="anamespacege211_1_1events_html_a7996c6421dbcbb112730003daf99ab94"><div class="ttname"><a href="namespacege211_1_1events.html#a7996c6421dbcbb112730003daf99ab94">ge211::events::Mouse_button</a></div><div class="ttdeci">Mouse_button</div><div class="ttdoc">A representation of a mouse button.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__event_8hxx_source.html#l00019">ge211_event.hxx:20</a></div></div>
 <div class="ttc" id="aclassge211_1_1time_1_1_duration_html"><div class="ttname"><a href="classge211_1_1time_1_1_duration.html">ge211::time::Duration</a></div><div class="ttdoc">A length of time.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__time_8hxx_source.html#l00030">ge211_time.hxx:31</a></div></div>
 <div class="ttc" id="aclassge211_1_1sprites_1_1_circle__sprite_html"><div class="ttname"><a href="classge211_1_1sprites_1_1_circle__sprite.html">ge211::sprites::Circle_sprite</a></div><div class="ttdoc">A Sprite that renders as a solid circle.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__sprites_8hxx_source.html#l00142">ge211_sprites.hxx:143</a></div></div>
-<div class="ttc" id="astructge211_1_1geometry_1_1_basic__position_html"><div class="ttname"><a href="structge211_1_1geometry_1_1_basic__position.html">ge211::geometry::Basic_position</a></div><div class="ttdoc">A position in the T-valued Cartesian plane.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__forward_8hxx_source.html#l00081">ge211_forward.hxx:81</a></div></div>
-<div class="ttc" id="astructge211_1_1geometry_1_1_basic__rectangle_html"><div class="ttname"><a href="structge211_1_1geometry_1_1_basic__rectangle.html">ge211::geometry::Basic_rectangle</a></div><div class="ttdoc">Represents a positioned rectangle.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__forward_8hxx_source.html#l00082">ge211_forward.hxx:82</a></div></div>
+<div class="ttc" id="astructge211_1_1geometry_1_1_basic__position_html"><div class="ttname"><a href="structge211_1_1geometry_1_1_basic__position.html">ge211::geometry::Basic_position</a></div><div class="ttdoc">A position in the T-valued Cartesian plane.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__forward_8hxx_source.html#l00067">ge211_forward.hxx:67</a></div></div>
+<div class="ttc" id="astructge211_1_1geometry_1_1_basic__rectangle_html"><div class="ttname"><a href="structge211_1_1geometry_1_1_basic__rectangle.html">ge211::geometry::Basic_rectangle</a></div><div class="ttdoc">Represents a positioned rectangle.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__forward_8hxx_source.html#l00068">ge211_forward.hxx:68</a></div></div>
 <div class="ttc" id="aclassge211_1_1time_1_1_time__point_html"><div class="ttname"><a href="classge211_1_1time_1_1_time__point.html">ge211::time::Time_point</a></div><div class="ttdoc">A point in time.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__time_8hxx_source.html#l00174">ge211_time.hxx:175</a></div></div>
 <div class="ttc" id="anamespacege211_html"><div class="ttname"><a href="namespacege211.html">ge211</a></div><div class="ttdoc">The game engine namespace.</div><div class="ttdef"><b>Definition:</b> <a href="ge211_8hxx_source.html#l00004">ge211.hxx:4</a></div></div>
 <div class="ttc" id="aclassge211_1_1sprites_1_1_sprite_html"><div class="ttname"><a href="classge211_1_1sprites_1_1_sprite.html">ge211::sprites::Sprite</a></div><div class="ttdoc">A sprite is an image that knows how to render itself to the screen at a given location,...</div><div class="ttdef"><b>Definition:</b> <a href="ge211__sprites_8hxx_source.html#l00034">ge211_sprites.hxx:35</a></div></div>
@@ -234,10 +234,10 @@ $(document).ready(function(){initNavTree('ge211__forward_8hxx_source.html',''); 
 <div class="ttc" id="aclassge211_1_1sprites_1_1_rectangle__sprite_html"><div class="ttname"><a href="classge211_1_1sprites_1_1_rectangle__sprite.html">ge211::sprites::Rectangle_sprite</a></div><div class="ttdoc">A Sprite that renders as a solid rectangle.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__sprites_8hxx_source.html#l00127">ge211_sprites.hxx:128</a></div></div>
 <div class="ttc" id="aclassge211_1_1sprites_1_1_text__sprite_html"><div class="ttname"><a href="classge211_1_1sprites_1_1_text__sprite.html">ge211::sprites::Text_sprite</a></div><div class="ttdoc">A Sprite that displays text.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__sprites_8hxx_source.html#l00180">ge211_sprites.hxx:181</a></div></div>
 <div class="ttc" id="aclassge211_1_1sprites_1_1_multiplexed__sprite_html"><div class="ttname"><a href="classge211_1_1sprites_1_1_multiplexed__sprite.html">ge211::sprites::Multiplexed_sprite</a></div><div class="ttdoc">A Sprite that allows switching between other sprites based on the time at rendering.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__sprites_8hxx_source.html#l00329">ge211_sprites.hxx:330</a></div></div>
-<div class="ttc" id="aclassge211_1_1geometry_1_1_transform_html"><div class="ttname"><a href="classge211_1_1geometry_1_1_transform.html">ge211::geometry::Transform</a></div><div class="ttdoc">A rendering transform, which can scale, flip, and rotate.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8hxx_source.html#l00725">ge211_geometry.hxx:726</a></div></div>
+<div class="ttc" id="aclassge211_1_1geometry_1_1_transform_html"><div class="ttname"><a href="classge211_1_1geometry_1_1_transform.html">ge211::geometry::Transform</a></div><div class="ttdoc">A rendering transform, which can scale, flip, and rotate.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8hxx_source.html#l00762">ge211_geometry.hxx:763</a></div></div>
 <div class="ttc" id="aclassge211_1_1sprites_1_1_image__sprite_html"><div class="ttname"><a href="classge211_1_1sprites_1_1_image__sprite.html">ge211::sprites::Image_sprite</a></div><div class="ttdoc">A Sprite that displays a bitmap image.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__sprites_8hxx_source.html#l00162">ge211_sprites.hxx:163</a></div></div>
 <div class="ttc" id="aclassge211_1_1geometry_1_1_origin__type_html"><div class="ttname"><a href="classge211_1_1geometry_1_1_origin__type.html">ge211::geometry::Origin_type</a></div><div class="ttdoc">The type of the special value the_origin.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8hxx_source.html#l00022">ge211_geometry.hxx:22</a></div></div>
-<div class="ttc" id="astructge211_1_1geometry_1_1_basic__dimensions_html"><div class="ttname"><a href="structge211_1_1geometry_1_1_basic__dimensions.html">ge211::geometry::Basic_dimensions</a></div><div class="ttdoc">Represents the dimensions of an object, or more generally, the displacement between two Basic_positio...</div><div class="ttdef"><b>Definition:</b> <a href="ge211__forward_8hxx_source.html#l00080">ge211_forward.hxx:80</a></div></div>
+<div class="ttc" id="astructge211_1_1geometry_1_1_basic__dimensions_html"><div class="ttname"><a href="structge211_1_1geometry_1_1_basic__dimensions.html">ge211::geometry::Basic_dimensions</a></div><div class="ttdoc">Represents the dimensions of an object, or more generally, the displacement between two Basic_positio...</div><div class="ttdef"><b>Definition:</b> <a href="ge211__forward_8hxx_source.html#l00066">ge211_forward.hxx:66</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

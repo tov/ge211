@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2020.5.3</span>
+   &#160;<span id="projectnumber">2020.6.1</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -107,9 +107,9 @@ $(document).ready(function(){initNavTree('structge211_1_1geometry_1_1_basic__dim
 struct ge211::geometry::Basic_dimensions&lt; T &gt;</h3>
 
 <p>Represents the dimensions of an object, or more generally, the displacement between two <a class="el" href="structge211_1_1geometry_1_1_basic__position.html" title="A position in the T-valued Cartesian plane.">Basic_position</a>s. </p>
-<p>Note that much of the library uses <a class="el" href="namespacege211_1_1geometry.html#a6984557cfdc7f69501ef8b04882ecd83" title="Type alias for the most common use of Basic_dimensions, which is with a coordinate type of int.">geometry::Dimensions</a>, which is a type alias for Basic_dimensions&lt;int&gt;. </p>
+<p>Note that much of the library uses <a class="el" href="namespacege211_1_1geometry.html#a6984557cfdc7f69501ef8b04882ecd83">Dimensions</a>, which is a type alias for <code><a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html" title="Represents the dimensions of an object, or more generally, the displacement between two Basic_positio...">Basic_dimensions</a>&lt;int&gt;</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__forward_8hxx_source.html#l00080">80</a> of file <a class="el" href="ge211__forward_8hxx_source.html">ge211_forward.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__forward_8hxx_source.html#l00066">66</a> of file <a class="el" href="ge211__forward_8hxx_source.html">ge211_forward.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -123,10 +123,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4482cc623a88e719a54fe0bcd7895d78"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; U &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html#a4482cc623a88e719a54fe0bcd7895d78">into</a> () const</td></tr>
 <tr class="memdesc:a4482cc623a88e719a54fe0bcd7895d78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a <a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html" title="Represents the dimensions of an object, or more generally, the displacement between two Basic_positio...">Basic_dimensions</a> to another coordinate type.  <a href="structge211_1_1geometry_1_1_basic__dimensions.html#a4482cc623a88e719a54fe0bcd7895d78">More...</a><br /></td></tr>
 <tr class="separator:a4482cc623a88e719a54fe0bcd7895d78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d0c159dbf00c38e7caad3c87d2a6522"><td class="memTemplParams" colspan="2"><a id="a5d0c159dbf00c38e7caad3c87d2a6522"></a>
-template&lt;class U &gt; </td></tr>
+<tr class="memitem:a5d0c159dbf00c38e7caad3c87d2a6522"><td class="memTemplParams" colspan="2">template&lt;class U &gt; </td></tr>
 <tr class="memitem:a5d0c159dbf00c38e7caad3c87d2a6522"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html#a5d0c159dbf00c38e7caad3c87d2a6522">operator Basic_dimensions&lt; U &gt;</a> () const</td></tr>
-<tr class="memdesc:a5d0c159dbf00c38e7caad3c87d2a6522"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for <code>into&lt;U&gt;()</code> to support casting between coordinate types. <br /></td></tr>
+<tr class="memdesc:a5d0c159dbf00c38e7caad3c87d2a6522"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for <a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html#a4482cc623a88e719a54fe0bcd7895d78" title="Converts a Basic_dimensions to another coordinate type.">Basic_dimensions::into</a> to support explicit conversions between coordinate types.  <a href="structge211_1_1geometry_1_1_basic__dimensions.html#a5d0c159dbf00c38e7caad3c87d2a6522">More...</a><br /></td></tr>
 <tr class="separator:a5d0c159dbf00c38e7caad3c87d2a6522"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -186,10 +185,42 @@ Public Attributes</h2></td></tr>
 
 <p>Converts a <a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html" title="Represents the dimensions of an object, or more generally, the displacement between two Basic_positio...">Basic_dimensions</a> to another coordinate type. </p>
 <p>For example:</p>
-<div class="fragment"><div class="line">Basic_dimensions&lt;int&gt; d1{3, 4};</div>
-<div class="line">Basic_dimensions&lt;double&gt; d2 = d1.into&lt;<span class="keywordtype">double</span>&gt;();</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> d1 = <a class="code" href="structge211_1_1geometry_1_1_basic__dimensions.html">ge211::Basic_dimensions&lt;int&gt;</a>{3, 4};</div>
+<div class="line"><span class="keyword">auto</span> d2 = d1.<a class="code" href="structge211_1_1geometry_1_1_basic__dimensions.html#a4482cc623a88e719a54fe0bcd7895d78">into</a>&lt;<span class="keywordtype">double</span>&gt;();</div>
 </div><!-- fragment --> 
 <p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00046">46</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
+
+</div>
+</div>
+<a id="a5d0c159dbf00c38e7caad3c87d2a6522"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d0c159dbf00c38e7caad3c87d2a6522">&#9670;&nbsp;</a></span>operator Basic_dimensions&lt; U &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">operator <a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html">Basic_dimensions</a>&lt; U &gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Alias for <a class="el" href="structge211_1_1geometry_1_1_basic__dimensions.html#a4482cc623a88e719a54fe0bcd7895d78" title="Converts a Basic_dimensions to another coordinate type.">Basic_dimensions::into</a> to support explicit conversions between coordinate types. </p>
+<p>For example:</p>
+<div class="fragment"><div class="line"><a class="code" href="structge211_1_1geometry_1_1_basic__dimensions.html">ge211::Basic_dimensions&lt;int&gt;</a> d1{3, 4};</div>
+<div class="line"><a class="code" href="structge211_1_1geometry_1_1_basic__dimensions.html">ge211::Basic_dimensions&lt;double&gt;</a> d2(d1);</div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00062">62</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -199,6 +230,8 @@ Public Attributes</h2></td></tr>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="astructge211_1_1geometry_1_1_basic__dimensions_html_a4482cc623a88e719a54fe0bcd7895d78"><div class="ttname"><a href="structge211_1_1geometry_1_1_basic__dimensions.html#a4482cc623a88e719a54fe0bcd7895d78">ge211::geometry::Basic_dimensions::into</a></div><div class="ttdeci">Basic_dimensions&lt; U &gt; into() const</div><div class="ttdoc">Converts a Basic_dimensions to another coordinate type.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8hxx_source.html#l00046">ge211_geometry.hxx:46</a></div></div>
+<div class="ttc" id="astructge211_1_1geometry_1_1_basic__dimensions_html"><div class="ttname"><a href="structge211_1_1geometry_1_1_basic__dimensions.html">ge211::geometry::Basic_dimensions</a></div><div class="ttdoc">Represents the dimensions of an object, or more generally, the displacement between two Basic_positio...</div><div class="ttdef"><b>Definition:</b> <a href="ge211__forward_8hxx_source.html#l00066">ge211_forward.hxx:66</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
