@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ge211_docs: ge211::geometry Namespace Reference</title>
+<title>ge211: ge211::geometry Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,8 +30,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">ge211_docs
+   <div id="projectname">ge211
+   &#160;<span id="projectnumber">2020.5.3</span>
    </div>
+   <div id="projectbrief">A student game engine</div>
   </td>
    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -94,7 +96,8 @@ $(document).ready(function(){initNavTree('namespacege211_1_1geometry.html',''); 
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">ge211::geometry Namespace Reference</div>  </div>
 </div><!--header-->
@@ -112,6 +115,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structge211_1_1geometry_1_1_basic__rectangle.html">Basic_rectangle</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a positioned rectangle.  <a href="structge211_1_1geometry_1_1_basic__rectangle.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_origin__type.html">Origin_type</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the special value <code>the_origin</code>.  <a href="classge211_1_1geometry_1_1_origin__type.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A rendering transform, which can scale, flip, and rotate.  <a href="classge211_1_1geometry_1_1_transform.html#details">More...</a><br /></td></tr>
@@ -264,6 +270,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacege211_1_1geometry.html#a88a928a4bb5b994398dd39d849472641">operator!=</a> (const <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;, const <a class="el" href="classge211_1_1geometry_1_1_transform.html">Transform</a> &amp;)</td></tr>
 <tr class="memdesc:a88a928a4bb5b994398dd39d849472641"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disequality for transforms. <br /></td></tr>
 <tr class="separator:a88a928a4bb5b994398dd39d849472641"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:acaef59186611cf03ca5628cda87af082"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classge211_1_1geometry_1_1_origin__type.html">Origin_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacege211_1_1geometry.html#acaef59186611cf03ca5628cda87af082">the_origin</a></td></tr>
+<tr class="memdesc:acaef59186611cf03ca5628cda87af082"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets implicitly converted to <code><a class="el" href="structge211_1_1geometry_1_1_basic__position.html" title="A position in the T-valued Cartesian plane.">Basic_position</a>&lt;T&gt;(0, 0)</code> for any coordinate type <code>T</code>.  <a href="namespacege211_1_1geometry.html#acaef59186611cf03ca5628cda87af082">More...</a><br /></td></tr>
+<tr class="separator:acaef59186611cf03ca5628cda87af082"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ade926c7fb087339caa2a18ec418ba64b"></a>
@@ -296,7 +308,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 <p>This is vector-scalar multiplication. If the result components would be fractional, they are truncated.</p>
 <p>This function is disabled if <code>T</code> is <code>double</code>, as there is another function for that. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00108">108</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00124">124</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -330,7 +342,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 <p>This is vector-scalar multiplication. If the result components would be fractional, they are truncated.</p>
 <p>This function is disabled if <code>T</code> is <code>double</code>, as there is another function for that. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00123">123</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00139">139</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -363,7 +375,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 <p>Translates a position by some displacement. </p>
 <p>This is the same as Position::below_right_by(Basic_dimensions) const. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00352">352</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00384">384</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -396,7 +408,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 <p>Translates a position by the opposite of some displacement. </p>
 <p>This is the same as Position::above_left_by(Basic_dimensions) const. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00369">369</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00401">401</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -430,7 +442,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="name
 <p>This is vector-scalar division. If the result components would be fractional, they are truncated.</p>
 <p>This function is disabled if <code>T</code> is <code>double</code>, as there is another function for that. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00150">150</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00166">166</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -468,7 +480,7 @@ Preconditions:</h4>
 <li><code>z</code> cannot be <code>0</code> if <code>T</code> is an integral type. </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00136">136</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00152">152</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -505,7 +517,7 @@ Preconditions:</h4>
 <li><code>s2 != 0</code> </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00195">195</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00211">211</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
@@ -538,12 +550,45 @@ Preconditions:</h4>
 <p>Equality for rectangles. </p>
 <p>Note that this is naïve, in that it considers empty rectangles with different positions to be different. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00549">549</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00590">590</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="acaef59186611cf03ca5628cda87af082"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acaef59186611cf03ca5628cda87af082">&#9670;&nbsp;</a></span>the_origin</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classge211_1_1geometry_1_1_origin__type.html">Origin_type</a> the_origin</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets implicitly converted to <code><a class="el" href="structge211_1_1geometry_1_1_basic__position.html" title="A position in the T-valued Cartesian plane.">Basic_position</a>&lt;T&gt;(0, 0)</code> for any coordinate type <code>T</code>. </p>
+<p>Examples:</p>
+<div class="fragment"><div class="line"><a class="code" href="structge211_1_1geometry_1_1_basic__position.html">ge211::Basic_position&lt;float&gt;</a> p0 = <a class="code" href="namespacege211_1_1geometry.html#acaef59186611cf03ca5628cda87af082">the_origin</a>;</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="keywordflow">return</span> <a class="code" href="structge211_1_1geometry_1_1_basic__rectangle.html#a0a9ce8f44d07ab35d28849b7a34eab16">Rectangle::from_top_left</a>(<a class="code" href="namespacege211_1_1geometry.html#acaef59186611cf03ca5628cda87af082">the_origin</a>, {w, h});</div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="ge211__geometry_8hxx_source.html#l00841">841</a> of file <a class="el" href="ge211__geometry_8hxx_source.html">ge211_geometry.hxx</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="astructge211_1_1geometry_1_1_basic__position_html"><div class="ttname"><a href="structge211_1_1geometry_1_1_basic__position.html">ge211::geometry::Basic_position</a></div><div class="ttdoc">A position in the T-valued Cartesian plane.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__forward_8hxx_source.html#l00081">ge211_forward.hxx:81</a></div></div>
+<div class="ttc" id="anamespacege211_1_1geometry_html_acaef59186611cf03ca5628cda87af082"><div class="ttname"><a href="namespacege211_1_1geometry.html#acaef59186611cf03ca5628cda87af082">ge211::geometry::the_origin</a></div><div class="ttdeci">constexpr Origin_type the_origin</div><div class="ttdoc">Gets implicitly converted to Basic_position&lt;T&gt;(0, 0) for any coordinate type T.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8hxx_source.html#l00841">ge211_geometry.hxx:841</a></div></div>
+<div class="ttc" id="astructge211_1_1geometry_1_1_basic__rectangle_html_a0a9ce8f44d07ab35d28849b7a34eab16"><div class="ttname"><a href="structge211_1_1geometry_1_1_basic__rectangle.html#a0a9ce8f44d07ab35d28849b7a34eab16">ge211::geometry::Basic_rectangle::from_top_left</a></div><div class="ttdeci">static Basic_rectangle from_top_left(Position tl, Dimensions dims)</div><div class="ttdoc">Creates a Basic_rectangle given the position of its top left vertex and its dimensions.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8hxx_source.html#l00469">ge211_geometry.hxx:469</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

@@ -37,6 +37,7 @@ var hierarchy =
     ] ],
     [ "Key", "classge211_1_1events_1_1_key.html", null ],
     [ "Mixer", "classge211_1_1audio_1_1_mixer.html", null ],
+    [ "Origin_type", "classge211_1_1geometry_1_1_origin__type.html", null ],
     [ "Pausable_timer", "classge211_1_1time_1_1_pausable__timer.html", null ],
     [ "Random", "classge211_1_1_random.html", null ],
     [ "Sound_effect_handle", "classge211_1_1audio_1_1_sound__effect__handle.html", null ],

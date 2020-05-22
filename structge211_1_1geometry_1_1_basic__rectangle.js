@@ -11,6 +11,7 @@ var structge211_1_1geometry_1_1_basic__rectangle =
     [ "dimensions", "structge211_1_1geometry_1_1_basic__rectangle.html#a02d758bd035e1f2d8e63e0658301ec9a", null ],
     [ "end", "structge211_1_1geometry_1_1_basic__rectangle.html#a68b688a51bd0cf6fb5bc2cba292209a8", null ],
     [ "into", "structge211_1_1geometry_1_1_basic__rectangle.html#a5c9da901b7adfaedeaa3efd9d85bfe8d", null ],
+    [ "operator Basic_rectangle< U >", "structge211_1_1geometry_1_1_basic__rectangle.html#aaf5e3ef91a85fc3adc52f494fd6a78f1", null ],
     [ "top_left", "structge211_1_1geometry_1_1_basic__rectangle.html#a6d7e08fc5420f8454ed7c9ad61c85c48", null ],
     [ "top_right", "structge211_1_1geometry_1_1_basic__rectangle.html#a829bfb323b19134c099f832ece7ad840", null ],
     [ "height", "structge211_1_1geometry_1_1_basic__rectangle.html#a050576b0776777b293a8aa065f369292", null ],

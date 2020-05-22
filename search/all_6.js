@@ -28,6 +28,7 @@ var searchData=
   ['get_5fvolume_98',['get_volume',['../classge211_1_1audio_1_1_sound__effect__handle.html#af3af53acc5705a6c9d0e9ba29a3d8ef7',1,'ge211::audio::Sound_effect_handle']]],
   ['get_5fwindow_99',['get_window',['../classge211_1_1_abstract__game.html#a329a95db19556a21771dc45265095cee',1,'ge211::Abstract_game']]],
   ['green_100',['green',['../classge211_1_1_color.html#a8cc8512a435b375d9d44029bd17a0ff5',1,'ge211::Color']]],
-  ['sprites_101',['sprites',['../namespacege211_1_1sprites.html',1,'ge211']]],
-  ['time_102',['time',['../namespacege211_1_1time.html',1,'ge211']]]
+  ['ge211_20—_20a_20game_20engine_20for_20cs_20211_101',['GE211 — a game engine for CS 211',['../index.html',1,'']]],
+  ['sprites_102',['sprites',['../namespacege211_1_1sprites.html',1,'ge211']]],
+  ['time_103',['time',['../namespacege211_1_1time.html',1,'ge211']]]
 ];
