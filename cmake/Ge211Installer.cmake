@@ -32,5 +32,5 @@ export( TARGETS         ge211
 
 write_basic_package_version_file(${config_version_cmake}
         VERSION         ${CMAKE_PROJECT_VERSION}
-        COMPATIBILITY   SameMinorVersion)
+        COMPATIBILITY   SameMajorVersion)
 
