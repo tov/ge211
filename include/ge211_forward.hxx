@@ -80,6 +80,7 @@ namespace geometry {
 template <class> struct Basic_dimensions;
 template <class> struct Basic_position;
 template <class> struct Basic_rectangle;
+class Origin_type;
 
 using Dimensions = Basic_dimensions<int>;
 using Position = Basic_position<int>;

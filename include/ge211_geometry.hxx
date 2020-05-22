@@ -14,6 +14,13 @@ namespace ge211 {
 /// Geometric objects and their operations.
 namespace geometry {
 
+/// The type of the special value `the_origin`.
+///
+/// This type exists only so that we can overload the
+/// Basic_position constructor to construct the origin. See
+/// geometry::the_origin for examples.
+class Origin_type { };
+
 /// Represents the dimensions of an object, or more generally,
 /// the displacement between two Basic_position%s. Note that
 /// much of the library uses geometry::Dimensions, which is a
@@ -242,11 +249,18 @@ struct Basic_position
             : x{x}, y{y}
     { }
 
+    /// Constructs the origin when given geometry::the_origin.
+    Basic_position(Origin_type)
+    NOEXCEPT_(detail::is_nothrow_convertible<int, Coordinate>())
+            : Basic_position(0, 0)
+    { }
+
     /// Constructs a position from a Basic_dimensions, which gives the
     /// displacement of the position from the origin.
-    explicit Basic_position(Dimensions dims)
-        NOEXCEPT_(detail::is_nothrow_convertible<Coordinate>())
-            : Basic_position{dims.width, dims.height}
+    explicit
+    Basic_position(Dimensions dims)
+    NOEXCEPT_(detail::is_nothrow_convertible<Coordinate>())
+            : Basic_position(dims.width, dims.height)
     { }
 
     /// Converts a Basic_position to another coordinate type.
@@ -810,6 +824,21 @@ private:
 bool operator==(const Transform&, const Transform&) NOEXCEPT;
 /// Disequality for transforms.
 bool operator!=(const Transform&, const Transform&) NOEXCEPT;
+
+/// Gets implicitly converted to `Basic_position<T>(0, 0)`
+/// for any coordinate type `T`.
+///
+/// Examples:
+///
+/// ```
+/// ge211::Basic_position<float> p0 = the_origin;
+/// ```
+///
+/// ```
+/// return Rectangle::from_top_left(the_origin, {w, h});
+/// ```
+//;
+constexpr Origin_type the_origin;
 
 } // end namespace geometry.
 
