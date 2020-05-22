@@ -123,7 +123,7 @@ Transform Transform::operator*(const Transform& other) const NOEXCEPT
 Transform Transform::inverse() const NOEXCEPT
 {
     Transform result;
-    result.set_rotation(-rotation_);
+    result.set_rotation(360 - rotation_);
     result.set_flip_h(flip_h_);
     result.set_flip_v(flip_v_);
     result.set_scale_x(1 / scale_x_);
