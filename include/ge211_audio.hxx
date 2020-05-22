@@ -31,7 +31,7 @@ public:
 
     /// Recognizes a non-empty audio clip.
     /// Equivalent to `!empty()`.
-    operator bool() const { return !real_empty(); }
+    explicit operator bool() const { return !real_empty(); }
 
     /// Loads audio from a resource file into this audio clip instance.
     ///
@@ -396,7 +396,7 @@ public:
 
     /// Recognizes a non-empty sound effect handle.
     /// Equivalent to `!empty()`.
-    operator bool() const;
+    explicit operator bool() const;
 
     /// Pauses the effect.
     ///

@@ -110,7 +110,7 @@ public:
         return ptr_;
     }
 
-    operator bool() const noexcept
+    explicit operator bool() const noexcept
     {
         return ptr_ != nullptr;
     }

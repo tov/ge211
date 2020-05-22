@@ -200,7 +200,7 @@ public:
     bool empty() const;
 
     /// Is this Text_sprite non-empty (and thus renderable)?
-    operator bool() const;
+    explicit operator bool() const;
 
     // Defined below.
     class Builder;
