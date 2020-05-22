@@ -14,17 +14,17 @@ namespace ge211 {
 /// Geometric objects and their operations.
 namespace geometry {
 
-/// The type of the special value `the_origin`.
+/// The type of the special value @ref the_origin.
 ///
 /// This type exists only so that we can overload the
 /// Basic_position constructor to construct the origin. See
-/// geometry::the_origin for examples.
+/// @ref the_origin for examples.
 class Origin_type { };
 
 /// Represents the dimensions of an object, or more generally,
 /// the displacement between two Basic_position%s. Note that
-/// much of the library uses geometry::Dimensions, which is a
-/// type alias for Basic_dimensions<int>.
+/// much of the library uses @ref Dimensions, which is a
+/// type alias for `Basic_dimensions<int>`.
 template <class T>
 struct Basic_dimensions
 {
@@ -38,9 +38,9 @@ struct Basic_dimensions
     /// Converts a Basic_dimensions to another coordinate type.
     /// For example:
     ///
-    /// ```cpp
-    /// Basic_dimensions<int> d1{3, 4};
-    /// Basic_dimensions<double> d2 = d1.into<double>();
+    /// ```
+    /// auto d1 = ge211::Basic_dimensions<int>{3, 4};
+    /// auto d2 = d1.into<double>();
     /// ```
     template <class U>
     Basic_dimensions<U> into() const
@@ -49,8 +49,15 @@ struct Basic_dimensions
         return {U(width), U(height)};
     }
 
-    /// Alias for `into<U>()` to support casting between coordinate
-    /// types.
+    /// Alias for Basic_dimensions::into to support explicit conversions
+    /// between coordinate types.
+    ///
+    /// For example:
+    ///
+    /// ```
+    /// ge211::Basic_dimensions<int> d1{3, 4};
+    /// ge211::Basic_dimensions<double> d2(d1);
+    /// ```
     template <class U>
     explicit operator Basic_dimensions<U>() const
     NOEXCEPT_(noexcept(into<U>()))
@@ -59,8 +66,8 @@ struct Basic_dimensions
     }
 };
 
-/// Type alias for the most common use of Basic_dimensions, which is with
-/// a coordinate type of `int`.
+/// Type alias for the most common use of Basic_dimensions, which is
+/// with a coordinate type of `int`.
 using Dimensions = Basic_dimensions<int>;
 
 /// Equality for Basic_dimensions.
@@ -187,7 +194,9 @@ Basic_dimensions<T>& operator-=(Basic_dimensions<T>& d1,
     return d1 = d1 - d2;
 }
 
-/// Succinct Basic_dimensions-scalar multiplication.
+/// Succinct [Basic_dimensions][1]-scalar multiplication.
+///
+/// [1]: @ref Basic_dimensions
 template <class T>
 Basic_dimensions<T>& operator*=(Basic_dimensions<T>& d1, T s2)
     NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
@@ -195,7 +204,9 @@ Basic_dimensions<T>& operator*=(Basic_dimensions<T>& d1, T s2)
     return d1 = d1 * s2;
 }
 
-/// Succinct Basic_dimensions-scalar multiplication.
+/// Succinct [Basic_dimensions][1]-scalar multiplication.
+///
+/// [1]: @ref Basic_dimensions
 template <class T>
 Basic_dimensions<T>& operator*=(Basic_dimensions<T>& d1, double s2)
     NOEXCEPT_(detail::has_nothrow_arithmetic<T, double>())
@@ -203,10 +214,12 @@ Basic_dimensions<T>& operator*=(Basic_dimensions<T>& d1, double s2)
     return d1 = d1 * s2;
 }
 
-/// Succinct Basic_dimensions-scalar division.
+/// Succinct [Basic_dimensions][1]-scalar division.
 ///
 /// \preconditions
 ///  - `s2 != 0`
+///
+/// [1]: @ref Basic_dimensions
 template <class T>
 Basic_dimensions<T>& operator/=(Basic_dimensions<T>& d1, T s2)
     NOEXCEPT_(detail::has_nothrow_division<T>())
@@ -214,7 +227,9 @@ Basic_dimensions<T>& operator/=(Basic_dimensions<T>& d1, T s2)
     return d1 = d1 / s2;
 }
 
-/// Succinct Basic_dimensions-scalar division.
+/// Succinct [Basic_dimensions][1]-scalar division.
+///
+/// [1]: @ref Basic_dimensions
 template <class T>
 Basic_dimensions<T>& operator/=(Basic_dimensions<T>& d1, double s2)
     NOEXCEPT_(detail::has_nothrow_division<T, double>())
@@ -245,13 +260,13 @@ struct Basic_position
 
     /// Constructs a position from the given *x* and *y* coordinates.
     Basic_position(Coordinate x, Coordinate y)
-        NOEXCEPT_(detail::is_nothrow_convertible<Coordinate>())
+        NOEXCEPT_(detail::is_nothrow_convertible<T>())
             : x{x}, y{y}
     { }
 
-    /// Constructs the origin when given geometry::the_origin.
+    /// Constructs the origin when given @ref the_origin.
     Basic_position(Origin_type)
-    NOEXCEPT_(detail::is_nothrow_convertible<int, Coordinate>())
+    NOEXCEPT_(detail::is_nothrow_convertible<int, T>())
             : Basic_position(0, 0)
     { }
 
@@ -259,26 +274,33 @@ struct Basic_position
     /// displacement of the position from the origin.
     explicit
     Basic_position(Dimensions dims)
-    NOEXCEPT_(detail::is_nothrow_convertible<Coordinate>())
+    NOEXCEPT_(detail::is_nothrow_convertible<T>())
             : Basic_position(dims.width, dims.height)
     { }
 
     /// Converts a Basic_position to another coordinate type.
     /// For example:
     ///
-    /// ```cpp
-    /// Basic_position<int> p1{3, 4};
-    /// Basic_position<double> p2 = d1.into<double>();
+    /// ```
+    /// auto p1 = ge211::Basic_position<int>{3, 4};
+    /// auto p2 = p1.into<double>();
     /// ```
     template <class U>
     Basic_position<U> into() const
-        NOEXCEPT_(detail::is_nothrow_convertible<Coordinate, U>())
+        NOEXCEPT_(detail::is_nothrow_convertible<T, U>())
     {
         return {U(x), U(y)};
     }
 
-    /// Alias for `into<U>()` to support casting between coordinate
-    /// types.
+    /// Alias for Basic_position::into to support casting between
+    /// coordinate types.
+    ///
+    /// For example:
+    ///
+    /// ```
+    /// ge211::Basic_position<int>    p1(3, 4);
+    /// ge211::Basic_position<double> p2(p1);
+    /// ```
     template <class U>
     explicit operator Basic_position<U>() const
     NOEXCEPT_(noexcept(into<U>()))
@@ -294,7 +316,7 @@ struct Basic_position
     /// Constructs the position that is above this position by the given
     /// amount.
     Basic_position up_by(Coordinate dy) const
-        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
     {
         return {x, y - dy};
     }
@@ -302,7 +324,7 @@ struct Basic_position
     /// Constructs the position that is below this position by the given
     /// amount.
     Basic_position down_by(Coordinate dy) const
-        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
     {
         return {x, y + dy};
     }
@@ -310,7 +332,7 @@ struct Basic_position
     /// Constructs the position that is to the left of this position by
     /// the given amount.
     Basic_position left_by(Coordinate dx) const
-        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
     {
         return {x - dx, y};
     }
@@ -318,7 +340,7 @@ struct Basic_position
     /// Constructs the position that is to the right of this position by
     /// the given amount.
     Basic_position right_by(Coordinate dx) const
-        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
     {
         return {x + dx, y};
     }
@@ -326,7 +348,7 @@ struct Basic_position
     /// Constructs the position that is above and left of this position
     /// by the given dimensions.
     Basic_position up_left_by(Dimensions dims) const
-        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
     {
         return {x - dims.width, y - dims.height};
     }
@@ -334,7 +356,7 @@ struct Basic_position
     /// Constructs the position that is above and right of this position
     /// by the given dimensions.
     Basic_position up_right_by(Dimensions dims) const
-        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
     {
         return {x + dims.width, y - dims.height};
     }
@@ -342,7 +364,7 @@ struct Basic_position
     /// Constructs the position that is below and left of this position
     /// by the given dimensions.
     Basic_position down_left_by(Dimensions dims) const
-        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
     {
         return {x - dims.width, y + dims.height};
     }
@@ -350,7 +372,7 @@ struct Basic_position
     /// Constructs the position that is below and right of this position
     /// by the given dimensions.
     Basic_position down_right_by(Dimensions dims) const
-        NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
+        NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
     {
         return {x + dims.width, y + dims.height};
     }
@@ -379,7 +401,7 @@ bool operator!=(Basic_position<T> p1, Basic_position<T> p2)
 }
 
 /// Translates a position by some displacement. This is the same as
-/// Position::below_right_by(Basic_dimensions) const.
+/// @ref Basic_position::down_right_by(Dimensions) const.
 template <class T>
 Basic_position<T> operator+(Basic_position<T> p1, Basic_dimensions<T> d2)
     NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
@@ -396,7 +418,7 @@ Basic_position<T> operator+(Basic_dimensions<T> d1, Basic_position<T> p2)
 }
 
 /// Translates a position by the opposite of some displacement. This is
-/// the same as Position::above_left_by(Basic_dimensions) const.
+/// the same as @ref Basic_position::up_left_by(Dimensions) const.
 template <class T>
 Basic_position<T> operator-(Basic_position<T> p1, Basic_dimensions<T> d2)
     NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
@@ -448,6 +470,13 @@ struct Basic_rectangle
     Coordinate height;    ///< The height of the rectangle in pixels.
 
     /// Converts a Basic_rectangle to another coordinate type.
+    ///
+    /// For example:
+    ///
+    /// ```
+    /// auto r1 = ge211::Basic_rectangle<int>{-1, -1, 2, 2};
+    /// auto r2 = r1.into<double>();
+    /// ```
     template<typename U>
     Basic_rectangle<U> into() const
         NOEXCEPT_(detail::is_nothrow_convertible<Coordinate, U>())
@@ -455,8 +484,15 @@ struct Basic_rectangle
         return {U(x), U(y), U(width), U(height)};
     }
 
-    /// Alias for `into<U>()` to support casting between coordinate
-    /// types.
+    /// Alias for Basic_rectangle::into to support casting between
+    /// coordinate types.
+    ///
+    /// For example:
+    ///
+    /// ```
+    /// ge211::Basic_rectangle<int>    r1{-1, -1, 2, 2};
+    /// ge211::Basic_rectangle<double> r2(p1);
+    /// ```
     template <class U>
     explicit operator Basic_rectangle<U>() const
     NOEXCEPT_(noexcept(into<U>()))
@@ -715,11 +751,12 @@ private:
 /// such as set_rotation(double) and set_scale(double). This can be used
 /// to configure a transform that does more than one thing:
 ///
-/// ```cpp
-/// Transform my_transform =
-///     Transform{}.set_flip_h(true)
-///                .set_flip_v(true)
-///                .scale_x(2);
+/// ```
+/// ge211::Transform my_transform =
+///     ge211::Transform{}
+///         .set_flip_h(true)
+///         .set_flip_v(true)
+///         .scale_x(2);
 /// ```
 ///
 class Transform
@@ -820,9 +857,9 @@ private:
     bool flip_v_;
 };
 
-/// Equality for transforms.
+/// Equality for `Transform`s.
 bool operator==(const Transform&, const Transform&) NOEXCEPT;
-/// Disequality for transforms.
+/// Disequality for `Transform`s.
 bool operator!=(const Transform&, const Transform&) NOEXCEPT;
 
 /// Gets implicitly converted to `Basic_position<T>(0, 0)`
@@ -835,10 +872,62 @@ bool operator!=(const Transform&, const Transform&) NOEXCEPT;
 /// ```
 ///
 /// ```
-/// return Rectangle::from_top_left(the_origin, {w, h});
+/// return ge211::Rectangle::from_top_left(the_origin, {w, h});
 /// ```
 //;
 constexpr Origin_type the_origin;
+
+/// Constructs a Basic_dimensions given the width and height.
+///
+/// Unlike the constructor, this function can infer the coordinate type
+/// from its arguments. For example:
+///
+/// ```
+/// auto near = make_dimensions(5, 7);   // Basic_dimensions<int>
+/// auto far  = make_dimensions(5, 7e9); // Basic_dimensions<double>
+/// ```
+template <class T>
+Basic_dimensions<T> make_dimensions(T x, T y)
+{
+    return {x, y};
+}
+
+/// Constructs a Basic_position given the `x` and `y` coordinates.
+///
+/// Unlike the constructor, this function can infer the coordinate type
+/// from its arguments. For example:
+///
+/// ```
+/// auto here  = make_position( 0, 0);    // Basic_position<int>
+/// auto there = make_position(-5, 7e9);  // Basic_position<double>
+/// ```
+template <class T>
+Basic_position<T> make_position(T x, T y)
+{
+    return {x, y};
+}
+
+
+/// Constructs a Basic_rectangle given its member variables.
+///
+/// It takes them in the same order as the constructor: the `x` and
+/// `y` coordinates followed by the width and height.
+///
+/// Unlike the constructor, this function can infer the coordinate type
+/// from its arguments. For example:
+///
+/// ```
+/// // infers Basic_rectangle<double>:
+/// auto unit_square = make_rectangle(0., 0., 1., 1.);
+///
+/// // infers Basic_rectangle<int>:
+/// auto big_reversi = make_rectangle(0, 0, 16, 16);
+/// ```
+template <class T>
+Basic_rectangle<T> make_rectangle(T x, T y, T width, T height)
+{
+    return {x, y, width, height};
+}
 
 } // end namespace geometry.
 
@@ -848,9 +937,10 @@ constexpr Origin_type the_origin;
 namespace std
 {
 
-/// Template specialization to define hashing of Basic_position,
-/// which allows storing them in a `std::unordered_set`, or using
-/// them as keys in a `std::unordered_map`.
+/// Template specialization to define hashing of
+/// @ref ge211::geometry::Basic_position,
+/// which allows storing them in a @ref std::unordered_set, or using
+/// them as keys in a @ref std::unordered_map.
 template <class T>
 struct hash<ge211::Basic_position<T>>
 {
