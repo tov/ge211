@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2020.6.1</span>
+   &#160;<span id="projectnumber">2020.6.2</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -222,7 +222,7 @@ $(document).ready(function(){initNavTree('ge211__geometry_8cxx_source.html','');
 <div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="classge211_1_1geometry_1_1_transform.html#a29dc42828ecc7d06b9fb34f1717fa730">  123</a></span>&#160;<a class="code" href="classge211_1_1geometry_1_1_transform.html">Transform</a> <a class="code" href="classge211_1_1geometry_1_1_transform.html#a29dc42828ecc7d06b9fb34f1717fa730">Transform::inverse</a>() const NOEXCEPT</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;{</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <a class="code" href="classge211_1_1geometry_1_1_transform.html">Transform</a> result;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    result.<a class="code" href="classge211_1_1geometry_1_1_transform.html#a4beeff4a6a0371fafe7a4378a602449a">set_rotation</a>(-rotation_);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    result.<a class="code" href="classge211_1_1geometry_1_1_transform.html#a4beeff4a6a0371fafe7a4378a602449a">set_rotation</a>(360 - rotation_);</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    result.<a class="code" href="classge211_1_1geometry_1_1_transform.html#ab46945cb64c156e21fa0a8eb4ffdd528">set_flip_h</a>(flip_h_);</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    result.<a class="code" href="classge211_1_1geometry_1_1_transform.html#a1d62308c5aa8c36067033e7723ae2c26">set_flip_v</a>(flip_v_);</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    result.<a class="code" href="classge211_1_1geometry_1_1_transform.html#adee00d937ca861ebe644f3d43f77f014">set_scale_x</a>(1 / scale_x_);</div>

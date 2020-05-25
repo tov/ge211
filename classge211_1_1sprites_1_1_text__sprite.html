@@ -31,7 +31,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2020.6.1</span>
+   &#160;<span id="projectnumber">2020.6.2</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -174,8 +174,35 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div><div class="memdoc">
 
 <p>Constructs an empty text sprite. </p>
-<p>This is useful when you don't know the message at the point where the sprite is created, but note that passing an empty text sprite to <a class="el" href="classge211_1_1_sprite__set.html#a2240fce09cf44668dcb2e5605676935a" title="Adds the given sprite at the given x–y geometry::Position and optional z coordinate,...">Sprite_set::add_sprite(Sprite const&amp;, Position, int)</a> is an error. </p>
-
+<p>This is useful when you don't yet know the message at the point where the sprite is created. It's an error to pass the an empty <a class="el" href="classge211_1_1sprites_1_1_text__sprite.html" title="A Sprite that displays text.">Text_sprite</a> to <a class="el" href="classge211_1_1_sprite__set.html#a2240fce09cf44668dcb2e5605676935a" title="Adds the given sprite at the given x–y geometry::Position and optional z coordinate,...">Sprite_set::add_sprite(Sprite const&amp;, Position, int)</a>, but you can use <a class="el" href="classge211_1_1sprites_1_1_text__sprite.html#afe7c024ae674fec2431b9d3eb9ad4173" title="Resets this text sprite with the configuration from the given Builder.">Text_sprite::reconfigure(Builder const&amp;)</a> to make it non-empty.</p>
+<h1><a class="anchor" id="autotoc_md18"></a>
+Example</h1>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>View</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">void</span> draw(<a class="code" href="classge211_1_1_sprite__set.html">ge211::Sprite_set</a>&amp; set,</div>
+<div class="line">              std::string <span class="keyword">const</span>&amp; name,</div>
+<div class="line">              <span class="keywordtype">int</span>                score);</div>
+<div class="line"> </div>
+<div class="line">    <a class="code" href="classge211_1_1_font.html">ge211::Font</a> sans30{<span class="stringliteral">&quot;sans.ttf&quot;</span>, 30};</div>
+<div class="line">    <a class="code" href="classge211_1_1sprites_1_1_text__sprite.html">ge211::Text_sprite</a> name_sprite;</div>
+<div class="line">    <a class="code" href="classge211_1_1sprites_1_1_text__sprite.html">ge211::Text_sprite</a> score_sprite;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> View::draw(<a class="code" href="classge211_1_1_sprite__set.html">ge211::Sprite_set</a>&amp; set,</div>
+<div class="line">                std::string <span class="keyword">const</span>&amp; name,</div>
+<div class="line">                <span class="keywordtype">int</span>                score)</div>
+<div class="line">{</div>
+<div class="line">    ge211::Text_sprite::Builder name_builder(sans30);</div>
+<div class="line">    name_builder.color(NAME_COLOR) &lt;&lt; name;</div>
+<div class="line">    name_sprite.reconfigure(name_builder);</div>
+<div class="line">    set.<a class="code" href="classge211_1_1_sprite__set.html#a2240fce09cf44668dcb2e5605676935a">add_sprite</a>(name_sprite, NAME_POSITION);</div>
+<div class="line"> </div>
+<div class="line">    ge211::Text_sprite::Builder score_builder(sans30);</div>
+<div class="line">    score_builder.color(SCORE_COLOR) &lt;&lt; score;</div>
+<div class="line">    score_sprite.reconfigure(score_builder);</div>
+<div class="line">    set.<a class="code" href="classge211_1_1_sprite__set.html#a2240fce09cf44668dcb2e5605676935a">add_sprite</a>(score_sprite, SCORE_POSITION);</div>
+<div class="line">}</div>
+</div><!-- fragment --> 
 <p class="definition">Definition at line <a class="el" href="ge211__sprites_8cxx_source.html#l00229">229</a> of file <a class="el" href="ge211__sprites_8cxx_source.html">ge211_sprites.cxx</a>.</p>
 
 </div>
@@ -208,8 +235,21 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 <p>Constructs a white text sprite with the given text and font. </p>
 <p>For more control (color, wrapping, turning off anti-aliasing), use the <a class="el" href="classge211_1_1sprites_1_1_text__sprite_1_1_builder.html" title="Builder-style API for configuring and constructing Text_sprites.">Builder</a> API instead.</p>
-<p>While it is okay to construct a text sprite with no text, it cannot be rendered into a scene. Use <a class="el" href="classge211_1_1sprites_1_1_text__sprite.html#a644718bb2fb240de962dc3c9a1fdf0dc" title="Is this Text_sprite empty? (If so, you shouldn&#39;t try to use it.)">empty() const </a>to check if you haven't kept track. </p>
-
+<p>While it is okay to construct a text sprite with no text, it cannot be rendered into a scene. Use <a class="el" href="classge211_1_1sprites_1_1_text__sprite.html#a644718bb2fb240de962dc3c9a1fdf0dc" title="Is this Text_sprite empty? (If so, you shouldn&#39;t try to use it.)">empty() const </a>to check if you haven't kept track.</p>
+<h1><a class="anchor" id="autotoc_md19"></a>
+Example</h1>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>View</div>
+<div class="line">{</div>
+<div class="line">    <a class="code" href="classge211_1_1_font.html">ge211::Font</a>        sans72      {<span class="stringliteral">&quot;sans.ttf&quot;</span>, 72},</div>
+<div class="line">                       sans30      {<span class="stringliteral">&quot;sans.ttf&quot;</span>, 30};</div>
+<div class="line"> </div>
+<div class="line">    <a class="code" href="classge211_1_1sprites_1_1_text__sprite.html">ge211::Text_sprite</a> title       {<span class="stringliteral">&quot;My Fun Game&quot;</span>, sans72},</div>
+<div class="line">                       score_label {<span class="stringliteral">&quot;Score:&quot;</span>, sans30},</div>
+<div class="line">                       level_label {<span class="stringliteral">&quot;Level:&quot;</span>, sans30},</div>
+<div class="line">                       score_value,</div>
+<div class="line">                       level_value;</div>
+<div class="line">};</div>
+</div><!-- fragment --> 
 <p class="definition">Definition at line <a class="el" href="ge211__sprites_8cxx_source.html#l00232">232</a> of file <a class="el" href="ge211__sprites_8cxx_source.html">ge211_sprites.cxx</a>.</p>
 
 </div>
@@ -220,6 +260,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aclassge211_1_1_sprite__set_html"><div class="ttname"><a href="classge211_1_1_sprite__set.html">ge211::Sprite_set</a></div><div class="ttdoc">A collection of positioned sprites ready to be rendered to the screen.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__sprites_8hxx_source.html#l00452">ge211_sprites.hxx:453</a></div></div>
+<div class="ttc" id="aclassge211_1_1sprites_1_1_text__sprite_html"><div class="ttname"><a href="classge211_1_1sprites_1_1_text__sprite.html">ge211::sprites::Text_sprite</a></div><div class="ttdoc">A Sprite that displays text.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__sprites_8hxx_source.html#l00180">ge211_sprites.hxx:181</a></div></div>
+<div class="ttc" id="aclassge211_1_1_font_html"><div class="ttname"><a href="classge211_1_1_font.html">ge211::Font</a></div><div class="ttdoc">Represents a font that can be used to render a sprites::Text_sprite.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__resource_8hxx_source.html#l00056">ge211_resource.hxx:57</a></div></div>
+<div class="ttc" id="aclassge211_1_1_sprite__set_html_a2240fce09cf44668dcb2e5605676935a"><div class="ttname"><a href="classge211_1_1_sprite__set.html#a2240fce09cf44668dcb2e5605676935a">ge211::Sprite_set::add_sprite</a></div><div class="ttdeci">Sprite_set &amp; add_sprite(Sprite const &amp;, Position, int z=0)</div><div class="ttdoc">Adds the given sprite at the given x–y geometry::Position and optional z coordinate,...</div><div class="ttdef"><b>Definition:</b> <a href="ge211__sprites_8cxx_source.html#l00024">ge211_sprites.cxx:24</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
