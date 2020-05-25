@@ -180,19 +180,70 @@ private:
 class Text_sprite : public detail::Texture_sprite
 {
 public:
-    /// Constructs an empty text sprite. This is useful when you
-    /// don't know the message at the point where the sprite is created,
-    /// but note that passing an empty text sprite to
-    /// Sprite_set::add_sprite(Sprite const&, Position, int) is an error.
+    /// Constructs an empty text sprite.
+    ///
+    /// This is useful when you don't yet know the message at the point
+    /// where the sprite is created. It's an error to pass the an
+    /// empty Text_sprite to
+    /// Sprite_set::add_sprite(Sprite const&, Position, int), but
+    /// you can use Text_sprite::reconfigure(Builder const&) to make
+    /// it non-empty.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// struct View
+    /// {
+    ///     void draw(ge211::Sprite_set& set,
+    ///               std::string const& name,
+    ///               int                score);
+    ///
+    ///     ge211::Font sans30{"sans.ttf", 30};
+    ///     ge211::Text_sprite name_sprite;
+    ///     ge211::Text_sprite score_sprite;
+    /// }
+    ///
+    /// void View::draw(ge211::Sprite_set& set,
+    ///                 std::string const& name,
+    ///                 int                score)
+    /// {
+    ///     ge211::Text_sprite::Builder name_builder(sans30);
+    ///     name_builder.color(NAME_COLOR) << name;
+    ///     name_sprite.reconfigure(name_builder);
+    ///     set.add_sprite(name_sprite, NAME_POSITION);
+    ///
+    ///     ge211::Text_sprite::Builder score_builder(sans30);
+    ///     score_builder.color(SCORE_COLOR) << score;
+    ///     score_sprite.reconfigure(score_builder);
+    ///     set.add_sprite(score_sprite, SCORE_POSITION);
+    /// }
+    /// ```
     Text_sprite();
 
     /// Constructs a white text sprite with the given text and font.
+    ///
     /// For more control (color, wrapping, turning off anti-aliasing),
     /// use the Builder API instead.
     ///
     /// While it is okay to construct a text sprite with no text, it
     /// cannot be rendered into a scene. Use empty() const to check
     /// if you haven't kept track.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// struct View
+    /// {
+    ///     ge211::Font        sans72      {"sans.ttf", 72},
+    ///                        sans30      {"sans.ttf", 30};
+    ///
+    ///     ge211::Text_sprite title       {"My Fun Game", sans72},
+    ///                        score_label {"Score:", sans30},
+    ///                        level_label {"Level:", sans30},
+    ///                        score_value,
+    ///                        level_value;
+    /// };
+    /// ```
     Text_sprite(std::string const&, Font const&);
 
     /// Is this Text_sprite empty? (If so, you shouldn't try to use
@@ -221,17 +272,41 @@ private:
 };
 
 /// Builder-style API for configuring and constructing Text_sprite%s.
+///
 /// The idea is that a Text_sprite::Builder allows configuring a
-/// Text_sprite in detail before actually constructing it. For example:
+/// Text_sprite in detail before actually constructing it.
 ///
-/// ```cpp
-/// Font sans("sans.ttf", 24);
+/// # Example
 ///
-/// Text_sprite sprite =
-///     Text_sprite::Builder(sans)
-///         .message("Hello, world!")
-///         .color(Color::medium_red())
-///         .build();
+/// ```
+/// struct View
+/// {
+///     ge211::Font sans{"sans.ttf", 16},
+///     ge211::Text_sprite percentage_sprite;
+///     double cached_value = NAN;
+///
+///     void update_percentage(double unit_value);
+///     …
+/// };
+///
+/// void View::update_percentage(double unit_value)
+/// {
+///     if (unit_value == cached_value) return;
+///
+///     ge211::Text_sprite::Builder builder(sans);
+///
+///     if (unit_value < 0.5) {
+///         builder.color(Color::medium_green());
+///     } else {
+///         builder.color(Color::medium_red());
+///     }
+///
+///     builder << std::setprecision(1) << std::fixed
+///             << 100 * unit_value << '%';
+///
+///     percentage_sprite.reconfigure(builder);
+///     cached_value = unit_value;
+/// }
 /// ```
 class Text_sprite::Builder
 {
