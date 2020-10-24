@@ -74,16 +74,16 @@ struct Model
 
 // VIEW DATA DEFINITIONS
 
-struct View
+struct View : Gui_view<Model>
 {
-    View(Mixer&);
-
     Font sans{"sans.ttf", 30};
     Text_sprite fps;
     Text_sprite load;
     Circle_sprite mortar{mortar_radius, mortar_color};
     vector<Circle_sprite> stars;
     Sound_effect pop;
+
+    View(Mixer&);
 };
 
 // MAIN STRUCT AND FUNCTION

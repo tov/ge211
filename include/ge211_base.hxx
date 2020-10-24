@@ -17,6 +17,64 @@
 
 namespace ge211 {
 
+namespace detail {
+
+struct Nothing {};
+
+}
+
+template <class Model, class Control_state = void>
+class Gui_view
+{
+protected:
+    /// You must override this function in the derived class to specify how
+    /// to draw your scene. This function is called by the game engine once
+    /// per frame, after handling events. It is passed a const reference to
+    /// your model and a reference to an empty Sprite_set; add sprites to
+    /// the Sprite_set to reflect the state of your model.
+    ///
+    /// Note that the sprites added to the Sprite_set cannot be local
+    /// variables owned by the draw(Sprite_set&) function itself, as
+    /// they must continue to live after the function returns. For this
+    /// reason, they are usually stored as members in the game class, or
+    /// in a data structure that is a member of the game class.
+    virtual void draw(Sprite_set&, Model const&, Control_state const&) = 0;
+
+public:
+    /// The default background color of the window, if not changed by the
+    /// derived class. To change the background color, assign the protected
+    /// member variable Abstract_game::background_color from the
+    /// draw(Sprite_set&) or on_start() functions.
+    static const Color default_background_color;
+
+    /// The default initial window title. You can change this in a derived class
+    /// by overriding the initial_window_title() const member function.
+    static const char* const default_window_title;
+
+    /// The default window dimensions, in pixels. You can change this in a
+    /// derived class by overriding the initial_window_dimensions() const member
+    /// function.
+    static const Dimensions default_window_dimensions;
+
+    /// Polymorphic classes should have virtual destructors.
+    virtual ~Gui_view() = default;
+
+};
+
+template <class Model>
+class Gui_view<Model, void> : Gui_view<Model, detail::Nothing>
+{
+protected:
+    virtual void draw(Sprite_set&, Model const&) = 0;
+
+    void draw(Sprite_set& sprites,
+              Model const& model,
+              detail::Nothing const&) final override
+    {
+        draw(sprites, model);
+    }
+};
+
 /** This is the abstract base class for deriving games.
  *
  * To create a new game, you must define a new struct or class that derives
