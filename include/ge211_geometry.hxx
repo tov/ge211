@@ -39,7 +39,7 @@ struct Dims;
 /// A position in the T-valued Cartesian plane. In graphics,
 /// the origin is traditionally in the upper left, so the *x* coordinate
 /// increases to the right and the *y* coordinate increases downward.
-/// Note that much of the library uses geometry::Position, which is a
+/// Note that much of the library uses geometry::Posn, which is a
 /// type alias for Posn<int>.
 template <class>
 struct Posn;
@@ -198,7 +198,7 @@ struct Posn
 
     /// Constructs the origin when given @ref the_origin.
     Posn(Origin_type)
-    NOEXCEPT_(detail::is_nothrow_convertible<int, T>())
+    NOEXCEPT_(noexcept(T(0)))
             : Posn(0, 0)
     { }
 
@@ -571,19 +571,19 @@ class Rect<T>::iterator
         : public std::iterator<std::input_iterator_tag, const Posn>
 {
 public:
-    /// Returns the current `Position` of this iterator.
+    /// Returns the current Posn of this iterator.
     Posn operator*() const
     {
         return current_;
     }
 
-    /// Returns a pointer to the current `Position` of this iterator.
+    /// Returns a pointer to the current Posn of this iterator.
     Posn const* operator->() const
     {
         return &current_;
     }
 
-    /// Pre-increments, advancing this iterator to the next `Position`.
+    /// Pre-increments, advancing this iterator to the next Posn.
     iterator& operator++()
     {
         if (++current_.y >= y_end_) {
@@ -594,7 +594,7 @@ public:
         return *this;
     }
 
-    /// Pre-decrements, retreating this iterator to the previous `Position`.
+    /// Pre-decrements, retreating this iterator to the previous Posn.
     iterator& operator--()
     {
         if (current_.y == y_begin_) {
@@ -607,7 +607,7 @@ public:
         return *this;
     }
 
-    /// Post-increments, advancing this iterator to the next `Position`.
+    /// Post-increments, advancing this iterator to the next Posn.
     iterator operator++(int)
     {
         iterator result(*this);
@@ -615,7 +615,7 @@ public:
         return result;
     }
 
-    /// Post-decrements, retreating this iterator to the previous `Position`.
+    /// Post-decrements, retreating this iterator to the previous Posn.
     iterator operator--(int)
     {
         iterator result(*this);
@@ -653,7 +653,7 @@ private:
 
 /// A rendering transform, which can scale, flip, and rotate. A Transform
 /// can be given to
-/// Sprite_set::add_sprite(const Sprite&, Position, int, const Transform&)
+/// Sprite_set::add_sprite(const Sprite&, Posn<int>, int, const Transform&)
 /// to specify how a sprites::Sprite should be rendered.
 ///
 /// To construct a transform that does just one thing, you can use one of
