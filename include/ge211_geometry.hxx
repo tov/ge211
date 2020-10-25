@@ -16,15 +16,35 @@ namespace ge211
 namespace geometry
 {
 
+class Origin_type;
+
+template <class T>
+struct Geometry
+{
+    using Coordinate = T;
+    struct Dims;
+    struct Posn;
+    struct Rect;
+};
+
+template <class T>
+using Dims = typename Geometry<T>::Dims;
+
+template <class T>
+using Posn = typename Geometry<T>::Posn;
+
+template <class T>
+using Rect = typename Geometry<T>::Rect;
+
 /// The type of the special value @ref the_origin.
 ///
 /// This type exists only so that we can overload the
 /// Posn constructor to construct the origin. See
 /// @ref the_origin for examples.
-class Origin_type { };
+class Origin_type
+{
+};
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunknown-pragmas"
 /// Represents the dimensions of an object, or more generally,
 /// the displacement between two Posn%s. Note that
 /// much of the library uses @ref geometry::Dims, which is a
@@ -36,35 +56,16 @@ struct Geometry<T>::Dims
     /// geometry type parameter `T`.
     using Coordinate = Geometry::Coordinate;
 
+    /// The position type corresponding to this type. This is an
+    /// alias of @ref Geometry::Posn.
+    using Posn = Geometry::Posn;
+
+    /// The rectangle type corresponding to this type. This is an
+    /// alias of @ref Geometry::Rect.
+    using Rect = Geometry::Rect;
+
     Coordinate width;  ///< The width of the object.
     Coordinate height; ///< The height of the object.
-
-    // Constructs a Dims with the given width and height.
-    Dims(Coordinate width, Coordinate height)
-    NOEXCEPT_(detail::is_nothrow_convertible<T>())
-            : width(width)
-            , height(height)
-    { }
-
-    // Default constructs the 0-by-0 Dims.
-    Dims()
-    NOEXCEPT_(detail::is_nothrow_convertible<int, T>())
-            : Dims(0, 0)
-    { }
-
-    /// Constructs a @ref Dims from a Dims of another coordinate type.
-    /// For example:
-    ///
-    /// ```
-    /// ge211::Dims<int> d1 { 3, 4 };
-    /// auto d2 = ge211::Dims<double>(d1);
-    /// ```
-    template<class U>
-    explicit Dims(geometry::Dims<U> dims)
-    NOEXCEPT_(detail::is_nothrow_convertible<U, T>())
-            : width(dims.width)
-            , height(dims.height)
-    { }
 
     /// Equality for Dims.
     bool operator==(Dims that) const
@@ -76,6 +77,7 @@ struct Geometry<T>::Dims
     bool operator!=(Dims that) const
     {
 #pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunknown-pragmas"
 #pragma ide diagnostic ignored "Simplify"
         return !(*this == that);
 #pragma clang diagnostic pop
@@ -95,16 +97,16 @@ struct Geometry<T>::Dims
 
     /// Multiplies a Dims by a scalar.
     template<class U = T>
-    Dims operator*(U s2)
+    Dims operator*(U scalar) const
     {
-        return {T(width * s2), T(height * s2)};
+        return {T(width * scalar), T(height * scalar)};
     }
 
     /// Divides a Dims by a scalar.
     template <class U = T>
-    Dims operator/(U s2)
+    Dims operator/(U scalar) const
     {
-        return {T(width / s2), T(height / s2)};
+        return {T(width / scalar), T(height / scalar)};
     }
 
 /// Succinct Dims addition.
@@ -154,15 +156,9 @@ struct Geometry<T>::Dims
     geometry::Dims<U>
     into() const
     {
-        return geometry::Dims<U>{*this};
+        return geometry::Dims<U>(U(width), U(height));
     }
 };
-#pragma clang diagnostic pop
-
-/// Type alias for the most common use of @ref Dims, which is
-/// with a coordinate type of `int`.
-template <class T>
-using Dims = typename Geometry<T>::Dims;
 
 /// Multiplies a scalar by a Dims.
 template<
@@ -170,10 +166,11 @@ template<
         class U,
         std::enable_if_t<std::is_arithmetic<U>::value, void>
         >
-Dims<T> operator*(U s1, Dims<T> d2)
+Dims<T> operator*(U scalar, Dims<T> dims)
 {
-    return d2 * s1;
+    return dims * scalar;
 }
+
 
 /// A position in the T-valued Cartesian plane. In graphics,
 /// the origin is traditionally in the upper left, so the *x* coordinate
@@ -187,10 +184,18 @@ struct Geometry<T>::Posn
     /// type parameter `T`.
     using Coordinate = Geometry::Coordinate;
 
+    /// The dimensions type corresponding to this type. This is an
+    /// alias of @ref Geometry::Dims.
+    using Dims = Geometry::Dims;
+
+    /// The rectangle type corresponding to this type. This is an
+    /// alias of @ref Geometry::Rect.
+    using Rect = Geometry::Rect;
+
     Coordinate x; ///< The *x* coordinate
     Coordinate y; ///< The *y* coordiante
 
-    /// \name Constructors
+    /// \name Constructors and Conversions
     /// @{
 
     /// Constructs a position from the given *x* and *y* coordinates.
@@ -205,6 +210,13 @@ struct Geometry<T>::Posn
             : Posn(0, 0)
     { }
 
+    /// Constructs a position from a Dims, which gives the
+    /// displacement of the position from the origin.
+    explicit Posn(Dims dims)
+    NOEXCEPT_(detail::is_nothrow_convertible<T>())
+            : Posn{dims.width, dims.height}
+    { }
+
     /// Constructs a @ref Posn from a Posn of another coordinate type.
     /// For example:
     ///
@@ -213,19 +225,9 @@ struct Geometry<T>::Posn
     /// auto p2 = ge211::Posn<double>(p1);
     /// ```
     template <class U>
-    explicit
-    Posn(geometry::Posn<U> posn)
-    NOEXCEPT_(detail::is_nothrow_convertible<T, U>())
-            : x(posn.x)
-            , y(posn.y)
-    { }
-
-    /// Constructs a position from a Dims, which gives the
-    /// displacement of the position from the origin.
-    explicit
-    Posn(Dims dims)
-    NOEXCEPT_(detail::is_nothrow_convertible<T>())
-            : Posn(dims.width, dims.height)
+    explicit Posn(const U& that)
+            : x(that.x)
+            , y(that.y)
     { }
 
     /// Converts a Posn to another coordinate type.
@@ -240,7 +242,67 @@ struct Geometry<T>::Posn
     into() const
     NOEXCEPT_(detail::is_nothrow_convertible<T, U>())
     {
-        return geometry::Posn<U>{*this};
+        return {U(x), U(y)};
+    }
+
+    /// @}
+
+    /// \name Operators
+    /// @{
+
+    /// Equality for positions.
+    bool operator==(Posn that) const
+    NOEXCEPT_(detail::is_nothrow_comparable<T>())
+    {
+        return x == that.x && y == that.y;
+    }
+
+    /// Disequality for positions.
+    bool operator!=(Posn p2) const
+    NOEXCEPT_(detail::is_nothrow_comparable<T>())
+    {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunknown-pragmas"
+#pragma ide diagnostic ignored "Simplify"
+        return !(*this == p2);
+#pragma clang diagnostic pop
+    }
+
+    /// Translates a position by some displacement. This is the same as
+    /// @ref Posn::down_right_by(Dims) const.
+    Posn operator+(Dims dims) const
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    {
+        return down_right_by(dims);
+    }
+
+    /// Translates a position by the opposite of some displacement. This is
+    /// the same as @ref Posn::up_left_by(Dims) const.
+    Posn operator-(Dims dims) const
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    {
+        return up_left_by(dims);
+    }
+
+    /// Subtracts two Posn%s, yields a Dims.
+    Dims operator-(Posn that) const
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    {
+        return {x - that.x, y - that.y};
+    }
+
+    /// Succinct position translation.
+    Posn& operator+=(Dims dims)
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    {
+        return *this = *this + dims;
+    }
+
+    /// Succinct position translation.
+    Posn& operator-=(Dims dims)
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    {
+        return *this = *this - dims;
     }
 
     /// @}
@@ -315,71 +377,6 @@ struct Geometry<T>::Posn
     /// @}
 };
 
-/// Equality for positions.
-template<class T>
-bool operator==(Posn<T> p1, Posn<T> p2)
-NOEXCEPT_(detail::is_nothrow_comparable<T>())
-{
-    return p1.x == p2.x && p1.y == p2.y;
-}
-
-/// Disequality for positions.
-template<class T>
-bool operator!=(Posn<T> p1, Posn<T> p2)
-NOEXCEPT_(detail::is_nothrow_comparable<T>())
-{
-    return !(p1 == p2);
-}
-
-/// Translates a position by some displacement. This is the same as
-/// @ref Posn::down_right_by(Dims) const.
-template <class T>
-Posn<T> operator+(Posn<T> p1, Dims<T> d2)
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
-{
-    return p1.down_right_by(d2);
-}
-
-/// Translates a position by some displacement.
-template <class T>
-Posn<T> operator+(Dims<T> d1, Posn<T> p2)
-NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
-{
-    return p2.down_right_by(d1);
-}
-
-/// Translates a position by the opposite of some displacement. This is
-/// the same as @ref Posn::up_left_by(Dims) const.
-template <class T>
-Posn<T> operator-(Posn<T> p1, Dims<T> d2)
-NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
-{
-    return p1.up_left_by(d2);
-}
-
-/// Translates a position by the opposite of some displacement.
-template <class T>
-Dims<T> operator-(Posn<T> p1, Posn<T> p2)
-NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
-{
-    return {p1.x - p2.x, p1.y - p2.y};
-}
-
-/// Succinct position translation.
-template <class T>
-Posn<T>& operator+=(Posn<T>& p1, Dims<T> d2)
-NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
-{
-    return p1 = p1 + d2;
-}
-
-/// Succinct position translation.
-template <class T>
-Posn<T>& operator-=(Posn<T>& p1, Dims<T> d2)
-NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
-{
-    return p1 = p1 - d2;
-}
 
 /// Represents a positioned rectangle.
 template<class T>
@@ -389,10 +386,21 @@ struct Geometry<T>::Rect
     /// type parameter `T`.
     using Coordinate = Geometry::Coordinate;
 
+    /// The dimensions type corresponding to this type. This is an
+    /// alias of @ref Geometry::Dims.
+    using Dims = Geometry::Dims;
+
+    /// The position type corresponding to this type. This is an
+    /// alias of @ref Geometry::Posn.
+    using Posn = Geometry::Posn;
+
     Coordinate x;         ///< The *x* coordinate of the upper-left vertex.
     Coordinate y;         ///< The *y* coordinate of the upper-left vertex.
     Coordinate width;     ///< The width of the rectangle in pixels.
     Coordinate height;    ///< The height of the rectangle in pixels.
+
+    /// \name Conversions
+    /// @{
 
     /// Converts a Rect to another coordinate type.
     ///
@@ -427,48 +435,40 @@ struct Geometry<T>::Rect
         return into<U>();
     }
 
-    /// Creates a Rect given the position of its top left vertex
-    /// and its dimensions.
-    static Rect from_top_left(Posn tl, Dims dims)
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    /// @}
+
+    /// \name Operators
+    /// @{
+
+    /// Equality for rectangles. Note that this is naïve, in that it considers
+    /// empty rectangles with different positions to be different.
+    bool operator==(const Rect& that) const
+    NOEXCEPT_(detail::is_nothrow_comparable<T>())
     {
-        return {tl.x, tl.y, dims.width, dims.height};
+        return x == that.x &&
+               y == that.y &&
+               width == that.width &&
+               height == that.height;
     }
 
-    /// Creates a Rect given the position of its top right vertex
-    /// and its dimensions.
-    static Rect from_top_right(Posn tr, Dims dims)
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    /// Disequality for rectangles.
+    bool operator!=(const Rect &that) const
+    NOEXCEPT_(detail::is_nothrow_comparable<T>())
     {
-        return from_top_left(tr.left_by(dims.width), dims);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunknown-pragmas"
+#pragma ide diagnostic ignored "Simplify"
+        return !(*this == that);
+#pragma clang diagnostic pop
     }
 
-    /// Creates a Rect given the position of its bottom left vertex
-    /// and its dimensions.
-    static Rect from_bottom_left(Posn bl, Dims dims)
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
-    {
-        return from_top_left(bl.up_by(dims.height), dims);
-    }
+    /// @}
 
-    /// Creates a Rect given the position of its bottom right vertex
-    /// and its dimensions.
-    static Rect from_bottom_right(Posn br, Dims dims)
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
-    {
-        return from_top_left(br.up_left_by(dims), dims);
-    }
-
-    /// Creates a Rect given the position of its center
-    /// and its dimensions.
-    static Rect from_center(Posn center, Dims dims)
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
-    {
-        return from_top_left(center.up_left_by(dims / Coordinate(2)), dims);
-    }
+    /// \name Dimensions and positions
+    /// @{
 
     /// The dimensions of the rectangle. Equivalent to
-    /// `Dims{rect.width, rect.height}`.
+    /// `Dims<T>{rect.width, rect.height}`.
     Dims dimensions() const
     NOEXCEPT_(detail::is_nothrow_convertible<T>())
     {
@@ -511,6 +511,53 @@ struct Geometry<T>::Rect
         return top_left().down_right_by(dimensions() / Coordinate(2));
     }
 
+    /// @}
+
+    /// \name Static factory functions
+    /// @{
+
+    /// Creates a Rect given the position of its top left vertex
+    /// and its dimensions.
+    static Rect from_top_left(Posn tl, Dims dims)
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    {
+        return {tl.x, tl.y, dims.width, dims.height};
+    }
+
+    /// Creates a Rect given the position of its top right vertex
+    /// and its dimensions.
+    static Rect from_top_right(Posn tr, Dims dims)
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    {
+        return from_top_left(tr.left_by(dims.width), dims);
+    }
+
+    /// Creates a Rect given the position of its bottom left vertex
+    /// and its dimensions.
+    static Rect from_bottom_left(Posn bl, Dims dims)
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    {
+        return from_top_left(bl.up_by(dims.height), dims);
+    }
+
+    /// Creates a Rect given the position of its bottom right vertex
+    /// and its dimensions.
+    static Rect from_bottom_right(Posn br, Dims dims)
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    {
+        return from_top_left(br.up_left_by(dims), dims);
+    }
+
+    /// Creates a Rect given the position of its center
+    /// and its dimensions.
+    static Rect from_center(Posn center, Dims dims)
+    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    {
+        return from_top_left(center.up_left_by(dims / Coordinate(2)), dims);
+    }
+
+    /// @}
+
     class iterator;
 
     /// Returns an `iterator` to the top left corner of this rectangle.
@@ -542,26 +589,6 @@ private:
         return result;
     }
 };
-
-/// Equality for rectangles. Note that this is naïve, in that it considers
-/// empty rectangles with different positions to be different.
-template<class T>
-bool operator==(const Rect<T>& r1, const Rect<T>& r2)
-NOEXCEPT_(detail::is_nothrow_comparable<T>())
-{
-    return r1.x == r2.x &&
-           r1.y == r2.y &&
-           r1.width == r2.width &&
-           r1.height == r2.height;
-}
-
-/// Disequality for rectangles.
-template <class T>
-bool operator!=(const Rect<T> &r1, const Rect<T> &r2)
-NOEXCEPT_(detail::is_nothrow_comparable<T>())
-{
-    return !(r1 == r2);
-}
 
 /// An iterator over the `Posn<T>`s of a `Rect<T>`.
 ///
@@ -862,6 +889,8 @@ Rect<T> make_rect(T x, T y, T width, T height)
 
 } // end namespace geometry.
 
+using namespace geometry;
+
 } // end namespace ge211
 
 // specializations in std:
@@ -890,3 +919,4 @@ private:
  */
 
 } // end namespace std
+

@@ -61,32 +61,6 @@ class Mixer_error;
 
 } // end namespace exception
 
-namespace geometry {
-
-class Origin_type;
-
-template <class T>
-struct Geometry
-{
-    using Coordinate = T;
-    struct Posn;
-    struct Dims;
-    struct Rect;
-};
-
-class Transform;
-
-template <class T>
-using Posn = typename Geometry<T>::Posn;
-
-template <class T>
-using Dims = typename Geometry<T>::Dims;
-
-template <class T>
-using Rect = typename Geometry<T>::Rect;
-
-} // end namespace geometry
-
 namespace sprites {
 
 class Sprite;
@@ -128,7 +102,6 @@ class Texture_sprite;
 using namespace audio;
 using namespace events;
 using namespace exceptions;
-using namespace geometry;
 using namespace sprites;
 using namespace time;
 

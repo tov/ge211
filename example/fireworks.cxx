@@ -180,7 +180,7 @@ Firework Firework::random(Random& rng, Projectile::Position p0)
 
     int star_count = rng.between(min_stars, max_stars);
     for (int i = 0; i < star_count; ++i) {
-        Projectile star = Projectile::random(rng, {0, 0},
+        Projectile star = Projectile::random(rng, the_origin,
                                              min_star_speed, max_star_speed,
                                              0, 360);
         stars.push_back(star);
@@ -248,13 +248,13 @@ void Fireworks::draw_fireworks(Sprite_set& sprites) const
         switch (firework.stage) {
             case Firework::Stage::mortar:
                 sprites.add_sprite(view.mortar,
-                                   Position(firework.mortar.position));
+                                   firework.mortar.position.into<int>());
                 break;
 
             case Firework::Stage::stars:
                 for (Projectile const& star : firework.stars) {
                     sprites.add_sprite(view.stars[firework.star_color],
-                                       Position(star.position));
+                                       star.position.into<int>());
                 }
                 break;
 
@@ -319,9 +319,9 @@ void Fireworks::on_frame(double dt)
             mixer().play_effect(view.pop);
 }
 
-void Fireworks::on_mouse_up(Mouse_button, Posn<int> position)
+void Fireworks::on_mouse_up(Mouse_button, Posn<int> posn)
 {
     if (is_paused) return;
 
-    model.add_random(get_random(), Projectile::Position(position));
+    model.add_random(get_random(), Projectile::Position(posn));
 }
