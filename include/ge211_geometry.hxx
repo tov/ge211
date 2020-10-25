@@ -14,27 +14,12 @@ namespace ge211
 
 /// Geometric objects and their operations.
 namespace geometry
+{ }
+
+using namespace geometry;
+
+namespace geometry
 {
-
-class Origin_type;
-
-template <class T>
-struct Geometry
-{
-    using Coordinate = T;
-    struct Dims;
-    struct Posn;
-    struct Rect;
-};
-
-template <class T>
-using Dims = typename Geometry<T>::Dims;
-
-template <class T>
-using Posn = typename Geometry<T>::Posn;
-
-template <class T>
-using Rect = typename Geometry<T>::Rect;
 
 /// The type of the special value @ref the_origin.
 ///
@@ -42,27 +27,42 @@ using Rect = typename Geometry<T>::Rect;
 /// Posn constructor to construct the origin. See
 /// @ref the_origin for examples.
 class Origin_type
-{
-};
+{ };
 
 /// Represents the dimensions of an object, or more generally,
 /// the displacement between two Posn%s. Note that
 /// much of the library uses @ref geometry::Dims, which is a
 /// type alias for `Dims<int>`.
+template <class>
+struct Dims;
+
+/// A position in the T-valued Cartesian plane. In graphics,
+/// the origin is traditionally in the upper left, so the *x* coordinate
+/// increases to the right and the *y* coordinate increases downward.
+/// Note that much of the library uses geometry::Position, which is a
+/// type alias for Posn<int>.
+template <class>
+struct Posn;
+
+/// Represents a positioned rectangle.
+template <class>
+struct Rect;
+
+
 template <class T>
-struct Geometry<T>::Dims
+struct Dims
 {
     /// The coordinate type for the dimensions. This is an alias of
     /// geometry type parameter `T`.
-    using Coordinate = Geometry::Coordinate;
+    using Coordinate = T;
 
     /// The position type corresponding to this type. This is an
     /// alias of @ref Geometry::Posn.
-    using Posn = Geometry::Posn;
+    using Posn = Posn<T>;
 
     /// The rectangle type corresponding to this type. This is an
     /// alias of @ref Geometry::Rect.
-    using Rect = Geometry::Rect;
+    using Rect = Rect<T>;
 
     Coordinate width;  ///< The width of the object.
     Coordinate height; ///< The height of the object.
@@ -151,7 +151,7 @@ struct Geometry<T>::Dims
     /// auto d2 = d1.into<double>();
     /// ```
     template <class U>
-    geometry::Dims<U>
+    ge211::Dims<U>
     into() const
     {
         return {U(width), U(height)};
@@ -169,26 +169,20 @@ Dims<T> operator*(U scalar, Dims<T> dims)
     return dims * scalar;
 }
 
-
-/// A position in the T-valued Cartesian plane. In graphics,
-/// the origin is traditionally in the upper left, so the *x* coordinate
-/// increases to the right and the *y* coordinate increases downward.
-/// Note that much of the library uses geometry::Position, which is a
-/// type alias for Posn<int>.
 template <class T>
-struct Geometry<T>::Posn
+struct Posn
 {
     /// The coordinate type for the position. This is an alias of
     /// type parameter `T`.
-    using Coordinate = Geometry::Coordinate;
+    using Coordinate = T;
 
     /// The dimensions type corresponding to this type. This is an
     /// alias of @ref Geometry::Dims.
-    using Dims = Geometry::Dims;
+    using Dims = Dims<T>;
 
     /// The rectangle type corresponding to this type. This is an
     /// alias of @ref Geometry::Rect.
-    using Rect = Geometry::Rect;
+    using Rect = Rect<T>;
 
     Coordinate x; ///< The *x* coordinate
     Coordinate y; ///< The *y* coordiante
@@ -237,7 +231,7 @@ struct Geometry<T>::Posn
     /// auto p2 = p1.into<double>();
     /// ```
     template <class U>
-    geometry::Posn<U>
+    ge211::Posn<U>
     into() const
     {
         return {U(x), U(y)};
@@ -376,21 +370,20 @@ struct Geometry<T>::Posn
 };
 
 
-/// Represents a positioned rectangle.
 template <class T>
-struct Geometry<T>::Rect
+struct Rect
 {
     /// The coordinate type for the rectangle. This is an alias of
     /// type parameter `T`.
-    using Coordinate = Geometry::Coordinate;
+    using Coordinate = T;
 
     /// The dimensions type corresponding to this type. This is an
     /// alias of @ref Geometry::Dims.
-    using Dims = Geometry::Dims;
+    using Dims = Dims<T>;
 
     /// The position type corresponding to this type. This is an
     /// alias of @ref Geometry::Posn.
-    using Posn = Geometry::Posn;
+    using Posn = Posn<T>;
 
     Coordinate x;         ///< The *x* coordinate of the upper-left vertex.
     Coordinate y;         ///< The *y* coordinate of the upper-left vertex.
@@ -409,7 +402,7 @@ struct Geometry<T>::Rect
     /// auto r2 = r1.into<double>();
     /// ```
     template <class U>
-    geometry::Rect<U>
+    ge211::Rect<U>
     into() const
     {
         return {U(x), U(y), U(width), U(height)};
@@ -574,7 +567,7 @@ private:
 ///
 /// Iterates in column-major order.
 template <class T>
-class Geometry<T>::Rect::iterator
+class Rect<T>::iterator
         : public std::iterator<std::input_iterator_tag, const Posn>
 {
 public:
@@ -656,6 +649,7 @@ private:
     Coordinate y_begin_;
     Coordinate y_end_;
 };
+
 
 /// A rendering transform, which can scale, flip, and rotate. A Transform
 /// can be given to
@@ -797,6 +791,7 @@ bool operator==(const Transform&, const Transform&) NOEXCEPT;
 /// Disequality for `Transform`s.
 bool operator!=(const Transform&, const Transform&) NOEXCEPT;
 
+
 /// Gets implicitly converted to `Posn<T>(0, 0)`
 /// for any coordinate type `T`.
 ///
@@ -811,6 +806,7 @@ bool operator!=(const Transform&, const Transform&) NOEXCEPT;
 /// ```
 //;
 constexpr Origin_type the_origin;
+
 
 /// Constructs a Dims given the width and height.
 ///
@@ -866,8 +862,6 @@ Rect<T> make_rect(T x, T y, T width, T height)
 
 } // end namespace geometry.
 
-using namespace geometry;
-
 } // end namespace ge211
 
 // specializations in std:
@@ -878,13 +872,11 @@ namespace std
 /// @ref ge211::geometry::Posn,
 /// which allows storing them in a @ref std::unordered_set, or using
 /// them as keys in a @ref std::unordered_map.
-/* XXX TODO */
-/*
 template <class T>
-struct hash<ge211::geometry::Posn<T>>
+struct hash<ge211::Posn<T>>
 {
     /// Hashes a Posn<T>, provided that T is hashable.
-    std::size_t operator()(ge211::geometry::Posn<T> pos) const
+    std::size_t operator()(ge211::Posn<T> pos) const
     NOEXCEPT
     {
         return hash_t_(pos.x) * 31 ^ hash_t_(pos.y);
@@ -893,7 +885,6 @@ struct hash<ge211::geometry::Posn<T>>
 private:
     std::hash<T> hash_t_;
 };
- */
 
 } // end namespace std
 
