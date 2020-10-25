@@ -49,7 +49,7 @@ class Origin_type
 /// the displacement between two Posn%s. Note that
 /// much of the library uses @ref geometry::Dims, which is a
 /// type alias for `Dims<int>`.
-template<class T>
+template <class T>
 struct Geometry<T>::Dims
 {
     /// The coordinate type for the dimensions. This is an alias of
@@ -96,7 +96,7 @@ struct Geometry<T>::Dims
     }
 
     /// Multiplies a Dims by a scalar.
-    template<class U = T>
+    template <class U = T>
     Dims operator*(U scalar) const
     {
         return {T(width * scalar), T(height * scalar)};
@@ -109,7 +109,7 @@ struct Geometry<T>::Dims
         return {T(width / scalar), T(height / scalar)};
     }
 
-/// Succinct Dims addition.
+    /// Succinct Dims addition.
     Dims& operator+=(Dims that)
     {
         return *this = *this + that;
@@ -117,7 +117,6 @@ struct Geometry<T>::Dims
 
     /// Succinct Dims subtraction.
     Dims& operator-=(Dims that)
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
     {
         return *this = *this - that;
     }
@@ -143,8 +142,7 @@ struct Geometry<T>::Dims
         return *this = *this / scalar;
     }
 
-    /// Alias for @ref Dims::Dims to support explicit conversions
-    /// between coordinate types.
+    /// Explicitly converts a Dims to a different coordinate type.
     ///
     /// For example:
     ///
@@ -156,12 +154,12 @@ struct Geometry<T>::Dims
     geometry::Dims<U>
     into() const
     {
-        return geometry::Dims<U>(U(width), U(height));
+        return {U(width), U(height)};
     }
 };
 
 /// Multiplies a scalar by a Dims.
-template<
+template <
         class T,
         class U,
         std::enable_if_t<std::is_arithmetic<U>::value, void>
@@ -177,7 +175,7 @@ Dims<T> operator*(U scalar, Dims<T> dims)
 /// increases to the right and the *y* coordinate increases downward.
 /// Note that much of the library uses geometry::Position, which is a
 /// type alias for Posn<int>.
-template<class T>
+template <class T>
 struct Geometry<T>::Posn
 {
     /// The coordinate type for the position. This is an alias of
@@ -230,17 +228,17 @@ struct Geometry<T>::Posn
             , y(that.y)
     { }
 
-    /// Converts a Posn to another coordinate type.
+    /// Explicitly converts a Posn to another coordinate type.
+    ///
     /// For example:
     ///
     /// ```
     /// auto p1 = ge211::Posn<int>{3, 4};
     /// auto p2 = p1.into<double>();
     /// ```
-    template<class U>
+    template <class U>
     geometry::Posn<U>
     into() const
-    NOEXCEPT_(detail::is_nothrow_convertible<T, U>())
     {
         return {U(x), U(y)};
     }
@@ -379,7 +377,7 @@ struct Geometry<T>::Posn
 
 
 /// Represents a positioned rectangle.
-template<class T>
+template <class T>
 struct Geometry<T>::Rect
 {
     /// The coordinate type for the rectangle. This is an alias of
@@ -399,10 +397,10 @@ struct Geometry<T>::Rect
     Coordinate width;     ///< The width of the rectangle in pixels.
     Coordinate height;    ///< The height of the rectangle in pixels.
 
-    /// \name Conversions
+    /// \name Conversion
     /// @{
 
-    /// Converts a Rect to another coordinate type.
+    /// Explicitly converts a Rect to another coordinate type.
     ///
     /// For example:
     ///
@@ -410,29 +408,11 @@ struct Geometry<T>::Rect
     /// auto r1 = ge211::Rect<int>{-1, -1, 2, 2};
     /// auto r2 = r1.into<double>();
     /// ```
-    template<typename U>
+    template <class U>
     geometry::Rect<U>
     into() const
-    NOEXCEPT_(detail::is_nothrow_convertible<T, U>())
     {
         return {U(x), U(y), U(width), U(height)};
-    }
-
-    /// Alias for Rect::into to support casting between
-    /// coordinate types.
-    ///
-    /// For example:
-    ///
-    /// ```
-    /// ge211::Rect<int>    r1{-1, -1, 2, 2};
-    /// ge211::Rect<double> r2(p1);
-    /// ```
-    template <class U>
-    explicit operator
-    geometry::Rect<U>() const
-    NOEXCEPT_(noexcept(into<U>()))
-    {
-        return into<U>();
     }
 
     /// @}
@@ -593,14 +573,11 @@ private:
 /// An iterator over the `Posn<T>`s of a `Rect<T>`.
 ///
 /// Iterates in column-major order.
-template<class T>
+template <class T>
 class Geometry<T>::Rect::iterator
-        : public std::iterator<
-                std::input_iterator_tag,
-                Posn const>
+        : public std::iterator<std::input_iterator_tag, const Posn>
 {
 public:
-
     /// Returns the current `Position` of this iterator.
     Posn operator*() const
     {
