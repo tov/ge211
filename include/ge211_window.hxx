@@ -28,7 +28,7 @@ public:
     /// Sets the position of the upper-left corner of the window with
     /// respect to the upper-left corner of the screen.
     void set_position(Posn<int>);
-    /// A special value to pass to set_position(Position) to center
+    /// A special value to pass to set_position(Posn<int>) to center
     /// the window on the screen.
     static const Posn<int> centered;
 

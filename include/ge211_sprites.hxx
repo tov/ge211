@@ -29,7 +29,7 @@ namespace sprites {
 ///
 /// \internal
 /// A sprite is anything with dimensions that knows how to render itself
-/// at a given `Position`. Derived classes need to implement both the
+/// at a given position. Derived classes need to implement both the
 /// public `dimensions` function and the private `render` function.
 class Sprite
 {
@@ -127,7 +127,7 @@ namespace sprites {
 class Rectangle_sprite : public detail::Render_sprite
 {
 public:
-    /// Constructs a rectangle sprite from required Dimensions
+    /// Constructs a rectangle sprite from required Dims
     /// and an optional Color, which defaults to white.
     ///
     /// \preconditions
@@ -185,7 +185,7 @@ public:
     /// This is useful when you don't yet know the message at the point
     /// where the sprite is created. It's an error to pass the an
     /// empty Text_sprite to
-    /// Sprite_set::add_sprite(Sprite const&, Position, int), but
+    /// Sprite_set::add_sprite(Sprite const&, Posn<int>, int), but
     /// you can use Text_sprite::reconfigure(Builder const&) to make
     /// it non-empty.
     ///
@@ -341,7 +341,7 @@ public:
     /// For example:
     ///
     /// ```cpp
-    /// Text_sprite position_sprite(Position position)
+    /// Text_sprite position_sprite(Posn<int> position)
     /// {
     ///     Builder builder(font);
     ///     builder << "(" << position.x << ", " << position.y << ")";
@@ -443,17 +443,17 @@ bool operator<(Placed_sprite const&, Placed_sprite const&) NOEXCEPT;
 /// time Abstract_game::draw(Sprite_set&) is called by the game engine, it is
 /// given an empty Sprite_set, and it must add every sprites::Sprite that
 /// should appear on the screen to that Sprite_set. Each Sprite is added
-/// with an x–y geometry::Position and a z
+/// with an x–y geometry::Posn<int> and a z
 /// coordinate that determines stacking order. Each sprite may have a
 /// geometry::Transform applied as well.
 ///
-/// \sa add_sprite(Sprite const&, Position, int)
-/// \sa add_sprite(Sprite const&, Position, int, Transform const&)
+/// \sa add_sprite(Sprite const&, Posn<int>, int)
+/// \sa add_sprite(Sprite const&, Posn<int>, int, Transform const&)
 class Sprite_set
 {
 public:
-    /// Adds the given sprite at the given x–y geometry::Position and optional z
-    /// coordinate, which defaults to 0.
+    /// Adds the given sprite at the given x–y geometry::Posn<int> and
+    /// optional z coordinate, which defaults to 0.
     /// Sprites with higher `z` values will be rendered on top of those with
     /// lower `z` values. Two sprites with the same `z` value that interfere
     /// will be stacked in an arbitrary order, so if you care about the layering
@@ -464,7 +464,7 @@ public:
     /// else, and continue to live until it is rendered.
     Sprite_set& add_sprite(Sprite const&, Posn<int>, int z = 0);
 
-    /// Adds the given sprite as the given geometry::Position and
+    /// Adds the given sprite as the given geometry::Posn<int> and
     /// z coordinate, to be rendered with the given geometry::Transform. The
     /// transform allows scaling, flipping, and rotating the Sprite when
     /// rendered.

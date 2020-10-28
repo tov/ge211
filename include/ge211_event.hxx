@@ -13,8 +13,8 @@ namespace ge211 {
 namespace events {
 
 /// A representation of a mouse button. This is used by
-/// Abstract_game::on_mouse_down(Mouse_button, Position) and
-/// Abstract_game::on_mouse_up(Mouse_button, Position) to specify
+/// Abstract_game::on_mouse_down(Mouse_button, Posn<int>) and
+/// Abstract_game::on_mouse_up(Mouse_button, Posn<int>) to specify
 /// which mouse button was depressed or released.
 enum class Mouse_button
 {

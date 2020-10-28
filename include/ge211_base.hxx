@@ -36,11 +36,11 @@ namespace ge211 {
  *
  * struct My_game : Abstract_game
  * {
- *     Rectangle_sprite rect{Dimensions{300, 200}, Color::medium_red()};
+ *     Rectangle_sprite rect{Dims<int>{300, 200}, Color::medium_red()};
  *
  *     void draw(Sprite_set& sprites) override
  *     {
- *         sprites.add_sprite(rect, Position{100, 100});
+ *         sprites.add_sprite(rect, Posn<int>{100, 100});
  *     }
  * };
  *
@@ -66,11 +66,11 @@ namespace ge211 {
  * struct My_game2 : Abstract_game
  * {
  *     // Holds the most recent position of the mouse:
- *     Position last_mouse{0, 0};
+ *     Posn<int> last_mouse{0, 0};
  *
  *     // Saves the most recent most position each time the
  *     // mouse moves:
- *     void on_mouse_move(Position mouse) override
+ *     void on_mouse_move(Posn<int> mouse) override
  *     {
  *         last_mouse = mouse;
  *     }

@@ -437,7 +437,7 @@ struct Rect
 
     /// @}
 
-    /// \name Dimensions and positions
+    /// \name Dims and positions
     /// @{
 
     /// The dimensions of the rectangle. Equivalent to
@@ -802,7 +802,7 @@ bool operator!=(const Transform&, const Transform&) NOEXCEPT;
 /// ```
 ///
 /// ```
-/// return ge211::Rectangle::from_top_left(the_origin, {w, h});
+/// return ge211::Rect<float>::from_top_left(the_origin, {w, h});
 /// ```
 //;
 constexpr Origin_type the_origin;
