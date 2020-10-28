@@ -14,11 +14,6 @@ namespace ge211
 
 /// Geometric objects and their operations.
 namespace geometry
-{ }
-
-using namespace geometry;
-
-namespace geometry
 {
 
 /// The type of the special value @ref the_origin.
@@ -29,26 +24,9 @@ namespace geometry
 class Origin_type
 { };
 
+
 /// Represents the dimensions of an object, or more generally,
-/// the displacement between two Posn%s. Note that
-/// much of the library uses @ref geometry::Dims, which is a
-/// type alias for `Dims<int>`.
-template <class>
-struct Dims;
-
-/// A position in the T-valued Cartesian plane. In graphics,
-/// the origin is traditionally in the upper left, so the *x* coordinate
-/// increases to the right and the *y* coordinate increases downward.
-/// Note that much of the library uses geometry::Posn, which is a
-/// type alias for Posn<int>.
-template <class>
-struct Posn;
-
-/// Represents a positioned rectangle.
-template <class>
-struct Rect;
-
-
+/// the displacement between two Posn%s.
 template <class T>
 struct Dims
 {
@@ -57,15 +35,62 @@ struct Dims
     using Coordinate = T;
 
     /// The position type corresponding to this type. This is an
-    /// alias of @ref Geometry::Posn.
+    /// alias of @ref ge211::geometry::Posn.
     using Posn = Posn<T>;
 
-    /// The rectangle type corresponding to this type. This is an
-    /// alias of @ref Geometry::Rect.
+    /// The rectangle type corresponding to this type.
+    /// alias of @ref ge211::geometry::Rect.
     using Rect = Rect<T>;
 
     Coordinate width;  ///< The width of the object.
     Coordinate height; ///< The height of the object.
+
+    /// \name Constructors and Conversions
+    /// @{
+
+    /// Constructs a dimensions from the given *width* and *height*.
+    Dims(Coordinate width, Coordinate height)
+            : width{width}
+            , height{height}
+    { }
+
+    /// Default-constructs the zero-sized Dims.
+    Dims()
+            : Dims{T(), T()}
+    { }
+
+    /// Casts or converts a @ref Dims to a Dims of a different coordinate type.
+    /// For example:
+    ///
+    /// ```
+    /// ge211::Dims<int> p1 { 3, 4 };
+    /// auto p2 = ge211::Dims<double>(p1);
+    /// ```
+    template <class U>
+    explicit Dims(const Dims<U>& that)
+            : width(that.width)
+            , height(that.height)
+    { }
+
+    /// Explicitly converts a Dims to a different coordinate type.
+    ///
+    /// For example:
+    ///
+    /// ```
+    /// auto d1 = ge211::Dims<int>{3, 4};
+    /// auto d2 = d1.into<double>();
+    /// ```
+    template <class U>
+    ge211::Dims<U>
+    into() const
+    {
+        return {U(width), U(height)};
+    }
+
+    /// @}
+
+    /// \name Operators
+    /// @{
 
     /// Equality for Dims.
     bool operator==(Dims that) const
@@ -96,14 +121,20 @@ struct Dims
     }
 
     /// Multiplies a Dims by a scalar.
-    template <class U = T>
+    template <
+            class U,
+            class = std::enable_if_t<std::is_arithmetic<U>::value, void>
+             >
     Dims operator*(U scalar) const
     {
         return {T(width * scalar), T(height * scalar)};
     }
 
     /// Divides a Dims by a scalar.
-    template <class U = T>
+    template <
+            class U,
+            class = std::enable_if_t<std::is_arithmetic<U>::value, void>
+             >
     Dims operator/(U scalar) const
     {
         return {T(width / scalar), T(height / scalar)};
@@ -124,7 +155,10 @@ struct Dims
     /// Succinct [Dims][1]-scalar multiplication.
     ///
     /// [1]: @ref Dims
-    template <class U>
+    template <
+            class U,
+            class = std::enable_if_t<std::is_arithmetic<U>::value, void>
+             >
     Dims& operator*=(U scalar)
     {
         return *this = *this * scalar;
@@ -136,39 +170,34 @@ struct Dims
     ///  - `scalar != 0` (when `U` is an integer type)
     ///
     /// [1]: @ref Dims
-    template <class U>
+    template <
+            class U,
+            class = std::enable_if_t<std::is_arithmetic<U>::value, void>
+             >
     Dims& operator/=(U scalar)
     {
         return *this = *this / scalar;
     }
 
-    /// Explicitly converts a Dims to a different coordinate type.
-    ///
-    /// For example:
-    ///
-    /// ```
-    /// auto d1 = ge211::Dims<int>{3, 4};
-    /// auto d2 = d1.into<double>();
-    /// ```
-    template <class U>
-    ge211::Dims<U>
-    into() const
-    {
-        return {U(width), U(height)};
-    }
+    /// @}
 };
+
 
 /// Multiplies a scalar by a Dims.
 template <
         class T,
         class U,
-        std::enable_if_t<std::is_arithmetic<U>::value, void>
+        class = std::enable_if_t<std::is_arithmetic<U>::value, void>
         >
 Dims<T> operator*(U scalar, Dims<T> dims)
 {
     return dims * scalar;
 }
 
+
+/// A position in the T-valued Cartesian plane. In graphics,
+/// the origin is traditionally in the upper left, so the *x* coordinate
+/// increases to the right and the *y* coordinate increases downward.
 template <class T>
 struct Posn
 {
@@ -177,11 +206,11 @@ struct Posn
     using Coordinate = T;
 
     /// The dimensions type corresponding to this type. This is an
-    /// alias of @ref Geometry::Dims.
+    /// alias of @ref ge211::geometry::Dims.
     using Dims = Dims<T>;
 
     /// The rectangle type corresponding to this type. This is an
-    /// alias of @ref Geometry::Rect.
+    /// alias of @ref ge211::geometry::Rect.
     using Rect = Rect<T>;
 
     Coordinate x; ///< The *x* coordinate
@@ -209,7 +238,7 @@ struct Posn
             : Posn{dims.width, dims.height}
     { }
 
-    /// Constructs a @ref Posn from a Posn of another coordinate type.
+    /// Casts or converts a @ref Posn to a Posn of a different coordinate type.
     /// For example:
     ///
     /// ```
@@ -217,7 +246,7 @@ struct Posn
     /// auto p2 = ge211::Posn<double>(p1);
     /// ```
     template <class U>
-    explicit Posn(const U& that)
+    explicit Posn(const Posn<U>& that)
             : x(that.x)
             , y(that.y)
     { }
@@ -370,6 +399,7 @@ struct Posn
 };
 
 
+/// Represents a positioned rectangle.
 template <class T>
 struct Rect
 {
@@ -378,11 +408,11 @@ struct Rect
     using Coordinate = T;
 
     /// The dimensions type corresponding to this type. This is an
-    /// alias of @ref Geometry::Dims.
+    /// alias of @ref ge211::geometry::Dims.
     using Dims = Dims<T>;
 
     /// The position type corresponding to this type. This is an
-    /// alias of @ref Geometry::Posn.
+    /// alias of @ref ge211::geometry::Posn.
     using Posn = Posn<T>;
 
     Coordinate x;         ///< The *x* coordinate of the upper-left vertex.
@@ -390,8 +420,37 @@ struct Rect
     Coordinate width;     ///< The width of the rectangle in pixels.
     Coordinate height;    ///< The height of the rectangle in pixels.
 
-    /// \name Conversion
+    /// \name Construction and Conversion
     /// @{
+
+    /// Constructs a rectangle given the *x* and *y* coordinates of its
+    /// top left corner, and its width and height.
+    Rect(Coordinate x, Coordinate y, Coordinate width, Coordinate height)
+            : x{x}
+            , y{y}
+            , width{width}
+            , height{height}
+    { }
+
+    /// Default-constructs the zero-sized Rect at the origin.
+    Rect()
+            : Rect{T(), T(), T(), T()}
+    { }
+
+    /// Casts or converts a @ref Rect to a Rect of a different coordinate type.
+    /// For example:
+    ///
+    /// ```
+    /// ge211::Posn<int> p1 { 3, 4 };
+    /// auto p2 = ge211::Posn<double>(p1);
+    /// ```
+    template <class U>
+    explicit Rect(const Rect<U>& that)
+            : x(that.x)
+            , y(that.y)
+            , width(that.width)
+            , height(that.height)
+    { }
 
     /// Explicitly converts a Rect to another coordinate type.
     ///
@@ -869,9 +928,8 @@ namespace std
 {
 
 /// Template specialization to define hashing of
-/// @ref ge211::geometry::Posn,
-/// which allows storing them in a @ref std::unordered_set, or using
-/// them as keys in a @ref std::unordered_map.
+/// @ref Posn,  which allows storing them in a @ref std::unordered_set, or
+/// using them as keys in a @ref std::unordered_map.
 template <class T>
 struct hash<ge211::Posn<T>>
 {

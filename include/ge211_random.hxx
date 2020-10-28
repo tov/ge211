@@ -1,8 +1,11 @@
 #pragma once
 
 #include "ge211_forward.hxx"
+#include "ge211_error.hxx"
+
 #include <cstdint>
 #include <limits>
+#include <memory>
 #include <random>
 #include <type_traits>
 
@@ -12,139 +15,200 @@ namespace ge211 {
 
 namespace detail {
 
-template <class T, class Enable = void>
-struct Between
+template<class T>
+struct Random_engine
 {
-    static_assert(
-            std::is_integral<T>::value || std::is_floating_point<T>::value,
-            "Random::between: only works on built-in numeric types"
-    );
-};
+    virtual T next() = 0;
 
-template <class T, class Enable = void>
-struct Up_to {
-    static_assert(
-            std::is_integral<T>::value || std::is_floating_point<T>::value,
-            "Random::up_to: only works on built-in numeric types"
-    );
-};
-
-template <class T>
-struct Between<T, std::enable_if_t<std::is_integral<T>::value>>
-        : std::uniform_int_distribution<T>
-{
-    using std::uniform_int_distribution<T>::uniform_int_distribution;
-};
-
-template <class T>
-struct Between<T, std::enable_if_t<std::is_floating_point<T>::value>>
-        : std::uniform_real_distribution<T>
-{
-    using std::uniform_real_distribution<T>::uniform_real_distribution;
-};
-
-template <class T>
-struct Up_to<T, std::enable_if_t<std::is_integral<T>::value>>
-        : Between<T>
-{
-    explicit Up_to(T max) : Between<T>{0, max - 1}
+    virtual ~Random_engine()
     { }
 };
 
-template <class T>
-struct Up_to<T, std::enable_if_t<std::is_floating_point<T>::value>>
-        : Between<T>
+using std::enable_if_t;
+using std::is_integral;
+using std::is_floating_point;
+using std::uniform_int_distribution;
+using std::uniform_real_distribution;
+
+template<class T, class D = void>
+struct Distribution
 {
-    explicit Up_to(T max) : Between<T>{0, max}
+};
+
+template<class T>
+struct Distribution<T, enable_if_t<is_integral<T>::value>>
+        : uniform_int_distribution<T>
+{
+    Distribution(T begin, T end)
+            : uniform_int_distribution<T>{begin, end - 1}
     { }
+};
+
+template<class T>
+struct Distribution<T, enable_if_t<is_floating_point<T>::value>>
+        : uniform_real_distribution<T>
+{
+    Distribution(T begin, T end)
+            : uniform_real_distribution<T>{begin, end}
+    { }
+};
+
+using Generator = std::mt19937_64;
+
+Generator construct_generator();
+
+template<class T>
+class Pseudo_random_engine : public Random_engine<T>
+{
+public:
+    Pseudo_random_engine(T min, T max)
+            : distribution_{min, max}
+            , generator_(construct_generator())
+    { }
+
+    T next() override
+    {
+        return distribution_(generator_);
+    }
+
+private:
+    Distribution<T> distribution_;
+    Generator       generator_;
+};
+
+template<>
+class Pseudo_random_engine<bool> : public Random_engine<bool>
+{
+public:
+    Pseudo_random_engine(double probability)
+            : probability_{probability}
+            , distribution_{0.0, 1.0}
+            , generator_{construct_generator()}
+    {
+        if (probability_ < 0) {
+            throw ge211::Client_logic_error{
+                    "Random_source: probability cannot be < 0"};
+        }
+
+        if (probability_ > 1) {
+            throw ge211::Client_logic_error{
+                    "Random_source: probability cannot be > 1"};
+        }
+    }
+
+    bool next() override
+    {
+        return probability_ > 0 &&
+               distribution_(generator_) <= probability_;
+    }
+
+private:
+    double               probability_;
+    Distribution<double> distribution_;
+    Generator            generator_;
+};
+
+template<class T>
+class Stub_random_engine : public Random_engine<T>
+{
+public:
+    // PRECONDITION: ! data.empty()
+    Stub_random_engine(std::vector<T> data)
+            : data_(std::move(data))
+            , next_(0)
+    { }
+
+    T next() override
+    {
+        T result = data_[next_++];
+        if (next_ == data_.size()) next_ = 0;
+        return result;
+    }
+
+private:
+    std::vector<T> data_;
+    size_t         next_;
 };
 
 } // end namespace detail
 
-/// A pseudo-random number generator.
+/// A random number generator.
 ///
-/// This class has member functions for generating random numbers.
+/// This class can be used to generate random numbers. To use it, first
+/// you must instantiate it with a particular type, such as
+/// `int` or `double`, and then provide the constructor with the minimum
+/// and maximum values you would like to generate. For example, to generate
+/// `int` values in the range from -7 to 7, you could write:
 ///
-/// Classes derived from Abstract_game can access an instance of
-/// this class via Abstract_game::get_random(), which returns a
-/// reference to a Random object maintained by Abstract_game. There
-/// is no way for clients to construct their own instances of the
-/// Random class.
-class Random
+/// ```c
+///     ge211::Random_source<int> my_int_source(-7, 7);
+/// ```
+///
+/// Then call the member function Random_source::next to generate
+/// a random value:
+///
+/// ```c
+///     int a_random_int = my_int_source.next();
+/// ```
+///
+/// For testing, you can “stub” your Random_source in order to
+/// predetermine the sequence of values that it will return. See
+/// Random_source::stub_with and Random_source::stub_with_vector.
+template<class T>
+class Random_source
 {
+    using Real = detail::Pseudo_random_engine<T>;
+    using Stub = detail::Stub_random_engine<T>;
+
 public:
-    /// Returns a random `T` between 0 (inclusive) and `max` (exclusive).
-    ///
-    /// Example:
-    ///
-    /// ```cpp
-    /// int roll_the_die(Random& random)
-    /// {
-    ///       return random.up_to(6) + 1;
-    /// }
-    /// ```
-    template <class T>
-    T up_to(T max)
+    /// Constructs a random source that generates values between `min` and
+    // `max`.
+    Random_source(T min, T max)
+            : engine_{std::make_unique<Real>(min, max)}
+    { }
+
+    /// Constructs a random source that generates values between `0` and
+    /// `max - 1`.
+    Random_source(T max)
+            : Random_source{T(), max - 1}
+    { }
+
+    /// Returns the next random number from the random source.
+    T next()
     {
-        return detail::Up_to<T>{max}(generator_);
+        return engine_->next();
     }
 
-    /// Returns a random `T` between `min` and `max`. The right bound
-    /// is inclusive for integral types but exclusive for floating point
-    /// types. The left bound is always inclusive.
-    ///
-    /// Example:
-    ///
-    /// ```cpp
-    /// int roll_the_die(Random& random)
-    /// {
-    ///       return random.between(1, 6);
-    /// }
-    /// ```
-    template <class T>
-    T between(T min, T max)
+    /// Returns the next random number from the random source. (This is an alias
+    /// for Random_source::next().
+    T operator()()
     {
-        return detail::Between<T>{min, max}(generator_);
+        return next();
     }
 
-    /// Returns a random `T` from the whole range of `T`.
-    /// Only enabled for integral types `T`.
-    template <
-            class T,
-            class = std::enable_if_t<std::is_integral<T>::value>
-    >
-    T any()
+    // Causes the random source to return the given values instead of using its
+    // usual generation mechanism. If the values run out then the source will
+    // repeat them as many times as necessary.
+    void stub_with(std::initializer_list<T> values)
     {
-        return between(std::numeric_limits<T>::min(),
-                       std::numeric_limits<T>::max());
+        stub_with_vector(values);
     }
 
-    /// Returns a random `bool` that is `true` with probability
-    /// `ptrue`.
-    bool random_bool(double ptrue = 0.5);
+    // Causes the random source to return the values of the given vector instead
+    // of using its usual generation mechanism. If the values run out then
+    // the source will repeat them as many times as necessary.
+    void stub_with_vector(std::vector<T> vec)
+    {
+        if (vec.empty()) {
+            throw ge211::Client_logic_error{
+                    "Random_source: cannot stub with empty vector"};
+        }
 
-    /// Can't copy the random number generator.
-    Random(Random &) = delete;
-
-    /// Can't copy the random number generator.
-    Random& operator=(Random &) = delete;
-
-    /// Can't move the random number generator.
-    Random(Random &&) = delete;
-
-    /// Can't move the random number generator.
-    Random& operator=(Random &&) = delete;
+        engine_ = std::make_unique<Stub>(std::move(vec));
+    }
 
 private:
-    // Creator:
-    friend Abstract_game;
-
-    // Random friend:
-    friend Random_test_access;
-
-    Random();
-
-    std::mt19937_64 generator_;
+    std::unique_ptr<detail::Random_engine<T>> engine_;
 };
 
-}
+} // end namespace ge211

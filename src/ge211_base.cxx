@@ -44,11 +44,6 @@ Window& Abstract_game::get_window() const
                              "until engine is initialized"};
 }
 
-Random& Abstract_game::get_random() const NOEXCEPT
-{
-    return rng_;
-}
-
 void Abstract_game::prepare(const sprites::Sprite& sprite) const
 {
     if (engine_)

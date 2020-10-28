@@ -59,7 +59,18 @@ class Font_error;
 class Image_error;
 class Mixer_error;
 
-} // end namespace exception
+} // end namespace exceptions
+
+namespace geometry
+{
+
+class Origin_type;
+template <class> struct Dims;
+template <class> struct Posn;
+template <class> struct Rect;
+class Transform;
+
+} // end namespace geometry.
 
 namespace sprites {
 
@@ -102,6 +113,7 @@ class Texture_sprite;
 using namespace audio;
 using namespace events;
 using namespace exceptions;
+using namespace geometry;
 using namespace sprites;
 using namespace time;
 
