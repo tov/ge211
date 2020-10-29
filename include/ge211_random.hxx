@@ -450,7 +450,7 @@ template <class RESULT_TYPE>
 void
 Random_source<RESULT_TYPE>::stub_with(std::initializer_list<result_type> values)
 {
-    stub_with_vector(values);
+    stub_with(values);
 }
 
 template <class RESULT_TYPE>
