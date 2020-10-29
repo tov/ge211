@@ -928,8 +928,9 @@ namespace std
 {
 
 /// Template specialization to define hashing of
-/// @ref Posn,  which allows storing them in a @ref std::unordered_set, or
-/// using them as keys in a @ref std::unordered_map.
+/// @ref ge211::geometry::Posn%s, which allows storing them as members of an
+/// @ref std::unordered_set or as keys of an
+/// @ref std::unordered_map.
 template <class T>
 struct hash<ge211::Posn<T>>
 {
