@@ -21,11 +21,6 @@ Sprite_set::add_sprite(const Sprite& sprite, Posn<int> xy, int z,
     return *this;
 }
 
-Sprite_set& Sprite_set::add_sprite(const Sprite& sprite, Posn<int> xy, int z)
-{
-    return add_sprite(sprite, xy, z, Transform{});
-}
-
 namespace detail {
 
 Placed_sprite::Placed_sprite(const Sprite& sprite, Posn<int> xy,
