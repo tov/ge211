@@ -1,9 +1,16 @@
 set(STDLIB_DOC_ROOT  "http://en.cppreference.com/w/")
 set(STDLIB_TAG_FILE  "cppreference.xml")
 set(STDLIB_TAG_URL   "http://upload.cppreference.com/mwiki/images/f/f8/cppreference-doxygen-web.tag.xml")
+set(STDLIB_TAG_PATH  "${CMAKE_CURRENT_BINARY_DIR}/src/${STDLIB_TAG_FILE}")
 
 set(readme_md        ${CMAKE_CURRENT_SOURCE_DIR}/../README.md)
 set(frontmatter_md   ${CMAKE_CURRENT_BINARY_DIR}/FRONTMATTER.md)
+
+# Convert Markdown format:
+SET(sed_command sed -E "/^\\[.*\\]: *$$/,/^ *$$/d\;s/[][]//g")
+execute_process(COMMAND ${sed_command}
+        INPUT_FILE   ${readme_md}
+        OUTPUT_FILE  ${frontmatter_md})
 
 set(DOXYGEN_OUTPUT_DIRECTORY       doc)
 set(DOXYGEN_JAVADOC_AUTOBRIEF      YES)
@@ -19,23 +26,10 @@ set(DOXYGEN_HTML_DYNAMIC_SECTIONS  YES)
 set(DOXYGEN_DISABLE_INDEX          YES)
 set(DOXYGEN_GENERATE_TREEVIEW      YES)
 set(DOXYGEN_ENABLE_PREPROCESSING   YES)
-set(DOXYGEN_PREDEFINED             NO_NOEXCEPT)
+set(DOXYGEN_PREDEFINED             NO_NOEXCEPT GE211_DOXYGEN)
 set(DOXYGEN_MACRO_EXPANSION        YES)
 set(DOXYGEN_EXPAND_ONLY_PREDEF     YES)
-set(DOXYGEN_EXPAND_AS_DEFINED      NOEXCEPT NOEXCEPT_)
-
-SET(sed_command sed -E "/^\\[.*\\]: *$$/,/^ *$$/d\;s/[][]//g")
-execute_process(COMMAND ${sed_command}
-        INPUT_FILE   ${readme_md}
-        OUTPUT_FILE  ${frontmatter_md})
-file(GLOB_RECURSE ge211_srcs
-        LIST_DIRECTORIES false
-        ../include/*.hxx
-        ../src/*.cxx)
-doxygen_add_docs(Build-GE211-Docs
-        ${ge211_srcs}
-        ${frontmatter_md}
-        USE_STAMP_FILE)
+set(DOXYGEN_EXPAND_AS_DEFINED      IF_DOXYGEN IF_COMPILER)
 
 if (DOWNLOAD_STDLIB_TAGS)
     include(ExternalProject)
@@ -49,8 +43,19 @@ if (DOWNLOAD_STDLIB_TAGS)
             CONFIGURE_COMMAND     ""
             BUILD_COMMAND         ""
             INSTALL_COMMAND       "")
-    set(DOXYGEN_TAGFILES
-            "${STDLIB_TAG_FILE}=${CMAKE_CURRENT_BINARY_DIR}/${STDLIB_TAGFILE}")
+    set(DOXYGEN_TAGFILES "${STDLIB_TAG_PATH}=${STDLIB_DOC_ROOT}")
+endif ()
+
+file(GLOB_RECURSE ge211_srcs
+        LIST_DIRECTORIES false
+        ../include/*.hxx
+        ../src/*.cxx)
+doxygen_add_docs(Build-GE211-Docs
+        ${ge211_srcs}
+        ${frontmatter_md}
+        USE_STAMP_FILE)
+
+if (DOWNLOAD_STDLIB_TAGS)
     add_dependencies(Build-GE211-Docs Fetch-StdLib-Tags)
 endif()
 
@@ -59,3 +64,4 @@ add_custom_target(Upload-GE211-Docs
         COMMAND git push --force ${GIT_PUSH_DOCS_URI} ${GIT_PUSH_DOCS_BRANCH}
         COMMENT "Publishing to GitHub Pages")
 add_dependencies(Upload-GE211-Docs Build-GE211-Docs)
+
