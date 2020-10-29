@@ -9,13 +9,35 @@
       </option>
     </inspection_tool>
     <inspection_tool class="ClangTidyInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ConstantConditionsOC" enabled="false" level="WARNING" enabled_by_default="false">
+      <scope name="Project Files" level="WARNING" enabled="false" />
+    </inspection_tool>
+    <inspection_tool class="DanglingPointers" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="EndlessLoop" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="InfiniteRecursion" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="LocalValueEscapesScope" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="LongLine" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="OCInconsistentNaming" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="LoopDoesntUseConditionVariable" enabled="false" level="WARNING" enabled_by_default="false">
+      <scope name="Project Files" level="WARNING" enabled="false" />
+    </inspection_tool>
+    <inspection_tool class="MissingReturn" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="NotInitializedVariable" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="NullDereferences" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="OCInconsistentNaming" enabled="true" level="WEAK WARNING" enabled_by_default="false">
+      <scope name="Project Files" level="WEAK WARNING" enabled="true" />
+    </inspection_tool>
     <inspection_tool class="ProblematicWhitespace" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="SpellCheckingInspection" enabled="true" level="TYPO" enabled_by_default="true">
       <option name="processCode" value="false" />
       <option name="processLiterals" value="true" />
       <option name="processComments" value="true" />
     </inspection_tool>
+    <inspection_tool class="TodoComment" enabled="true" level="INFORMATION" enabled_by_default="false">
+      <scope name="Project Files" level="WEAK WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="UnreachableCode" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UnusedLocalVariable" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UnusedParameter" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UnusedValue" enabled="false" level="WARNING" enabled_by_default="false" />
   </profile>
 </component>
