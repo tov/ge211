@@ -158,7 +158,7 @@ private:
 /// the bounds to either of the two constructors,
 /// @ref Random_source(result_type, result_type) or
 /// @ref Random_source(result_type).
-/// Then call @ref Random_source::next() on your %Random_source to generate a
+/// Then call @ref Random_source::next() on your `Random_source` to generate a
 /// random number.
 ///
 /// There are also two constructors available only for particular result types:
@@ -175,7 +175,7 @@ private:
 ///
 /// You can *stub* your Random_source in order to predetermine the sequence of
 /// values that it will return. For details, see
-/// @ref Random_source::stub_with(std::initializer_list<result_type>) and
+/// @ref `Random_source::stub_with(std::initializer_list<result_type>)` and
 /// @ref Random_source::stub_with(std::vector<result_type>).
 ///
 /// [pseudorandom numbers]:
@@ -190,10 +190,10 @@ public:
     /// Constructs a random source that generates values between `min` and
     /// `max`, inclusive.
     ///
-    /// Not defined when result_type is `bool`. See
+    /// Not defined when @ref result_type is `bool`. See
     /// @ref Random_source<bool>::Random_source(double) instead.
     ///
-    /// ### Example
+    /// \example
     ///
     /// ```cxx
     /// // Initialize the source to produce `int`s from 1 to 6:
@@ -219,7 +219,7 @@ public:
     /// Thus, %Random_source(limit) is equivalent to
     /// [Random_source][1](0, / limit - 1).
     ///
-    /// Not defined when result_type is bool or any non-integral type.
+    /// Not defined when @ref result_type is bool or any non-integral type.
     ///
     /// [1]: @ref Random_source::Random_source(result_type, result_type)
     IF_COMPILER(DECLARE_IF(
@@ -231,6 +231,8 @@ public:
     /// Constructs a random source that generates `bool`s, producing `true`
     /// with probability `p_true`.
     ///
+    /// Only defined when @ref result_type is `bool`.
+    ///
     /// ### Errors
     ///
     ///  - Throws `ge211::Client_logic_error` if `p_true` is less than 0.0 or
@@ -241,7 +243,7 @@ public:
 
     /// Returns the next random value from this source.
     ///
-    /// ### Example
+    /// \example
     ///
     /// ```cxx
     /// ge211::Random_source<bool> fair_coin(0.5);
@@ -256,14 +258,17 @@ public:
     ///     std::cout << "All three flips were tails!\n";
     /// }
     /// ```
-    result_type next();
+    result_type next()
+    {
+        return engine_->next();
+    }
 
 
     /// Returns the next random value from this source.
     ///
     /// (This is an alias for Random_source::next().
     ///
-    /// ### Example
+    /// \example
     ///
     /// ```cxx
     /// void try_it(size_t n_trials)
@@ -284,7 +289,10 @@ public:
     ///     }
     /// }
     /// ```
-    result_type operator()();
+    result_type operator()()
+    {
+        return next();
+    }
 
 
     /// Configures this %Random_source to return a predetermined sequence of
@@ -296,7 +304,7 @@ public:
     /// This is intended for testing, in order to make the values chosen by
     /// some component predicable.
     ///
-    /// ### Example
+    /// \example
     ///
     /// ```cxx
     /// struct Two_dice
@@ -421,36 +429,22 @@ Stub_random_engine<RESULT_TYPE>::is_sticky() const
 }  // end namespace detail
 
 template <class RESULT_TYPE>
-DEFINE_IF
+IF_COMPILER(DEFINE_IF)
 Random_source<RESULT_TYPE>::Random_source(result_type min, result_type max)
         : engine_{std::make_unique<Real>(min, max)}
 { }
 
 template <class RESULT_TYPE>
-DEFINE_IF
+IF_COMPILER(DEFINE_IF)
 Random_source<RESULT_TYPE>::Random_source(result_type limit)
         : engine_{std::make_unique<Real>(limit)}
 { }
 
 template <class RESULT_TYPE>
-DEFINE_IF
+IF_COMPILER(DEFINE_IF)
 Random_source<RESULT_TYPE>::Random_source(double p_true)
         : engine_{std::make_unique<Real>(p_true)}
 { }
-
-template <class RESULT_TYPE>
-RESULT_TYPE
-Random_source<RESULT_TYPE>::next()
-{
-    return engine_->next();
-}
-
-template <class RESULT_TYPE>
-RESULT_TYPE
-Random_source<RESULT_TYPE>::operator()()
-{
-    return next();
-}
 
 template <class RESULT_TYPE>
 void

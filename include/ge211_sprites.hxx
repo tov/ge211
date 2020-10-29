@@ -189,7 +189,7 @@ public:
     /// you can use Text_sprite::reconfigure(Builder const&) to make
     /// it non-empty.
     ///
-    /// # Example
+    /// \example
     ///
     /// ```
     /// struct View
@@ -229,7 +229,7 @@ public:
     /// cannot be rendered into a scene. Use empty() const to check
     /// if you haven't kept track.
     ///
-    /// # Example
+    /// \example
     ///
     /// ```
     /// struct View
@@ -276,7 +276,7 @@ private:
 /// The idea is that a Text_sprite::Builder allows configuring a
 /// Text_sprite in detail before actually constructing it.
 ///
-/// # Example
+/// \example
 ///
 /// ```
 /// struct View
@@ -453,28 +453,39 @@ class Sprite_set
 public:
     /// Adds the given sprite to the sprite set to render it in the next frame.
     ///
+    /// \param sprite The sprite to render in the window.
+    /// \param xy The (*x*, *y*) coordinates of the sprite, given as the
+    /// position of its top-left corner relative to the top-left
+    /// corner of the window.
+    /// \param z (*optional*, defaults to 0) The *z* coordinate, which
+    /// determines the relative layering of all the sprites in the window.
+    /// The layering of sprites placed with the same *z* is unspecified and
+    /// not related to the order in which they were added, so you may need to
+    /// specify *z* if sprites overlap and you care which appears in front.
+    /// \param transform (*optional*, defaults to the identity transform)
+    /// A [Transform] allows scaling, flipping, and rotating the [Sprite]
+    /// when it is rendered.
+    /// \return a reference to this same Sprite_set
+    ///
+    /// \ownership
+    ///
     /// This function borrows the sprite and retains a reference to it in the
     /// the Sprite_set, which is then used to render the sprite after
     /// Abstract_game::draw(Sprite_set&) returns. This means that any sprites
     /// added to the Sprite_set need to be owned by some other object that
     /// outlives the current call to @ref Abstract_game::draw.
     ///
-    /// The required arguments are the sprite itself and its *x*-*y* position,
-    /// but optionally you may provide a *z* coordinate and a Transform.
+    /// \sa [Transform]
+    /// \sa [Sprite]
+    /// \sa [Posn]
     ///
-    /// The *z* coordinate, which defaults to 0, determines the relative
-    /// layering of all the sprites in the window. For overlapping sprites with
-    /// the same *z*, their relative stacking order is unspecified. In
-    /// particular, the order in which they were added to the sprite set
-    /// cannot be used to control which obscures which.
-    ///
-    /// The Transform allows scaling, flipping, and rotating the Sprite when it
-    /// is rendered. It defaults to the identity transformation. See the
-    /// documentation for Transform for examples.
-    Sprite_set& add_sprite(Sprite const&,
-                           Posn<int>,
+    /// [Posn]: @ref ge211::geometry::Posn
+    /// [Sprite]: @ref ge211::sprites::Sprite
+    /// [Transform]: @ref ge211::geometry::Transform
+    Sprite_set& add_sprite(Sprite const& sprite,
+                           Posn<int> xy,
                            int z = 0,
-                           Transform const& = Transform());
+                           Transform const& transform = Transform());
 
 private:
     friend class detail::Engine;
