@@ -14,11 +14,11 @@ execute_process(COMMAND ${sed_command}
 
 set(DOXYGEN_OUTPUT_DIRECTORY       doc)
 set(DOXYGEN_JAVADOC_AUTOBRIEF      YES)
-set(DOXYGEN_ALIASES                [=[preconditions=#### Preconditions: ]=])
 set(DOXYGEN_HIDE_FRIEND_COMPOUNDS  YES)
 set(DOXYGEN_HIDE_SCOPE_NAMES       YES)
 set(DOXYGEN_SHOW_INCLUDE_FILES     NO)
 set(DOXYGEN_LAYOUT_FILE            DoxygenLayout.xml)
+set(DOXYGEN_HTML_EXTRA_STYLESHEET  extradoxy.css)
 set(DOXYGEN_EXCLUDE_SYMBOLS        detail)
 set(DOXYGEN_USE_MDFILE_AS_MAINPAGE ${frontmatter_md})
 set(DOXYGEN_SOURCE_BROWSER         YES)
@@ -30,6 +30,13 @@ set(DOXYGEN_PREDEFINED             GE211_DOXYGEN)
 set(DOXYGEN_MACRO_EXPANSION        YES)
 set(DOXYGEN_EXPAND_ONLY_PREDEF     YES)
 set(DOXYGEN_EXPAND_AS_DEFINED      NOEXCEPT NOEXCEPT_ IF_DOXYGEN IF_COMPILER)
+
+set(DOXYGEN_ALIASES
+        "ownership=#### Ownership"
+        "example=#### Example"
+        "examples=#### Examples"
+        "precondition=#### Precondition"
+        "preconditions=#### Preconditions")
 
 if (DOWNLOAD_STDLIB_TAGS)
     include(ExternalProject)

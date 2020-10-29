@@ -4,11 +4,6 @@ builds/
 build.*/
 cmake-build-*/
 
-# Documentation output
-doc/
-doxygen/cppreference.xml
-doxygen/FRONTMATTER.md
-
 # CLion preferences
 .idea/*
 

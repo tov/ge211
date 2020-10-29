@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@600;900&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+body, table, div, p, dl {
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+a.el, a.code, code, tt {
+    font-family: "Source Code Pro", monospace;
+    font-weight: 600;
+}
+
+strong a.el, a.el strong, b a.el, a.el b,
+strong a.code, a.code strong, b a.code, a.code b,
+strong code, code strong, b code, code b,
+strong tt, tt strong, b tt, tt b
+{
+    font-weight: 900;
+}
+
+a {
+    color: #3B2F77;
+}
+
+.contents a:visited {
+    color: #7D75A5;
+}
+
+a:hover {
+    text-decoration: none;
+    border-bottom: 1px solid;
+}
