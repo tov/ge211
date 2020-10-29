@@ -5,18 +5,50 @@
 using namespace std;
 
 namespace ge211 {
-
 namespace detail {
+namespace random {
 
-Generator construct_generator()
+namespace {
+
+double
+normalize_probability(double p)
 {
-    random_device rd;
-    auto time = static_cast<random_device::result_type>(
-            chrono::high_resolution_clock()
-                    .now().time_since_epoch().count());
-    return mt19937_64(rd() ^ time);
+    if (p < 0) {
+        throw ge211::Client_logic_error{
+                "Random_source: probability cannot be < 0"};
+    } else if (p > 1) {
+        throw ge211::Client_logic_error{
+                "Random_source: probability cannot be > 1"};
+    }
+
+    return p == 0 ? -1 : p;
+}
+
+}  // end inline namespace
+
+Generator
+construct_generator()
+{
+    using Clock = chrono::high_resolution_clock;
+
+    auto a = random_device{}();
+    decltype(a) b = Clock::now().time_since_epoch().count();
+
+    return mt19937_64(a ^ b);
+}
+
+Pseudo_random_engine<bool>::Pseudo_random_engine(double probability)
+        : probability_{normalize_probability(probability)},
+          distribution_{0.0, 1.0},
+          generator_{construct_generator()}
+{ }
+
+bool
+Pseudo_random_engine<bool>::next()
+{
+    return distribution_(generator_) <= probability_;
 }
 
 } // end namespace detail
-
+} // end namespace random
 } // end namespace ge211

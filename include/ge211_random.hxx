@@ -1,7 +1,9 @@
 #pragma once
 
-#include "ge211_forward.hxx"
 #include "ge211_error.hxx"
+#include "ge211_if_cpp.hxx"
+#include "ge211_forward.hxx"
+#include "ge211_type_traits.hxx"
 
 #include <cstdint>
 #include <limits>
@@ -9,206 +11,459 @@
 #include <random>
 #include <type_traits>
 
-struct Random_test_access;
-
 namespace ge211 {
-
 namespace detail {
-
-template<class T>
-struct Random_engine
-{
-    virtual T next() = 0;
-
-    virtual ~Random_engine()
-    { }
-};
-
-using std::enable_if_t;
-using std::is_integral;
-using std::is_floating_point;
-using std::uniform_int_distribution;
-using std::uniform_real_distribution;
-
-template<class T, class D = void>
-struct Distribution
-{
-};
-
-template<class T>
-struct Distribution<T, enable_if_t<is_integral<T>::value>>
-        : uniform_int_distribution<T>
-{
-    Distribution(T begin, T end)
-            : uniform_int_distribution<T>{begin, end - 1}
-    { }
-};
-
-template<class T>
-struct Distribution<T, enable_if_t<is_floating_point<T>::value>>
-        : uniform_real_distribution<T>
-{
-    Distribution(T begin, T end)
-            : uniform_real_distribution<T>{begin, end}
-    { }
-};
+namespace random {
 
 using Generator = std::mt19937_64;
 
-Generator construct_generator();
+Generator
+construct_generator();
 
-template<class T>
-class Pseudo_random_engine : public Random_engine<T>
+template <class RESULT_TYPE>
+struct Random_engine
 {
-public:
-    Pseudo_random_engine(T min, T max)
-            : distribution_{min, max}
-            , generator_(construct_generator())
-    { }
+    using result_type = RESULT_TYPE;
 
-    T next() override
-    {
-        return distribution_(generator_);
-    }
+    virtual result_type next() = 0;
 
-private:
-    Distribution<T> distribution_;
-    Generator       generator_;
+    virtual bool is_sticky() const;
+
+    virtual ~Random_engine() = default;
 };
 
-template<>
-class Pseudo_random_engine<bool> : public Random_engine<bool>
+template <class RESULT_TYPE, class ENABLE = void>
+struct Distribution
+{
+    struct
+    {
+        RESULT_TYPE contents;
+    } error = "ge211::Random_source<RESULT_TYPE> requires "
+              "RESULT_TYPE to be a built-in arithmetic type like int "
+              "or double.";
+};
+
+template <class RESULT_TYPE>
+class Distribution<
+        RESULT_TYPE,
+        std::enable_if_t<std::is_integral<RESULT_TYPE>::value>
+>
 {
 public:
-    Pseudo_random_engine(double probability)
-            : probability_{probability}
-            , distribution_{0.0, 1.0}
-            , generator_{construct_generator()}
-    {
-        if (probability_ < 0) {
-            throw ge211::Client_logic_error{
-                    "Random_source: probability cannot be < 0"};
-        }
-
-        if (probability_ > 1) {
-            throw ge211::Client_logic_error{
-                    "Random_source: probability cannot be > 1"};
-        }
-    }
-
-    bool next() override
-    {
-        return probability_ > 0 &&
-               distribution_(generator_) <= probability_;
-    }
+    using result_type = RESULT_TYPE;
 
 private:
-    double               probability_;
+    using impl_type = std::uniform_int_distribution<result_type>;
+    impl_type impl_;
+
+public:
+    Distribution(result_type min, result_type max)
+            : impl_{min, max}
+    { }
+
+    Distribution(result_type end)
+            : Distribution{0, end - 1}
+    { }
+
+    result_type operator()(Generator &gen)
+    {
+        return impl_(gen);
+    }
+};
+
+
+template <class RESULT_TYPE>
+class Distribution<
+        RESULT_TYPE,
+        std::enable_if_t<std::is_floating_point<RESULT_TYPE>::value>>
+{
+public:
+    using result_type = RESULT_TYPE;
+
+private:
+    using impl_type = std::uniform_real_distribution<result_type>;
+    impl_type impl_;
+
+public:
+    Distribution(result_type min, result_type max)
+            : impl_{min, max}
+    { }
+
+    result_type operator()(Generator &gen)
+    {
+        return impl_(gen);
+    }
+};
+
+template <class RESULT_TYPE>
+class Pseudo_random_engine
+        : public Random_engine<RESULT_TYPE>
+{
+public:
+    using result_type = RESULT_TYPE;
+
+    template <class... Args>
+    Pseudo_random_engine(Args&&... args);
+
+    result_type next() override;
+
+private:
+    Distribution<result_type> distribution_;
+    Generator generator_;
+};
+
+template <>
+class Pseudo_random_engine<bool>
+        : public Random_engine<bool>
+{
+public:
+    explicit Pseudo_random_engine(double p_true);
+
+    bool next() override;
+
+private:
+    double probability_;
     Distribution<double> distribution_;
-    Generator            generator_;
+    Generator generator_;
 };
 
-template<class T>
-class Stub_random_engine : public Random_engine<T>
+template <class RESULT_TYPE>
+class Stub_random_engine
+        : public Random_engine<RESULT_TYPE>
 {
 public:
-    // PRECONDITION: ! data.empty()
-    Stub_random_engine(std::vector<T> data)
-            : data_(std::move(data))
-            , next_(0)
-    { }
+    using result_type = RESULT_TYPE;
+    using container_type = std::vector<RESULT_TYPE>;
+    using iterator_type = typename container_type::const_iterator;
 
-    T next() override
-    {
-        T result = data_[next_++];
-        if (next_ == data_.size()) next_ = 0;
-        return result;
-    }
+    // PRECONDITION: ! data.empty()
+    Stub_random_engine(container_type container);
+
+    result_type next() override;
+    bool is_sticky() const override;
 
 private:
-    std::vector<T> data_;
-    size_t         next_;
+    container_type container_;
+    iterator_type next_;
 };
 
-} // end namespace detail
+}  // end namespace random
+}  // end namespace detail
 
-/// A random number generator.
+/// A generic class for generating [pseudorandom numbers] in uniform
+/// distribution over a specified range.
 ///
-/// This class can be used to generate random numbers. To use it, first
-/// you must instantiate it with a particular type, such as
-/// `int` or `double`, and then provide the constructor with the minimum
-/// and maximum values you would like to generate. For example, to generate
-/// `int` values in the range from -7 to 7, you could write:
+/// For example, a @ref Random_source<float> generates `float`s, and a
+/// @ref Random_source<int> generates `int`s. To specify a range, pass
+/// the bounds to either of the two constructors,
+/// @ref Random_source(result_type, result_type) or
+/// @ref Random_source(result_type).
+/// Then call @ref Random_source::next() on your %Random_source to generate a
+/// random number.
 ///
-/// ```c
-///     ge211::Random_source<int> my_int_source(-7, 7);
-/// ```
+/// There are also two constructors available only for particular result types:
 ///
-/// Then call the member function Random_source::next to generate
-/// a random value:
+///   - @ref Random_source(result_type limit) is defined only when result_type
+///     is an integral type. It constructs a source that generates numbers from
+///     0 up to, but excluding, `limit`.
 ///
-/// ```c
-///     int a_random_int = my_int_source.next();
-/// ```
+///   - @ref Random_source(double p_true) is defined only when result_type
+///     is `bool`. It takes a probability and generates `true` with that
+///     probability and `false` otherwise.
 ///
-/// For testing, you can “stub” your Random_source in order to
-/// predetermine the sequence of values that it will return. See
-/// Random_source::stub_with and Random_source::stub_with_vector.
-template<class T>
+/// ### Testing
+///
+/// You can *stub* your Random_source in order to predetermine the sequence of
+/// values that it will return. For details, see
+/// @ref Random_source::stub_with(std::initializer_list<result_type>) and
+/// @ref Random_source::stub_with(std::vector<result_type>).
+///
+/// [pseudorandom numbers]:
+///     <https://en.wikipedia.org/wiki/Pseudorandom_number_generator>
+template <class RESULT_TYPE>
 class Random_source
 {
-    using Real = detail::Pseudo_random_engine<T>;
-    using Stub = detail::Stub_random_engine<T>;
-
 public:
+    /// The type of value generated by this Random_source.
+    using result_type = RESULT_TYPE;
+
     /// Constructs a random source that generates values between `min` and
-    // `max`.
-    Random_source(T min, T max)
-            : engine_{std::make_unique<Real>(min, max)}
-    { }
+    /// `max`, inclusive.
+    ///
+    /// Not defined when result_type is `bool`. See
+    /// @ref Random_source<bool>::Random_source(double) instead.
+    ///
+    /// ### Example
+    ///
+    /// ```cxx
+    /// // Initialize the source to produce `int`s from 1 to 6:
+    /// ge211::Random_source<int> six_sided_die(1, 7);
+    ///
+    /// // Generate a random roll:
+    /// int roll_value = six_sided_die.next();
+    ///
+    /// while (roll_value != 6) {
+    ///     std::cout << "You rolled " << roll_value << "; try again.\n";
+    ///     roll_value = six_sided_die.next();
+    /// }
+    ///
+    /// std::cout << "Finally rolled a 6!\n";
+    /// ```
+    IF_COMPILER(DECLARE_IF(!Is_Same<result_type, bool>))
+    Random_source(result_type min, result_type max);
 
-    /// Constructs a random source that generates values between `0` and
-    /// `max - 1`.
-    Random_source(T max)
-            : Random_source{T(), max - 1}
-    { }
 
-    /// Returns the next random number from the random source.
-    T next()
-    {
-        return engine_->next();
-    }
+    /// Constructs, for integral @ref result_type%s only, a random source that
+    /// generates values between `0` and `limit - 1`.
+    ///
+    /// Thus, %Random_source(limit) is equivalent to
+    /// [Random_source][1](0, / limit - 1).
+    ///
+    /// Not defined when result_type is bool or any non-integral type.
+    ///
+    /// [1]: @ref Random_source::Random_source(result_type, result_type)
+    IF_COMPILER(DECLARE_IF(
+            Is_Integral<result_type> &&
+            !Is_Same<result_type, bool>))
+    explicit Random_source(result_type limit);
 
-    /// Returns the next random number from the random source. (This is an alias
-    /// for Random_source::next().
-    T operator()()
-    {
-        return next();
-    }
 
-    // Causes the random source to return the given values instead of using its
-    // usual generation mechanism. If the values run out then the source will
-    // repeat them as many times as necessary.
-    void stub_with(std::initializer_list<T> values)
-    {
-        stub_with_vector(values);
-    }
+    /// Constructs a random source that generates `bool`s, producing `true`
+    /// with probability `p_true`.
+    ///
+    /// ### Errors
+    ///
+    ///  - Throws `ge211::Client_logic_error` if `p_true` is less than 0.0 or
+    ///    greater than 1.0.
+    IF_COMPILER(DECLARE_IF(Is_Same<result_type, bool>))
+    explicit Random_source(double p_true);
 
-    // Causes the random source to return the values of the given vector instead
-    // of using its usual generation mechanism. If the values run out then
-    // the source will repeat them as many times as necessary.
-    void stub_with_vector(std::vector<T> vec)
-    {
-        if (vec.empty()) {
-            throw ge211::Client_logic_error{
-                    "Random_source: cannot stub with empty vector"};
-        }
 
-        engine_ = std::make_unique<Stub>(std::move(vec));
-    }
+    /// Returns the next random value from this source.
+    ///
+    /// ### Example
+    ///
+    /// ```cxx
+    /// ge211::Random_source<bool> fair_coin(0.5);
+    ///
+    /// bool flip_1 = fair_coin.next();
+    /// bool flip_2 = fair_coin.next();
+    /// bool flip_3 = fair_coin.next();
+    ///
+    /// if (flip_1 && flip_2 && flip_3) {
+    ///     std::cout << "All three flips were heads!\n";
+    /// } else if (!(flip_1 || flip_2 || flip_3)) {
+    ///     std::cout << "All three flips were tails!\n";
+    /// }
+    /// ```
+    result_type next();
+
+
+    /// Returns the next random value from this source.
+    ///
+    /// (This is an alias for Random_source::next().
+    ///
+    /// ### Example
+    ///
+    /// ```cxx
+    /// void try_it(size_t n_trials)
+    /// {
+    ///     ge211::Random_source<bool> fair_coin{0.5};
+    ///     size_t heads_count = 0;
+    ///
+    ///     for (size_t i = 0; i < n_trials; ++i) {
+    ///         if (fail_coin()) {
+    ///             ++heads_count;
+    ///         }
+    ///     }
+    ///
+    ///     double heads_frequency = heads_count / (double) n_trials;
+    ///
+    ///     if (heads_frequency < 0.25 || heads_frequecny > 0.75) {
+    ///         std::cout << "Doesn't seem so fair.\n";
+    ///     }
+    /// }
+    /// ```
+    result_type operator()();
+
+
+    /// Configures this %Random_source to return a predetermined sequence of
+    /// values.
+    ///
+    /// After passing in a list of values, the Random_source will return those
+    /// values in order, and then cycle through them repeatedly if necessary.
+    ///
+    /// This is intended for testing, in order to make the values chosen by
+    /// some component predicable.
+    ///
+    /// ### Example
+    ///
+    /// ```cxx
+    /// struct Two_dice
+    /// {
+    ///     // Source of random die rolls from 1 to 6:
+    ///     ge211::Random_source<int> die_source(1, 7);
+    ///
+    ///     // Rolls both dice and returns their sum.
+    ///     int roll();
+    /// };
+    ///
+    /// int Two_dice::roll()
+    /// {
+    ///     int first = die_source.next();
+    ///     int second = die_source.next();
+    ///     return first + second;
+    /// }
+    ///
+    /// TEST_CASE("demonstrate random source stubbing")
+    /// {
+    ///     Model m;
+    ///
+    ///     // Perform a random roll and check that the result is in the
+    ///     // expected range:
+    ///     int sum = m.roll();
+    ///     CHECK( 2 <= sum && sum <= 12 );
+    ///
+    ///     // Stub the source to return the given sequence, repeatedly:
+    ///     m.die_source.stub_with({1, 2, 3, 4, 5});
+    ///
+    ///     // Now we can predict the rolls:
+    ///     CHECK( m.roll() == 3 );  // rolls 1 and 2
+    ///     CHECK( m.roll() == 7 );  // rolls 3 and 4
+    ///     CHECK( m.roll() == 6 );  // rolls 5 and 1
+    ///     CHECK( m.roll() == 5 );  // rolls 2 and 3
+    ///     CHECK( m.roll() == 9 );  // rolls 4 and 5
+    ///     CHECK( m.roll() == 3 );  // rolls 1 and 2
+    ///     CHECK( m.roll() == 7 );  // rolls 3 and 4
+    /// }
+    /// ```
+    void stub_with(std::initializer_list<result_type> values);
+
+
+    /// Stubs this %Random_source using a @ref std::vector.
+    ///
+    /// After passing in a vector of values, the %Random_source will
+    /// return those values in order, and then cycle through them repeatedly
+    /// if necessary. This works the same as
+    /// @ref stub_with(std::initializer_list<result_type>,
+    /// so you should see / that function for an example.
+    void stub_with(std::vector<result_type> values);
+
 
 private:
-    std::unique_ptr<detail::Random_engine<T>> engine_;
+    using Real = detail::random::Pseudo_random_engine<result_type>;
+    using Stub = detail::random::Stub_random_engine<std::vector<result_type>>;
+    using Engine = detail::random::Random_engine<result_type>;
+
+    std::unique_ptr<Engine> engine_;
 };
 
-} // end namespace ge211
+
+//
+// IMPLEMENTATIONS
+//
+
+namespace detail {
+namespace random {
+
+using std::begin;
+using std::end;
+
+template <class RESULT_TYPE>
+bool
+Random_engine<RESULT_TYPE>::is_sticky() const
+{
+    return false;
+}
+
+template <class RESULT_TYPE>
+template <class... Args>
+Pseudo_random_engine<RESULT_TYPE>::Pseudo_random_engine(Args&&... args)
+        : distribution_{std::forward<Args>(args)...},
+          generator_{construct_generator()}
+{ }
+
+template <class RESULT_TYPE>
+RESULT_TYPE
+Pseudo_random_engine<RESULT_TYPE>::next()
+{
+    return distribution_(generator_);
+}
+
+template <class RESULT_TYPE>
+Stub_random_engine<RESULT_TYPE>::Stub_random_engine(container_type container)
+        : container_(std::move(container)),
+          next_(begin(container_))
+{
+    if (next_ == end(container)) {
+        throw ge211::Client_logic_error{
+                "Random_source: cannot stub with empty container"};
+    }
+}
+
+template <class RESULT_TYPE>
+RESULT_TYPE
+Stub_random_engine<RESULT_TYPE>::next()
+{
+    result_type result = *next_++;
+    if (next_ == end(container_)) next_ = begin(container_);
+    return result;
+}
+
+template <class RESULT_TYPE>
+bool
+Stub_random_engine<RESULT_TYPE>::is_sticky() const
+{
+    return true;
+}
+
+}  // end namespace random
+}  // end namespace detail
+
+template <class RESULT_TYPE>
+DEFINE_IF
+Random_source<RESULT_TYPE>::Random_source(result_type min, result_type max)
+        : engine_{std::make_unique<Real>(min, max)}
+{ }
+
+template <class RESULT_TYPE>
+DEFINE_IF
+Random_source<RESULT_TYPE>::Random_source(result_type limit)
+        : engine_{std::make_unique<Real>(limit)}
+{ }
+
+template <class RESULT_TYPE>
+DEFINE_IF
+Random_source<RESULT_TYPE>::Random_source(double p_true)
+        : engine_{std::make_unique<Real>(p_true)}
+{ }
+
+template <class RESULT_TYPE>
+RESULT_TYPE
+Random_source<RESULT_TYPE>::next()
+{
+    return engine_->next();
+}
+
+template <class RESULT_TYPE>
+RESULT_TYPE
+Random_source<RESULT_TYPE>::operator()()
+{
+    return next();
+}
+
+template <class RESULT_TYPE>
+void
+Random_source<RESULT_TYPE>::stub_with(std::initializer_list<result_type> values)
+{
+    stub_with_vector(values);
+}
+
+template <class RESULT_TYPE>
+void
+Random_source<RESULT_TYPE>::stub_with(std::vector<RESULT_TYPE> values)
+{
+    engine_ = std::make_unique<Stub>(std::move(values));
+}
+
+}  // end namespace ge211
