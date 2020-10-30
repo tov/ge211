@@ -27,8 +27,6 @@ struct Random_engine
 
     virtual result_type next() = 0;
 
-    virtual bool is_sticky() const;
-
     virtual ~Random_engine() = default;
 };
 
@@ -140,7 +138,6 @@ public:
     Stub_random_engine(container_type container);
 
     result_type next() override;
-    bool is_sticky() const override;
 
 private:
     container_type container_;
@@ -357,11 +354,17 @@ public:
     /// so you should see / that function for an example.
     void stub_with(std::vector<result_type> values);
 
+    /// Random_sources cannot be move-constructed, because they cannot be
+    /// moved.
+    Random_source(Random_source&& other) = delete;
+
+    /// Random_sources cannot be moved.
+    Random_source& operator=(Random_source&& other) = delete;
 
 private:
-    using Real = detail::random::Pseudo_random_engine<result_type>;
-    using Stub = detail::random::Stub_random_engine<std::vector<result_type>>;
     using Engine = detail::random::Random_engine<result_type>;
+    using Prng = detail::random::Pseudo_random_engine<result_type>;
+    using Stub = detail::random::Stub_random_engine<std::vector<result_type>>;
 
     std::unique_ptr<Engine> engine_;
 };
@@ -376,13 +379,6 @@ namespace random {
 
 using std::begin;
 using std::end;
-
-template <class RESULT_TYPE>
-bool
-Random_engine<RESULT_TYPE>::is_sticky() const
-{
-    return false;
-}
 
 template <class RESULT_TYPE>
 template <class... Args>
@@ -418,32 +414,25 @@ Stub_random_engine<RESULT_TYPE>::next()
     return result;
 }
 
-template <class RESULT_TYPE>
-bool
-Stub_random_engine<RESULT_TYPE>::is_sticky() const
-{
-    return true;
-}
-
 }  // end namespace random
 }  // end namespace detail
 
 template <class RESULT_TYPE>
 IF_COMPILER(DEFINE_IF)
 Random_source<RESULT_TYPE>::Random_source(result_type min, result_type max)
-        : engine_{std::make_unique<Real>(min, max)}
+        : engine_{new Prng{min, max}}
 { }
 
 template <class RESULT_TYPE>
 IF_COMPILER(DEFINE_IF)
 Random_source<RESULT_TYPE>::Random_source(result_type limit)
-        : engine_{std::make_unique<Real>(limit)}
+        : engine_{new Prng{limit}}
 { }
 
 template <class RESULT_TYPE>
 IF_COMPILER(DEFINE_IF)
 Random_source<RESULT_TYPE>::Random_source(double p_true)
-        : engine_{std::make_unique<Real>(p_true)}
+        : engine_{new Prng{p_true}}
 { }
 
 template <class RESULT_TYPE>
