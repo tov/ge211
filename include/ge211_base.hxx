@@ -73,20 +73,21 @@ namespace ge211 {
  *     /// Function members
  *     ///
  *
- *     // Holds the most recent position of the mouse:
- *     ge211::Posn<int> last_mouse{0, 0};
- *
- *     // Saves the most recent most position each time the
- *     // mouse moves:
+ *     // Called by the framework whenever the user moves the mouse. We
+ *     // override this function so we can react to that event.
  *     void on_mouse_move(ge211::Posn<int> mouse) override;
  *
- *     // Whenever we need to redraw the screen, add the Circle_sprite
- *     // at the mouse position.
+ *     // Called by the framework to find out what sprites to render on
+ *     // the screen. It passes our function an empty Sprite_set, which
+ *     // we add sprite(s) to with Sprite_set::add_sprite.
  *     void draw(ge211::Sprite_set& sprites) override;
  *
  *     ///
  *     /// Data members
  *     ///
+ *
+ *     // The most recent position of the mouse.
+ *     ge211::Posn<int> last_mouse {0, 0};
  *
  *     // The circle sprite to render where the mouse is. This is
  *     // initialized with a radius and a color in the My_game2
@@ -94,23 +95,31 @@ namespace ge211 {
  *     ge211::Circle_sprite cursor;
  * };
  *
+ * // Initializes cursor, a Circle_sprite, with the requested radius
+ * // and a predetermined color.
  * My_game2::My_game2(int cursor_size)
  *         : cursor(cursor_size, ge211::Color::medium_blue())
  * { }
  *
+ * // Saves the most recent most position in `last_mouse` each time the
+ * // mouse moves.
  * void My_game2::on_mouse_move(ge211::Posn<int> mouse)
  * {
  *     last_mouse = mouse;
  * }
  *
+ * // Places the Circle_sprite at the most recent mouse position.
  * void My_game2::draw(ge211::Sprite_set& sprites)
  * {
- *     // If the mouse is at the center, where is the top-left?
+ *     // If the mouse should be the center of the sprite, where do we
+ *     // want the top left to be?
  *     ge211::Posn<int> top_left =
  *         last_mouse.up_left_by(cursor.dimensions() / 2);
+ *
  *     sprites.add_sprite(cursor, top_left);
  * }
  *
+ * // Constructs an instance of our game and then run it.
  * int main()
  * {
  *     My_game2 game(10);
