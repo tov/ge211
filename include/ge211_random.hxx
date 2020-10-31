@@ -134,8 +134,8 @@ public:
     using container_type = std::vector<RESULT_TYPE>;
     using iterator_type = typename container_type::const_iterator;
 
-    // PRECONDITION: ! data.empty()
-    Stub_random_engine(container_type container);
+    // PRECONDITION: !container.empty()
+    Stub_random_engine(container_type&& container);
 
     result_type next() override;
 
@@ -354,6 +354,14 @@ public:
     /// so you should see / that function for an example.
     void stub_with(std::vector<result_type> values);
 
+    /// Stubs this %Random_source to always return the given value.
+    ///
+    /// If you want to stub multiple values in sequence, see
+    /// @ref stub_with(std::initializer_list<result_type>)
+    /// and
+    /// @ref stub_with(std::vector<result_type>).
+    void stub_with(result_type value);
+
     /// Random_sources cannot be move-constructed, because they cannot be
     /// moved.
     Random_source(Random_source&& other) = delete;
@@ -364,7 +372,7 @@ public:
 private:
     using Engine = detail::random::Random_engine<result_type>;
     using Prng = detail::random::Pseudo_random_engine<result_type>;
-    using Stub = detail::random::Stub_random_engine<std::vector<result_type>>;
+    using Stub = detail::random::Stub_random_engine<result_type>;
 
     std::unique_ptr<Engine> engine_;
 };
@@ -395,11 +403,11 @@ Pseudo_random_engine<RESULT_TYPE>::next()
 }
 
 template <class RESULT_TYPE>
-Stub_random_engine<RESULT_TYPE>::Stub_random_engine(container_type container)
+Stub_random_engine<RESULT_TYPE>::Stub_random_engine(container_type&& container)
         : container_(std::move(container)),
           next_(begin(container_))
 {
-    if (next_ == end(container)) {
+    if (next_ == end(container_)) {
         throw ge211::Client_logic_error{
                 "Random_source: cannot stub with empty container"};
     }
@@ -420,33 +428,40 @@ Stub_random_engine<RESULT_TYPE>::next()
 template <class RESULT_TYPE>
 IF_COMPILER(DEFINE_IF)
 Random_source<RESULT_TYPE>::Random_source(result_type min, result_type max)
-        : engine_{new Prng{min, max}}
+        : engine_{std::make_unique<Prng>(min, max)}
 { }
 
 template <class RESULT_TYPE>
 IF_COMPILER(DEFINE_IF)
 Random_source<RESULT_TYPE>::Random_source(result_type limit)
-        : engine_{new Prng{limit}}
+        : engine_{std::make_unique<Prng>(limit)}
 { }
 
 template <class RESULT_TYPE>
 IF_COMPILER(DEFINE_IF)
 Random_source<RESULT_TYPE>::Random_source(double p_true)
-        : engine_{new Prng{p_true}}
+        : engine_{std::make_unique<Prng>(p_true)}
 { }
+
+template <class RESULT_TYPE>
+void
+Random_source<RESULT_TYPE>::stub_with(std::vector<result_type> values)
+{
+    engine_ = std::make_unique<Stub>(std::move(values));
+}
 
 template <class RESULT_TYPE>
 void
 Random_source<RESULT_TYPE>::stub_with(std::initializer_list<result_type> values)
 {
-    stub_with(values);
+    stub_with(std::vector<result_type>(values));
 }
 
 template <class RESULT_TYPE>
 void
-Random_source<RESULT_TYPE>::stub_with(std::vector<RESULT_TYPE> values)
+Random_source<RESULT_TYPE>::stub_with(result_type value)
 {
-    engine_ = std::make_unique<Stub>(std::move(values));
+    stub_with({value});
 }
 
 }  // end namespace ge211
