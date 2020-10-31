@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ge211_forward.hxx"
+#include "ge211_if_cpp.hxx"
 #include "ge211_noexcept.hxx"
 #include "ge211_util.hxx"
 
@@ -26,21 +27,14 @@ class Origin_type
 
 
 /// Represents the dimensions of an object, or more generally,
-/// the displacement between two Posn%s.
-template <class T>
+/// the displacement between two Posn%s. The coordinate type
+/// `COORDINATE` may be any arithmetic type.
+template <typename COORDINATE>
 struct Dims
 {
     /// The coordinate type for the dimensions. This is an alias of
-    /// geometry type parameter `T`.
-    using Coordinate = T;
-
-    /// The position type corresponding to this type. This is an
-    /// alias of @ref ge211::geometry::Posn.
-    using Posn = Posn<T>;
-
-    /// The rectangle type corresponding to this type.
-    /// alias of @ref ge211::geometry::Rect.
-    using Rect = Rect<T>;
+    /// geometry type parameter `COORDINATE`.
+    using Coordinate = COORDINATE;
 
     Coordinate width;  ///< The width of the object.
     Coordinate height; ///< The height of the object.
@@ -56,7 +50,7 @@ struct Dims
 
     /// Default-constructs the zero-sized Dims.
     Dims()
-            : Dims{T(), T()}
+            : Dims{Coordinate{}, Coordinate{}}
     { }
 
     /// Casts or converts a @ref Dims to a Dims of a different coordinate type.
@@ -66,8 +60,8 @@ struct Dims
     /// ge211::Dims<int> p1 { 3, 4 };
     /// auto p2 = ge211::Dims<double>(p1);
     /// ```
-    template <class U>
-    explicit Dims(const Dims<U>& that)
+    template <typename FROM_COORD>
+    explicit Dims(const Dims<FROM_COORD>& that)
             : width(that.width)
             , height(that.height)
     { }
@@ -80,11 +74,11 @@ struct Dims
     /// auto d1 = ge211::Dims<int>{3, 4};
     /// auto d2 = d1.into<double>();
     /// ```
-    template <class U>
-    ge211::Dims<U>
+    template <typename TO_COORD>
+    ge211::Dims<TO_COORD>
     into() const
     {
-        return {U(width), U(height)};
+        return {TO_COORD(width), TO_COORD(height)};
     }
 
     /// @}
@@ -101,43 +95,43 @@ struct Dims
     /// Disequality for Dims.
     bool operator!=(Dims that) const
     {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunknown-pragmas"
-#pragma ide diagnostic ignored "Simplify"
         return !(*this == that);
-#pragma clang diagnostic pop
     }
 
     /// Adds two Dims%es. This is vector addition.
     Dims operator+(Dims that) const
     {
-        return {T(width + that.width), T(height + that.height)};
+        return {Coordinate(width + that.width),
+                Coordinate(height + that.height)};
     }
 
     /// Subtracts two Dims%es. This is vector subtraction.
     Dims operator-(Dims that) const
     {
-        return {T(width - that.width), T(height - that.height)};
+        return {Coordinate(width - that.width),
+                Coordinate(height - that.height)};
     }
 
     /// Multiplies a Dims by a scalar.
     template <
-            class U,
-            class = std::enable_if_t<std::is_arithmetic<U>::value, void>
+            typename ARITHMETIC_TYPE,
+            typename = std::enable_if_t<
+                    std::is_arithmetic<ARITHMETIC_TYPE>::value>
              >
-    Dims operator*(U scalar) const
+    Dims operator*(ARITHMETIC_TYPE scalar) const
     {
-        return {T(width * scalar), T(height * scalar)};
+        return {Coordinate(width * scalar), Coordinate(height * scalar)};
     }
 
     /// Divides a Dims by a scalar.
     template <
-            class U,
-            class = std::enable_if_t<std::is_arithmetic<U>::value, void>
+            typename ARITHMETIC_TYPE,
+            typename = std::enable_if_t<
+                    std::is_arithmetic<ARITHMETIC_TYPE>::value>
              >
-    Dims operator/(U scalar) const
+    Dims operator/(ARITHMETIC_TYPE scalar) const
     {
-        return {T(width / scalar), T(height / scalar)};
+        return {Coordinate(width / scalar), Coordinate(height / scalar)};
     }
 
     /// Succinct Dims addition.
@@ -156,10 +150,10 @@ struct Dims
     ///
     /// [1]: @ref Dims
     template <
-            class U,
-            class = std::enable_if_t<std::is_arithmetic<U>::value, void>
+            typename ARITHMETIC_TYPE,
+            typename = std::enable_if_t<std::is_arithmetic<ARITHMETIC_TYPE>::value>
              >
-    Dims& operator*=(U scalar)
+    Dims& operator*=(ARITHMETIC_TYPE scalar)
     {
         return *this = *this * scalar;
     }
@@ -167,14 +161,14 @@ struct Dims
     /// Succinct [Dims][1]-scalar division.
     ///
     /// \preconditions
-    ///  - `scalar != 0` (when `U` is an integer type)
+    ///  - `scalar != 0` (when `ARITHMETIC_TYPE` is an integer type)
     ///
     /// [1]: @ref Dims
     template <
-            class U,
-            class = std::enable_if_t<std::is_arithmetic<U>::value, void>
-             >
-    Dims& operator/=(U scalar)
+            typename ARITHMETIC_TYPE,
+            typename = std::enable_if_t<std::is_arithmetic<ARITHMETIC_TYPE>::value>
+    >
+    Dims& operator/=(ARITHMETIC_TYPE scalar)
     {
         return *this = *this / scalar;
     }
@@ -185,33 +179,30 @@ struct Dims
 
 /// Multiplies a scalar by a Dims.
 template <
-        class T,
-        class U,
-        class = std::enable_if_t<std::is_arithmetic<U>::value, void>
+        typename COORDINATE,
+        typename SCALAR,
+        typename = std::enable_if_t<std::is_arithmetic<SCALAR>::value>
         >
-Dims<T> operator*(U scalar, Dims<T> dims)
+Dims<COORDINATE> operator*(SCALAR scalar, Dims<COORDINATE> dims)
 {
     return dims * scalar;
 }
 
 
-/// A position in the T-valued Cartesian plane. In graphics,
-/// the origin is traditionally in the upper left, so the *x* coordinate
-/// increases to the right and the *y* coordinate increases downward.
-template <class T>
+/// A position in the `COORDINATE`-valued Cartesian plane, where `COORDINATE`
+/// can be any arithmetic type. In graphics, the origin is traditionally in
+/// the upper left, so the *x* coordinate increases to the right and the *y*
+/// coordinate increases downward.
+template <typename COORDINATE>
 struct Posn
 {
     /// The coordinate type for the position. This is an alias of
-    /// type parameter `T`.
-    using Coordinate = T;
+    /// type parameter `COORDINATE`.
+    using Coordinate = COORDINATE;
 
     /// The dimensions type corresponding to this type. This is an
     /// alias of @ref ge211::geometry::Dims.
-    using Dims = Dims<T>;
-
-    /// The rectangle type corresponding to this type. This is an
-    /// alias of @ref ge211::geometry::Rect.
-    using Rect = Rect<T>;
+    using Dims_type = Dims<COORDINATE>;
 
     Coordinate x; ///< The *x* coordinate
     Coordinate y; ///< The *y* coordiante
@@ -221,20 +212,20 @@ struct Posn
 
     /// Constructs a position from the given *x* and *y* coordinates.
     Posn(Coordinate x, Coordinate y)
-    NOEXCEPT_(detail::is_nothrow_convertible<T>())
+    NOEXCEPT_(detail::is_nothrow_convertible<Coordinate>())
             : x{x}, y{y}
     { }
 
     /// Constructs the origin when given @ref the_origin.
     Posn(Origin_type)
-    NOEXCEPT_(noexcept(T(0)))
-            : Posn(0, 0)
+    NOEXCEPT_(noexcept(Coordinate{}))
+            : Posn(Coordinate{}, Coordinate{})
     { }
 
     /// Constructs a position from a Dims, which gives the
     /// displacement of the position from the origin.
-    explicit Posn(Dims dims)
-    NOEXCEPT_(detail::is_nothrow_convertible<T>())
+    explicit Posn(Dims_type dims)
+    NOEXCEPT_(detail::is_nothrow_convertible<Coordinate>())
             : Posn{dims.width, dims.height}
     { }
 
@@ -245,8 +236,8 @@ struct Posn
     /// ge211::Posn<int> p1 { 3, 4 };
     /// auto p2 = ge211::Posn<double>(p1);
     /// ```
-    template <class U>
-    explicit Posn(const Posn<U>& that)
+    template <typename FROM_COORD>
+    explicit Posn(const Posn<FROM_COORD>& that)
             : x(that.x)
             , y(that.y)
     { }
@@ -259,11 +250,11 @@ struct Posn
     /// auto p1 = ge211::Posn<int>{3, 4};
     /// auto p2 = p1.into<double>();
     /// ```
-    template <class U>
-    ge211::Posn<U>
+    template <typename TO_COORD>
+    ge211::Posn<TO_COORD>
     into() const
     {
-        return {U(x), U(y)};
+        return {TO_COORD(x), TO_COORD(y)};
     }
 
     /// @}
@@ -273,55 +264,51 @@ struct Posn
 
     /// Equality for positions.
     bool operator==(Posn that) const
-    NOEXCEPT_(detail::is_nothrow_comparable<T>())
+    NOEXCEPT_(detail::is_nothrow_comparable<Coordinate>())
     {
         return x == that.x && y == that.y;
     }
 
     /// Disequality for positions.
     bool operator!=(Posn p2) const
-    NOEXCEPT_(detail::is_nothrow_comparable<T>())
+    NOEXCEPT_(detail::is_nothrow_comparable<Coordinate>())
     {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunknown-pragmas"
-#pragma ide diagnostic ignored "Simplify"
         return !(*this == p2);
-#pragma clang diagnostic pop
     }
 
     /// Translates a position by some displacement. This is the same as
     /// @ref Posn::down_right_by(Dims) const.
-    Posn operator+(Dims dims) const
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    Posn operator+(Dims_type dims) const
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return down_right_by(dims);
     }
 
     /// Translates a position by the opposite of some displacement. This is
     /// the same as @ref Posn::up_left_by(Dims) const.
-    Posn operator-(Dims dims) const
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    Posn operator-(Dims_type dims) const
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return up_left_by(dims);
     }
 
     /// Subtracts two Posn%s, yields a Dims.
-    Dims operator-(Posn that) const
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    Dims_type operator-(Posn that) const
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {x - that.x, y - that.y};
     }
 
     /// Succinct position translation.
-    Posn& operator+=(Dims dims)
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    Posn& operator+=(Dims_type dims)
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return *this = *this + dims;
     }
 
     /// Succinct position translation.
-    Posn& operator-=(Dims dims)
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    Posn& operator-=(Dims_type dims)
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return *this = *this - dims;
     }
@@ -334,7 +321,7 @@ struct Posn
     /// Constructs the position that is above this position by the given
     /// amount.
     Posn up_by(Coordinate dy) const
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {x, y - dy};
     }
@@ -342,7 +329,7 @@ struct Posn
     /// Constructs the position that is below this position by the given
     /// amount.
     Posn down_by(Coordinate dy) const
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {x, y + dy};
     }
@@ -350,7 +337,7 @@ struct Posn
     /// Constructs the position that is to the left of this position by
     /// the given amount.
     Posn left_by(Coordinate dx) const
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {x - dx, y};
     }
@@ -358,39 +345,39 @@ struct Posn
     /// Constructs the position that is to the right of this position by
     /// the given amount.
     Posn right_by(Coordinate dx) const
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {x + dx, y};
     }
 
     /// Constructs the position that is above and left of this position
     /// by the given dimensions.
-    Posn up_left_by(Dims dims) const
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    Posn up_left_by(Dims_type dims) const
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {x - dims.width, y - dims.height};
     }
 
     /// Constructs the position that is above and right of this position
     /// by the given dimensions.
-    Posn up_right_by(Dims dims) const
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    Posn up_right_by(Dims_type dims) const
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {x + dims.width, y - dims.height};
     }
 
     /// Constructs the position that is below and left of this position
     /// by the given dimensions.
-    Posn down_left_by(Dims dims) const
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    Posn down_left_by(Dims_type dims) const
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {x - dims.width, y + dims.height};
     }
 
     /// Constructs the position that is below and right of this position
     /// by the given dimensions.
-    Posn down_right_by(Dims dims) const
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    Posn down_right_by(Dims_type dims) const
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {x + dims.width, y + dims.height};
     }
@@ -400,20 +387,20 @@ struct Posn
 
 
 /// Represents a positioned rectangle.
-template <class T>
+template <typename COORDINATE>
 struct Rect
 {
     /// The coordinate type for the rectangle. This is an alias of
-    /// type parameter `T`.
-    using Coordinate = T;
+    /// type parameter `COORDINATE`.
+    using Coordinate = COORDINATE;
 
     /// The dimensions type corresponding to this type. This is an
     /// alias of @ref ge211::geometry::Dims.
-    using Dims = Dims<T>;
+    using Dims_type = Dims<Coordinate>;
 
     /// The position type corresponding to this type. This is an
     /// alias of @ref ge211::geometry::Posn.
-    using Posn = Posn<T>;
+    using Posn_type = Posn<Coordinate>;
 
     Coordinate x;         ///< The *x* coordinate of the upper-left vertex.
     Coordinate y;         ///< The *y* coordinate of the upper-left vertex.
@@ -434,7 +421,7 @@ struct Rect
 
     /// Default-constructs the zero-sized Rect at the origin.
     Rect()
-            : Rect{T(), T(), T(), T()}
+            : Rect{Coordinate{}, Coordinate{}, Coordinate{}, Coordinate{}}
     { }
 
     /// Casts or converts a @ref Rect to a Rect of a different coordinate type.
@@ -444,8 +431,8 @@ struct Rect
     /// ge211::Posn<int> p1 { 3, 4 };
     /// auto p2 = ge211::Posn<double>(p1);
     /// ```
-    template <class U>
-    explicit Rect(const Rect<U>& that)
+    template <typename FROM_COORD>
+    explicit Rect(const Rect<FROM_COORD>& that)
             : x(that.x)
             , y(that.y)
             , width(that.width)
@@ -460,11 +447,11 @@ struct Rect
     /// auto r1 = ge211::Rect<int>{-1, -1, 2, 2};
     /// auto r2 = r1.into<double>();
     /// ```
-    template <class U>
-    ge211::Rect<U>
+    template <typename TO_COORD>
+    ge211::Rect<TO_COORD>
     into() const
     {
-        return {U(x), U(y), U(width), U(height)};
+        return {TO_COORD(x), TO_COORD(y), TO_COORD(width), TO_COORD(height)};
     }
 
     /// @}
@@ -475,7 +462,7 @@ struct Rect
     /// Equality for rectangles. Note that this is naïve, in that it considers
     /// empty rectangles with different positions to be different.
     bool operator==(const Rect& that) const
-    NOEXCEPT_(detail::is_nothrow_comparable<T>())
+    NOEXCEPT_(detail::is_nothrow_comparable<Coordinate>())
     {
         return x == that.x &&
                y == that.y &&
@@ -485,13 +472,9 @@ struct Rect
 
     /// Disequality for rectangles.
     bool operator!=(const Rect &that) const
-    NOEXCEPT_(detail::is_nothrow_comparable<T>())
+    NOEXCEPT_(detail::is_nothrow_comparable<Coordinate>())
     {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunknown-pragmas"
-#pragma ide diagnostic ignored "Simplify"
         return !(*this == that);
-#pragma clang diagnostic pop
     }
 
     /// @}
@@ -500,45 +483,45 @@ struct Rect
     /// @{
 
     /// The dimensions of the rectangle. Equivalent to
-    /// `Dims<T>{rect.width, rect.height}`.
-    Dims dimensions() const
-    NOEXCEPT_(detail::is_nothrow_convertible<T>())
+    /// `Dims<Coordinate>{rect.width, rect.height}`.
+    Dims_type dimensions() const
+    NOEXCEPT_(detail::is_nothrow_convertible<Coordinate>())
     {
         return {width, height};
     }
 
     /// The position of the top left vertex.
-    Posn top_left() const
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    Posn_type top_left() const
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {x, y};
     }
 
     /// The position of the top right vertex.
-    Posn top_right() const
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    Posn_type top_right() const
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return top_left().right_by(width);
     }
 
     /// The position of the bottom left vertex.
-    Posn bottom_left() const
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    Posn_type bottom_left() const
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return top_left().down_by(height);
     }
 
     /// The position of the bottom right vertex.
-    Posn bottom_right() const
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    Posn_type bottom_right() const
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return top_left().down_right_by(dimensions());
     }
 
     /// The position of the center of the rectangle.
-    Posn center() const
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>() &&
-              detail::has_nothrow_division<T>())
+    Posn_type center() const
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>() &&
+              detail::has_nothrow_division<Coordinate>())
     {
         return top_left().down_right_by(dimensions() / Coordinate(2));
     }
@@ -550,40 +533,40 @@ struct Rect
 
     /// Creates a Rect given the position of its top left vertex
     /// and its dimensions.
-    static Rect from_top_left(Posn tl, Dims dims)
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    static Rect from_top_left(Posn_type tl, Dims_type dims)
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return {tl.x, tl.y, dims.width, dims.height};
     }
 
     /// Creates a Rect given the position of its top right vertex
     /// and its dimensions.
-    static Rect from_top_right(Posn tr, Dims dims)
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    static Rect from_top_right(Posn_type tr, Dims_type dims)
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return from_top_left(tr.left_by(dims.width), dims);
     }
 
     /// Creates a Rect given the position of its bottom left vertex
     /// and its dimensions.
-    static Rect from_bottom_left(Posn bl, Dims dims)
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    static Rect from_bottom_left(Posn_type bl, Dims_type dims)
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return from_top_left(bl.up_by(dims.height), dims);
     }
 
     /// Creates a Rect given the position of its bottom right vertex
     /// and its dimensions.
-    static Rect from_bottom_right(Posn br, Dims dims)
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    static Rect from_bottom_right(Posn_type br, Dims_type dims)
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return from_top_left(br.up_left_by(dims), dims);
     }
 
     /// Creates a Rect given the position of its center
     /// and its dimensions.
-    static Rect from_center(Posn center, Dims dims)
-    NOEXCEPT_(detail::has_nothrow_arithmetic<T>())
+    static Rect from_center(Posn_type center, Dims_type dims)
+    NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return from_top_left(center.up_left_by(dims / Coordinate(2)), dims);
     }
@@ -611,7 +594,7 @@ private:
 
     /// Converts this rectangle to an internal SDL rectangle.
     operator SDL_Rect() const
-    NOEXCEPT_(detail::is_nothrow_convertible<T, int>())
+    NOEXCEPT_(detail::is_nothrow_convertible<COORDINATE, int>())
     {
         SDL_Rect result;
         result.x = static_cast<int>(x);
@@ -622,22 +605,22 @@ private:
     }
 };
 
-/// An iterator over the `Posn<T>`s of a `Rect<T>`.
+/// An iterator over the `Posn<COORDINATE>`s of a `Rect<COORDINATE>`.
 ///
 /// Iterates in column-major order.
-template <class T>
-class Rect<T>::iterator
-        : public std::iterator<std::input_iterator_tag, const Posn>
+template <typename COORDINATE>
+class Rect<COORDINATE>::iterator
+        : public std::iterator<std::input_iterator_tag, const Posn_type>
 {
 public:
     /// Returns the current Posn of this iterator.
-    Posn operator*() const
+    Posn_type operator*() const
     {
         return current_;
     }
 
     /// Returns a pointer to the current Posn of this iterator.
-    Posn const* operator->() const
+    Posn_type const* operator->() const
     {
         return &current_;
     }
@@ -698,13 +681,13 @@ public:
 private:
     friend Rect;
 
-    iterator(Posn current, Coordinate y_begin, Coordinate y_end)
+    iterator(Posn_type current, Coordinate y_begin, Coordinate y_end)
             : current_(current),
               y_begin_(y_begin),
               y_end_(y_end)
     { }
 
-    Posn       current_;
+    Posn_type current_;
     Coordinate y_begin_;
     Coordinate y_end_;
 };
@@ -851,8 +834,8 @@ bool operator==(const Transform&, const Transform&) NOEXCEPT;
 bool operator!=(const Transform&, const Transform&) NOEXCEPT;
 
 
-/// Gets implicitly converted to `Posn<T>(0, 0)`
-/// for any coordinate type `T`.
+/// Gets implicitly converted to `Posn<COORDINATE>(0, 0)`
+/// for any coordinate type `COORDINATE`.
 ///
 /// Examples:
 ///
@@ -876,8 +859,8 @@ constexpr Origin_type the_origin;
 /// auto near = make_dims(5, 7);   // Dims<int>
 /// auto far  = make_dims(5, 7e9); // Dims<double>
 /// ```
-template <class T>
-Dims<T> make_dims(T x, T y)
+template <typename COORDINATE>
+Dims<COORDINATE> make_dims(COORDINATE x, COORDINATE y)
 {
     return {x, y};
 }
@@ -891,8 +874,8 @@ Dims<T> make_dims(T x, T y)
 /// auto here  = make_posn( 0, 0);    // Posn<int>
 /// auto there = make_posn(-5, 7e9);  // Posn<double>
 /// ```
-template <class T>
-Posn<T> make_posn(T x, T y)
+template <typename COORDINATE>
+Posn<COORDINATE> make_posn(COORDINATE x, COORDINATE y)
 {
     return {x, y};
 }
@@ -913,8 +896,11 @@ Posn<T> make_posn(T x, T y)
 /// // infers Rect<int>:
 /// auto big_reversi = make_rect(0, 0, 16, 16);
 /// ```
-template <class T>
-Rect<T> make_rect(T x, T y, T width, T height)
+template <class COORDINATE>
+Rect<COORDINATE> make_rect(COORDINATE x,
+                           COORDINATE y,
+                           COORDINATE width,
+                           COORDINATE height)
 {
     return {x, y, width, height};
 }
@@ -931,18 +917,18 @@ namespace std
 /// @ref ge211::geometry::Posn%s, which allows storing them as members of an
 /// @ref std::unordered_set or as keys of an
 /// @ref std::unordered_map.
-template <class T>
-struct hash<ge211::Posn<T>>
+template <typename COORDINATE>
+struct hash<ge211::Posn<COORDINATE>>
 {
-    /// Hashes a Posn<T>, provided that T is hashable.
-    std::size_t operator()(ge211::Posn<T> pos) const
+    /// Hashes a Posn<COORDINATE>, provided that COORDINATE is hashable.
+    std::size_t operator()(ge211::Posn<COORDINATE> pos) const
     NOEXCEPT
     {
         return hash_t_(pos.x) * 31 ^ hash_t_(pos.y);
     }
 
 private:
-    std::hash<T> hash_t_;
+    std::hash<COORDINATE> hash_t_;
 };
 
 } // end namespace std
