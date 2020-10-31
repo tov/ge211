@@ -186,7 +186,7 @@ class Mixer
     // This calls default constructor...
     friend Abstract_game;
     // ...via this:
-    friend detail::lazy_ptr<Mixer>;
+    friend class detail::lazy_ptr<Mixer>;
 
 public:
     /// The state of an audio channel.

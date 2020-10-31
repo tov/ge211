@@ -172,7 +172,8 @@ private:
 ///
 /// You can *stub* your Random_source in order to predetermine the sequence of
 /// values that it will return. For details, see
-/// @ref `Random_source::stub_with(std::initializer_list<result_type>)` and
+/// @ref Random_source::stub_with(std::initializer_list<result_type>)
+/// and
 /// @ref Random_source::stub_with(std::vector<result_type>).
 ///
 /// [pseudorandom numbers]:

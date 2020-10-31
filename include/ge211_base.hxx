@@ -32,23 +32,24 @@ namespace ge211 {
  * ```cpp
  * #include <ge211.hxx>
  *
- * using namespace ge211;
+ * const ge211::Dims<int> dimensions {300, 200};
+ * const ge211::Color     color {200, 0, 0};     // red
  *
- * struct My_game : Abstract_game
+ * struct My_game : ge211::Abstract_game
  * {
- *     Rectangle_sprite rect{Dims<int>{300, 200}, Color::medium_red()};
+ *     void draw(ge211::Sprite_set& sprites) override;
  *
- *     void draw(Sprite_set& sprites) override;
+ *     ge211::Rectangle_sprite rect{dimensions, color};
  * };
  *
- * void My_game::draw(Sprite_set& sprites)
+ * void My_game::draw(ge211::Sprite_set& sprites)
  * {
- *     sprites.add_sprite(rect, Posn<int>{100, 100});
+ *     sprites.add_sprite(rect, ge211::Posn<int>(100, 100));
  * }
  *
  * int main()
  * {
- *     My_game{}.run();
+ *     My_game().run();
  * }
  * ```
  *
@@ -65,6 +66,13 @@ namespace ge211 {
  *
  * struct My_game2 : ge211::Abstract_game
  * {
+ *     // Constructs a new game with the given cursor size.
+ *     explicit My_game2(int cursor_size);
+ *
+ *     ///
+ *     /// Function members
+ *     ///
+ *
  *     // Holds the most recent position of the mouse:
  *     ge211::Posn<int> last_mouse{0, 0};
  *
@@ -72,13 +80,23 @@ namespace ge211 {
  *     // mouse moves:
  *     void on_mouse_move(ge211::Posn<int> mouse) override;
  *
- *     // The circle sprite to render where the mouse is:
- *     ge211::Circle_sprite cursor{10, ge211::Color::medium_blue()};
- *
  *     // Whenever we need to redraw the screen, add the Circle_sprite
  *     // at the mouse position.
  *     void draw(ge211::Sprite_set& sprites) override;
+ *
+ *     ///
+ *     /// Data members
+ *     ///
+ *
+ *     // The circle sprite to render where the mouse is. This is
+ *     // initialized with a radius and a color in the My_game2
+ *     // constructor.
+ *     ge211::Circle_sprite cursor;
  * };
+ *
+ * My_game2::My_game2(int cursor_size)
+ *         : cursor(cursor_size, ge211::Color::medium_blue())
+ * { }
  *
  * void My_game2::on_mouse_move(ge211::Posn<int> mouse)
  * {
@@ -87,12 +105,16 @@ namespace ge211 {
  *
  * void My_game2::draw(ge211::Sprite_set& sprites)
  * {
- *     sprites.add_sprite(cursor, last_mouse);
+ *     // If the mouse is at the center, where is the top-left?
+ *     ge211::Posn<int> top_left =
+ *         last_mouse.up_left_by(cursor.dimensions() / 2);
+ *     sprites.add_sprite(cursor, top_left);
  * }
  *
  * int main()
  * {
- *     My_game2{}.run();
+ *     My_game2 game(10);
+ *     game.run();
  * }
  * ```
  */

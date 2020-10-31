@@ -278,7 +278,7 @@ struct Posn
     }
 
     /// Translates a position by some displacement. This is the same as
-    /// @ref Posn::down_right_by(Dims) const.
+    /// @ref Posn::down_right_by(Dims_type) const.
     Posn operator+(Dims_type dims) const
     NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
@@ -286,7 +286,7 @@ struct Posn
     }
 
     /// Translates a position by the opposite of some displacement. This is
-    /// the same as @ref Posn::up_left_by(Dims) const.
+    /// the same as @ref Posn::up_left_by(Dims_type) const.
     Posn operator-(Dims_type dims) const
     NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
