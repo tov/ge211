@@ -4,8 +4,12 @@ builds/
 build.*/
 cmake-build-*/
 
-# CLion preferences
-.idea/*
+# User-specific CLion (IDEA) settings:
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf/
+.idea/**/workspace.xml
 
-# MacOS Finder preferences
+# Mac OS Finder preferences:
 .DS_Store
