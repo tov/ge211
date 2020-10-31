@@ -10,12 +10,10 @@
 #include <type_traits>
 #include <utility>
 
-namespace ge211
-{
+namespace ge211 {
 
 /// Geometric objects and their operations.
-namespace geometry
-{
+namespace geometry {
 
 /// The type of the special value @ref the_origin.
 ///
@@ -23,7 +21,8 @@ namespace geometry
 /// Posn constructor to construct the origin. See
 /// @ref the_origin for examples.
 class Origin_type
-{ };
+{
+};
 
 
 /// Represents the dimensions of an object, or more generally,
@@ -44,8 +43,8 @@ struct Dims
 
     /// Constructs a dimensions from the given *width* and *height*.
     Dims(Coordinate width, Coordinate height)
-            : width{width}
-            , height{height}
+            : width{width},
+              height{height}
     { }
 
     /// Default-constructs the zero-sized Dims.
@@ -61,9 +60,9 @@ struct Dims
     /// auto p2 = ge211::Dims<double>(p1);
     /// ```
     template <typename FROM_COORD>
-    explicit Dims(const Dims<FROM_COORD>& that)
-            : width(that.width)
-            , height(that.height)
+    explicit Dims(const Dims<FROM_COORD> &that)
+            : width(that.width),
+              height(that.height)
     { }
 
     /// Explicitly converts a Dims to a different coordinate type.
@@ -117,7 +116,7 @@ struct Dims
             typename ARITHMETIC_TYPE,
             typename = std::enable_if_t<
                     std::is_arithmetic<ARITHMETIC_TYPE>::value>
-             >
+    >
     Dims operator*(ARITHMETIC_TYPE scalar) const
     {
         return {Coordinate(width * scalar), Coordinate(height * scalar)};
@@ -128,20 +127,20 @@ struct Dims
             typename ARITHMETIC_TYPE,
             typename = std::enable_if_t<
                     std::is_arithmetic<ARITHMETIC_TYPE>::value>
-             >
+    >
     Dims operator/(ARITHMETIC_TYPE scalar) const
     {
         return {Coordinate(width / scalar), Coordinate(height / scalar)};
     }
 
     /// Succinct Dims addition.
-    Dims& operator+=(Dims that)
+    Dims &operator+=(Dims that)
     {
         return *this = *this + that;
     }
 
     /// Succinct Dims subtraction.
-    Dims& operator-=(Dims that)
+    Dims &operator-=(Dims that)
     {
         return *this = *this - that;
     }
@@ -152,8 +151,8 @@ struct Dims
     template <
             typename ARITHMETIC_TYPE,
             typename = std::enable_if_t<std::is_arithmetic<ARITHMETIC_TYPE>::value>
-             >
-    Dims& operator*=(ARITHMETIC_TYPE scalar)
+    >
+    Dims &operator*=(ARITHMETIC_TYPE scalar)
     {
         return *this = *this * scalar;
     }
@@ -168,7 +167,7 @@ struct Dims
             typename ARITHMETIC_TYPE,
             typename = std::enable_if_t<std::is_arithmetic<ARITHMETIC_TYPE>::value>
     >
-    Dims& operator/=(ARITHMETIC_TYPE scalar)
+    Dims &operator/=(ARITHMETIC_TYPE scalar)
     {
         return *this = *this / scalar;
     }
@@ -182,8 +181,9 @@ template <
         typename COORDINATE,
         typename SCALAR,
         typename = std::enable_if_t<std::is_arithmetic<SCALAR>::value>
-        >
-Dims<COORDINATE> operator*(SCALAR scalar, Dims<COORDINATE> dims)
+>
+Dims<COORDINATE>
+operator*(SCALAR scalar, Dims<COORDINATE> dims)
 {
     return dims * scalar;
 }
@@ -213,7 +213,8 @@ struct Posn
     /// Constructs a position from the given *x* and *y* coordinates.
     Posn(Coordinate x, Coordinate y)
     NOEXCEPT_(detail::is_nothrow_convertible<Coordinate>())
-            : x{x}, y{y}
+            : x{x},
+              y{y}
     { }
 
     /// Constructs the origin when given @ref the_origin.
@@ -237,9 +238,9 @@ struct Posn
     /// auto p2 = ge211::Posn<double>(p1);
     /// ```
     template <typename FROM_COORD>
-    explicit Posn(const Posn<FROM_COORD>& that)
-            : x(that.x)
-            , y(that.y)
+    explicit Posn(const Posn<FROM_COORD> &that)
+            : x(that.x),
+              y(that.y)
     { }
 
     /// Explicitly converts a Posn to another coordinate type.
@@ -300,14 +301,14 @@ struct Posn
     }
 
     /// Succinct position translation.
-    Posn& operator+=(Dims_type dims)
+    Posn &operator+=(Dims_type dims)
     NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return *this = *this + dims;
     }
 
     /// Succinct position translation.
-    Posn& operator-=(Dims_type dims)
+    Posn &operator-=(Dims_type dims)
     NOEXCEPT_(detail::has_nothrow_arithmetic<Coordinate>())
     {
         return *this = *this - dims;
@@ -413,10 +414,10 @@ struct Rect
     /// Constructs a rectangle given the *x* and *y* coordinates of its
     /// top left corner, and its width and height.
     Rect(Coordinate x, Coordinate y, Coordinate width, Coordinate height)
-            : x{x}
-            , y{y}
-            , width{width}
-            , height{height}
+            : x{x},
+              y{y},
+              width{width},
+              height{height}
     { }
 
     /// Default-constructs the zero-sized Rect at the origin.
@@ -432,11 +433,11 @@ struct Rect
     /// auto p2 = ge211::Posn<double>(p1);
     /// ```
     template <typename FROM_COORD>
-    explicit Rect(const Rect<FROM_COORD>& that)
-            : x(that.x)
-            , y(that.y)
-            , width(that.width)
-            , height(that.height)
+    explicit Rect(const Rect<FROM_COORD> &that)
+            : x(that.x),
+              y(that.y),
+              width(that.width),
+              height(that.height)
     { }
 
     /// Explicitly converts a Rect to another coordinate type.
@@ -461,7 +462,7 @@ struct Rect
 
     /// Equality for rectangles. Note that this is naïve, in that it considers
     /// empty rectangles with different positions to be different.
-    bool operator==(const Rect& that) const
+    bool operator==(const Rect &that) const
     NOEXCEPT_(detail::is_nothrow_comparable<Coordinate>())
     {
         return x == that.x &&
@@ -589,7 +590,9 @@ struct Rect
 
 private:
     friend Circle_sprite;
+
     friend class detail::Render_sprite;
+
     friend class detail::Renderer;
 
     /// Converts this rectangle to an internal SDL rectangle.
@@ -620,13 +623,13 @@ public:
     }
 
     /// Returns a pointer to the current Posn of this iterator.
-    Posn_type const* operator->() const
+    Posn_type const *operator->() const
     {
         return &current_;
     }
 
     /// Pre-increments, advancing this iterator to the next Posn.
-    iterator& operator++()
+    iterator &operator++()
     {
         if (++current_.y >= y_end_) {
             ++current_.x;
@@ -637,7 +640,7 @@ public:
     }
 
     /// Pre-decrements, retreating this iterator to the previous Posn.
-    iterator& operator--()
+    iterator &operator--()
     {
         if (current_.y == y_begin_) {
             current_.y = y_end_;
@@ -667,13 +670,13 @@ public:
 
     /// Compares whether two iterators are equal. Considers only the current
     /// position, not the bounds of the stripe we're iterating through.
-    bool operator==(iterator const& that) const
+    bool operator==(iterator const &that) const
     {
         return **this == *that;
     }
 
     /// Iterator inequality.
-    bool operator!=(iterator const& that) const
+    bool operator!=(iterator const &that) const
     {
         return !(*this == that);
     }
@@ -754,28 +757,28 @@ public:
     /// @{
 
     /// Modifies this transform to have the given rotation, in degrees.
-    Transform& set_rotation(double) NOEXCEPT;
+    Transform &set_rotation(double) NOEXCEPT;
 
     /// Modifies this transform to determine whether to flip horizontally.
-    Transform& set_flip_h(bool) NOEXCEPT;
+    Transform &set_flip_h(bool) NOEXCEPT;
 
     /// Modifies this transform to determine whether to flip vertically.
-    Transform& set_flip_v(bool) NOEXCEPT;
+    Transform &set_flip_v(bool) NOEXCEPT;
 
     /// Modifies this transform to scale the sprite by the given amount in
     /// both dimensions. This overwrites the effect of previous calls to
     /// set_scale_x(double) and set_scale_y(double).
-    Transform& set_scale(double) NOEXCEPT;
+    Transform &set_scale(double) NOEXCEPT;
 
     /// Modifies this transform to scale the sprite horizontally. This
     /// overwrites the effect of previous calls to `set_scale(double)`
     /// as well as itself.
-    Transform& set_scale_x(double) NOEXCEPT;
+    Transform &set_scale_x(double) NOEXCEPT;
 
     /// Modifies this transform to scale the sprite vertically. This
     /// overwrites the effect of previous calls to `set_scale(double)`
     /// as well as itself.
-    Transform& set_scale_y(double) NOEXCEPT;
+    Transform &set_scale_y(double) NOEXCEPT;
 
     /// @}
 
@@ -809,7 +812,7 @@ public:
     bool is_identity() const NOEXCEPT;
 
     /// Composes two transforms to combine both of their effects.
-    Transform operator*(const Transform&) const NOEXCEPT;
+    Transform operator*(const Transform &) const NOEXCEPT;
 
     /// Returns the inverse of this transform. Composing a transform with its
     /// inverse should result in the identity transformation, though because
@@ -823,15 +826,17 @@ private:
     double rotation_;
     double scale_x_;
     double scale_y_;
-    bool   flip_h_;
-    bool   flip_v_;
+    bool flip_h_;
+    bool flip_v_;
 };
 
 /// Equality for `Transform`s.
-bool operator==(const Transform&, const Transform&) NOEXCEPT;
+bool
+operator==(const Transform &, const Transform &) NOEXCEPT;
 
 /// Disequality for `Transform`s.
-bool operator!=(const Transform&, const Transform&) NOEXCEPT;
+bool
+operator!=(const Transform &, const Transform &) NOEXCEPT;
 
 
 /// Gets implicitly converted to `Posn<COORDINATE>(0, 0)`
@@ -860,7 +865,8 @@ constexpr Origin_type the_origin;
 /// auto far  = make_dims(5, 7e9); // Dims<double>
 /// ```
 template <typename COORDINATE>
-Dims<COORDINATE> make_dims(COORDINATE x, COORDINATE y)
+Dims<COORDINATE>
+make_dims(COORDINATE x, COORDINATE y)
 {
     return {x, y};
 }
@@ -875,7 +881,8 @@ Dims<COORDINATE> make_dims(COORDINATE x, COORDINATE y)
 /// auto there = make_posn(-5, 7e9);  // Posn<double>
 /// ```
 template <typename COORDINATE>
-Posn<COORDINATE> make_posn(COORDINATE x, COORDINATE y)
+Posn<COORDINATE>
+make_posn(COORDINATE x, COORDINATE y)
 {
     return {x, y};
 }
@@ -897,10 +904,8 @@ Posn<COORDINATE> make_posn(COORDINATE x, COORDINATE y)
 /// auto big_reversi = make_rect(0, 0, 16, 16);
 /// ```
 template <class COORDINATE>
-Rect<COORDINATE> make_rect(COORDINATE x,
-                           COORDINATE y,
-                           COORDINATE width,
-                           COORDINATE height)
+Rect<COORDINATE>
+make_rect(COORDINATE x, COORDINATE y, COORDINATE width, COORDINATE height)
 {
     return {x, y, width, height};
 }
@@ -910,8 +915,7 @@ Rect<COORDINATE> make_rect(COORDINATE x,
 } // end namespace ge211
 
 // specializations in std:
-namespace std
-{
+namespace std {
 
 /// Template specialization to define hashing of
 /// @ref ge211::geometry::Posn%s, which allows storing them as members of an
