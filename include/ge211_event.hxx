@@ -18,11 +18,13 @@ namespace events {
 /// which mouse button was depressed or released.
 enum class Mouse_button
 {
-    /// the primary mouse button
+    /// The primary mouse button. This is an ordinary click.
     left,
-    /// the tertiary mouse button
+    /// The tertiary mouse button. If you don’t have an actual mouse
+    /// with three buttons then you might not have this.
     middle,
-    /// the secondary mouse button
+    /// The secondary mouse button. On a track pad you might do this
+    /// with control-click or a two-finger tap.
     right,
 };
 
