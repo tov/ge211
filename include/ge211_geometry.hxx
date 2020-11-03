@@ -3,10 +3,12 @@
 #include "ge211_forward.hxx"
 #include "ge211_if_cpp.hxx"
 #include "ge211_noexcept.hxx"
+#include "ge211_type_traits.hxx"
 #include "ge211_util.hxx"
 
 #include <SDL_rect.h>
 
+#include <ostream>
 #include <type_traits>
 #include <utility>
 
@@ -903,12 +905,47 @@ make_posn(COORDINATE x, COORDINATE y)
 /// // infers Rect<int>:
 /// auto big_reversi = make_rect(0, 0, 16, 16);
 /// ```
-template <class COORDINATE>
+template <typename COORDINATE>
 Rect<COORDINATE>
 make_rect(COORDINATE x, COORDINATE y, COORDINATE width, COORDINATE height)
 {
     return {x, y, width, height};
 }
+
+/// @}
+
+/// \name Stream-insertion operators
+/// @{
+
+/// Formats a @ref Dims on an output stream.
+template <typename COORDINATE>
+std::ostream& operator<<(std::ostream& out, Dims<COORDINATE> dims)
+{
+    return out
+            << "Dims<" << detail::name_of_type<COORDINATE> << ">("
+            << dims.width << ", " << dims.height << ")";
+}
+
+/// Formats a @ref Posn on an output stream.
+template <typename COORDINATE>
+std::ostream& operator<<(std::ostream& out, Posn<COORDINATE> p)
+{
+    return out
+            << "Posn<" << detail::name_of_type<COORDINATE> << ">("
+            << p.x << ", " << p.y << ")";
+}
+
+/// Formats a @ref Rect on an output stream.
+template <typename COORDINATE>
+std::ostream& operator<<(std::ostream& out, Rect<COORDINATE> rect)
+{
+    return out
+            << "Rect<" << detail::name_of_type<COORDINATE> << ">("
+            << rect.x     << ", " << rect.y      << ", "
+            << rect.width << ", " << rect.height << ")";
+}
+
+/// @}
 
 } // end namespace geometry.
 

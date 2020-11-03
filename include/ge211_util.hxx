@@ -222,6 +222,31 @@ constexpr bool has_nothrow_division()
     return noexcept(t / u);
 }
 
+/// Template constant for turning some built-in arithmetic types into
+/// their names via template specialization.
+template <typename>
+static char const* const
+name_of_type = "?";
+
+#define Specialize_name_of_type(Type) \
+    template <> \
+    static char const* const \
+    name_of_type<Type> = #Type;
+
+Specialize_name_of_type(char)
+Specialize_name_of_type(signed char)
+Specialize_name_of_type(unsigned char)
+Specialize_name_of_type(short)
+Specialize_name_of_type(unsigned short)
+Specialize_name_of_type(int)
+Specialize_name_of_type(unsigned)
+Specialize_name_of_type(long)
+Specialize_name_of_type(unsigned long)
+Specialize_name_of_type(float)
+Specialize_name_of_type(double)
+
+#undef Specialize_name_of_type
+
 } // end namespace detail
 
 } // end namespace ge211
