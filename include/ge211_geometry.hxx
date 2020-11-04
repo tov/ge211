@@ -116,8 +116,7 @@ struct Dims
     /// Multiplies a Dims by a scalar.
     template <
             typename ARITHMETIC_TYPE,
-            typename = std::enable_if_t<
-                    std::is_arithmetic<ARITHMETIC_TYPE>::value>
+            typename = std::enable_if_t<Is_Arithmetic<ARITHMETIC_TYPE>>
     >
     Dims operator*(ARITHMETIC_TYPE scalar) const
     {
@@ -127,8 +126,7 @@ struct Dims
     /// Divides a Dims by a scalar.
     template <
             typename ARITHMETIC_TYPE,
-            typename = std::enable_if_t<
-                    std::is_arithmetic<ARITHMETIC_TYPE>::value>
+            typename = std::enable_if_t<Is_Arithmetic<ARITHMETIC_TYPE>>
     >
     Dims operator/(ARITHMETIC_TYPE scalar) const
     {
@@ -152,7 +150,7 @@ struct Dims
     /// [1]: @ref Dims
     template <
             typename ARITHMETIC_TYPE,
-            typename = std::enable_if_t<std::is_arithmetic<ARITHMETIC_TYPE>::value>
+            typename = std::enable_if_t<Is_Arithmetic<ARITHMETIC_TYPE>>
     >
     Dims &operator*=(ARITHMETIC_TYPE scalar)
     {
@@ -167,7 +165,7 @@ struct Dims
     /// [1]: @ref Dims
     template <
             typename ARITHMETIC_TYPE,
-            typename = std::enable_if_t<std::is_arithmetic<ARITHMETIC_TYPE>::value>
+            typename = std::enable_if_t<Is_Arithmetic<ARITHMETIC_TYPE>>
     >
     Dims &operator/=(ARITHMETIC_TYPE scalar)
     {
@@ -178,18 +176,18 @@ struct Dims
 };
 
 
-/// Multiplies a scalar by a Dims.
+/// Multiplies a scalar and a Dims. (This is scalar-vector
+/// multiplication.)
 template <
         typename COORDINATE,
         typename SCALAR,
-        typename = std::enable_if_t<std::is_arithmetic<SCALAR>::value>
+        typename = std::enable_if_t<Is_Arithmetic<SCALAR>>
 >
 Dims<COORDINATE>
 operator*(SCALAR scalar, Dims<COORDINATE> dims)
 {
     return dims * scalar;
 }
-
 
 /// A position in the `COORDINATE`-valued Cartesian plane, where `COORDINATE`
 /// can be any arithmetic type. In graphics, the origin is traditionally in
