@@ -698,24 +698,24 @@ private:
 };
 
 
-/// A rendering transform, which can scale, flip, and rotate. A Transform
-/// can be given to
+/// A rendering transformation, which can scale, flip, and rotate.
+/// A Transform can be given to
 /// Sprite_set::add_sprite(const Sprite&, Posn<int>, int, const Transform&)
-/// to specify how a sprites::Sprite should be rendered.
+/// to specify how a [Sprite](@ref sprites::Sprite) should be rendered.
 ///
 /// To construct a transform that does just one thing, you can use one of
 /// the static factory functions:
 ///
-///   - Transform::rotation(double)
-///   - Transform::flip_h()
-///   - Transform::flip_v()
-///   - Transform::scale(double)
-///   - Transform::scale_x(double)
-///   - Transform::scale_y(double)
+///   - @ref Transform::rotation(double)
+///   - @ref Transform::flip_h()
+///   - @ref Transform::flip_v()
+///   - @ref Transform::scale(double)
+///   - @ref Transform::scale_x(double)
+///   - @ref Transform::scale_y(double)
 ///
 /// It is also possible to modify a transform with the setter functions
-/// such as set_rotation(double) and set_scale(double). This can be used
-/// to configure a transform that does more than one thing:
+/// such as @ref set_rotation(double) and @ref set_scale(double). This
+/// can be used to configure a transform that does more than one thing:
 ///
 /// ```
 /// ge211::Transform my_transform =

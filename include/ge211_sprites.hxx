@@ -18,14 +18,18 @@ namespace ge211 {
 /// and four specific types of sprites with different purposes.
 namespace sprites {
 
-/// A sprite is an image that knows how to render itself to the screen at
-/// a given location, under a particular transformation. You cannot create
-/// a Sprite object directly, but must create one of its derived classes,
-/// such as Image_sprite or Rectangle_sprite.
-/// You can find out any sprite's dimensions with the
-/// Sprite::dimensions() const member function.
-/// Specific derived classes of Sprite, such as Rectangle_sprite, may have
-/// more specific operations.
+/// A sprite is an image that knows how to render itself to the screen
+/// at a given location, under a particular transformation. You cannot
+/// create a Sprite object directly, but must create one of its derived
+/// classes, such as @ref Image_sprite or @ref Rectangle_sprite. You can
+/// find out any sprite's dimensions with the @ref Sprite::dimensions()
+/// const member function. Specific derived classes of Sprite, such as
+/// @ref Rectangle_sprite, may have more specific operations.
+///
+/// \sa @ref Circle_sprite
+/// \sa @ref Image_sprite
+/// \sa @ref Rectangle_sprite
+/// \sa @ref Text_sprite
 ///
 /// \internal
 /// A sprite is anything with dimensions that knows how to render itself
@@ -439,15 +443,21 @@ bool operator<(Placed_sprite const&, Placed_sprite const&) NOEXCEPT;
 
 } // end namespace detail
 
-/// A collection of positioned sprites ready to be rendered to the screen. Each
-/// time Abstract_game::draw(Sprite_set&) is called by the game engine, it is
-/// given an empty Sprite_set, and it must add every sprites::Sprite that
-/// should appear on the screen to that Sprite_set. Each Sprite is added
-/// with an x–y geometry::Posn<int> and a z
+/// A collection of positioned [Sprite](@ref ge211::sprites::Sprite)s
+/// ready to be rendered to the screen. Each time @ref
+/// Abstract_game::draw(Sprite_set&) is called by the game engine, it is
+/// given an empty @ref Sprite_set, and it must add every [Sprite] that
+/// should appear on the screen to that @ref Sprite_set. Each [Sprite]
+/// is added with an *x–y* coordinates (@ref Posn<int>) and a *z*
 /// coordinate that determines stacking order. Each sprite may have a
-/// geometry::Transform applied as well.
+/// [Transform] applied as well.
 ///
-/// \sa add_sprite(Sprite const&, Posn<int>, int, Transform const&)
+/// \sa Sprite_set::add_sprite(Sprite const&, Posn<int>, int, Transform const&)
+/// \sa `class` [Sprite]
+/// \sa `class` [Transform]
+///
+/// [Sprite]: @ref ge211::sprites::Sprite
+/// [Transform]: @ref ge211::geometry::Transform
 class Sprite_set
 {
 public:
@@ -475,13 +485,13 @@ public:
     /// added to the Sprite_set need to be owned by some other object that
     /// outlives the current call to @ref Abstract_game::draw.
     ///
-    /// \sa [Transform]
-    /// \sa [Sprite]
-    /// \sa [Posn]
+    /// \sa `struct` [Posn]
+    /// \sa `class` [Transform]
+    /// \sa `class` [Sprite]
     ///
     /// [Posn]: @ref ge211::geometry::Posn
-    /// [Sprite]: @ref ge211::sprites::Sprite
     /// [Transform]: @ref ge211::geometry::Transform
+    /// [Sprite]: @ref ge211::sprites::Sprite
     Sprite_set& add_sprite(Sprite const& sprite,
                            Posn<int> xy,
                            int z = 0,

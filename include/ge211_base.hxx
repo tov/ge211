@@ -26,8 +26,8 @@ namespace ge211 {
  * If nothing else, the Abstract_game::draw(Sprite_set&) function must be
  * overridden to specify how to draw your game.
  *
- * For example, here is a game that creates one rectangular sprites::Sprite and
- * renders it on the screen:
+ * For example, here is a game that creates one rectangular
+ * [Sprite](@ref sprites::Sprite) and renders it on the screen:
  *
  * ```cpp
  * #include <ge211.hxx>
