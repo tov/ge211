@@ -22,7 +22,7 @@ namespace geometry {
 /// This type exists only so that we can overload the
 /// Posn constructor to construct the origin. See
 /// @ref the_origin for examples.
-class Origin_type
+class origin_type
 {
 };
 
@@ -220,7 +220,7 @@ struct Posn
     { }
 
     /// Constructs the origin when given @ref the_origin.
-    Posn(Origin_type)
+    Posn(origin_type)
     NOEXCEPT_(noexcept(Coordinate{}))
             : Posn(Coordinate{}, Coordinate{})
     { }
@@ -854,7 +854,7 @@ operator!=(const Transform &, const Transform &) NOEXCEPT;
 /// return ge211::Rect<float>::from_top_left(the_origin, {w, h});
 /// ```
 //;
-constexpr Origin_type the_origin;
+constexpr origin_type the_origin;
 
 
 /// Constructs a Dims given the width and height.
