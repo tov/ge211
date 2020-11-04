@@ -812,7 +812,7 @@ public:
     bool is_identity() const NOEXCEPT;
 
     /// Composes two transforms to combine both of their effects.
-    Transform operator*(const Transform &) const NOEXCEPT;
+    Transform operator*(const Transform& other) const NOEXCEPT;
 
     /// Returns the inverse of this transform. Composing a transform with its
     /// inverse should result in the identity transformation, though because
@@ -857,6 +857,9 @@ private:
 //;
 constexpr origin_type the_origin;
 
+
+/// \name Factory functions
+/// @{
 
 /// Constructs a Dims given the width and height.
 ///

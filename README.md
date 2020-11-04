@@ -65,7 +65,7 @@ set_target_properties(my_game PROPERTIES
         CXX_EXTENSIONS          Off)
 ```
 
-To see this in action, see the [`ge211-vendored-example`] repo.
+To see this in action, see the [ge211-vendored-example] repo.
 
-[`ge211-vendored-example`]:
+[ge211-vendored-example]:
     https://github.com/tov/ge211-vendored-example
