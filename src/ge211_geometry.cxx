@@ -131,18 +131,18 @@ Transform Transform::inverse() const NOEXCEPT
     return result;
 }
 
-bool operator==(const Transform& t1, const Transform& t2) NOEXCEPT
+bool Transform::operator==(Transform const& other) const NOEXCEPT
 {
-    return t1.get_rotation() == t2.get_rotation() &&
-            t1.get_flip_h() == t2.get_flip_h() &&
-            t1.get_flip_v() == t2.get_flip_v() &&
-            t1.get_scale_x() == t2.get_scale_x() &&
-            t1.get_scale_y() == t2.get_scale_y();
+    return get_rotation() == other.get_rotation() &&
+           get_flip_h() == other.get_flip_h() &&
+           get_flip_v() == other.get_flip_v() &&
+           get_scale_x() == other.get_scale_x() &&
+           get_scale_y() == other.get_scale_y();
 }
 
-bool operator!=(const Transform& t1, const Transform& t2) NOEXCEPT
+bool Transform::operator!=(Transform const& other) const NOEXCEPT
 {
-    return !(t1 == t2);
+    return !(*this == other);
 }
 
 }

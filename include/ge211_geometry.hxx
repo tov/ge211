@@ -822,6 +822,17 @@ public:
 
     /// @}
 
+    /// \name Comparing transforms
+    /// @{
+
+    /// Equality for `Transform`s.
+    bool operator==(const Transform& other) const NOEXCEPT;
+
+    /// Disequality for `Transform`s.
+    bool operator!=(const Transform& other) const NOEXCEPT;
+
+    /// @}
+
 private:
     double rotation_;
     double scale_x_;
@@ -829,14 +840,6 @@ private:
     bool flip_h_;
     bool flip_v_;
 };
-
-/// Equality for `Transform`s.
-bool
-operator==(const Transform &, const Transform &) NOEXCEPT;
-
-/// Disequality for `Transform`s.
-bool
-operator!=(const Transform &, const Transform &) NOEXCEPT;
 
 
 /// Gets implicitly converted to `Posn<COORDINATE>(0, 0)`
