@@ -65,9 +65,9 @@ namespace geometry
 {
 
 class Origin_type;
-template <class> struct Dims;
-template <class> struct Posn;
-template <class> struct Rect;
+template <typename COORDINATE> struct Dims;
+template <typename COORDINATE> struct Posn;
+template <typename COORDINATE> struct Rect;
 class Transform;
 
 } // end namespace geometry.

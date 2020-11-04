@@ -10,17 +10,17 @@ namespace ge211 {
 
 /// Type alias to indicate that the given pointer owns
 /// its object.
-template<class T>
-using Owned = T*;
+template <typename OBJECT_TYPE>
+using Owned = OBJECT_TYPE*;
 
 /// Type alias to indicate that the given pointer does
 /// not own its object.
-template<class T>
-using Borrowed = T*;
+template <typename OBJECT_TYPE>
+using Borrowed = OBJECT_TYPE*;
 
 /// Converts any printable type to a `std::string`.
-template<class T>
-std::string to_string(const T& value)
+template <typename PRINTABLE>
+std::string to_string(const PRINTABLE& value)
 {
     std::ostringstream oss;
     oss << value;
@@ -30,33 +30,33 @@ std::string to_string(const T& value)
 // `detail` is for implementation details
 namespace detail {
 
-template<class T>
-using deleter_t = void (*)(Owned<T>);
+template <typename OBJECT_TYPE>
+using deleter_t = void (*)(Owned<OBJECT_TYPE>);
 
-template<class T>
-void no_op_deleter(Owned<T>) {}
+template <typename OBJECT_TYPE>
+void no_op_deleter(Owned<OBJECT_TYPE>) {}
 
-template<class T>
-void c_heap_deleter(Owned<T> o)
+template <typename OBJECT_TYPE>
+void c_heap_deleter(Owned<OBJECT_TYPE> o)
 {
     std::free(o);
 }
 
-template<
-        class        T,
-        deleter_t<T> Deleter     = &c_heap_deleter,
-        bool         Delete_null = false
+template <
+        typename               OBJECT_TYPE,
+        deleter_t<OBJECT_TYPE> Deleter_Fn = &c_heap_deleter,
+        bool                   Delete_Null      = false
 >
 class delete_ptr
 {
 public:
-    using object_type           = T;
-    using owned_pointer         = Owned<object_type>;
-    using borrowed_pointer      = Borrowed<object_type>;
-    using deleter_function_type = deleter_t<object_type>;
+    using object_type       = OBJECT_TYPE;
+    using owned_pointer     = Owned<object_type>;
+    using borrowed_pointer  = Borrowed<object_type>;
+    using deleter_fn_type   = deleter_t<object_type>;
 
-    static constexpr deleter_function_type deleter_function = Deleter;
-    static constexpr bool                  delete_null_v = Delete_null;
+    static constexpr deleter_fn_type deleter_fn  = Deleter_Fn;
+    static constexpr bool            delete_null = Delete_Null;
 
     delete_ptr() noexcept
             : ptr_(nullptr) { }
@@ -115,10 +115,10 @@ public:
         return ptr_ != nullptr;
     }
 
-    explicit operator std::unique_ptr<object_type, deleter_function_type>()
+    explicit operator std::unique_ptr<object_type, deleter_fn_type>()
     && noexcept
     {
-        return {release(), deleter_function};
+        return {release(), deleter_fn};
     };
 
     friend void swap(delete_ptr& a, delete_ptr& b) noexcept
@@ -129,34 +129,40 @@ public:
 private:
     void delete_it_() noexcept
     {
-        if (delete_null_v || ptr_)
-            deleter_function(ptr_);
+        if (delete_null || ptr_)
+            deleter_fn(ptr_);
     }
 
     owned_pointer ptr_;
 };
 
-template<class T, deleter_t<T> deleter>
-bool operator==(delete_ptr<T, deleter> const& a,
-                delete_ptr<T, deleter> const& b)
+template <
+        typename                OBJECT_TYPE,
+        deleter_t<OBJECT_TYPE>  Deleter_Fn
+>
+bool operator==(delete_ptr<OBJECT_TYPE, Deleter_Fn> const& a,
+                delete_ptr<OBJECT_TYPE, Deleter_Fn> const& b)
 {
     return a.get() == b.get();
 }
 
-template<class T, deleter_t<T> deleter>
-bool operator!=(delete_ptr<T, deleter> const& a,
-                delete_ptr<T, deleter> const& b)
+template <
+        typename                OBJECT_TYPE,
+        deleter_t<OBJECT_TYPE>  Deleter_Fn
+>
+bool operator!=(delete_ptr<OBJECT_TYPE, Deleter_Fn> const& a,
+                delete_ptr<OBJECT_TYPE, Deleter_Fn> const& b)
 {
     return !(a == b);
 }
 
-template<class T>
+template <typename OBJECT_TYPE>
 class lazy_ptr
 {
 public:
-    using value     = T;
-    using reference = T&;
-    using pointer   = T*;
+    using value     = OBJECT_TYPE;
+    using reference = OBJECT_TYPE&;
+    using pointer   = OBJECT_TYPE*;
 
     lazy_ptr()
     { }
@@ -187,38 +193,40 @@ private:
     }
 };
 
-/// Can type `T` be converted to type `U` without risk of an exception?
-template <class T, class U = T>
+/// Can type `FROM_TYPE` be converted to type `TO_TYPE` without risk of
+/// an exception?
+template <typename FROM_TYPE, typename TO_TYPE = FROM_TYPE>
 constexpr bool is_nothrow_convertible()
 {
-    T t{};
-    return noexcept(U(t));
+    FROM_TYPE t{};
+    return noexcept(TO_TYPE(t));
 }
 
-/// Can type `T` be compared to itself without risk of an exception?
-template<class T>
+/// Can type `EQ_TYPE` be compared to itself without risk of an exception?
+template <typename EQ_TYPE>
 constexpr bool is_nothrow_comparable()
 {
-    T t{};
+    EQ_TYPE t{};
     return noexcept(t == t) && noexcept(t != t);
 }
 
-/// Can types `T` and `U` be used for basic arithmetic (addition,
-/// subtraction, multiplication) without risk of an exception?
-template<class T, class U = T>
+/// Can types `ARITH_LEFT` and `ARITH_RIGHT` be used for basic arithmetic
+/// (addition, subtraction, multiplication) without risk of an exception?
+template <typename ARITH_LEFT, typename ARITH_RIGHT = ARITH_LEFT>
 constexpr bool has_nothrow_arithmetic()
 {
-    T t{};
-    U u{};
+    ARITH_LEFT t{};
+    ARITH_RIGHT u{};
     return noexcept(t + u) && noexcept(t - u) && noexcept(t * u);
 }
 
-/// Can types `T` and `U` be used for division without risk of an exception?
-template<class T, class U = T>
+/// Can types `DIVIDEND` and `DIVISOR` be used for division without
+/// risk of an exception?
+template <typename DIVIDEND, typename DIVISOR = DIVIDEND>
 constexpr bool has_nothrow_division()
 {
-    T t{};
-    U u{};
+    DIVIDEND t{};
+    DIVISOR u{};
     return noexcept(t / u);
 }
 

@@ -20,7 +20,7 @@ using Generator = std::mt19937_64;
 Generator
 construct_generator();
 
-template <class RESULT_TYPE>
+template <typename RESULT_TYPE>
 struct Random_engine
 {
     using result_type = RESULT_TYPE;
@@ -30,7 +30,7 @@ struct Random_engine
     virtual ~Random_engine() = default;
 };
 
-template <class RESULT_TYPE, class ENABLE = void>
+template <typename RESULT_TYPE, typename ENABLE = void>
 struct Distribution
 {
     struct
@@ -41,7 +41,7 @@ struct Distribution
               "or double.";
 };
 
-template <class RESULT_TYPE>
+template <typename RESULT_TYPE>
 class Distribution<
         RESULT_TYPE,
         std::enable_if_t<std::is_integral<RESULT_TYPE>::value>
@@ -70,7 +70,7 @@ public:
 };
 
 
-template <class RESULT_TYPE>
+template <typename RESULT_TYPE>
 class Distribution<
         RESULT_TYPE,
         std::enable_if_t<std::is_floating_point<RESULT_TYPE>::value>>
@@ -93,14 +93,14 @@ public:
     }
 };
 
-template <class RESULT_TYPE>
+template <typename RESULT_TYPE>
 class Pseudo_random_engine
         : public Random_engine<RESULT_TYPE>
 {
 public:
     using result_type = RESULT_TYPE;
 
-    template <class... Args>
+    template <typename... Args>
     Pseudo_random_engine(Args&&... args);
 
     result_type next() override;
@@ -125,7 +125,7 @@ private:
     Generator generator_;
 };
 
-template <class RESULT_TYPE>
+template <typename RESULT_TYPE>
 class Stub_random_engine
         : public Random_engine<RESULT_TYPE>
 {
@@ -178,7 +178,7 @@ private:
 ///
 /// [pseudorandom numbers]:
 ///     <https://en.wikipedia.org/wiki/Pseudorandom_number_generator>
-template <class RESULT_TYPE>
+template <typename RESULT_TYPE>
 class Random_source
 {
 public:
@@ -389,21 +389,21 @@ namespace random {
 using std::begin;
 using std::end;
 
-template <class RESULT_TYPE>
-template <class... Args>
+template <typename RESULT_TYPE>
+template <typename... Args>
 Pseudo_random_engine<RESULT_TYPE>::Pseudo_random_engine(Args&&... args)
         : distribution_{std::forward<Args>(args)...},
           generator_{construct_generator()}
 { }
 
-template <class RESULT_TYPE>
+template <typename RESULT_TYPE>
 RESULT_TYPE
 Pseudo_random_engine<RESULT_TYPE>::next()
 {
     return distribution_(generator_);
 }
 
-template <class RESULT_TYPE>
+template <typename RESULT_TYPE>
 Stub_random_engine<RESULT_TYPE>::Stub_random_engine(container_type&& container)
         : container_(std::move(container)),
           next_(begin(container_))
@@ -414,7 +414,7 @@ Stub_random_engine<RESULT_TYPE>::Stub_random_engine(container_type&& container)
     }
 }
 
-template <class RESULT_TYPE>
+template <typename RESULT_TYPE>
 RESULT_TYPE
 Stub_random_engine<RESULT_TYPE>::next()
 {
@@ -426,39 +426,39 @@ Stub_random_engine<RESULT_TYPE>::next()
 }  // end namespace random
 }  // end namespace detail
 
-template <class RESULT_TYPE>
+template <typename RESULT_TYPE>
 IF_COMPILER(DEFINE_IF)
 Random_source<RESULT_TYPE>::Random_source(result_type min, result_type max)
         : engine_{std::make_unique<Prng>(min, max)}
 { }
 
-template <class RESULT_TYPE>
+template <typename RESULT_TYPE>
 IF_COMPILER(DEFINE_IF)
 Random_source<RESULT_TYPE>::Random_source(result_type limit)
         : engine_{std::make_unique<Prng>(limit)}
 { }
 
-template <class RESULT_TYPE>
+template <typename RESULT_TYPE>
 IF_COMPILER(DEFINE_IF)
 Random_source<RESULT_TYPE>::Random_source(double p_true)
         : engine_{std::make_unique<Prng>(p_true)}
 { }
 
-template <class RESULT_TYPE>
+template <typename RESULT_TYPE>
 void
 Random_source<RESULT_TYPE>::stub_with(std::vector<result_type> values)
 {
     engine_ = std::make_unique<Stub>(std::move(values));
 }
 
-template <class RESULT_TYPE>
+template <typename RESULT_TYPE>
 void
 Random_source<RESULT_TYPE>::stub_with(std::initializer_list<result_type> values)
 {
     stub_with(std::vector<result_type>(values));
 }
 
-template <class RESULT_TYPE>
+template <typename RESULT_TYPE>
 void
 Random_source<RESULT_TYPE>::stub_with(result_type value)
 {

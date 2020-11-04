@@ -328,15 +328,15 @@ public:
     /// Adds to the builder's message. This takes any printable type
     /// and prints it à la `operator<<`. Returns the builder, for call
     /// chaining.
-    template<class T>
-    Builder& add_message(T const& value)
+    template <typename PRINTABLE>
+    Builder& add_message(PRINTABLE const& value)
     {
         message_ << value;
         return *this;
     }
 
     /// Adds to the builder's message. This is an alias for
-    /// add_message(const T&).
+    /// @ref add_message(const PRINTABLE&).
     ///
     /// For example:
     ///
@@ -348,8 +348,8 @@ public:
     ///     return builder.build();
     /// }
     /// ```
-    template<class T>
-    Builder& operator<<(T const& value)
+    template <typename PRINTABLE>
+    Builder& operator<<(PRINTABLE const& value)
     {
         return add_message(value);
     }

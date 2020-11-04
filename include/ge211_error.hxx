@@ -214,8 +214,8 @@ public:
     explicit Log_message(std::string reason,
                          Level level = Level::debug) NOEXCEPT;
 
-    template <class T>
-    Log_message& operator<<(const T& value)
+    template <typename STREAM_INSERTABLE>
+    Log_message& operator<<(STREAM_INSERTABLE const& value)
     {
         if (active_) message_ << value;
         return *this;
