@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rectangle_555',['Rectangle',['../namespacege211_1_1geometry.html#a6070d6748531d25ccc6fdc0c0b096e6b',1,'ge211::geometry']]]
+  ['result_5ftype_2710',['result_type',['../classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88',1,'ge211::Random_source']]]
 ];

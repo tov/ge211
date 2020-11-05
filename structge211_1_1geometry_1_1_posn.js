@@ -1,0 +1,27 @@
+var structge211_1_1geometry_1_1_posn =
+[
+    [ "Coordinate", "structge211_1_1geometry_1_1_posn.html#abf435f7ff17ad97110babdc0cb36f0da", null ],
+    [ "Dims_type", "structge211_1_1geometry_1_1_posn.html#adf326a0230520c53d0d049b7996e34f8", null ],
+    [ "Posn", "structge211_1_1geometry_1_1_posn.html#ac915aba3abcb1af21715fe4998261f74", null ],
+    [ "Posn", "structge211_1_1geometry_1_1_posn.html#a4cd1fc0bf40a3d774434e96a4c9a96c6", null ],
+    [ "Posn", "structge211_1_1geometry_1_1_posn.html#a6ac7c954220374864176b7e2405a69a7", null ],
+    [ "Posn", "structge211_1_1geometry_1_1_posn.html#a40e42e0a5dfcf846725eea0e132bf8d7", null ],
+    [ "down_by", "structge211_1_1geometry_1_1_posn.html#a4137e6615c6833df9338ca62ca88b620", null ],
+    [ "down_left_by", "structge211_1_1geometry_1_1_posn.html#a9aaab81cf28f6d8230917f1a8b81b4cb", null ],
+    [ "down_right_by", "structge211_1_1geometry_1_1_posn.html#afd0293ea549897f9f7c3aff07a257a7c", null ],
+    [ "into", "structge211_1_1geometry_1_1_posn.html#a7d9d609c3d8adc2dc364590919b52b62", null ],
+    [ "left_by", "structge211_1_1geometry_1_1_posn.html#a1c14c1517307adb1530e29c342854583", null ],
+    [ "operator!=", "structge211_1_1geometry_1_1_posn.html#a6ff52b3d4347a6ece8038f697b7f1861", null ],
+    [ "operator+", "structge211_1_1geometry_1_1_posn.html#a9fb488e084695e95b04aac40edb8ccba", null ],
+    [ "operator+=", "structge211_1_1geometry_1_1_posn.html#abbd37f6677a2ac77c04b6750a0d91d6b", null ],
+    [ "operator-", "structge211_1_1geometry_1_1_posn.html#a768a3037048330d67bd94b0a9f231b34", null ],
+    [ "operator-", "structge211_1_1geometry_1_1_posn.html#a81876075688c592b285cd1c81e94271f", null ],
+    [ "operator-=", "structge211_1_1geometry_1_1_posn.html#a0aa41d63481865011f363c2474822148", null ],
+    [ "operator==", "structge211_1_1geometry_1_1_posn.html#a60f36d649d34a6e5f16b7beed96419a5", null ],
+    [ "right_by", "structge211_1_1geometry_1_1_posn.html#ad39d9d4dcab98f7ccaed55525b4d8f5b", null ],
+    [ "up_by", "structge211_1_1geometry_1_1_posn.html#a5ea547ef8a407ed55300ea19028a6972", null ],
+    [ "up_left_by", "structge211_1_1geometry_1_1_posn.html#a93f7c2650319fe26974b8d1630d98bac", null ],
+    [ "up_right_by", "structge211_1_1geometry_1_1_posn.html#a9a0587d5e80180e185668349649f2afa", null ],
+    [ "x", "structge211_1_1geometry_1_1_posn.html#afaf4c505f41c9d6c8408963b4d62a872", null ],
+    [ "y", "structge211_1_1geometry_1_1_posn.html#a6868b0f3e17c825b6d02243d2b1473fe", null ]
+];

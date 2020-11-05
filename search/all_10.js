@@ -1,21 +1,6 @@
 var searchData=
 [
-  ['random_195',['Random',['../classge211_1_1_random.html',1,'Random'],['../classge211_1_1_random.html#a288f955cf834411b32b1ca2780432f27',1,'ge211::Random::Random(Random &amp;)=delete'],['../classge211_1_1_random.html#adafc8f8792a34676726ae63ee404cb0c',1,'ge211::Random::Random(Random &amp;&amp;)=delete']]],
-  ['random_5fbool_196',['random_bool',['../classge211_1_1_random.html#a24c34022698ab572faa24fb04a699b12',1,'ge211::Random']]],
-  ['recolor_197',['recolor',['../classge211_1_1sprites_1_1_rectangle__sprite.html#abc7bf693008a828fd7b68632ffbe4b7b',1,'ge211::sprites::Rectangle_sprite::recolor()'],['../classge211_1_1sprites_1_1_circle__sprite.html#abc7bf693008a828fd7b68632ffbe4b7b',1,'ge211::sprites::Circle_sprite::recolor()']]],
-  ['reconfigure_198',['reconfigure',['../classge211_1_1sprites_1_1_text__sprite.html#afe7c024ae674fec2431b9d3eb9ad4173',1,'ge211::sprites::Text_sprite']]],
-  ['rectangle_199',['Rectangle',['../namespacege211_1_1geometry.html#a6070d6748531d25ccc6fdc0c0b096e6b',1,'ge211::geometry']]],
-  ['rectangle_5fsprite_200',['Rectangle_sprite',['../classge211_1_1sprites_1_1_rectangle__sprite.html',1,'Rectangle_sprite'],['../classge211_1_1sprites_1_1_rectangle__sprite.html#a3dcff78c7d6a0d43fafa74b515395318',1,'ge211::sprites::Rectangle_sprite::Rectangle_sprite()']]],
-  ['red_201',['red',['../classge211_1_1_color.html#aec81eee7c2b1ebff223b1e64568c1c53',1,'ge211::Color']]],
-  ['reset_202',['reset',['../classge211_1_1sprites_1_1_multiplexed__sprite.html#ad20897c5c8bd47f5d4005989bead0e55',1,'ge211::sprites::Multiplexed_sprite::reset()'],['../classge211_1_1time_1_1_timer.html#a591f6ffe6420dd8e563bffcde86a6810',1,'ge211::time::Timer::reset()'],['../classge211_1_1time_1_1_pausable__timer.html#a591f6ffe6420dd8e563bffcde86a6810',1,'ge211::time::Pausable_timer::reset()']]],
-  ['resume_203',['resume',['../classge211_1_1audio_1_1_sound__effect__handle.html#a41de8150eff044a237990c271d57ea27',1,'ge211::audio::Sound_effect_handle::resume()'],['../classge211_1_1time_1_1_pausable__timer.html#a41de8150eff044a237990c271d57ea27',1,'ge211::time::Pausable_timer::resume()']]],
-  ['resume_5fall_5feffects_204',['resume_all_effects',['../classge211_1_1audio_1_1_mixer.html#a27f3a58dd43265a7a40e5608d4bb6330',1,'ge211::audio::Mixer']]],
-  ['resume_5fmusic_205',['resume_music',['../classge211_1_1audio_1_1_mixer.html#a61e224afec653fdb5f9b1e19cadfb9d2',1,'ge211::audio::Mixer']]],
-  ['revalue_206',['revalue',['../structge211_1_1_color_1_1_h_s_v_a.html#a524343e4efbc6320be85755ff05fb01d',1,'ge211::Color::HSVA']]],
-  ['rewind_5fmusic_207',['rewind_music',['../classge211_1_1audio_1_1_mixer.html#a810210b7b1d7fb6be78a0dffb94d4431',1,'ge211::audio::Mixer']]],
-  ['right_208',['right',['../classge211_1_1events_1_1_key.html#ad0c50f1b0995a25c9b4f13b16eeb4d27',1,'ge211::events::Key::right()'],['../classge211_1_1events_1_1_key.html#a1d1cfd8ffb84e947f82999c682b666a7a7c4f29407893c334a6cb7a87bf045c0d',1,'ge211::events::Key::right()'],['../namespacege211_1_1events.html#a7996c6421dbcbb112730003daf99ab94a7c4f29407893c334a6cb7a87bf045c0d',1,'ge211::events::right()']]],
-  ['right_5fby_209',['right_by',['../structge211_1_1geometry_1_1_basic__position.html#a356612663ef3d0b2d4aa559e42241f5f',1,'ge211::geometry::Basic_position']]],
-  ['rotate_5fhue_210',['rotate_hue',['../classge211_1_1_color.html#af3da8f7cc68a887baa57aa309a5cc968',1,'ge211::Color::rotate_hue()'],['../structge211_1_1_color_1_1_h_s_l_a.html#a0ffb9ffcdbd24892ae89588d9b66f5af',1,'ge211::Color::HSLA::rotate_hue()'],['../structge211_1_1_color_1_1_h_s_v_a.html#a35fece7a65212a6514a244f25ef2bc64',1,'ge211::Color::HSVA::rotate_hue()']]],
-  ['rotation_211',['rotation',['../classge211_1_1geometry_1_1_transform.html#a1e7de7869f3a1f94156e47e53b085e43',1,'ge211::geometry::Transform']]],
-  ['run_212',['run',['../classge211_1_1_abstract__game.html#a13a43e6d814de94978c515cb084873b1',1,'ge211::Abstract_game']]]
+  ['queue_777',['queue',['http://en.cppreference.com/w/cpp/container/queue.html',1,'queue'],['http://en.cppreference.com/w/cpp/container/queue/queue.html',1,'std::queue::queue()']]],
+  ['quiet_5fnan_778',['quiet_NaN',['http://en.cppreference.com/w/cpp/types/numeric_limits/quiet_NaN.html',1,'std::numeric_limits']]],
+  ['quit_779',['quit',['../classge211_1_1_abstract__game.html#a2463a3acef2df4c951ce942a3229e44e',1,'ge211::Abstract_game']]]
 ];

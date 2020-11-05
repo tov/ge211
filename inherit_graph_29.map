@@ -1,5 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classge211_1_1sprites_1_1_sprite.html" title="A sprite is an image that knows how to render itself to the screen at a given location,..." alt="" coords="5,5,61,32"/>
-<area shape="rect" id="node2" href="$classge211_1_1sprites_1_1_multiplexed__sprite.html" title="A Sprite that allows switching between other sprites based on the time at rendering." alt="" coords="109,31,236,57"/>
-<area shape="rect" id="node3" href="$classge211_1_1sprites_1_1_sprite.html" title="A sprite is an image that knows how to render itself to the screen at a given location,..." alt="" coords="5,56,61,83"/>
-</map>

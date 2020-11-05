@@ -1,5 +1,5 @@
 <map id="Abstract_game" name="Abstract_game">
-<area shape="rect" id="node1" title="This is the abstract base class for deriving games." alt="" coords="129,124,239,151"/>
-<area shape="rect" id="node2" href="$structge211_1_1geometry_1_1_basic__dimensions.html" title="Represents the dimensions of an object, or more generally, the displacement between two Basic_positio..." alt="" coords="5,5,165,32"/>
-<area shape="rect" id="node3" href="$classge211_1_1_color.html" title="For representing colors." alt="" coords="257,5,311,32"/>
+<area shape="rect" id="node1" title="This is the abstract base class for deriving games." alt="" coords="94,124,205,151"/>
+<area shape="rect" id="node2" href="$structge211_1_1geometry_1_1_dims.html" title=" " alt="" coords="5,5,96,32"/>
+<area shape="rect" id="node3" href="$classge211_1_1_color.html" title="For representing colors." alt="" coords="223,5,276,32"/>
 </map>

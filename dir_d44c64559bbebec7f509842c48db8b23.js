@@ -9,6 +9,7 @@ var dir_d44c64559bbebec7f509842c48db8b23 =
     [ "ge211_event.hxx", "ge211__event_8hxx_source.html", null ],
     [ "ge211_forward.hxx", "ge211__forward_8hxx_source.html", null ],
     [ "ge211_geometry.hxx", "ge211__geometry_8hxx_source.html", null ],
+    [ "ge211_if_cpp.hxx", "ge211__if__cpp_8hxx_source.html", null ],
     [ "ge211_noexcept.hxx", "ge211__noexcept_8hxx_source.html", null ],
     [ "ge211_random.hxx", "ge211__random_8hxx_source.html", null ],
     [ "ge211_render.hxx", "ge211__render_8hxx_source.html", null ],
@@ -16,6 +17,7 @@ var dir_d44c64559bbebec7f509842c48db8b23 =
     [ "ge211_session.hxx", "ge211__session_8hxx_source.html", null ],
     [ "ge211_sprites.hxx", "ge211__sprites_8hxx_source.html", null ],
     [ "ge211_time.hxx", "ge211__time_8hxx_source.html", null ],
+    [ "ge211_type_traits.hxx", "ge211__type__traits_8hxx_source.html", null ],
     [ "ge211_util.hxx", "ge211__util_8hxx_source.html", null ],
     [ "ge211_window.hxx", "ge211__window_8hxx_source.html", null ]
 ];
