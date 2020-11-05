@@ -233,13 +233,21 @@ constexpr bool has_nothrow_division()
 /// Template constant for turning some built-in arithmetic types into
 /// their names via template specialization.
 template <typename>
-static char const* const
-name_of_type = "?";
+struct Name_of_type
+{
+    static constexpr char const* value = "?";
+};
+
+template <typename TYPE>
+char const* name_of_type()
+{
+    return Name_of_type<TYPE>::value;
+}
 
 #define Specialize_name_of_type(Type) \
     template <> \
-    static char const* const \
-    name_of_type<Type> = #Type;
+    struct Name_of_type<Type> \
+    { static constexpr char const* value = #Type; };
 
 Specialize_name_of_type(char)
 Specialize_name_of_type(signed char)

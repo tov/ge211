@@ -926,7 +926,7 @@ template <typename COORDINATE>
 std::ostream& operator<<(std::ostream& out, Dims<COORDINATE> dims)
 {
     return out
-            << "Dims<" << detail::name_of_type<COORDINATE> << ">("
+            << "Dims<" << detail::name_of_type<COORDINATE>() << ">("
             << dims.width << ", " << dims.height << ")";
 }
 
@@ -935,7 +935,7 @@ template <typename COORDINATE>
 std::ostream& operator<<(std::ostream& out, Posn<COORDINATE> p)
 {
     return out
-            << "Posn<" << detail::name_of_type<COORDINATE> << ">("
+            << "Posn<" << detail::name_of_type<COORDINATE>() << ">("
             << p.x << ", " << p.y << ")";
 }
 
@@ -944,7 +944,7 @@ template <typename COORDINATE>
 std::ostream& operator<<(std::ostream& out, Rect<COORDINATE> rect)
 {
     return out
-            << "Rect<" << detail::name_of_type<COORDINATE> << ">("
+            << "Rect<" << detail::name_of_type<COORDINATE>() << ">("
             << rect.x     << ", " << rect.y      << ", "
             << rect.width << ", " << rect.height << ")";
 }
