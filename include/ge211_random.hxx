@@ -231,16 +231,6 @@ public:
     ///
     /// Only defined when @ref result_type is `bool`.
     ///
-    /// ### Errors
-    ///
-    ///  - Throws `ge211::Client_logic_error` if `p_true` is less than 0.0 or
-    ///    greater than 1.0.
-    IF_COMPILER(DECLARE_IF(Is_Same<result_type, bool>))
-    explicit Random_source(double p_true);
-
-
-    /// Returns the next random value from this source.
-    ///
     /// \example
     ///
     /// ```cxx
@@ -256,6 +246,25 @@ public:
     ///     std::cout << "All three flips were tails!\n";
     /// }
     /// ```
+    ///
+    /// ### Errors
+    ///
+    ///  - Throws `ge211::Client_logic_error` if `p_true` is less than 0.0 or
+    ///    greater than 1.0.
+    IF_COMPILER(DECLARE_IF(Is_Same<result_type, bool>))
+    explicit Random_source(double p_true);
+
+
+    /// Returns the next random value from this source.
+    ///
+    /// \example
+    ///
+    /// ```cxx
+    /// ge211::Random_source<int> one_to_ten(1, 10);
+    ///
+    /// int choice = one_to_ten.next();
+    /// std::cout << "The random number is " << choice << "\n";
+    /// ```
     result_type next()
     {
         return engine_->next();
@@ -264,26 +273,26 @@ public:
 
     /// Returns the next random value from this source.
     ///
-    /// (This is an alias for Random_source::next().
+    /// (This is an alias for @ref Random_source::next().)
     ///
     /// \example
     ///
     /// ```cxx
-    /// void try_it(size_t n_trials)
+    /// void try_it(std::size_t n_trials)
     /// {
-    ///     ge211::Random_source<bool> fair_coin{0.5};
-    ///     size_t heads_count = 0;
+    ///     ge211::Random_source<bool> fair_coin(0.5);
+    ///     std::size_t heads_count = 0;
     ///
-    ///     for (size_t i = 0; i < n_trials; ++i) {
-    ///         if (fail_coin()) {
+    ///     for (std::size_t i = 0; i < n_trials; ++i) {
+    ///         if (fair_coin()) {
     ///             ++heads_count;
     ///         }
     ///     }
     ///
     ///     double heads_frequency = heads_count / (double) n_trials;
     ///
-    ///     if (heads_frequency < 0.25 || heads_frequecny > 0.75) {
-    ///         std::cout << "Doesn't seem so fair.\n";
+    ///     if (heads_frequency < 0.25 || heads_frequency > 0.75) {
+    ///         std::cerr << "Doesn't seem so fair!\n";
     ///     }
     /// }
     /// ```
@@ -351,9 +360,10 @@ public:
     /// After passing in a vector of values, the %Random_source will
     /// return those values in order, and then cycle through them repeatedly
     /// if necessary. This works the same as
-    /// @ref stub_with(std::initializer_list<result_type>,
+    /// @ref stub_with(std::initializer_list<result_type>),
     /// so you should see / that function for an example.
     void stub_with(std::vector<result_type> values);
+
 
     /// Stubs this @ref Random_source to always return the given value.
     ///
@@ -363,11 +373,13 @@ public:
     /// @ref stub_with(std::vector<result_type>).
     void stub_with(result_type value);
 
-    /// @ref Random_source%s cannot be move-constructed, because they
-    /// cannot be moved.
+
+    /// @ref Random_source%s cannot be move-constructed because they
+    /// cannot be moved or copied.
     Random_source(Random_source&& other) = delete;
 
-    /// @ref Random_source%s cannot be moved.
+    /// @ref Random_source%s cannot be move-assigned because they cannot
+    /// be moved or copied.
     Random_source& operator=(Random_source&& other) = delete;
 
 private:
