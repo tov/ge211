@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ge211: /Users/tov/school/cs211/lib/dot-cs211/lib/ge211/include/ge211_geometry.hxx Source File</title>
+<title>ge211: /Users/tov/school/cs211/dev/ge211/include/ge211_geometry.hxx Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -32,7 +32,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2020.8.0</span>
+   &#160;<span id="projectnumber">2020.8.1</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -711,7 +711,7 @@ $(document).ready(function(){initNavTree('ge211__geometry_8hxx_source.html','');
 <div class="line"><a name="l00926"></a><span class="lineno"><a class="line" href="namespacege211_1_1geometry.html#aa32bfc8d780a60f9e87d0f6a79b8b11d">  926</a></span>&#160;<a class="codeRef" href="http://en.cppreference.com/w/cpp/io/basic_ostream.html">std::ostream</a>&amp; <a class="code" href="namespacege211_1_1geometry.html#aa32bfc8d780a60f9e87d0f6a79b8b11d">operator&lt;&lt;</a>(<a class="codeRef" href="http://en.cppreference.com/w/cpp/io/basic_ostream.html">std::ostream</a>&amp; out, <a class="code" href="structge211_1_1geometry_1_1_dims.html">Dims&lt;COORDINATE&gt;</a> dims)</div>
 <div class="line"><a name="l00927"></a><span class="lineno">  927</span>&#160;{</div>
 <div class="line"><a name="l00928"></a><span class="lineno">  928</span>&#160;    <span class="keywordflow">return</span> out</div>
-<div class="line"><a name="l00929"></a><span class="lineno">  929</span>&#160;            &lt;&lt; <span class="stringliteral">&quot;Dims&lt;&quot;</span> &lt;&lt; detail::name_of_type&lt;COORDINATE&gt; &lt;&lt; <span class="stringliteral">&quot;&gt;(&quot;</span></div>
+<div class="line"><a name="l00929"></a><span class="lineno">  929</span>&#160;            &lt;&lt; <span class="stringliteral">&quot;Dims&lt;&quot;</span> &lt;&lt; detail::name_of_type&lt;COORDINATE&gt;() &lt;&lt; <span class="stringliteral">&quot;&gt;(&quot;</span></div>
 <div class="line"><a name="l00930"></a><span class="lineno">  930</span>&#160;            &lt;&lt; dims.<a class="code" href="structge211_1_1geometry_1_1_dims.html#afacc5a60c416c4e435b3e7b7634e11d9">width</a> &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; dims.<a class="code" href="structge211_1_1geometry_1_1_dims.html#a050576b0776777b293a8aa065f369292">height</a> &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
 <div class="line"><a name="l00931"></a><span class="lineno">  931</span>&#160;}</div>
 <div class="line"><a name="l00932"></a><span class="lineno">  932</span>&#160; </div>
@@ -719,7 +719,7 @@ $(document).ready(function(){initNavTree('ge211__geometry_8hxx_source.html','');
 <div class="line"><a name="l00935"></a><span class="lineno"><a class="line" href="namespacege211_1_1geometry.html#a09b310c768105f5cb63e110f514dab12">  935</a></span>&#160;<a class="codeRef" href="http://en.cppreference.com/w/cpp/io/basic_ostream.html">std::ostream</a>&amp; <a class="code" href="namespacege211_1_1geometry.html#aa32bfc8d780a60f9e87d0f6a79b8b11d">operator&lt;&lt;</a>(<a class="codeRef" href="http://en.cppreference.com/w/cpp/io/basic_ostream.html">std::ostream</a>&amp; out, <a class="code" href="structge211_1_1geometry_1_1_posn.html">Posn&lt;COORDINATE&gt;</a> p)</div>
 <div class="line"><a name="l00936"></a><span class="lineno">  936</span>&#160;{</div>
 <div class="line"><a name="l00937"></a><span class="lineno">  937</span>&#160;    <span class="keywordflow">return</span> out</div>
-<div class="line"><a name="l00938"></a><span class="lineno">  938</span>&#160;            &lt;&lt; <span class="stringliteral">&quot;Posn&lt;&quot;</span> &lt;&lt; detail::name_of_type&lt;COORDINATE&gt; &lt;&lt; <span class="stringliteral">&quot;&gt;(&quot;</span></div>
+<div class="line"><a name="l00938"></a><span class="lineno">  938</span>&#160;            &lt;&lt; <span class="stringliteral">&quot;Posn&lt;&quot;</span> &lt;&lt; detail::name_of_type&lt;COORDINATE&gt;() &lt;&lt; <span class="stringliteral">&quot;&gt;(&quot;</span></div>
 <div class="line"><a name="l00939"></a><span class="lineno">  939</span>&#160;            &lt;&lt; p.<a class="code" href="structge211_1_1geometry_1_1_posn.html#afaf4c505f41c9d6c8408963b4d62a872">x</a> &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; p.<a class="code" href="structge211_1_1geometry_1_1_posn.html#a6868b0f3e17c825b6d02243d2b1473fe">y</a> &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
 <div class="line"><a name="l00940"></a><span class="lineno">  940</span>&#160;}</div>
 <div class="line"><a name="l00941"></a><span class="lineno">  941</span>&#160; </div>
@@ -727,7 +727,7 @@ $(document).ready(function(){initNavTree('ge211__geometry_8hxx_source.html','');
 <div class="line"><a name="l00944"></a><span class="lineno"><a class="line" href="namespacege211_1_1geometry.html#af6ac0dcc48c7fc263144bafe4814bdeb">  944</a></span>&#160;<a class="codeRef" href="http://en.cppreference.com/w/cpp/io/basic_ostream.html">std::ostream</a>&amp; <a class="code" href="namespacege211_1_1geometry.html#aa32bfc8d780a60f9e87d0f6a79b8b11d">operator&lt;&lt;</a>(<a class="codeRef" href="http://en.cppreference.com/w/cpp/io/basic_ostream.html">std::ostream</a>&amp; out, <a class="code" href="structge211_1_1geometry_1_1_rect.html">Rect&lt;COORDINATE&gt;</a> rect)</div>
 <div class="line"><a name="l00945"></a><span class="lineno">  945</span>&#160;{</div>
 <div class="line"><a name="l00946"></a><span class="lineno">  946</span>&#160;    <span class="keywordflow">return</span> out</div>
-<div class="line"><a name="l00947"></a><span class="lineno">  947</span>&#160;            &lt;&lt; <span class="stringliteral">&quot;Rect&lt;&quot;</span> &lt;&lt; detail::name_of_type&lt;COORDINATE&gt; &lt;&lt; <span class="stringliteral">&quot;&gt;(&quot;</span></div>
+<div class="line"><a name="l00947"></a><span class="lineno">  947</span>&#160;            &lt;&lt; <span class="stringliteral">&quot;Rect&lt;&quot;</span> &lt;&lt; detail::name_of_type&lt;COORDINATE&gt;() &lt;&lt; <span class="stringliteral">&quot;&gt;(&quot;</span></div>
 <div class="line"><a name="l00948"></a><span class="lineno">  948</span>&#160;            &lt;&lt; rect.<a class="code" href="structge211_1_1geometry_1_1_rect.html#afaf4c505f41c9d6c8408963b4d62a872">x</a>     &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; rect.<a class="code" href="structge211_1_1geometry_1_1_rect.html#a6868b0f3e17c825b6d02243d2b1473fe">y</a>      &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
 <div class="line"><a name="l00949"></a><span class="lineno">  949</span>&#160;            &lt;&lt; rect.<a class="code" href="structge211_1_1geometry_1_1_rect.html#afacc5a60c416c4e435b3e7b7634e11d9">width</a> &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; rect.<a class="code" href="structge211_1_1geometry_1_1_rect.html#a050576b0776777b293a8aa065f369292">height</a> &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
 <div class="line"><a name="l00950"></a><span class="lineno">  950</span>&#160;}</div>

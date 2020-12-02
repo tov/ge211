@@ -32,7 +32,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2020.8.0</span>
+   &#160;<span id="projectnumber">2020.8.1</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -104,12 +104,12 @@ $(document).ready(function(){initNavTree('classge211_1_1audio_1_1_mixer.html',''
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The entity that coordinates playing all audio tracks. </p>
-<p>The mixer is the center of ge211's audio facilities. It is used to load audio files as <a class="el" href="classge211_1_1audio_1_1_music__track.html">Music_track</a>s and <a class="el" href="classge211_1_1audio_1_1_sound__effect.html">Sound_effect</a>s, and to play and control them. However, <a class="el" href="classge211_1_1audio_1_1_mixer.html">Mixer</a> itself has no public constructor, and you will not construct your own. Rather, a <a class="el" href="classge211_1_1audio_1_1_mixer.html">Mixer</a> is constructed, if possible, when <a class="el" href="classge211_1_1_abstract__game.html">Abstract_game</a> is initialized, and this mixer can be accessed by your game via the <a class="el" href="classge211_1_1_abstract__game.html#ac2984a24279136313af128c084eeb9da">Abstract_game::mixer() const</a> member function. The member function returns an uncopyable reference.</p>
+<p>The mixer is the center of ge211's audio facilities. It is used to load audio files as <a class="el" href="classge211_1_1audio_1_1_music__track.html">Music_track</a>s and <a class="el" href="classge211_1_1audio_1_1_sound__effect.html">Sound_effect</a>s, and to play and control them. However, <a class="el" href="classge211_1_1audio_1_1_mixer.html">Mixer</a> itself has no public constructor, and you will not construct your own. Rather, a <a class="el" href="classge211_1_1audio_1_1_mixer.html">Mixer</a> is constructed, if possible, when <a class="el" href="classge211_1_1_abstract__game.html">Abstract_game</a> is initialized, and this mixer can be accessed by your game via the <a class="el" href="classge211_1_1_abstract__game.html#ac2984a24279136313af128c084eeb9da">Abstract_game::mixer</a> member function. The member function returns a reference to an uncopyable object.</p>
 <p>This mixer has one music channel, and some fixed number (usually 8) of sound effects channels. This means that it can play one <a class="el" href="classge211_1_1audio_1_1_music__track.html">Music_track</a> and up to (usually) 8 <a class="el" href="classge211_1_1audio_1_1_sound__effect.html">Sound_effect</a>s simultaneously.</p>
-<p>For playing background music, one <a class="el" href="classge211_1_1audio_1_1_music__track.html">Music_track</a> can be <em>attached</em> to the mixer at any given time, using <a class="el" href="classge211_1_1audio_1_1_mixer.html#a5e4ec9c6d45c070e1393e4618f9ef8b2">Mixer::attach_music(Music_track)</a>. Once a <a class="el" href="classge211_1_1audio_1_1_music__track.html">Music_track</a> is attached, it can be played with Mixer::resume(Duration) and paused with <a class="el" href="classge211_1_1audio_1_1_mixer.html#a719fb22740078909c02b8ceae673dc49">Mixer::pause_music(Duration)</a>. A <a class="el" href="classge211_1_1audio_1_1_music__track.html">Music_track</a> can be both attached and played with <a class="el" href="classge211_1_1audio_1_1_mixer.html#a2838a830ec261732a92d6661e8f7896d">Mixer::play_music(Music_track)</a>. The music channel is always in one of four states, of type <a class="el" href="classge211_1_1audio_1_1_mixer.html#a5d74787dedbc4e11c1ab15bf487e61f8">audio::Mixer::State</a>, which can be retrieved by <a class="el" href="classge211_1_1audio_1_1_mixer.html#a3947f21f830ecb981cb8a3f422ded52a">Mixer::get_music_state() const</a>. Note that the validity of music operations depends on what state the mixer's music channel is in. For example, it is an error to attach a <a class="el" href="classge211_1_1audio_1_1_music__track.html">Music_track</a> to the mixer when music is already playing or fading out.</p>
-<p>For playing sound effects, multiple <a class="el" href="classge211_1_1audio_1_1_sound__effect.html">Sound_effect</a>s can be attached to the mixer simultaneously. A <a class="el" href="classge211_1_1audio_1_1_sound__effect.html">Sound_effect</a> is attached and played using the <a class="el" href="classge211_1_1audio_1_1_mixer.html#a44e4d21a97285323b523a94380561220">Mixer::play_effect</a>(<a class="el" href="classge211_1_1audio_1_1_sound__effect.html" title="A sound effect track, which can be attached to a Mixer channel and played.">Sound_effect</a>, double) member function, which also allows specifying the volume of the sound effect. If nothing further is done, the sound effect plays to completion and then detaches, making room to attach more sound effects; however, <a class="el" href="classge211_1_1audio_1_1_mixer.html#a44e4d21a97285323b523a94380561220">Mixer::play_effect(Sound_effect, double)</a> returns a <a class="el" href="classge211_1_1audio_1_1_sound__effect__handle.html">Sound_effect_handle</a>, which can be used to control the sound effect while it is playing as well. </p>
+<p>For playing background music, one <a class="el" href="classge211_1_1audio_1_1_music__track.html">Music_track</a> can be <em>attached</em> to the mixer at any given time, using <a class="el" href="classge211_1_1audio_1_1_mixer.html#a5e4ec9c6d45c070e1393e4618f9ef8b2">Mixer::attach_music</a>. Once a <a class="el" href="classge211_1_1audio_1_1_music__track.html">Music_track</a> is attached, it can be played with <a class="el" href="classge211_1_1audio_1_1_mixer.html#a61e224afec653fdb5f9b1e19cadfb9d2">Mixer::resume_music</a> and paused with <a class="el" href="classge211_1_1audio_1_1_mixer.html#a719fb22740078909c02b8ceae673dc49">Mixer::pause_music</a>. A <a class="el" href="classge211_1_1audio_1_1_music__track.html">Music_track</a> can be both attached and played in one step with <a class="el" href="classge211_1_1audio_1_1_mixer.html#a2838a830ec261732a92d6661e8f7896d">Mixer::play_music</a>. The music channel is always in one of four states, of type <a class="el" href="classge211_1_1audio_1_1_mixer.html#a5d74787dedbc4e11c1ab15bf487e61f8">audio::Mixer::State</a>, which can be retrieved by <a class="el" href="classge211_1_1audio_1_1_mixer.html#a3947f21f830ecb981cb8a3f422ded52a">Mixer::get_music_state</a>. Note that the validity of music operations depends on what state the mixer's music channel is in. For example, it is an error to attach a <a class="el" href="classge211_1_1audio_1_1_music__track.html">Music_track</a> to the mixer when music is already playing or fading out.</p>
+<p>For playing sound effects, multiple <a class="el" href="classge211_1_1audio_1_1_sound__effect.html">Sound_effect</a>s can be attached to the mixer simultaneously. A <a class="el" href="classge211_1_1audio_1_1_sound__effect.html">Sound_effect</a> is attached and played using the <a class="el" href="classge211_1_1audio_1_1_mixer.html#a44e4d21a97285323b523a94380561220">Mixer::play_effect</a> member function, which also allows specifying the volume of the sound effect. If nothing further is done, the sound effect plays to completion and then detaches, making room to attach more sound effects; however, <a class="el" href="classge211_1_1audio_1_1_mixer.html#a44e4d21a97285323b523a94380561220">Mixer::play_effect</a> returns a <a class="el" href="classge211_1_1audio_1_1_sound__effect__handle.html">Sound_effect_handle</a>, which can be used to control the sound effect while it is playing as well. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00189">189</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00190">190</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -159,7 +159,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr><td colspan="2"><div class="groupHeader">Playing sound effects</div></td></tr>
 <tr class="memitem:abe0697d7a8c4384c2a8396e4f11fd7a1"><td class="memItemLeft" align="right" valign="top"><a id="abe0697d7a8c4384c2a8396e4f11fd7a1"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1audio_1_1_mixer.html#abe0697d7a8c4384c2a8396e4f11fd7a1">available_effect_channels</a> () const</td></tr>
-<tr class="memdesc:abe0697d7a8c4384c2a8396e4f11fd7a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">How many effect channels are currently unused? If this is positive, then we can play an additional sound effect with <a class="el" href="classge211_1_1audio_1_1_mixer.html#a44e4d21a97285323b523a94380561220" title="Plays the given effect track on this mixer, at the specified volume.">Mixer::play_effect(Sound_effect, double)</a>. <br /></td></tr>
+<tr class="memdesc:abe0697d7a8c4384c2a8396e4f11fd7a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">How many effect channels are currently unused? If this is positive, then we can play an additional sound effect with <a class="el" href="classge211_1_1audio_1_1_mixer.html#a44e4d21a97285323b523a94380561220">Mixer::play_effect</a>. <br /></td></tr>
 <tr class="separator:abe0697d7a8c4384c2a8396e4f11fd7a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44e4d21a97285323b523a94380561220"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classge211_1_1audio_1_1_sound__effect__handle.html">Sound_effect_handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1audio_1_1_mixer.html#a44e4d21a97285323b523a94380561220">play_effect</a> (<a class="el" href="classge211_1_1audio_1_1_sound__effect.html">Sound_effect</a> effect, double volume=1.0)</td></tr>
 <tr class="memdesc:a44e4d21a97285323b523a94380561220"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plays the given effect track on this mixer, at the specified volume.  <a href="classge211_1_1audio_1_1_mixer.html#a44e4d21a97285323b523a94380561220">More...</a><br /></td></tr>
@@ -230,7 +230,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00198">198</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00199">199</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
 
 </div>
 </div>
@@ -289,13 +289,13 @@ Preconditions</h4>
 <p>Returns the current state of the attached music, if any. </p>
 <p>The state changes in only three ways:</p>
 <ol type="1">
-<li>In response to client actions, for example, Mixer::unpause(Duration) changes the state from <code>paused</code> to <code>playing</code></li>
+<li>In response to client actions, for example, <a class="el" href="classge211_1_1audio_1_1_mixer.html#a61e224afec653fdb5f9b1e19cadfb9d2">Mixer::resume_music</a> changes the state from <code>paused</code> to <code>playing</code></li>
 <li>When a playing track ends, it changes from <code>playing</code> to <code>paused</code>.</li>
 <li>When a pause-with-fade-out ends, it changes from <code>fading_out</code> to <code>paused</code>.</li>
 </ol>
 <p>Cases 2 and 3 happen only between frames, and not asynchronously while computing the next frame. This means that after checking the result of <code><a class="el" href="classge211_1_1audio_1_1_mixer.html#a3947f21f830ecb981cb8a3f422ded52a" title="Returns the current state of the attached music, if any.">get_music_state()</a></code> const, that state continues to hold, and can be relied on, at least until the end of the frame, unless the client requests that it be changed (case 1). </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00284">284</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00285">285</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
 
 </div>
 </div>
@@ -315,7 +315,7 @@ Preconditions</h4>
 </div><div class="memdoc">
 
 <p>Returns the music volume as a number from 0.0 to 1.0. </p>
-<p>Initially this will be 1.0, but you can lower it with <a class="el" href="classge211_1_1audio_1_1_mixer.html#a0ae3b978f05c3ba7468f2a0509413b30" title="Sets the music volume, on a scale from 0.0 to 1.0.">Mixer::set_music_volume(double)</a>. </p>
+<p>Initially this will be 1.0, but you can lower it with <a class="el" href="classge211_1_1audio_1_1_mixer.html#a0ae3b978f05c3ba7468f2a0509413b30">Mixer::set_music_volume</a>. </p>
 
 <p class="definition">Definition at line <a class="el" href="ge211__audio_8cxx_source.html#l00422">422</a> of file <a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a>.</p>
 
@@ -347,7 +347,7 @@ Preconditions</h4>
 <p>Returns whether the mixer is enabled. </p>
 <p>If it is then we can play audio, but if it isn't, audio operations will fail. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00214">214</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__audio_8hxx_source.html#l00215">215</a> of file <a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a>.</p>
 
 </div>
 </div>
@@ -434,7 +434,7 @@ Preconditions</h4>
 </div><div class="memdoc">
 
 <p>Attaches the given music track to this mixer and starts it playing. </p>
-<p>Equivalent to <a class="el" href="classge211_1_1audio_1_1_mixer.html#a5e4ec9c6d45c070e1393e4618f9ef8b2" title="Attaches the given music track to this mixer.">Mixer::attach_music(Music_track)</a> followed by Mixer::unpause_music(Duration).</p>
+<p>Equivalent to <a class="el" href="classge211_1_1audio_1_1_mixer.html#a5e4ec9c6d45c070e1393e4618f9ef8b2">Mixer::attach_music</a> followed by <a class="el" href="classge211_1_1audio_1_1_mixer.html#a61e224afec653fdb5f9b1e19cadfb9d2">Mixer::resume_music</a>.</p>
 <h4><a class="anchor" id="autotoc_md0"></a>
 Preconditions</h4>
 <ul>
@@ -536,8 +536,8 @@ Preconditions</h4>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/tov/school/cs211/lib/dot-cs211/lib/ge211/include/<a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a></li>
-<li>/Users/tov/school/cs211/lib/dot-cs211/lib/ge211/src/<a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a></li>
+<li>/Users/tov/school/cs211/dev/ge211/include/<a class="el" href="ge211__audio_8hxx_source.html">ge211_audio.hxx</a></li>
+<li>/Users/tov/school/cs211/dev/ge211/src/<a class="el" href="ge211__audio_8cxx_source.html">ge211_audio.cxx</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

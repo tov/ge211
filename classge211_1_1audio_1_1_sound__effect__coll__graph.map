@@ -1,4 +1,4 @@
 <map id="Sound_effect" name="Sound_effect">
 <area shape="rect" id="node1" title="A sound effect track, which can be attached to a Mixer channel and played." alt="" coords="5,80,104,107"/>
-<area shape="rect" id="node2" href="$classge211_1_1audio_1_1_audio__clip.html" title="Abstract base class for classes that load audio data, Music_track and Sound_effect." alt="" coords="13,5,96,32"/>
+<area shape="rect" id="node2" href="$classge211_1_1audio_1_1_audio__clip.html" title="Common interface to classes that load audio data, Music_track and Sound_effect." alt="" coords="13,5,96,32"/>
 </map>

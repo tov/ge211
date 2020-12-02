@@ -3,7 +3,7 @@ var searchData=
   ['make_5fsigned_1508',['make_signed',['http://en.cppreference.com/w/cpp/types/make_signed.html',1,'std']]],
   ['make_5funsigned_1509',['make_unsigned',['http://en.cppreference.com/w/cpp/types/make_unsigned.html',1,'std']]],
   ['map_1510',['map',['http://en.cppreference.com/w/cpp/container/map.html',1,'std']]],
-  ['mask_1511',['mask',['http://en.cppreference.com/w/cpp/locale/ctype_base.html',1,'ctype::mask'],['http://en.cppreference.com/w/cpp/locale/ctype_base.html',1,'ctype_base::mask'],['http://en.cppreference.com/w/cpp/locale/ctype_base.html',1,'ctype_byname::mask']]],
+  ['mask_1511',['mask',['http://en.cppreference.com/w/cpp/locale/ctype_base.html',1,'ctype::mask'],['http://en.cppreference.com/w/cpp/locale/ctype_base.html',1,'ctype_byname::mask'],['http://en.cppreference.com/w/cpp/locale/ctype_base.html',1,'ctype_base::mask']]],
   ['match_5fresults_1512',['match_results',['http://en.cppreference.com/w/cpp/regex/match_results.html',1,'std']]],
   ['max_5falign_5ft_1513',['max_align_t',['http://en.cppreference.com/w/cpp/types/max_align_t.html',1,'std']]],
   ['mbstate_5ft_1514',['mbstate_t',['http://en.cppreference.com/w/cpp/string/multibyte/mbstate_t.html',1,'std']]],

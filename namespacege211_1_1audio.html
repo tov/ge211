@@ -32,7 +32,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2020.8.0</span>
+   &#160;<span id="projectnumber">2020.8.1</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -102,12 +102,12 @@ $(document).ready(function(){initNavTree('namespacege211_1_1audio.html',''); ini
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Audio facilities, for playing music and sound effects. </p>
-<p>All audio facilities are accessed via the <a class="el" href="classge211_1_1audio_1_1_mixer.html" title="The entity that coordinates playing all audio tracks.">Mixer</a>, which is in turn accessed via the <a class="el" href="classge211_1_1_abstract__game.html#ac2984a24279136313af128c084eeb9da" title="Gets access to the audio mixer, which can be used to play music and sound effects.">Abstract_game::mixer() const </a>member function of <a class="el" href="classge211_1_1_abstract__game.html" title="This is the abstract base class for deriving games.">Abstract_game</a>. If the <a class="el" href="classge211_1_1audio_1_1_mixer.html" title="The entity that coordinates playing all audio tracks.">Mixer</a> is enabled (and it may not be), then it can be used to load audio files as <a class="el" href="classge211_1_1audio_1_1_music__track.html" title="A music track, which can be attached to the Mixer and played.">Music_track</a>s and <a class="el" href="classge211_1_1audio_1_1_sound__effect.html" title="A sound effect track, which can be attached to a Mixer channel and played.">Sound_effect</a>s. The former is for playing continuous background music, whereas the latter is for adding sound effects. See the <a class="el" href="classge211_1_1audio_1_1_mixer.html" title="The entity that coordinates playing all audio tracks.">Mixer</a> class documentation for more. </p>
+<p>All audio facilities are accessed via the <a class="el" href="classge211_1_1audio_1_1_mixer.html" title="The entity that coordinates playing all audio tracks.">Mixer</a>, which is in turn accessed via the <a class="el" href="classge211_1_1_abstract__game.html#ac2984a24279136313af128c084eeb9da">Abstract_game::mixer</a> member function of the <a class="el" href="classge211_1_1_abstract__game.html">Abstract_game</a> class. If the mixer is enabled (it may not be—check by calling <a class="el" href="classge211_1_1audio_1_1_mixer.html#a6507f40ddf408e1f124cb84fa5cbfd1e">Mixer::is_enabled</a>), then it can be used to load audio files as <a class="el" href="classge211_1_1audio_1_1_music__track.html">Music_track</a>s and <a class="el" href="classge211_1_1audio_1_1_sound__effect.html">Sound_effect</a>s. The former is for playing continuous background music, whereas the latter is for adding sound effects. See the <a class="el" href="classge211_1_1audio_1_1_mixer.html">Mixer</a> class documentation for more. </p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1audio_1_1_audio__clip.html">Audio_clip</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base class for classes that load audio data, <a class="el" href="classge211_1_1audio_1_1_music__track.html" title="A music track, which can be attached to the Mixer and played.">Music_track</a> and <a class="el" href="classge211_1_1audio_1_1_sound__effect.html" title="A sound effect track, which can be attached to a Mixer channel and played.">Sound_effect</a>.  <a href="classge211_1_1audio_1_1_audio__clip.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Common interface to classes that load audio data, <a class="el" href="classge211_1_1audio_1_1_music__track.html">Music_track</a> and <a class="el" href="classge211_1_1audio_1_1_sound__effect.html">Sound_effect</a>.  <a href="classge211_1_1audio_1_1_audio__clip.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1audio_1_1_mixer.html">Mixer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The entity that coordinates playing all audio tracks.  <a href="classge211_1_1audio_1_1_mixer.html#details">More...</a><br /></td></tr>

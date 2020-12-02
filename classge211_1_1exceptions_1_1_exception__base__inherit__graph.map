@@ -2,7 +2,7 @@
 <area shape="rect" id="node1" title="The root of the ge211 exception hierarchy." alt="" coords="105,80,219,107"/>
 <area shape="rect" id="node3" href="$classge211_1_1exceptions_1_1_client__logic__error.html" title="An exception that indicates that a logic error was performed by the client." alt="" coords="26,155,149,181"/>
 <area shape="rect" id="node5" href="$classge211_1_1exceptions_1_1_environment__error.html" title="Indicates that an error was encountered by the game engine or in the client&#39;s environment." alt="" coords="179,155,307,181"/>
-<area shape="rect" id="node2" href="/Users/tov/school/cs211/lib/dot-cs211/lib/ge211/build/doc/src/cppreference.xml$cpp/error/exception.html" title=" " alt="" coords="123,5,201,32"/>
+<area shape="rect" id="node2" href="/Users/tov/school/cs211/dev/ge211/cmake-build-debug/doc/src/cppreference.xml$cpp/error/exception.html" title=" " alt="" coords="123,5,201,32"/>
 <area shape="rect" id="node4" href="$classge211_1_1exceptions_1_1_session__needed__error.html" title="An exception thrown when the client attempts to perform an action that requires a GE211 session befor..." alt="" coords="5,229,156,256"/>
 <area shape="rect" id="node6" href="$classge211_1_1exceptions_1_1_ge211__logic__error.html" title="Indicates a condition unexpected by ge211, that appears to break its invariants." alt="" coords="180,229,307,256"/>
 <area shape="rect" id="node7" href="$classge211_1_1exceptions_1_1_host__error.html" title="Indicates an exception from the host environment being passed along by ge211." alt="" coords="331,229,414,256"/>
