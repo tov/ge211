@@ -13,16 +13,18 @@ namespace ge211 {
 /// Audio facilities, for playing music and sound effects.
 ///
 /// All audio facilities are accessed via the Mixer, which is in turn
-/// accessed via the Abstract_game::mixer() const member function of
-/// Abstract_game. If the Mixer is enabled (and it may not be), then it
-/// can be used to load audio files as Music_track%s and Sound_effect%s.
-/// The former is for playing continuous background music, whereas the
-/// latter is for adding sound effects. See the Mixer class documentation
+/// accessed via the @ref Abstract_game::mixer member function of the
+/// @ref Abstract_game class. If the mixer is enabled (it may not be—check
+/// by calling @ref Mixer::is_enabled), then it
+/// can be used to load audio files as @ref Music_track%s and
+/// @ref Sound_effect%s. The former is for playing continuous background music,
+/// whereas the
+/// latter is for adding sound effects. See the @ref Mixer class documentation
 /// for more.
 namespace audio {
 
-/// Abstract base class for classes that load audio data, Music_track and
-/// Sound_effect.
+/// Common interface to classes that load audio data, @ref Music_track and
+/// @ref Sound_effect.
 class Audio_clip
 {
     friend Music_track;  // derived class
@@ -77,8 +79,8 @@ private:
 /// Note that Music_track has few public member functions. However, a
 /// music track can be passed to these Mixer member functions to play it:
 ///
-///  - Mixer::play_music(Music_track)
-///  - Mixer::attach_music(Music_track)
+///  - @ref Mixer::play_music(Music_track)
+///  - @ref Mixer::attach_music(Music_track)
 ///
 /// Note also that the mixer can only play one music track at a time.
 class Music_track : public Audio_clip
@@ -118,8 +120,7 @@ private:
 ///
 /// Note that Sound_effect has few public member functions. However, an
 /// effect track can be passed to the Mixer member function
-/// Mixer::play_effect(Sound_effect, double)
-/// to play it.
+/// @ref Mixer::play_effect to play it.
 class Sound_effect : public Audio_clip
 {
     friend Mixer;
@@ -155,8 +156,8 @@ private:
 /// constructor, and you will not construct your own. Rather, a @ref
 /// Mixer is constructed, if possible, when @ref Abstract_game is
 /// initialized, and this mixer can be accessed by your game via the
-/// @ref Abstract_game::mixer() const member function. The member
-/// function returns an uncopyable reference.
+/// @ref Abstract_game::mixer member function. The member
+/// function returns a reference to an uncopyable object.
 ///
 /// This mixer has one music channel, and some fixed number (usually 8)
 /// of sound effects channels. This means that it can play one @ref
@@ -164,14 +165,14 @@ private:
 /// simultaneously.
 ///
 /// For playing background music, one @ref Music_track can be *attached*
-/// to the mixer at any given time, using @ref
-/// Mixer::attach_music(Music_track). Once a @ref Music_track is
-/// attached, it can be played with @ref Mixer::resume(Duration) and
-/// paused with @ref Mixer::pause_music(Duration). A @ref Music_track
-/// can be both attached and played with @ref
-/// Mixer::play_music(Music_track). The music channel is always in one
+/// to the mixer at any given time, using @ref Mixer::attach_music.
+/// Once a @ref Music_track is
+/// attached, it can be played with @ref Mixer::resume_music and
+/// paused with @ref Mixer::pause_music. A @ref Music_track
+/// can be both attached and played in one step with @ref
+/// Mixer::play_music. The music channel is always in one
 /// of four states, of type @ref audio::Mixer::State, which can be
-/// retrieved by @ref Mixer::get_music_state() const. Note that the
+/// retrieved by @ref Mixer::get_music_state. Note that the
 /// validity of music operations depends on what state the mixer's music
 /// channel is in. For example, it is an error to attach a @ref
 /// Music_track to the mixer when music is already playing or fading
@@ -179,11 +180,11 @@ private:
 ///
 /// For playing sound effects, multiple @ref Sound_effect%s can be
 /// attached to the mixer simultaneously. A @ref Sound_effect is
-/// attached and played using the @ref Mixer::play_effect(Sound_effect,
-/// double) member function, which also allows specifying the volume of
+/// attached and played using the @ref Mixer::play_effect member function,
+/// which also allows specifying the volume of
 /// the sound effect. If nothing further is done, the sound effect plays
 /// to completion and then detaches, making room to attach more sound
-/// effects; however, @ref Mixer::play_effect(Sound_effect, double)
+/// effects; however, @ref Mixer::play_effect
 /// returns a @ref Sound_effect_handle, which can be used to control the
 /// sound effect while it is playing as well.
 class Mixer
@@ -218,8 +219,8 @@ public:
     ///@{
 
     /// Attaches the given music track to this mixer and starts it playing.
-    /// Equivalent to Mixer::attach_music(Music_track) followed by
-    /// Mixer::unpause_music(Duration).
+    /// Equivalent to @ref Mixer::attach_music followed by
+    /// @ref Mixer::resume_music.
     ///
     /// \preconditions
     ///  - `get_music_state()` is `paused` or `detached`; throws
@@ -268,7 +269,7 @@ public:
     /// The state changes in only three ways:
     ///
     /// 1. In response to client actions, for example,
-    ///    Mixer::unpause(Duration) changes the state from `paused` to
+    ///    @ref Mixer::resume_music changes the state from `paused` to
     ///    `playing`
     ///
     /// 2. When a playing track ends, it changes from `playing` to `paused`.
@@ -288,7 +289,7 @@ public:
 
     /// Returns the music volume as a number from 0.0 to 1.0.
     /// Initially this will be 1.0, but you can lower it with
-    /// Mixer::set_music_volume(double).
+    /// @ref Mixer::set_music_volume.
     double get_music_volume() const;
 
     /// Sets the music volume, on a scale from 0.0 to 1.0.
@@ -301,7 +302,7 @@ public:
 
     /// How many effect channels are currently unused? If this is positive,
     /// then we can play an additional sound effect with
-    /// Mixer::play_effect(Sound_effect, double).
+    /// @ref Mixer::play_effect.
     int available_effect_channels() const;
 
     /// Plays the given effect track on this mixer, at the specified volume.
@@ -381,7 +382,7 @@ private:
 
 /// Used to control a Sound_effect after it is started playing on a Mixer.
 ///
-/// This is returned by Mixer::play_effect(Sound_effect, double).
+/// This is returned by @ref Mixer::play_effect.
 class Sound_effect_handle
 {
 public:
@@ -390,7 +391,7 @@ public:
     /// perform operations on it.
     ///
     /// To get a non-empty Sound_effect_handle, play a Sound_effect with
-    /// Mixer::play_effect(Sound_effect, double).
+    /// @ref Mixer::play_effect.
     Sound_effect_handle() {}
 
     /// Recognizes the empty sound effect handle.
