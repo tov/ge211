@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['centered_2692',['centered',['../classge211_1_1_window.html#a5a27ad3ddfc3e04895334e4f6e38ac45',1,'ge211::Window']]]
+  ['centered_2688',['centered',['../classge211_1_1_window.html#a5a27ad3ddfc3e04895334e4f6e38ac45',1,'ge211::Window']]]
 ];

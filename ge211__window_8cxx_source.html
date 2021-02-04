@@ -32,7 +32,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2020.8.1</span>
+   &#160;<span id="projectnumber">2021.9.0</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -139,91 +139,79 @@ $(document).ready(function(){initNavTree('ge211__window_8cxx_source.html',''); i
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classge211_1_1exceptions_1_1_environment__error.html">Environment_error</a>{<span class="stringliteral">&quot;Window::set_dimensions: out of range&quot;</span>};</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classge211_1_1_window.html#ad667f8c421f302b4efe6a4ca21a1e358">   42</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="classge211_1_1_window.html#ad667f8c421f302b4efe6a4ca21a1e358">Window::get_title</a>() const NOEXCEPT</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">return</span> SDL_GetWindowTitle(get_raw_());</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classge211_1_1_window.html#ad45c02327301d5a77826dbcfb48a30c8">   47</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classge211_1_1_window.html#ad45c02327301d5a77826dbcfb48a30c8">Window::set_title</a>(<span class="keyword">const</span> <a class="codeRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>&amp; title) NOEXCEPT</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    SDL_SetWindowTitle(get_raw_(), title.c_str());</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#if SDL_VERSION_ATLEAST(2, 0, 5)</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">bool</span> Window::get_resizeable() const NOEXCEPT</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;{</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">return</span> (get_flags_() &amp; SDL_WINDOW_RESIZABLE) != 0;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordtype">void</span> Window::set_resizeable(<span class="keywordtype">bool</span> resizable) NOEXCEPT</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;{</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    SDL_SetWindowResizable(get_raw_(), resizable? SDL_TRUE : SDL_FALSE);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classge211_1_1_window.html#a4ec35009bd443e2244dc6d06bbe77a7b">   64</a></span>&#160;<a class="code" href="structge211_1_1geometry_1_1_posn.html">Posn&lt;int&gt;</a> <a class="code" href="classge211_1_1_window.html#a4ec35009bd443e2244dc6d06bbe77a7b">Window::get_position</a>() const NOEXCEPT</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;{</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="structge211_1_1geometry_1_1_posn.html">Posn&lt;int&gt;</a> result{0, 0};</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    SDL_GetWindowPosition(get_raw_(), &amp;result.x, &amp;result.y);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classge211_1_1_window.html#aaa1929eeb5d8e4cd06eb4d039954bae6">   71</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classge211_1_1_window.html#aaa1929eeb5d8e4cd06eb4d039954bae6">Window::set_position</a>(<a class="code" href="structge211_1_1geometry_1_1_posn.html">Posn&lt;int&gt;</a> position)</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;{</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    SDL_SetWindowPosition(get_raw_(), position.<a class="code" href="structge211_1_1geometry_1_1_posn.html#afaf4c505f41c9d6c8408963b4d62a872">x</a>, position.<a class="code" href="structge211_1_1geometry_1_1_posn.html#a6868b0f3e17c825b6d02243d2b1473fe">y</a>);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">const</span> <a class="code" href="structge211_1_1geometry_1_1_posn.html">Posn&lt;int&gt;</a> <a class="code" href="classge211_1_1_window.html#a5a27ad3ddfc3e04895334e4f6e38ac45">Window::centered</a>{SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED};</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classge211_1_1_window.html#adead327fbc63510f642884762f0d7e9e">   78</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classge211_1_1_window.html#adead327fbc63510f642884762f0d7e9e">Window::get_fullscreen</a>() const NOEXCEPT</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;{</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">return</span> (get_flags_() &amp; SDL_WINDOW_FULLSCREEN) != 0;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classge211_1_1_window.html#a680e6cdc8539608bfbfa308e7a7317b0">   83</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classge211_1_1_window.html#a680e6cdc8539608bfbfa308e7a7317b0">Window::set_fullscreen</a>(<span class="keywordtype">bool</span> fullscreen)</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;{</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    uint32_t flags = fullscreen? SDL_WINDOW_FULLSCREEN : 0;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordflow">if</span> (SDL_SetWindowFullscreen(get_raw_(), flags) &lt; 0)</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classge211_1_1exceptions_1_1_host__error.html">Host_error</a>{<span class="stringliteral">&quot;Window::set_fullscreen: failed&quot;</span>};</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;}</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="classge211_1_1_window.html#aee6ebe16dcdd1b86feeb99b85bd045da">   91</a></span>&#160;<a class="code" href="structge211_1_1geometry_1_1_dims.html">Dims&lt;int&gt;</a> <a class="code" href="classge211_1_1_window.html#aee6ebe16dcdd1b86feeb99b85bd045da">Window::max_fullscreen_dimensions</a>() NOEXCEPT</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;{</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#if SDL_VERSION_ATLEAST(2, 0, 5)</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">bool</span> Window::get_resizeable() const NOEXCEPT</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">return</span> (get_flags_() &amp; SDL_WINDOW_RESIZABLE) != 0;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordtype">void</span> Window::set_resizeable(<span class="keywordtype">bool</span> resizable) NOEXCEPT</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    SDL_SetWindowResizable(get_raw_(), resizable? SDL_TRUE : SDL_FALSE);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classge211_1_1_window.html#a4ec35009bd443e2244dc6d06bbe77a7b">   54</a></span>&#160;<a class="code" href="structge211_1_1geometry_1_1_posn.html">Posn&lt;int&gt;</a> <a class="code" href="classge211_1_1_window.html#a4ec35009bd443e2244dc6d06bbe77a7b">Window::get_position</a>() const NOEXCEPT</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="structge211_1_1geometry_1_1_posn.html">Posn&lt;int&gt;</a> result{0, 0};</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    SDL_GetWindowPosition(get_raw_(), &amp;result.x, &amp;result.y);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classge211_1_1_window.html#aaa1929eeb5d8e4cd06eb4d039954bae6">   61</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classge211_1_1_window.html#aaa1929eeb5d8e4cd06eb4d039954bae6">Window::set_position</a>(<a class="code" href="structge211_1_1geometry_1_1_posn.html">Posn&lt;int&gt;</a> position)</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;{</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    SDL_SetWindowPosition(get_raw_(), position.<a class="code" href="structge211_1_1geometry_1_1_posn.html#afaf4c505f41c9d6c8408963b4d62a872">x</a>, position.<a class="code" href="structge211_1_1geometry_1_1_posn.html#a6868b0f3e17c825b6d02243d2b1473fe">y</a>);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">const</span> <a class="code" href="structge211_1_1geometry_1_1_posn.html">Posn&lt;int&gt;</a> <a class="code" href="classge211_1_1_window.html#a5a27ad3ddfc3e04895334e4f6e38ac45">Window::centered</a>{SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED};</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classge211_1_1_window.html#adead327fbc63510f642884762f0d7e9e">   68</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classge211_1_1_window.html#adead327fbc63510f642884762f0d7e9e">Window::get_fullscreen</a>() const NOEXCEPT</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;{</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">return</span> (get_flags_() &amp; SDL_WINDOW_FULLSCREEN) != 0;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classge211_1_1_window.html#a680e6cdc8539608bfbfa308e7a7317b0">   73</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classge211_1_1_window.html#a680e6cdc8539608bfbfa308e7a7317b0">Window::set_fullscreen</a>(<span class="keywordtype">bool</span> fullscreen)</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;{</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    uint32_t flags = fullscreen? SDL_WINDOW_FULLSCREEN : 0;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">if</span> (SDL_SetWindowFullscreen(get_raw_(), flags) &lt; 0)</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classge211_1_1exceptions_1_1_host__error.html">Host_error</a>{<span class="stringliteral">&quot;Window::set_fullscreen: failed&quot;</span>};</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classge211_1_1_window.html#aee6ebe16dcdd1b86feeb99b85bd045da">   81</a></span>&#160;<a class="code" href="structge211_1_1geometry_1_1_dims.html">Dims&lt;int&gt;</a> <a class="code" href="classge211_1_1_window.html#aee6ebe16dcdd1b86feeb99b85bd045da">Window::max_fullscreen_dimensions</a>() NOEXCEPT</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;{</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    SDL_Rect rect;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    SDL_GetDisplayBounds(0, &amp;rect);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">return</span> {rect.w, rect.h};</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="classge211_1_1_window.html#a68caff5f092864209ea6e74c218640a6">   88</a></span>&#160;<a class="code" href="structge211_1_1geometry_1_1_dims.html">Dims&lt;int&gt;</a> <a class="code" href="classge211_1_1_window.html#a68caff5f092864209ea6e74c218640a6">Window::max_window_dimensions</a>() const NOEXCEPT</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;{</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">int</span> top, left, bottom, right;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    SDL_GetWindowBordersSize(get_raw_(), &amp;top, &amp;left, &amp;bottom, &amp;right);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    SDL_Rect rect;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    SDL_GetDisplayBounds(0, &amp;rect);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordflow">return</span> {rect.w, rect.h};</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;}</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="classge211_1_1_window.html#a68caff5f092864209ea6e74c218640a6">   98</a></span>&#160;<a class="code" href="structge211_1_1geometry_1_1_dims.html">Dims&lt;int&gt;</a> <a class="code" href="classge211_1_1_window.html#a68caff5f092864209ea6e74c218640a6">Window::max_window_dimensions</a>() const NOEXCEPT</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;{</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">int</span> top, left, bottom, right;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    SDL_GetWindowBordersSize(get_raw_(), &amp;top, &amp;left, &amp;bottom, &amp;right);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    SDL_Rect rect;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    SDL_GetDisplayUsableBounds(0, &amp;rect);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">return</span> {rect.w - left - right, rect.h - top - bottom};</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;}</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;}</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    SDL_GetDisplayUsableBounds(0, &amp;rect);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">return</span> {rect.w - left - right, rect.h - top - bottom};</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclassge211_1_1_window_html_adead327fbc63510f642884762f0d7e9e"><div class="ttname"><a href="classge211_1_1_window.html#adead327fbc63510f642884762f0d7e9e">ge211::Window::get_fullscreen</a></div><div class="ttdeci">bool get_fullscreen() const</div><div class="ttdoc">Returns whether the program is in fullscreen mode.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__window_8cxx_source.html#l00078">ge211_window.cxx:78</a></div></div>
-<div class="ttc" id="aclassge211_1_1_window_html_a4ec35009bd443e2244dc6d06bbe77a7b"><div class="ttname"><a href="classge211_1_1_window.html#a4ec35009bd443e2244dc6d06bbe77a7b">ge211::Window::get_position</a></div><div class="ttdeci">Posn&lt; int &gt; get_position() const</div><div class="ttdoc">Gets the position of the upper-left corner of the window with respect to the upper-left corner of the...</div><div class="ttdef"><b>Definition:</b> <a href="ge211__window_8cxx_source.html#l00064">ge211_window.cxx:64</a></div></div>
+<div class="ttc" id="aclassge211_1_1_window_html_adead327fbc63510f642884762f0d7e9e"><div class="ttname"><a href="classge211_1_1_window.html#adead327fbc63510f642884762f0d7e9e">ge211::Window::get_fullscreen</a></div><div class="ttdeci">bool get_fullscreen() const</div><div class="ttdoc">Returns whether the program is in fullscreen mode.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__window_8cxx_source.html#l00068">ge211_window.cxx:68</a></div></div>
+<div class="ttc" id="aclassge211_1_1_window_html_a4ec35009bd443e2244dc6d06bbe77a7b"><div class="ttname"><a href="classge211_1_1_window.html#a4ec35009bd443e2244dc6d06bbe77a7b">ge211::Window::get_position</a></div><div class="ttdeci">Posn&lt; int &gt; get_position() const</div><div class="ttdoc">Gets the position of the upper-left corner of the window with respect to the upper-left corner of the...</div><div class="ttdef"><b>Definition:</b> <a href="ge211__window_8cxx_source.html#l00054">ge211_window.cxx:54</a></div></div>
 <div class="ttc" id="aclassge211_1_1_window_html_a378e785a9c5f169f501e7b291af0f5a4"><div class="ttname"><a href="classge211_1_1_window.html#a378e785a9c5f169f501e7b291af0f5a4">ge211::Window::get_dimensions</a></div><div class="ttdeci">Dims&lt; int &gt; get_dimensions() const</div><div class="ttdoc">Returns the current dimensions of this window.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__window_8cxx_source.html#l00027">ge211_window.cxx:27</a></div></div>
 <div class="ttc" id="abasic_string_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a></div></div>
-<div class="ttc" id="aclassge211_1_1_window_html_a680e6cdc8539608bfbfa308e7a7317b0"><div class="ttname"><a href="classge211_1_1_window.html#a680e6cdc8539608bfbfa308e7a7317b0">ge211::Window::set_fullscreen</a></div><div class="ttdeci">void set_fullscreen(bool)</div><div class="ttdoc">Sets whether the program should be in fullscreen mode.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__window_8cxx_source.html#l00083">ge211_window.cxx:83</a></div></div>
-<div class="ttc" id="aclassge211_1_1_window_html_aee6ebe16dcdd1b86feeb99b85bd045da"><div class="ttname"><a href="classge211_1_1_window.html#aee6ebe16dcdd1b86feeb99b85bd045da">ge211::Window::max_fullscreen_dimensions</a></div><div class="ttdeci">static Dims&lt; int &gt; max_fullscreen_dimensions()</div><div class="ttdoc">Returns the maximum dimensions for a fullscreen window.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__window_8cxx_source.html#l00091">ge211_window.cxx:91</a></div></div>
-<div class="ttc" id="aclassge211_1_1_window_html_ad667f8c421f302b4efe6a4ca21a1e358"><div class="ttname"><a href="classge211_1_1_window.html#ad667f8c421f302b4efe6a4ca21a1e358">ge211::Window::get_title</a></div><div class="ttdeci">const char * get_title() const</div><div class="ttdoc">Returns the current title of this window.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__window_8cxx_source.html#l00042">ge211_window.cxx:42</a></div></div>
+<div class="ttc" id="aclassge211_1_1_window_html_a680e6cdc8539608bfbfa308e7a7317b0"><div class="ttname"><a href="classge211_1_1_window.html#a680e6cdc8539608bfbfa308e7a7317b0">ge211::Window::set_fullscreen</a></div><div class="ttdeci">void set_fullscreen(bool)</div><div class="ttdoc">Sets whether the program should be in fullscreen mode.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__window_8cxx_source.html#l00073">ge211_window.cxx:73</a></div></div>
+<div class="ttc" id="aclassge211_1_1_window_html_aee6ebe16dcdd1b86feeb99b85bd045da"><div class="ttname"><a href="classge211_1_1_window.html#aee6ebe16dcdd1b86feeb99b85bd045da">ge211::Window::max_fullscreen_dimensions</a></div><div class="ttdeci">static Dims&lt; int &gt; max_fullscreen_dimensions()</div><div class="ttdoc">Returns the maximum dimensions for a fullscreen window.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__window_8cxx_source.html#l00081">ge211_window.cxx:81</a></div></div>
 <div class="ttc" id="anamespacege211_html"><div class="ttname"><a href="namespacege211.html">ge211</a></div><div class="ttdoc">The game engine namespace.</div><div class="ttdef"><b>Definition:</b> <a href="ge211_8hxx_source.html#l00004">ge211.hxx:4</a></div></div>
-<div class="ttc" id="aclassge211_1_1_window_html_aaa1929eeb5d8e4cd06eb4d039954bae6"><div class="ttname"><a href="classge211_1_1_window.html#aaa1929eeb5d8e4cd06eb4d039954bae6">ge211::Window::set_position</a></div><div class="ttdeci">void set_position(Posn&lt; int &gt;)</div><div class="ttdoc">Sets the position of the upper-left corner of the window with respect to the upper-left corner of the...</div><div class="ttdef"><b>Definition:</b> <a href="ge211__window_8cxx_source.html#l00071">ge211_window.cxx:71</a></div></div>
+<div class="ttc" id="aclassge211_1_1_window_html_aaa1929eeb5d8e4cd06eb4d039954bae6"><div class="ttname"><a href="classge211_1_1_window.html#aaa1929eeb5d8e4cd06eb4d039954bae6">ge211::Window::set_position</a></div><div class="ttdeci">void set_position(Posn&lt; int &gt;)</div><div class="ttdoc">Sets the position of the upper-left corner of the window with respect to the upper-left corner of the...</div><div class="ttdef"><b>Definition:</b> <a href="ge211__window_8cxx_source.html#l00061">ge211_window.cxx:61</a></div></div>
 <div class="ttc" id="astructge211_1_1geometry_1_1_posn_html_afaf4c505f41c9d6c8408963b4d62a872"><div class="ttname"><a href="structge211_1_1geometry_1_1_posn.html#afaf4c505f41c9d6c8408963b4d62a872">ge211::geometry::Posn::x</a></div><div class="ttdeci">Coordinate x</div><div class="ttdoc">The x coordinate.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8hxx_source.html#l00207">ge211_geometry.hxx:207</a></div></div>
 <div class="ttc" id="astructge211_1_1geometry_1_1_dims_html"><div class="ttname"><a href="structge211_1_1geometry_1_1_dims.html">ge211::geometry::Dims&lt; int &gt;</a></div></div>
-<div class="ttc" id="aclassge211_1_1_window_html_ad45c02327301d5a77826dbcfb48a30c8"><div class="ttname"><a href="classge211_1_1_window.html#ad45c02327301d5a77826dbcfb48a30c8">ge211::Window::set_title</a></div><div class="ttdeci">void set_title(const std::string &amp;)</div><div class="ttdoc">Changes the title of this window.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__window_8cxx_source.html#l00047">ge211_window.cxx:47</a></div></div>
 <div class="ttc" id="ac_str_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/string/basic_string/c_str.html">std::string::c_str</a></div><div class="ttdeci">T c_str(T... args)</div></div>
 <div class="ttc" id="astructge211_1_1geometry_1_1_dims_html_a050576b0776777b293a8aa065f369292"><div class="ttname"><a href="structge211_1_1geometry_1_1_dims.html#a050576b0776777b293a8aa065f369292">ge211::geometry::Dims::height</a></div><div class="ttdeci">Coordinate height</div><div class="ttdoc">The height of the object.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8hxx_source.html#l00041">ge211_geometry.hxx:41</a></div></div>
-<div class="ttc" id="aclassge211_1_1_window_html_a68caff5f092864209ea6e74c218640a6"><div class="ttname"><a href="classge211_1_1_window.html#a68caff5f092864209ea6e74c218640a6">ge211::Window::max_window_dimensions</a></div><div class="ttdeci">Dims&lt; int &gt; max_window_dimensions() const</div><div class="ttdoc">Returns the maximum dimensions for a non-fullscreen window.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__window_8cxx_source.html#l00098">ge211_window.cxx:98</a></div></div>
+<div class="ttc" id="aclassge211_1_1_window_html_a68caff5f092864209ea6e74c218640a6"><div class="ttname"><a href="classge211_1_1_window.html#a68caff5f092864209ea6e74c218640a6">ge211::Window::max_window_dimensions</a></div><div class="ttdeci">Dims&lt; int &gt; max_window_dimensions() const</div><div class="ttdoc">Returns the maximum dimensions for a non-fullscreen window.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__window_8cxx_source.html#l00088">ge211_window.cxx:88</a></div></div>
 <div class="ttc" id="aclassge211_1_1_window_html_a5a27ad3ddfc3e04895334e4f6e38ac45"><div class="ttname"><a href="classge211_1_1_window.html#a5a27ad3ddfc3e04895334e4f6e38ac45">ge211::Window::centered</a></div><div class="ttdeci">static const Posn&lt; int &gt; centered</div><div class="ttdoc">A special value to pass to set_position(Posn&lt;int&gt;) to center the window on the screen.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__window_8hxx_source.html#l00033">ge211_window.hxx:33</a></div></div>
 <div class="ttc" id="astructge211_1_1geometry_1_1_posn_html_a6868b0f3e17c825b6d02243d2b1473fe"><div class="ttname"><a href="structge211_1_1geometry_1_1_posn.html#a6868b0f3e17c825b6d02243d2b1473fe">ge211::geometry::Posn::y</a></div><div class="ttdeci">Coordinate y</div><div class="ttdoc">The y coordiante.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8hxx_source.html#l00208">ge211_geometry.hxx:208</a></div></div>
 <div class="ttc" id="aclassge211_1_1exceptions_1_1_environment__error_html"><div class="ttname"><a href="classge211_1_1exceptions_1_1_environment__error.html">ge211::exceptions::Environment_error</a></div><div class="ttdoc">Indicates that an error was encountered by the game engine or in the client's environment.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__error_8hxx_source.html#l00079">ge211_error.hxx:80</a></div></div>
