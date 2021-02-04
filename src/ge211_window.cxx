@@ -39,16 +39,6 @@ void Window::set_dimensions(Dims<int> dims)
         throw Environment_error{"Window::set_dimensions: out of range"};
 }
 
-const char* Window::get_title() const NOEXCEPT
-{
-    return SDL_GetWindowTitle(get_raw_());
-}
-
-void Window::set_title(const std::string& title) NOEXCEPT
-{
-    SDL_SetWindowTitle(get_raw_(), title.c_str());
-}
-
 #if SDL_VERSION_ATLEAST(2, 0, 5)
 bool Window::get_resizeable() const NOEXCEPT
 {

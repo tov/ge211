@@ -32,16 +32,6 @@ public:
     /// the window on the screen.
     static const Posn<int> centered;
 
-    /// Returns the current title of this window.
-    ///
-    /// The returned pointer should not be freed by the client. It is
-    /// borrowed from a buffer stored within the window, and should be
-    /// valid until the next call to set_title(const std::string&).
-    /// Copy it to a std::string if you need to hold it longer.
-    const char* get_title() const NOEXCEPT;
-    /// Changes the title of this window.
-    void set_title(const std::string&) NOEXCEPT;
-
 #if SDL_VERSION_ATLEAST(2, 0, 5)
     /// Returns whether the user can resize this window.
     bool get_resizeable() const NOEXCEPT;
