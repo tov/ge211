@@ -1,5 +1,5 @@
 <map id="Client_logic_error" name="Client_logic_error">
 <area shape="rect" id="node1" title="An exception that indicates that a logic error was performed by the client." alt="" coords="5,155,128,181"/>
 <area shape="rect" id="node2" href="$classge211_1_1exceptions_1_1_exception__base.html" title="The root of the ge211 exception hierarchy." alt="" coords="9,80,124,107"/>
-<area shape="rect" id="node3" href="/Users/tov/school/cs211/dev/ge211/cmake-build-debug/doc/src/cppreference.xml$cpp/error/exception.html" title=" " alt="" coords="27,5,106,32"/>
+<area shape="rect" id="node3" href="/Users/tov/school/cs211/dev/ge211/build/doc/src/cppreference.xml$cpp/error/exception.html" title=" " alt="" coords="27,5,106,32"/>
 </map>
