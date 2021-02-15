@@ -195,7 +195,7 @@ public:
     ///
     /// ```cxx
     /// // Initialize the source to produce `int`s from 1 to 6:
-    /// ge211::Random_source<int> six_sided_die(1, 7);
+    /// ge211::Random_source<int> six_sided_die(1, 6);
     ///
     /// // Generate a random roll:
     /// int roll_value = six_sided_die.next();
@@ -317,7 +317,7 @@ public:
     /// struct Two_dice
     /// {
     ///     // Source of random die rolls from 1 to 6:
-    ///     ge211::Random_source<int> die_source(1, 7);
+    ///     ge211::Random_source<int> die_source(1, 6);
     ///
     ///     // Rolls both dice and returns their sum.
     ///     int roll();
