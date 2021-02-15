@@ -10,6 +10,14 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 ### DEPENDENCIES
 ###
 
+# For Apple Silicon (ARM). (This can go away when CMake is updated to
+# know about it.)
+if(APPLE AND EXISTS /opt/homebrew)
+    message(STATUS "GE211: Adding /opt/homebrew to system search path")
+    list(PREPEND CMAKE_SYSTEM_PREFIX_PATH /opt/homebrew)
+    list(REMOVE_DUPLICATES CMAKE_SYSTEM_PREFIX_PATH)
+endif()
+
 # Prefer Homebrew's /usr/local to Valve's /Library/Frameworks:
 set(CMAKE_FIND_FRAMEWORK    LAST)
 
