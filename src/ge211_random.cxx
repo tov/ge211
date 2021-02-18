@@ -49,6 +49,15 @@ Pseudo_random_engine<bool>::next()
     return distribution_(generator_) <= probability_;
 }
 
+bool
+Pseudo_random_engine<bool>::next_between(bool lo, bool hi)
+{
+    // if lo < hi   return next()
+    // if lo > hi   return ! next()
+    // if lo == hi  return lo
+    return lo ^ (lo != hi && next());
+}
+
 } // end namespace detail
 } // end namespace random
 } // end namespace ge211
