@@ -231,9 +231,7 @@ protected:
     virtual Dims<int> initial_window_dimensions() const;
 
     /// Override this function to specify the initial title of the game.
-    /// This is only called by the engine once at startup. To change the
-    /// title during the game, use get_window() const and
-    /// Window::set_title(const std::string&).
+    /// This is only called by the engine once at startup.
     virtual std::string initial_window_title() const;
 
     ///@}
