@@ -43,7 +43,7 @@ private:
 /// project. You can create multiple Font instances for the same font
 /// file at different sizes.
 ///
-/// One TTF file, `sans.tff`, is included among %ge211's built-in resources,
+/// One TTF file, `sans.ttf`, is included among %ge211's built-in resources,
 /// and can always be used even if you haven't added any fonts yourself.
 ///
 /// Note that Font%s cannot be constructed until the text subsystem is
