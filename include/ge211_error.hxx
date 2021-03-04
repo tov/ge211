@@ -171,8 +171,11 @@ class Mixer_error : public Host_error
 
 } // end namespace exception
 
-namespace detail {
+namespace internal {
 
+namespace logging {
+
+/// How serious is this log message?
 enum class Log_level
 {
     /// extra debugging information
@@ -186,34 +189,40 @@ enum class Log_level
 };
 
 // Right now a Logger just keeps track of the current log
-// level, and there's only one Logger (Singleton Pattern).
+// level. There's only one Logger (Singleton Pattern).
 class Logger
 {
 public:
-    using Level = Log_level;
+    /// Returns the log level of this logger.
+    Log_level level() const NOEXCEPT { return level_; }
 
-    Level level() const NOEXCEPT { return level_; }
-    void level(Level level) NOEXCEPT { level_ = level; }
+    /// Changes the log level of this logger.
+    void level(Log_level level) NOEXCEPT { level_ = level; }
 
+    /// Returns the one and only logger instance.
     static Logger& instance() NOEXCEPT;
 
 private:
     Logger() NOEXCEPT = default;
 
-    Level level_ = Level::warn;
+    Log_level level_ = Log_level::warn;
 };
 
-// A Log_message accumulate information and then prints it all at
-// once when it's going to be destroyed.
+// A Log_message accumulates information and then prints it all at
+// once when it's about to be destroyed.
 class Log_message
 {
 public:
-    using Level = Log_level;
+    /// Construct a new Log_message with the given log level. The
+    /// default log level is Log_level::debug.
+    explicit Log_message(Log_level level = Log_level::debug);
 
-    explicit Log_message(Level level = Level::debug);
+    /// Construct a new Log_message with the given log level and
+    /// cause. The default log level is Log_level::debug.
     explicit Log_message(std::string reason,
-                         Level level = Level::debug) NOEXCEPT;
+                         Log_level level = Log_level::debug) NOEXCEPT;
 
+    /// Appends more text to this Log_message.
     template <typename STREAM_INSERTABLE>
     Log_message& operator<<(STREAM_INSERTABLE const& value)
     {
@@ -221,15 +230,24 @@ public:
         return *this;
     }
 
-    // A Log_message has important work to do when it's destroyed.
+    /// A Log_message has important work to do when it's destroyed.
     virtual ~Log_message();
 
-    // A Log_message should not be copied.
+    /// A Log_message cannot be copied, since that would cause it to
+    /// print twice.
     Log_message(const Log_message&) = delete;
+
+    /// A Log_message cannot be copied, since that would cause it to
+    /// print twice.
     Log_message& operator=(const Log_message&) = delete;
 
-    // But it can be moved.
+    /// A log message can be moved. The source of the move becomes
+    /// inactive, meaning it won't print anything when destroyed.
     Log_message(Log_message&&) = default;
+
+    /// A log message can be move-assigned. The source of the move
+    /// becomes inactive, meaning it won't print anything when
+    /// destroyed.
     Log_message& operator=(Log_message&&) = default;
 
 private:
@@ -238,10 +256,28 @@ private:
     bool active_;
 };
 
+/// Returns a debug-level log message.
 Log_message debug(std::string reason = "");
+
+/// Returns a info-level log message.
 Log_message info(std::string reason = "");
+
+/// Returns a warn-level log message.
 Log_message warn(std::string reason = "");
+
+/// Returns a fatal-level log message.
 Log_message fatal(std::string reason = "");
+
+} // end namespace logging
+
+} // end namespace internal
+
+namespace detail {
+
+using Log_message = internal::logging::Log_message;
+
+// These functions generate log messages with the reason set to the
+// cause of SDL2's most recent message.
 
 Log_message info_sdl();
 Log_message warn_sdl();

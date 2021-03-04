@@ -94,6 +94,22 @@ class Pausable_timer;
 
 } // end namespace time
 
+/// Internal facilities that you might want to use if you're doing
+/// something fancy.
+namespace internal {
+
+/// Facilities for logging to the console.
+namespace logging {
+
+/* These don't need forward declarations: */
+// enum class Log_level;
+// class Logger;
+// class Log_message;
+
+} // end namespace logging
+
+} // end namespace internal
+
 /// Internal implementation details.
 namespace detail {
 
@@ -108,7 +124,8 @@ class Texture_sprite;
 
 } // end namespace detail
 
-// Bring everything but detail into the ge211 namespace.
+// Bring everything but `detail` and `internal` into the ge211
+// namespace.
 
 using namespace audio;
 using namespace events;

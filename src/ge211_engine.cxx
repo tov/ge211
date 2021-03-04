@@ -70,8 +70,9 @@ void Engine::run()
                 auto duration = allowed_frame_length - frame_length;
                 duration.sleep_for();
                 game_.mark_frame_();
-                debug() << "Software vsync slept for "
-                        << duration.seconds() << " s";
+                internal::logging::debug()
+                    << "Software vsync slept for "
+                    << duration.seconds() << " s";
             } else {
                 game_.mark_frame_();
             }
@@ -79,7 +80,9 @@ void Engine::run()
 
         game_.on_quit();
     } catch (const Exception_base& e) {
-        fatal() << "Uncaught exception:\n  " << e.what();
+        internal::logging::fatal()
+            << "Uncaught exception:\n  "
+            << e.what();
         exit(1);
     }
 }

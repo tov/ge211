@@ -49,8 +49,9 @@ void Abstract_game::prepare(const sprites::Sprite& sprite) const
     if (engine_)
         engine_->prepare(sprite);
     else {
-        warn() << "Abstract_game::prepare: Could not prepare sprite "
-               << "because engine is not initialized";
+        internal::logging::warn()
+            << "Abstract_game::prepare: Could not prepare sprite "
+            << "because engine is not initialized";
     }
 }
 

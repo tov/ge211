@@ -55,10 +55,17 @@ static std::string build_sdl_error_message(const std::string& message) {
     const char* reason = take_sdl_error();
 
     std::ostringstream oss;
-    if (message.empty())
-        oss << "SDL Error: " << reason;
-    else
-        oss << message << "\n  (reason from SDL: " << reason << ")";
+    if (message.empty()) {
+        oss << "SDL Error";
+        if (reason[0]) {
+            oss << ": " << reason;
+        }
+    } else {
+        oss << message;
+        if (reason[0]) {
+            oss << "\n  (reason from SDL: " << reason << ")";
+        }
+    }
 
     return oss.str();
 }
@@ -119,9 +126,12 @@ Mixer_error Mixer_error::not_enabled()
 
 }
 
-namespace detail {
+namespace internal {
 
-static const char* log_level_string(Log_level level)
+namespace logging {
+
+static const char*
+log_level_string(Log_level level)
 {
     switch (level) {
         case Log_level::debug:
@@ -159,6 +169,42 @@ Log_message fatal(std::string reason)
     return Log_message{std::move(reason), Log_level::fatal};
 }
 
+Logger& Logger::instance() NOEXCEPT
+{
+    static Logger instance;
+    return instance;
+}
+
+Log_message::Log_message(std::string reason, Log_level level) NOEXCEPT
+        : reason_{std::move(reason)}
+        , message_{}
+        , active_{level >= Logger::instance().level()}
+{
+    if (active_)
+        message_ << "ge211[" << log_level_string(level) << "]: ";
+}
+
+Log_message::Log_message(Log_level level)
+        : Log_message{"", level}
+{ }
+
+Log_message::~Log_message()
+{
+    if (active_) {
+        std::cerr << message_.str();
+        if (!reason_.empty()) std::cerr << "\n  (Reason: " << reason_ << ")";
+        std::cerr << std::endl;
+    }
+}
+
+} // end namespace logging
+
+} // end namespace internal
+
+namespace detail {
+
+using namespace internal::logging;
+
 Log_message info_sdl()
 {
     return info(take_sdl_error());
@@ -174,35 +220,7 @@ Log_message fatal_sdl()
     return fatal(take_sdl_error());
 }
 
-Logger& Logger::instance() NOEXCEPT
-{
-    static Logger instance;
-    return instance;
-}
-
-Log_message::Log_message(std::string reason, Log_message::Level level) NOEXCEPT
-        : reason_{std::move(reason)}
-        , message_{}
-        , active_{level >= Logger::instance().level()}
-{
-    if (active_)
-        message_ << "ge211[" << log_level_string(level) << "]: ";
-}
-
-Log_message::Log_message(Log_message::Level level)
-        : Log_message{"", level}
-{ }
-
-Log_message::~Log_message()
-{
-    if (active_) {
-        std::cerr << message_.str();
-        if (!reason_.empty()) std::cerr << "\n  (Reason: " << reason_ << ")";
-        std::cerr << std::endl;
-    }
-}
-
-} // end namespace detail
+}  // end namespace detail
 
 }
 
