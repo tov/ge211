@@ -85,50 +85,72 @@ private:
     virtual Texture const& get_texture_() const = 0;
 };
 
-// A `Render_sprite` works by allowing its derived classes to render
-// themselves onto an `SDL_Surface`, which it creates. It then converts
-// that surface to a `Texture`, which it caches.
-//
-// The constructor of the derived class should pass the required
-// dimensions to the `Render_sprite` constructor. Then, in its own
-// constructor, use `as_surface` to access the underlying surface, and
-// render the sprite image to that surface.
-class Render_sprite : public Texture_sprite
+} // end namespace detail
+
+namespace internal {
+
+/// A `Render_sprite` works by allowing its derived classes to render
+/// themselves pixel-by-pixel onto an [`SDL_Surface` ☛]. Then it converts
+/// the rendered surface into a `Texture`, which it caches.
+///
+/// The constructor of the derived class should pass the required
+/// dimensions to the `Render_sprite` constructor. Then, in its own
+/// constructor, use @ref fill_surface(), @ref fill_rectangle(), and
+/// @ref set_pixel() to paint the desired sprite image to the
+/// surface. Or for direct access to the underlying [`SDL_Surface` ☛], use
+/// @ref as_surface().
+///
+/// [`SDL_Surface` ☛]:
+///     <https://wiki.libsdl.org/SDL_Surface>
+class Render_sprite : public detail::Texture_sprite
 {
 protected:
+    /// Constructs a Render_sprite with the given pixel dimensions.
+    ///
     /// \preconditions
-    ///  - Both dimensions must be positive.
+    ///  - Both dimensions are positive.
     explicit Render_sprite(Dims<int>);
 
     /// Fills the whole surface with the given color.
+    ///
     /// This should only be called from the derived class's constructor.
     void fill_surface(Color);
 
     /// Fills the given rectangle in the given color.
+    ///
     /// This should only be called from the derived class's constructor.
     void fill_rectangle(Rect<int>, Color);
 
     /// Sets one pixel to the given color.
+    ///
     /// This should only be called from the derived class's constructor.
     void set_pixel(Posn<int>, Color);
 
-private:
-    Texture texture_;
-    Texture const& get_texture_() const override;
-
-    /// This is called by fill_surface/fill_rectangle/set_pixel, so
-    /// it should only be called during the derived class's constructor.
+    /// Gains access to the underlying [`SDL_Surface` ☛].
+    ///
+    /// This function should only be called from the derived class's
+    /// constructor. If this sprite has already been rendered then
+    /// Ge211_logic_error will be thrown. If this function returns, the
+    /// result will be non-null.
+    ///
+    /// [`SDL_Surface` ☛]:
+    ///     <https://wiki.libsdl.org/SDL_Surface>
     SDL_Surface& as_surface();
 
-    static Uniq_SDL_Surface create_surface_(Dims<int>);
+private:
+    detail::Texture texture_;
+    detail::Texture const& get_texture_() const override;
+
+    static detail::Uniq_SDL_Surface
+    create_surface_(Dims<int>);
 };
 
-} // end namespace detail
+} // end namespace internal
 
 namespace sprites {
 
 /// A Sprite that renders as a solid rectangle.
-class Rectangle_sprite : public detail::Render_sprite
+class Rectangle_sprite : public internal::Render_sprite
 {
 public:
     /// Constructs a rectangle sprite from required Dims
@@ -143,7 +165,7 @@ public:
 };
 
 /// A Sprite that renders as a solid circle.
-class Circle_sprite : public detail::Render_sprite
+class Circle_sprite : public internal::Render_sprite
 {
 public:
     /// Constructs a circle sprite from its radius and optionally

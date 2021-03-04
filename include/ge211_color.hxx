@@ -308,7 +308,7 @@ private:
     uint8_t alpha_;
 
     friend Text_sprite;
-    friend class detail::Render_sprite;
+    friend internal::Render_sprite;
 
     SDL_Color to_sdl_() const NOEXCEPT;
     uint32_t to_sdl_(const SDL_PixelFormat*) const NOEXCEPT;

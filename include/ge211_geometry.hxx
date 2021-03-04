@@ -590,9 +590,7 @@ struct Rect
 
 private:
     friend Circle_sprite;
-
-    friend class detail::Render_sprite;
-
+    friend internal::Render_sprite;
     friend class detail::Renderer;
 
     /// Converts this rectangle to an internal SDL rectangle.

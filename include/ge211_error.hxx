@@ -96,7 +96,7 @@ class Ge211_logic_error : public Environment_error
     explicit Ge211_logic_error(const std::string& message);
 
     /// Throwers
-    friend class detail::Render_sprite;
+    friend internal::Render_sprite;
     friend Mixer;
     friend Text_sprite;
 };
@@ -118,8 +118,8 @@ class Host_error : public Environment_error
     /// Throwers
     friend Text_sprite;
     friend Window;
+    friend internal::Render_sprite;
     friend class detail::Renderer;
-    friend class detail::Render_sprite;
     friend class detail::Texture;
 };
 

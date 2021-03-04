@@ -10,6 +10,7 @@
 namespace ge211 {
 
 using namespace detail;
+using namespace internal;
 
 Sprite_set::Sprite_set() {}
 
@@ -57,6 +58,10 @@ void Texture_sprite::prepare(const Renderer& renderer) const
 {
     renderer.prepare(get_texture_());
 }
+
+} // end namespace detail
+
+namespace internal {
 
 Uniq_SDL_Surface Render_sprite::create_surface_(Dims<int> dimensions)
 {
@@ -107,7 +112,7 @@ void Render_sprite::set_pixel(Posn<int> xy, Color color)
     fill_rectangle({xy.x, xy.y, 1, 1}, color);
 }
 
-} // end namespace detail
+} // end namespace internal
 
 namespace sprites {
 

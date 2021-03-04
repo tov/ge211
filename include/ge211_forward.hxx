@@ -98,6 +98,8 @@ class Pausable_timer;
 /// something fancy.
 namespace internal {
 
+class Render_sprite;
+
 /// Facilities for logging to the console.
 namespace logging {
 
@@ -118,7 +120,6 @@ class File_resource;
 struct Placed_sprite;
 class Renderer;
 class Session;
-class Render_sprite;
 class Texture;
 class Texture_sprite;
 
