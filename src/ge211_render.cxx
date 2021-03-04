@@ -215,7 +215,7 @@ Dims<int> Texture::dimensions() const NOEXCEPT
     return result;
 }
 
-SDL_Surface* Texture::as_surface() NOEXCEPT
+Borrowed<SDL_Surface> Texture::raw_surface() NOEXCEPT
 {
     return impl_->surface_.get();
 }

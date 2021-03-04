@@ -98,7 +98,7 @@ namespace internal {
 /// constructor, use @ref fill_surface(), @ref fill_rectangle(), and
 /// @ref set_pixel() to paint the desired sprite image to the
 /// surface. Or for direct access to the underlying [`SDL_Surface` ☛], use
-/// @ref as_surface().
+/// @ref raw_surface().
 ///
 /// [`SDL_Surface` ☛]:
 ///     <https://wiki.libsdl.org/SDL_Surface>
@@ -135,7 +135,7 @@ protected:
     ///
     /// [`SDL_Surface` ☛]:
     ///     <https://wiki.libsdl.org/SDL_Surface>
-    SDL_Surface& as_surface();
+    SDL_Surface& raw_surface();
 
 private:
     detail::Texture texture_;

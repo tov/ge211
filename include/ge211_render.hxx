@@ -69,7 +69,7 @@ public:
 
     // Returns nullptr if this `Texture` has been rendered, and can no
     // longer be updated as an `SDL_Surface`.
-    Borrowed<SDL_Surface> as_surface() NOEXCEPT;
+    Borrowed<SDL_Surface> raw_surface() NOEXCEPT;
 
     bool empty() const NOEXCEPT;
 
