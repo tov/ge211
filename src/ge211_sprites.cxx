@@ -86,25 +86,25 @@ const Texture& Render_sprite::get_texture_() const
     return texture_;
 }
 
-SDL_Surface& Render_sprite::raw_surface()
+Borrowed<SDL_Surface> Render_sprite::raw_surface()
 {
     SDL_Surface* result = texture_.raw_surface();
-    if (result) return *result;
+    if (result) return result;
 
     throw Ge211_logic_error{"Render_sprite::raw_surface: already a texture"};
 }
 
 void Render_sprite::fill_surface(Color color)
 {
-    auto& surface = raw_surface();
-    SDL_FillRect(&surface, nullptr, color.to_sdl_(surface.format));
+    auto* surface = raw_surface();
+    SDL_FillRect(surface, nullptr, color.to_sdl_(surface->format));
 }
 
 void Render_sprite::fill_rectangle(Rect<int> rect, Color color)
 {
-    auto& surface = raw_surface();
+    auto* surface = raw_surface();
     SDL_Rect rect_buf = rect;
-    SDL_FillRect(&surface, &rect_buf, color.to_sdl_(surface.format));
+    SDL_FillRect(surface, &rect_buf, color.to_sdl_(surface->format));
 }
 
 void Render_sprite::set_pixel(Posn<int> xy, Color color)

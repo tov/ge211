@@ -135,7 +135,7 @@ protected:
     ///
     /// [`SDL_Surface` ☛]:
     ///     <https://wiki.libsdl.org/SDL_Surface>
-    SDL_Surface& raw_surface();
+    Borrowed<SDL_Surface> raw_surface();
 
 private:
     detail::Texture texture_;
