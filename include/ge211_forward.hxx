@@ -53,6 +53,7 @@ class Client_logic_error;
 class Session_needed_error;
 class Environment_error;
 class Ge211_logic_error;
+class Late_paint_error;
 class Host_error;
 class File_error;
 class Font_error;

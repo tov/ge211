@@ -71,6 +71,17 @@ private:
     std::string action_;
 };
 
+/// Thrown by member functions of @ref internal::Render_sprite when
+/// the sprite has already been rendered to the screen and can no longer
+/// be modified.
+class Late_paint_error : public Client_logic_error
+{
+    explicit Late_paint_error(char const* who);
+
+    // Throwers
+    friend ::ge211::internal::Render_sprite;
+};
+
 /// Indicates that an error was encountered by the game engine or
 /// in the client's environment.
 /// This could indicate a problem with your video driver,
@@ -96,7 +107,6 @@ class Ge211_logic_error : public Environment_error
     explicit Ge211_logic_error(const std::string& message);
 
     /// Throwers
-    friend internal::Render_sprite;
     friend Mixer;
     friend Text_sprite;
 };
@@ -118,7 +128,7 @@ class Host_error : public Environment_error
     /// Throwers
     friend Text_sprite;
     friend Window;
-    friend internal::Render_sprite;
+    friend ::ge211::internal::Render_sprite;
     friend class detail::Renderer;
     friend class detail::Texture;
 };
@@ -188,8 +198,8 @@ enum class Log_level
     fatal,
 };
 
-// Right now a Logger just keeps track of the current log
-// level. There's only one Logger (Singleton Pattern).
+/// Right now a Logger just keeps track of the current log
+/// level. There's only one Logger (Singleton Pattern).
 class Logger
 {
 public:
@@ -208,8 +218,8 @@ private:
     Log_level level_ = Log_level::warn;
 };
 
-// A Log_message accumulates information and then prints it all at
-// once when it's about to be destroyed.
+/// A Log_message accumulates information and then prints it all at
+/// once when it's about to be destroyed.
 class Log_message
 {
 public:

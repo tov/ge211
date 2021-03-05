@@ -63,6 +63,51 @@ void Texture_sprite::prepare(const Renderer& renderer) const
 
 namespace internal {
 
+Render_sprite::Render_sprite(Dims<int> dimensions)
+        : texture_{create_surface_(dimensions)}
+{ }
+
+Borrowed<SDL_Surface> Render_sprite::raw_surface()
+{
+    return raw_surface_("Render_sprite::raw_surface");
+}
+
+void Render_sprite::fill_surface(Color color)
+{
+    auto* surface = raw_surface_("Render_sprite::fill_surface");
+    SDL_FillRect(surface, nullptr, color.to_sdl_(surface->format));
+}
+
+void Render_sprite::fill_rectangle(Rect<int> rect, Color color)
+{
+    fill_rectangle_(rect, color, "Render_sprite::fill_rectangle");
+}
+
+void Render_sprite::set_pixel(Posn<int> xy, Color color)
+{
+    fill_rectangle_({xy.x, xy.y, 1, 1}, color, "Render_sprite::set_pixel");
+}
+
+const Texture& Render_sprite::get_texture_() const
+{
+    return texture_;
+}
+
+void Render_sprite::fill_rectangle_(Rect<int> rect, Color color, char const* who)
+{
+    auto* surface = raw_surface_(who);
+    SDL_Rect rect_buf = rect;
+    SDL_FillRect(surface, &rect_buf, color.to_sdl_(surface->format));
+}
+
+Borrowed<SDL_Surface> Render_sprite::raw_surface_(char const* who)
+{
+    SDL_Surface* result = texture_.raw_surface();
+    if (result) return result;
+
+    throw Late_paint_error{who};
+}
+
 Uniq_SDL_Surface Render_sprite::create_surface_(Dims<int> dimensions)
 {
     SDL_Surface* surface =
@@ -75,41 +120,6 @@ Uniq_SDL_Surface Render_sprite::create_surface_(Dims<int> dimensions)
         throw Host_error{"Could not create sprite surface"};
 
     return Uniq_SDL_Surface(surface);
-}
-
-Render_sprite::Render_sprite(Dims<int> dimensions)
-        : texture_{create_surface_(dimensions)}
-{ }
-
-const Texture& Render_sprite::get_texture_() const
-{
-    return texture_;
-}
-
-Borrowed<SDL_Surface> Render_sprite::raw_surface()
-{
-    SDL_Surface* result = texture_.raw_surface();
-    if (result) return result;
-
-    throw Ge211_logic_error{"Render_sprite::raw_surface: already a texture"};
-}
-
-void Render_sprite::fill_surface(Color color)
-{
-    auto* surface = raw_surface();
-    SDL_FillRect(surface, nullptr, color.to_sdl_(surface->format));
-}
-
-void Render_sprite::fill_rectangle(Rect<int> rect, Color color)
-{
-    auto* surface = raw_surface();
-    SDL_Rect rect_buf = rect;
-    SDL_FillRect(surface, &rect_buf, color.to_sdl_(surface->format));
-}
-
-void Render_sprite::set_pixel(Posn<int> xy, Color color)
-{
-    fill_rectangle({xy.x, xy.y, 1, 1}, color);
 }
 
 } // end namespace internal

@@ -90,18 +90,17 @@ private:
 namespace internal {
 
 /// A `Render_sprite` works by allowing its derived classes to render
-/// themselves pixel-by-pixel onto an [`SDL_Surface` ☛]. Then it converts
+/// themselves pixel-by-pixel onto an [`SDL_Surface`☛]. Then it converts
 /// the rendered surface into a `Texture`, which it caches.
 ///
 /// The constructor of the derived class should pass the required
 /// dimensions to the `Render_sprite` constructor. Then, in its own
 /// constructor, use @ref fill_surface(), @ref fill_rectangle(), and
 /// @ref set_pixel() to paint the desired sprite image to the
-/// surface. Or for direct access to the underlying [`SDL_Surface` ☛], use
+/// surface. Or for direct access to the underlying [`SDL_Surface`☛], use
 /// @ref raw_surface().
 ///
-/// [`SDL_Surface` ☛]:
-///     <https://wiki.libsdl.org/SDL_Surface>
+/// [`SDL_Surface`☛]: https://wiki.libsdl.org/SDL_Surface
 class Render_sprite : public detail::Texture_sprite
 {
 protected:
@@ -111,35 +110,61 @@ protected:
     ///  - Both dimensions are positive.
     explicit Render_sprite(Dims<int>);
 
+    /// Returns whether we can paint to this Render_sprite.
+    ///
+    /// If this sprite has already been rendered to the screen then this
+    /// function returns `false`. When the result is `false`, then calling
+    /// any of @ref fill_surface(), @ref fill_rectangle(), @ref
+    /// set_pixel(), or @ref raw_surface() will throw an
+    /// @ref exceptions::Late_paint_error exception.
+    bool can_paint() const;
+
     /// Fills the whole surface with the given color.
     ///
-    /// This should only be called from the derived class's constructor.
+    /// Typically this will only be called from a derived class's
+    /// constructor.
+    ///
+    /// \precondition
+    /// Throws @ref exceptions::Late_paint_error if `!`@ref can_paint().
     void fill_surface(Color);
 
     /// Fills the given rectangle in the given color.
     ///
-    /// This should only be called from the derived class's constructor.
+    /// Typically this will only be called from a derived class's
+    /// constructor.
+    ///
+    /// \precondition
+    /// Throws @ref exceptions::Late_paint_error if `!`@ref can_paint().
     void fill_rectangle(Rect<int>, Color);
 
     /// Sets one pixel to the given color.
     ///
-    /// This should only be called from the derived class's constructor.
+    /// Typically this will only be called from a derived class's
+    /// constructor.
+    ///
+    /// \precondition
+    /// Throws @ref exceptions::Late_paint_error if `!`@ref can_paint().
     void set_pixel(Posn<int>, Color);
 
-    /// Gains access to the underlying [`SDL_Surface` ☛].
+    /// Gains access to the underlying [`SDL_Surface`☛].
     ///
-    /// This function should only be called from the derived class's
-    /// constructor. If this sprite has already been rendered then
-    /// Ge211_logic_error will be thrown. If this function returns, the
-    /// result will be non-null.
+    /// Typically this will only be called from a derived class's
+    /// constructor. Never returns null.
     ///
-    /// [`SDL_Surface` ☛]:
-    ///     <https://wiki.libsdl.org/SDL_Surface>
+    /// \precondition
+    /// Throws @ref exceptions::Late_paint_error if `!`@ref can_paint().
+    ///
+    /// [`SDL_Surface`☛]: https://wiki.libsdl.org/SDL_Surface
     Borrowed<SDL_Surface> raw_surface();
 
 private:
     detail::Texture texture_;
+
     detail::Texture const& get_texture_() const override;
+
+    void fill_rectangle_(Rect<int>, Color, char const* who);
+
+    Borrowed<SDL_Surface> raw_surface_(char const* who);
 
     static detail::Uniq_SDL_Surface
     create_surface_(Dims<int>);

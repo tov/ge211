@@ -51,6 +51,20 @@ Session_needed_error::Session_needed_error(const std::string& action)
         , action_(action)
 { }
 
+static std::string build_late_paint_message(char const* who) {
+    std::ostringstream oss;
+    oss << "\n\nERROR\n=====\n\n"
+        << who
+        << ": Cannot paint to a ge211::internal::Render_sprite\n"
+           "that has already been rendered.\n";
+
+    return oss.str();
+}
+
+Late_paint_error::Late_paint_error(char const* who)
+        : Client_logic_error(build_late_paint_message(who))
+{ }
+
 static std::string build_sdl_error_message(const std::string& message) {
     const char* reason = take_sdl_error();
 
