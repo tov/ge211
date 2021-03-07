@@ -133,6 +133,12 @@ struct Dims
         return {Coordinate(width / scalar), Coordinate(height / scalar)};
     }
 
+    // Negates a Dims. (Multiplies it by -1.)
+    Dims operator-() const
+    {
+        return {-width, -height};
+    }
+
     /// Succinct Dims addition.
     Dims &operator+=(Dims that)
     {
