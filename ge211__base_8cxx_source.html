@@ -32,7 +32,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2021.1.1</span>
+   &#160;<span id="projectnumber">2021.3.2</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -149,46 +149,48 @@ $(document).ready(function(){initNavTree('ge211__base_8cxx_source.html',''); ini
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">if</span> (engine_)</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        engine_-&gt;prepare(sprite);</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        warn() &lt;&lt; <span class="stringliteral">&quot;Abstract_game::prepare: Could not prepare sprite &quot;</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;               &lt;&lt; <span class="stringliteral">&quot;because engine is not initialized&quot;</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keywordtype">void</span> Abstract_game::mark_present_() NOEXCEPT</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    busy_time_.pause();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keywordtype">void</span> Abstract_game::mark_frame_() NOEXCEPT</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;{</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    busy_time_.resume();</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    prev_frame_length_ = frame_start_.reset();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">if</span> (++sample_counter_ == frames_per_sample) {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keyword">auto</span> sample_duration = real_time_.reset().seconds();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keyword">auto</span> busy_duration   = busy_time_.reset().seconds();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        fps_            = frames_per_sample / sample_duration;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        load_           = 100 * busy_duration / sample_duration;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        sample_counter_ = 0;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keywordtype">void</span> Abstract_game::poll_channels_()</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;{</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">if</span> (mixer_.is_forced())</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        mixer_-&gt;poll_channels_();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="classge211_1_1_abstract__game.html#ae85ce1a769627a2932a9aedcc9316fc5">   82</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classge211_1_1_abstract__game.html#ae85ce1a769627a2932a9aedcc9316fc5">Abstract_game::on_key_down</a>(<a class="code" href="classge211_1_1events_1_1_key.html">Key</a> key)</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;{</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">if</span> (key.<a class="code" href="classge211_1_1events_1_1_key.html#a432fb7ffcc1364f573dcaa2513ea5b23">code</a>() == <span class="stringliteral">&#39;\u001B&#39;</span>) quit();</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;} <span class="comment">// end namespace ge211</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="namespacege211_1_1internal_1_1logging.html#aaee605ca6d13d1ebd3d40cd78b85e54c">internal::logging::warn</a>()</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            &lt;&lt; <span class="stringliteral">&quot;Abstract_game::prepare: Could not prepare sprite &quot;</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            &lt;&lt; <span class="stringliteral">&quot;because engine is not initialized&quot;</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordtype">void</span> Abstract_game::mark_present_() NOEXCEPT</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;{</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    busy_time_.pause();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keywordtype">void</span> Abstract_game::mark_frame_() NOEXCEPT</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;{</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    busy_time_.resume();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    prev_frame_length_ = frame_start_.reset();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordflow">if</span> (++sample_counter_ == frames_per_sample) {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keyword">auto</span> sample_duration = real_time_.reset().seconds();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keyword">auto</span> busy_duration   = busy_time_.reset().seconds();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        fps_            = frames_per_sample / sample_duration;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        load_           = 100 * busy_duration / sample_duration;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        sample_counter_ = 0;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keywordtype">void</span> Abstract_game::poll_channels_()</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">if</span> (mixer_.is_forced())</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        mixer_-&gt;poll_channels_();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classge211_1_1_abstract__game.html#ae85ce1a769627a2932a9aedcc9316fc5">   83</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classge211_1_1_abstract__game.html#ae85ce1a769627a2932a9aedcc9316fc5">Abstract_game::on_key_down</a>(<a class="code" href="classge211_1_1events_1_1_key.html">Key</a> key)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;{</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">if</span> (key.<a class="code" href="classge211_1_1events_1_1_key.html#a432fb7ffcc1364f573dcaa2513ea5b23">code</a>() == <span class="stringliteral">&#39;\u001B&#39;</span>) quit();</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;} <span class="comment">// end namespace ge211</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="abasic_string_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a></div></div>
-<div class="ttc" id="aclassge211_1_1_abstract__game_html_ae85ce1a769627a2932a9aedcc9316fc5"><div class="ttname"><a href="classge211_1_1_abstract__game.html#ae85ce1a769627a2932a9aedcc9316fc5">ge211::Abstract_game::on_key_down</a></div><div class="ttdeci">virtual void on_key_down(Key)</div><div class="ttdoc">Called by the game engine each time a key is depressed.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__base_8cxx_source.html#l00082">ge211_base.cxx:82</a></div></div>
+<div class="ttc" id="anamespacege211_1_1internal_1_1logging_html_aaee605ca6d13d1ebd3d40cd78b85e54c"><div class="ttname"><a href="namespacege211_1_1internal_1_1logging.html#aaee605ca6d13d1ebd3d40cd78b85e54c">ge211::internal::logging::warn</a></div><div class="ttdeci">Log_message warn(std::string reason=&quot;&quot;)</div><div class="ttdoc">Returns a warn-level log message.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__error_8cxx_source.html#l00176">ge211_error.cxx:176</a></div></div>
+<div class="ttc" id="aclassge211_1_1_abstract__game_html_ae85ce1a769627a2932a9aedcc9316fc5"><div class="ttname"><a href="classge211_1_1_abstract__game.html#ae85ce1a769627a2932a9aedcc9316fc5">ge211::Abstract_game::on_key_down</a></div><div class="ttdeci">virtual void on_key_down(Key)</div><div class="ttdoc">Called by the game engine each time a key is depressed.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__base_8cxx_source.html#l00083">ge211_base.cxx:83</a></div></div>
 <div class="ttc" id="aclassge211_1_1_abstract__game_html_ac4eaf7428940544c4776e138621a6946"><div class="ttname"><a href="classge211_1_1_abstract__game.html#ac4eaf7428940544c4776e138621a6946">ge211::Abstract_game::default_window_dimensions</a></div><div class="ttdeci">static const Dims&lt; int &gt; default_window_dimensions</div><div class="ttdoc">The default window dimensions, in pixels.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__base_8hxx_source.html#l00151">ge211_base.hxx:151</a></div></div>
 <div class="ttc" id="aclassge211_1_1_abstract__game_html_a5dd1fce58a747385e3372c62744933d7"><div class="ttname"><a href="classge211_1_1_abstract__game.html#a5dd1fce58a747385e3372c62744933d7">ge211::Abstract_game::initial_window_title</a></div><div class="ttdeci">virtual std::string initial_window_title() const</div><div class="ttdoc">Override this function to specify the initial title of the game.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__base_8cxx_source.html#l00024">ge211_base.cxx:24</a></div></div>
 <div class="ttc" id="aclassge211_1_1events_1_1_key_html"><div class="ttname"><a href="classge211_1_1events_1_1_key.html">ge211::events::Key</a></div><div class="ttdoc">Represents a key on the keyboard.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__event_8hxx_source.html#l00127">ge211_event.hxx:128</a></div></div>

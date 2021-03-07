@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['width_2698',['width',['../structge211_1_1geometry_1_1_dims.html#afacc5a60c416c4e435b3e7b7634e11d9',1,'ge211::geometry::Dims::width()'],['../structge211_1_1geometry_1_1_rect.html#afacc5a60c416c4e435b3e7b7634e11d9',1,'ge211::geometry::Rect::width()']]]
+  ['value_2744',['value',['../structge211_1_1_color_1_1_h_s_v_a.html#aee90379adb0307effb138f4871edbc5c',1,'ge211::Color::HSVA']]]
 ];

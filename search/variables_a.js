@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['x_2699',['x',['../structge211_1_1geometry_1_1_posn.html#afaf4c505f41c9d6c8408963b4d62a872',1,'ge211::geometry::Posn::x()'],['../structge211_1_1geometry_1_1_rect.html#afaf4c505f41c9d6c8408963b4d62a872',1,'ge211::geometry::Rect::x()']]]
+  ['width_2745',['width',['../structge211_1_1geometry_1_1_dims.html#afacc5a60c416c4e435b3e7b7634e11d9',1,'ge211::geometry::Dims::width()'],['../structge211_1_1geometry_1_1_rect.html#afacc5a60c416c4e435b3e7b7634e11d9',1,'ge211::geometry::Rect::width()']]]
 ];

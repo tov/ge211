@@ -32,7 +32,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2021.1.1</span>
+   &#160;<span id="projectnumber">2021.3.2</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -149,9 +149,18 @@ $(document).ready(function(){initNavTree('ge211__random_8cxx_source.html',''); i
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> distribution_(generator_) &lt;= probability_;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;} <span class="comment">// end namespace detail</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;} <span class="comment">// end namespace random</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;} <span class="comment">// end namespace ge211</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordtype">bool</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;Pseudo_random_engine&lt;bool&gt;::next_between(<span class="keywordtype">bool</span> lo, <span class="keywordtype">bool</span> hi)</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;{</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">// if lo &lt; hi   return next()</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">// if lo &gt; hi   return ! next()</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="comment">// if lo == hi  return lo</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">return</span> lo ^ (lo != hi &amp;&amp; <a class="codeRef" href="http://en.cppreference.com/w/cpp/iterator/next.html">next</a>());</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;} <span class="comment">// end namespace detail</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;} <span class="comment">// end namespace random</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;} <span class="comment">// end namespace ge211</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="ahigh_resolution_clock_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/chrono/high_resolution_clock.html">std::chrono::high_resolution_clock</a></div></div>
@@ -159,6 +168,7 @@ $(document).ready(function(){initNavTree('ge211__random_8cxx_source.html',''); i
 <div class="ttc" id="anamespacege211_html"><div class="ttname"><a href="namespacege211.html">ge211</a></div><div class="ttdoc">The game engine namespace.</div><div class="ttdef"><b>Definition:</b> <a href="ge211_8hxx_source.html#l00004">ge211.hxx:4</a></div></div>
 <div class="ttc" id="arandom_device_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/numeric/random/random_device.html">std::random_device</a></div></div>
 <div class="ttc" id="aclassge211_1_1exceptions_1_1_client__logic__error_html"><div class="ttname"><a href="classge211_1_1exceptions_1_1_client__logic__error.html">ge211::exceptions::Client_logic_error</a></div><div class="ttdoc">An exception that indicates that a logic error was performed by the client.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__error_8hxx_source.html#l00047">ge211_error.hxx:48</a></div></div>
+<div class="ttc" id="anext_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/iterator/next.html">std::next</a></div><div class="ttdeci">T next(T... args)</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

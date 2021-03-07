@@ -10,6 +10,7 @@ var structge211_1_1geometry_1_1_dims =
     [ "operator*=", "structge211_1_1geometry_1_1_dims.html#acdccbb332f23bc2ac22971afb4eced18", null ],
     [ "operator+", "structge211_1_1geometry_1_1_dims.html#a148e0d74136d97b574279c75b9a65316", null ],
     [ "operator+=", "structge211_1_1geometry_1_1_dims.html#a7252683f84f317f487dc12761d1f49a3", null ],
+    [ "operator-", "structge211_1_1geometry_1_1_dims.html#ab11e0838dedf4fb6ac6b68281c0c2fcc", null ],
     [ "operator-", "structge211_1_1geometry_1_1_dims.html#abeb6c0f0dea3c2653de6ba5b9b061ed0", null ],
     [ "operator-=", "structge211_1_1geometry_1_1_dims.html#a254822d4e756a679aae964839c90ae97", null ],
     [ "operator/", "structge211_1_1geometry_1_1_dims.html#a3913923742713e6079a308d2ed8a9d1e", null ],

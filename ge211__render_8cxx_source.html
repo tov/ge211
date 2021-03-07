@@ -32,7 +32,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2021.1.1</span>
+   &#160;<span id="projectnumber">2021.3.2</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -174,9 +174,9 @@ $(document).ready(function(){initNavTree('ge211__render_8cxx_source.html',''); i
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordtype">bool</span> Renderer::is_vsync() const NOEXCEPT</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;{</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    SDL_RendererInfo info;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    SDL_RendererInfo <a class="code" href="namespacege211_1_1internal_1_1logging.html#a7214ea2d319e1068f2753b7f06dbf6ae">info</a>;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    SDL_GetRendererInfo(get_raw_(), &amp;info);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">return</span> (info.flags &amp; SDL_RENDERER_PRESENTVSYNC) != 0;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">return</span> (<a class="code" href="namespacege211_1_1internal_1_1logging.html#a7214ea2d319e1068f2753b7f06dbf6ae">info</a>.flags &amp; SDL_RENDERER_PRESENTVSYNC) != 0;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keywordtype">void</span> Renderer::clear()</div>
@@ -315,7 +315,7 @@ $(document).ready(function(){initNavTree('ge211__render_8cxx_source.html',''); i
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    <span class="keywordflow">return</span> result;</div>
 <div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;}</div>
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;SDL_Surface* Texture::as_surface() NOEXCEPT</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;Borrowed&lt;SDL_Surface&gt; Texture::raw_surface() NOEXCEPT</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;{</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="keywordflow">return</span> impl_-&gt;surface_.get();</div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;}</div>
@@ -330,9 +330,10 @@ $(document).ready(function(){initNavTree('ge211__render_8cxx_source.html',''); i
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="astructge211_1_1geometry_1_1_rect_html_ae18da1b80963bae7f6ab0b5dcfefc389"><div class="ttname"><a href="structge211_1_1geometry_1_1_rect.html#ae18da1b80963bae7f6ab0b5dcfefc389">ge211::geometry::Rect::from_top_left</a></div><div class="ttdeci">static Rect from_top_left(Posn_type tl, Dims_type dims)</div><div class="ttdoc">Creates a Rect given the position of its top left vertex and its dimensions.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8hxx_source.html#l00537">ge211_geometry.hxx:537</a></div></div>
+<div class="ttc" id="astructge211_1_1geometry_1_1_rect_html_ae18da1b80963bae7f6ab0b5dcfefc389"><div class="ttname"><a href="structge211_1_1geometry_1_1_rect.html#ae18da1b80963bae7f6ab0b5dcfefc389">ge211::geometry::Rect::from_top_left</a></div><div class="ttdeci">static Rect from_top_left(Posn_type tl, Dims_type dims)</div><div class="ttdoc">Creates a Rect given the position of its top left vertex and its dimensions.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__geometry_8hxx_source.html#l00543">ge211_geometry.hxx:543</a></div></div>
 <div class="ttc" id="amove_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/utility/move.html">std::move</a></div><div class="ttdeci">T move(T... args)</div></div>
 <div class="ttc" id="amake_shared_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/memory/shared_ptr/make_shared.html">std::make_shared</a></div><div class="ttdeci">T make_shared(T... args)</div></div>
+<div class="ttc" id="anamespacege211_1_1internal_1_1logging_html_a7214ea2d319e1068f2753b7f06dbf6ae"><div class="ttname"><a href="namespacege211_1_1internal_1_1logging.html#a7214ea2d319e1068f2753b7f06dbf6ae">ge211::internal::logging::info</a></div><div class="ttdeci">Log_message info(std::string reason=&quot;&quot;)</div><div class="ttdoc">Returns a info-level log message.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__error_8cxx_source.html#l00171">ge211_error.cxx:171</a></div></div>
 <div class="ttc" id="anamespacege211_html"><div class="ttname"><a href="namespacege211.html">ge211</a></div><div class="ttdoc">The game engine namespace.</div><div class="ttdef"><b>Definition:</b> <a href="ge211_8hxx_source.html#l00004">ge211.hxx:4</a></div></div>
 <div class="ttc" id="atransform_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/algorithm/transform.html">std::transform</a></div><div class="ttdeci">T transform(T... args)</div></div>
 <!-- start footer part -->

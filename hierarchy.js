@@ -13,6 +13,7 @@ var hierarchy =
     [ "exception", "http://en.cppreference.com/w/cpp/error/exception.html", [
       [ "Exception_base", "classge211_1_1exceptions_1_1_exception__base.html", [
         [ "Client_logic_error", "classge211_1_1exceptions_1_1_client__logic__error.html", [
+          [ "Late_paint_error", "classge211_1_1exceptions_1_1_late__paint__error.html", null ],
           [ "Session_needed_error", "classge211_1_1exceptions_1_1_session__needed__error.html", null ]
         ] ],
         [ "Environment_error", "classge211_1_1exceptions_1_1_environment__error.html", [
@@ -34,6 +35,8 @@ var hierarchy =
       [ "Rect< COORDINATE >::iterator", "classge211_1_1geometry_1_1_rect_1_1iterator.html", null ]
     ] ],
     [ "Key", "classge211_1_1events_1_1_key.html", null ],
+    [ "Log_message", "classge211_1_1internal_1_1logging_1_1_log__message.html", null ],
+    [ "Logger", "classge211_1_1internal_1_1logging_1_1_logger.html", null ],
     [ "Mixer", "classge211_1_1audio_1_1_mixer.html", null ],
     [ "origin_type", "classge211_1_1geometry_1_1origin__type.html", null ],
     [ "Pausable_timer", "classge211_1_1time_1_1_pausable__timer.html", null ],
@@ -45,7 +48,7 @@ var hierarchy =
     [ "Sound_effect_handle", "classge211_1_1audio_1_1_sound__effect__handle.html", null ],
     [ "Sprite", "classge211_1_1sprites_1_1_sprite.html", [
       [ "Texture_sprite", null, [
-        [ "Render_sprite", null, [
+        [ "Render_sprite", "classge211_1_1internal_1_1_render__sprite.html", [
           [ "Circle_sprite", "classge211_1_1sprites_1_1_circle__sprite.html", null ],
           [ "Rectangle_sprite", "classge211_1_1sprites_1_1_rectangle__sprite.html", null ]
         ] ],
@@ -58,5 +61,6 @@ var hierarchy =
     [ "Time_point", "classge211_1_1time_1_1_time__point.html", null ],
     [ "Timer", "classge211_1_1time_1_1_timer.html", null ],
     [ "Transform", "classge211_1_1geometry_1_1_transform.html", null ],
+    [ "unbounded_type", "classge211_1_1unbounded__type.html", null ],
     [ "Window", "classge211_1_1_window.html", null ]
 ];

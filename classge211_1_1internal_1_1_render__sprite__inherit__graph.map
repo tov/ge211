@@ -1,0 +1,7 @@
+<map id="Render_sprite" name="Render_sprite">
+<area shape="rect" id="node1" title="A Render_sprite works by allowing its derived classes to render themselves pixel&#45;by&#45;pixel onto an SDL..." alt="" coords="67,155,169,181"/>
+<area shape="rect" id="node4" href="$classge211_1_1sprites_1_1_circle__sprite.html" title="A Sprite that renders as a solid circle." alt="" coords="5,229,100,256"/>
+<area shape="rect" id="node5" href="$classge211_1_1sprites_1_1_rectangle__sprite.html" title="A Sprite that renders as a solid rectangle." alt="" coords="125,229,245,256"/>
+<area shape="rect" id="node2" title=" " alt="" coords="66,80,170,107"/>
+<area shape="rect" id="node3" href="$classge211_1_1sprites_1_1_sprite.html" title="A sprite is an image that knows how to render itself to the screen at a given location,..." alt="" coords="90,5,146,32"/>
+</map>

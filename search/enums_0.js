@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mouse_5fbutton_2707',['Mouse_button',['../namespacege211_1_1events.html#a7996c6421dbcbb112730003daf99ab94',1,'ge211::events']]]
+  ['log_5flevel_2754',['Log_level',['../namespacege211_1_1internal_1_1logging.html#a439a79288cf2529846a8828ad47b82aa',1,'ge211::internal::logging']]]
 ];
