@@ -141,10 +141,10 @@ Mixer::~Mixer()
 }
 
 
-void Mixer::play_music(Music_track music)
+void Mixer::play_music(Music_track music, bool forever)
 {
     attach_music(std::move(music));
-    resume_music();
+    resume_music(Duration(0), forever);
 }
 
 void Mixer::attach_music(Music_track music)
@@ -170,7 +170,7 @@ void Mixer::attach_music(Music_track music)
     }
 }
 
-void Mixer::resume_music(Duration fade_in)
+void Mixer::resume_music(Duration fade_in, bool forever)
 {
     switch (music_state_) {
         case State::detached:
@@ -179,7 +179,7 @@ void Mixer::resume_music(Duration fade_in)
         case State::paused:
             Mix_RewindMusic();
             Mix_FadeInMusicPos(current_music_.ptr_.get(),
-                               0,
+                               forever? -1 : 0,
                                int(fade_in.milliseconds()),
                                music_position_.elapsed_time().seconds());
             music_position_.resume();
