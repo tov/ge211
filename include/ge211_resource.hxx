@@ -13,10 +13,23 @@ extern "C" {
 extern DECLSPEC void SDLCALL TTF_CloseFont(TTF_Font*);
 }
 
+#include <fstream>
 #include <string>
 #include <vector>
 
 namespace ge211 {
+
+/// Opens a file in the `Resources/` directory for input in text mode.
+///
+/// Throws @ref exceptions::File_error if the file cannot be opened.
+std::ifstream
+open_resource_file(std::string const& filename);
+
+/// Opens a file in the `Resources/` directory for input in binary mode.
+///
+/// Throws @ref exceptions::File_error if the file cannot be opened.
+std::ifstream
+open_binary_resource_file(std::string const& filename);
 
 namespace detail {
 

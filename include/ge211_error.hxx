@@ -139,8 +139,11 @@ class File_error final : public Host_error
     explicit File_error(const std::string& message);
     static File_error could_not_open(const std::string& filename);
 
-    /// Thrower
+    /// Throwers
     friend class detail::File_resource;
+
+    template <bool>
+    friend struct detail::ifstream_opener;
 };
 
 /// Indicates an error loading a font front an already-open file.

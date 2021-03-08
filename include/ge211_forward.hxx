@@ -124,6 +124,9 @@ class Session;
 class Texture;
 class Texture_sprite;
 
+template <bool>
+struct ifstream_opener;
+
 } // end namespace detail
 
 // Bring everything but `detail` and `internal` into the ge211
