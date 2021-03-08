@@ -56,8 +56,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"",
-"classge211_1_1time_1_1_duration.html#a9e10e19f3a16435d0544a0c1e37223eb"
+"annotated.html",
+"classge211_1_1time_1_1_duration.html#ac71e679fa64b1f19c9ca6312fe879322"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

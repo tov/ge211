@@ -1,6 +1,5 @@
 var NAVTREEINDEX0 =
 {
-"":[2,0,1],
 "annotated.html":[2,0],
 "classes.html":[2,1],
 "classge211_1_1_abstract__game.html":[2,0,0,7],
@@ -249,5 +248,6 @@ var NAVTREEINDEX0 =
 "classge211_1_1time_1_1_duration.html#a60b5d1e05eb3d0b5195125cf671c125b":[2,0,0,6,0,5],
 "classge211_1_1time_1_1_duration.html#a74dc560c2db87b83d38eb65bce2ee79f":[2,0,0,6,0,7],
 "classge211_1_1time_1_1_duration.html#a7f0b62d45a396c44da2a091377519a85":[2,0,0,6,0,10],
-"classge211_1_1time_1_1_duration.html#a8372ed24630cfb2f570236dcb38e5be1":[2,0,0,6,0,4]
+"classge211_1_1time_1_1_duration.html#a8372ed24630cfb2f570236dcb38e5be1":[2,0,0,6,0,4],
+"classge211_1_1time_1_1_duration.html#a9e10e19f3a16435d0544a0c1e37223eb":[2,0,0,6,0,9]
 };
