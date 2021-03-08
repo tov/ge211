@@ -48,8 +48,9 @@ struct ifstream_opener
     using result_t = std::ifstream;
 
     static constexpr std::ios_base::openmode
-    mode = std::ios_base::in
-         | (BinaryMode? std::ios_base::binary : 0);
+    mode = BinaryMode
+            ? std::ios_base::in | std::ios_base::binary
+            : std::ios_base::in;
 
     static result_t open(std::string const& path)
     {
