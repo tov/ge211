@@ -219,14 +219,16 @@ public:
     ///@{
 
     /// Attaches the given music track to this mixer and starts it playing.
-    /// Loops music forever if requested.
+    /// Loops forever if given `true` for `forever`; otherwise when the
+    /// music track finishes, the mixer rewinds and pauses it.
+    ///
     /// Equivalent to @ref Mixer::attach_music followed by
     /// @ref Mixer::resume_music.
     ///
     /// \preconditions
     ///  - `get_music_state()` is `paused` or `detached`; throws
     ///    exceptions::Client_logic_error if violated.
-    void play_music(Music_track, bool forever = true);
+    void play_music(Music_track, bool forever = false);
 
     /// Attaches the given music track to this mixer. Give the empty
     /// Music_track to detach the current track, if any, without attaching a
@@ -237,13 +239,15 @@ public:
     ///    exceptions::Client_logic_error if violated.
     void attach_music(Music_track);
 
-    /// Plays the currently attached music from the current saved position,
-    /// fading in if requested and looping forever unless requested.
+    /// Plays the currently attached music from the current saved position.
+    /// Fades in if given a non-zero @ref Duration for `fade_in`.
+    /// Loops forever if given `true` for `forever`; otherwise when the
+    /// music track finishes, the mixer rewinds and pauses it.
     ///
     /// \preconditions
     ///  - `get_music_state()` is `paused` or `playing`; throws
     ///    exceptions::Client_logic_error if violated.
-    void resume_music(Duration fade_in = Duration(0), bool forever = true);
+    void resume_music(Duration fade_in = Duration(0), bool forever = false);
 
     /// Pauses the currently attached music, fading out if requested.
     ///
