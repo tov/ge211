@@ -79,7 +79,7 @@ private:
 /// Note that Music_track has few public member functions. However, a
 /// music track can be passed to these Mixer member functions to play it:
 ///
-///  - @ref Mixer::play_music(Music_track)
+///  - @ref Mixer::play_music(Music_track, bool)
 ///  - @ref Mixer::attach_music(Music_track)
 ///
 /// Note also that the mixer can only play one music track at a time.
@@ -219,13 +219,14 @@ public:
     ///@{
 
     /// Attaches the given music track to this mixer and starts it playing.
+    /// Loops music forever if requested.
     /// Equivalent to @ref Mixer::attach_music followed by
     /// @ref Mixer::resume_music.
     ///
     /// \preconditions
     ///  - `get_music_state()` is `paused` or `detached`; throws
     ///    exceptions::Client_logic_error if violated.
-    void play_music(Music_track);
+    void play_music(Music_track, bool forever = true);
 
     /// Attaches the given music track to this mixer. Give the empty
     /// Music_track to detach the current track, if any, without attaching a
@@ -237,12 +238,12 @@ public:
     void attach_music(Music_track);
 
     /// Plays the currently attached music from the current saved position,
-    /// fading in if requested.
+    /// fading in if requested and looping forever unless requested.
     ///
     /// \preconditions
     ///  - `get_music_state()` is `paused` or `playing`; throws
     ///    exceptions::Client_logic_error if violated.
-    void resume_music(Duration fade_in = Duration(0));
+    void resume_music(Duration fade_in = Duration(0), bool forever = true);
 
     /// Pauses the currently attached music, fading out if requested.
     ///

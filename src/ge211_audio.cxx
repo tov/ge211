@@ -141,10 +141,10 @@ Mixer::~Mixer()
 }
 
 
-void Mixer::play_music(Music_track music)
+void Mixer::play_music(Music_track music, bool forever)
 {
     attach_music(std::move(music));
-    resume_music();
+    resume_music(forever);
 }
 
 void Mixer::attach_music(Music_track music)
@@ -170,8 +170,15 @@ void Mixer::attach_music(Music_track music)
     }
 }
 
-void Mixer::resume_music(Duration fade_in)
+void Mixer::resume_music(Duration fade_in, bool forever)
 {
+    // 0 plays the music once
+    int loops = 0;
+    if (forever) {
+        // -1 plays the music forever, looping it
+        loops = -1;
+    }
+
     switch (music_state_) {
         case State::detached:
             throw Client_logic_error("Mixer::resume_music: no music attached");
@@ -179,7 +186,7 @@ void Mixer::resume_music(Duration fade_in)
         case State::paused:
             Mix_RewindMusic();
             Mix_FadeInMusicPos(current_music_.ptr_.get(),
-                               0,
+                               loops,
                                int(fade_in.milliseconds()),
                                music_position_.elapsed_time().seconds());
             music_position_.resume();
