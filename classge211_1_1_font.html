@@ -32,7 +32,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2021.3.2</span>
+   &#160;<span id="projectnumber">2021.4.0</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -104,10 +104,10 @@ $(document).ready(function(){initNavTree('classge211_1_1_font.html',''); initRes
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a font that can be used to render a <a class="el" href="classge211_1_1sprites_1_1_text__sprite.html" title="A Sprite that displays text.">sprites::Text_sprite</a>. </p>
 <p>To create a font, you must specify the TrueType font file (<code>.ttf</code>) to load, and that file must be in the <code>Resources/</code> directory of your project. You can create multiple <a class="el" href="classge211_1_1_font.html" title="Represents a font that can be used to render a sprites::Text_sprite.">Font</a> instances for the same font file at different sizes.</p>
-<p>One TTF file, <code>sans.tff</code>, is included among ge211's built-in resources, and can always be used even if you haven't added any fonts yourself.</p>
+<p>One TTF file, <code>sans.ttf</code>, is included among ge211's built-in resources, and can always be used even if you haven't added any fonts yourself.</p>
 <p>Note that <a class="el" href="classge211_1_1_font.html" title="Represents a font that can be used to render a sprites::Text_sprite.">Font</a>s cannot be constructed until the text subsystem is initialized. The text subsystem is initialized with the rest of <a class="el" href="namespacege211.html" title="The game engine namespace.">ge211</a> when the <a class="el" href="classge211_1_1_abstract__game.html" title="This is the abstract base class for deriving games.">Abstract_game</a> underlying your game struct or class is constructed. Thus, you cannot create namespace level (or global) <a class="el" href="classge211_1_1_font.html" title="Represents a font that can be used to render a sprites::Text_sprite.">Font</a>s. The usual place to define <a class="el" href="classge211_1_1_font.html" title="Represents a font that can be used to render a sprites::Text_sprite.">Font</a>s is as member variables in your game struct, since member variables of a derived class are initialized after the base class is initialized. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__resource_8hxx_source.html#l00056">56</a> of file <a class="el" href="ge211__resource_8hxx_source.html">ge211_resource.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__resource_8hxx_source.html#l00069">69</a> of file <a class="el" href="ge211__resource_8hxx_source.html">ge211_resource.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>

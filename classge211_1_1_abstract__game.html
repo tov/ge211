@@ -32,7 +32,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2021.3.2</span>
+   &#160;<span id="projectnumber">2021.4.0</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -358,7 +358,7 @@ Protected Attributes</h2></td></tr>
 <p>Returns an approximation of the current frame rate in Hz. </p>
 <p>Typically we synchronize the frame rate with the video controller, but accessing it might be useful for diagnosing performance problems. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00275">275</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00273">273</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
 
 </div>
 </div>
@@ -388,7 +388,7 @@ Protected Attributes</h2></td></tr>
 <p>Gets the time point at which the current frame started. </p>
 <p>This can be used to measure intervals between events, though it might be better to use a <a class="el" href="classge211_1_1time_1_1_timer.html" title="A class for timing intervals. The result is a Duration.">time::Timer</a> or <a class="el" href="classge211_1_1time_1_1_pausable__timer.html" title="A class for timing intervals while supporting pausing.">time::Pausable_timer</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00264">264</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00262">262</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
 
 </div>
 </div>
@@ -418,7 +418,7 @@ Protected Attributes</h2></td></tr>
 <p>Returns the duration of the frame right before the frame currently running. </p>
 <p>See <a class="el" href="classge211_1_1time_1_1_duration.html" title="A length of time.">time::Duration</a> for information on how to use the result. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00269">269</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00267">267</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
 
 </div>
 </div>
@@ -507,7 +507,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Override this function to specify the initial title of the game. </p>
-<p>This is only called by the engine once at startup. To change the title during the game, use <a class="el" href="classge211_1_1_abstract__game.html#a329a95db19556a21771dc45265095cee" title="Gets the Window that the game is running in.">get_window() const </a>and Window::set_title(const std::string&amp;). </p>
+<p>This is only called by the engine once at startup. </p>
 
 <p class="definition">Definition at line <a class="el" href="ge211__base_8cxx_source.html#l00024">24</a> of file <a class="el" href="ge211__base_8cxx_source.html">ge211_base.cxx</a>.</p>
 
@@ -776,7 +776,7 @@ Protected Attributes</h2></td></tr>
 <p>Assign this member variable to change the window's background color in subsequent frames. </p>
 <p>The usual place to assign this variable is from your overridden <a class="el" href="classge211_1_1_abstract__game.html#a6122f9c7efc34a6648754d435f0ed8c8" title="Called by the game engine after initializing the game but before commencing the event loop.">on_start()</a> and/or <a class="el" href="classge211_1_1_abstract__game.html#a44518135e411e35374f252d1c7d44e3e" title="You must override this function in the derived class to specify how to draw your scene.">draw(Sprite_set&amp;)</a> functions. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00298">298</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__base_8hxx_source.html#l00296">296</a> of file <a class="el" href="ge211__base_8hxx_source.html">ge211_base.hxx</a>.</p>
 
 </div>
 </div>

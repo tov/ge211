@@ -20,9 +20,9 @@ var classge211_1_1audio_1_1_mixer =
     [ "pause_all_effects", "classge211_1_1audio_1_1_mixer.html#a4528ee2be1cd4da81e6d4d8e12d872f3", null ],
     [ "pause_music", "classge211_1_1audio_1_1_mixer.html#a719fb22740078909c02b8ceae673dc49", null ],
     [ "play_effect", "classge211_1_1audio_1_1_mixer.html#a44e4d21a97285323b523a94380561220", null ],
-    [ "play_music", "classge211_1_1audio_1_1_mixer.html#a2838a830ec261732a92d6661e8f7896d", null ],
+    [ "play_music", "classge211_1_1audio_1_1_mixer.html#ac811021d010b3d84eac0363c9eb993d4", null ],
     [ "resume_all_effects", "classge211_1_1audio_1_1_mixer.html#a27f3a58dd43265a7a40e5608d4bb6330", null ],
-    [ "resume_music", "classge211_1_1audio_1_1_mixer.html#a61e224afec653fdb5f9b1e19cadfb9d2", null ],
+    [ "resume_music", "classge211_1_1audio_1_1_mixer.html#a560664bbc443cc0f6af4cf8cdd238768", null ],
     [ "rewind_music", "classge211_1_1audio_1_1_mixer.html#a810210b7b1d7fb6be78a0dffb94d4431", null ],
     [ "set_music_volume", "classge211_1_1audio_1_1_mixer.html#a0ae3b978f05c3ba7468f2a0509413b30", null ],
     [ "try_play_effect", "classge211_1_1audio_1_1_mixer.html#a41ec193bfca490e91ecff189a60f805a", null ]

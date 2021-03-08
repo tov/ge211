@@ -32,7 +32,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2021.3.2</span>
+   &#160;<span id="projectnumber">2021.4.0</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -170,6 +170,12 @@ template&lt;typename OBJECT_TYPE &gt; </td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a2dadd7cd96f1642d432e9d63de63f00c"><td class="memItemLeft" align="right" valign="top"><a class="elRef" href="http://en.cppreference.com/w/cpp/io/basic_ifstream.html">std::ifstream</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacege211.html#a2dadd7cd96f1642d432e9d63de63f00c">open_resource_file</a> (<a class="elRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> const &amp;filename)</td></tr>
+<tr class="memdesc:a2dadd7cd96f1642d432e9d63de63f00c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a file in the <code>Resources/</code> directory for input in text mode.  <a href="namespacege211.html#a2dadd7cd96f1642d432e9d63de63f00c">More...</a><br /></td></tr>
+<tr class="separator:a2dadd7cd96f1642d432e9d63de63f00c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa708c6f4ea6c64987fdcc17d9b53bc01"><td class="memItemLeft" align="right" valign="top"><a class="elRef" href="http://en.cppreference.com/w/cpp/io/basic_ifstream.html">std::ifstream</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacege211.html#aa708c6f4ea6c64987fdcc17d9b53bc01">open_binary_resource_file</a> (<a class="elRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> const &amp;filename)</td></tr>
+<tr class="memdesc:aa708c6f4ea6c64987fdcc17d9b53bc01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a file in the <code>Resources/</code> directory for input in binary mode.  <a href="namespacege211.html#aa708c6f4ea6c64987fdcc17d9b53bc01">More...</a><br /></td></tr>
+<tr class="separator:aa708c6f4ea6c64987fdcc17d9b53bc01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a174cc07dfd21de67da102cec93c0303d"><td class="memTemplParams" colspan="2"><a id="a174cc07dfd21de67da102cec93c0303d"></a>
 template&lt;typename PRINTABLE &gt; </td></tr>
 <tr class="memitem:a174cc07dfd21de67da102cec93c0303d"><td class="memTemplItemLeft" align="right" valign="top"><a class="elRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacege211.html#a174cc07dfd21de67da102cec93c0303d">to_string</a> (const PRINTABLE &amp;value)</td></tr>
@@ -182,6 +188,53 @@ Variables</h2></td></tr>
 <tr class="memdesc:a257730de21159253dae5eaef8653b35e"><td class="mdescLeft">&#160;</td><td class="mdescRight">A tag value for passing to the constructor <a class="el" href="classge211_1_1_random__source.html#ad97908ff91a1a617c8ef8e625e9cd239">Random_source::Random_source(unbounded_type)</a> in order to delay specifying the range of numbers at construction time.  <a href="namespacege211.html#a257730de21159253dae5eaef8653b35e">More...</a><br /></td></tr>
 <tr class="separator:a257730de21159253dae5eaef8653b35e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="aa708c6f4ea6c64987fdcc17d9b53bc01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa708c6f4ea6c64987fdcc17d9b53bc01">&#9670;&nbsp;</a></span>open_binary_resource_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="http://en.cppreference.com/w/cpp/io/basic_ifstream.html">std::ifstream</a> open_binary_resource_file </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> const &amp;&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Opens a file in the <code>Resources/</code> directory for input in binary mode. </p>
+<p>Throws <a class="el" href="classge211_1_1exceptions_1_1_file__error.html">exceptions::File_error</a> if the file cannot be opened. </p>
+
+<p class="definition">Definition at line <a class="el" href="ge211__resource_8cxx_source.html#l00074">74</a> of file <a class="el" href="ge211__resource_8cxx_source.html">ge211_resource.cxx</a>.</p>
+
+</div>
+</div>
+<a id="a2dadd7cd96f1642d432e9d63de63f00c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dadd7cd96f1642d432e9d63de63f00c">&#9670;&nbsp;</a></span>open_resource_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="http://en.cppreference.com/w/cpp/io/basic_ifstream.html">std::ifstream</a> open_resource_file </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> const &amp;&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Opens a file in the <code>Resources/</code> directory for input in text mode. </p>
+<p>Throws <a class="el" href="classge211_1_1exceptions_1_1_file__error.html">exceptions::File_error</a> if the file cannot be opened. </p>
+
+<p class="definition">Definition at line <a class="el" href="ge211__resource_8cxx_source.html#l00068">68</a> of file <a class="el" href="ge211__resource_8cxx_source.html">ge211_resource.cxx</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Variable Documentation</h2>
 <a id="a257730de21159253dae5eaef8653b35e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a257730de21159253dae5eaef8653b35e">&#9670;&nbsp;</a></span>unbounded</h2>

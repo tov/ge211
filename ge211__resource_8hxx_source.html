@@ -32,7 +32,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2021.3.2</span>
+   &#160;<span id="projectnumber">2021.4.0</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -113,52 +113,62 @@ $(document).ready(function(){initNavTree('ge211__resource_8hxx_source.html','');
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">extern</span> DECLSPEC <span class="keywordtype">void</span> SDLCALL TTF_CloseFont(TTF_Font*);</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;}</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacege211.html">ge211</a> {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">namespace </span>detail {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">class </span>File_resource</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">explicit</span> File_resource(<span class="keyword">const</span> <a class="codeRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>&amp;);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacege211.html">ge211</a> {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<a class="codeRef" href="http://en.cppreference.com/w/cpp/io/basic_ifstream.html">std::ifstream</a></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<a class="code" href="namespacege211.html#a2dadd7cd96f1642d432e9d63de63f00c">open_resource_file</a>(<a class="codeRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> <span class="keyword">const</span>&amp; filename);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    Borrowed&lt;SDL_RWops&gt; get_raw() const NOEXCEPT { <span class="keywordflow">return</span> ptr_.get(); }</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    Owned&lt;SDL_RWops&gt; release() &amp;&amp; { <span class="keywordflow">return</span> ptr_.release(); }</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> close_rwops_(Owned&lt;SDL_RWops&gt;);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    delete_ptr&lt;SDL_RWops, &amp;close_rwops_&gt; ptr_;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;} <span class="comment">// end namespace detail</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classge211_1_1_font.html">   56</a></span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1_font.html">Font</a></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="classge211_1_1_font.html#a9bc2331b89c9ddb884c1b4b1548830fd">Font</a>(<span class="keyword">const</span> <a class="codeRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>&amp; filename, <span class="keywordtype">int</span> size);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">friend</span> <a class="code" href="classge211_1_1sprites_1_1_text__sprite.html">Text_sprite</a>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="namespacege211.html#a0fda89f9e117731356bb011b454ea1a2">Borrowed&lt;TTF_Font&gt;</a> get_raw_() <span class="keyword">const</span> NOEXCEPT { <span class="keywordflow">return</span> ptr_.get(); }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    detail::delete_ptr&lt;TTF_Font, &amp;TTF_CloseFont, true&gt; ptr_;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;};</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<a class="codeRef" href="http://en.cppreference.com/w/cpp/io/basic_ifstream.html">std::ifstream</a></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<a class="code" href="namespacege211.html#aa708c6f4ea6c64987fdcc17d9b53bc01">open_binary_resource_file</a>(<a class="codeRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a> <span class="keyword">const</span>&amp; filename);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">namespace </span>detail {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">class </span>File_resource</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">explicit</span> File_resource(<span class="keyword">const</span> <a class="codeRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>&amp;);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    Borrowed&lt;SDL_RWops&gt; get_raw() const NOEXCEPT { <span class="keywordflow">return</span> ptr_.get(); }</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    Owned&lt;SDL_RWops&gt; release() &amp;&amp; { <span class="keywordflow">return</span> ptr_.release(); }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> close_rwops_(Owned&lt;SDL_RWops&gt;);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    delete_ptr&lt;SDL_RWops, &amp;close_rwops_&gt; ptr_;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;};</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;} <span class="comment">// end namespace detail</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classge211_1_1_font.html">   69</a></span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1_font.html">Font</a></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;{</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="classge211_1_1_font.html#a9bc2331b89c9ddb884c1b4b1548830fd">Font</a>(<span class="keyword">const</span> <a class="codeRef" href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a>&amp; filename, <span class="keywordtype">int</span> size);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">friend</span> <a class="code" href="classge211_1_1sprites_1_1_text__sprite.html">Text_sprite</a>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="namespacege211.html#a0fda89f9e117731356bb011b454ea1a2">Borrowed&lt;TTF_Font&gt;</a> get_raw_() <span class="keyword">const</span> NOEXCEPT { <span class="keywordflow">return</span> ptr_.get(); }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    detail::delete_ptr&lt;TTF_Font, &amp;TTF_CloseFont, true&gt; ptr_;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;};</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="abasic_string_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/string/basic_string.html">std::string</a></div></div>
-<div class="ttc" id="aclassge211_1_1_font_html_a9bc2331b89c9ddb884c1b4b1548830fd"><div class="ttname"><a href="classge211_1_1_font.html#a9bc2331b89c9ddb884c1b4b1548830fd">ge211::Font::Font</a></div><div class="ttdeci">Font(const std::string &amp;filename, int size)</div><div class="ttdoc">Loads a font from the specified TrueType font file, at the specified size.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__resource_8cxx_source.html#l00059">ge211_resource.cxx:59</a></div></div>
+<div class="ttc" id="anamespacege211_html_aa708c6f4ea6c64987fdcc17d9b53bc01"><div class="ttname"><a href="namespacege211.html#aa708c6f4ea6c64987fdcc17d9b53bc01">ge211::open_binary_resource_file</a></div><div class="ttdeci">std::ifstream open_binary_resource_file(std::string const &amp;filename)</div><div class="ttdoc">Opens a file in the Resources/ directory for input in binary mode.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__resource_8cxx_source.html#l00074">ge211_resource.cxx:74</a></div></div>
+<div class="ttc" id="aclassge211_1_1_font_html_a9bc2331b89c9ddb884c1b4b1548830fd"><div class="ttname"><a href="classge211_1_1_font.html#a9bc2331b89c9ddb884c1b4b1548830fd">ge211::Font::Font</a></div><div class="ttdeci">Font(const std::string &amp;filename, int size)</div><div class="ttdoc">Loads a font from the specified TrueType font file, at the specified size.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__resource_8cxx_source.html#l00120">ge211_resource.cxx:120</a></div></div>
 <div class="ttc" id="anamespacege211_html"><div class="ttname"><a href="namespacege211.html">ge211</a></div><div class="ttdoc">The game engine namespace.</div><div class="ttdef"><b>Definition:</b> <a href="ge211_8hxx_source.html#l00004">ge211.hxx:4</a></div></div>
+<div class="ttc" id="anamespacege211_html_a2dadd7cd96f1642d432e9d63de63f00c"><div class="ttname"><a href="namespacege211.html#a2dadd7cd96f1642d432e9d63de63f00c">ge211::open_resource_file</a></div><div class="ttdeci">std::ifstream open_resource_file(std::string const &amp;filename)</div><div class="ttdoc">Opens a file in the Resources/ directory for input in text mode.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__resource_8cxx_source.html#l00068">ge211_resource.cxx:68</a></div></div>
 <div class="ttc" id="aclassge211_1_1sprites_1_1_text__sprite_html"><div class="ttname"><a href="classge211_1_1sprites_1_1_text__sprite.html">ge211::sprites::Text_sprite</a></div><div class="ttdoc">A Sprite that displays text.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__sprites_8hxx_source.html#l00231">ge211_sprites.hxx:232</a></div></div>
-<div class="ttc" id="aclassge211_1_1_font_html"><div class="ttname"><a href="classge211_1_1_font.html">ge211::Font</a></div><div class="ttdoc">Represents a font that can be used to render a sprites::Text_sprite.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__resource_8hxx_source.html#l00056">ge211_resource.hxx:57</a></div></div>
+<div class="ttc" id="aclassge211_1_1_font_html"><div class="ttname"><a href="classge211_1_1_font.html">ge211::Font</a></div><div class="ttdoc">Represents a font that can be used to render a sprites::Text_sprite.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__resource_8hxx_source.html#l00069">ge211_resource.hxx:70</a></div></div>
 <div class="ttc" id="anamespacege211_html_a0fda89f9e117731356bb011b454ea1a2"><div class="ttname"><a href="namespacege211.html#a0fda89f9e117731356bb011b454ea1a2">ge211::Borrowed</a></div><div class="ttdeci">OBJECT_TYPE * Borrowed</div><div class="ttdoc">Type alias to indicate that the given pointer does not own its object.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__util_8hxx_source.html#l00019">ge211_util.hxx:19</a></div></div>
+<div class="ttc" id="abasic_ifstream_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/io/basic_ifstream.html">std::ifstream</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

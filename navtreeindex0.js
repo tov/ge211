@@ -1,5 +1,6 @@
 var NAVTREEINDEX0 =
 {
+"":[2,0,1],
 "annotated.html":[2,0],
 "classes.html":[2,1],
 "classge211_1_1_abstract__game.html":[2,0,0,7],
@@ -82,19 +83,18 @@ var NAVTREEINDEX0 =
 "classge211_1_1audio_1_1_mixer.html#a0ae3b978f05c3ba7468f2a0509413b30":[2,0,0,0,1,19],
 "classge211_1_1audio_1_1_mixer.html#a2644d06bcd07b1ddf1c339258f8ac2f4":[2,0,0,0,1,11],
 "classge211_1_1audio_1_1_mixer.html#a27f3a58dd43265a7a40e5608d4bb6330":[2,0,0,0,1,16],
-"classge211_1_1audio_1_1_mixer.html#a2838a830ec261732a92d6661e8f7896d":[2,0,0,0,1,15],
 "classge211_1_1audio_1_1_mixer.html#a310bf1177a02fd33b1dd08b6dea090b0":[2,0,0,0,1,2],
 "classge211_1_1audio_1_1_mixer.html#a3947f21f830ecb981cb8a3f422ded52a":[2,0,0,0,1,7],
 "classge211_1_1audio_1_1_mixer.html#a41ec193bfca490e91ecff189a60f805a":[2,0,0,0,1,20],
 "classge211_1_1audio_1_1_mixer.html#a44e4d21a97285323b523a94380561220":[2,0,0,0,1,14],
 "classge211_1_1audio_1_1_mixer.html#a4528ee2be1cd4da81e6d4d8e12d872f3":[2,0,0,0,1,12],
+"classge211_1_1audio_1_1_mixer.html#a560664bbc443cc0f6af4cf8cdd238768":[2,0,0,0,1,17],
 "classge211_1_1audio_1_1_mixer.html#a5d74787dedbc4e11c1ab15bf487e61f8":[2,0,0,0,1,0],
 "classge211_1_1audio_1_1_mixer.html#a5d74787dedbc4e11c1ab15bf487e61f8a4ab6065c40839d4954f260a6be3e1775":[2,0,0,0,1,0,2],
 "classge211_1_1audio_1_1_mixer.html#a5d74787dedbc4e11c1ab15bf487e61f8a7ed501a93c1205e3a23f7f0313ea65dc":[2,0,0,0,1,0,1],
 "classge211_1_1audio_1_1_mixer.html#a5d74787dedbc4e11c1ab15bf487e61f8ab0398fd2e0c78072a48131f810266119":[2,0,0,0,1,0,0],
 "classge211_1_1audio_1_1_mixer.html#a5d74787dedbc4e11c1ab15bf487e61f8ad13c3f7baed576768b11a714ef4d90e2":[2,0,0,0,1,0,3],
 "classge211_1_1audio_1_1_mixer.html#a5e4ec9c6d45c070e1393e4618f9ef8b2":[2,0,0,0,1,4],
-"classge211_1_1audio_1_1_mixer.html#a61e224afec653fdb5f9b1e19cadfb9d2":[2,0,0,0,1,17],
 "classge211_1_1audio_1_1_mixer.html#a6507f40ddf408e1f124cb84fa5cbfd1e":[2,0,0,0,1,9],
 "classge211_1_1audio_1_1_mixer.html#a68208fe1c3f429db05f7a2429e4f6a5b":[2,0,0,0,1,8],
 "classge211_1_1audio_1_1_mixer.html#a719fb22740078909c02b8ceae673dc49":[2,0,0,0,1,13],
@@ -102,6 +102,7 @@ var NAVTREEINDEX0 =
 "classge211_1_1audio_1_1_mixer.html#a810210b7b1d7fb6be78a0dffb94d4431":[2,0,0,0,1,18],
 "classge211_1_1audio_1_1_mixer.html#abe0697d7a8c4384c2a8396e4f11fd7a1":[2,0,0,0,1,5],
 "classge211_1_1audio_1_1_mixer.html#ac70cc36512875386d56a1a533ec3e3bf":[2,0,0,0,1,10],
+"classge211_1_1audio_1_1_mixer.html#ac811021d010b3d84eac0363c9eb993d4":[2,0,0,0,1,15],
 "classge211_1_1audio_1_1_mixer.html#acbf5600345491fd2f57e1cf2c2ead1c4":[2,0,0,0,1,1],
 "classge211_1_1audio_1_1_mixer.html#ae7ed2c298311f23fac5314b0e4eebfbc":[2,0,0,0,1,6],
 "classge211_1_1audio_1_1_music__track.html":[2,0,0,0,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "classge211_1_1time_1_1_duration.html#a60b5d1e05eb3d0b5195125cf671c125b":[2,0,0,6,0,5],
 "classge211_1_1time_1_1_duration.html#a74dc560c2db87b83d38eb65bce2ee79f":[2,0,0,6,0,7],
 "classge211_1_1time_1_1_duration.html#a7f0b62d45a396c44da2a091377519a85":[2,0,0,6,0,10],
-"classge211_1_1time_1_1_duration.html#a8372ed24630cfb2f570236dcb38e5be1":[2,0,0,6,0,4],
-"classge211_1_1time_1_1_duration.html#a9e10e19f3a16435d0544a0c1e37223eb":[2,0,0,6,0,9]
+"classge211_1_1time_1_1_duration.html#a8372ed24630cfb2f570236dcb38e5be1":[2,0,0,6,0,4]
 };
