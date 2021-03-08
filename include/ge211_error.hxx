@@ -74,7 +74,7 @@ private:
 /// Thrown by member functions of @ref internal::Render_sprite when
 /// the sprite has already been rendered to the screen and can no longer
 /// be modified.
-class Late_paint_error : public Client_logic_error
+class Late_paint_error final : public Client_logic_error
 {
     explicit Late_paint_error(char const* who);
 
