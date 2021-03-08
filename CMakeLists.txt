@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.13)
 project(ge211
-        VERSION 2021.3.2
+        VERSION 2021.4.0
         DESCRIPTION "A student game engine"
         LANGUAGES CXX)
 
