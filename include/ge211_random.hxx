@@ -22,17 +22,10 @@ Generator
 construct_generator();
 
 template <typename T>
-std::enable_if_t<Is_Integral<T>, T>
+T
 bound_between(T value, T lo, T hi)
 {
-    return lo + value % (hi - lo + 1);
-}
-
-template <typename T>
-std::enable_if_t<Is_Floating_Point<T>, T>
-bound_between(T value, T lo, T hi)
-{
-    return lo + std::fmod(value, hi - lo);
+    return std::max(lo, std::min(hi, value));
 }
 
 template <typename RESULT_TYPE>
@@ -478,21 +471,9 @@ public:
     void stub_with(result_type value);
 
 
-    /// Given a randomly-generated @ref result_type `value`, returns a
-    /// number between `lo` and `hi` (inclusive) derived from
-    /// `value` according a formula that differs by `result_type`.
-    ///
-    /// For integral types (*e.g.,* `long` or `int`), the result is:
-    ///
-    /// ```
-    ///         lo + value % (hi - lo + 1)
-    /// ```
-    ///
-    /// For floating-point types (*e.g.,* `double` or `float`), the result is:
-    ///
-    /// ```
-    ///         lo + std::fmod(value, hi - lo)
-    /// ```
+    /// Given a randomly-generated @ref result_type `value`, bounds it
+    /// between `lo` and `hi` (inclusive) by adjusting `value`s less than
+    /// `lo` to `lo` and `value`s greater than `hi` to `hi`.
     IF_COMPILER(DECLARE_IF(!Is_Same<result_type, bool>))
     static result_type bound_between(
             result_type value, result_type lo, result_type hi);
