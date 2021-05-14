@@ -32,7 +32,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2021.4.1</span>
+   &#160;<span id="projectnumber">2021.5.0</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('classge211_1_1sprites_1_1_text__sprite
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classge211_1_1sprites_1_1_text__sprite__inherit__graph.png" border="0" usemap="#a_text__sprite_inherit__map" alt="Inheritance graph"/></div>
-<map name="_text__sprite_inherit__map" id="_text__sprite_inherit__map">
+<map name="_text__sprite_inherit__map" id="a_text__sprite_inherit__map">
 <area shape="rect" title="A Sprite that displays text." alt="" coords="14,155,101,181"/>
 <area shape="rect" title=" " alt="" coords="5,80,109,107"/>
 <area shape="rect" href="classge211_1_1sprites_1_1_sprite.html" title="A sprite is an image that knows how to render itself to the screen at a given location,..." alt="" coords="29,5,85,32"/>
@@ -124,7 +124,7 @@ $(document).ready(function(){initNavTree('classge211_1_1sprites_1_1_text__sprite
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classge211_1_1sprites_1_1_text__sprite__coll__graph.png" border="0" usemap="#a_text__sprite_coll__map" alt="Collaboration graph"/></div>
-<map name="_text__sprite_coll__map" id="_text__sprite_coll__map">
+<map name="_text__sprite_coll__map" id="a_text__sprite_coll__map">
 <area shape="rect" title="A Sprite that displays text." alt="" coords="14,155,101,181"/>
 <area shape="rect" title=" " alt="" coords="5,80,109,107"/>
 <area shape="rect" href="classge211_1_1sprites_1_1_sprite.html" title="A sprite is an image that knows how to render itself to the screen at a given location,..." alt="" coords="29,5,85,32"/>
@@ -176,7 +176,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 <p>Constructs an empty text sprite. </p>
 <p>This is useful when you don't yet know the message at the point where the sprite is created. It's an error to pass the an empty <a class="el" href="classge211_1_1sprites_1_1_text__sprite.html" title="A Sprite that displays text.">Text_sprite</a> to Sprite_set::add_sprite(Sprite const&amp;, Posn&lt;int&gt;, int, Transform), but you can use <a class="el" href="classge211_1_1sprites_1_1_text__sprite.html#afe7c024ae674fec2431b9d3eb9ad4173" title="Resets this text sprite with the configuration from the given Builder.">Text_sprite::reconfigure(Builder const&amp;)</a> to make it non-empty.</p>
-<h4><a class="anchor" id="autotoc_md30"></a>
+<h4><a class="anchor" id="autotoc_md31"></a>
 Example</h4>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>View</div>
 <div class="line">{</div>
@@ -237,7 +237,7 @@ Example</h4>
 <p>Constructs a white text sprite with the given text and font. </p>
 <p>For more control (color, wrapping, turning off anti-aliasing), use the <a class="el" href="classge211_1_1sprites_1_1_text__sprite_1_1_builder.html" title="Builder-style API for configuring and constructing Text_sprites.">Builder</a> API instead.</p>
 <p>While it is okay to construct a text sprite with no text, it cannot be rendered into a scene. Use <a class="el" href="classge211_1_1sprites_1_1_text__sprite.html#a644718bb2fb240de962dc3c9a1fdf0dc" title="Is this Text_sprite empty? (If so, you shouldn&#39;t try to use it.)">empty() const </a>to check if you haven't kept track.</p>
-<h4><a class="anchor" id="autotoc_md31"></a>
+<h4><a class="anchor" id="autotoc_md32"></a>
 Example</h4>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>View</div>
 <div class="line">{</div>

@@ -32,7 +32,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2021.4.1</span>
+   &#160;<span id="projectnumber">2021.5.0</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -114,11 +114,11 @@ class ge211::Random_source&lt; RESULT_TYPE &gt;</h3>
 <li><a class="el" href="classge211_1_1_random__source.html#a1cbcf3d1006c2c81033e89ba40f41638">Random_source(result_type limit)</a> is defined only when result_type is an integral type. It constructs a source that generates numbers from 0 up to, but excluding, <code>limit</code>.</li>
 <li><a class="el" href="classge211_1_1_random__source.html#a2cb2a117423dcfbddbf4e3054b84921e">Random_source(double p_true)</a> is defined only when result_type is <code>bool</code>. It takes a probability and generates <code>true</code> with that probability and <code>false</code> otherwise.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md13"></a>
+<h3><a class="anchor" id="autotoc_md14"></a>
 Testing</h3>
 <p>You can <em>stub</em> your <a class="el" href="classge211_1_1_random__source.html">Random_source</a> in order to predetermine the sequence of values that it will return. For details, see <a class="el" href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">Random_source::stub_with(std::initializer_list&lt;result_type&gt;)</a> and <a class="el" href="classge211_1_1_random__source.html#a4177f858b15d58b402ecc2b2cab7330f">Random_source::stub_with(std::vector&lt;result_type&gt;)</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00222">222</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00215">215</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -173,8 +173,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a165285031feac30284cf7eb33fc96f47"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_random__source.html#a165285031feac30284cf7eb33fc96f47">bound_between</a> (<a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> value, <a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> lo, <a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> hi)</td></tr>
-<tr class="memdesc:a165285031feac30284cf7eb33fc96f47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a randomly-generated <a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> <code>value</code>, returns a number between <code>lo</code> and <code>hi</code> (inclusive) derived from <code>value</code> according a formula that differs by <code>result_type</code>.  <a href="classge211_1_1_random__source.html#a165285031feac30284cf7eb33fc96f47">More...</a><br /></td></tr>
+<tr class="memitem:a165285031feac30284cf7eb33fc96f47"><td class="memItemLeft" align="right" valign="top"><a id="a165285031feac30284cf7eb33fc96f47"></a>
+static <a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classge211_1_1_random__source.html#a165285031feac30284cf7eb33fc96f47">bound_between</a> (<a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> value, <a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> lo, <a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> hi)</td></tr>
+<tr class="memdesc:a165285031feac30284cf7eb33fc96f47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a randomly-generated <a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> <code>value</code>, bounds it between <code>lo</code> and <code>hi</code> (inclusive) by adjusting <code>value</code>s less than <code>lo</code> to <code>lo</code> and <code>value</code>s greater than <code>hi</code> to <code>hi</code>. <br /></td></tr>
 <tr class="separator:a165285031feac30284cf7eb33fc96f47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -206,7 +207,7 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Constructs a random source that generates values between <code>lo</code> and <code>hi</code>, inclusive. </p>
 <p>Not defined when <a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> is <code>bool</code>. See <a class="el" href="classge211_1_1_random__source.html#a2cb2a117423dcfbddbf4e3054b84921e">Random_source&lt;bool&gt;::Random_source(double)</a> instead.</p>
-<h4><a class="anchor" id="autotoc_md14"></a>
+<h4><a class="anchor" id="autotoc_md15"></a>
 Example</h4>
 <div class="fragment"><div class="line"><span class="comment">// Initialize the source to produce `int`s from 1 to 6:</span></div>
 <div class="line"><a class="code" href="classge211_1_1_random__source.html">ge211::Random_source&lt;int&gt;</a> six_sided_die(1, 6);</div>
@@ -221,7 +222,7 @@ Example</h4>
 <div class="line"> </div>
 <div class="line"><a class="codeRef" href="http://en.cppreference.com/w/cpp/io/basic_ostream.html">std::cout</a> &lt;&lt; <span class="stringliteral">&quot;Finally rolled a 6!\n&quot;</span>;</div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00580">580</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00561">561</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
 
 </div>
 </div>
@@ -253,7 +254,7 @@ Example</h4>
 <p>Thus, <code>Random_source(limit)</code> is equivalent to <a class="el" href="classge211_1_1_random__source.html#ab82bd37222911c65a8c9d03a28c986a3">Random_source</a><code>(0, limit - 1)</code>.</p>
 <p>Not defined when <a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> is <code>bool</code> or any non-integral type. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00586">586</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00567">567</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
 
 </div>
 </div>
@@ -283,7 +284,7 @@ Example</h4>
 
 <p>Constructs a random source that generates <code>bool</code>s, producing <code>true</code> with probability <code>p_true</code>. </p>
 <p>Only defined when <a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> is <code>bool</code>.</p>
-<h4><a class="anchor" id="autotoc_md15"></a>
+<h4><a class="anchor" id="autotoc_md16"></a>
 Example</h4>
 <div class="fragment"><div class="line"><a class="code" href="classge211_1_1_random__source.html">ge211::Random_source&lt;bool&gt;</a> fair_coin(0.5);</div>
 <div class="line"> </div>
@@ -296,13 +297,13 @@ Example</h4>
 <div class="line">} <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!(flip_1 || flip_2 || flip_3)) {</div>
 <div class="line">    <a class="codeRef" href="http://en.cppreference.com/w/cpp/io/basic_ostream.html">std::cout</a> &lt;&lt; <span class="stringliteral">&quot;All three flips were tails!\n&quot;</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md16"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md17"></a>
 Errors</h3>
 <ul>
 <li>Throws <code>ge211::Client_logic_error</code> if <code>p_true</code> is less than 0.0 or greater than 1.0. </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00592">592</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00573">573</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
 
 </div>
 </div>
@@ -333,7 +334,7 @@ Errors</h3>
 <p>Constructs a <a class="el" href="classge211_1_1_random__source.html">Random_source</a> with no predetermined bounds. </p>
 <p>Use this with <a class="el" href="classge211_1_1_random__source.html#a856804121bd6b9c59e30e0c4db4978c6">Random_source::operator()(result_type, result_type)</a> or <a class="el" href="classge211_1_1_random__source.html#a519629634c776c2d4385e91088d17a5b">Random_source::next_between(result_type, result_type)</a> to specify the range each time you generate a new number.</p>
 <p>Not defined when <a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> is <code>bool</code>.</p>
-<h4><a class="anchor" id="autotoc_md17"></a>
+<h4><a class="anchor" id="autotoc_md18"></a>
 Example</h4>
 <p>In this example, we generate one random uppercase letter, one random lowercase letter, and one random digit:</p>
 <div class="fragment"><div class="line"><a class="code" href="classge211_1_1_random__source.html">ge211::Random_source&lt;char&gt;</a> source(<a class="code" href="namespacege211.html#a257730de21159253dae5eaef8653b35e">ge211::unbounded</a>);</div>
@@ -341,61 +342,11 @@ Example</h4>
 <div class="line"><span class="keywordtype">char</span> lower = source(<span class="charliteral">&#39;a&#39;</span>, <span class="charliteral">&#39;z&#39;</span>);</div>
 <div class="line"><span class="keywordtype">char</span> digit = source(<span class="charliteral">&#39;0&#39;</span>, <span class="charliteral">&#39;9&#39;</span>);</div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00598">598</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00579">579</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a165285031feac30284cf7eb33fc96f47"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a165285031feac30284cf7eb33fc96f47">&#9670;&nbsp;</a></span>bound_between()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">RESULT_TYPE bound_between </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a>&#160;</td>
-          <td class="paramname"><em>value</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a>&#160;</td>
-          <td class="paramname"><em>lo</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a>&#160;</td>
-          <td class="paramname"><em>hi</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Given a randomly-generated <a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> <code>value</code>, returns a number between <code>lo</code> and <code>hi</code> (inclusive) derived from <code>value</code> according a formula that differs by <code>result_type</code>. </p>
-<p>For integral types (<em>e.g.,</em> <code>long</code> or <code>int</code>), the result is:</p>
-<div class="fragment"><div class="line">lo + value % (hi - lo + 1)</div>
-</div><!-- fragment --><p>For floating-point types (<em>e.g.,</em> <code>double</code> or <code>float</code>), the result is:</p>
-<div class="fragment"><div class="line">lo + <a class="codeRef" href="http://en.cppreference.com/w/cpp/numeric/math/fmod.html">std::fmod</a>(value, hi - lo)</div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00626">626</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
-
-</div>
-</div>
 <a id="aef5081a1d42b4facad44fe3bcd8432d3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aef5081a1d42b4facad44fe3bcd8432d3">&#9670;&nbsp;</a></span>next()</h2>
 
@@ -420,14 +371,14 @@ Example</h4>
 </div><div class="memdoc">
 
 <p>Returns the next random value from this source. </p>
-<h4><a class="anchor" id="autotoc_md18"></a>
+<h4><a class="anchor" id="autotoc_md19"></a>
 Example</h4>
 <div class="fragment"><div class="line"><a class="code" href="classge211_1_1_random__source.html">ge211::Random_source&lt;int&gt;</a> one_to_ten(1, 10);</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> choice = one_to_ten.next();</div>
 <div class="line"><a class="codeRef" href="http://en.cppreference.com/w/cpp/io/basic_ostream.html">std::cout</a> &lt;&lt; <span class="stringliteral">&quot;The random number is &quot;</span> &lt;&lt; choice &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00334">334</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00327">327</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
 
 </div>
 </div>
@@ -468,14 +419,14 @@ Example</h4>
 <p>Returns a random value between <code>lo</code> and <code>hi</code>. </p>
 <p>When using this member function, it is not necessary to initialize your <a class="el" href="classge211_1_1_random__source.html">Random_source</a> with bounds, so you should usually construct it using <a class="el" href="classge211_1_1_random__source.html#ad97908ff91a1a617c8ef8e625e9cd239">Random_source::Random_source(unbounded_type)</a>.</p>
 <p>For an example, see <a class="el" href="classge211_1_1_random__source.html#ad97908ff91a1a617c8ef8e625e9cd239">Random_source::Random_source(unbounded_type)</a>.</p>
-<h3><a class="anchor" id="autotoc_md20"></a>
+<h3><a class="anchor" id="autotoc_md21"></a>
 Testing</h3>
 <p>If this <a class="el" href="classge211_1_1_random__source.html">Random_source</a> is <em>stubbed</em> (<em>e.g.,</em> via <a class="el" href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">Random_source::stub_with(std::initializer_list&lt;result_type&gt;)</a>), the result is computed using the static function <a class="el" href="classge211_1_1_random__source.html#a165285031feac30284cf7eb33fc96f47">Random_source::bound_between()</a>:</p>
 <div class="fragment"><div class="line"><a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> value = <a class="code" href="classge211_1_1_random__source.html#aef5081a1d42b4facad44fe3bcd8432d3">next</a>();  <span class="comment">// the next stubbed value</span></div>
 <div class="line"><span class="keywordflow">return</span> <a class="code" href="classge211_1_1_random__source.html#a165285031feac30284cf7eb33fc96f47">bound_between</a>(value, lo, hi);</div>
 </div><!-- fragment --><p>Not defined when <a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> is <code>bool</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00391">391</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00384">384</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
 
 </div>
 </div>
@@ -504,7 +455,7 @@ Testing</h3>
 
 <p>Returns the next random value from this source. </p>
 <p>(This is an alias for <a class="el" href="classge211_1_1_random__source.html#aef5081a1d42b4facad44fe3bcd8432d3">Random_source::next()</a>.)</p>
-<h4><a class="anchor" id="autotoc_md19"></a>
+<h4><a class="anchor" id="autotoc_md20"></a>
 Example</h4>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> try_it(<a class="codeRef" href="http://en.cppreference.com/w/cpp/types/size_t.html">std::size_t</a> n_trials)</div>
 <div class="line">{</div>
@@ -524,7 +475,7 @@ Example</h4>
 <div class="line">    }</div>
 <div class="line">}</div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00364">364</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00357">357</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
 
 </div>
 </div>
@@ -567,7 +518,7 @@ Example</h4>
 <p>For an example, see <a class="el" href="classge211_1_1_random__source.html#ad97908ff91a1a617c8ef8e625e9cd239">Random_source::Random_source(unbounded_type)</a>.</p>
 <p>Not defined when <a class="el" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> is <code>bool</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00404">404</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00397">397</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
 
 </div>
 </div>
@@ -590,7 +541,7 @@ Example</h4>
 <p>Stubs this <a class="el" href="classge211_1_1_random__source.html">Random_source</a> to always return the given value. </p>
 <p>If you want to stub multiple values in sequence, see <a class="el" href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">stub_with(std::initializer_list&lt;result_type&gt;)</a> and <a class="el" href="classge211_1_1_random__source.html#a4177f858b15d58b402ecc2b2cab7330f">stub_with(std::vector&lt;result_type&gt;)</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00618">618</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00599">599</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
 
 </div>
 </div>
@@ -613,7 +564,7 @@ Example</h4>
 <p>Configures this Random_source to return a predetermined sequence of values. </p>
 <p>After passing in a list of values, the <a class="el" href="classge211_1_1_random__source.html" title="A generic class for generating pseudorandom numbers in uniform distribution over a specified range.">Random_source</a> will return those values in order, and then cycle through them repeatedly if necessary.</p>
 <p>This is intended for testing, in order to make the values chosen by some component predicable.</p>
-<h4><a class="anchor" id="autotoc_md21"></a>
+<h4><a class="anchor" id="autotoc_md22"></a>
 Example</h4>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>Two_dice</div>
 <div class="line">{</div>
@@ -653,7 +604,7 @@ Example</h4>
 <div class="line">    CHECK( m.roll() == 7 );  <span class="comment">// rolls 3 and 4</span></div>
 <div class="line">}</div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00611">611</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00592">592</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
 
 </div>
 </div>
@@ -676,7 +627,7 @@ Example</h4>
 <p>Stubs this <a class="el" href="classge211_1_1_random__source.html">Random_source</a> using a <a class="elRef" href="http://en.cppreference.com/w/cpp/container/vector.html">std::vector</a>. </p>
 <p>After passing in a vector of values, the Random_source will return those values in order, and then cycle through them repeatedly if necessary. This works the same as <a class="el" href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">stub_with(std::initializer_list&lt;result_type&gt;)</a>, so you should see that function for an example. </p>
 
-<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00604">604</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ge211__random_8hxx_source.html#l00585">585</a> of file <a class="el" href="ge211__random_8hxx_source.html">ge211_random.hxx</a>.</p>
 
 </div>
 </div>
@@ -685,14 +636,13 @@ Example</h4>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclassge211_1_1_random__source_html_a37162b107c3d355ba6951a73f9cd1c88"><div class="ttname"><a href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">ge211::Random_source::result_type</a></div><div class="ttdeci">RESULT_TYPE result_type</div><div class="ttdoc">The type of value generated by this Random_source.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00226">ge211_random.hxx:226</a></div></div>
-<div class="ttc" id="anamespacege211_html_a257730de21159253dae5eaef8653b35e"><div class="ttname"><a href="namespacege211.html#a257730de21159253dae5eaef8653b35e">ge211::unbounded</a></div><div class="ttdeci">constexpr unbounded_type const unbounded</div><div class="ttdoc">A tag value for passing to the constructor Random_source::Random_source(unbounded_type) in order to d...</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00188">ge211_random.hxx:188</a></div></div>
-<div class="ttc" id="aclassge211_1_1_random__source_html_a165285031feac30284cf7eb33fc96f47"><div class="ttname"><a href="classge211_1_1_random__source.html#a165285031feac30284cf7eb33fc96f47">ge211::Random_source::bound_between</a></div><div class="ttdeci">static result_type bound_between(result_type value, result_type lo, result_type hi)</div><div class="ttdoc">Given a randomly-generated result_type value, returns a number between lo and hi (inclusive) derived ...</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00626">ge211_random.hxx:626</a></div></div>
+<div class="ttc" id="aclassge211_1_1_random__source_html_a37162b107c3d355ba6951a73f9cd1c88"><div class="ttname"><a href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">ge211::Random_source::result_type</a></div><div class="ttdeci">RESULT_TYPE result_type</div><div class="ttdoc">The type of value generated by this Random_source.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00219">ge211_random.hxx:219</a></div></div>
+<div class="ttc" id="anamespacege211_html_a257730de21159253dae5eaef8653b35e"><div class="ttname"><a href="namespacege211.html#a257730de21159253dae5eaef8653b35e">ge211::unbounded</a></div><div class="ttdeci">constexpr unbounded_type const unbounded</div><div class="ttdoc">A tag value for passing to the constructor Random_source::Random_source(unbounded_type) in order to d...</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00181">ge211_random.hxx:181</a></div></div>
+<div class="ttc" id="aclassge211_1_1_random__source_html_a165285031feac30284cf7eb33fc96f47"><div class="ttname"><a href="classge211_1_1_random__source.html#a165285031feac30284cf7eb33fc96f47">ge211::Random_source::bound_between</a></div><div class="ttdeci">static result_type bound_between(result_type value, result_type lo, result_type hi)</div><div class="ttdoc">Given a randomly-generated result_type value, bounds it between lo and hi (inclusive) by adjusting va...</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00607">ge211_random.hxx:607</a></div></div>
 <div class="ttc" id="abasic_ostream_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/io/basic_ostream.html">std::cout</a></div></div>
-<div class="ttc" id="aclassge211_1_1_random__source_html"><div class="ttname"><a href="classge211_1_1_random__source.html">ge211::Random_source</a></div><div class="ttdoc">A generic class for generating pseudorandom numbers in uniform distribution over a specified range.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00222">ge211_random.hxx:223</a></div></div>
-<div class="ttc" id="afmod_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/numeric/math/fmod.html">std::fmod</a></div><div class="ttdeci">T fmod(T... args)</div></div>
+<div class="ttc" id="aclassge211_1_1_random__source_html"><div class="ttname"><a href="classge211_1_1_random__source.html">ge211::Random_source</a></div><div class="ttdoc">A generic class for generating pseudorandom numbers in uniform distribution over a specified range.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00215">ge211_random.hxx:216</a></div></div>
 <div class="ttc" id="asize_t_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/types/size_t.html">std::size_t</a></div></div>
-<div class="ttc" id="aclassge211_1_1_random__source_html_aef5081a1d42b4facad44fe3bcd8432d3"><div class="ttname"><a href="classge211_1_1_random__source.html#aef5081a1d42b4facad44fe3bcd8432d3">ge211::Random_source::next</a></div><div class="ttdeci">result_type next()</div><div class="ttdoc">Returns the next random value from this source.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00334">ge211_random.hxx:334</a></div></div>
+<div class="ttc" id="aclassge211_1_1_random__source_html_aef5081a1d42b4facad44fe3bcd8432d3"><div class="ttname"><a href="classge211_1_1_random__source.html#aef5081a1d42b4facad44fe3bcd8432d3">ge211::Random_source::next</a></div><div class="ttdeci">result_type next()</div><div class="ttdoc">Returns the next random value from this source.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00327">ge211_random.hxx:327</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

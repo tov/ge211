@@ -2,5 +2,5 @@
 <area shape="rect" id="node1" title="Thrown by member functions of internal::Render_sprite when the sprite has already been rendered to th..." alt="" coords="9,229,124,256"/>
 <area shape="rect" id="node2" href="$classge211_1_1exceptions_1_1_client__logic__error.html" title="An exception that indicates that a logic error was performed by the client." alt="" coords="5,155,128,181"/>
 <area shape="rect" id="node3" href="$classge211_1_1exceptions_1_1_exception__base.html" title="The root of the ge211 exception hierarchy." alt="" coords="9,80,124,107"/>
-<area shape="rect" id="node4" href="/Users/tov/school/cs211/dev/ge211/cmake-build-release/doc/src/cppreference.xml$cpp/error/exception.html" title=" " alt="" coords="27,5,106,32"/>
+<area shape="rect" id="node4" href="/Users/tov/school/cs211/dev/ge211/build/doc/src/cppreference.xml$cpp/error/exception.html" title=" " alt="" coords="27,5,106,32"/>
 </map>

@@ -32,7 +32,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2021.4.1</span>
+   &#160;<span id="projectnumber">2021.5.0</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -122,375 +122,367 @@ $(document).ready(function(){initNavTree('ge211__random_8hxx_source.html',''); i
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;construct_generator();</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;std::enable_if_t&lt;Is_Integral&lt;T&gt;, T&gt;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;T</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;bound_between(T value, T lo, T hi)</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">return</span> lo + value % (hi - lo + 1);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">return</span> <a class="codeRef" href="http://en.cppreference.com/w/cpp/algorithm/max.html">std::max</a>(lo, std::min(hi, value));</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;std::enable_if_t&lt;Is_Floating_Point&lt;T&gt;, T&gt;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;bound_between(T value, T lo, T hi)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">return</span> lo + <a class="codeRef" href="http://en.cppreference.com/w/cpp/numeric/math/fmod.html">std::fmod</a>(value, hi - lo);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">struct </span>Random_engine</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">using</span> result_type = RESULT_TYPE;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">virtual</span> result_type <a class="codeRef" href="http://en.cppreference.com/w/cpp/iterator/next.html">next</a>() = 0;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">struct </span>Random_engine</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;{</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">using</span> result_type = RESULT_TYPE;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">virtual</span> result_type next_between(result_type, result_type) = 0;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">virtual</span> ~Random_engine() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">virtual</span> result_type <a class="codeRef" href="http://en.cppreference.com/w/cpp/iterator/next.html">next</a>() = 0;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">virtual</span> result_type next_between(result_type, result_type) = 0;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">virtual</span> ~Random_engine() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE, <span class="keyword">typename</span> ENABLE = <span class="keywordtype">void</span>&gt;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">struct </span>Distribution</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">struct</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        RESULT_TYPE contents;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    } error = <span class="stringliteral">&quot;ge211::Random_source&lt;RESULT_TYPE&gt; requires &quot;</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;              <span class="stringliteral">&quot;RESULT_TYPE to be a built-in arithmetic type like int &quot;</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;              <span class="stringliteral">&quot;or double.&quot;</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">class </span>Distribution&lt;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        RESULT_TYPE,</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        std::enable_if_t&lt;Is_Integral&lt;RESULT_TYPE&gt;&gt;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;&gt;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE, <span class="keyword">typename</span> ENABLE = <span class="keywordtype">void</span>&gt;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">struct </span>Distribution</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">struct</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        RESULT_TYPE contents;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    } error = <span class="stringliteral">&quot;ge211::Random_source&lt;RESULT_TYPE&gt; requires &quot;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;              <span class="stringliteral">&quot;RESULT_TYPE to be a built-in arithmetic type like int &quot;</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;              <span class="stringliteral">&quot;or double.&quot;</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;};</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">class </span>Distribution&lt;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        RESULT_TYPE,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        std::enable_if_t&lt;Is_Integral&lt;RESULT_TYPE&gt;&gt;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;&gt;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;{</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">using</span> result_type = RESULT_TYPE;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">using</span> impl_type = <a class="codeRef" href="http://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution.html">std::uniform_int_distribution&lt;result_type&gt;</a>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    impl_type impl_;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">using</span> result_type = RESULT_TYPE;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">using</span> impl_type = <a class="codeRef" href="http://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution.html">std::uniform_int_distribution&lt;result_type&gt;</a>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    impl_type impl_;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    Distribution(result_type lo, result_type hi)</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            : impl_{lo, hi}</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    { }</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">explicit</span> Distribution(result_type end)</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            : impl_{0, <a class="codeRef" href="http://en.cppreference.com/w/cpp/iterator/end.html">end</a> - 1}</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    { }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    Distribution(result_type lo, result_type hi)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            : impl_{lo, hi}</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    { }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">explicit</span> Distribution(result_type end)</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            : impl_{0, <a class="codeRef" href="http://en.cppreference.com/w/cpp/iterator/end.html">end</a> - 1}</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    { }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    result_type operator()(Generator &amp;gen)</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">return</span> impl_(gen);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;};</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    result_type operator()(Generator &amp;gen)</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    {</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordflow">return</span> impl_(gen);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;};</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">class </span>Distribution&lt;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        RESULT_TYPE,</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        std::enable_if_t&lt;Is_Floating_Point&lt;RESULT_TYPE&gt;&gt;&gt;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;{</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keyword">class </span>Distribution&lt;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        RESULT_TYPE,</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        std::enable_if_t&lt;Is_Floating_Point&lt;RESULT_TYPE&gt;&gt;&gt;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;{</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">using</span> result_type = RESULT_TYPE;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">using</span> impl_type = <a class="codeRef" href="http://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution.html">std::uniform_real_distribution&lt;result_type&gt;</a>;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    impl_type impl_;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">using</span> result_type = RESULT_TYPE;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">using</span> impl_type = <a class="codeRef" href="http://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution.html">std::uniform_real_distribution&lt;result_type&gt;</a>;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    impl_type impl_;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    Distribution(result_type lo, result_type hi)</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            : impl_{lo, hi}</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    { }</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    result_type operator()(Generator &amp;gen)</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    {</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordflow">return</span> impl_(gen);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    }</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;};</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    Distribution(result_type lo, result_type hi)</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            : impl_{lo, hi}</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    { }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    result_type operator()(Generator &amp;gen)</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    {</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordflow">return</span> impl_(gen);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;};</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">class </span>Pseudo_random_engine</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        : <span class="keyword">public</span> Random_engine&lt;RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;{</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">using</span> result_type = RESULT_TYPE;</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">class </span>Pseudo_random_engine</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        : <span class="keyword">public</span> Random_engine&lt;RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;{</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keyword">using</span> result_type = RESULT_TYPE;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    Pseudo_random_engine(Args&amp;&amp;... args);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    result_type <a class="codeRef" href="http://en.cppreference.com/w/cpp/iterator/next.html">next</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    result_type next_between(result_type, result_type) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    Pseudo_random_engine(Args&amp;&amp;... args);</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    result_type <a class="codeRef" href="http://en.cppreference.com/w/cpp/iterator/next.html">next</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    Distribution&lt;result_type&gt; distribution_;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    Generator generator_;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;};</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    result_type next_between(result_type, result_type) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    Distribution&lt;result_type&gt; distribution_;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    Generator generator_;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;};</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="keyword">template</span> &lt;&gt;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="keyword">class </span>Pseudo_random_engine&lt;bool&gt;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        : <span class="keyword">public</span> Random_engine&lt;bool&gt;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;{</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keyword">explicit</span> Pseudo_random_engine(<span class="keywordtype">double</span> p_true);</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="keyword">template</span> &lt;&gt;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="keyword">class </span>Pseudo_random_engine&lt;bool&gt;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        : <span class="keyword">public</span> Random_engine&lt;bool&gt;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;{</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keyword">explicit</span> Pseudo_random_engine(<span class="keywordtype">double</span> p_true);</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keywordtype">bool</span> <a class="codeRef" href="http://en.cppreference.com/w/cpp/iterator/next.html">next</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keywordtype">bool</span> next_between(<span class="keywordtype">bool</span>, <span class="keywordtype">bool</span>) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="keywordtype">double</span> probability_;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    Distribution&lt;double&gt; distribution_;</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    Generator generator_;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;};</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="keyword">class </span>Stub_random_engine</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        : <span class="keyword">public</span> Random_engine&lt;RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;{</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keyword">using</span> result_type = RESULT_TYPE;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keyword">using</span> container_type = <a class="codeRef" href="http://en.cppreference.com/w/cpp/container/vector.html">std::vector&lt;RESULT_TYPE&gt;</a>;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keyword">using</span> iterator_type = <span class="keyword">typename</span> container_type::const_iterator;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordtype">bool</span> <a class="codeRef" href="http://en.cppreference.com/w/cpp/iterator/next.html">next</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordtype">bool</span> next_between(<span class="keywordtype">bool</span>, <span class="keywordtype">bool</span>) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keywordtype">double</span> probability_;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    Distribution&lt;double&gt; distribution_;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    Generator generator_;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;};</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="keyword">class </span>Stub_random_engine</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        : <span class="keyword">public</span> Random_engine&lt;RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;{</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keyword">using</span> result_type = RESULT_TYPE;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keyword">using</span> container_type = <a class="codeRef" href="http://en.cppreference.com/w/cpp/container/vector.html">std::vector&lt;RESULT_TYPE&gt;</a>;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keyword">using</span> iterator_type = <span class="keyword">typename</span> container_type::const_iterator;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="comment">// PRECONDITION: !container.empty()</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    Stub_random_engine(container_type&amp;&amp; container);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    result_type <a class="codeRef" href="http://en.cppreference.com/w/cpp/iterator/next.html">next</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    result_type next_between(result_type, result_type) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="comment">// PRECONDITION: !container.empty()</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    Stub_random_engine(container_type&amp;&amp; container);</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    result_type <a class="codeRef" href="http://en.cppreference.com/w/cpp/iterator/next.html">next</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    container_type container_;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    iterator_type next_;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;};</div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    result_type next_between(result_type, result_type) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    container_type container_;</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    iterator_type next_;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;};</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;}  <span class="comment">// end namespace random</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;}  <span class="comment">// end namespace detail</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
-<div class="line"><a name="l00175"></a><span class="lineno"><a class="line" href="classge211_1_1unbounded__type.html">  175</a></span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1unbounded__type.html">unbounded_type</a></div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;{ };</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00188"></a><span class="lineno"><a class="line" href="namespacege211.html#a257730de21159253dae5eaef8653b35e">  188</a></span>&#160;constexpr <a class="code" href="classge211_1_1unbounded__type.html">unbounded_type</a> <span class="keyword">const</span> <a class="code" href="namespacege211.html#a257730de21159253dae5eaef8653b35e">unbounded</a> { };</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00222"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html">  222</a></span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1_random__source.html">Random_source</a></div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;{</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00226"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">  226</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> = RESULT_TYPE;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; </div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    IF_COMPILER(DECLARE_IF(!Is_Same&lt;result_type, bool&gt;))</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <a class="code" href="classge211_1_1_random__source.html#ab82bd37222911c65a8c9d03a28c986a3">Random_source</a>(<a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> lo, <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> hi);</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; </div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    IF_COMPILER(DECLARE_IF(</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            Is_Integral&lt;result_type&gt; &amp;&amp;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            !Is_Same&lt;result_type, bool&gt;))</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classge211_1_1_random__source.html#ab82bd37222911c65a8c9d03a28c986a3">Random_source</a>(<a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> limit);</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    IF_COMPILER(DECLARE_IF(Is_Same&lt;result_type, bool&gt;))</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classge211_1_1_random__source.html#ab82bd37222911c65a8c9d03a28c986a3">Random_source</a>(<span class="keywordtype">double</span> p_true);</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    IF_COMPILER(DECLARE_IF(!Is_Same&lt;result_type, bool&gt;))</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classge211_1_1_random__source.html#ab82bd37222911c65a8c9d03a28c986a3">Random_source</a>(<a class="code" href="classge211_1_1unbounded__type.html">unbounded_type</a>);</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
-<div class="line"><a name="l00334"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#aef5081a1d42b4facad44fe3bcd8432d3">  334</a></span>&#160;    <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> <a class="code" href="classge211_1_1_random__source.html#aef5081a1d42b4facad44fe3bcd8432d3">next</a>()</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    {</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        <span class="keywordflow">return</span> engine_-&gt;next();</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    }</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
-<div class="line"><a name="l00364"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#aaaead712fe7dc29c1799e7d8f77d1cfb">  364</a></span>&#160;    <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> <a class="code" href="classge211_1_1_random__source.html#aaaead712fe7dc29c1799e7d8f77d1cfb">operator()</a>()</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    {</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classge211_1_1_random__source.html#aef5081a1d42b4facad44fe3bcd8432d3">next</a>();</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    }</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; </div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    IF_COMPILER(DECLARE_IF(!Is_Same&lt;result_type, bool&gt;))</div>
-<div class="line"><a name="l00391"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a519629634c776c2d4385e91088d17a5b">  391</a></span>&#160;    <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> <a class="code" href="classge211_1_1_random__source.html#a519629634c776c2d4385e91088d17a5b">next_between</a>(<a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> lo, <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> hi)</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    {</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        <span class="keywordflow">return</span> engine_-&gt;next_between(lo, hi);</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    }</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160; </div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    IF_COMPILER(DECLARE_IF(!Is_Same&lt;result_type, bool&gt;))</div>
-<div class="line"><a name="l00404"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a856804121bd6b9c59e30e0c4db4978c6">  404</a></span>&#160;    <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> operator()(<a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> lo, <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> hi)</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    {</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classge211_1_1_random__source.html#a519629634c776c2d4385e91088d17a5b">next_between</a>(lo, hi);</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    }</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160; </div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">stub_with</a>(<a class="codeRef" href="http://en.cppreference.com/w/cpp/utility/initializer_list.html">std::initializer_list&lt;result_type&gt;</a> values);</div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160; </div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160; </div>
-<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">stub_with</a>(<a class="codeRef" href="http://en.cppreference.com/w/cpp/container/vector.html">std::vector&lt;result_type&gt;</a> values);</div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160; </div>
-<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160; </div>
-<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">stub_with</a>(<a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> value);</div>
-<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;}  <span class="comment">// end namespace random</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;}  <span class="comment">// end namespace detail</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
+<div class="line"><a name="l00168"></a><span class="lineno"><a class="line" href="classge211_1_1unbounded__type.html">  168</a></span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1unbounded__type.html">unbounded_type</a></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;{ };</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00181"></a><span class="lineno"><a class="line" href="namespacege211.html#a257730de21159253dae5eaef8653b35e">  181</a></span>&#160;constexpr <a class="code" href="classge211_1_1unbounded__type.html">unbounded_type</a> <span class="keyword">const</span> <a class="code" href="namespacege211.html#a257730de21159253dae5eaef8653b35e">unbounded</a> { };</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00215"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html">  215</a></span>&#160;<span class="keyword">class </span><a class="code" href="classge211_1_1_random__source.html">Random_source</a></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;{</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00219"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">  219</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> = RESULT_TYPE;</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    IF_COMPILER(DECLARE_IF(!Is_Same&lt;result_type, bool&gt;))</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <a class="code" href="classge211_1_1_random__source.html#ab82bd37222911c65a8c9d03a28c986a3">Random_source</a>(<a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> lo, <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> hi);</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    IF_COMPILER(DECLARE_IF(</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            Is_Integral&lt;result_type&gt; &amp;&amp;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            !Is_Same&lt;result_type, bool&gt;))</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classge211_1_1_random__source.html#ab82bd37222911c65a8c9d03a28c986a3">Random_source</a>(<a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> limit);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    IF_COMPILER(DECLARE_IF(Is_Same&lt;result_type, bool&gt;))</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classge211_1_1_random__source.html#ab82bd37222911c65a8c9d03a28c986a3">Random_source</a>(<span class="keywordtype">double</span> p_true);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    IF_COMPILER(DECLARE_IF(!Is_Same&lt;result_type, bool&gt;))</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classge211_1_1_random__source.html#ab82bd37222911c65a8c9d03a28c986a3">Random_source</a>(<a class="code" href="classge211_1_1unbounded__type.html">unbounded_type</a>);</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
+<div class="line"><a name="l00327"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#aef5081a1d42b4facad44fe3bcd8432d3">  327</a></span>&#160;    <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> <a class="code" href="classge211_1_1_random__source.html#aef5081a1d42b4facad44fe3bcd8432d3">next</a>()</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    {</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        <span class="keywordflow">return</span> engine_-&gt;next();</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    }</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
+<div class="line"><a name="l00357"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#aaaead712fe7dc29c1799e7d8f77d1cfb">  357</a></span>&#160;    <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> <a class="code" href="classge211_1_1_random__source.html#aaaead712fe7dc29c1799e7d8f77d1cfb">operator()</a>()</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    {</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classge211_1_1_random__source.html#aef5081a1d42b4facad44fe3bcd8432d3">next</a>();</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    }</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160; </div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; </div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    IF_COMPILER(DECLARE_IF(!Is_Same&lt;result_type, bool&gt;))</div>
+<div class="line"><a name="l00384"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a519629634c776c2d4385e91088d17a5b">  384</a></span>&#160;    <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> <a class="code" href="classge211_1_1_random__source.html#a519629634c776c2d4385e91088d17a5b">next_between</a>(<a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> lo, <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> hi)</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    {</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        <span class="keywordflow">return</span> engine_-&gt;next_between(lo, hi);</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    }</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160; </div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    IF_COMPILER(DECLARE_IF(!Is_Same&lt;result_type, bool&gt;))</div>
+<div class="line"><a name="l00397"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a856804121bd6b9c59e30e0c4db4978c6">  397</a></span>&#160;    <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> operator()(<a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> lo, <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> hi)</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    {</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classge211_1_1_random__source.html#a519629634c776c2d4385e91088d17a5b">next_between</a>(lo, hi);</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    }</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160; </div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">stub_with</a>(<a class="codeRef" href="http://en.cppreference.com/w/cpp/utility/initializer_list.html">std::initializer_list&lt;result_type&gt;</a> values);</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160; </div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160; </div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">stub_with</a>(<a class="codeRef" href="http://en.cppreference.com/w/cpp/container/vector.html">std::vector&lt;result_type&gt;</a> values);</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160; </div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160; </div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">stub_with</a>(<a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> value);</div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160; </div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160; </div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;    IF_COMPILER(DECLARE_IF(!Is_Same&lt;result_type, bool&gt;))</div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;    <span class="keyword">static</span> <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> <a class="code" href="classge211_1_1_random__source.html#a165285031feac30284cf7eb33fc96f47">bound_between</a>(</div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;            <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> value, <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> lo, <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> hi);</div>
 <div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160; </div>
-<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;    IF_COMPILER(DECLARE_IF(!Is_Same&lt;result_type, bool&gt;))</div>
-<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;    <span class="keyword">static</span> <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> <a class="code" href="classge211_1_1_random__source.html#a165285031feac30284cf7eb33fc96f47">bound_between</a>(</div>
-<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;            <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> value, <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> lo, <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> hi);</div>
-<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160; </div>
-<div class="line"><a name="l00502"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#ad151743256b890e65aa4a50e739c4f73">  502</a></span>&#160;    <a class="code" href="classge211_1_1_random__source.html#ad151743256b890e65aa4a50e739c4f73">Random_source</a>(<a class="code" href="classge211_1_1_random__source.html">Random_source</a>&amp;&amp; other) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160; </div>
-<div class="line"><a name="l00506"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a8916a65557bfa3138a1199e80dd77bb5">  506</a></span>&#160;    <a class="code" href="classge211_1_1_random__source.html">Random_source</a>&amp; <a class="code" href="classge211_1_1_random__source.html#a8916a65557bfa3138a1199e80dd77bb5">operator=</a>(<a class="code" href="classge211_1_1_random__source.html">Random_source</a>&amp;&amp; other) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00483"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#ad151743256b890e65aa4a50e739c4f73">  483</a></span>&#160;    <a class="code" href="classge211_1_1_random__source.html#ad151743256b890e65aa4a50e739c4f73">Random_source</a>(<a class="code" href="classge211_1_1_random__source.html">Random_source</a>&amp;&amp; other) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160; </div>
+<div class="line"><a name="l00487"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a8916a65557bfa3138a1199e80dd77bb5">  487</a></span>&#160;    <a class="code" href="classge211_1_1_random__source.html">Random_source</a>&amp; <a class="code" href="classge211_1_1_random__source.html#a8916a65557bfa3138a1199e80dd77bb5">operator=</a>(<a class="code" href="classge211_1_1_random__source.html">Random_source</a>&amp;&amp; other) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160; </div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;    <span class="keyword">using</span> Engine = detail::random::Random_engine&lt;result_type&gt;;</div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;    <span class="keyword">using</span> Prng = detail::random::Pseudo_random_engine&lt;result_type&gt;;</div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;    <span class="keyword">using</span> Stub = detail::random::Stub_random_engine&lt;result_type&gt;;</div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160; </div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;    <a class="codeRef" href="http://en.cppreference.com/w/cpp/memory/unique_ptr.html">std::unique_ptr&lt;Engine&gt;</a> engine_;</div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;};</div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160; </div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160; </div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;<span class="comment">// IMPLEMENTATIONS</span></div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160; </div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;<span class="keyword">namespace </span>detail {</div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;<span class="keyword">namespace </span>random {</div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160; </div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;<span class="keyword">using</span> std::begin;</div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;<span class="keyword">using</span> std::end;</div>
 <div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160; </div>
-<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;    <span class="keyword">using</span> Engine = detail::random::Random_engine&lt;result_type&gt;;</div>
-<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;    <span class="keyword">using</span> Prng = detail::random::Pseudo_random_engine&lt;result_type&gt;;</div>
-<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;    <span class="keyword">using</span> Stub = detail::random::Stub_random_engine&lt;result_type&gt;;</div>
-<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160; </div>
-<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;    <a class="codeRef" href="http://en.cppreference.com/w/cpp/memory/unique_ptr.html">std::unique_ptr&lt;Engine&gt;</a> engine_;</div>
-<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;};</div>
-<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160; </div>
-<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160; </div>
-<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;<span class="comment">// IMPLEMENTATIONS</span></div>
-<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160; </div>
-<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;<span class="keyword">namespace </span>detail {</div>
-<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;<span class="keyword">namespace </span>random {</div>
-<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160; </div>
-<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;<span class="keyword">using</span> std::begin;</div>
-<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;<span class="keyword">using</span> std::end;</div>
-<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160; </div>
-<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;Pseudo_random_engine&lt;RESULT_TYPE&gt;::Pseudo_random_engine(Args&amp;&amp;... args)</div>
-<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;        : distribution_{std::forward&lt;Args&gt;(args)...},</div>
-<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;          generator_{construct_generator()}</div>
-<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;{ }</div>
-<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160; </div>
-<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;RESULT_TYPE</div>
-<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;Pseudo_random_engine&lt;RESULT_TYPE&gt;::next()</div>
-<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;{</div>
-<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;    <span class="keywordflow">return</span> distribution_(generator_);</div>
-<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;}</div>
-<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160; </div>
-<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;RESULT_TYPE</div>
-<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;Pseudo_random_engine&lt;RESULT_TYPE&gt;::next_between(result_type lo, result_type hi)</div>
-<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;{</div>
-<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;    <span class="keywordflow">return</span> Distribution&lt;result_type&gt;{lo, hi}(generator_);</div>
-<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;}</div>
-<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160; </div>
-<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;Stub_random_engine&lt;RESULT_TYPE&gt;::Stub_random_engine(container_type&amp;&amp; container)</div>
-<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;        : container_(std::move(container)),</div>
-<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;          next_(begin(container_))</div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;Pseudo_random_engine&lt;RESULT_TYPE&gt;::Pseudo_random_engine(Args&amp;&amp;... args)</div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;        : distribution_{std::forward&lt;Args&gt;(args)...},</div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;          generator_{construct_generator()}</div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;{ }</div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160; </div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;RESULT_TYPE</div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;Pseudo_random_engine&lt;RESULT_TYPE&gt;::next()</div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;{</div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;    <span class="keywordflow">return</span> distribution_(generator_);</div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;}</div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160; </div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;RESULT_TYPE</div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;Pseudo_random_engine&lt;RESULT_TYPE&gt;::next_between(result_type lo, result_type hi)</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;{</div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;    <span class="keywordflow">return</span> Distribution&lt;result_type&gt;{lo, hi}(generator_);</div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;}</div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160; </div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;Stub_random_engine&lt;RESULT_TYPE&gt;::Stub_random_engine(container_type&amp;&amp; container)</div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;        : container_(std::move(container)),</div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;          next_(begin(container_))</div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;{</div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;    <span class="keywordflow">if</span> (next_ == end(container_)) {</div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classge211_1_1exceptions_1_1_client__logic__error.html">ge211::Client_logic_error</a>{</div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;                <span class="stringliteral">&quot;Random_source: cannot stub with empty container&quot;</span>};</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;    }</div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;}</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160; </div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;RESULT_TYPE</div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;Stub_random_engine&lt;RESULT_TYPE&gt;::next()</div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;{</div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;    result_type result = *next_++;</div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;    <span class="keywordflow">if</span> (next_ == end(container_)) next_ = begin(container_);</div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;}</div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160; </div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;RESULT_TYPE</div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;Stub_random_engine&lt;RESULT_TYPE&gt;::next_between(result_type lo, result_type hi)</div>
 <div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;{</div>
-<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;    <span class="keywordflow">if</span> (next_ == end(container_)) {</div>
-<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;        <span class="keywordflow">throw</span> <a class="code" href="classge211_1_1exceptions_1_1_client__logic__error.html">ge211::Client_logic_error</a>{</div>
-<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;                <span class="stringliteral">&quot;Random_source: cannot stub with empty container&quot;</span>};</div>
-<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;    }</div>
-<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;}</div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;    <span class="keywordflow">return</span> bound_between&lt;result_type&gt;(next(), lo, hi);</div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;}</div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160; </div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;}  <span class="comment">// end namespace random</span></div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;}  <span class="comment">// end namespace detail</span></div>
 <div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160; </div>
 <div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;RESULT_TYPE</div>
-<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;Stub_random_engine&lt;RESULT_TYPE&gt;::next()</div>
-<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;{</div>
-<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;    result_type result = *next_++;</div>
-<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;    <span class="keywordflow">if</span> (next_ == end(container_)) next_ = begin(container_);</div>
-<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;}</div>
-<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160; </div>
-<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;RESULT_TYPE</div>
-<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;Stub_random_engine&lt;RESULT_TYPE&gt;::next_between(result_type lo, result_type hi)</div>
-<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;{</div>
-<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;    <span class="keywordflow">return</span> bound_between&lt;result_type&gt;(next(), lo, hi);</div>
-<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;}</div>
-<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160; </div>
-<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;}  <span class="comment">// end namespace random</span></div>
-<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;}  <span class="comment">// end namespace detail</span></div>
-<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160; </div>
-<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;IF_COMPILER(DEFINE_IF)</div>
-<div class="line"><a name="l00580"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#ab82bd37222911c65a8c9d03a28c986a3">  580</a></span>&#160;<a class="code" href="classge211_1_1_random__source.html">Random_source</a>&lt;RESULT_TYPE&gt;::<a class="code" href="classge211_1_1_random__source.html">Random_source</a>(<a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> lo, <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> hi)</div>
-<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;        : engine_{std::make_unique&lt;Prng&gt;(lo, hi)}</div>
-<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;{ }</div>
-<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160; </div>
-<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;IF_COMPILER(DEFINE_IF)</div>
-<div class="line"><a name="l00586"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a1cbcf3d1006c2c81033e89ba40f41638">  586</a></span>&#160;<a class="code" href="classge211_1_1_random__source.html">Random_source</a>&lt;RESULT_TYPE&gt;::<a class="code" href="classge211_1_1_random__source.html">Random_source</a>(<a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> limit)</div>
-<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;        : engine_{std::make_unique&lt;Prng&gt;(limit)}</div>
-<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;{ }</div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;IF_COMPILER(DEFINE_IF)</div>
+<div class="line"><a name="l00561"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#ab82bd37222911c65a8c9d03a28c986a3">  561</a></span>&#160;<a class="code" href="classge211_1_1_random__source.html">Random_source</a>&lt;RESULT_TYPE&gt;::<a class="code" href="classge211_1_1_random__source.html">Random_source</a>(<a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> lo, <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> hi)</div>
+<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;        : engine_{std::make_unique&lt;Prng&gt;(lo, hi)}</div>
+<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;{ }</div>
+<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160; </div>
+<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;IF_COMPILER(DEFINE_IF)</div>
+<div class="line"><a name="l00567"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a1cbcf3d1006c2c81033e89ba40f41638">  567</a></span>&#160;<a class="code" href="classge211_1_1_random__source.html">Random_source</a>&lt;RESULT_TYPE&gt;::<a class="code" href="classge211_1_1_random__source.html">Random_source</a>(<a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> limit)</div>
+<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;        : engine_{std::make_unique&lt;Prng&gt;(limit)}</div>
+<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;{ }</div>
+<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160; </div>
+<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;IF_COMPILER(DEFINE_IF)</div>
+<div class="line"><a name="l00573"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a2cb2a117423dcfbddbf4e3054b84921e">  573</a></span>&#160;<a class="code" href="classge211_1_1_random__source.html">Random_source</a>&lt;RESULT_TYPE&gt;::<a class="code" href="classge211_1_1_random__source.html">Random_source</a>(<span class="keywordtype">double</span> p_true)</div>
+<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;        : engine_{std::make_unique&lt;Prng&gt;(p_true)}</div>
+<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;{ }</div>
+<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160; </div>
+<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;IF_COMPILER(DEFINE_IF)</div>
+<div class="line"><a name="l00579"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#ad97908ff91a1a617c8ef8e625e9cd239">  579</a></span>&#160;<a class="code" href="classge211_1_1_random__source.html">Random_source</a>&lt;RESULT_TYPE&gt;::<a class="code" href="classge211_1_1_random__source.html">Random_source</a>(<a class="code" href="classge211_1_1unbounded__type.html">unbounded_type</a>)</div>
+<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;        : <a class="code" href="classge211_1_1_random__source.html">Random_source</a>{0, <a class="codeRef" href="http://en.cppreference.com/w/cpp/types/numeric_limits/max.html">std::numeric_limits&lt;result_type&gt;::max</a>()}</div>
+<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;{ }</div>
+<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160; </div>
+<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00585"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a4177f858b15d58b402ecc2b2cab7330f">  585</a></span>&#160;<a class="code" href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">Random_source&lt;RESULT_TYPE&gt;::stub_with</a>(<a class="codeRef" href="http://en.cppreference.com/w/cpp/container/vector.html">std::vector&lt;result_type&gt;</a> values)</div>
+<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;{</div>
+<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;    engine_ = std::make_unique&lt;Stub&gt;(std::move(values));</div>
+<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;}</div>
 <div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160; </div>
 <div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;IF_COMPILER(DEFINE_IF)</div>
-<div class="line"><a name="l00592"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a2cb2a117423dcfbddbf4e3054b84921e">  592</a></span>&#160;<a class="code" href="classge211_1_1_random__source.html">Random_source</a>&lt;RESULT_TYPE&gt;::<a class="code" href="classge211_1_1_random__source.html">Random_source</a>(<span class="keywordtype">double</span> p_true)</div>
-<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;        : engine_{std::make_unique&lt;Prng&gt;(p_true)}</div>
-<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;{ }</div>
-<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160; </div>
-<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;IF_COMPILER(DEFINE_IF)</div>
-<div class="line"><a name="l00598"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#ad97908ff91a1a617c8ef8e625e9cd239">  598</a></span>&#160;<a class="code" href="classge211_1_1_random__source.html">Random_source</a>&lt;RESULT_TYPE&gt;::<a class="code" href="classge211_1_1_random__source.html">Random_source</a>(<a class="code" href="classge211_1_1unbounded__type.html">unbounded_type</a>)</div>
-<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;        : <a class="code" href="classge211_1_1_random__source.html">Random_source</a>{0, <a class="codeRef" href="http://en.cppreference.com/w/cpp/types/numeric_limits/max.html">std::numeric_limits&lt;result_type&gt;::max</a>()}</div>
-<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;{ }</div>
-<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160; </div>
-<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00604"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a4177f858b15d58b402ecc2b2cab7330f">  604</a></span>&#160;<a class="code" href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">Random_source&lt;RESULT_TYPE&gt;::stub_with</a>(<a class="codeRef" href="http://en.cppreference.com/w/cpp/container/vector.html">std::vector&lt;result_type&gt;</a> values)</div>
-<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;{</div>
-<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;    engine_ = std::make_unique&lt;Stub&gt;(std::move(values));</div>
-<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;}</div>
-<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160; </div>
-<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00611"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">  611</a></span>&#160;<a class="code" href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">Random_source&lt;RESULT_TYPE&gt;::stub_with</a>(<a class="codeRef" href="http://en.cppreference.com/w/cpp/utility/initializer_list.html">std::initializer_list&lt;result_type&gt;</a> values)</div>
-<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;{</div>
-<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;    stub_with(<a class="codeRef" href="http://en.cppreference.com/w/cpp/container/vector.html">std::vector&lt;result_type&gt;</a>(values));</div>
-<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;}</div>
-<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160; </div>
-<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00618"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a1a04c5640e787c1c2bfd67e5826d8928">  618</a></span>&#160;<a class="code" href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">Random_source&lt;RESULT_TYPE&gt;::stub_with</a>(<a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> value)</div>
-<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;{</div>
-<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;    stub_with({value});</div>
-<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;}</div>
-<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160; </div>
-<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
-<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;IF_COMPILER(DEFINE_IF)</div>
-<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;RESULT_TYPE</div>
-<div class="line"><a name="l00626"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a165285031feac30284cf7eb33fc96f47">  626</a></span>&#160;<a class="code" href="classge211_1_1_random__source.html#a165285031feac30284cf7eb33fc96f47">Random_source&lt;RESULT_TYPE&gt;::bound_between</a>(</div>
-<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;        <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> value,</div>
-<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;        <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> lo,</div>
-<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;        <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> hi)</div>
-<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;{</div>
-<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;    <span class="keywordflow">return</span> detail::random::bound_between&lt;result_type&gt;(value, lo, hi);</div>
-<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;}</div>
-<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160; </div>
-<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;}  <span class="comment">// end namespace ge211</span></div>
+<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00592"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">  592</a></span>&#160;<a class="code" href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">Random_source&lt;RESULT_TYPE&gt;::stub_with</a>(<a class="codeRef" href="http://en.cppreference.com/w/cpp/utility/initializer_list.html">std::initializer_list&lt;result_type&gt;</a> values)</div>
+<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;{</div>
+<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;    stub_with(<a class="codeRef" href="http://en.cppreference.com/w/cpp/container/vector.html">std::vector&lt;result_type&gt;</a>(values));</div>
+<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;}</div>
+<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160; </div>
+<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00599"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a1a04c5640e787c1c2bfd67e5826d8928">  599</a></span>&#160;<a class="code" href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">Random_source&lt;RESULT_TYPE&gt;::stub_with</a>(<a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> value)</div>
+<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;{</div>
+<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;    stub_with({value});</div>
+<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;}</div>
+<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160; </div>
+<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> RESULT_TYPE&gt;</div>
+<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;IF_COMPILER(DEFINE_IF)</div>
+<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;RESULT_TYPE</div>
+<div class="line"><a name="l00607"></a><span class="lineno"><a class="line" href="classge211_1_1_random__source.html#a165285031feac30284cf7eb33fc96f47">  607</a></span>&#160;<a class="code" href="classge211_1_1_random__source.html#a165285031feac30284cf7eb33fc96f47">Random_source&lt;RESULT_TYPE&gt;::bound_between</a>(</div>
+<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;        <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> value,</div>
+<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;        <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> lo,</div>
+<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;        <a class="code" href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">result_type</a> hi)</div>
+<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;{</div>
+<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;    <span class="keywordflow">return</span> detail::random::bound_between&lt;result_type&gt;(value, lo, hi);</div>
+<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;}</div>
+<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160; </div>
+<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;}  <span class="comment">// end namespace ge211</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="auniform_int_distribution_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution.html">std::uniform_int_distribution</a></div></div>
-<div class="ttc" id="aclassge211_1_1_random__source_html_a37162b107c3d355ba6951a73f9cd1c88"><div class="ttname"><a href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">ge211::Random_source::result_type</a></div><div class="ttdeci">RESULT_TYPE result_type</div><div class="ttdoc">The type of value generated by this Random_source.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00226">ge211_random.hxx:226</a></div></div>
-<div class="ttc" id="anamespacege211_html_a257730de21159253dae5eaef8653b35e"><div class="ttname"><a href="namespacege211.html#a257730de21159253dae5eaef8653b35e">ge211::unbounded</a></div><div class="ttdeci">constexpr unbounded_type const unbounded</div><div class="ttdoc">A tag value for passing to the constructor Random_source::Random_source(unbounded_type) in order to d...</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00188">ge211_random.hxx:188</a></div></div>
+<div class="ttc" id="aclassge211_1_1_random__source_html_a37162b107c3d355ba6951a73f9cd1c88"><div class="ttname"><a href="classge211_1_1_random__source.html#a37162b107c3d355ba6951a73f9cd1c88">ge211::Random_source::result_type</a></div><div class="ttdeci">RESULT_TYPE result_type</div><div class="ttdoc">The type of value generated by this Random_source.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00219">ge211_random.hxx:219</a></div></div>
+<div class="ttc" id="anamespacege211_html_a257730de21159253dae5eaef8653b35e"><div class="ttname"><a href="namespacege211.html#a257730de21159253dae5eaef8653b35e">ge211::unbounded</a></div><div class="ttdeci">constexpr unbounded_type const unbounded</div><div class="ttdoc">A tag value for passing to the constructor Random_source::Random_source(unbounded_type) in order to d...</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00181">ge211_random.hxx:181</a></div></div>
 <div class="ttc" id="avector_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/container/vector.html">std::vector</a></div></div>
-<div class="ttc" id="aclassge211_1_1_random__source_html_a165285031feac30284cf7eb33fc96f47"><div class="ttname"><a href="classge211_1_1_random__source.html#a165285031feac30284cf7eb33fc96f47">ge211::Random_source::bound_between</a></div><div class="ttdeci">static result_type bound_between(result_type value, result_type lo, result_type hi)</div><div class="ttdoc">Given a randomly-generated result_type value, returns a number between lo and hi (inclusive) derived ...</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00626">ge211_random.hxx:626</a></div></div>
-<div class="ttc" id="aclassge211_1_1unbounded__type_html"><div class="ttname"><a href="classge211_1_1unbounded__type.html">ge211::unbounded_type</a></div><div class="ttdoc">The type of special tag value unbounded.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00175">ge211_random.hxx:176</a></div></div>
-<div class="ttc" id="aclassge211_1_1_random__source_html_ab82bd37222911c65a8c9d03a28c986a3"><div class="ttname"><a href="classge211_1_1_random__source.html#ab82bd37222911c65a8c9d03a28c986a3">ge211::Random_source::Random_source</a></div><div class="ttdeci">Random_source(result_type lo, result_type hi)</div><div class="ttdoc">Constructs a random source that generates values between lo and hi, inclusive.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00580">ge211_random.hxx:580</a></div></div>
+<div class="ttc" id="aclassge211_1_1_random__source_html_a165285031feac30284cf7eb33fc96f47"><div class="ttname"><a href="classge211_1_1_random__source.html#a165285031feac30284cf7eb33fc96f47">ge211::Random_source::bound_between</a></div><div class="ttdeci">static result_type bound_between(result_type value, result_type lo, result_type hi)</div><div class="ttdoc">Given a randomly-generated result_type value, bounds it between lo and hi (inclusive) by adjusting va...</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00607">ge211_random.hxx:607</a></div></div>
+<div class="ttc" id="aclassge211_1_1unbounded__type_html"><div class="ttname"><a href="classge211_1_1unbounded__type.html">ge211::unbounded_type</a></div><div class="ttdoc">The type of special tag value unbounded.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00168">ge211_random.hxx:169</a></div></div>
+<div class="ttc" id="aclassge211_1_1_random__source_html_ab82bd37222911c65a8c9d03a28c986a3"><div class="ttname"><a href="classge211_1_1_random__source.html#ab82bd37222911c65a8c9d03a28c986a3">ge211::Random_source::Random_source</a></div><div class="ttdeci">Random_source(result_type lo, result_type hi)</div><div class="ttdoc">Constructs a random source that generates values between lo and hi, inclusive.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00561">ge211_random.hxx:561</a></div></div>
 <div class="ttc" id="auniform_real_distribution_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution.html">std::uniform_real_distribution</a></div></div>
 <div class="ttc" id="amersenne_twister_engine_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/numeric/random/mersenne_twister_engine.html">std::mt19937_64</a></div></div>
 <div class="ttc" id="anamespacege211_html"><div class="ttname"><a href="namespacege211.html">ge211</a></div><div class="ttdoc">The game engine namespace.</div><div class="ttdef"><b>Definition:</b> <a href="ge211_8hxx_source.html#l00004">ge211.hxx:4</a></div></div>
-<div class="ttc" id="aclassge211_1_1_random__source_html_a519629634c776c2d4385e91088d17a5b"><div class="ttname"><a href="classge211_1_1_random__source.html#a519629634c776c2d4385e91088d17a5b">ge211::Random_source::next_between</a></div><div class="ttdeci">result_type next_between(result_type lo, result_type hi)</div><div class="ttdoc">Returns a random value between lo and hi.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00391">ge211_random.hxx:391</a></div></div>
+<div class="ttc" id="aclassge211_1_1_random__source_html_a519629634c776c2d4385e91088d17a5b"><div class="ttname"><a href="classge211_1_1_random__source.html#a519629634c776c2d4385e91088d17a5b">ge211::Random_source::next_between</a></div><div class="ttdeci">result_type next_between(result_type lo, result_type hi)</div><div class="ttdoc">Returns a random value between lo and hi.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00384">ge211_random.hxx:384</a></div></div>
 <div class="ttc" id="aclassge211_1_1exceptions_1_1_client__logic__error_html"><div class="ttname"><a href="classge211_1_1exceptions_1_1_client__logic__error.html">ge211::exceptions::Client_logic_error</a></div><div class="ttdoc">An exception that indicates that a logic error was performed by the client.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__error_8hxx_source.html#l00047">ge211_error.hxx:48</a></div></div>
 <div class="ttc" id="aclassge211_1_1_random__source_html_ad151743256b890e65aa4a50e739c4f73"><div class="ttname"><a href="classge211_1_1_random__source.html#ad151743256b890e65aa4a50e739c4f73">ge211::Random_source::Random_source</a></div><div class="ttdeci">Random_source(Random_source &amp;&amp;other)=delete</div><div class="ttdoc">Random_sources cannot be move-constructed because they cannot be moved or copied.</div></div>
-<div class="ttc" id="aclassge211_1_1_random__source_html"><div class="ttname"><a href="classge211_1_1_random__source.html">ge211::Random_source</a></div><div class="ttdoc">A generic class for generating pseudorandom numbers in uniform distribution over a specified range.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00222">ge211_random.hxx:223</a></div></div>
-<div class="ttc" id="afmod_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/numeric/math/fmod.html">std::fmod</a></div><div class="ttdeci">T fmod(T... args)</div></div>
+<div class="ttc" id="aclassge211_1_1_random__source_html"><div class="ttname"><a href="classge211_1_1_random__source.html">ge211::Random_source</a></div><div class="ttdoc">A generic class for generating pseudorandom numbers in uniform distribution over a specified range.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00215">ge211_random.hxx:216</a></div></div>
 <div class="ttc" id="aclassge211_1_1_random__source_html_a8916a65557bfa3138a1199e80dd77bb5"><div class="ttname"><a href="classge211_1_1_random__source.html#a8916a65557bfa3138a1199e80dd77bb5">ge211::Random_source::operator=</a></div><div class="ttdeci">Random_source &amp; operator=(Random_source &amp;&amp;other)=delete</div><div class="ttdoc">Random_sources cannot be move-assigned because they cannot be moved or copied.</div></div>
 <div class="ttc" id="aend_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/iterator/end.html">std::end</a></div><div class="ttdeci">T end(T... args)</div></div>
-<div class="ttc" id="amax_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/types/numeric_limits/max.html">std::numeric_limits::max</a></div><div class="ttdeci">T max(T... args)</div></div>
+<div class="ttc" id="amax_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/algorithm/max.html">std::max</a></div><div class="ttdeci">T max(T... args)</div></div>
 <div class="ttc" id="aunique_ptr_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/memory/unique_ptr.html">std::unique_ptr&lt; Engine &gt;</a></div></div>
-<div class="ttc" id="aclassge211_1_1_random__source_html_a11d83f72731fb8a719599c44f7463e95"><div class="ttname"><a href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">ge211::Random_source::stub_with</a></div><div class="ttdeci">void stub_with(std::initializer_list&lt; result_type &gt; values)</div><div class="ttdoc">Configures this Random_source to return a predetermined sequence of values.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00611">ge211_random.hxx:611</a></div></div>
-<div class="ttc" id="aclassge211_1_1_random__source_html_aaaead712fe7dc29c1799e7d8f77d1cfb"><div class="ttname"><a href="classge211_1_1_random__source.html#aaaead712fe7dc29c1799e7d8f77d1cfb">ge211::Random_source::operator()</a></div><div class="ttdeci">result_type operator()()</div><div class="ttdoc">Returns the next random value from this source.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00364">ge211_random.hxx:364</a></div></div>
+<div class="ttc" id="aclassge211_1_1_random__source_html_a11d83f72731fb8a719599c44f7463e95"><div class="ttname"><a href="classge211_1_1_random__source.html#a11d83f72731fb8a719599c44f7463e95">ge211::Random_source::stub_with</a></div><div class="ttdeci">void stub_with(std::initializer_list&lt; result_type &gt; values)</div><div class="ttdoc">Configures this Random_source to return a predetermined sequence of values.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00592">ge211_random.hxx:592</a></div></div>
+<div class="ttc" id="aclassge211_1_1_random__source_html_aaaead712fe7dc29c1799e7d8f77d1cfb"><div class="ttname"><a href="classge211_1_1_random__source.html#aaaead712fe7dc29c1799e7d8f77d1cfb">ge211::Random_source::operator()</a></div><div class="ttdeci">result_type operator()()</div><div class="ttdoc">Returns the next random value from this source.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00357">ge211_random.hxx:357</a></div></div>
 <div class="ttc" id="anext_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/iterator/next.html">std::next</a></div><div class="ttdeci">T next(T... args)</div></div>
-<div class="ttc" id="aclassge211_1_1_random__source_html_aef5081a1d42b4facad44fe3bcd8432d3"><div class="ttname"><a href="classge211_1_1_random__source.html#aef5081a1d42b4facad44fe3bcd8432d3">ge211::Random_source::next</a></div><div class="ttdeci">result_type next()</div><div class="ttdoc">Returns the next random value from this source.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00334">ge211_random.hxx:334</a></div></div>
+<div class="ttc" id="aclassge211_1_1_random__source_html_aef5081a1d42b4facad44fe3bcd8432d3"><div class="ttname"><a href="classge211_1_1_random__source.html#aef5081a1d42b4facad44fe3bcd8432d3">ge211::Random_source::next</a></div><div class="ttdeci">result_type next()</div><div class="ttdoc">Returns the next random value from this source.</div><div class="ttdef"><b>Definition:</b> <a href="ge211__random_8hxx_source.html#l00327">ge211_random.hxx:327</a></div></div>
 <div class="ttc" id="ainitializer_list_html"><div class="ttname"><a href="http://en.cppreference.com/w/cpp/utility/initializer_list.html">std::initializer_list</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

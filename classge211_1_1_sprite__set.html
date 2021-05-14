@@ -32,7 +32,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ge211
-   &#160;<span id="projectnumber">2021.4.1</span>
+   &#160;<span id="projectnumber">2021.5.0</span>
    </div>
    <div id="projectbrief">A student game engine</div>
   </td>
@@ -168,7 +168,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a reference to this same <a class="el" href="classge211_1_1_sprite__set.html" title="A collection of positioned Sprites ready to be rendered to the screen.">Sprite_set</a></dd></dl>
-<h4><a class="anchor" id="autotoc_md32"></a>
+<h4><a class="anchor" id="autotoc_md33"></a>
 Ownership</h4>
 <p>This function borrows the sprite and retains a reference to it in the the <a class="el" href="classge211_1_1_sprite__set.html" title="A collection of positioned Sprites ready to be rendered to the screen.">Sprite_set</a>, which is then used to render the sprite after <a class="el" href="classge211_1_1_abstract__game.html#a44518135e411e35374f252d1c7d44e3e" title="You must override this function in the derived class to specify how to draw your scene.">Abstract_game::draw(Sprite_set&amp;)</a> returns. This means that any sprites added to the <a class="el" href="classge211_1_1_sprite__set.html" title="A collection of positioned Sprites ready to be rendered to the screen.">Sprite_set</a> need to be owned by some other object that outlives the current call to <a class="el" href="classge211_1_1_abstract__game.html#a44518135e411e35374f252d1c7d44e3e">Abstract_game::draw</a>.</p>
 <dl class="section see"><dt>See also</dt><dd><code>struct</code> <a class="el" href="structge211_1_1geometry_1_1_posn.html">Posn</a> </dd>
