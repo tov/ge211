@@ -99,6 +99,34 @@ struct Dims
         return !(*this == that);
     }
 
+    /// Less-than-or-equal for Dims. Determines whether `*this` Dims
+    /// fits inside `that` Dims.
+    bool operator<=(Dims that) const
+    {
+        return width <= that.width && height <= that.height;
+    }
+
+    /// Greater-than-or-equal for Dims. Determines whether `that` Dims
+    /// fits inside `*this` Dims.
+    bool operator>=(Dims that) const
+    {
+        return that <= *this;
+    }
+
+    /// Less-than for Dims. True when `*this` Dims fits inside `that` Dims
+    /// but they aren't equal.
+    bool operator<(Dims that) const
+    {
+        return *this <= that && *this != that;
+    }
+
+    /// Greater-than for Dims. True when `that` Dims fits inside `*this` Dims
+    /// but they aren't equal.
+    bool operator>(Dims that) const
+    {
+        return that < *this;
+    }
+
     /// Adds two Dims%es. This is vector addition.
     Dims operator+(Dims that) const
     {
@@ -111,6 +139,31 @@ struct Dims
     {
         return {Coordinate(width - that.width),
                 Coordinate(height - that.height)};
+    }
+
+    /// Multiplies two Dims%es. This scales them by multiplying the widths and
+    /// heights, pointwise.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// ge211::Dims<double> cell_size {50, 25};
+    /// ge211::Dims<int>    repetitions {3, 2};
+    ///
+    /// ge211::Dims<double> actual_result = cell_size * repetitions;
+    /// ge211::Dims<double> expected_result {150, 50};
+    ///
+    /// CHECK( actual_result == expected_result );
+    /// ```
+    template <
+            typename OTHER_COORD,
+            typename RESULT_COORD = Multiply_Result<Coordinate, OTHER_COORD>
+    >
+    Dims<RESULT_COORD>
+    operator*(Dims<OTHER_COORD> that) const
+    {
+        return {RESULT_COORD(width - that.width),
+                RESULT_COORD(height - that.height)};
     }
 
     /// Multiplies a Dims by a scalar.
@@ -149,6 +202,15 @@ struct Dims
     Dims &operator-=(Dims that)
     {
         return *this = *this - that;
+    }
+
+    /// Succinct Dims–Dims multiplication. Scales `*this` by `that`.
+    template <
+            typename OTHER_COORD
+    >
+    Dims &operator*=(Dims<OTHER_COORD> that)
+    {
+        return *this = *this * that;
     }
 
     /// Succinct [Dims][1]-scalar multiplication.
