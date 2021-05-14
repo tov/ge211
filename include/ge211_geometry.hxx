@@ -162,8 +162,8 @@ struct Dims
     Dims<RESULT_COORD>
     operator*(Dims<OTHER_COORD> that) const
     {
-        return {RESULT_COORD(width - that.width),
-                RESULT_COORD(height - that.height)};
+        return {RESULT_COORD(width * that.width),
+                RESULT_COORD(height * that.height)};
     }
 
     /// Multiplies a Dims by a scalar.
