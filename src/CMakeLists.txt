@@ -20,6 +20,26 @@ set_target_properties(ge211
         CXX_EXTENSIONS                  Off
         VERSION                         ${PROJECT_VERSION})
 
+if(EMSCRIPTEN)
+    set(EM_IMAGE_FORMATS
+            bmp gif jpg png svg webp
+            CACHE STRING
+            "list of image formats to support under emscripten")
+    set(EM_MIXER_FORMATS
+            mp3 ogg wav
+            CACHE STRING
+            "list of audio formats to support under emscripten")
+    set(GE211_EMCC_PORTS
+            -sUSE_SDL=2
+            -sUSE_SDL_IMAGE=2
+            -sSDL2_IMAGE_FORMATS=[$<JOIN:${EM_IMAGE_FORMATS},$<COMMA>>]
+            -sUSE_SDL_MIXER=2
+            -sSDL2_MIXER_FORMATS=[$<JOIN:${EM_MIXER_FORMATS},$<COMMA>>]
+            -sUSE_SDL_TTF=2)
+    target_compile_options(ge211 PRIVATE ${GE211_EMCC_PORTS})
+    target_link_options(ge211 PUBLIC ${GE211_EMCC_PORTS})
+endif()
+
 if(MSVC)
     target_compile_options(ge211 PRIVATE /W4)
 else(MSVC)
@@ -58,7 +78,14 @@ set(GE211_RESOURCE_PATH
         CACHE STRING
         "Where to search for GE211 resource files.")
 
-target_compile_definitions(ge211
-        PRIVATE
-        GE211_RESOURCES="$<JOIN:${GE211_RESOURCE_PATH},\"$<COMMA>\">")
+if(EMSCRIPTEN)
+    set(GE211_RESOURCES_LITERAL
+            \"Resources\")
+else()
+    set(GE211_RESOURCES_LITERAL
+            \"$<JOIN:${GE211_RESOURCE_PATH},\"$<COMMA>\">\")
+endif()
 
+target_compile_definitions(ge211
+    PRIVATE
+    GE211_RESOURCES=${GE211_RESOURCES_LITERAL})

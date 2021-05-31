@@ -14,9 +14,9 @@ target_link_libraries(fireworks ge211)
 
 if(MSVC)
     target_compile_options(fireworks PRIVATE /W4)
-else(MSVC)
+else()
     target_compile_options(fireworks PRIVATE -Wall -pedantic-errors)
-endif(MSVC)
+endif()
 
 include(GNUInstallDirs)
 install(TARGETS fireworks
