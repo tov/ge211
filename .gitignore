@@ -13,3 +13,7 @@ cmake-build-*/
 
 # Mac OS Finder preferences:
 .DS_Store
+
+# Clangd
+compile_commands.json
+.cache/
