@@ -6,6 +6,7 @@ project(ge211
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
+
 ###
 ### DEPENDENCIES
 ###
@@ -26,10 +27,13 @@ set(SDL2_BUILDING_LIBRARY   1)
 
 add_subdirectory(3rdparty/utf8-cpp EXCLUDE_FROM_ALL)
 
-find_package(SDL2       REQUIRED)
-find_package(SDL2_image REQUIRED)
-find_package(SDL2_mixer REQUIRED)
-find_package(SDL2_ttf   REQUIRED)
+if(NOT EMSCRIPTEN)
+    find_package(SDL2       REQUIRED)
+    find_package(SDL2_image REQUIRED)
+    find_package(SDL2_mixer REQUIRED)
+    find_package(SDL2_ttf   REQUIRED)
+endif()
+
 
 ###
 ### MAIN LIBRARY SETUP
@@ -38,6 +42,7 @@ find_package(SDL2_ttf   REQUIRED)
 configure_file(include/ge211_version.hxx.in
                include/ge211_version.hxx)
 add_subdirectory(src)
+
 
 ###
 ### DOCUMENTATION
