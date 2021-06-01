@@ -13,9 +13,6 @@ const Dims<int> Abstract_game::default_window_dimensions{800, 600};
 const char* const Abstract_game::default_window_title = "ge211 window";
 const Color Abstract_game::default_background_color = Color::black();
 
-// How many frames to run before calculating the frame rate.
-static int const frames_per_sample = 30;
-
 Dims<int> Abstract_game::initial_window_dimensions() const
 {
     return default_window_dimensions;
@@ -52,25 +49,6 @@ void Abstract_game::prepare(const sprites::Sprite& sprite) const
         internal::logging::warn()
             << "Abstract_game::prepare: Could not prepare sprite "
             << "because engine is not initialized";
-    }
-}
-
-void Abstract_game::mark_present_() NOEXCEPT
-{
-    busy_time_.pause();
-}
-
-void Abstract_game::mark_frame_() NOEXCEPT
-{
-    busy_time_.resume();
-    prev_frame_length_ = frame_start_.reset();
-
-    if (++sample_counter_ == frames_per_sample) {
-        auto sample_duration = real_time_.reset().seconds();
-        auto busy_duration   = busy_time_.reset().seconds();
-        fps_            = frames_per_sample / sample_duration;
-        load_           = 100 * busy_duration / sample_duration;
-        sample_counter_ = 0;
     }
 }
 

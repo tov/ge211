@@ -3,8 +3,9 @@
 #include "ge211_render.hxx"
 #include "ge211_sprites.hxx"
 
-#include <SDL.h>
 #include "utf8.h"
+
+#include <SDL.h>
 
 #include <algorithm>
 #include <cstring>
@@ -22,7 +23,10 @@ static const Duration min_frame_length = software_frame_length / 2;
 
 Engine::Engine(Abstract_game& game)
         : game_{game},
-          window_{game_.initial_window_title(), game_.initial_window_dimensions()},
+          window_{
+              game_.initial_window_title(),
+              game_.initial_window_dimensions(),
+          },
           renderer_{window_}
 {
     game_.engine_ = this;
@@ -38,45 +42,96 @@ void Engine::prepare(const sprites::Sprite& sprite) const
     sprite.prepare(renderer_);
 }
 
+struct Engine::Cycle_state_
+{
+    Engine& engine;
+    bool has_vsync;
+    SDL_Event event{};
+    Sprite_set sprite_set{};
+
+    bool
+    run_cycle(time::Duration);
+};
+
+#ifdef __EMSCRIPTEN__
+bool
+em_cycle_callback(double millis, void* user_data)
+{
+    auto& state = *static_cast<Engine::Cycle_state_*>(user_data);
+    auto& clock = state.engine.clock_();
+
+    auto now = time::Time_point() + time::Duration(millis / 1000); 
+
+    clock.mark_frame(now);
+    auto result = state.run_cycle(clock.prev_frame_length());
+    clock.mark_present();
+
+    return result;
+}
+
+extern "C" EM_BOOL
+em_cycle_shim(double millis, void* user_data)
+{
+    return em_cycle_callback(millis, user_data)? EM_TRUE : EM_FALSE;
+}
+#endif
+
+bool
+Engine::Cycle_state_::run_cycle(time::Duration frame_length)
+{
+    auto& game = engine.game_;
+    auto& clock = game.clock_;
+    auto& renderer = engine.renderer_;
+
+    engine.handle_events_(event);
+    game.on_frame(game.get_prev_frame_length().seconds());
+
+    if (game.quit_) {
+        return false;
+    }
+
+    game.poll_channels_();
+    game.draw(sprite_set);
+
+    renderer.set_color(game.background_color);
+    renderer.clear();
+    engine.paint_sprites_(sprite_set);
+
+    Duration allowed_frame_length =
+        (engine.is_focused_ && has_vsync)?
+        min_frame_length : software_frame_length;
+
+    if (frame_length < allowed_frame_length) {
+        auto duration = allowed_frame_length - frame_length;
+        duration.sleep_for();
+        internal::logging::debug()
+            << "Software vsync slept for "
+            << duration.seconds() << " s";
+    }
+
+    clock.mark_present();
+    renderer.present();
+
+    return true;
+}
+
 void Engine::run()
 {
-    SDL_Event e;
-    Sprite_set sprites;
-
-    bool has_vsync = renderer_.is_vsync();
+    auto state = Cycle_state_{*this, renderer_.is_vsync()};
 
     try {
         game_.on_start();
 
-        while (!game_.quit_) {
-            handle_events_(e);
-            game_.on_frame(game_.get_prev_frame_length().seconds());
-            game_.poll_channels_();
-            game_.draw(sprites);
-
-            renderer_.set_color(game_.background_color);
-            renderer_.clear();
-            paint_sprites_(sprites);
-
-            game_.mark_present_();
-            renderer_.present();
-
-            Duration allowed_frame_length =
-                    (is_focused_ && has_vsync)?
-                    min_frame_length : software_frame_length;
-
-            auto frame_length = game_.frame_start_.elapsed_time();
-            if (frame_length < allowed_frame_length) {
-                auto duration = allowed_frame_length - frame_length;
-                duration.sleep_for();
-                game_.mark_frame_();
-                internal::logging::debug()
-                    << "Software vsync slept for "
-                    << duration.seconds() << " s";
-            } else {
-                game_.mark_frame_();
-            }
-        }
+#ifdef __EMSCRIPTEN__
+        emscripten_request_animation_frame_loop(&em_cycle_shim, &state);
+#else
+        bool result;
+        auto& clock = game_.clock_;
+        do {
+            clock.mark_frame();
+            result = state.run_cycle(clock.prev_frame_length());
+        } while (result);
+#endif
 
         game_.on_quit();
     } catch (const Exception_base& e) {

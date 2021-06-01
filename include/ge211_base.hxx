@@ -260,12 +260,12 @@ protected:
     /// used to measure intervals between events, though it might be better
     /// to use a time::Timer or time::Pausable_timer.
     Time_point get_frame_start_time() const NOEXCEPT
-    { return frame_start_.start_time(); }
+    { return clock_.frame_start_time(); }
 
     /// Returns the duration of the frame right before the frame currently
     /// running. See time::Duration for information on how to use the result.
     Duration get_prev_frame_length() const NOEXCEPT
-    { return prev_frame_length_; }
+    { return clock_.prev_frame_length(); }
 
     /// Returns an approximation of the current frame rate in Hz.
     /// Typically we synchronize the frame rate with the video controller, but
@@ -298,9 +298,6 @@ protected:
 private:
     friend class detail::Engine;
 
-    void mark_present_() NOEXCEPT;
-    void mark_frame_() NOEXCEPT;
-
     void poll_channels_();
 
     detail::Session session_;
@@ -309,8 +306,7 @@ private:
 
     bool quit_ = false;
 
-    Timer          frame_start_;
-    Duration       prev_frame_length_;
+    detail::Frame_clock clock_;
 
     double         fps_            {0};
     double         load_           {100};

@@ -20,7 +20,13 @@ set_target_properties(ge211
         CXX_EXTENSIONS                  Off
         VERSION                         ${PROJECT_VERSION})
 
-if(EMSCRIPTEN)
+
+if(NOT EMSCRIPTEN)
+    set(ge211_default_resource_path
+            "${CMAKE_CURRENT_SOURCE_DIR}/../Resources/"
+            "${CMAKE_INSTALL_FULL_DATADIR}/ge211/")
+else()
+    set(ge211_default_resource_path "Resources/")
     set(EM_IMAGE_FORMATS
             bmp gif jpg png svg webp
             CACHE STRING
@@ -72,20 +78,9 @@ target_link_libraries(ge211
         ${SDL2_TTF_LIBRARIES}
         utf8-cpp)
 
-set(GE211_RESOURCE_PATH
-        "${CMAKE_CURRENT_SOURCE_DIR}/../Resources/"
-        "${CMAKE_INSTALL_FULL_DATADIR}/ge211/"
-        CACHE STRING
-        "Where to search for GE211 resource files.")
-
-if(EMSCRIPTEN)
-    set(GE211_RESOURCES_LITERAL
-            \"Resources\")
-else()
-    set(GE211_RESOURCES_LITERAL
-            \"$<JOIN:${GE211_RESOURCE_PATH},\"$<COMMA>\">\")
-endif()
+set(GE211_RESOURCE_PATH ${ge211_default_resource_path}
+        CACHE STRING "Where to search for GE211 resource files.")
 
 target_compile_definitions(ge211
-    PRIVATE
-    GE211_RESOURCES=${GE211_RESOURCES_LITERAL})
+        PRIVATE
+        GE211_RESOURCES=\"$<JOIN:${GE211_RESOURCE_PATH},\"$<COMMA>\">\")
