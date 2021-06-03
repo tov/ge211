@@ -13,7 +13,7 @@
           </envs>
         </ADDITIONAL_GENERATION_ENVIRONMENT>
       </configuration>
-      <configuration PROFILE_NAME="Emscripten Release" CONFIG_NAME="RelWithDebInfo" TOOLCHAIN_NAME="Emscripten" GENERATION_OPTIONS="-GNinja -DCMAKE_INSTALL_PREFIX=/usr/local/asmjs-unknown-emscripten -DCMAKE_TOOLCHAIN_FILE=/usr/local/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_CROSSCOMPILING_EMULATOR=/usr/local/emsdk/node/14.15.5_64bit/bin/node" ENABLED="true">
+      <configuration PROFILE_NAME="Emscripten Release" CONFIG_NAME="MinSizeRel" TOOLCHAIN_NAME="Emscripten" GENERATION_OPTIONS="-GNinja -DCMAKE_INSTALL_PREFIX=/usr/local/asmjs-unknown-emscripten -DCMAKE_TOOLCHAIN_FILE=/usr/local/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake -DCMAKE_CROSSCOMPILING_EMULATOR=/usr/local/emsdk/node/14.15.5_64bit/bin/node" ENABLED="true">
         <ADDITIONAL_GENERATION_ENVIRONMENT>
           <envs>
             <env name="EMSDK" value="/usr/local/emsdk" />

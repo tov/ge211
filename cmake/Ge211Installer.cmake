@@ -1,7 +1,7 @@
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
-set(module_name FindGe211)
+set(module_name Ge211Config)
 set(config_version_cmake
         ${CMAKE_CURRENT_BINARY_DIR}/${module_name}Version.cmake)
 set(config_install_dir
