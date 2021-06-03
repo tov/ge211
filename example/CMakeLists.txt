@@ -1,11 +1,8 @@
 cmake_minimum_required(VERSION 3.13)
 project(ge211_examples CXX)
 
-list(APPEND CMAKE_MODULE_PATH
-        /usr/local/asmjs-unknown-emscripten/share/cmake)
-
 if (NOT GE211_INHERITED)
-    find_package(Ge211 2021.6 REQUIRED)
+    find_package(Ge211 2021.6 CONFIG REQUIRED)
 endif ()
 
 add_executable(fireworks fireworks.cxx)
