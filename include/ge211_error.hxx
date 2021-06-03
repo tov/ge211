@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ge211_forward.hxx"
-#include "ge211_noexcept.hxx"
+#include "ge211_doxygen.hxx"
 
 #include <exception>
 #include <memory>
@@ -27,7 +27,7 @@ public:
     /// pointer is guaranteed to be good as long as the exception
     /// exists and hasn't been mutated. If you need it for longer,
     /// copy it to a std::string.
-    const char* what() const NOEXCEPT override;
+    const char* what() const NOEXCEPT_ override;
 
 private:
     explicit Exception_base(const std::string& message);
@@ -207,16 +207,16 @@ class Logger
 {
 public:
     /// Returns the log level of this logger.
-    Log_level level() const NOEXCEPT { return level_; }
+    Log_level level() const NOEXCEPT_ { return level_; }
 
     /// Changes the log level of this logger.
-    void level(Log_level level) NOEXCEPT { level_ = level; }
+    void level(Log_level level) NOEXCEPT_ { level_ = level; }
 
     /// Returns the one and only logger instance.
-    static Logger& instance() NOEXCEPT;
+    static Logger& instance() NOEXCEPT_;
 
 private:
-    Logger() NOEXCEPT = default;
+    Logger() NOEXCEPT_ = default;
 
     Log_level level_ = Log_level::warn;
 };
@@ -233,7 +233,7 @@ public:
     /// Construct a new Log_message with the given log level and
     /// cause. The default log level is Log_level::debug.
     explicit Log_message(std::string reason,
-                         Log_level level = Log_level::debug) NOEXCEPT;
+                         Log_level level = Log_level::debug) NOEXCEPT_;
 
     /// Appends more text to this Log_message.
     template <typename STREAM_INSERTABLE>

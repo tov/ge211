@@ -28,7 +28,7 @@ void Abstract_game::run()
     Engine(*this).run();
 }
 
-void Abstract_game::quit() NOEXCEPT
+void Abstract_game::quit() NOEXCEPT_
 {
     quit_ = true;
 }
@@ -61,6 +61,58 @@ void Abstract_game::poll_channels_()
 void Abstract_game::on_key_down(Key key)
 {
     if (key.code() == '\u001B') quit();
+}
+
+std::unique_ptr<Abstract_game::Guard_>
+Abstract_game::guard_()
+{
+    return std::make_unique<Guard_>(this);
+}
+
+Abstract_game::Guard_::Guard_(Abstract_game *g)
+        : game(g)
+{
+    start_();
+}
+
+Abstract_game::Guard_::~Guard_()
+{
+    quit_();
+}
+
+Abstract_game::Guard_::Guard_(Abstract_game::Guard_&& other)
+        : game(other.release_())
+{ }
+
+Abstract_game::Guard_&
+Abstract_game::Guard_::operator=(Abstract_game::Guard_&& other)
+{
+    quit_();
+    game = other.release_();
+    return *this;
+}
+
+void
+Abstract_game::Guard_::start_()
+{
+    if (game) {
+        game->on_start();
+    }
+}
+
+void
+Abstract_game::Guard_::quit_()
+{
+    if (game) {
+        game->on_quit();
+        game = nullptr;
+    }
+}
+
+Abstract_game *
+Abstract_game::Guard_::release_()
+{
+    return std::exchange(game, nullptr);
 }
 
 } // end namespace ge211

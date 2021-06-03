@@ -16,6 +16,8 @@
 # SDL2_TTF_FOUND, if false, do not try to link against
 # SDL2_TTF_VERSION_STRING - human-readable string containing the
 # version of SDL2_ttf
+# SDL2_TTF_COMPILE_FLAGS, extra flags to pass the compiler
+# SDL2_TTF_LINK_FLAGS, extra flags to pass the linker
 #
 #
 #
@@ -26,6 +28,17 @@
 # Created by Eric Wing. This was influenced by the FindSDL.cmake
 # module, but with modifications to recognize OS X frameworks and
 # additional Unix paths (FreeBSD, etc).
+
+if (EMSCRIPTEN)
+    message(STATUS "Using Emscripten port for SDL2_TTF")
+    set(SDL2_TTF_FOUND 1)
+    set(SDL2_TTF_VERSION_STRING emcc-port)
+    set(SDL2_TTF_COMPILE_FLAGS -sUSE_SDL_TTF=2)
+    set(SDL2_TTF_LINK_FLAGS ${SDL2_TTF_COMPILE_FLAGS})
+    set(SDL2_TTF_LIBRARIES)
+    set(SDL2_TTF_INCLUDE_DIRS)
+    return()
+endif ()
 
 include(FindPackageHandleStandardArgs)
 
@@ -75,6 +88,8 @@ endif()
 
 set(SDL2_TTF_LIBRARIES ${SDL2_TTF_LIBRARY})
 set(SDL2_TTF_INCLUDE_DIRS ${SDL2_TTF_INCLUDE_DIR})
+set(SDL2_TTF_COMPILE_FLAGS)
+set(SDL2_TTF_LINK_FLAGS)
 
 find_package_handle_standard_args(SDL2_ttf
         FOUND_VAR       SDL2_TTF_FOUND

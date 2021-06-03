@@ -16,6 +16,8 @@
 # SDL2_IMAGE_FOUND, if false, do not try to link against
 # SDL2_IMAGE_VERSION_STRING - human-readable string containing the
 # version of SDL2_image
+# SDL2_IMAGE_COMPILE_FLAGS, extra flags to pass the compiler
+# SDL2_IMAGE_LINK_FLAGS, extra flags to pass the linker
 #
 #
 #
@@ -27,6 +29,24 @@
 # Created by Eric Wing. This was influenced by the FindSDL.cmake
 # module, but with modifications to recognize OS X frameworks and
 # additional Unix paths (FreeBSD, etc).
+
+if (EMSCRIPTEN)
+    message(STATUS "Using Emscripten port for SDL2_IMAGE")
+    set(SDL2_IMAGE_FORMATS
+            bmp gif jpg png svg
+            CACHE STRING
+            "list of image formats to support under emscripten")
+
+    set(SDL2_IMAGE_FOUND 1)
+    set(SDL2_IMAGE_VERSION_STRING emcc-port)
+    set(SDL2_IMAGE_COMPILE_FLAGS
+            -sUSE_SDL_IMAGE=2
+            -sSDL2_IMAGE_FORMATS=[$<JOIN:${SDL2_IMAGE_FORMATS},$<COMMA>>])
+    set(SDL2_IMAGE_LINK_FLAGS ${SDL2_IMAGE_COMPILE_FLAGS})
+    set(SDL2_IMAGE_LIBRARIES)
+    set(SDL2_IMAGE_INCLUDE_DIRS)
+    return()
+endif ()
 
 include(FindPackageHandleStandardArgs)
 
@@ -76,6 +96,8 @@ endif()
 
 set(SDL2_IMAGE_LIBRARIES ${SDL2_IMAGE_LIBRARY})
 set(SDL2_IMAGE_INCLUDE_DIRS ${SDL2_IMAGE_INCLUDE_DIR})
+set(SDL2_COMPILE_FLAGS)
+set(SDL2_LINK_FLAGS)
 
 find_package_handle_standard_args(SDL2_image
         FOUND_VAR       SDL2_IMAGE_FOUND

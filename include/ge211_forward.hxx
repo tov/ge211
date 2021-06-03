@@ -1,8 +1,10 @@
 #pragma once
 
+#include <cstddef>
+
 // Prevent SDL2 from taking over main().
 #ifndef SDL_MAIN_HANDLED
-# define SDL_MAIN_HANDLED
+  #define SDL_MAIN_HANDLED
 #endif
 
 // Forward declarations for some useful SDL2 types.
@@ -21,6 +23,8 @@ typedef struct _TTF_Font TTF_Font;
 
 // Forward declarations for all ge211 types.
 namespace ge211 {
+
+using std::size_t;
 
 class Abstract_game;
 class Color;
@@ -118,6 +122,7 @@ namespace detail {
 
 class Engine;
 class File_resource;
+class Frame_clock;
 struct Placed_sprite;
 class Renderer;
 class Session;

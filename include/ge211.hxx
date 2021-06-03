@@ -1,7 +1,7 @@
 #pragma once
 
 /// The game engine namespace.
-namespace ge211 {}
+namespace ge211 { }
 
 #include "ge211_base.hxx"
 #include "ge211_color.hxx"

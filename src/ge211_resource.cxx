@@ -15,9 +15,9 @@ using namespace detail;
 namespace {
 
 static const char* search_prefixes[] = {
-        GE211_RESOURCES,
         "Resources/",
         "../Resources/",
+        GE211_RESOURCES
 };
 
 template <class OPENER>
@@ -79,11 +79,12 @@ open_binary_resource_file(std::string const& filename)
 
 namespace detail {
 
-static Owned<SDL_RWops> open_rwops_(const std::string& filename)
+static SDL_RWops*
+open_rwops_(const std::string& filename)
 {
     struct Opener
     {
-        using result_t = Owned<SDL_RWops>;
+        using result_t = SDL_RWops*;
 
         static result_t open(std::string const& path)
         {

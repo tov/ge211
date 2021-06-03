@@ -5,9 +5,6 @@
 #include <vector>
 #include <utility>
 
-#undef GE211_TEXT
-#undef GE211_AUDIO
-
 using namespace ge211;
 using namespace std;
 
@@ -93,24 +90,16 @@ struct Model
 
 struct View
 {
-#if GE211_AUDIO
-    View(Mixer&);
-#else
-    View();
-#endif
+    explicit View(Mixer&);
 
-#ifdef GE211_TEXT
     Font                  sans{"sans.ttf", 30};
     Text_sprite           fps;
     Text_sprite           load;
-#endif
 
     Circle_sprite         mortar{mortar_radius, mortar_color};
     vector<Circle_sprite> stars;
 
-#ifdef GE211_AUDIO
     Sound_effect          pop;
-#endif
 };
 
 // MAIN STRUCT AND FUNCTION
@@ -128,9 +117,7 @@ struct Fireworks : Abstract_game
     Dims<int> initial_window_dimensions() const override;
     void draw(Sprite_set& sprites) override;
     void draw_fireworks(Sprite_set& sprites) const;
-#ifdef GE211_TEXT
     void draw_stats(Sprite_set& sprites);
-#endif
 
     // Controller
     bool is_paused = false;
@@ -141,7 +128,8 @@ struct Fireworks : Abstract_game
 
 int main()
 {
-    Fireworks{}.run();
+    Fireworks game;
+    game.run();
 }
 
 // FUNCTION DEFINITIONS FOR MODEL
@@ -246,11 +234,7 @@ void Model::add_random(Projectile::Position position0)
 
 // FUNCTION DEFINITIONS FOR VIEW
 
-#if GE211_AUDIO
         View::View(Mixer& mixer)
-#else
-        View::View()
-#endif
 {
     double hue  = 1.0;
     double dhue = 360.0 / number_of_colors;
@@ -260,9 +244,7 @@ void Model::add_random(Projectile::Position position0)
         hue += dhue;
     }
 
-#ifdef GE211_AUDIO
     pop.try_load("pop.ogg", mixer);
-#endif
 }
 
 Dims<int> Fireworks::initial_window_dimensions() const
@@ -273,9 +255,7 @@ Dims<int> Fireworks::initial_window_dimensions() const
 void Fireworks::draw(Sprite_set& sprites)
 {
     draw_fireworks(sprites);
-#ifdef GE211_TEXT
     draw_stats(sprites);
-#endif
 }
 
 void Fireworks::draw_fireworks(Sprite_set& sprites) const
@@ -301,7 +281,6 @@ void Fireworks::draw_fireworks(Sprite_set& sprites) const
     }
 }
 
-#ifdef GE211_TEXT
 void Fireworks::draw_stats(Sprite_set& sprites)
 {
     Dims<int> const margin{20, 10};
@@ -321,30 +300,43 @@ void Fireworks::draw_stats(Sprite_set& sprites)
             .left_by(view.load.dimensions().width);
     sprites.add_sprite(view.load, load_posn);
 }
-#endif
 
 // CONSTRUCTING THE GAME OBJECT
 
 Fireworks::Fireworks()
-#if GE211_AUDIO
         : view(mixer())
-#endif
 { }
 
 // FUNCTION DEFINITIONS FOR CONTROLLER
 
 void Fireworks::on_key(Key key)
 {
-    if (key == Key::code('q')) {
+    switch (key.code()) {
+    case 'd':
+        extern int puts(char const*);
+        puts("hi hi");
+        return;
+    case 'q':
         quit();
-    } else if (key == Key::code('f')) {
+        return;
+    case 'f':
         get_window().set_fullscreen(!get_window().get_fullscreen());
-    } else if (key == Key::code('p')) {
-        is_paused = !is_paused;
-    } else if (key == Key::code(' ') && !is_paused) {
+        return;
+    case 'p':
+        is_paused ^= true;
+        return;
+    case 'P':
+        is_paused = false;
+        return;
+    case 'u':
+        is_paused = true;
+        return;
+    case ' ':
+        if (is_paused) return;
         auto dims             = get_window().get_dimensions();
         auto initial_position = Posn<double>(dims.width / 2, dims.height);
         model.add_random(initial_position);
+        return;
     }
 }
 
@@ -354,13 +346,9 @@ void Fireworks::on_frame(double dt)
 
     unsigned explosion_count = model.update(dt);
 
-#if GE211_AUDIO
     if (view.pop)
         while (explosion_count--)
             mixer().play_effect(view.pop);
-#else
-    (void) explosion_count;
-#endif
 }
 
 void Fireworks::on_mouse_up(Mouse_button, Posn<int> posn)
