@@ -16,6 +16,8 @@
 # SDL2_MIXER_FOUND, if false, do not try to link against
 # SDL2_MIXER_VERSION_STRING - human-readable string containing the
 # version of SDL2_mixer
+# SDL2_MIXER_COMPILE_FLAGS, extra flags to pass the compiler
+# SDL2_MIXER_LINK_FLAGS, extra flags to pass the linker
 #
 #
 #
@@ -28,6 +30,24 @@
 # additional Unix paths (FreeBSD, etc).
 #
 # Mindlessly adapted from FindSDL2_ttf.cmake by Jesse Tov.
+
+if (EMSCRIPTEN)
+    message(STATUS "Using Emscripten port for SDL2_MIXER")
+    set(SDL2_MIXER_FORMATS
+            mp3 ogg wav
+            CACHE STRING
+            "list of audio formats to support under emscripten")
+
+    set(SDL2_MIXER_FOUND 1)
+    set(SDL2_MIXER_VERSION_STRING emcc-port)
+    set(SDL2_MIXER_COMPILE_FLAGS
+            -sUSE_SDL_MIXER=2
+            -sSDL2_MIXER_FORMATS=[$<JOIN:${SDL2_MIXER_FORMATS},$<COMMA>>])
+    set(SDL2_MIXER_LINK_FLAGS ${SDL2_MIXER_COMPILE_FLAGS})
+    set(SDL2_MIXER_LIBRARIES)
+    set(SDL2_MIXER_INCLUDE_DIRS)
+    return()
+endif ()
 
 include(FindPackageHandleStandardArgs)
 
@@ -77,6 +97,8 @@ endif()
 
 set(SDL2_MIXER_LIBRARIES ${SDL2_MIXER_LIBRARY})
 set(SDL2_MIXER_INCLUDE_DIRS ${SDL2_MIXER_INCLUDE_DIR})
+set(SDL2_MIXER_COMPILE_FLAGS)
+set(SDL2_MIXER_LINK_FLAGS)
 
 find_package_handle_standard_args(SDL2_mixer
         FOUND_VAR       SDL2_MIXER_FOUND
@@ -84,4 +106,3 @@ find_package_handle_standard_args(SDL2_mixer
         VERSION_VAR     SDL2_MIXER_VERSION_STRING)
 
 mark_as_advanced(SDL2_MIXER_LIBRARY SDL2_MIXER_INCLUDE_DIR)
-

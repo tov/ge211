@@ -15,42 +15,29 @@ add_library(ge211
 
 set_target_properties(ge211
         PROPERTIES
-        CXX_STANDARD                    14
-        CXX_STANDARD_REQUIRED           On
-        CXX_EXTENSIONS                  Off
-        VERSION                         ${PROJECT_VERSION})
+        CXX_STANDARD 14
+        CXX_STANDARD_REQUIRED On
+        CXX_EXTENSIONS Off
+        VERSION ${PROJECT_VERSION})
 
+target_compile_options(ge211 PRIVATE
+        -fexceptions
+        ${SDL2_COMPILE_FLAGS}
+        ${SDL2_IMAGE_COMPILE_FLAGS}
+        ${SDL2_MIXER_COMPILE_FLAGS}
+        ${SDL2_TTF_COMPILE_FLAGS})
+target_link_options(ge211 PUBLIC
+        -fexceptions
+        ${SDL2_LINK_FLAGS}
+        ${SDL2_IMAGE_LINK_FLAGS}
+        ${SDL2_MIXER_LINK_FLAGS}
+        ${SDL2_TTF_LINK_FLAGS})
 
-if(NOT EMSCRIPTEN)
-    set(ge211_default_resource_path
-            "${CMAKE_CURRENT_SOURCE_DIR}/../Resources/"
-            "${CMAKE_INSTALL_FULL_DATADIR}/ge211/")
-else()
-    set(ge211_default_resource_path "Resources/")
-    set(EM_IMAGE_FORMATS
-            bmp gif jpg png svg webp
-            CACHE STRING
-            "list of image formats to support under emscripten")
-    set(EM_MIXER_FORMATS
-            mp3 ogg wav
-            CACHE STRING
-            "list of audio formats to support under emscripten")
-    set(GE211_EMCC_PORTS
-            -sUSE_SDL=2
-            -sUSE_SDL_IMAGE=2
-            -sSDL2_IMAGE_FORMATS=[$<JOIN:${EM_IMAGE_FORMATS},$<COMMA>>]
-            -sUSE_SDL_MIXER=2
-            -sSDL2_MIXER_FORMATS=[$<JOIN:${EM_MIXER_FORMATS},$<COMMA>>]
-            -sUSE_SDL_TTF=2)
-    target_compile_options(ge211 PRIVATE ${GE211_EMCC_PORTS})
-    target_link_options(ge211 PUBLIC ${GE211_EMCC_PORTS})
-endif()
-
-if(MSVC)
+if (MSVC)
     target_compile_options(ge211 PRIVATE /W4)
-else(MSVC)
+else (MSVC)
     target_compile_options(ge211 PRIVATE -Wall -Wextra -pedantic)
-endif(MSVC)
+endif (MSVC)
 
 include(GNUInstallDirs)
 
@@ -78,8 +65,24 @@ target_link_libraries(ge211
         ${SDL2_TTF_LIBRARIES}
         utf8-cpp)
 
-set(GE211_RESOURCE_PATH ${ge211_default_resource_path}
-        CACHE STRING "Where to search for GE211 resource files.")
+if (EMSCRIPTEN)
+    target_link_options(ge211
+            INTERFACE
+            --preload-file
+            ${CMAKE_CURRENT_SOURCE_DIR}/../Resources@/Resources)
+    set(GE211_DEFAULT_RESOURCE_PATH
+            "/Resources/")
+else ()
+    set(GE211_DEFAULT_RESOURCE_PATH
+            "${CMAKE_CURRENT_SOURCE_DIR}/../Resources/"
+            "${CMAKE_INSTALL_FULL_DATADIR}/ge211/Resources/"
+            "/Resources/")
+endif ()
+
+set(GE211_RESOURCE_PATH
+        ${GE211_DEFAULT_RESOURCE_PATH}
+        CACHE STRING
+        "Where to search for GE211 resource files.")
 
 target_compile_definitions(ge211
         PRIVATE

@@ -1,16 +1,11 @@
 #pragma once
 
 #include "ge211_forward.hxx"
-#include "ge211_noexcept.hxx"
+#include "ge211_doxygen.hxx"
 #include "ge211_base.hxx"
 #include "ge211_render.hxx"
 #include "ge211_time.hxx"
 #include "ge211_window.hxx"
-
-#ifdef __EMSCRIPTEN__
-# include <emscripten/emscripten.h>
-# include <emscripten/html5.h>
-#endif
 
 namespace ge211 {
 
@@ -23,7 +18,7 @@ public:
 
     void run();
     void prepare(const sprites::Sprite&) const;
-    Window& get_window() NOEXCEPT;
+    Window& get_window() NOEXCEPT_;
 
     ~Engine();
 
@@ -36,7 +31,7 @@ private:
 
 #ifdef __EMSCRIPTEN__
     friend bool
-    em_cycle_callback(double millis, void* user_data);
+    em_cycle_callback(void *user_data);
 #endif
 
     Abstract_game& game_;
@@ -44,7 +39,7 @@ private:
     detail::Renderer renderer_;
     bool is_focused_ = false;
 
-    struct Cycle_state_;
+    struct State_;
 };
 
 } // end namespace detail

@@ -192,7 +192,7 @@ class Mixer
     // This calls default constructor...
     friend Abstract_game;
     // ...via this:
-    friend class detail::lazy_ptr<Mixer>;
+    friend class detail::Lazy_ptr<Mixer>;
 
 public:
     /// The state of an audio channel.
@@ -240,7 +240,7 @@ public:
     void attach_music(Music_track);
 
     /// Plays the currently attached music from the current saved position.
-    /// Fades in if given a non-zero @ref Duration for `fade_in`.
+    /// Fades in if given a non-zero @ref time::Duration for `fade_in`.
     /// Loops forever if given `true` for `forever`; otherwise when the
     /// music track finishes, the mixer rewinds and pauses it.
     ///

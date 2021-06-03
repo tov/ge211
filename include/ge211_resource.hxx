@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ge211_forward.hxx"
-#include "ge211_noexcept.hxx"
+#include "ge211_doxygen.hxx"
 #include "ge211_util.hxx"
 #include "ge211_error.hxx"
 
@@ -10,7 +10,8 @@
 // Copied from SDL_ttf.h in order to avoid getting including all of
 // SDL.h from the GE211 headers.
 extern "C" {
-extern DECLSPEC void SDLCALL TTF_CloseFont(TTF_Font*);
+extern DECLSPEC void SDLCALL
+TTF_CloseFont(TTF_Font *);
 }
 
 #include <fstream>
@@ -35,17 +36,27 @@ namespace detail {
 
 class File_resource
 {
+private:
+    static void close_rwops_(SDL_RWops*);
+
+    typedef Delete_ptr<SDL_RWops, &close_rwops_> delete_ptr;
+
+    delete_ptr ptr_;
+
 public:
     explicit File_resource(const std::string&);
 
-    Borrowed<SDL_RWops> get_raw() const NOEXCEPT { return ptr_.get(); }
+    Borrowed<SDL_RWops>
+    get_raw() const NOEXCEPT_
+    {
+        return ptr_.get();
+    }
 
-    Owned<SDL_RWops> release() && { return ptr_.release(); }
-
-private:
-    static void close_rwops_(Owned<SDL_RWops>);
-
-    delete_ptr<SDL_RWops, &close_rwops_> ptr_;
+    Owned<SDL_RWops>
+    release()&&
+    {
+        return ptr_.release();
+    }
 };
 
 } // end namespace detail
@@ -76,9 +87,11 @@ public:
 private:
     friend Text_sprite;
 
-    Borrowed<TTF_Font> get_raw_() const NOEXCEPT { return ptr_.get(); }
+    Borrowed<TTF_Font>
+    get_raw_() const NOEXCEPT_
+    { return ptr_.get(); }
 
-    detail::delete_ptr<TTF_Font, &TTF_CloseFont, true> ptr_;
+    detail::Delete_ptr<TTF_Font, &TTF_CloseFont> ptr_;
 };
 
 }

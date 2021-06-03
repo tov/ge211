@@ -7,6 +7,11 @@
 
 #include <SDL.h>
 
+#ifdef __EMSCRIPTEN__
+  #include <emscripten/emscripten.h>
+  #include <emscripten/html5.h>
+#endif
+
 #include <algorithm>
 #include <cstring>
 
@@ -24,8 +29,8 @@ static const Duration min_frame_length = software_frame_length / 2;
 Engine::Engine(Abstract_game& game)
         : game_{game},
           window_{
-              game_.initial_window_title(),
-              game_.initial_window_dimensions(),
+                  game_.initial_window_title(),
+                  game_.initial_window_dimensions(),
           },
           renderer_{window_}
 {
@@ -37,47 +42,31 @@ Engine::~Engine()
     game_.engine_ = nullptr;
 }
 
-void Engine::prepare(const sprites::Sprite& sprite) const
+void
+Engine::prepare(const sprites::Sprite& sprite) const
 {
     sprite.prepare(renderer_);
 }
 
-struct Engine::Cycle_state_
+struct Engine::State_
 {
     Engine& engine;
     bool has_vsync;
     SDL_Event event{};
     Sprite_set sprite_set{};
 
-    bool
-    run_cycle(time::Duration);
+    explicit State_(Engine& engine);
+
+    bool run_cycle(time::Duration);
 };
 
-#ifdef __EMSCRIPTEN__
-bool
-em_cycle_callback(double millis, void* user_data)
-{
-    auto& state = *static_cast<Engine::Cycle_state_*>(user_data);
-    auto& clock = state.engine.clock_();
-
-    auto now = time::Time_point() + time::Duration(millis / 1000); 
-
-    clock.mark_frame(now);
-    auto result = state.run_cycle(clock.prev_frame_length());
-    clock.mark_present();
-
-    return result;
-}
-
-extern "C" EM_BOOL
-em_cycle_shim(double millis, void* user_data)
-{
-    return em_cycle_callback(millis, user_data)? EM_TRUE : EM_FALSE;
-}
-#endif
+Engine::State_::State_(Engine& engine)
+        : engine(engine),
+          has_vsync(engine.renderer_.is_vsync())
+{ }
 
 bool
-Engine::Cycle_state_::run_cycle(time::Duration frame_length)
+Engine::State_::run_cycle(time::Duration frame_length)
 {
     auto& game = engine.game_;
     auto& clock = game.clock_;
@@ -98,15 +87,15 @@ Engine::Cycle_state_::run_cycle(time::Duration frame_length)
     engine.paint_sprites_(sprite_set);
 
     Duration allowed_frame_length =
-        (engine.is_focused_ && has_vsync)?
-        min_frame_length : software_frame_length;
+            (engine.is_focused_ && has_vsync) ?
+            min_frame_length : software_frame_length;
 
     if (frame_length < allowed_frame_length) {
         auto duration = allowed_frame_length - frame_length;
         duration.sleep_for();
         internal::logging::debug()
-            << "Software vsync slept for "
-            << duration.seconds() << " s";
+                << "Software vsync slept for "
+                << duration.seconds() << " s";
     }
 
     clock.mark_present();
@@ -115,112 +104,133 @@ Engine::Cycle_state_::run_cycle(time::Duration frame_length)
     return true;
 }
 
-void Engine::run()
+#ifdef __EMSCRIPTEN__
+bool
+em_cycle_callback(void *user_data)
 {
-    auto state = Cycle_state_{*this, renderer_.is_vsync()};
+    auto& state = *static_cast<Engine::State_*>(user_data);
+    auto& clock = state.engine.clock_();
 
+    clock.mark_frame();
+    auto result = state.run_cycle(clock.prev_frame_length());
+    clock.mark_present();
+
+    return result;
+}
+
+extern "C" void
+em_cycle_shim(void* user_data)
+{
+    em_cycle_callback(user_data);
+}
+#endif
+
+void
+Engine::run()
+{
     try {
-        game_.on_start();
+        auto state = std::make_unique<State_>(*this);
+        auto guard = game_.guard_();
 
 #ifdef __EMSCRIPTEN__
-        emscripten_request_animation_frame_loop(&em_cycle_shim, &state);
+        emscripten_set_main_loop_arg(em_cycle_shim, &*state, 0, true);
 #else
-        bool result;
         auto& clock = game_.clock_;
         do {
             clock.mark_frame();
-            result = state.run_cycle(clock.prev_frame_length());
-        } while (result);
+        } while (state->run_cycle(clock.prev_frame_length()));
 #endif
+    }
 
-        game_.on_quit();
-    } catch (const Exception_base& e) {
+    catch (const Exception_base& e) {
         internal::logging::fatal()
-            << "Uncaught exception:\n  "
-            << e.what();
+                << "Uncaught exception:\n  "
+                << e.what();
         exit(1);
     }
 }
 
-void Engine::handle_events_(SDL_Event& e)
+void
+Engine::handle_events_(SDL_Event& e)
 {
     while (SDL_PollEvent(&e) != 0) {
         switch (e.type) {
-            case SDL_QUIT:
-                game_.quit();
-                break;
+        case SDL_QUIT:
+            game_.quit();
+            break;
 
-            case SDL_TEXTINPUT: {
-                const char* str = e.text.text;
-                const char* end = str + std::strlen(str);
+        case SDL_TEXTINPUT: {
+            const char *str = e.text.text;
+            const char *end = str + std::strlen(str);
 
-                while (str < end) {
-                    uint32_t code = utf8::next(str, end);
-                    if (code) game_.on_key(Key{code});
-                }
-
-                break;
+            while (str < end) {
+                uint32_t code = utf8::next(str, end);
+                if (code) { game_.on_key(Key{code}); }
             }
 
-            case SDL_KEYDOWN: {
-                Key key(e.key);
-                if (!e.key.repeat) {
-                    game_.on_key_down(key);
-                }
-                if (!key.is_textual()) {
-                    game_.on_key(key);
-                }
-                break;
+            break;
+        }
+
+        case SDL_KEYDOWN: {
+            Key key(e.key);
+            if (!e.key.repeat) {
+                game_.on_key_down(key);
             }
-
-            case SDL_KEYUP:
-                game_.on_key_up(Key{e.key});
-                break;
-
-            case SDL_MOUSEBUTTONDOWN: {
-                Mouse_button button;
-                if (map_button(e.button.button, button))
-                    game_.on_mouse_down(button, {e.button.x, e.button.y});
-                break;
+            if (!key.is_textual()) {
+                game_.on_key(key);
             }
+            break;
+        }
 
-            case SDL_MOUSEBUTTONUP: {
-                Mouse_button button;
-                if (map_button(e.button.button, button))
-                    game_.on_mouse_up(button, {e.button.x, e.button.y});
-                break;
+        case SDL_KEYUP:
+            game_.on_key_up(Key{e.key});
+            break;
+
+        case SDL_MOUSEBUTTONDOWN: {
+            Mouse_button button;
+            if (map_button(e.button.button, button)) {
+                game_.on_mouse_down(button, {e.button.x, e.button.y});
             }
+            break;
+        }
 
-            case SDL_MOUSEMOTION:
-                game_.on_mouse_move({e.motion.x, e.motion.y});
+        case SDL_MOUSEBUTTONUP: {
+            Mouse_button button;
+            if (map_button(e.button.button, button)) {
+                game_.on_mouse_up(button, {e.button.x, e.button.y});
+            }
+            break;
+        }
+
+        case SDL_MOUSEMOTION:
+            game_.on_mouse_move({e.motion.x, e.motion.y});
+            break;
+
+        case SDL_WINDOWEVENT:
+            switch (e.window.event) {
+            case SDL_WINDOWEVENT_FOCUS_GAINED:
+                is_focused_ = true;
                 break;
 
-            case SDL_WINDOWEVENT:
-                switch (e.window.event) {
-                    case SDL_WINDOWEVENT_FOCUS_GAINED:
-                        is_focused_ = true;
-                        break;
-
-                    case SDL_WINDOWEVENT_FOCUS_LOST:
-                        is_focused_ = false;
-                        break;
-
-                    default:
-                        ;
-                }
+            case SDL_WINDOWEVENT_FOCUS_LOST:
+                is_focused_ = false;
                 break;
 
-            default:
-                ;
+            default:;
+            }
+            break;
+
+        default:;
         }
     }
 }
 
-void Engine::paint_sprites_(Sprite_set& sprite_set)
+void
+Engine::paint_sprites_(Sprite_set& sprite_set)
 {
-    auto& vec   = sprite_set.sprites_;
-    auto  begin = vec.begin(),
-          end   = vec.end();
+    auto& vec = sprite_set.sprites_;
+    auto begin = vec.begin(),
+            end = vec.end();
 
     std::make_heap(begin, end);
 
@@ -232,7 +242,8 @@ void Engine::paint_sprites_(Sprite_set& sprite_set)
     vec.clear();
 }
 
-Window& Engine::get_window() NOEXCEPT
+Window&
+Engine::get_window() NOEXCEPT_
 {
     return window_;
 }
