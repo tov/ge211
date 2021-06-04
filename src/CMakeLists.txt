@@ -66,12 +66,8 @@ target_link_libraries(ge211
         utf8-cpp)
 
 if (EMSCRIPTEN)
-    target_link_options(ge211
-            INTERFACE
-            --preload-file
-            ${CMAKE_CURRENT_SOURCE_DIR}/../Resources@/Resources)
-    set(GE211_DEFAULT_RESOURCE_PATH
-            "/Resources/")
+    target_preload_resources (ge211 INTERFACE)
+    set(GE211_DEFAULT_RESOURCE_PATH "/Resources/")
 else ()
     set(GE211_DEFAULT_RESOURCE_PATH
             "${CMAKE_CURRENT_SOURCE_DIR}/../Resources/"

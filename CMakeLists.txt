@@ -6,7 +6,6 @@ project(ge211
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
-
 ###
 ### DEPENDENCIES
 ###
@@ -36,6 +35,10 @@ find_package(SDL2_ttf REQUIRED)
 ### MAIN LIBRARY SETUP
 ###
 
+if (EMSCRIPTEN)
+    include(Ge211EmscriptenHelpers)
+endif ()
+
 configure_file(include/ge211_version.hxx.in
         include/ge211_version.hxx)
 add_subdirectory(src)
@@ -51,6 +54,6 @@ include(Ge211Doxygen)
 # Support library installation
 include(Ge211Installer)
 
-# Example client program
-set(GE211_INHERITED 1)
-add_subdirectory(example/)
+# # Example client program
+# set(GE211_INHERITED 1)
+# add_subdirectory(example/)

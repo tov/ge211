@@ -13,8 +13,7 @@ set_target_properties(fireworks PROPERTIES
 target_link_libraries(fireworks ge211)
 
 if (EMSCRIPTEN)
-    include(Ge211Helpers)
-    add_html_runtime(fireworks)
+    emscripten_add_target(fireworks)
 endif ()
 
 if (MSVC)
