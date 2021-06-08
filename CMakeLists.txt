@@ -6,6 +6,8 @@ project(ge211
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
+include(Ge211EmscriptenHelpers)
+
 ###
 ### DEPENDENCIES
 ###
@@ -34,10 +36,6 @@ find_package(SDL2_ttf REQUIRED)
 ###
 ### MAIN LIBRARY SETUP
 ###
-
-if (EMSCRIPTEN)
-    include(Ge211EmscriptenHelpers)
-endif ()
 
 configure_file(include/ge211_version.hxx.in
         include/ge211_version.hxx)

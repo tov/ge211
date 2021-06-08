@@ -57,7 +57,7 @@ struct Engine::State_
 
     explicit State_(Engine& engine);
 
-    bool run_cycle(time::Duration);
+    void run_cycle();
 };
 
 Engine::State_::State_(Engine& engine)
@@ -65,57 +65,52 @@ Engine::State_::State_(Engine& engine)
           has_vsync(engine.renderer_.is_vsync())
 { }
 
-bool
-Engine::State_::run_cycle(time::Duration frame_length)
+void
+Engine::State_::run_cycle()
 {
     auto& game = engine.game_;
     auto& clock = game.clock_;
     auto& renderer = engine.renderer_;
 
-    engine.handle_events_(event);
-    game.on_frame(game.get_prev_frame_length().seconds());
+    clock.mark_frame();
+    auto frame_length = game.clock_.prev_frame_length().seconds();
 
-    if (game.quit_) {
-        return false;
-    }
+    engine.handle_events_(event);
+
+    // game.on_frame(frame_length);
+
+    // if (game.quit_) {
+    //     return;
+    // }
 
     game.poll_channels_();
-    game.draw(sprite_set);
+    // game.draw(sprite_set);
 
-    renderer.set_color(game.background_color);
-    renderer.clear();
+    // renderer.set_color(game.background_color);
+    // renderer.clear();
     engine.paint_sprites_(sprite_set);
 
-    Duration allowed_frame_length =
-            (engine.is_focused_ && has_vsync) ?
-            min_frame_length : software_frame_length;
+    // Duration allowed_frame_length =
+    //         (engine.is_focused_ && has_vsync) ?
+    //         min_frame_length : software_frame_length;
 
-    if (frame_length < allowed_frame_length) {
-        auto duration = allowed_frame_length - frame_length;
-        duration.sleep_for();
-        internal::logging::debug()
-                << "Software vsync slept for "
-                << duration.seconds() << " s";
-    }
+    // if (frame_length < allowed_frame_length) {
+    //     auto duration = allowed_frame_length - frame_length;
+    //     duration.sleep_for();
+    //     internal::logging::debug()
+    //             << "Software vsync slept for "
+    //             << duration.seconds() << " s";
+    // }
 
     clock.mark_present();
-    renderer.present();
-
-    return true;
+    // renderer.present();
 }
 
 #ifdef __EMSCRIPTEN__
-bool
+void
 em_cycle_callback(void *user_data)
 {
-    auto& state = *static_cast<Engine::State_*>(user_data);
-    auto& clock = state.engine.clock_();
-
-    clock.mark_frame();
-    auto result = state.run_cycle(clock.prev_frame_length());
-    clock.mark_present();
-
-    return result;
+    static_cast<Engine::State_*>(user_data)->run_cycle();
 }
 
 extern "C" void
@@ -129,16 +124,14 @@ void
 Engine::run()
 {
     try {
-        auto state = std::make_unique<State_>(*this);
+        auto state = new State_(*this);
         auto guard = game_.guard_();
 
 #ifdef __EMSCRIPTEN__
-        emscripten_set_main_loop_arg(em_cycle_shim, &*state, 0, true);
+        emscripten_set_main_loop_arg(em_cycle_shim, &*state, 0, false);
 #else
-        auto& clock = game_.clock_;
-        do {
-            clock.mark_frame();
-        } while (state->run_cycle(clock.prev_frame_length()));
+        while (state->run_cycle())
+        { }
 #endif
     }
 
