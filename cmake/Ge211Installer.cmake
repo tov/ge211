@@ -1,10 +1,12 @@
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
-set(config_version_cmake
-        ${CMAKE_CURRENT_BINARY_DIR}/Ge211/Ge211ConfigVersion.cmake)
 set(config_install_dir
         ${CMAKE_INSTALL_DATADIR}/cmake/Ge211)
+set(config_version_cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/Ge211/Ge211ConfigVersion.cmake)
+set(emscripten_helpers_cmake
+        ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Ge211EmscriptenHelpers.cmake)
 
 install(TARGETS         ge211
                         utf8-cpp
@@ -28,6 +30,7 @@ install(EXPORT          Ge211Config
         DESTINATION     ${config_install_dir})
 
 install(FILES           ${config_version_cmake}
+                        ${emscripten_helpers_cmake}
         DESTINATION     ${config_install_dir})
 
 export( TARGETS         ge211

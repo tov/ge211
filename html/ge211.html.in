@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>@ge211_TITLE@</title>
-    <link rel=stylestyle href=@ge211_STYLESHEET@>
+    <title>@GE211_TITLE@</title>
+    <link rel=stylestyle href=@GE211_STYLESHEET@>
 </head>
 <body>
 <main>
@@ -129,7 +129,7 @@
     }
 </script>
 
-<script async type="text/javascript" src="@ge211_JAVASCRIPT@"></script>
+<script async type="text/javascript" src="@GE211_JAVASCRIPT@"></script>
 
 </main>
 </body>

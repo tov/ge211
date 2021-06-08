@@ -30,7 +30,7 @@ private:
     { return game_.clock_; }
 
 #ifdef __EMSCRIPTEN__
-    friend bool
+    friend void
     em_cycle_callback(void *user_data);
 #endif
 

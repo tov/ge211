@@ -20,14 +20,20 @@ set_target_properties(ge211
         CXX_EXTENSIONS Off
         VERSION ${PROJECT_VERSION})
 
+target_compile_features(ge211 PUBLIC
+    cxx_std_14)
+
+if (EMSCRIPTEN)
+    target_compile_options(ge211 PUBLIC -fexceptions)
+    target_link_options(ge211 PUBLIC -fexceptions)
+endif ()
+
 target_compile_options(ge211 PRIVATE
-        -fexceptions
         ${SDL2_COMPILE_FLAGS}
         ${SDL2_IMAGE_COMPILE_FLAGS}
         ${SDL2_MIXER_COMPILE_FLAGS}
         ${SDL2_TTF_COMPILE_FLAGS})
 target_link_options(ge211 PUBLIC
-        -fexceptions
         ${SDL2_LINK_FLAGS}
         ${SDL2_IMAGE_LINK_FLAGS}
         ${SDL2_MIXER_LINK_FLAGS}
@@ -66,7 +72,10 @@ target_link_libraries(ge211
         utf8-cpp)
 
 if (EMSCRIPTEN)
-    target_preload_resources (ge211 INTERFACE)
+    target_link_options(ge211 INTERFACE
+        "SHELL:--preload-file $<INSTALL_PREFIX>/share/ge211/Resources@/Resources")
+    # target_link_options(ge211 INTERFACE
+    #     "SHELL:--preload-file $<TARGET_PROPERTY:SOURCE_DIR>/Resources@/Resources")
     set(GE211_DEFAULT_RESOURCE_PATH "/Resources/")
 else ()
     set(GE211_DEFAULT_RESOURCE_PATH
