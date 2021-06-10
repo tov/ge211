@@ -15,9 +15,6 @@
 #include <algorithm>
 #include <cstring>
 
-// TODO XXX FIXME
-#include <iostream>
-
 namespace ge211 {
 
 namespace detail {
@@ -38,14 +35,11 @@ Engine::Engine(Abstract_game& game)
           renderer_{window_}
 {
     game_.engine_ = this;
-    identify("has arrived");
 }
 
 Engine::~Engine()
 {
-    identify("has left the building");
-    std::abort();
-    // game_.engine_ = nullptr;
+    game_.engine_ = nullptr;
 }
 
 void
@@ -62,59 +56,18 @@ struct Engine::State_
     Sprite_set sprite_set{};
 
     explicit State_(Engine& engine);
-    ~State_();
-
-    void identify(char const*) const;
 
     bool run_cycle();
 };
 
-void
-Engine::State_::identify(char const* msg) const
-{
-    std::cout << "Engine::State_ " << this << " " << msg
-        << "\n  (engine " << &engine << " says hello:)\n";
-
-    Engine* tmp = &engine;
-    if (to_string(tmp) != "0") {
-        tmp->identify("Hello!");
-    }
-}
-
 Engine::State_::State_(Engine& engine)
         : engine(engine),
           has_vsync(engine.renderer_.is_vsync())
-{
-    identify("initialized");
-}
-
-Engine::State_::~State_()
-{
-    identify("destroyed");
-    std::abort();
-}
-
-void
-Engine::identify(char const* msg) const
-{
-    using std::cout;
-
-    cout << "Engine " << this << " " << msg;
-    cout << "\n  (game: " << &game_ << ")\n";
-}
+{ }
 
 bool
 Engine::State_::run_cycle()
 {
-    engine.identify("in State_::run_cycle");
-
-    {
-        auto game = &engine.game_;
-
-        std::cout << "game: " << game << "\n";
-        if (to_string(game) == "0") return false;
-    }
-
     auto& game = engine.game_;
     auto& clock = game.clock_;
     auto& renderer = engine.renderer_;
@@ -161,9 +114,7 @@ Engine::State_::run_cycle()
 void
 em_cycle_callback(void *user_data)
 {
-    auto p = static_cast<Engine::State_*>(user_data);
-    std::cout << "em_cycle_callback(" << p << ")\n";
-    p->run_cycle();
+    static_cast<Engine::State_*>(user_data)->run_cycle();
 }
 
 extern "C" void

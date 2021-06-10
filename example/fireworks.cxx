@@ -1,5 +1,4 @@
 #include <ge211.hxx>
-#include <iostream>
 
 #include <cmath>
 #include <iomanip>
@@ -144,16 +143,7 @@ struct Fireworks : Abstract_game
 
 int main()
 {
-    struct Bye_bye
-    {
-        ~Bye_bye()
-        {
-            cout << "bye bye!\n";
-        }
-    } bye_bye;
-
     Fireworks game;
-    cout << "Fireworks constructed, hello\n";
     game.run();
 }
 

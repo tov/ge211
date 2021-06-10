@@ -131,8 +131,6 @@ namespace ge211 {
 class Abstract_game
 {
 public:
-    Abstract_game();
-
     /// Runs the game. Usually the way to use this is to create an instance of
     /// your game class in `main` and then call run() on it.
     void run();
@@ -153,7 +151,7 @@ public:
     static const Dims<int> default_window_dimensions;
 
     /// Polymorphic classes should have virtual destructors.
-    virtual ~Abstract_game();
+    virtual ~Abstract_game() { }
 
 protected:
     /// \name Functions to be overridden by clients

@@ -14,9 +14,6 @@ namespace detail {
 class Engine
 {
 public:
-    // TODO XXX
-    void identify(char const*) const;
-
     explicit Engine(Abstract_game&);
 
     void run();

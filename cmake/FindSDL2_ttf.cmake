@@ -32,7 +32,7 @@
 if (EMSCRIPTEN)
     message(STATUS "Using Emscripten port for SDL2_TTF")
     set(SDL2_TTF_FOUND 1)
-    set(SDL2_TTF_VERSION_STRING emcc-port)
+    set(SDL2_TTF_VERSION_STRING "2.0.8")
     set(SDL2_TTF_COMPILE_FLAGS -sUSE_SDL_TTF=2)
     set(SDL2_TTF_LINK_FLAGS ${SDL2_TTF_COMPILE_FLAGS})
     set(SDL2_TTF_LIBRARIES)
