@@ -33,12 +33,12 @@
 if (EMSCRIPTEN)
     message(STATUS "Using Emscripten port for SDL2_IMAGE")
     set(SDL2_IMAGE_FORMATS
-            bmp gif jpg png svg
+            bmp gif jpg png
             CACHE STRING
             "list of image formats to support under emscripten")
 
     set(SDL2_IMAGE_FOUND 1)
-    set(SDL2_IMAGE_VERSION_STRING emcc-port)
+    set(SDL2_IMAGE_VERSION_STRING "2.0.0")
     set(SDL2_IMAGE_COMPILE_FLAGS
             -sUSE_SDL_IMAGE=2
             -sSDL2_IMAGE_FORMATS=[$<JOIN:${SDL2_IMAGE_FORMATS},$<COMMA>>])

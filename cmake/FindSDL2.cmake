@@ -76,7 +76,7 @@
 if (EMSCRIPTEN)
     message(STATUS "Using Emscripten port for SDL2")
     set(SDL2_FOUND 1)
-    set(SDL2_VERSION_STRING emcc-port)
+    set(SDL2_VERSION_STRING "2.0.10")
     set(SDL2_COMPILE_FLAGS -sUSE_SDL=2)
     set(SDL2_LINK_FLAGS ${SDL2_COMPILE_FLAGS})
     set(SDL2_LIBRARIES)

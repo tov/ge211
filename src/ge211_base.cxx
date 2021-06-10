@@ -4,8 +4,6 @@
 
 #include <SDL.h>
 
-#include <iostream> // XXX TODO FIXME
-
 namespace ge211 {
 
 using namespace detail;
@@ -14,18 +12,6 @@ using namespace detail;
 const Dims<int> Abstract_game::default_window_dimensions{800, 600};
 const char* const Abstract_game::default_window_title = "ge211 window";
 const Color Abstract_game::default_background_color = Color::black();
-
-Abstract_game::Abstract_game()
-{
-    std::cout << "Game " << this << " is here\n";
-}
-
-Abstract_game::~Abstract_game()
-{
-    std::cout << "Game " << this << " out\n";
-    std::cout << "  (engine " << engine_ << ")\n";
-    std::abort();
-}
 
 Dims<int> Abstract_game::initial_window_dimensions() const
 {

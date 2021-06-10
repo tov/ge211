@@ -39,7 +39,7 @@ if (EMSCRIPTEN)
             "list of audio formats to support under emscripten")
 
     set(SDL2_MIXER_FOUND 1)
-    set(SDL2_MIXER_VERSION_STRING emcc-port)
+    set(SDL2_MIXER_VERSION_STRING "2.0.2")
     set(SDL2_MIXER_COMPILE_FLAGS
             -sUSE_SDL_MIXER=2
             -sSDL2_MIXER_FORMATS=[$<JOIN:${SDL2_MIXER_FORMATS},$<COMMA>>])
