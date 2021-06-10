@@ -1,9 +1,16 @@
 #include <ge211.hxx>
+#include <iostream>
 
 #include <cmath>
 #include <iomanip>
 #include <vector>
 #include <utility>
+
+#ifdef __EMSCRIPTEN__
+  // #define GE211_NO_MIXER
+  // #define GE211_NO_TTF
+  // #define GE211_NO_WINDOW
+#endif
 
 using namespace ge211;
 using namespace std;
@@ -90,16 +97,24 @@ struct Model
 
 struct View
 {
+#ifndef GE211_NO_MIXER
     explicit View(Mixer&);
+#else
+    View();
+#endif
 
+#ifndef GE211_NO_TTF
     Font                  sans{"sans.ttf", 30};
     Text_sprite           fps;
     Text_sprite           load;
+#endif
 
     Circle_sprite         mortar{mortar_radius, mortar_color};
     vector<Circle_sprite> stars;
 
+#ifndef GE211_NO_MIXER
     Sound_effect          pop;
+#endif
 };
 
 // MAIN STRUCT AND FUNCTION
@@ -116,7 +131,7 @@ struct Fireworks : Abstract_game
     View view;
     Dims<int> initial_window_dimensions() const override;
     void draw(Sprite_set& sprites) override;
-    void draw_fireworks(Sprite_set& sprites) const;
+    void draw_fireworks(Sprite_set& sprites);
     void draw_stats(Sprite_set& sprites);
 
     // Controller
@@ -126,9 +141,19 @@ struct Fireworks : Abstract_game
     void on_frame(double dt) override;
 };
 
+
 int main()
 {
+    struct Bye_bye
+    {
+        ~Bye_bye()
+        {
+            cout << "bye bye!\n";
+        }
+    } bye_bye;
+
     Fireworks game;
+    cout << "Fireworks constructed, hello\n";
     game.run();
 }
 
@@ -234,7 +259,11 @@ void Model::add_random(Projectile::Position position0)
 
 // FUNCTION DEFINITIONS FOR VIEW
 
-        View::View(Mixer& mixer)
+View::View(
+#ifndef GE211_NO_MIXER
+        Mixer& mixer
+#endif
+        )
 {
     double hue  = 1.0;
     double dhue = 360.0 / number_of_colors;
@@ -244,7 +273,9 @@ void Model::add_random(Projectile::Position position0)
         hue += dhue;
     }
 
+#ifndef GE211_NO_MIXER
     pop.try_load("pop.ogg", mixer);
+#endif
 }
 
 Dims<int> Fireworks::initial_window_dimensions() const
@@ -258,7 +289,7 @@ void Fireworks::draw(Sprite_set& sprites)
     draw_stats(sprites);
 }
 
-void Fireworks::draw_fireworks(Sprite_set& sprites) const
+void Fireworks::draw_fireworks(Sprite_set& sprites)
 {
     for (Firework const& firework : model.fireworks) {
         switch (firework.stage) {
@@ -283,6 +314,7 @@ void Fireworks::draw_fireworks(Sprite_set& sprites) const
 
 void Fireworks::draw_stats(Sprite_set& sprites)
 {
+#ifndef GE211_NO_TTF
     Dims<int> const margin{20, 10};
 
     view.fps.reconfigure(Text_sprite::Builder(view.sans)
@@ -299,12 +331,18 @@ void Fireworks::draw_stats(Sprite_set& sprites)
             .down_left_by(margin)
             .left_by(view.load.dimensions().width);
     sprites.add_sprite(view.load, load_posn);
+#else
+    (void) sprites;
+#endif
 }
 
 // CONSTRUCTING THE GAME OBJECT
 
 Fireworks::Fireworks()
-        : view(mixer())
+        : Abstract_game()
+#ifndef GE211_NO_MIXER
+        , view(mixer())
+#endif
 { }
 
 // FUNCTION DEFINITIONS FOR CONTROLLER
@@ -319,9 +357,11 @@ void Fireworks::on_key(Key key)
     case 'q':
         quit();
         return;
+#ifndef GE211_NO_WINDOW
     case 'f':
         get_window().set_fullscreen(!get_window().get_fullscreen());
         return;
+#endif
     case 'p':
         is_paused ^= true;
         return;
@@ -333,7 +373,7 @@ void Fireworks::on_key(Key key)
         return;
     case ' ':
         if (is_paused) return;
-        auto dims             = get_window().get_dimensions();
+        auto dims             = scene_dimensions;
         auto initial_position = Posn<double>(dims.width / 2, dims.height);
         model.add_random(initial_position);
         return;
@@ -346,9 +386,11 @@ void Fireworks::on_frame(double dt)
 
     unsigned explosion_count = model.update(dt);
 
+#ifndef GE211_NO_MIXER
     if (view.pop)
         while (explosion_count--)
             mixer().play_effect(view.pop);
+#endif
 }
 
 void Fireworks::on_mouse_up(Mouse_button, Posn<int> posn)

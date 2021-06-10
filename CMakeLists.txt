@@ -52,6 +52,6 @@ include(Ge211Doxygen)
 # Support library installation
 include(Ge211Installer)
 
-# # Example client program
-# set(GE211_INHERITED 1)
-# add_subdirectory(example/)
+# Example client program
+set(GE211_INHERITED 1)
+add_subdirectory(example/)
