@@ -131,6 +131,7 @@ namespace ge211 {
 class Abstract_game
 {
 public:
+    Abstract_game();
 
     /// Runs the game. Usually the way to use this is to create an instance of
     /// your game class in `main` and then call run() on it.
@@ -152,8 +153,7 @@ public:
     static const Dims<int> default_window_dimensions;
 
     /// Polymorphic classes should have virtual destructors.
-    virtual ~Abstract_game()
-    { }
+    virtual ~Abstract_game();
 
 protected:
     /// \name Functions to be overridden by clients
@@ -308,11 +308,6 @@ protected:
 private:
     friend class detail::Engine;
 
-    class Guard_;
-
-    std::unique_ptr<Guard_>
-    guard_();
-
     void
     poll_channels_();
 
@@ -321,36 +316,6 @@ private:
     detail::Engine *engine_ = nullptr;
     bool quit_ = false;
     detail::Frame_clock clock_;
-};
-
-/// RAII helper for calling Abstract_game::on_quit().
-class Abstract_game::Guard_
-{
-public:
-    /// Constructs the guard and calls `g->on_start()`.
-    Guard_(Abstract_game *g);
-
-    /// Calls `g->on_quit()`.
-    ~Guard_();
-
-    /// Allow moves.
-    Guard_(Guard_&& other);
-
-    /// Allow moves.
-    Guard_& operator=(Guard_&& other);
-
-    /// Prohibit copying.
-    Guard_(Guard_ const&) = delete;
-
-    /// Prohibit copying.
-    Guard_& operator=(Guard_ const&) = delete;
-
-private:
-    Abstract_game *game;
-
-    void start_();
-    void quit_();
-    Abstract_game* release_();
 };
 
 }

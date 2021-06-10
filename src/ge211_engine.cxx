@@ -15,6 +15,9 @@
 #include <algorithm>
 #include <cstring>
 
+// TODO XXX FIXME
+#include <iostream>
+
 namespace ge211 {
 
 namespace detail {
@@ -35,11 +38,14 @@ Engine::Engine(Abstract_game& game)
           renderer_{window_}
 {
     game_.engine_ = this;
+    identify("has arrived");
 }
 
 Engine::~Engine()
 {
-    game_.engine_ = nullptr;
+    identify("has left the building");
+    std::abort();
+    // game_.engine_ = nullptr;
 }
 
 void
@@ -56,61 +62,108 @@ struct Engine::State_
     Sprite_set sprite_set{};
 
     explicit State_(Engine& engine);
+    ~State_();
 
-    void run_cycle();
+    void identify(char const*) const;
+
+    bool run_cycle();
 };
+
+void
+Engine::State_::identify(char const* msg) const
+{
+    std::cout << "Engine::State_ " << this << " " << msg
+        << "\n  (engine " << &engine << " says hello:)\n";
+
+    Engine* tmp = &engine;
+    if (to_string(tmp) != "0") {
+        tmp->identify("Hello!");
+    }
+}
 
 Engine::State_::State_(Engine& engine)
         : engine(engine),
           has_vsync(engine.renderer_.is_vsync())
-{ }
+{
+    identify("initialized");
+}
+
+Engine::State_::~State_()
+{
+    identify("destroyed");
+    std::abort();
+}
 
 void
+Engine::identify(char const* msg) const
+{
+    using std::cout;
+
+    cout << "Engine " << this << " " << msg;
+    cout << "\n  (game: " << &game_ << ")\n";
+}
+
+bool
 Engine::State_::run_cycle()
 {
+    engine.identify("in State_::run_cycle");
+
+    {
+        auto game = &engine.game_;
+
+        std::cout << "game: " << game << "\n";
+        if (to_string(game) == "0") return false;
+    }
+
     auto& game = engine.game_;
     auto& clock = game.clock_;
     auto& renderer = engine.renderer_;
 
     clock.mark_frame();
-    auto frame_length = game.clock_.prev_frame_length().seconds();
+    auto frame_length = game.clock_.prev_frame_length();
 
     engine.handle_events_(event);
+    game.on_frame(frame_length.seconds());
 
-    // game.on_frame(frame_length);
-
-    // if (game.quit_) {
-    //     return;
-    // }
+    if (game.quit_) {
+#ifdef __EMSCRIPTEN__
+        game.on_quit();
+#endif
+        return false;
+    }
 
     game.poll_channels_();
-    // game.draw(sprite_set);
+    game.draw(sprite_set);
 
-    // renderer.set_color(game.background_color);
-    // renderer.clear();
+    renderer.set_color(game.background_color);
+    renderer.clear();
     engine.paint_sprites_(sprite_set);
 
-    // Duration allowed_frame_length =
-    //         (engine.is_focused_ && has_vsync) ?
-    //         min_frame_length : software_frame_length;
+    Duration allowed_frame_length =
+            (engine.is_focused_ && has_vsync) ?
+            min_frame_length : software_frame_length;
 
-    // if (frame_length < allowed_frame_length) {
-    //     auto duration = allowed_frame_length - frame_length;
-    //     duration.sleep_for();
-    //     internal::logging::debug()
-    //             << "Software vsync slept for "
-    //             << duration.seconds() << " s";
-    // }
+    if (frame_length < allowed_frame_length) {
+        auto duration = allowed_frame_length - frame_length;
+        duration.sleep_for();
+        internal::logging::debug()
+                << "Software vsync slept for "
+                << duration.seconds() << " s";
+    }
 
     clock.mark_present();
-    // renderer.present();
+    renderer.present();
+
+    return true;
 }
 
 #ifdef __EMSCRIPTEN__
 void
 em_cycle_callback(void *user_data)
 {
-    static_cast<Engine::State_*>(user_data)->run_cycle();
+    auto p = static_cast<Engine::State_*>(user_data);
+    std::cout << "em_cycle_callback(" << p << ")\n";
+    p->run_cycle();
 }
 
 extern "C" void
@@ -124,14 +177,16 @@ void
 Engine::run()
 {
     try {
-        auto state = new State_(*this);
-        auto guard = game_.guard_();
 
 #ifdef __EMSCRIPTEN__
-        emscripten_set_main_loop_arg(em_cycle_shim, &*state, 0, false);
+        State_* state = new State_(*this);
+        game_.on_start();
+        emscripten_set_main_loop_arg(em_cycle_shim, state, 0, true);
 #else
-        while (state->run_cycle())
-        { }
+        State_ state(*this);
+        game_.on_start();
+        while (state.run_cycle()) { }
+        game_.on_quit();
 #endif
     }
 
