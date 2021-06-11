@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en-us">
+<html lang=en-us>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta charset=utf-8>
+  <meta http-equiv=Content-Type content="text/html; charset=utf-8">
   <title>@GE211_TITLE@</title>
   <style>
     @import url("@GE211_STYLESHEET@");
@@ -26,41 +26,44 @@
   <textarea id=output rows=8></textarea>
 </main>
 
-<script type="text/javascript">
+<script type=text/javascript>
 
 const canvasElement = document.getElementById('canvas')
 const statusElement = document.getElementById('status')
 const progressElement = document.getElementById('progress')
 const spinnerElement = document.getElementById('spinner')
+const outputElement = document.getElementById('output')
+
+if (outputElement) outputElement.value = ''  // clear browser cache
 
 var Module = {
     preRun: [],
     postRun: [],
-    print: (function () {
-        const element = document.getElementById('output')
-        // // TODO XXX
-        // if (element)
-        //     element.value = ''  // clear browser cache
-
-        return text => {
-            if (arguments.length > 1)
-                text = Array.prototype.slice.call(arguments).join(' ')
-
-            // These replacements are necessary if you render to raw HTML
-            //text = text.replace(/&/g, "&amp;")
-            //text = text.replace(/</g, "&lt;")
-            //text = text.replace(/>/g, "&gt;")
-            //text = text.replace('\n', '<br>', 'g')
-
-            console.log(text)
-
-            if (element) {
-                element.value += text + "\n"
-                // focus on bottom:
-                element.scrollTop = element.scrollHeight
-            }
-        }
+    totalDeps: 0,
+    arguments: (() => {
+        const qs = window.location.search
+        if (qs && qs[0] == '?')
+            return qs.substr(1).split(/\+/).map(decodeURIComponent)
     })(),
+    print(text) {
+        if (arguments.length > 1)
+            text = Array.prototype.slice.call(arguments).join(' ')
+
+        /*
+        // If we want to render raw HTML:
+        text = text.replace(/&/g, '&amp;')
+        text = text.replace(/</g, '&lt;')
+        text = text.replace(/>/g, '&gt;')
+        text = text.replace('\n', '<br>', 'g')
+        */
+
+        console.log(text)
+
+        if (outputElement) {
+            outputElement.value += text + '\n'
+            outputElement.scrollTop = outputElement.scrollHeight
+        }
+    },
     printErr(text) {
         if (arguments.length > 1)
             text = Array.prototype.slice.call(arguments).join(' ')
@@ -75,15 +78,13 @@ var Module = {
             }
         }
 
-        if (text === Module.setStatus.last.text)
-            return
+        if (text === Module.setStatus.last.text) return
 
         const match = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/)
         const now = Date.now()
 
         // if this is a progress update, skip it if too soon:
-        if (match && now - Module.setStatus.last.time < 30)
-            return
+        if (match && now - Module.setStatus.last.time < 30) return
 
         Module.setStatus.last.time = now
         Module.setStatus.last.text = text
@@ -102,7 +103,6 @@ var Module = {
         }
         statusElement.innerHTML = text
     },
-    totalDeps: 0,
     monitorRunDependencies(left) {
         const deps = Math.max(this.totalDeps, left)
         this.totalDeps = deps
@@ -114,18 +114,12 @@ var Module = {
 
 Module.setStatus('Downloading...')
 
-// As a default initial behavior, pop up an alert when webgl
-// context is lost. To make your application robust, you may want
-// to override this behavior before shipping! See
-// http://www.khronos.org/registry/webgl/specs/latest/1.0/#5.15.2
 canvasElement.addEventListener('webglcontextlost', (e) => {
     alert('WebGL context lost. You will need to reload the page.')
     e.preventDefault()
 }, false)
 
 window.onerror = event => {
-    // Future To Do: Don't warn on ok events like simulating an infinite
-    // loop or exitStatus
     Module.setStatus('Exception thrown, see JavaScript console')
     spinnerElement.style.display = 'none'
     Module.setStatus = text => {
@@ -136,7 +130,7 @@ window.onerror = event => {
 
 </script>
 
-<script async type="text/javascript" src="@GE211_JAVASCRIPT@"></script>
+<script async type=text/javascript src="@GE211_JAVASCRIPT@"></script>
 
 </body>
 </html>
