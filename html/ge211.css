@@ -1,28 +1,28 @@
 body {
+    position: fixed;
     margin: 0;
     padding: 0;
-}
-
-.emscripten {
-    padding-right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-family: sans-serif;
 }
 
 div.emscripten {
     text-align: center;
 }
 
-div.emscripten_border {
-    border: 1px solid black;
-}
-
 /* the canvas *must not* have any border or padding,
    or mouse coords will be wrong */
 canvas.emscripten {
     border: none;
-    background-color: black;
+    display: block;
+}
+
+.emscripten {
+    padding: 0;
+    margin: 0 auto;
 }
 
 .spinner {
@@ -43,7 +43,6 @@ canvas.emscripten {
     border-top: 5px solid rgb(120, 120, 120);
 
     border-radius: 100%;
-    background-color: rgb(189, 215, 46);
 }
 
 @-webkit-keyframes rotation {
@@ -82,13 +81,25 @@ canvas.emscripten {
     }
 }
 
+#statusbar {
+    z-index: 10;
+    position: fixed;
+    padding: 0;
+    bottom: 10px;
+    margin: 0 auto;
+}
+
+.spinner {
+    background-color: #606;
+}
+
 #status {
     display: inline-block;
     vertical-align: top;
-    margin-top: 30px;
-    margin-left: 20px;
-    font-weight: bold;
-    color: rgb(120, 120, 120);
+    margin: 20px;
+    padding: 20px;
+    font-size: 200%;
+    font-weight: normal;
 }
 
 #progress {
@@ -96,25 +107,31 @@ canvas.emscripten {
     width: 300px;
 }
 
-#controls {
-    display: inline-block;
-    float: right;
-    vertical-align: top;
-    margin-top: 30px;
-    margin-right: 20px;
-}
-
 #output {
     width: 100%;
     height: 200px;
-    margin: 10px auto 0;
+    margin: 0;
     border-left: 0;
     border-right: 0;
     padding-left: 0;
     padding-right: 0;
     display: block;
-    background-color: black;
-    color: white;
     font-family: 'Lucida Console', Monaco, monospace;
     outline: none;
 }
+
+body {
+    color: #ccc;
+    background-color: #666;
+}
+
+#output {
+    color: #ccc;
+    background-color: #333;
+}
+
+canvas.emscripten {
+    background-color: #000;
+    border: 1px solid #111;
+}
+
