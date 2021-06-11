@@ -270,16 +270,17 @@ _T_CAP_DIM=$(tput dim)
 unalias tput
 
 file_message () {
-    local t_fresh= t_colon= t_body=
+    local t_reset= t_fresh= t_colon= t_body=
 
     if tty -s
     then
+        t_reset=$_T_CAP_0
         t_fresh=$_T_CAP_0$_T_CAP_ITA${3-$_T_CAP_GRN}
         t_colon=$_T_CAP_OP$_T_CAP_ROM
         t_body=${4-$_T_CAP_CYA}
     fi
 
-    local fmt="$t_fresh%s$t_colon:$t_body %s$_T_CAP_0\n"
+    local fmt="$t_fresh%s$t_colon:$t_body %s$t_reset\n"
 
     printf $fmt $1 "$(path_take $2 2)"
 }
