@@ -220,7 +220,7 @@ preprocess_main () {
 
     file_message destackify $main_out $_T_CAP_YEL
 
-    local classes='Model|View|Controller'
+    local classes='Model|View|Controller|Ui'
     sed -E "
         /\b($classes)([ \t]*\([^)]*\)|\{[^}]*\})[ \t]*\./ {
             s//(*new \1\2)./
