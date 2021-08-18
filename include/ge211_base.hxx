@@ -182,16 +182,16 @@ protected:
     /// override on_key_down(Key) and on_key_up(Key) instead.
     virtual void on_key(Key) { }
 
-    /// Called by the game engine each time a key is depressed.
-    /// Note that this function is delivered the actual key pressed, not the
-    /// character that would be generated. For example, if shift is down
-    /// and the *5 / %* key is pressed, the delivered key code is `'5'`, not
-    /// `'%'`. Similarly, letter keys deliver only lowercase key codes. If
-    /// you want key presses interpreted as characters, override on_key(Key)
-    /// instead.
+    /// Called by the game engine each time a key is depressed. Note
+    /// that this function is delivered the actual key pressed, not the
+    /// character that would be generated. For example, if the `Shift`
+    /// key is down when the `8` / `*` key is pressed, the delivered key
+    /// code is ``'8'``, not ``'*'``. Similarly, letter keys deliver only
+    /// lowercase key codes. If you want key presses interpreted as
+    /// characters, override on_key(Key) instead.
     ///
-    /// The default behavior of this function, if not overridden, is to quit
-    /// if the escape key (code 27) is pressed.
+    /// The default behavior of this function, if not overridden, is to
+    /// quit if the escape key (code 27) is pressed.
     virtual void on_key_down(Key);
 
     /// Called by the game engine each time a key is released. This delivers
