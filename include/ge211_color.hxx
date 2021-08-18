@@ -9,9 +9,9 @@
 namespace ge211 {
 
 /// For representing colors.
+///
 /// A color has red, green, blue, and alpha (opacity) components,
 /// each of which is an integer from 0 to 255, inclusive.
-///
 /// The most common way to construct a color is to pass these
 /// components to the constructor
 /// Color(uint8_t, uint8_t, uint8_t, uint8_t). The components can
@@ -19,7 +19,7 @@ namespace ge211 {
 /// Color::from_rgba(double, double, double, double).
 ///
 /// It's also possible to construct a color via alternative color
-/// models HSLA and HSVA, and then convert those to RGBA.
+/// models @ref HSLA and @ref HSVA, and then convert those to RGBA.
 class Color
 {
 public:
