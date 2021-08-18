@@ -12,8 +12,23 @@
 : ${TAG=}
 : ${BUILD_DIR_FORMAT:=build.em%s}
 
+set +e
+_COLS=$(tput cols)
+_COLS=$(( _COLS ? _COLS : 80 ))
+
+_T_CAP_0=$(tput sgr0)
+_T_CAP_OP=$(tput op)
+_T_CAP_ITA=$(tput sitm)
+_T_CAP_ROM=$(tput ritm)
+_T_CAP_GRN=$(tput setaf 2 || tput setf 2)
+_T_CAP_YEL=$(tput setaf 3 || tput setf 3)
+_T_CAP_MAG=$(tput setaf 5 || tput setf 5)
+_T_CAP_CYA=$(tput setaf 6 || tput setf 6)
+_T_CAP_DIM=$(tput dim)
+
 set -e -onullglob -opipefail
 unset REPORTTIME
+alias tput='tput 2>/dev/null'
 
 main () {
     define_variables "$@"
@@ -253,21 +268,6 @@ preprocess_html () {
         ' <$index_in >$index_out
     fi
 }
-
-alias tput='tput 2>/dev/null'
-_COLS=$(tput cols)
-_COLS=$(( _COLS ? _COLS : 80 ))
-
-_T_CAP_0=$(tput sgr0)
-_T_CAP_OP=$(tput op)
-_T_CAP_ITA=$(tput sitm)
-_T_CAP_ROM=$(tput ritm)
-_T_CAP_GRN=$(tput setaf 2 || tput setf 2)
-_T_CAP_YEL=$(tput setaf 3 || tput setf 3)
-_T_CAP_MAG=$(tput setaf 5 || tput setf 5)
-_T_CAP_CYA=$(tput setaf 6 || tput setf 6)
-_T_CAP_DIM=$(tput dim)
-unalias tput
 
 file_message () {
     local t_reset= t_fresh= t_colon= t_body=
