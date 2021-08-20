@@ -5,8 +5,9 @@
 #include "ge211_error.hxx"
 #include "ge211_event.hxx"
 #include "ge211_forward.hxx"
+#include "ge211_frame.hxx"
 #include "ge211_geometry.hxx"
-#include "ge211_noexcept.hxx"
+#include "ge211_doxygen.hxx"
 #include "ge211_random.hxx"
 #include "ge211_resource.hxx"
 #include "ge211_session.hxx"
@@ -130,7 +131,6 @@ namespace ge211 {
 class Abstract_game
 {
 public:
-
     /// Runs the game. Usually the way to use this is to create an instance of
     /// your game class in `main` and then call run() on it.
     void run();
@@ -143,7 +143,7 @@ public:
 
     /// The default initial window title. You can change this in a derived class
     /// by overriding the initial_window_title() const member function.
-    static const char* const default_window_title;
+    static const char *const default_window_title;
 
     /// The default window dimensions, in pixels. You can change this in a
     /// derived class by overriding the initial_window_dimensions() const member
@@ -151,7 +151,7 @@ public:
     static const Dims<int> default_window_dimensions;
 
     /// Polymorphic classes should have virtual destructors.
-    virtual ~Abstract_game() {}
+    virtual ~Abstract_game() { }
 
 protected:
     /// \name Functions to be overridden by clients
@@ -172,7 +172,8 @@ protected:
     /// Called by the game engine once per frame. The parameter is the duration
     /// of the previous frame in seconds. Override this function to react to time
     /// passing in order to implement animation.
-    virtual void on_frame(double last_frame_seconds) {
+    virtual void on_frame(double last_frame_seconds)
+    {
         (void) last_frame_seconds;
     }
 
@@ -180,7 +181,8 @@ protected:
     /// repeating behavior, so the user holding down a key can result in multiple
     /// events being delivered. To find out exactly when keys go down and up,
     /// override on_key_down(Key) and on_key_up(Key) instead.
-    virtual void on_key(Key) { }
+    virtual void on_key(Key)
+    { }
 
     /// Called by the game engine each time a key is depressed. Note
     /// that this function is delivered the actual key pressed, not the
@@ -196,22 +198,27 @@ protected:
 
     /// Called by the game engine each time a key is released. This delivers
     /// the same raw key code as on_key_down(Key).
-    virtual void on_key_up(Key) { }
+    virtual void on_key_up(Key)
+    { }
 
     /// Called by the game engine each time a mouse button is depressed.
-    virtual void on_mouse_down(Mouse_button, Posn<int>) { }
+    virtual void on_mouse_down(Mouse_button, Posn<int>)
+    { }
 
     /// Called by the game engine each time a mouse button is released.
-    virtual void on_mouse_up(Mouse_button, Posn<int>) { }
+    virtual void on_mouse_up(Mouse_button, Posn<int>)
+    { }
 
     /// Called by the game engine each time the mouse moves.
-    virtual void on_mouse_move(Posn<int>) { }
+    virtual void on_mouse_move(Posn<int>)
+    { }
 
     /// Called by the game engine after initializing the game but before
     /// commencing the event loop. You can do this to perform initialization
     /// tasks such as preparing sprites::Sprite%s with
     /// prepare(const Sprite&) const.
-    virtual void on_start() { }
+    virtual void on_start()
+    { }
 
     /// Called by the game engine after exiting the event loop but before
     /// the game instance is destroyed. Overriding the function cannot be
@@ -223,7 +230,8 @@ protected:
     /// normally, by calling quit(), or by the user telling
     /// the OS to quit the program. It is not called on exceptions or
     /// errors.
-    virtual void on_quit() { }
+    virtual void on_quit()
+    { }
 
     /// Override this function to specify the initial dimensions of the
     /// game's window.
@@ -240,7 +248,7 @@ protected:
     ///@{
 
     /// Causes the event loop to quit after the current frame finishes.
-    void quit() NOEXCEPT;
+    void quit() NOEXCEPT_;
 
     /// Gets the Window that the game is running in. This can be used to query
     /// its size, change its title, etc.
@@ -259,23 +267,23 @@ protected:
     /// Gets the time point at which the current frame started. This can be
     /// used to measure intervals between events, though it might be better
     /// to use a time::Timer or time::Pausable_timer.
-    Time_point get_frame_start_time() const NOEXCEPT
-    { return frame_start_.start_time(); }
+    Time_point get_frame_start_time() const NOEXCEPT_
+    { return clock_.frame_start_time(); }
 
     /// Returns the duration of the frame right before the frame currently
     /// running. See time::Duration for information on how to use the result.
-    Duration get_prev_frame_length() const NOEXCEPT
-    { return prev_frame_length_; }
+    Duration get_prev_frame_length() const NOEXCEPT_
+    { return clock_.prev_frame_length(); }
 
     /// Returns an approximation of the current frame rate in Hz.
     /// Typically we synchronize the frame rate with the video controller, but
     /// accessing it might be useful for diagnosing performance problems.
-    double get_frame_rate() const NOEXCEPT
-    { return fps_; }
+    double get_frame_rate() const NOEXCEPT_
+    { return clock_.frame_rate(); }
 
     /// Returns an approximation of the current machine load due to GE211.
-    double get_load_percent() const NOEXCEPT
-    { return load_; }
+    double get_load_percent() const NOEXCEPT_
+    { return clock_.load_fraction() * 100; }
 
     /// Prepares a sprites::Sprite for rendering, without actually including it
     /// in the scene. The first time a sprites::Sprite is rendered, it ordinarily
@@ -298,26 +306,14 @@ protected:
 private:
     friend class detail::Engine;
 
-    void mark_present_() NOEXCEPT;
-    void mark_frame_() NOEXCEPT;
-
-    void poll_channels_();
+    void
+    poll_channels_();
 
     detail::Session session_;
-    detail::lazy_ptr<Mixer> mixer_;
-    detail::Engine* engine_ = nullptr;
-
+    detail::Lazy_ptr<Mixer> mixer_;
+    detail::Engine *engine_ = nullptr;
     bool quit_ = false;
-
-    Timer          frame_start_;
-    Duration       prev_frame_length_;
-
-    double         fps_            {0};
-    double         load_           {100};
-
-    int            sample_counter_ {0};
-    Timer          real_time_;
-    Pausable_timer busy_time_;
+    detail::Frame_clock clock_;
 };
 
 }

@@ -90,13 +90,15 @@ struct Model
 
 struct View
 {
-    View(Mixer&);
+    explicit View(Mixer&);
 
     Font                  sans{"sans.ttf", 30};
     Text_sprite           fps;
     Text_sprite           load;
+
     Circle_sprite         mortar{mortar_radius, mortar_color};
     vector<Circle_sprite> stars;
+
     Sound_effect          pop;
 };
 
@@ -114,7 +116,7 @@ struct Fireworks : Abstract_game
     View view;
     Dims<int> initial_window_dimensions() const override;
     void draw(Sprite_set& sprites) override;
-    void draw_fireworks(Sprite_set& sprites) const;
+    void draw_fireworks(Sprite_set& sprites);
     void draw_stats(Sprite_set& sprites);
 
     // Controller
@@ -255,7 +257,7 @@ void Fireworks::draw(Sprite_set& sprites)
     draw_stats(sprites);
 }
 
-void Fireworks::draw_fireworks(Sprite_set& sprites) const
+void Fireworks::draw_fireworks(Sprite_set& sprites)
 {
     for (Firework const& firework : model.fireworks) {
         switch (firework.stage) {
@@ -308,16 +310,32 @@ Fireworks::Fireworks()
 
 void Fireworks::on_key(Key key)
 {
-    if (key == Key::code('q')) {
+    switch (key.code()) {
+    case 'd':
+        extern int puts(char const*);
+        puts("hi hi");
+        return;
+    case 'q':
         quit();
-    } else if (key == Key::code('f')) {
+        return;
+    case 'f':
         get_window().set_fullscreen(!get_window().get_fullscreen());
-    } else if (key == Key::code('p')) {
-        is_paused = !is_paused;
-    } else if (key == Key::code(' ') && !is_paused) {
-        auto dims             = get_window().get_dimensions();
+        return;
+    case 'p':
+        is_paused ^= true;
+        return;
+    case 'P':
+        is_paused = false;
+        return;
+    case 'u':
+        is_paused = true;
+        return;
+    case ' ':
+        if (is_paused) return;
+        auto dims             = scene_dimensions;
         auto initial_position = Posn<double>(dims.width / 2, dims.height);
         model.add_random(initial_position);
+        return;
     }
 }
 

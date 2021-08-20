@@ -1,9 +1,8 @@
 #pragma once
 
 #include "ge211_error.hxx"
-#include "ge211_if_cpp.hxx"
 #include "ge211_forward.hxx"
-#include "ge211_type_traits.hxx"
+#include "ge211_doxygen.hxx"
 
 #include <cmath>
 #include <cstdint>
@@ -54,7 +53,8 @@ struct Distribution
 template <typename RESULT_TYPE>
 class Distribution<
         RESULT_TYPE,
-        std::enable_if_t<Is_Integral<RESULT_TYPE>>
+        std::enable_if_t<std::is_integral<RESULT_TYPE>{}>
+
 >
 {
 public:
@@ -65,28 +65,34 @@ private:
     impl_type impl_;
 
 public:
+
     Distribution(result_type lo, result_type hi)
             : impl_{lo, hi}
     { }
 
-    explicit Distribution(result_type end)
+    explicit Distribution(
+            result_type
+            end)
             : impl_{0, end - 1}
-    { }
+    {
+    }
 
-    result_type operator()(Generator &gen)
+    result_type
+    operator()(Generator& gen)
     {
         return impl_(gen);
     }
 };
 
 
-template <typename RESULT_TYPE>
+template <typename TYPE>
 class Distribution<
-        RESULT_TYPE,
-        std::enable_if_t<Is_Floating_Point<RESULT_TYPE>>>
+        TYPE,
+        std::enable_if_t<std::is_floating_point<TYPE>{}>
+>
 {
 public:
-    using result_type = RESULT_TYPE;
+    using result_type = TYPE;
 
 private:
     using impl_type = std::uniform_real_distribution<result_type>;
@@ -97,7 +103,7 @@ public:
             : impl_{lo, hi}
     { }
 
-    result_type operator()(Generator &gen)
+    result_type operator()(Generator& gen)
     {
         return impl_(gen);
     }
@@ -111,7 +117,7 @@ public:
     using result_type = RESULT_TYPE;
 
     template <typename... Args>
-    Pseudo_random_engine(Args&&... args);
+    Pseudo_random_engine(Args&& ... args);
 
     result_type next() override;
 
@@ -166,7 +172,8 @@ private:
 /// The type of special tag value @ref unbounded. Don’t construct this
 /// yourself; just use @ref ge211::unbounded.
 class unbounded_type
-{ };
+{
+};
 
 /// A tag value for passing to the constructor
 /// @ref Random_source::Random_source(unbounded_type)
@@ -178,7 +185,7 @@ class unbounded_type
 /// for each number you generate.
 ///
 /// For an example, see @ref Random_source::Random_source(unbounded_type).
-constexpr unbounded_type const unbounded { };
+constexpr unbounded_type const unbounded{};
 
 /// A generic class for generating [pseudorandom numbers] in uniform
 /// distribution over a specified range.
@@ -240,7 +247,7 @@ public:
     ///
     /// std::cout << "Finally rolled a 6!\n";
     /// ```
-    IF_COMPILER(DECLARE_IF(!Is_Same<result_type, bool>))
+    DECLARE_IF(!std::is_same<result_type, bool>{})
     Random_source(result_type lo, result_type hi);
 
 
@@ -253,9 +260,10 @@ public:
     /// Not defined when @ref result_type is `bool` or any non-integral type.
     ///
     /// [1]: @ref Random_source::Random_source(result_type, result_type)
-    IF_COMPILER(DECLARE_IF(
-            Is_Integral<result_type> &&
-            !Is_Same<result_type, bool>))
+    DECLARE_IF(
+            std::is_integral<result_type>{}
+            && !std::is_same<result_type, bool>{}
+    )
     explicit Random_source(result_type limit);
 
 
@@ -284,7 +292,7 @@ public:
     ///
     ///  - Throws `ge211::Client_logic_error` if `p_true` is less than 0.0 or
     ///    greater than 1.0.
-    IF_COMPILER(DECLARE_IF(Is_Same<result_type, bool>))
+    DECLARE_IF(std::is_same<result_type, bool>{})
     explicit Random_source(double p_true);
 
 
@@ -310,7 +318,7 @@ public:
     /// char digit = source('0', '9');
     /// ```
     ///
-    IF_COMPILER(DECLARE_IF(!Is_Same<result_type, bool>))
+    DECLARE_IF(!std::is_same<result_type, bool>{})
     explicit Random_source(unbounded_type);
 
 
@@ -380,7 +388,8 @@ public:
     /// ```
     ///
     /// Not defined when @ref result_type is `bool`.
-    IF_COMPILER(DECLARE_IF(!Is_Same<result_type, bool>))
+    DECLARE_IF(!std::is_same<result_type, bool>{})
+
     result_type next_between(result_type lo, result_type hi)
     {
         return engine_->next_between(lo, hi);
@@ -393,7 +402,8 @@ public:
     /// For an example, see @ref Random_source::Random_source(unbounded_type).
     ///
     /// Not defined when @ref result_type is `bool`.
-    IF_COMPILER(DECLARE_IF(!Is_Same<result_type, bool>))
+    DECLARE_IF(!std::is_same<result_type, bool>{})
+
     result_type operator()(result_type lo, result_type hi)
     {
         return next_between(lo, hi);
@@ -474,7 +484,7 @@ public:
     /// Given a randomly-generated @ref result_type `value`, bounds it
     /// between `lo` and `hi` (inclusive) by adjusting `value`s less than
     /// `lo` to `lo` and `value`s greater than `hi` to `hi`.
-    IF_COMPILER(DECLARE_IF(!Is_Same<result_type, bool>))
+    DECLARE_IF(!std::is_same<result_type, bool>{})
     static result_type bound_between(
             result_type value, result_type lo, result_type hi);
 
@@ -507,7 +517,7 @@ using std::end;
 
 template <typename RESULT_TYPE>
 template <typename... Args>
-Pseudo_random_engine<RESULT_TYPE>::Pseudo_random_engine(Args&&... args)
+Pseudo_random_engine<RESULT_TYPE>::Pseudo_random_engine(Args&& ... args)
         : distribution_{std::forward<Args>(args)...},
           generator_{construct_generator()}
 { }
@@ -542,7 +552,7 @@ RESULT_TYPE
 Stub_random_engine<RESULT_TYPE>::next()
 {
     result_type result = *next_++;
-    if (next_ == end(container_)) next_ = begin(container_);
+    if (next_ == end(container_)) { next_ = begin(container_); }
     return result;
 }
 
@@ -557,25 +567,25 @@ Stub_random_engine<RESULT_TYPE>::next_between(result_type lo, result_type hi)
 }  // end namespace detail
 
 template <typename RESULT_TYPE>
-IF_COMPILER(DEFINE_IF)
+DEFINE_IF
 Random_source<RESULT_TYPE>::Random_source(result_type lo, result_type hi)
         : engine_{std::make_unique<Prng>(lo, hi)}
 { }
 
 template <typename RESULT_TYPE>
-IF_COMPILER(DEFINE_IF)
+DEFINE_IF
 Random_source<RESULT_TYPE>::Random_source(result_type limit)
         : engine_{std::make_unique<Prng>(limit)}
 { }
 
 template <typename RESULT_TYPE>
-IF_COMPILER(DEFINE_IF)
+DEFINE_IF
 Random_source<RESULT_TYPE>::Random_source(double p_true)
         : engine_{std::make_unique<Prng>(p_true)}
 { }
 
 template <typename RESULT_TYPE>
-IF_COMPILER(DEFINE_IF)
+DEFINE_IF
 Random_source<RESULT_TYPE>::Random_source(unbounded_type)
         : Random_source{0, std::numeric_limits<result_type>::max()}
 { }
@@ -602,7 +612,7 @@ Random_source<RESULT_TYPE>::stub_with(result_type value)
 }
 
 template <typename RESULT_TYPE>
-IF_COMPILER(DEFINE_IF)
+DEFINE_IF
 RESULT_TYPE
 Random_source<RESULT_TYPE>::bound_between(
         result_type value,

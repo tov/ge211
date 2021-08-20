@@ -15,16 +15,30 @@ add_library(ge211
 
 set_target_properties(ge211
         PROPERTIES
-        CXX_STANDARD                    14
-        CXX_STANDARD_REQUIRED           On
-        CXX_EXTENSIONS                  Off
-        VERSION                         ${PROJECT_VERSION})
+        CXX_STANDARD 14
+        CXX_STANDARD_REQUIRED On
+        CXX_EXTENSIONS Off
+        VERSION ${PROJECT_VERSION})
 
-if(MSVC)
+target_compile_features(ge211 PUBLIC
+    cxx_std_14)
+
+target_compile_options(ge211 PRIVATE
+        ${SDL2_COMPILE_FLAGS}
+        ${SDL2_IMAGE_COMPILE_FLAGS}
+        ${SDL2_MIXER_COMPILE_FLAGS}
+        ${SDL2_TTF_COMPILE_FLAGS})
+target_link_options(ge211 PUBLIC
+        ${SDL2_LINK_FLAGS}
+        ${SDL2_IMAGE_LINK_FLAGS}
+        ${SDL2_MIXER_LINK_FLAGS}
+        ${SDL2_TTF_LINK_FLAGS})
+
+if (MSVC)
     target_compile_options(ge211 PRIVATE /W4)
-else(MSVC)
+else (MSVC)
     target_compile_options(ge211 PRIVATE -Wall -Wextra -pedantic)
-endif(MSVC)
+endif (MSVC)
 
 include(GNUInstallDirs)
 
@@ -52,13 +66,16 @@ target_link_libraries(ge211
         ${SDL2_TTF_LIBRARIES}
         utf8-cpp)
 
-set(GE211_RESOURCE_PATH
+set(GE211_DEFAULT_RESOURCE_PATH
         "${CMAKE_CURRENT_SOURCE_DIR}/../Resources/"
-        "${CMAKE_INSTALL_FULL_DATADIR}/ge211/"
+        "${CMAKE_INSTALL_FULL_DATADIR}/ge211/Resources/"
+        "/Resources/")
+
+set(GE211_RESOURCE_PATH
+        ${GE211_DEFAULT_RESOURCE_PATH}
         CACHE STRING
         "Where to search for GE211 resource files.")
 
 target_compile_definitions(ge211
         PRIVATE
-        GE211_RESOURCES="$<JOIN:${GE211_RESOURCE_PATH},\"$<COMMA>\">")
-
+        GE211_RESOURCES=\"$<JOIN:${GE211_RESOURCE_PATH},\"$<COMMA>\">\")

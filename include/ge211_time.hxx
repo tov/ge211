@@ -1,16 +1,22 @@
 #pragma once
 
 #include "ge211_forward.hxx"
+#include "util/ring_buffer.hxx"
 
+#include <algorithm>
+#include <array>
 #include <chrono>
+#include <cstdint>
 #include <ratio>
 #include <thread>
+#include <type_traits>
+#include <utility>
 
 namespace ge211 {
 
 namespace detail {
 
-using Clock = std::conditional_t<
+using System_clock = std::conditional_t<
         std::chrono::high_resolution_clock::is_steady,
         std::chrono::high_resolution_clock,
         std::chrono::steady_clock>;
@@ -29,69 +35,81 @@ namespace time {
 /// added, subtracted, and added and subtracted to Time_point values.
 class Duration
 {
+    using duration_type_ = detail::System_clock::duration;
+    using seconds_type_ = std::chrono::duration<double>;
+    using millis_type_ = std::chrono::duration<long, std::milli>;
+
+    duration_type_ duration_;
+
+    template <typename ToType, typename FromType>
+    static ToType
+    cast_(FromType v)
+    {
+        return std::chrono::duration_cast<ToType>(v);
+    }
+
 public:
     /// Constructs the zero duration.
-    Duration() : duration_{} {}
+    Duration()
+            : duration_{}
+    { }
 
     /// Constructs the duration of the given number of seconds.
     explicit Duration(double seconds)
-            : Duration{std::chrono::duration<double>{seconds}} {}
+            : Duration{seconds_type_{seconds}}
+    { }
 
     /// Gets this duration in seconds.
     double seconds() const
     {
-        auto seconds =
-                std::chrono::duration_cast<std::chrono::duration<double>>(
-                        duration_);
-        return seconds.count();
+        auto s = cast_<seconds_type_>(duration_);
+        return s.count();
     }
 
     /// Gets this duration, approximately, in milliseconds.
     long milliseconds() const
     {
-        auto millis =
-                std::chrono::duration_cast<std::chrono::duration<long, std::milli>>(
-                        duration_);
-        return millis.count();
+        auto ms = cast_<millis_type_>(duration_);
+        return ms.count();
     }
 
     /// \name Comparisons
     ///@{
 
     /// Does this Duration equal another one?
-    bool operator==(Duration other) const
+    friend inline bool operator==(Duration a, Duration b)
     {
-        return duration_ == other.duration_;
+        return a.duration_ == b.duration_;
     }
 
     /// Does this Duration NOT equal another one?
-    bool operator!=(Duration other) const
+    friend inline bool operator!=(Duration a, Duration b)
     {
-        return duration_ != other.duration_;
+        return a.duration_ != b.duration_;
     }
 
     /// Less-than for Duration.
-    bool operator<(Duration other) const
+    friend inline bool operator<(Duration a, Duration b)
     {
-        return duration_ < other.duration_;
+        return a.duration_ < b.duration_;
     }
 
     /// Less-than-or-equal-to for Duration.
-    bool operator<=(Duration other) const
+    friend inline bool operator<=(Duration a, Duration b)
     {
-        return duration_ <= other.duration_;
+        return a.duration_ <= b.duration_;
     }
 
     /// Greater-than for Duration.
-    bool operator>(Duration other) const
+    friend inline bool operator>(Duration a, Duration b)
     {
-        return duration_ > other.duration_;
+        return a.duration_ > b.duration_;
     }
 
     /// Greater-than-or-equal-to for Duration.
-    bool operator>=(Duration other) const
+    friend inline bool operator>=(Duration a, Duration b)
     {
-        return duration_ >= other.duration_;
+        return a.duration_ >= b.duration_;
     }
 
     ///@}
@@ -100,27 +118,33 @@ public:
     ///@{
 
     /// Addition for Duration.
-    Duration operator+(Duration other) const
+    friend inline Duration operator+(Duration a, Duration b)
     {
-        return {duration_ + other.duration_};
+        return {a.duration_ + b.duration_};
     }
 
     /// Subtraction for Duration.
-    Duration operator-(Duration other) const
+    friend inline Duration operator-(Duration a, Duration b)
     {
-        return {duration_ - other.duration_};
+        return {a.duration_ - b.duration_};
     }
 
     /// Multiplication for Duration.
-    Duration operator*(double factor) const
+    friend inline Duration operator*(Duration a, double factor)
     {
-        return {duration_ * factor};
+        return {a.duration_ * factor};
+    }
+
+    /// Multiplication for Duration.
+    friend inline Duration operator*(double factor, Duration a)
+    {
+        return {a.duration_ * factor};
     }
 
     /// Division for Duration.
-    Duration operator/(double factor) const
+    friend inline Duration operator/(Duration a, double factor)
     {
-        return {duration_ / factor};
+        return {a.duration_ / factor};
     }
 
     /// Addition for Duration.
@@ -150,22 +174,22 @@ public:
     ///@}
 
 private:
-    friend Time_point;
+    friend class Time_point;
+
     friend class detail::Engine;
 
-    Duration(std::chrono::duration<double> duration)
-            : Duration{std::chrono::duration_cast<detail::Clock::duration>
-                               (duration)} {}
+    Duration(seconds_type_ duration)
+            : Duration(cast_<duration_type_>(duration))
+    { }
 
-    Duration(detail::Clock::duration duration)
-            : duration_{duration} {}
+    Duration(duration_type_ duration)
+            : duration_{duration}
+    { }
 
     void sleep_for() const
     {
         std::this_thread::sleep_for(duration_);
     }
-
-    detail::Clock::duration duration_;
 };
 
 /// A point in time. Time_point values can be compared; they cannot
@@ -173,50 +197,61 @@ private:
 /// and they can be shifted by Duration values.
 class Time_point
 {
+    using time_point_type_ = detail::System_clock::time_point;
+
+    time_point_type_ time_point_;
+
+    Time_point(time_point_type_ time_point)
+            : time_point_{time_point}
+    { }
+
 public:
     /// Constructs the zero time point (the epoch).
-    Time_point() : time_point_{} {}
+    Time_point()
+            : time_point_{}
+    { }
 
     /// Returns the current time.
-    static Time_point now() { return Time_point(detail::Clock::now()); }
+    static Time_point now()
+    { return Time_point(detail::System_clock::now()); }
 
     /// \name Comparisons
     ///@{
 
     /// Equality for Time_point.
-    bool operator==(Time_point other) const
+    friend inline bool operator==(Time_point a, Time_point b)
     {
-        return time_point_ == other.time_point_;
+        return a.time_point_ == b.time_point_;
     }
 
     /// Disequality for Time_point.
-    bool operator!=(Time_point other) const
+    friend inline bool operator!=(Time_point a, Time_point b)
     {
-        return time_point_ != other.time_point_;
+        return a.time_point_ != b.time_point_;
     }
 
     /// Is this Time_point earlier than that one?
-    bool operator<(Time_point other) const
+    friend inline bool operator<(Time_point a, Time_point b)
     {
-        return time_point_ < other.time_point_;
+        return a.time_point_ < b.time_point_;
     }
 
     /// Is this Time_point earlier than or equal to that one?
-    bool operator<=(Time_point other) const
+    friend inline bool operator<=(Time_point a, Time_point b)
     {
-        return time_point_ <= other.time_point_;
+        return a.time_point_ <= b.time_point_;
     }
 
     /// Is this Time_point later than that one?
-    bool operator>(Time_point other) const
+    friend inline bool operator>(Time_point a, Time_point b)
     {
-        return time_point_ > other.time_point_;
+        return a.time_point_ > b.time_point_;
     }
 
     /// Is this Time_point later than or equal to that one?
-    bool operator>=(Time_point other) const
+    friend inline bool operator>=(Time_point a, Time_point b)
     {
-        return time_point_ >= other.time_point_;
+        return a.time_point_ >= b.time_point_;
     }
 
     ///@}
@@ -225,21 +260,21 @@ public:
     ///@{
 
     /// Finds the Duration between one Time_point and another.
-    Duration operator-(Time_point other) const
+    friend inline Duration operator-(Time_point a, Time_point b)
     {
-        return Duration{time_point_ - other.time_point_};
+        return Duration{a.time_point_ - b.time_point_};
     }
 
     /// Offsets a Time_point by adding a Duration.
-    Time_point operator+(Duration duration) const
+    friend inline Time_point operator+(Time_point a, Duration b)
     {
-        return Time_point{time_point_ + duration.duration_};
+        return Time_point{a.time_point_ + b.duration_};
     }
 
     /// Offsets a Time_point subtracting by a Duration.
-    Time_point operator-(Duration duration) const
+    friend inline Time_point operator-(Time_point a, Duration b)
     {
-        return Time_point{time_point_ - duration.duration_};
+        return Time_point{a.time_point_ - b.duration_};
     }
 
     /// Offsets a Time_point by adding on a Duration.
@@ -256,11 +291,6 @@ public:
 
     ///@}
 
-private:
-    Time_point(detail::Clock::time_point time_point)
-            : time_point_{time_point} {}
-
-    detail::Clock::time_point time_point_;
 };
 
 /// A class for timing intervals. The result is a Duration.
@@ -268,7 +298,9 @@ class Timer
 {
 public:
     /// Creates a new timer, running from the time it was created.
-    Timer() : start_time_{now_()} {}
+    Timer()
+            : start_time_{now_()}
+    { }
 
     /// Creates a timer whose “start time” is some Duration in the future.
     /// Suppose we want to wait 30 seconds and then do something. We could
@@ -309,7 +341,8 @@ public:
 private:
     Time_point start_time_;
 
-    static Time_point now_() { return Time_point::now(); }
+    static Time_point now_()
+    { return Time_point::now(); }
 };
 
 /// A class for timing intervals while supporting pausing.
@@ -322,10 +355,11 @@ public:
     {
         is_paused_ = start_paused;
 
-        if (is_paused_)
+        if (is_paused_) {
             elapsed_time_ = Duration{};
-        else
+        } else {
             fake_start_time_ = now_();
+        }
     }
 
     /// Checks whether the timer is currently paused.
@@ -388,15 +422,15 @@ public:
 private:
     union
     {
-        Time_point fake_start_time_;        // when not paused
-        Duration elapsed_time_; // when paused
+        Time_point fake_start_time_;    // when not paused
+        Duration elapsed_time_;         // when paused
     };
     bool is_paused_;
 
-    static Time_point now_() { return Time_point::now(); }
+    static Time_point now_()
+    { return Time_point::now(); }
 };
 
 } // end namespace time
 
-}
-
+}  // end namespace ge211

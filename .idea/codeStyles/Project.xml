@@ -47,8 +47,6 @@
         <rule entity="ENUMERATOR" visibility="ANY" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="" />
         <rule entity="CLASS_MEMBER_FUNCTION,STRUCT_MEMBER_FUNCTION,CLASS_MEMBER_FIELD,STRUCT_MEMBER_FIELD" visibility="PROTECTED,PRIVATE" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="_" />
         <rule entity="CLASS_MEMBER_FUNCTION,STRUCT_MEMBER_FUNCTION,CLASS_MEMBER_FIELD,STRUCT_MEMBER_FIELD" visibility="PUBLIC" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="" />
-        <rule entity="CLASS_MEMBER_FUNCTION,STRUCT_MEMBER_FUNCTION,CLASS_MEMBER_FIELD,STRUCT_MEMBER_FIELD" visibility="PROTECTED,PRIVATE" specifier="STATIC" prefix="c_" style="SNAKE_CASE" suffix="_" />
-        <rule entity="CLASS_MEMBER_FUNCTION,STRUCT_MEMBER_FUNCTION,CLASS_MEMBER_FIELD,STRUCT_MEMBER_FIELD" visibility="PUBLIC" specifier="STATIC" prefix="c_" style="SNAKE_CASE" suffix="" />
         <rule entity="GLOBAL_FUNCTION" visibility="ANY" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="" />
         <rule entity="GLOBAL_VARIABLE" visibility="ANY" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="" />
         <rule entity="PARAMETER,LOCAL_VARIABLE" visibility="ANY" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="" />

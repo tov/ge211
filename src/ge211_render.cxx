@@ -72,7 +72,7 @@ Renderer::Renderer(const Window& window)
         throw Host_error{"Could not initialize renderer."};
 }
 
-bool Renderer::is_vsync() const NOEXCEPT
+bool Renderer::is_vsync() const NOEXCEPT_
 {
     SDL_RendererInfo info;
     SDL_GetRendererInfo(get_raw_(), &info);
@@ -85,7 +85,7 @@ void Renderer::clear()
         throw Host_error{"Could not clear window"};
 }
 
-SDL_Renderer* Renderer::get_raw_() const NOEXCEPT
+SDL_Renderer* Renderer::get_raw_() const NOEXCEPT_
 {
     return ptr_.get();
 }
@@ -98,7 +98,7 @@ void Renderer::set_color(Color color)
         throw Host_error{"Could not set renderer color"};
 }
 
-void Renderer::present() NOEXCEPT
+void Renderer::present() NOEXCEPT_
 {
     SDL_RenderPresent(get_raw_());
 }
@@ -157,23 +157,23 @@ void Renderer::prepare(const Texture& texture) const
     texture.get_raw_(*this);
 }
 
-Texture::Impl_::Impl_(Owned<SDL_Surface> surface) NOEXCEPT
+Texture::Impl_::Impl_(Owned<SDL_Surface> surface) NOEXCEPT_
         : surface_(surface)
 { }
 
-Texture::Impl_::Impl_(Owned<SDL_Texture> texture) NOEXCEPT
+Texture::Impl_::Impl_(Owned<SDL_Texture> texture) NOEXCEPT_
         : texture_(texture)
 { }
 
-Texture::Impl_::Impl_(Uniq_SDL_Surface surface) NOEXCEPT
+Texture::Impl_::Impl_(Uniq_SDL_Surface surface) NOEXCEPT_
         : surface_(std::move(surface))
 { }
 
-Texture::Impl_::Impl_(Uniq_SDL_Texture texture) NOEXCEPT
+Texture::Impl_::Impl_(Uniq_SDL_Texture texture) NOEXCEPT_
         : texture_(std::move(texture))
 { }
 
-Texture::Texture() NOEXCEPT
+Texture::Texture() NOEXCEPT_
 { }
 
 Texture::Texture(Owned<SDL_Surface> surface)
@@ -200,7 +200,7 @@ SDL_Texture* Texture::get_raw_(const Renderer& renderer) const
     throw Host_error{"Could not create texture from surface"};
 }
 
-Dims<int> Texture::dimensions() const NOEXCEPT
+Dims<int> Texture::dimensions() const NOEXCEPT_
 {
     Dims<int> result{0, 0};
 
@@ -215,12 +215,12 @@ Dims<int> Texture::dimensions() const NOEXCEPT
     return result;
 }
 
-Borrowed<SDL_Surface> Texture::raw_surface() NOEXCEPT
+Borrowed<SDL_Surface> Texture::raw_surface() NOEXCEPT_
 {
     return impl_->surface_.get();
 }
 
-bool Texture::empty() const NOEXCEPT
+bool Texture::empty() const NOEXCEPT_
 {
     return impl_ == nullptr;
 }

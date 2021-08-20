@@ -1,10 +1,10 @@
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
-set(config_version_cmake
-        ${CMAKE_CURRENT_BINARY_DIR}/Ge211/Ge211ConfigVersion.cmake)
 set(config_install_dir
         ${CMAKE_INSTALL_DATADIR}/cmake/Ge211)
+set(config_version_cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/Ge211/Ge211ConfigVersion.cmake)
 
 install(TARGETS         ge211
                         utf8-cpp

@@ -3,7 +3,7 @@
 #include "ge211_color.hxx"
 #include "ge211_forward.hxx"
 #include "ge211_geometry.hxx"
-#include "ge211_noexcept.hxx"
+#include "ge211_doxygen.hxx"
 #include "ge211_window.hxx"
 #include "ge211_util.hxx"
 
@@ -16,16 +16,16 @@ namespace ge211 {
 
 namespace detail {
 
-using Uniq_SDL_Renderer = delete_ptr<SDL_Renderer, &SDL_DestroyRenderer>;
-using Uniq_SDL_Surface  = delete_ptr<SDL_Surface, &SDL_FreeSurface>;
-using Uniq_SDL_Texture  = delete_ptr<SDL_Texture, &SDL_DestroyTexture>;
+using Uniq_SDL_Renderer = Delete_ptr<SDL_Renderer, &SDL_DestroyRenderer>;
+using Uniq_SDL_Surface  = Delete_ptr<SDL_Surface, &SDL_FreeSurface>;
+using Uniq_SDL_Texture  = Delete_ptr<SDL_Texture, &SDL_DestroyTexture>;
 
 class Renderer
 {
 public:
     explicit Renderer(const Window&);
 
-    bool is_vsync() const NOEXCEPT;
+    bool is_vsync() const NOEXCEPT_;
 
     void set_color(Color);
 
@@ -37,14 +37,16 @@ public:
     // actually copying it.
     void prepare(const Texture&) const;
 
-    void present() NOEXCEPT;
+    void present() NOEXCEPT_;
 
 private:
     friend Texture;
 
-    Borrowed<SDL_Renderer> get_raw_() const NOEXCEPT;
+    Borrowed<SDL_Renderer>
+    get_raw_() const NOEXCEPT_;
 
-    static Owned<SDL_Renderer> create_renderer_(Borrowed<SDL_Window>);
+    static Owned<SDL_Renderer>
+    create_renderer_(Borrowed<SDL_Window>);
 
     Uniq_SDL_Renderer ptr_;
 };
@@ -56,7 +58,7 @@ class Texture
 {
 public:
     // An empty texture; don't render this or even ask for its dimensions.
-    Texture() NOEXCEPT;
+    Texture() NOEXCEPT_;
 
     // Takes ownership of the `SDL_Surface` and will delete it.
     //
@@ -65,24 +67,24 @@ public:
     explicit Texture(Owned<SDL_Surface> surface);
     explicit Texture(Uniq_SDL_Surface);
 
-    Dims<int> dimensions() const NOEXCEPT;
+    Dims<int> dimensions() const NOEXCEPT_;
 
     // Returns nullptr if this `Texture` has been rendered, and can no
     // longer be updated as an `SDL_Surface`.
-    Borrowed<SDL_Surface> raw_surface() NOEXCEPT;
+    Borrowed<SDL_Surface> raw_surface() NOEXCEPT_;
 
-    bool empty() const NOEXCEPT;
+    bool empty() const NOEXCEPT_;
 
 private:
     friend Renderer;
 
     struct Impl_
     {
-        Impl_(Owned<SDL_Surface>) NOEXCEPT;
-        Impl_(Owned<SDL_Texture>) NOEXCEPT;
+        Impl_(Owned<SDL_Surface>) NOEXCEPT_;
+        Impl_(Owned<SDL_Texture>) NOEXCEPT_;
 
-        Impl_(Uniq_SDL_Surface) NOEXCEPT;
-        Impl_(Uniq_SDL_Texture) NOEXCEPT;
+        Impl_(Uniq_SDL_Surface) NOEXCEPT_;
+        Impl_(Uniq_SDL_Texture) NOEXCEPT_;
 
         Uniq_SDL_Surface surface_;
         Uniq_SDL_Texture texture_;
