@@ -378,7 +378,7 @@ private:
 private:
     Music_track current_music_;
     State music_state_{State::detached};
-    Pausable_timer music_position_{true};
+    detail::Pausable_timer music_position_{true};
 
     bool enabled_;
     std::vector<Sound_effect_handle> channels_;

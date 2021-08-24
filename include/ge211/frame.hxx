@@ -24,7 +24,7 @@ private:
     static constexpr double decay_rate_ = 0.5;
 
     Pausable_timer busy_timer_;
-    Time_point real_timer_ = Time_point::now();
+    Timer real_timer_;
 
     size_t frame_count_ = 0;
     Ring_buffer<Duration, Buffer_Size> samples_;
@@ -83,8 +83,7 @@ Perf_clock<Sample_Period, Buffer_size>::end_compute_frame()
     frame_count_ = 0;
 
     auto busy_sample = busy_timer_.reset();
-    auto real_sample = now - real_timer_;
-    real_timer_ = now;
+    auto real_sample = real_timer_.reset(now);
 
     busy_decay_sum_
             = decay_rate_ * (busy_decay_sum_ - busy_sample) + busy_sample;

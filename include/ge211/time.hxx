@@ -62,15 +62,13 @@ public:
     /// Gets this duration in seconds.
     double seconds() const
     {
-        auto s = cast_<seconds_type_>(duration_);
-        return s.count();
+        return cast_<seconds_type_>(duration_).count();
     }
 
     /// Gets this duration, approximately, in milliseconds.
     long milliseconds() const
     {
-        auto ms = cast_<millis_type_>(duration_);
-        return ms.count();
+        return cast_<millis_type_>(duration_).count();
     }
 
     /// \name Comparisons
@@ -186,7 +184,7 @@ private:
             : duration_{duration}
     { }
 
-    void sleep_for() const
+    void sleep_for_() const
     {
         std::this_thread::sleep_for(duration_);
     }
@@ -293,6 +291,41 @@ public:
 
 };
 
+} // end namespace time
+
+namespace detail {
+
+using namespace time;
+
+/// A class for timing intervals.
+class Timer
+{
+public:
+    Timer()
+            : start_(now_())
+    { }
+
+    Duration elapsed_time() const
+    {
+        return now_() - start_;
+    }
+
+    Duration reset(Time_point now = now_())
+    {
+        Duration result = now - start_;
+        start_ = now;
+        return result;
+    }
+
+private:
+    static Time_point now_()
+    {
+        return Time_point::now();
+    }
+
+    Time_point start_;
+};
+
 /// A class for timing intervals while supporting pausing.
 class Pausable_timer
 {
@@ -301,12 +334,10 @@ public:
     /// default, but can be started paused by passing `true`.
     explicit Pausable_timer(bool start_paused = false)
     {
-        is_paused_ = start_paused;
-
-        if (is_paused_) {
-            elapsed_time_ = Duration{};
+        if (start_paused) {
+            set_paused_();
         } else {
-            fake_start_time_ = now_();
+            set_running_();
         }
     }
 
@@ -316,7 +347,7 @@ public:
         return is_paused_;
     }
 
-    /** The elapsed time since the start or most recent reset, not counting
+    /** The elapsed_time time since the start or most recent reset, not counting
       * paused times.
       */
     Duration elapsed_time() const
@@ -329,14 +360,13 @@ public:
     }
 
     /// Pauses the timer. If the timer is already paused, has no effect. In
-    /// either case, the elapsed time thus far is saved, and can be queried
+    /// either case, the elapsed_time time thus far is saved, and can be queried
     /// with elapsed_time() const, or will continue to accumulate if we
-    /// unpause().
+    /// resume().
     Duration pause()
     {
         if (!is_paused_) {
-            elapsed_time_ = now_() - fake_start_time_;
-            is_paused_ = true;
+            set_paused_(now_() - fake_start_time_);
         }
 
         return elapsed_time_;
@@ -346,22 +376,20 @@ public:
     void resume()
     {
         if (is_paused_) {
-            fake_start_time_ = now_() - elapsed_time_;
-            is_paused_ = false;
+            set_running_(now_() - elapsed_time_);
         }
     }
 
-    /// Resets the timer, returning the elapsed time since starting or the
+    /// Resets the timer, returning the elapsed_time time since starting or the
     /// most recent reset(). Leaves the pause state unchanged.
-    Duration reset()
+    Duration reset(Time_point now = now_())
     {
         if (is_paused_) {
-            auto result = elapsed_time_;
+            Duration result = elapsed_time_;
             elapsed_time_ = Duration{};
             return result;
         } else {
-            auto now = now_();
-            auto result = now - fake_start_time_;
+            Duration result = now - fake_start_time_;
             fake_start_time_ = now;
             return result;
         }
@@ -375,10 +403,22 @@ private:
     };
     bool is_paused_;
 
+    void set_paused_(Duration elapsed = Duration{})
+    {
+        elapsed_time_ = elapsed;
+        is_paused_ = true;
+    }
+
+    void set_running_(Time_point now = now_())
+    {
+        fake_start_time_ = now;
+        is_paused_ = false;
+    }
+
     static Time_point now_()
     { return Time_point::now(); }
 };
 
-} // end namespace time
+}  // end namespace detail
 
 }  // end namespace ge211

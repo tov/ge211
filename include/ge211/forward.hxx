@@ -94,8 +94,6 @@ namespace time {
 class Duration;
 class Time_point;
 
-class Pausable_timer;
-
 } // end namespace time
 
 /// Internal facilities that you might want to use if you're doing
@@ -123,10 +121,12 @@ class Engine;
 class File_resource;
 class Frame_clock;
 struct Placed_sprite;
+class Pausable_timer;
 class Renderer;
 class Session;
 class Texture;
 class Texture_sprite;
+class Timer;
 
 template <bool>
 struct ifstream_opener;

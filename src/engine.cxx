@@ -90,7 +90,7 @@ Engine::State_::run_cycle()
 
     if (frame_length < allowed_frame_length) {
         auto duration = allowed_frame_length - frame_length;
-        duration.sleep_for();
+        duration.sleep_for_();
         internal::logging::debug()
                 << "Software vsync slept for "
                 << duration.seconds() << " s";
