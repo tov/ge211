@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ge211_error.hxx"
-#include "ge211_forward.hxx"
-#include "ge211_doxygen.hxx"
+#include "error.hxx"
+#include "forward.hxx"
+#include "doxygen.hxx"
 
 #include <cmath>
 #include <cstdint>

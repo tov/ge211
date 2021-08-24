@@ -1,12 +1,12 @@
 #pragma once
 
-#include "ge211_color.hxx"
-#include "ge211_forward.hxx"
-#include "ge211_geometry.hxx"
-#include "ge211_doxygen.hxx"
-#include "ge211_time.hxx"
-#include "ge211_render.hxx"
-#include "ge211_resource.hxx"
+#include "color.hxx"
+#include "forward.hxx"
+#include "geometry.hxx"
+#include "doxygen.hxx"
+#include "time.hxx"
+#include "render.hxx"
+#include "resource.hxx"
 
 #include <vector>
 #include <sstream>

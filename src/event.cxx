@@ -1,4 +1,4 @@
-#include "ge211_event.hxx"
+#include "ge211/event.hxx"
 
 #include <SDL_events.h>
 #include "utf8.h"

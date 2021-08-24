@@ -1,11 +1,11 @@
 #pragma once
 
-#include "ge211_forward.hxx"
-#include "ge211_doxygen.hxx"
-#include "ge211_base.hxx"
-#include "ge211_render.hxx"
-#include "ge211_time.hxx"
-#include "ge211_window.hxx"
+#include "forward.hxx"
+#include "doxygen.hxx"
+#include "base.hxx"
+#include "render.hxx"
+#include "time.hxx"
+#include "window.hxx"
 
 namespace ge211 {
 

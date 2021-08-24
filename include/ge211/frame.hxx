@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ge211_forward.hxx"
-#include "ge211_time.hxx"
+#include "forward.hxx"
+#include "time.hxx"
 
 namespace ge211 {
 

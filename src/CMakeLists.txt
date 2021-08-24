@@ -1,17 +1,17 @@
 add_library(ge211
-        ge211_base.cxx
-        ge211_color.cxx
-        ge211_engine.cxx
-        ge211_event.cxx
-        ge211_error.cxx
-        ge211_geometry.cxx
-        ge211_audio.cxx
-        ge211_random.cxx
-        ge211_render.cxx
-        ge211_resource.cxx
-        ge211_session.cxx
-        ge211_sprites.cxx
-        ge211_window.cxx)
+        base.cxx
+        color.cxx
+        engine.cxx
+        event.cxx
+        error.cxx
+        geometry.cxx
+        audio.cxx
+        random.cxx
+        render.cxx
+        resource.cxx
+        session.cxx
+        sprites.cxx
+        window.cxx)
 
 set_target_properties(ge211
         PROPERTIES

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ge211_forward.hxx"
-#include "util/ring_buffer.hxx"
+#include "forward.hxx"
+#include "ge211/util/ring_buffer.hxx"
 
 #include <algorithm>
 #include <array>

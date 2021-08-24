@@ -1,4 +1,4 @@
-#include "ge211_color.hxx"
+#include "ge211/color.hxx"
 
 #include <algorithm>
 #include <cmath>

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "util/delete_ptr.hxx"
-#include "util/lazy_ptr.hxx"
-#include "util/reflection.hxx"
-#include "util/ring_buffer.hxx"
+#include "ge211/util/delete_ptr.hxx"
+#include "ge211/util/lazy_ptr.hxx"
+#include "ge211/util/reflection.hxx"
+#include "ge211/util/ring_buffer.hxx"
 
 #include <sstream>
 #include <string>

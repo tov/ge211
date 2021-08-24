@@ -1,9 +1,9 @@
 #pragma once
 
-#include "ge211_forward.hxx"
-#include "ge211_geometry.hxx"
-#include "ge211_doxygen.hxx"
-#include "ge211_util.hxx"
+#include "forward.hxx"
+#include "geometry.hxx"
+#include "doxygen.hxx"
+#include "util.hxx"
 
 #include <SDL_version.h>
 #include <SDL_video.h>

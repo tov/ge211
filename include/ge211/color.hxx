@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ge211_forward.hxx"
-#include "ge211_doxygen.hxx"
+#include "forward.hxx"
+#include "doxygen.hxx"
 
 #include <SDL_pixels.h>
 #include <cstdint>

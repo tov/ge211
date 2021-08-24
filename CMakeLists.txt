@@ -35,8 +35,8 @@ find_package(SDL2_ttf REQUIRED)
 ### MAIN LIBRARY SETUP
 ###
 
-configure_file(include/ge211_version.hxx.in
-        include/ge211_version.hxx)
+configure_file(include/ge211/version.hxx.in
+        include/ge211/version.hxx)
 add_subdirectory(src)
 
 

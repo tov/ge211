@@ -1,6 +1,6 @@
-#include "ge211_audio.hxx"
-#include "ge211_resource.hxx"
-#include "ge211_session.hxx"
+#include "ge211/audio.hxx"
+#include "ge211/resource.hxx"
+#include "ge211/session.hxx"
 
 #include <SDL.h>
 #include <SDL_mixer.h>

@@ -1,6 +1,6 @@
-#include "ge211_resource.hxx"
-#include "ge211_error.hxx"
-#include "ge211_session.hxx"
+#include "ge211/resource.hxx"
+#include "ge211/error.hxx"
+#include "ge211/session.hxx"
 
 #include <SDL.h>
 #include <SDL_ttf.h>

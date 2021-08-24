@@ -1,9 +1,9 @@
 #pragma once
 
-#include "ge211_forward.hxx"
-#include "ge211_doxygen.hxx"
-#include "ge211_util.hxx"
-#include "ge211_error.hxx"
+#include "forward.hxx"
+#include "doxygen.hxx"
+#include "util.hxx"
+#include "error.hxx"
 
 #include <SDL_rwops.h>
 

@@ -1,6 +1,6 @@
-#include "ge211_base.hxx"
-#include "ge211_engine.hxx"
-#include "ge211_error.hxx"
+#include "ge211/base.hxx"
+#include "ge211/engine.hxx"
+#include "ge211/error.hxx"
 
 #include <SDL.h>
 

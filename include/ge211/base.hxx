@@ -1,17 +1,17 @@
 #pragma once
 
-#include "ge211_audio.hxx"
-#include "ge211_color.hxx"
-#include "ge211_error.hxx"
-#include "ge211_event.hxx"
-#include "ge211_forward.hxx"
-#include "ge211_frame.hxx"
-#include "ge211_geometry.hxx"
-#include "ge211_doxygen.hxx"
-#include "ge211_random.hxx"
-#include "ge211_resource.hxx"
-#include "ge211_session.hxx"
-#include "ge211_time.hxx"
+#include "audio.hxx"
+#include "color.hxx"
+#include "error.hxx"
+#include "event.hxx"
+#include "forward.hxx"
+#include "frame.hxx"
+#include "geometry.hxx"
+#include "doxygen.hxx"
+#include "random.hxx"
+#include "resource.hxx"
+#include "session.hxx"
+#include "time.hxx"
 
 #include <memory>
 #include <string>
