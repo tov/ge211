@@ -24,9 +24,9 @@ private:
     static constexpr double decay_rate_ = 0.5;
 
     Pausable_timer busy_timer_;
-    Timer real_timer_;
+    Time_point real_timer_ = Time_point::now();
 
-    size_t frame_count_{};
+    size_t frame_count_ = 0;
     Ring_buffer<Duration, Buffer_Size> samples_;
     Duration busy_decay_sum_;
     Duration real_decay_sum_;
@@ -63,25 +63,28 @@ private:
  * Perf_clock member functions
  */
 
-template <size_t Sample_period, size_t Buffer_size>
+template <size_t Sample_Period, size_t Buffer_Size>
 void
-Perf_clock<Sample_period, Buffer_size>::begin_compute_frame()
+Perf_clock<Sample_Period, Buffer_Size>::begin_compute_frame()
 {
     busy_timer_.resume();
 }
 
-template <size_t Sample_period, size_t Buffer_size>
+template <size_t Sample_Period, size_t Buffer_size>
 void
-Perf_clock<Sample_period, Buffer_size>::end_compute_frame()
+Perf_clock<Sample_Period, Buffer_size>::end_compute_frame()
 {
+    auto now = Time_point::now();
+
     busy_timer_.pause();
 
-    if (++frame_count_ != Sample_period) { return; }
+    if (++frame_count_ != Sample_Period) { return; }
 
     frame_count_ = 0;
 
     auto busy_sample = busy_timer_.reset();
-    auto real_sample = real_timer_.reset();
+    auto real_sample = now - real_timer_;
+    real_timer_ = now;
 
     busy_decay_sum_
             = decay_rate_ * (busy_decay_sum_ - busy_sample) + busy_sample;
@@ -90,20 +93,20 @@ Perf_clock<Sample_period, Buffer_size>::end_compute_frame()
     real_sum_
             += real_sample - samples_.rotate(real_sample);
 
-    fps_ = Sample_period * samples_.size() / real_sum_.seconds();
+    fps_ = Sample_Period * samples_.size() / real_sum_.seconds();
     load_ = busy_decay_sum_.seconds() / real_decay_sum_.seconds();
 }
 
-template <size_t Sample_period, size_t Buffer_size>
+template <size_t Sample_Period, size_t Buffer_Size>
 double
-Perf_clock<Sample_period, Buffer_size>::frame_rate() const
+Perf_clock<Sample_Period, Buffer_Size>::frame_rate() const
 {
     return fps_;
 }
 
-template <size_t Sample_period, size_t Buffer_size>
+template <size_t Sample_Period, size_t Buffer_Size>
 double
-Perf_clock<Sample_period, Buffer_size>::load_fraction() const
+Perf_clock<Sample_Period, Buffer_Size>::load_fraction() const
 {
     return load_;
 }

@@ -293,58 +293,6 @@ public:
 
 };
 
-/// A class for timing intervals. The result is a Duration.
-class Timer
-{
-public:
-    /// Creates a new timer, running from the time it was created.
-    Timer()
-            : start_time_{now_()}
-    { }
-
-    /// Creates a timer whose “start time” is some Duration in the future.
-    /// Suppose we want to wait 30 seconds and then do something. We could
-    /// create a Timer whose “start time” is in 30 seconds, and then poll it
-    /// on each frame. When it returns a non-negative number for its
-    /// elapsed_time() const, we know that the time as arrived.
-    static Timer future(Duration duration)
-    {
-        Timer result;
-        result.start_time_ += duration;
-        return result;
-    }
-
-    /// Resets a timer, returning the time it was at before it was reset.
-    Duration reset()
-    {
-        Time_point previous = start_time_;
-        start_time_ = now_();
-        return start_time_ - previous;
-    }
-
-    /** Returns the actual time when this timer was started or most recently
-      * reset.
-      */
-    Time_point start_time() const
-    {
-        return start_time_;
-    }
-
-    /** Returns how much time has elapsed since this timer was started or
-      * most recently reset.
-      */
-    Duration elapsed_time() const
-    {
-        return now_() - start_time_;
-    }
-
-private:
-    Time_point start_time_;
-
-    static Time_point now_()
-    { return Time_point::now(); }
-};
-
 /// A class for timing intervals while supporting pausing.
 class Pausable_timer
 {

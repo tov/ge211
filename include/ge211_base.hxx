@@ -265,8 +265,7 @@ protected:
     }
 
     /// Gets the time point at which the current frame started. This can be
-    /// used to measure intervals between events, though it might be better
-    /// to use a time::Timer or time::Pausable_timer.
+    /// used to measure intervals between events.
     Time_point get_frame_start_time() const NOEXCEPT_
     { return clock_.frame_start_time(); }
 

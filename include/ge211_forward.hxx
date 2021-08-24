@@ -94,7 +94,6 @@ namespace time {
 class Duration;
 class Time_point;
 
-class Timer;
 class Pausable_timer;
 
 } // end namespace time

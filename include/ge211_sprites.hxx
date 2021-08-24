@@ -467,7 +467,7 @@ private:
     void render(detail::Renderer& renderer, Posn<int> position,
                 Transform const& transform) const override;
 
-    Timer since_;
+    Time_point since_;
 };
 
 } // end namespace sprites

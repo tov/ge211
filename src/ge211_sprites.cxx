@@ -337,14 +337,14 @@ Text_sprite::operator bool() const
 
 void Multiplexed_sprite::reset()
 {
-    since_.reset();
+    since_ = Time_point::now();
 }
 
 void Multiplexed_sprite::render(detail::Renderer& renderer,
                                 Posn<int> position,
                                 Transform const& transform) const
 {
-    const Sprite& selection = select_(since_.elapsed_time());
+    const Sprite& selection = select_(Time_point::now() - since_);
     selection.render(renderer, position, transform);
 }
 
