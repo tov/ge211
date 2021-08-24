@@ -6,8 +6,9 @@
 namespace util {
 namespace pointers {
 
-/// A @ref std::unique_ptr%-like smart pointer that uses a statically-determined
-/// deleter, which does not have to be included in the pointer's representation.
+/// A smart pointer that uses a statically-determined deleter, which
+/// (unlike @ref std::unique_ptr) does not have to be included in the
+/// pointer's representation.
 template <
         typename OBJECT_TYPE,
         void (*Deleter)(OBJECT_TYPE *),
