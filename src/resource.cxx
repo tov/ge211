@@ -59,7 +59,7 @@ struct ifstream_opener
 
     static result_t fail(std::string const& filename)
     {
-        throw ge211::File_error::could_not_open(filename);
+        throw ge211::File_open_error(filename);
     }
 };
 
@@ -104,7 +104,7 @@ File_resource::File_resource(const std::string& filename)
         : ptr_(open_rwops_(filename))
 {
     if (!ptr_)
-        throw File_error::could_not_open(filename);
+        throw File_open_error(filename);
 }
 
 void File_resource::close_rwops_(Owned<SDL_RWops> ptr)
@@ -124,8 +124,9 @@ Font::Font(const std::string& filename, int size)
 {
     Session::check_session("Font loading");
 
-    if (!ptr_)
-        throw Font_error::could_not_load(filename);
+    if (!ptr_) {
+        throw Font_load_error{filename};
+    }
 }
 
 }

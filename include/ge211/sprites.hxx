@@ -481,12 +481,12 @@ struct Placed_sprite
     int z;
     Transform transform;
 
-    Placed_sprite(Sprite const&, Posn<int>, int, Transform const&) NOEXCEPT_;
+    Placed_sprite(Sprite const&, Posn<int>, int, Transform const&) NOEXCEPT;
 
     void render(Renderer&) const;
 };
 
-bool operator<(Placed_sprite const&, Placed_sprite const&) NOEXCEPT_;
+bool operator<(Placed_sprite const&, Placed_sprite const&) NOEXCEPT;
 
 } // end namespace detail
 
@@ -499,16 +499,17 @@ bool operator<(Placed_sprite const&, Placed_sprite const&) NOEXCEPT_;
 /// coordinate that determines stacking order. Each sprite may have a
 /// [Transform] applied as well.
 ///
-/// \sa Sprite_set::add_sprite(Sprite const&, Posn<int>, int, Transform const&)
-/// \sa `class` [Sprite]
-/// \sa `class` [Transform]
+/// \sa @ref
+/// Sprite_set::add_sprite(Sprite const&, Posn<int>, int, Transform const&)
+/// \sa @ref `class` [Sprite]
+/// \sa @ref `class` [Transform]
 ///
 /// [Sprite]: @ref ge211::sprites::Sprite
 /// [Transform]: @ref ge211::geometry::Transform
 class Sprite_set
 {
 public:
-    /// Adds the given sprite to the sprite set to render it in the next frame.
+    /// Adds the given sprite to the sprite set to render it in the v_next frame.
     ///
     /// \param sprite The sprite to render in the window.
     /// \param xy The (*x*, *y*) coordinates of the sprite, given as the

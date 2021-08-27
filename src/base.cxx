@@ -28,7 +28,7 @@ void Abstract_game::run()
     Engine(*this).run();
 }
 
-void Abstract_game::quit() NOEXCEPT_
+void Abstract_game::quit() NOEXCEPT
 {
     quit_ = true;
 }

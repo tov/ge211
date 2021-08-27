@@ -193,15 +193,16 @@ Firework Firework::random(Random_sources& random, Projectile::Position p0)
 
     vector<Projectile> stars;
 
-    int      star_count = random.star_count();
-    for (int i          = 0; i < star_count; ++i) {
+    int star_count = random.star_count.next();
+
+    for (int i = 0; i < star_count; ++i) {
         Projectile star = Projectile::random(the_origin,
                                              random.star_speed,
                                              random.star_angle);
         stars.push_back(star);
     }
 
-    int star_color = random.color();
+    int star_color = random.color.next();
 
     return Firework{Stage::mortar, mortar, stars, star_color, fuse_seconds};
 }

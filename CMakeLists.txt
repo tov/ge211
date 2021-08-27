@@ -6,6 +6,19 @@ project(ge211
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
+
+###
+### OPTIONS
+###
+
+option(BUILD_DOCS
+        "Create the HTML-based API documentation (requires Doxygen)"
+        Off)
+
+option(DOWNLOAD_STDLIB_TAGS
+        "Download tags for linking GE211 docs to the C++ standard library"
+        On)
+
 ###
 ### DEPENDENCIES
 ###
@@ -24,12 +37,13 @@ set(CMAKE_FIND_FRAMEWORK LAST)
 # Don't link in SDL2's main():
 set(SDL2_BUILDING_LIBRARY 1)
 
-add_subdirectory(3rdparty/utf8-cpp EXCLUDE_FROM_ALL)
+add_subdirectory(3rdparty/utf8-cpp/ EXCLUDE_FROM_ALL)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_ttf REQUIRED)
+
 
 ###
 ### MAIN LIBRARY SETUP
@@ -37,15 +51,18 @@ find_package(SDL2_ttf REQUIRED)
 
 configure_file(include/ge211/version.hxx.in
         include/ge211/version.hxx)
-add_subdirectory(src)
+add_subdirectory(src/)
 
 
 ###
 ### EXTRAS
 ###
 
-# HTML documentatoin
-include(Ge211Doxygen)
+# HTML documentation
+if(BUILD_DOCS)
+    find_package(Doxygen REQUIRED)
+    add_subdirectory(doc/)
+endif()
 
 # Support library installation
 include(Ge211Installer)

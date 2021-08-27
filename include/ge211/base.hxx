@@ -248,7 +248,7 @@ protected:
     ///@{
 
     /// Causes the event loop to quit after the current frame finishes.
-    void quit() NOEXCEPT_;
+    void quit() NOEXCEPT;
 
     /// Gets the Window that the game is running in. This can be used to query
     /// its size, change its title, etc.
@@ -266,22 +266,22 @@ protected:
 
     /// Gets the time point at which the current frame started. This can be
     /// used to measure intervals between events.
-    Time_point get_frame_start_time() const NOEXCEPT_
+    Time_point get_frame_start_time() const NOEXCEPT
     { return clock_.frame_start_time(); }
 
     /// Returns the duration of the frame right before the frame currently
     /// running. See time::Duration for information on how to use the result.
-    Duration get_prev_frame_length() const NOEXCEPT_
+    Duration get_prev_frame_length() const NOEXCEPT
     { return clock_.prev_frame_length(); }
 
     /// Returns an approximation of the current frame rate in Hz.
     /// Typically we synchronize the frame rate with the video controller, but
     /// accessing it might be useful for diagnosing performance problems.
-    double get_frame_rate() const NOEXCEPT_
+    double get_frame_rate() const NOEXCEPT
     { return clock_.frame_rate(); }
 
     /// Returns an approximation of the current machine load due to GE211.
-    double get_load_percent() const NOEXCEPT_
+    double get_load_percent() const NOEXCEPT
     { return clock_.load_fraction() * 100; }
 
     /// Prepares a sprites::Sprite for rendering, without actually including it

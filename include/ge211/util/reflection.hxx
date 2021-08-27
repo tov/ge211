@@ -9,15 +9,15 @@ namespace detail {
 /// Given a built-in type, returns its name as a static C string.
 template <typename TYPE>
 constexpr char const*
-name_of_type_helper()
+name_of_type_helper(char const* otherwise = "?")
 {
-    return "?";
+    return otherwise;
 }
 
 #define Specialize_name_of_type(Type) \
     template <>                       \
     constexpr char const* \
-    name_of_type_helper<Type>() \
+    name_of_type_helper<Type>(char const*) \
     { return #Type; };
 
 Specialize_name_of_type(char)
@@ -43,11 +43,16 @@ Specialize_name_of_type(unsigned long long)
 
 #undef Specialize_name_of_type
 
+constexpr char const question_mark_string[] = "?";
+
 }  // end namespace detail
 
-template <typename TYPE>
+template <
+        typename TYPE,
+        char const* OTHERWISE = detail::question_mark_string
+>
 static constexpr char const*
-        name_of_type = detail::name_of_type_helper<TYPE>();
+        name_of_type = detail::name_of_type_helper<TYPE>(OTHERWISE);
 
 }  // end namespace reflection
 }  // end namespace util

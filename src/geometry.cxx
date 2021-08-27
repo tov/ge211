@@ -6,7 +6,7 @@ namespace ge211 {
 
 namespace geometry {
 
-Transform::Transform() NOEXCEPT_
+Transform::Transform() NOEXCEPT
         : rotation_{0},
           scale_x_{1.0},
           scale_y_{1.0},
@@ -15,43 +15,43 @@ Transform::Transform() NOEXCEPT_
 { }
 
 Transform
-Transform::rotation(double degrees) NOEXCEPT_
+Transform::rotation(double degrees) NOEXCEPT
 {
     return Transform().set_rotation(degrees);
 }
 
 Transform
-Transform::flip_h() NOEXCEPT_
+Transform::flip_h() NOEXCEPT
 {
     return Transform().set_flip_h(true);
 }
 
 Transform
-Transform::flip_v() NOEXCEPT_
+Transform::flip_v() NOEXCEPT
 {
     return Transform().set_flip_v(true);
 }
 
 Transform
-Transform::scale(double factor) NOEXCEPT_
+Transform::scale(double factor) NOEXCEPT
 {
     return Transform().set_scale(factor);
 }
 
 Transform
-Transform::scale_x(double factor) NOEXCEPT_
+Transform::scale_x(double factor) NOEXCEPT
 {
     return Transform().set_scale_x(factor);
 }
 
 Transform
-Transform::scale_y(double factor) NOEXCEPT_
+Transform::scale_y(double factor) NOEXCEPT
 {
     return Transform().set_scale_y(factor);
 }
 
 Transform&
-Transform::set_rotation(double rotation) NOEXCEPT_
+Transform::set_rotation(double rotation) NOEXCEPT
 {
     while (rotation < 0) { rotation += 360; }
     rotation_ = std::fmod(rotation, 360);
@@ -59,21 +59,21 @@ Transform::set_rotation(double rotation) NOEXCEPT_
 }
 
 Transform&
-Transform::set_flip_h(bool flip_h) NOEXCEPT_
+Transform::set_flip_h(bool flip_h) NOEXCEPT
 {
     flip_h_ = flip_h;
     return *this;
 }
 
 Transform&
-Transform::set_flip_v(bool flip_v) NOEXCEPT_
+Transform::set_flip_v(bool flip_v) NOEXCEPT
 {
     flip_v_ = flip_v;
     return *this;
 }
 
 Transform&
-Transform::set_scale(double scale) NOEXCEPT_
+Transform::set_scale(double scale) NOEXCEPT
 {
     scale_x_ = scale;
     scale_y_ = scale;
@@ -81,57 +81,57 @@ Transform::set_scale(double scale) NOEXCEPT_
 }
 
 Transform&
-Transform::set_scale_x(double scale_x) NOEXCEPT_
+Transform::set_scale_x(double scale_x) NOEXCEPT
 {
     scale_x_ = scale_x;
     return *this;
 }
 
 Transform&
-Transform::set_scale_y(double scale_y) NOEXCEPT_
+Transform::set_scale_y(double scale_y) NOEXCEPT
 {
     scale_y_ = scale_y;
     return *this;
 }
 
 double
-Transform::get_rotation() const NOEXCEPT_
+Transform::get_rotation() const NOEXCEPT
 {
     return rotation_;
 }
 
 bool
-Transform::get_flip_h() const NOEXCEPT_
+Transform::get_flip_h() const NOEXCEPT
 {
     return flip_h_;
 }
 
 bool
-Transform::get_flip_v() const NOEXCEPT_
+Transform::get_flip_v() const NOEXCEPT
 {
     return flip_v_;
 }
 
 double
-Transform::get_scale_x() const NOEXCEPT_
+Transform::get_scale_x() const NOEXCEPT
 {
     return scale_x_;
 }
 
 double
-Transform::get_scale_y() const NOEXCEPT_
+Transform::get_scale_y() const NOEXCEPT
 {
     return scale_y_;
 }
 
 bool
-Transform::is_identity() const NOEXCEPT_
+Transform::is_identity() const NOEXCEPT
 {
     return *this == Transform();
 }
 
 Transform
-Transform::inverse() const NOEXCEPT_
+Transform::inverse() const NOEXCEPT
 {
     Transform result;
     result.set_rotation(360 - rotation_);
@@ -143,7 +143,7 @@ Transform::inverse() const NOEXCEPT_
 }
 
 Transform
-Transform::operator*(Transform const& that) const NOEXCEPT_
+Transform::operator*(Transform const& that) const NOEXCEPT
 {
     return Transform{}
             .set_rotation(get_rotation() + that.get_rotation())
@@ -154,7 +154,7 @@ Transform::operator*(Transform const& that) const NOEXCEPT_
 }
 
 bool
-Transform::operator==(Transform const& that) const NOEXCEPT_
+Transform::operator==(Transform const& that) const NOEXCEPT
 {
     return get_rotation() == that.get_rotation() &&
            get_flip_h() == that.get_flip_h() &&
@@ -164,7 +164,7 @@ Transform::operator==(Transform const& that) const NOEXCEPT_
 }
 
 bool
-Transform::operator!=(Transform const& that) const NOEXCEPT_
+Transform::operator!=(Transform const& that) const NOEXCEPT
 {
     return !(operator==(that));
 }

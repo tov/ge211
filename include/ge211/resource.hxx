@@ -22,13 +22,13 @@ namespace ge211 {
 
 /// Opens a file in the `Resources/` directory for input in text mode.
 ///
-/// Throws @ref exceptions::File_error if the file cannot be opened.
+/// Throws @ref exceptions::File_open_error if the file cannot be opened.
 std::ifstream
 open_resource_file(std::string const& filename);
 
 /// Opens a file in the `Resources/` directory for input in binary mode.
 ///
-/// Throws @ref exceptions::File_error if the file cannot be opened.
+/// Throws @ref exceptions::File_open_error if the file cannot be opened.
 std::ifstream
 open_binary_resource_file(std::string const& filename);
 
@@ -47,7 +47,7 @@ public:
     explicit File_resource(const std::string&);
 
     Borrowed<SDL_RWops>
-    get_raw() const NOEXCEPT_
+    get_raw() const NOEXCEPT
     {
         return ptr_.get();
     }
@@ -88,7 +88,7 @@ private:
     friend Text_sprite;
 
     Borrowed<TTF_Font>
-    get_raw_() const NOEXCEPT_
+    get_raw_() const NOEXCEPT
     { return ptr_.get(); }
 
     detail::Delete_ptr<TTF_Font, &TTF_CloseFont> ptr_;

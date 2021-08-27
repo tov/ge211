@@ -213,7 +213,7 @@ Engine::paint_sprites_(Sprite_set& sprite_set)
 }
 
 Window&
-Engine::get_window() NOEXCEPT_
+Engine::get_window() NOEXCEPT
 {
     return window_;
 }

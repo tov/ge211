@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef>
+#include <string>
 
 // Prevent SDL2 from taking over main().
 #ifndef SDL_MAIN_HANDLED
@@ -32,6 +33,8 @@ class Font;
 class Sprite_set;
 class Window;
 
+template <typename RESULT_TYPE> class Random_source;
+
 namespace audio {
 
 enum class Channel_state;
@@ -55,14 +58,21 @@ namespace exceptions {
 class Exception_base;
 class Client_logic_error;
 class Session_needed_error;
+class Random_source_error;
+class Random_source_bounds_error;
+class Random_source_empty_stub_error;
+class Random_source_unsupported_error;
 class Environment_error;
 class Ge211_logic_error;
 class Late_paint_error;
 class Host_error;
-class File_error;
-class Font_error;
-class Image_error;
+class File_open_error;
+class Font_load_error;
+class Image_load_error;
 class Mixer_error;
+class Audio_load_error;
+class Out_of_channels_error;
+class Mixer_not_enabled_error;
 
 } // end namespace exceptions
 
@@ -126,10 +136,15 @@ class Renderer;
 class Session;
 class Texture;
 class Texture_sprite;
+struct Throw_random_source_error;
 class Timer;
 
 template <bool>
 struct ifstream_opener;
+
+template <typename> struct Param_check;
+template <typename> class Bounded_engine;
+template <typename> class Unbounded_engine;
 
 } // end namespace detail
 

@@ -18,7 +18,7 @@ public:
 
     void run();
     void prepare(const sprites::Sprite&) const;
-    Window& get_window() NOEXCEPT_;
+    Window& get_window() NOEXCEPT;
 
     ~Engine();
 

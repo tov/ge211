@@ -30,16 +30,29 @@ using namespace util::containers;
 using namespace util::reflection;
 using namespace util::pointers;
 
+inline void
+concat_to(std::ostream&)
+{ }
+
+template <typename FIRST, typename... REST>
+void
+concat_to(std::ostream& buf, FIRST&& first, REST&&... rest)
+{
+    buf << std::forward<FIRST>(first);
+    concat_to(buf, std::forward<REST>(rest)...);
+}
+
 }  // end namespace detail
 
-
-/// Converts any printable type to a `std::string`.
-template <typename PRINTABLE>
-std::string to_string(const PRINTABLE& value)
+/// Converts any printable type to a `std::string`. Multiple arguments
+/// are concatenated.
+template <typename... PRINTABLE>
+std::string
+to_string(PRINTABLE&&... value)
 {
-    std::ostringstream oss;
-    oss << value;
-    return oss.str();
+    std::ostringstream buf;
+    detail::concat_to(buf, std::forward<PRINTABLE>(value)...);
+    return buf.str();
 }
 
 

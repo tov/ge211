@@ -25,7 +25,7 @@ Sprite_set::add_sprite(const Sprite& sprite, Posn<int> xy, int z,
 namespace detail {
 
 Placed_sprite::Placed_sprite(const Sprite& sprite, Posn<int> xy,
-                             int z, const Transform& transform) NOEXCEPT_
+                             int z, const Transform& transform) NOEXCEPT
         : sprite{&sprite}, xy{xy}, z{z}, transform{transform}
 { }
 
@@ -34,7 +34,7 @@ void Placed_sprite::render(Renderer& dst) const
     sprite->render(dst, xy, transform);
 }
 
-bool operator<(const Placed_sprite& s1, const Placed_sprite& s2) NOEXCEPT_
+bool operator<(const Placed_sprite& s1, const Placed_sprite& s2) NOEXCEPT
 {
     return s1.z > s2.z;
 }
@@ -189,9 +189,11 @@ Image_sprite::load_texture_(const std::string& filename)
 {
     File_resource file(filename);
     SDL_Surface* raw = IMG_Load_RW(file.get_raw(), 0);
-    if (raw) return Texture(raw);
+    if (raw) {
+        return Texture(raw);
+    }
 
-    throw Image_error::could_not_load(filename);
+    throw Image_load_error{filename};
 }
 
 Image_sprite::Image_sprite(const std::string& filename)

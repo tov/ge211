@@ -19,12 +19,12 @@ Window::Window(const std::string& title, Dims<int> dim)
         throw Host_error{"Could not create window"};
 }
 
-uint32_t Window::get_flags_() const NOEXCEPT_
+uint32_t Window::get_flags_() const NOEXCEPT
 {
     return SDL_GetWindowFlags(get_raw_());
 }
 
-Dims<int> Window::get_dimensions() const NOEXCEPT_
+Dims<int> Window::get_dimensions() const NOEXCEPT
 {
     Dims<int> result{0, 0};
     SDL_GetWindowSize(get_raw_(), &result.width, &result.height);
@@ -40,18 +40,18 @@ void Window::set_dimensions(Dims<int> dims)
 }
 
 #if SDL_VERSION_ATLEAST(2, 0, 5)
-bool Window::get_resizeable() const NOEXCEPT_
+bool Window::get_resizeable() const NOEXCEPT
 {
     return (get_flags_() & SDL_WINDOW_RESIZABLE) != 0;
 }
 
-void Window::set_resizeable(bool resizable) NOEXCEPT_
+void Window::set_resizeable(bool resizable) NOEXCEPT
 {
     SDL_SetWindowResizable(get_raw_(), resizable? SDL_TRUE : SDL_FALSE);
 }
 #endif
 
-Posn<int> Window::get_position() const NOEXCEPT_
+Posn<int> Window::get_position() const NOEXCEPT
 {
     Posn<int> result{0, 0};
     SDL_GetWindowPosition(get_raw_(), &result.x, &result.y);
@@ -65,7 +65,7 @@ void Window::set_position(Posn<int> position)
 
 const Posn<int> Window::centered{SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED};
 
-bool Window::get_fullscreen() const NOEXCEPT_
+bool Window::get_fullscreen() const NOEXCEPT
 {
     return (get_flags_() & SDL_WINDOW_FULLSCREEN) != 0;
 }
@@ -78,14 +78,14 @@ void Window::set_fullscreen(bool fullscreen)
         throw Host_error{"Window::set_fullscreen: failed"};
 }
 
-Dims<int> Window::max_fullscreen_dimensions() NOEXCEPT_
+Dims<int> Window::max_fullscreen_dimensions() NOEXCEPT
 {
     SDL_Rect rect;
     SDL_GetDisplayBounds(0, &rect);
     return {rect.w, rect.h};
 }
 
-Dims<int> Window::max_window_dimensions() const NOEXCEPT_
+Dims<int> Window::max_window_dimensions() const NOEXCEPT
 {
     int top, left, bottom, right;
     SDL_GetWindowBordersSize(get_raw_(), &top, &left, &bottom, &right);

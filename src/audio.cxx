@@ -36,8 +36,9 @@ bool Audio_clip::try_load(const std::string& filename, const Mixer& mixer)
 
 void Audio_clip::load(const std::string& filename, const Mixer& mixer)
 {
-    if (!try_load(filename, mixer))
-        throw Mixer_error::could_not_load(filename);
+    if (!try_load(filename, mixer)) {
+        throw Audio_load_error{filename};
+    }
 }
 
 void Audio_clip::clear()
@@ -294,10 +295,14 @@ void Mixer::poll_channels_()
 Sound_effect_handle
 Mixer::play_effect(Sound_effect effect, double volume)
 {
-    if (!enabled_) throw Mixer_error::not_enabled();
+    if (!enabled_) {
+        throw Mixer_not_enabled_error{};
+    }
 
     auto handle = try_play_effect(std::move(effect), volume);
-    if (!handle) throw Mixer_error::out_of_channels();
+    if (!handle) {
+        throw Out_of_channels_error{};
+    }
 
     return handle;
 }

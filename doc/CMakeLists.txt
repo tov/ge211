@@ -1,3 +1,10 @@
+set(GIT_PUSH_DOCS_URI "https://github.com/tov/ge211.git"
+        CACHE STRING
+        "Repo to push documentation to.")
+set(GIT_PUSH_DOCS_BRANCH "gh-pages"
+        CACHE STRING
+        "Branch to push documentation to.")
+
 set(STDLIB_DOC_ROOT  "http://en.cppreference.com/w/")
 set(STDLIB_TAG_FILE  "cppreference.xml")
 set(STDLIB_TAG_URL   "http://upload.cppreference.com/mwiki/images/f/f8/cppreference-doxygen-web.tag.xml")
@@ -30,11 +37,11 @@ set(DOXYGEN_PREDEFINED             GE211_DOXYGEN)
 set(DOXYGEN_MACRO_EXPANSION        YES)
 set(DOXYGEN_EXPAND_ONLY_PREDEF     YES)
 set(DOXYGEN_EXPAND_AS_DEFINED
+        COMPILER_ONLY
+        DOXYGEN_ONLY
         DECLARE_IF
         DEFINE_IF
-        NOEXCEPT
-        NOEXCEPT_
-        NOEXCEPT_AS)
+        NOEXCEPT)
 
 set(DOXYGEN_ALIASES
         "ownership=#### Ownership"

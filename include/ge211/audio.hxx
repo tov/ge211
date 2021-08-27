@@ -40,7 +40,7 @@ public:
 
     /// Loads audio from a resource file into this audio clip instance.
     ///
-    /// Throws exceptions::File_error if the file cannot be opened, and
+    /// Throws exceptions::File_open_error if the file cannot be opened, and
     /// exceptions::Mixer_error if the file format cannot be understood.
     void load(const std::string&, const Mixer&);
 
@@ -48,7 +48,7 @@ public:
     /// instance. Returns `true` if loading succeeds, or `false` if
     /// the file format cannot be understood.
     ///
-    /// Throws exceptions::File_error if the file cannot be opened.
+    /// Throws exceptions::File_open_error if the file cannot be opened.
     bool try_load(const std::string&, const Mixer&);
 
     /// Unloads any audio data, leaving this Audio_clip empty.
@@ -98,7 +98,7 @@ public:
     /// Pausing and resuming does not work correctly with all audio
     /// formats.
     ///
-    /// Throws exceptions::File_error if the file cannot be opened, and
+    /// Throws exceptions::File_open_error if the file cannot be opened, and
     /// exceptions::Mixer_error if the file format cannot be understood.
     Music_track(const std::string& filename, const Mixer&);
 
@@ -133,7 +133,7 @@ public:
     /// enabled when your copy of the SDL2_mixer library that %ge211 links
     /// against was compiled.
     ///
-    /// Throws exceptions::File_error if the file cannot be opened, and
+    /// Throws exceptions::File_open_error if the file cannot be opened, and
     /// exceptions::Mixer_error if the file format cannot be understood.
     Sound_effect(const std::string& filename, const Mixer&);
 
@@ -283,7 +283,7 @@ public:
     ///    `paused`.
     ///
     /// Cases 2 and 3 happen only between frames, and not asynchronously
-    /// while computing the next frame. This means that after checking
+    /// while computing the v_next frame. This means that after checking
     /// the result of `get_music_state()` const, that state continues to
     /// hold, and can be relied on, at least until the end of the frame,
     /// unless the client requests that it be changed (case 1).

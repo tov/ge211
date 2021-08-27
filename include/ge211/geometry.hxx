@@ -666,7 +666,7 @@ public:
         return &current_;
     }
 
-    /// Pre-increments, advancing this iterator to the next Posn.
+    /// Pre-increments, advancing this iterator to the v_next Posn.
     iterator& operator++()
     {
         if (++current_.y >= y_end_) {
@@ -690,7 +690,7 @@ public:
         return *this;
     }
 
-    /// Post-increments, advancing this iterator to the next Posn.
+    /// Post-increments, advancing this iterator to the v_next Posn.
     iterator operator++(int)
     {
         iterator result(*this);
@@ -767,26 +767,26 @@ public:
     /// @{
 
     /// Constructs the identity transform, which has no effect.
-    Transform() NOEXCEPT_;
+    Transform() NOEXCEPT;
 
     /// Constructs a rotating transform, given the rotation in degrees
     /// clockwise.
-    static Transform rotation(double) NOEXCEPT_;
+    static Transform rotation(double) NOEXCEPT;
 
     /// Constructs a transform that flips the sprite horizontally.
-    static Transform flip_h() NOEXCEPT_;
+    static Transform flip_h() NOEXCEPT;
 
     /// Constructs a transform that flips the sprite vertically.
-    static Transform flip_v() NOEXCEPT_;
+    static Transform flip_v() NOEXCEPT;
 
     /// Constructs a transform that scales the sprite in both dimensions.
-    static Transform scale(double) NOEXCEPT_;
+    static Transform scale(double) NOEXCEPT;
 
     /// Constructs a transform that scales the sprite in the *x* dimension.
-    static Transform scale_x(double) NOEXCEPT_;
+    static Transform scale_x(double) NOEXCEPT;
 
     /// Constructs a transform that scales the sprite in the *y* dimension.
-    static Transform scale_y(double) NOEXCEPT_;
+    static Transform scale_y(double) NOEXCEPT;
 
     /// @}
 
@@ -794,28 +794,28 @@ public:
     /// @{
 
     /// Modifies this transform to have the given rotation, in degrees.
-    Transform& set_rotation(double) NOEXCEPT_;
+    Transform& set_rotation(double) NOEXCEPT;
 
     /// Modifies this transform to determine whether to flip horizontally.
-    Transform& set_flip_h(bool) NOEXCEPT_;
+    Transform& set_flip_h(bool) NOEXCEPT;
 
     /// Modifies this transform to determine whether to flip vertically.
-    Transform& set_flip_v(bool) NOEXCEPT_;
+    Transform& set_flip_v(bool) NOEXCEPT;
 
     /// Modifies this transform to scale the sprite by the given amount in
     /// both dimensions. This overwrites the effect of previous calls to
     /// set_scale_x(double) and set_scale_y(double).
-    Transform& set_scale(double) NOEXCEPT_;
+    Transform& set_scale(double) NOEXCEPT;
 
     /// Modifies this transform to scale the sprite horizontally. This
     /// overwrites the effect of previous calls to `set_scale(double)`
     /// as well as itself.
-    Transform& set_scale_x(double) NOEXCEPT_;
+    Transform& set_scale_x(double) NOEXCEPT;
 
     /// Modifies this transform to scale the sprite vertically. This
     /// overwrites the effect of previous calls to `set_scale(double)`
     /// as well as itself.
-    Transform& set_scale_y(double) NOEXCEPT_;
+    Transform& set_scale_y(double) NOEXCEPT;
 
     /// @}
 
@@ -823,19 +823,19 @@ public:
     /// @{
 
     /// Returns the rotation that will be applied to the sprite.
-    double get_rotation() const NOEXCEPT_;
+    double get_rotation() const NOEXCEPT;
 
     /// Returns whether the sprite will be flipped horizontally.
-    bool get_flip_h() const NOEXCEPT_;
+    bool get_flip_h() const NOEXCEPT;
 
     /// Returns whether the sprite will be flipped vertically.
-    bool get_flip_v() const NOEXCEPT_;
+    bool get_flip_v() const NOEXCEPT;
 
     /// Returns how much the sprite will be scaled horizontally.
-    double get_scale_x() const NOEXCEPT_;
+    double get_scale_x() const NOEXCEPT;
 
     /// Returns how much the sprite will be scaled vertically.
-    double get_scale_y() const NOEXCEPT_;
+    double get_scale_y() const NOEXCEPT;
 
     /// @}
 
@@ -846,16 +846,16 @@ public:
     /// Because floating point is approximate, this may answer `false` for
     /// transforms that are nearly the identity. But it should answer `true`
     /// for any transform constructed by the default constructor Transform().
-    bool is_identity() const NOEXCEPT_;
+    bool is_identity() const NOEXCEPT;
 
     /// Returns the inverse of this transform. Composing a transform with its
     /// inverse should result in the identity transformation, though because
     /// floating point is approximate, is_identity() const may not actually
     /// answer `true`.
-    Transform inverse() const NOEXCEPT_;
+    Transform inverse() const NOEXCEPT;
 
     /// Composes two transforms to combine both of their effects.
-    Transform operator*(Transform const&) const NOEXCEPT_;
+    Transform operator*(Transform const&) const NOEXCEPT;
 
     /// @}
 
@@ -863,10 +863,10 @@ public:
     /// @{
 
     /// Equality for `Transform`s.
-    bool operator==(Transform const&) const NOEXCEPT_;
+    bool operator==(Transform const&) const NOEXCEPT;
 
     /// Disequality for `Transform`s.
-    bool operator!=(Transform const&) const NOEXCEPT_;
+    bool operator!=(Transform const&) const NOEXCEPT;
 
     /// @}
 
@@ -1007,7 +1007,7 @@ struct hash<ge211::Posn<COORDINATE>>
 {
     /// Hashes a Posn<COORDINATE>, provided that COORDINATE is hashable.
     std::size_t operator()(ge211::Posn<COORDINATE> pos) const
-    NOEXCEPT_
+    NOEXCEPT
     {
         return hash_t_(pos.x) * 31 ^ hash_t_(pos.y);
     }
