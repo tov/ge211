@@ -20,6 +20,7 @@ name_of_type_helper(char const* otherwise = "?")
     name_of_type_helper<Type>(char const*) \
     { return #Type; };
 
+Specialize_name_of_type(bool)
 Specialize_name_of_type(char)
 Specialize_name_of_type(signed char)
 Specialize_name_of_type(unsigned char)
