@@ -21,15 +21,14 @@ public:
     /// The capacity of the buffer.
     static constexpr std::size_t capacity = Capacity;
 
-    /// Constructs an empty, zero-filled ring buffer.
+    /// Constructs an empty ring buffer.
     constexpr Ring_buffer()
-            : Ring_buffer(Element())
     { }
 
     /// Constructs a ring buffer filled with `fill`.
-    explicit constexpr Ring_buffer(Element fill)
+    explicit constexpr Ring_buffer(value_type value)
     {
-        buf_.fill(fill);
+        fill(value);
     }
 
     /// Returns the number of elements in the ring buffer.
@@ -52,6 +51,15 @@ public:
     full() const
     {
         return size() == capacity;
+    }
+
+    /// Fills the ring buffer with the given value, replacing any values
+    /// already stored and increasing its size to meet its capacity.
+    constexpr void
+    fill(value_type value)
+    {
+        buf_.fill(value);
+        size_ = capacity;
     }
 
     /// Enqueues an element, returning the ejected oldest element if full, or
