@@ -11,6 +11,10 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 ### OPTIONS
 ###
 
+option(BUILD_TESTS
+        "Build GE211 tests"
+        Off)
+
 option(BUILD_DOCS
         "Create the HTML-based API documentation (requires Doxygen)"
         Off)
@@ -57,6 +61,12 @@ add_subdirectory(src/)
 ###
 ### EXTRAS
 ###
+
+# Tests
+if (BUILD_TESTS)
+    add_subdirectory(3rdparty/doctest/ EXCLUDE_FROM_ALL)
+    add_subdirectory(test/)
+endif ()
 
 # HTML documentation
 if(BUILD_DOCS)
