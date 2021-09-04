@@ -940,7 +940,7 @@ public:
     /// @ref stub_with(std::vector<result_type>).
     void stub_with(result_type value)
     {
-        stub_with(std::vector<result_type>{move(value)});
+        stub_with(std::vector<result_type>{std::move(value)});
     }
 
     /// Move-assigns a <tt>%Random_source</tt>.
