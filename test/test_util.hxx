@@ -12,8 +12,12 @@ struct Delete_ptr_tester
     static bool deleted;
 
     static void go(Delete_ptr_tester *)
-    { deleted = true; }
+    {
+        deleted = true;
+    }
 };
+
+bool Delete_ptr_tester::deleted;
 
 
 struct Lazy_ptr_tester
@@ -26,9 +30,12 @@ struct Lazy_ptr_tester
     }
 };
 
+bool Lazy_ptr_tester::forced;
+
+
 struct Name_of_type_tester
 {
-    static char const unknown[10];
+    static constexpr char unknown[] = "<unknown>";
 
     template <typename T, const char *... O>
     static std::string
@@ -39,8 +46,6 @@ struct Name_of_type_tester
 
 };
 
-bool Delete_ptr_tester::deleted;
-bool Lazy_ptr_tester::forced;
-char const Name_of_type_tester::unknown[10] = "<unknown>";
+constexpr char Name_of_type_tester::unknown[];
 
 }  // end namespace util_testers
