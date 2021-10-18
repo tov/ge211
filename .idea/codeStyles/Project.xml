@@ -12,12 +12,13 @@
       <option name="INDENT_PREPROCESSOR_DIRECTIVE" value="2" />
       <option name="KEEP_STRUCTURES_IN_ONE_LINE" value="true" />
       <option name="KEEP_DIRECTIVE_AT_FIRST_COLUMN" value="false" />
-      <option name="FUNCTION_BRACE_PLACEMENT" value="2" />
+      <option name="FUNCTION_BRACE_PLACEMENT" value="5" />
       <option name="FUNCTION_TOP_AFTER_RETURN_TYPE_WRAP" value="2" />
       <option name="FUNCTION_PARAMETERS_WRAP" value="5" />
       <option name="FUNCTION_PARAMETERS_NEW_LINE_AFTER_LPAR" value="true" />
       <option name="LAMBDA_CAPTURE_LIST_WRAP" value="1" />
       <option name="FUNCTION_CALL_ARGUMENTS_WRAP" value="5" />
+      <option name="TEMPLATE_DECLARATION_STRUCT_WRAP" value="1" />
       <option name="TEMPLATE_PARAMETERS_WRAP" value="5" />
       <option name="TEMPLATE_PARAMETERS_ALIGN_MULTILINE" value="true" />
       <option name="TEMPLATE_PARAMETERS_NEW_LINE_AFTER_LT" value="true" />
@@ -41,16 +42,6 @@
         <pair source="cxx" header="hxx" fileNamingConvention="SNAKE_CASE" />
         <pair source="c" header="h" fileNamingConvention="SNAKE_CASE" />
       </extensions>
-      <rules>
-        <rule entity="MACRO" visibility="ANY" specifier="ANY" prefix="" style="SCREAMING_SNAKE_CASE" suffix="" />
-        <rule entity="CLASS" visibility="ANY" specifier="ANY" prefix="" style="LEADING_SNAKE_CASE" suffix="" />
-        <rule entity="ENUMERATOR" visibility="ANY" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="" />
-        <rule entity="CLASS_MEMBER_FUNCTION,STRUCT_MEMBER_FUNCTION,CLASS_MEMBER_FIELD,STRUCT_MEMBER_FIELD" visibility="PROTECTED,PRIVATE" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="_" />
-        <rule entity="CLASS_MEMBER_FUNCTION,STRUCT_MEMBER_FUNCTION,CLASS_MEMBER_FIELD,STRUCT_MEMBER_FIELD" visibility="PUBLIC" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="" />
-        <rule entity="GLOBAL_FUNCTION" visibility="ANY" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="" />
-        <rule entity="GLOBAL_VARIABLE" visibility="ANY" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="" />
-        <rule entity="PARAMETER,LOCAL_VARIABLE" visibility="ANY" specifier="ANY" prefix="" style="SNAKE_CASE" suffix="" />
-      </rules>
     </Objective-C-extensions>
     <RsCodeStyleSettings>
       <option name="ALIGN_TYPE_PARAMS" value="true" />
@@ -73,9 +64,10 @@
       <option name="KEEP_FIRST_COLUMN_COMMENT" value="false" />
       <option name="KEEP_BLANK_LINES_BEFORE_RBRACE" value="1" />
       <option name="BLANK_LINES_BEFORE_IMPORTS" value="0" />
+      <option name="BLANK_LINES_AROUND_CLASS" value="0" />
+      <option name="BLANK_LINES_AROUND_METHOD" value="0" />
       <option name="BLANK_LINES_AROUND_METHOD_IN_INTERFACE" value="0" />
-      <option name="BLANK_LINES_AFTER_CLASS_HEADER" value="1" />
-      <option name="CLASS_BRACE_STYLE" value="2" />
+      <option name="CLASS_BRACE_STYLE" value="5" />
       <option name="INDENT_CASE_FROM_SWITCH" value="false" />
       <option name="ALIGN_MULTILINE_CHAINED_METHODS" value="true" />
       <option name="METHOD_CALL_CHAIN_WRAP" value="5" />
