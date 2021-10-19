@@ -68,7 +68,7 @@ private:
     uint32_t
     get_flags_() const NOEXCEPT;
 
-    detail::Delete_ptr<SDL_Window, &SDL_DestroyWindow> ptr_;
+    util::pointers::Delete_ptr<SDL_Window, &SDL_DestroyWindow> ptr_;
 };
 
 }

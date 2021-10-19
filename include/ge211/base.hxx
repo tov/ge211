@@ -12,9 +12,12 @@
 #include "resource.hxx"
 #include "session.hxx"
 #include "time.hxx"
+#include "util.hxx"
 
 #include <memory>
 #include <string>
+
+GE211_REGISTER_TYPE_NAME(ge211::Abstract_game);
 
 namespace ge211 {
 
@@ -309,7 +312,7 @@ private:
     poll_channels_();
 
     detail::Session session_;
-    detail::Lazy_ptr<Mixer> mixer_;
+    util::pointers::Lazy_ptr<Mixer> mixer_;
     detail::Engine *engine_ = nullptr;
     bool quit_ = false;
     detail::Frame_clock clock_;

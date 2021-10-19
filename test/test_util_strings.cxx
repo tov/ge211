@@ -1,11 +1,12 @@
 #include "doctest.hxx"
 
 #include <ge211/util/to_string.hxx>
+#include <ge211/util/stringable.hxx>
 
 using util::format::to_string;
 using util::format::Stringable;
 
-TEST_SUITE_BEGIN("util::to_string");
+TEST_SUITE_BEGIN("util::strings");
 
 TEST_CASE("to_string")
 {

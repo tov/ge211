@@ -7,6 +7,9 @@
 #include <sstream>
 #include <string>
 
+GE211_REGISTER_TYPE_NAME(ge211::Key);
+GE211_REGISTER_TYPE_NAME(ge211::Mouse_button);
+
 namespace ge211 {
 
 /// Types for representing mouse and keyboard events.

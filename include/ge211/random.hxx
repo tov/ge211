@@ -3,6 +3,7 @@
 #include "error.hxx"
 #include "forward.hxx"
 #include "doxygen.hxx"
+#include "util.hxx"
 
 #include <cmath>
 #include <cstdint>
@@ -10,6 +11,8 @@
 #include <memory>
 #include <random>
 #include <type_traits>
+
+GE211_REGISTER_TMPL_NAME(ge211::Random_source);
 
 namespace ge211 {
 
@@ -32,29 +35,29 @@ struct Throw_random_source_error
 {
     [[noreturn]] static void
     bounds(
-            char const *result_type,
-            char const *operation,
+            std::string const& result_type,
+            std::string const& operation,
             std::string const& lo,
             std::string const& hi);
 
     [[noreturn]] static void
-    empty_stub(char const *result_type);
+    empty_stub(std::string const& result_type);
 
     [[noreturn]] static void
     limit(
-            char const *result_type,
-            char const *operation,
+            std::string const& result_type,
+            std::string const& operation,
             std::string const& limit);
 
     [[noreturn]] static void
     probability(
-            char const *operation,
+            std::string const& operation,
             double probability);
 
     [[noreturn]] static void
     unsupported(
-            char const *result_type,
-            char const *operation,
+            std::string const& result_type,
+            std::string const& operation,
             bool has_bounds);
 
 private:
@@ -85,7 +88,7 @@ struct Param_check
             return lo;
         } else {
             Throw_random_source_error::bounds(
-                    name_of_type<T>, operation,
+                    util::reflection::name_of_type<T>(), operation,
                     to_string(lo), to_string(hi));
         }
     }
@@ -97,7 +100,7 @@ struct Param_check
             return limit;
         } else {
             Throw_random_source_error::limit(
-                    name_of_type<T>, operation,
+                    util::reflection::name_of_type<T>(), operation,
                     to_string(limit));
         }
     }
@@ -155,12 +158,10 @@ private:
 public:
 
     Distribution(result_type lo, result_type hi)
-            : impl_{lo, hi}
-    { }
+            : impl_{lo, hi} { }
 
     Distribution(result_type count)
-            : impl_{0, count - 1}
-    { }
+            : impl_{0, count - 1} { }
 
     result_type
     operator()(Generator& gen)
@@ -185,8 +186,7 @@ private:
 
 public:
     Distribution(result_type lo, result_type hi)
-            : impl_{lo, hi}
-    { }
+            : impl_{lo, hi} { }
 
     result_type operator()(Generator& gen)
     {
@@ -209,10 +209,12 @@ struct Random_engine
     virtual ~Random_engine() = default;
 
 protected:
-    static constexpr char const
-            result_type_str_lit_[] = "result_type",
-            *parameter_name_ = name_of_type<result_type, result_type_str_lit_>;
+    static std::string parameter_name()
+    {
+        return util::reflection::name_of_type<result_type>("result_type");
+    }
 };
+
 
 template <>
 struct Random_engine<bool>
@@ -224,7 +226,10 @@ struct Random_engine<bool>
     virtual ~Random_engine() = default;
 
 protected:
-    static constexpr char const *parameter_name_ = "bool";
+    static constexpr char const *parameter_name()
+    {
+        return "bool";
+    }
 };
 
 
@@ -238,7 +243,7 @@ class Unbounded_engine
         : public Random_engine<RESULT_TYPE>
 {
 protected:
-    using Random_engine<RESULT_TYPE>::parameter_name_;
+    using Random_engine<RESULT_TYPE>::parameter_name;
 
 public:
     using result_type = RESULT_TYPE;
@@ -248,7 +253,7 @@ public:
     result_type v_next() override
     {
         Throw_random_source_error::unsupported(
-                parameter_name_, "next", false);
+                parameter_name(), "next", false);
     }
 
     result_type v_next(result_type lo, result_type hi) override
@@ -292,21 +297,19 @@ class Bounded_engine
         : public Random_engine<RESULT_TYPE>
 {
 protected:
-    using Random_engine<RESULT_TYPE>::parameter_name_;
+    using Random_engine<RESULT_TYPE>::parameter_name;
 
 public:
     using result_type = RESULT_TYPE;
 
     Bounded_engine(result_type min, result_type max)
-            : distribution_(min, max)
-    { }
+            : distribution_(min, max) { }
 
     DECLARE_IF(
             std::is_integral<result_type>{}
     )
     explicit Bounded_engine(result_type limit)
-            : Bounded_engine(0, limit - 1)
-    { }
+            : Bounded_engine(0, limit - 1) { }
 
     result_type v_next() override
     {
@@ -316,7 +319,7 @@ public:
     result_type v_next(result_type, result_type) override
     {
         Throw_random_source_error::unsupported(
-                parameter_name_, "next_between", true);
+                parameter_name(), "next_between", true);
     }
 
 private:
@@ -333,8 +336,7 @@ public:
     using result_type = bool;
 
     explicit Bounded_engine(double p_true)
-            : probability_(p_true)
-    { }
+            : probability_(p_true) { }
 
     result_type v_next() override
     {
@@ -407,8 +409,7 @@ public:
 
     // PRECONDITION: !container.empty()
     Stub_engine(container_type&& container)
-            : Super(move(container))
-    { }
+            : Super(move(container)) { }
 
     result_type v_next() override
     {
@@ -433,8 +434,7 @@ public:
 
     // PRECONDITION: !container.empty()
     Stub_engine(container_type&& container)
-            : Super(move(container))
-    { }
+            : Super(move(container)) { }
 
     result_type v_next() override
     {
@@ -566,8 +566,7 @@ public:
     )
     Random_source(result_type lo, result_type hi)
             : engine_(new Bounded_(param_check_(lo, hi, "Random_source"),
-                                   hi))
-    { }
+                                   hi)) { }
 
 
     COMPILER_ONLY(
@@ -725,16 +724,14 @@ public:
     /// [arithmetic type]:
     ///     https://en.cppreference.com/w/c/language/arithmetic_types
     explicit Random_source(Unbounded_type)
-            : engine_(new Unbounded_)
-    { }
+            : engine_(new Unbounded_) { }
 
 
     /// Move-constructs a <tt>%Random_source</tt>.
     ///
     /// (Copy-construction is disallowed.)
     Random_source(Random_source&& other)
-            : engine_(std::move(other.engine_))
-    { }
+            : engine_(std::move(other.engine_)) { }
 
 
     /// Returns the next random value from this <tt>%Random_source</tt>.

@@ -2,9 +2,13 @@
 
 #include "forward.hxx"
 #include "doxygen.hxx"
+#include "util/name_of_type.hxx"
 
 #include <SDL_pixels.h>
 #include <cstdint>
+
+GE211_REGISTER_TYPE_NAME(ge211::Color);
+// See bottom of file for ge211::Color::{HSLA, HSVA}.
 
 namespace ge211 {
 
@@ -28,26 +32,29 @@ public:
 
     /// Constructs the transparent color.
     constexpr Color() NOEXCEPT
-            : Color{0, 0, 0, 0}
-    { }
+            : Color{0, 0, 0, 0} { }
 
     /// Constructs the color with the given components.
     ///
     /// Components are integers from 0 to 255, inclusive. If `alpha` is not
     /// provided, it defaults to fully opaque.
-    constexpr Color(uint8_t red,
-                    uint8_t green,
-                    uint8_t blue,
-                    uint8_t alpha = 255) NOEXCEPT
-            : red_{red}, green_{green}, blue_{blue}, alpha_{alpha}
-    { }
+    constexpr Color(
+            uint8_t red,
+            uint8_t green,
+            uint8_t blue,
+            uint8_t alpha = 255) NOEXCEPT
+            : red_{red},
+              green_{green},
+              blue_{blue},
+              alpha_{alpha} { }
 
     /// Constructs a color with the given components.
     ///
     /// Components are doubles from 0.0. to 1.0, inclusive.
     /// If `alpha` is not given, it defaults to 1.0, meaning fully opaque.
-    static Color from_rgba(double red, double green, double blue,
-                           double alpha = 1.0) NOEXCEPT;
+    static Color from_rgba(
+            double red, double green, double blue,
+            double alpha = 1.0) NOEXCEPT;
 
     /// @}
 
@@ -67,23 +74,22 @@ public:
     }
 
     /// Solid red.
-    static Color medium_red() NOEXCEPT
-    { return from_hsla(0, .5, .5); }
+    static Color medium_red() NOEXCEPT { return from_hsla(0, .5, .5); }
+
     /// Solid green.
-    static Color medium_green() NOEXCEPT
-    { return from_hsla(120, .5, .5); }
+    static Color medium_green() NOEXCEPT { return from_hsla(120, .5, .5); }
+
     /// Solid blue.
-    static Color medium_blue() NOEXCEPT
-    { return from_hsla(240, .5, .5); }
+    static Color medium_blue() NOEXCEPT { return from_hsla(240, .5, .5); }
+
     /// Solid cyan.
-    static Color medium_cyan() NOEXCEPT
-    { return from_hsla(180, .5, .5); }
+    static Color medium_cyan() NOEXCEPT { return from_hsla(180, .5, .5); }
+
     /// Solid magenta.
-    static Color medium_magenta() NOEXCEPT
-    { return from_hsla(300, .5, .5); }
+    static Color medium_magenta() NOEXCEPT { return from_hsla(300, .5, .5); }
+
     /// Solid yellow.
-    static Color medium_yellow() NOEXCEPT
-    { return from_hsla(60, .5, .5); }
+    static Color medium_yellow() NOEXCEPT { return from_hsla(60, .5, .5); }
 
     /// @}
 
@@ -92,10 +98,13 @@ public:
 
     /// Gets the red component of a color.
     uint8_t red() const NOEXCEPT { return red_; };
+
     /// Gets the green component of a color.
     uint8_t green() const NOEXCEPT { return green_; };
+
     /// Gets the blue component of a color.
     uint8_t blue() const NOEXCEPT { return blue_; };
+
     /// Gets the alpha (opacity) component of a color.
     uint8_t alpha() const NOEXCEPT { return alpha_; };
 
@@ -171,8 +180,9 @@ public:
 
         /// Constructs a hue-saturation-lightness-alpha color from its
         /// unit interval components.
-        HSLA(double hue, double saturation,
-             double lightness, double alpha = 1.0) NOEXCEPT;
+        HSLA(
+                double hue, double saturation,
+                double lightness, double alpha = 1.0) NOEXCEPT;
 
         /// Converts color to the RGBA color model.
         Color to_rgba() const NOEXCEPT;
@@ -218,11 +228,13 @@ public:
     /// \param lightness from 0.0 to 1.0
     /// \param alpha opacity, from 0.0 to 1.0
     /// \return the color
-    static Color from_hsla(double hue, double saturation, double lightness,
-                           double alpha = 1) NOEXCEPT;
+    static Color from_hsla(
+            double hue, double saturation, double lightness,
+            double alpha = 1) NOEXCEPT;
 
     /// Converts a color to the hue-saturation-lightness (HSL) color model.
     HSLA to_hsla() const NOEXCEPT;
+
     /// Representation for the hue-saturation-lightness-alpha color
     /// model. See [Wikipedia](https://en.wikipedia.org/wiki/HSL_and_HSV)
     /// for details on color models.
@@ -246,8 +258,9 @@ public:
 
         /// Constructs a hue-saturation-value-alpha color from its
         /// unit interval components.
-        HSVA(double hue, double saturation,
-             double value, double alpha = 1.0) NOEXCEPT;
+        HSVA(
+                double hue, double saturation,
+                double value, double alpha = 1.0) NOEXCEPT;
 
         /// Converts color to the RGBA color model.
         Color to_rgba() const NOEXCEPT;
@@ -293,8 +306,9 @@ public:
     /// \param value from 0.0 to 1.0
     /// \param alpha opacity, from 0.0 to 1.0
     /// \return the color
-    static Color from_hsva(double hue, double saturation, double value,
-                           double alpha = 1) NOEXCEPT;
+    static Color from_hsva(
+            double hue, double saturation, double value,
+            double alpha = 1) NOEXCEPT;
 
     /// Converts a color to the hue-saturation-value (HSV) color model.
     HSVA to_hsva() const NOEXCEPT;
@@ -311,8 +325,10 @@ private:
     friend ::ge211::internal::Render_sprite;
 
     SDL_Color to_sdl_() const NOEXCEPT;
-    uint32_t to_sdl_(const SDL_PixelFormat*) const NOEXCEPT;
+    uint32_t to_sdl_(const SDL_PixelFormat *) const NOEXCEPT;
 };
 
-}
+}  // end namespace ge211
 
+GE211_REGISTER_TYPE_NAME(ge211::Color::HSLA);
+GE211_REGISTER_TYPE_NAME(ge211::Color::HSVA);

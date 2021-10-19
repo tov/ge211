@@ -27,7 +27,7 @@ private:
     Timer real_timer_;
 
     size_t frame_count_ = 0;
-    Ring_buffer<Duration, Buffer_Size> samples_;
+    util::containers::Ring_buffer<Duration, Buffer_Size> samples_;
     Duration busy_decay_sum_;
     Duration real_decay_sum_;
     Duration real_sum_;

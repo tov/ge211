@@ -7,6 +7,8 @@
 
 #include <SDL_rwops.h>
 
+GE211_REGISTER_TYPE_NAME(ge211::Font);
+
 // Copied from SDL_ttf.h in order to avoid getting including all of
 // SDL.h from the GE211 headers.
 extern "C" {
@@ -39,7 +41,7 @@ class File_resource
 private:
     static void close_rwops_(SDL_RWops*);
 
-    typedef Delete_ptr<SDL_RWops, &close_rwops_> delete_ptr;
+    typedef util::pointers::Delete_ptr<SDL_RWops, &close_rwops_> delete_ptr;
 
     delete_ptr ptr_;
 
@@ -91,7 +93,7 @@ private:
     get_raw_() const NOEXCEPT
     { return ptr_.get(); }
 
-    detail::Delete_ptr<TTF_Font, &TTF_CloseFont> ptr_;
+    util::pointers::Delete_ptr<TTF_Font, &TTF_CloseFont> ptr_;
 };
 
 }

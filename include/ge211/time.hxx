@@ -2,6 +2,7 @@
 
 #include "forward.hxx"
 #include "ge211/util/ring_buffer.hxx"
+#include "ge211/util/name_of_type.hxx"
 
 #include <algorithm>
 #include <array>
@@ -11,6 +12,9 @@
 #include <thread>
 #include <type_traits>
 #include <utility>
+
+GE211_REGISTER_TYPE_NAME(ge211::Duration);
+GE211_REGISTER_TYPE_NAME(ge211::Time_point);
 
 namespace ge211 {
 

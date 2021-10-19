@@ -8,6 +8,13 @@
 #include <memory>
 #include <vector>
 
+GE211_REGISTER_TYPE_NAME(ge211::Audio_clip);
+GE211_REGISTER_TYPE_NAME(ge211::Channel_state);
+GE211_REGISTER_TYPE_NAME(ge211::Mixer);
+GE211_REGISTER_TYPE_NAME(ge211::Music_track);
+GE211_REGISTER_TYPE_NAME(ge211::Sound_effect);
+GE211_REGISTER_TYPE_NAME(ge211::Sound_effect_handle);
+
 namespace ge211 {
 
 /// Audio facilities, for playing music and sound effects.
@@ -191,8 +198,9 @@ class Mixer
 {
     // This calls default constructor...
     friend Abstract_game;
+
     // ...via this:
-    friend class detail::Lazy_ptr<Mixer>;
+    friend class util::pointers::Lazy_ptr<Mixer>;
 
 public:
     /// The state of an audio channel.
@@ -212,8 +220,7 @@ public:
 
     /// Returns whether the mixer is enabled. If it is then we can
     /// play audio, but if it isn't, audio operations will fail.
-    bool is_enabled() const
-    { return enabled_; }
+    bool is_enabled() const { return enabled_; }
 
     /// \name Playing music
     ///@{
@@ -361,6 +368,7 @@ private:
 
     /// Updates the state of the channels.
     void poll_channels_();
+
     friend class detail::Engine; // calls poll_channels_().
 
     /// Returns the index of an empty channel. Returns -1 if all
@@ -397,7 +405,7 @@ public:
     ///
     /// To get a non-empty Sound_effect_handle, play a Sound_effect with
     /// @ref Mixer::play_effect.
-    Sound_effect_handle() {}
+    Sound_effect_handle() { }
 
     /// Recognizes the empty sound effect handle.
     bool empty() const;
@@ -460,11 +468,10 @@ private:
     struct Impl_
     {
         Impl_(Mixer& m, Sound_effect e, int c)
-                : mixer(m)
-                , effect(std::move(e))
-                , channel(c)
-                , state(Mixer::State::playing)
-        { }
+                : mixer(m),
+                  effect(std::move(e)),
+                  channel(c),
+                  state(Mixer::State::playing) { }
 
         Mixer& mixer;
         Sound_effect effect;
@@ -480,3 +487,4 @@ private:
 } // end namespace audio
 
 } // end namespace ge211
+

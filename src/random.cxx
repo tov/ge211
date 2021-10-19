@@ -3,8 +3,6 @@
 
 #include <algorithm>
 #include <chrono>
-#include <cmath>
-#include <cstring>
 #include <sstream>
 
 using namespace std;
@@ -78,18 +76,25 @@ word_wrap(string const& text, size_t max_width = 72)
 } // end anonymous namespace
 
 Generator::Generator()
-        : impl(make_generator_impl())
-{ }
+        : impl(make_generator_impl()) { }
 
 struct Rnd_src_fmt
 {
-    char const *type;
-    char const *op = nullptr;
+    string const *p_type;
+    string const *p_op;
 
-    Rnd_src_fmt operator()(char const *s) const
+    explicit Rnd_src_fmt(string const& type)
+            : p_type(&type),
+              p_op(nullptr) { }
+
+    Rnd_src_fmt(string const& type, string const& op)
+            : p_type(&type),
+              p_op(&op) { }
+
+    Rnd_src_fmt operator()(string const& s) const
     {
         Rnd_src_fmt copy(*this);
-        copy.op = s;
+        copy.p_op = &s;
         return copy;
     }
 };
@@ -97,10 +102,10 @@ struct Rnd_src_fmt
 static ostream&
 operator<<(ostream& o, Rnd_src_fmt const& r)
 {
-    o << "Random_source<" << r.type << ">";
+    o << "Random_source<" << *r.p_type << ">";
 
-    if (r.op) {
-        o << "::" << r.op;
+    if (r.p_op) {
+        o << "::" << *r.p_op;
     }
 
     return o;
@@ -108,10 +113,10 @@ operator<<(ostream& o, Rnd_src_fmt const& r)
 
 void
 Throw_random_source_error::bounds(
-        char const *result_type,
-        char const *operation,
-        std::string const& lo,
-        std::string const& hi)
+        string const& result_type,
+        string const& operation,
+        string const& lo,
+        string const& hi)
 {
     throw_concat_<Random_source_bounds_error>(
             Rnd_src_fmt{result_type, operation},
@@ -121,8 +126,8 @@ Throw_random_source_error::bounds(
 
 void
 Throw_random_source_error::limit(
-        char const *result_type,
-        char const *operation,
+        string const& result_type,
+        string const& operation,
         string const& limit)
 {
     throw_concat_<Random_source_bounds_error>(
@@ -132,7 +137,7 @@ Throw_random_source_error::limit(
 
 void
 Throw_random_source_error::probability(
-        char const *operation,
+        string const& operation,
         double probability)
 {
     throw_concat_<Random_source_bounds_error>(
@@ -142,7 +147,7 @@ Throw_random_source_error::probability(
 }
 
 void
-Throw_random_source_error::empty_stub(char const *result_type)
+Throw_random_source_error::empty_stub(string const& result_type)
 {
     throw_concat_<Random_source_empty_stub_error>(
             Rnd_src_fmt{result_type, "stub_with"},
@@ -151,11 +156,11 @@ Throw_random_source_error::empty_stub(char const *result_type)
 
 void
 Throw_random_source_error::unsupported(
-        char const *result_type,
-        char const *operation,
+        string const& result_type,
+        string const& operation,
         bool has_bounds)
 {
-    bool is_boolean = std::strcmp(result_type, "bool") == 0;
+    bool is_boolean = result_type == "bool";
     char const *param_type = is_boolean ? "probability" : "bounds";
     ostringstream buf;
     Rnd_src_fmt fmt{result_type};
@@ -204,7 +209,7 @@ Throw_random_source_error::unsupported(
 
 template <typename ERROR_TYPE, typename ... ARGS>
 void
-Throw_random_source_error::throw_concat_(ARGS const&... args)
+Throw_random_source_error::throw_concat_(ARGS const& ... args)
 {
     throw ERROR_TYPE(word_wrap(to_string(args...)));
 }

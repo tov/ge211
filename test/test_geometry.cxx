@@ -1,7 +1,6 @@
-#define DOCTEST_CONFIG_SUPER_FAST_ASSERTS
-#include <doctest/doctest.h>
+#include "doctest.hxx"
 
-#include <ge211.hxx>
+#include <ge211/geometry.hxx>
 
 using namespace ge211::geometry;
 
@@ -79,8 +78,8 @@ TEST_CASE_TEMPLATE("Posn<T> to string", T,
     using util::reflection::name_of_type;
 
     std::string
-            actual = name_of_type<Posn<T>>,
-            expected = ge211::to_string("Posn<", name_of_type<T>, ">");
+            actual = name_of_type<Posn<T>>(),
+            expected = ge211::to_string("ge211::Posn<", name_of_type<T>(), ">");
 
     CHECK( actual == expected);
 }

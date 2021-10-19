@@ -10,6 +10,13 @@
 #include <type_traits>
 #include <utility>
 
+GE211_REGISTER_TYPE_NAME(ge211::Origin_type);
+GE211_REGISTER_TYPE_NAME(ge211::Transform);
+
+GE211_REGISTER_TMPL_NAME(ge211::Dims);
+GE211_REGISTER_TMPL_NAME(ge211::Posn);
+GE211_REGISTER_TMPL_NAME(ge211::Rect);
+
 namespace ge211 {
 
 /// Geometric objects and their operations.
@@ -23,7 +30,6 @@ namespace geometry {
 class Origin_type
 {
 };
-
 
 /// Represents the dimensions of an object, or more generally,
 /// the displacement between two Posn%s. The coordinate type
@@ -44,13 +50,11 @@ struct Dims
     /// Constructs a dimensions from the given *width* and *height*.
     Dims(Coordinate width, Coordinate height)
             : width{width},
-              height{height}
-    { }
+              height{height} { }
 
     /// Default-constructs the zero-sized Dims.
     Dims()
-            : Dims{Coordinate{}, Coordinate{}}
-    { }
+            : Dims{Coordinate{}, Coordinate{}} { }
 
     /// Casts or converts a @ref Dims to a Dims of a different coordinate type.
     /// For example:
@@ -62,8 +66,7 @@ struct Dims
     template <typename FROM_COORD>
     explicit Dims(const Dims<FROM_COORD>& that)
             : width(that.width),
-              height(that.height)
-    { }
+              height(that.height) { }
 
     /// Explicitly converts a Dims to a different coordinate type.
     ///
@@ -278,19 +281,16 @@ struct Posn
     /// Constructs a position from the given *x* and *y* coordinates.
     Posn(Coordinate x, Coordinate y)
             : x{x},
-              y{y}
-    { }
+              y{y} { }
 
     /// Constructs the origin when given @ref the_origin.
     Posn(Origin_type)
-            : Posn(Coordinate{}, Coordinate{})
-    { }
+            : Posn(Coordinate{}, Coordinate{}) { }
 
     /// Constructs a position from a Dims, which gives the
     /// displacement of the position from the origin.
     explicit Posn(Dims_type dims)
-            : Posn{dims.width, dims.height}
-    { }
+            : Posn{dims.width, dims.height} { }
 
     /// Casts or converts a @ref Posn to a Posn of a different coordinate type.
     /// For example:
@@ -302,8 +302,7 @@ struct Posn
     template <typename FROM_COORD>
     explicit Posn(const Posn<FROM_COORD>& that)
             : x(that.x),
-              y(that.y)
-    { }
+              y(that.y) { }
 
     /// Explicitly converts a Posn to another coordinate type.
     ///
@@ -464,13 +463,11 @@ struct Rect
             : x{x},
               y{y},
               width{width},
-              height{height}
-    { }
+              height{height} { }
 
     /// Default-constructs the zero-sized Rect at the origin.
     Rect()
-            : Rect{Coordinate{}, Coordinate{}, Coordinate{}, Coordinate{}}
-    { }
+            : Rect{Coordinate{}, Coordinate{}, Coordinate{}, Coordinate{}} { }
 
     /// Casts or converts a @ref Rect to a Rect of a different coordinate type.
     /// For example:
@@ -484,8 +481,7 @@ struct Rect
             : x(that.x),
               y(that.y),
               width(that.width),
-              height(that.height)
-    { }
+              height(that.height) { }
 
     /// Explicitly converts a Rect to another coordinate type.
     ///
@@ -725,8 +721,7 @@ private:
     iterator(Posn_type current, Coordinate y_begin, Coordinate y_end)
             : current_(current),
               y_begin_(y_begin),
-              y_end_(y_end)
-    { }
+              y_end_(y_end) { }
 
     Posn_type current_;
     Coordinate y_begin_;
@@ -964,7 +959,7 @@ std::ostream&
 operator<<(std::ostream& out, Dims<COORDINATE> dims)
 {
     return out
-            << "Dims<" << detail::name_of_type<COORDINATE> << ">("
+            << util::reflection::Name_of_type<Dims<COORDINATE>>() << "("
             << dims.width << ", " << dims.height << ")";
 }
 
@@ -974,7 +969,7 @@ std::ostream&
 operator<<(std::ostream& out, Posn<COORDINATE> p)
 {
     return out
-            << "Posn<" << detail::name_of_type<COORDINATE> << ">("
+            << util::reflection::Name_of_type<Posn<COORDINATE>>() << "("
             << p.x << ", " << p.y << ")";
 }
 
@@ -984,7 +979,7 @@ std::ostream&
 operator<<(std::ostream& out, Rect<COORDINATE> rect)
 {
     return out
-            << "Rect<" << detail::name_of_type<COORDINATE> << ">("
+            << util::reflection::Name_of_type<Rect<COORDINATE>>() << "("
             << rect.x << ", " << rect.y << ", "
             << rect.width << ", " << rect.height << ")";
 }

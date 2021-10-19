@@ -9,6 +9,25 @@
 #include <sstream>
 #include <string>
 
+GE211_REGISTER_TYPE_NAME(ge211::Exception_base);
+GE211_REGISTER_TYPE_NAME(ge211::Client_logic_error);
+GE211_REGISTER_TYPE_NAME(ge211::Session_needed_error);
+GE211_REGISTER_TYPE_NAME(ge211::Random_source_error);
+GE211_REGISTER_TYPE_NAME(ge211::Random_source_bounds_error);
+GE211_REGISTER_TYPE_NAME(ge211::Random_source_empty_stub_error);
+GE211_REGISTER_TYPE_NAME(ge211::Random_source_unsupported_error);
+GE211_REGISTER_TYPE_NAME(ge211::Environment_error);
+GE211_REGISTER_TYPE_NAME(ge211::Ge211_logic_error);
+GE211_REGISTER_TYPE_NAME(ge211::Late_paint_error);
+GE211_REGISTER_TYPE_NAME(ge211::Host_error);
+GE211_REGISTER_TYPE_NAME(ge211::File_open_error);
+GE211_REGISTER_TYPE_NAME(ge211::Font_load_error);
+GE211_REGISTER_TYPE_NAME(ge211::Image_load_error);
+GE211_REGISTER_TYPE_NAME(ge211::Mixer_error);
+GE211_REGISTER_TYPE_NAME(ge211::Audio_load_error);
+GE211_REGISTER_TYPE_NAME(ge211::Out_of_channels_error);
+GE211_REGISTER_TYPE_NAME(ge211::Mixer_not_enabled_error);
+
 namespace ge211 {
 
 /// An exception hierarchy for %ge211 to report errors.
@@ -65,8 +84,7 @@ class Session_needed_error : public Client_logic_error
 public:
     /// The action that the client attempted that couldn't be
     /// completed without a GE211 session.
-    std::string const& attempted_action() const
-    { return action_; }
+    std::string const& attempted_action() const { return action_; }
 
 private:
     explicit Session_needed_error(std::string const& action);
@@ -227,8 +245,7 @@ class File_open_error final : public Host_error
 
 public:
     /// Returns the name of the file that could not be opened.
-    std::string const& filename() const
-    { return filename_; }
+    std::string const& filename() const { return filename_; }
 
 private:
     std::string filename_;
@@ -246,8 +263,7 @@ class Font_load_error final : public Host_error
 
 public:
     /// Returns the filename of the font that could not be loaded.
-    std::string const& filename() const
-    { return filename_; }
+    std::string const& filename() const { return filename_; }
 
 private:
     std::string filename_;
@@ -265,8 +281,7 @@ class Image_load_error final : public Host_error
 
 public:
     /// Returns the filename of the image that could not be loaded.
-    std::string const& filename() const
-    { return filename_; }
+    std::string const& filename() const { return filename_; }
 
 private:
     std::string filename_;
@@ -308,8 +323,7 @@ class Audio_load_error final : public Mixer_error
 
 public:
     /// Returns the filename of the audio clip that could not be loaded.
-    std::string const& filename() const
-    { return filename_; }
+    std::string const& filename() const { return filename_; }
 
 private:
     std::string filename_;
@@ -365,12 +379,10 @@ class Logger
 {
 public:
     /// Returns the log level of this logger.
-    Log_level level() const NOEXCEPT
-    { return level_; }
+    Log_level level() const NOEXCEPT { return level_; }
 
     /// Changes the log level of this logger.
-    void level(Log_level level) NOEXCEPT
-    { level_ = level; }
+    void level(Log_level level) NOEXCEPT { level_ = level; }
 
     /// Returns the one and only logger instance.
     static Logger& instance() NOEXCEPT;

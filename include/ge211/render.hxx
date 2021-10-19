@@ -16,6 +16,8 @@ namespace ge211 {
 
 namespace detail {
 
+using util::pointers::Delete_ptr;
+
 using Uniq_SDL_Renderer = Delete_ptr<SDL_Renderer, &SDL_DestroyRenderer>;
 using Uniq_SDL_Surface  = Delete_ptr<SDL_Surface, &SDL_FreeSurface>;
 using Uniq_SDL_Texture  = Delete_ptr<SDL_Texture, &SDL_DestroyTexture>;

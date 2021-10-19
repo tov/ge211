@@ -2,8 +2,9 @@
 
 #include "ge211/util/delete_ptr.hxx"
 #include "ge211/util/lazy_ptr.hxx"
-#include "ge211/util/reflection.hxx"
+#include "ge211/util/name_of_type.hxx"
 #include "ge211/util/ring_buffer.hxx"
+#include "ge211/util/stringable.hxx"
 #include "ge211/util/to_string.hxx"
 
 #include <sstream>
@@ -22,21 +23,13 @@ namespace reflection { }
 namespace pointers { }
 
 /// Provides a variable-arity function for assembling strings.
-namespace to_string { }
+namespace format { }
 
 }  // end namespace util
 
 namespace ge211 {
 
-using namespace util::to_string;
-
-namespace detail {
-
-using namespace util::containers;
-using namespace util::reflection;
-using namespace util::pointers;
-
-} // end namespace detail
+using util::format::to_string;
 
 /// Type alias to indicate that the given pointer owns
 /// its object.

@@ -1,28 +1,29 @@
-#include "test_random.hxx"
+#include "doctest.hxx"
+#include "test_random_helpers.hxx"
 
-using namespace ge211;
+using ge211::unbounded;
+using ge211::Random_source;
 
-using std::initializer_list;
-
+using namespace test_random_helpers;
 
 namespace {
 
 template <typename T>
 struct Test_data
 {
-    static initializer_list<T> const stub_list;
+    static std::initializer_list<T> const stub_list;
 };
 
 template <>
 struct Test_data<bool>
 {
-    static initializer_list<bool> const stub_list;
+    static std::initializer_list<bool> const stub_list;
 };
 
 template <typename T>
-initializer_list<T> const Test_data<T>::stub_list{12, 18, 80, 0, 34};
+std::initializer_list<T> const Test_data<T>::stub_list{12, 18, 80, 0, 34};
 
-initializer_list<bool> const Test_data<bool>::stub_list{0, 1, 1, 0, 0, 1};
+std::initializer_list<bool> const Test_data<bool>::stub_list{0, 1, 1, 0, 0, 1};
 
 }  // end anonymous namespace
 

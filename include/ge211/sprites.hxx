@@ -11,6 +11,15 @@
 #include <vector>
 #include <sstream>
 
+GE211_REGISTER_TYPE_NAME(ge211::internal::Render_sprite);
+GE211_REGISTER_TYPE_NAME(ge211::Circle_sprite);
+GE211_REGISTER_TYPE_NAME(ge211::Image_sprite);
+GE211_REGISTER_TYPE_NAME(ge211::Multiplexed_sprite);
+GE211_REGISTER_TYPE_NAME(ge211::Rectangle_sprite);
+GE211_REGISTER_TYPE_NAME(ge211::Text_sprite);
+GE211_REGISTER_TYPE_NAME(ge211::Sprite);
+GE211_REGISTER_TYPE_NAME(ge211::Sprite_set);
+
 namespace ge211 {
 
 /// Sprites are images that can be rendered to the screen. This namespace
