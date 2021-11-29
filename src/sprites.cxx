@@ -258,8 +258,8 @@ void Text_sprite::assert_initialized_() const
 }
 
 Text_sprite::Builder::Builder(const Font& font)
-        : message_{}, font_{&font}, color_{Color::white()}, antialias_{true},
-          word_wrap_{0} {}
+        : message_{"", std::ios_base::app}, font_{&font},
+          color_{Color::white()}, antialias_{true}, word_wrap_{0} {}
 
 Text_sprite::Builder& Text_sprite::Builder::message(const std::string& message)
 {
